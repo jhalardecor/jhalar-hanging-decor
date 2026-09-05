@@ -650,14 +650,23 @@ function applyRevealMode() {
   else document.querySelectorAll('.reveal').forEach(el => el.classList.remove('active'));
 }
 
+let revealVisible = function(){};
 function setupReveal() {
   const els = document.querySelectorAll('.reveal');
   if (!els.length) return;
-  const fn = () => {
+  revealVisible = () => {
     if (document.body.classList.contains('no-reveal')) return;
-    els.forEach(el => { if (el.getBoundingClientRect().top < window.innerHeight - 150) el.classList.add('active'); });
+    els.forEach(el => {
+      const r = el.getBoundingClientRect();
+      // Activate anything on screen or just below it; the old check missed
+      // elements already scrolled past after an instant jump.
+      if (r.top < window.innerHeight - 80 && r.bottom > -200) el.classList.add('active');
+    });
   };
-  fn(); window.addEventListener('scroll', fn, { passive: true });
+  revealVisible();
+  window.addEventListener('scroll', revealVisible, { passive: true });
+  window.addEventListener('resize', revealVisible, { passive: true });
+  window.addEventListener('load', revealVisible);
 }
 
 function setupEnquiryForm() {
@@ -691,8 +700,33 @@ function setupSmoothScroll() {
     if (!h || h.length <= 1) return;
     let t = null;
     try { t = document.querySelector(h); } catch(err) { return; }
-    if (t) { e.preventDefault(); t.scrollIntoView({ behavior:'smooth', block:'start' }); }
+    if (!t) return;
+    e.preventDefault();
+
+    // The page is ~14000px on a phone, so "Contact" was a 11000px smooth
+    // scroll: over a second of blurred flight past sections that are still
+    // opacity:0, which reads as the page loading and dumping you at the
+    // bottom. Animate only short hops; jump instantly for long ones.
+    const dist = Math.abs(t.getBoundingClientRect().top);
+    const far = dist > window.innerHeight * 2.5;
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    // NB: 'auto' would defer to CSS scroll-behavior:smooth and still animate.
+    const behavior = (far || reduced) ? 'instant' : 'smooth';
+
+    // Reveal anything we are about to land on BEFORE moving, so the section is
+    // already painted on arrival instead of fading in afterwards.
+    revealNow(t);
+    t.scrollIntoView({ behavior: behavior, block: 'start' });
+    // Catch reveals that the scroll handler may not fire for on an instant jump.
+    requestAnimationFrame(() => { if (typeof revealVisible === 'function') revealVisible(); });
   });
+}
+
+// Force a subtree visible immediately (used before a jump).
+function revealNow(root) {
+  if (!root || document.body.classList.contains('no-reveal')) return;
+  if (root.classList && root.classList.contains('reveal')) root.classList.add('active');
+  root.querySelectorAll && root.querySelectorAll('.reveal').forEach(el => el.classList.add('active'));
 }
 
 // ===== JHALAR API =====
