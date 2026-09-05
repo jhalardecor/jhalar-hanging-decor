@@ -450,6 +450,26 @@ img{max-width:100%;height:auto;display:block}ul{list-style:none}button{font-fami
   .process{margin-top:var(--space-6);padding-top:var(--space-6)}
   .collection-actions{margin-top:var(--space-5)}
   .collection-note{margin-top:var(--space-5)}
+  /* BALANCE / ALIGNMENT.
+     Sections disagreed: why-jhalar, who-uses, collection, faq and contact
+     centred their headers while custom-orders and about were left-aligned.
+     Worse, centred multi-line body copy gives a ragged LEFT edge - measured
+     line starts of 26,24,133px in one paragraph - so nothing lines up with
+     the cards below it. On a 358px column, left-align everything onto one
+     axis. Short eyebrow labels stay put; only the block alignment changes. */
+  .section-header,.section-head{text-align:left}
+  .section-header h2,.section-head h2,
+  .section-title,.section-subtitle{text-align:left;margin-inline:0}
+  .section-subtitle{max-width:none}
+  /* Feature cards centred their icon and text while product cards were
+     left-aligned, so the two grids read as different systems. */
+  .feature-card{text-align:left}
+  .feature-card .feature-icon{margin-left:0;margin-right:auto}
+  /* Cards ran 225-254px because body copy is 2 or 3 lines. Even them out so
+     each row has a flat baseline. */
+  .feature-card p{min-height:calc(3em * var(--body-leading,1.65))}
+  /* FAQ buttons sat at x=17: a 1px border pushed them off the 16px axis. */
+  .accordion-header{padding-left:calc(var(--faq-pad,1rem) - 1px)}
   /* Hero was 1123px = 133% of the viewport, so the product photo (the whole
      point of a decor site) sat entirely below the fold and the first screen
      was pure text. Tighten the stack so the image starts before the fold. */
