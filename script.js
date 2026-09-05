@@ -182,6 +182,8 @@ async function init() {
   applyCustomCSS();
   renderProducts(products);
   setupFilterButtons();
+  setupCollectionToggle();
+  applyCollapse();
 }
 
 // ===== LOADERS =====
@@ -431,6 +433,50 @@ function renderProducts(productList) {
     </div>
   `).join('');
   grid.querySelectorAll('.product-details-btn').forEach(b => b.addEventListener('click', () => openProductModal(Number(b.dataset.productId))));
+  applyCollapse();
+}
+
+// Progressive disclosure: 16 cards inline made the collection 31% of the page
+// and pushed everything after it out of reach. Show a first screenful, let the
+// rest open on request. Filtered views are short already, so never collapse them.
+var PREVIEW_COUNT = 6;
+var collectionExpanded = false;
+
+function applyCollapse() {
+  const grid = document.getElementById('product-grid');
+  const btn = document.getElementById('collection-toggle');
+  if (!grid || !btn) return;
+  const cards = [...grid.querySelectorAll('.product-card:not(.is-filtered-out)')];
+  const collapsible = !collectionExpanded && cards.length > PREVIEW_COUNT;
+  cards.forEach((c, i) => {
+    const hide = collapsible && i >= PREVIEW_COUNT;
+    c.classList.toggle('is-collapsed', hide);
+    // Keep hidden cards out of the tab order and off the a11y tree.
+    c.querySelectorAll('button,a').forEach(el => el.tabIndex = hide ? -1 : 0);
+    c.setAttribute('aria-hidden', hide ? 'true' : 'false');
+  });
+  const hiddenCount = cards.length - PREVIEW_COUNT;
+  if (cards.length > PREVIEW_COUNT) {
+    btn.hidden = false;
+    btn.textContent = collectionExpanded ? 'Show fewer' : `View all ${cards.length} designs`;
+    btn.setAttribute('aria-expanded', String(collectionExpanded));
+  } else {
+    btn.hidden = true;
+  }
+}
+
+function setupCollectionToggle() {
+  const btn = document.getElementById('collection-toggle');
+  if (!btn) return;
+  btn.addEventListener('click', () => {
+    collectionExpanded = !collectionExpanded;
+    applyCollapse();
+    if (typeof revealVisible === 'function') revealVisible();
+    if (!collectionExpanded) {
+      const sec = document.getElementById('collection');
+      if (sec) sec.scrollIntoView({ behavior: 'instant', block: 'start' });
+    }
+  });
 }
 
 function setupFilterButtons() {
@@ -444,7 +490,16 @@ function setupFilterButtons() {
 }
 
 function filterProducts(cat) {
-  document.querySelectorAll('.product-card').forEach(c => c.style.display = (cat === 'all' || c.dataset.category === cat) ? 'block' : 'none');
+  // A category holds only 2 items; collapsing it would hide real results.
+  // "All" returns to the collapsed preview.
+  collectionExpanded = !!(cat && cat !== 'all');
+  // Use a class, not inline display: an inline style would outrank
+  // .is-collapsed{display:none} and defeat the preview entirely.
+  document.querySelectorAll('.product-card').forEach(c => {
+    c.style.display = '';
+    c.classList.toggle('is-filtered-out', !(cat === 'all' || c.dataset.category === cat));
+  });
+  applyCollapse();
 }
 
 // ===== UI SETUP =====
