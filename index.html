@@ -186,6 +186,9 @@
                 <div class="product-grid" id="product-grid" role="tabpanel" aria-live="polite">
                     <!-- Rendered by JavaScript -->
                 </div>
+                <div class="collection-actions">
+                    <button type="button" class="btn btn-outline" id="collection-toggle" hidden aria-expanded="false" aria-controls="product-grid">View all designs</button>
+                </div>
                 <p class="collection-note">Looking for something else? <a href="https://wa.me/918100656258" data-wa target="_blank" rel="noopener">Message us on WhatsApp</a> — we will share pricing and availability.</p>
             </div>
         </section>
@@ -344,10 +347,6 @@
                                 <input type="text" id="name" name="name" required autocomplete="name">
                             </div>
                             <div class="form-group">
-                                <label for="company">Business / Company (optional)</label>
-                                <input type="text" id="company" name="company" autocomplete="organization">
-                            </div>
-                            <div class="form-group">
                                 <label for="buyer-type">You Are *</label>
                                 <select id="buyer-type" name="buyer-type" required>
                                     <option value="" disabled selected>Select an option</option>
@@ -361,7 +360,7 @@
                             </div>
                             <div class="form-row">
                                 <div class="form-group half">
-                                    <label for="phone">Phone / WhatsApp Number *</label>
+                                    <label for="phone">Phone / WhatsApp *</label>
                                     <input type="tel" id="phone" name="phone" required autocomplete="tel">
                                 </div>
                                 <div class="form-group half">
@@ -369,9 +368,15 @@
                                     <input type="email" id="email" name="email" autocomplete="email">
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="location">City and State *</label>
-                                <input type="text" id="location" name="location" required autocomplete="address-level2">
+                            <div class="form-row">
+                                <div class="form-group half">
+                                    <label for="location">City and State *</label>
+                                    <input type="text" id="location" name="location" required autocomplete="address-level2">
+                                </div>
+                                <div class="form-group half">
+                                    <label for="company">Business / Company (optional)</label>
+                                    <input type="text" id="company" name="company" autocomplete="organization">
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="category">What You Need *</label>

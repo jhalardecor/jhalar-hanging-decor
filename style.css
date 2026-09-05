@@ -189,6 +189,10 @@ img{max-width:100%;height:auto;display:block}ul{list-style:none}button{font-fami
   .product-grid{grid-template-columns:repeat(auto-fit,minmax(min(var(--grid-min,300px),100%),1fr));justify-content:center}
   .product-card{max-width:var(--card-max,420px);width:100%;justify-self:center}
 }
+/* Progressive disclosure for the collection. */
+.product-card.is-collapsed,.product-card.is-filtered-out{display:none}
+.collection-actions{display:flex;justify-content:center;margin-top:var(--space-6)}
+.collection-actions .btn{min-width:min(320px,100%)}
 .product-card{background:var(--brand-background);border:1px solid var(--brand-border);border-radius:var(--radius-lg);overflow:hidden;transition:all .3s var(--ease-out);display:flex;flex-direction:column;box-shadow:0 1px 2px rgba(20,25,66,.06),0 1px 3px rgba(20,25,66,.04)}
 .product-card:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(20,25,66,.08);border-color:var(--brand-border)}
 .product-card .product-image{aspect-ratio:1/1;overflow:hidden;background:var(--brand-alt-background);position:relative}
@@ -343,9 +347,9 @@ img{max-width:100%;height:auto;display:block}ul{list-style:none}button{font-fami
 
 /* Small tablet + large phone landscape: go 2-up instead of wasting a full column */
 /* Phones showed ONE 673px card per row: the collection ran 11890px, 53.6% of
-   a 26-screen page. Go 2-across from 340px so the grid reads as a grid and
+   a 26-screen page. Go 2-across from 320px so the grid reads as a grid and
    the section shrinks to roughly half its height. */
-@media(min-width:340px) and (max-width:559.98px){
+@media(min-width:320px) and (max-width:559.98px){
   .product-grid{grid-template-columns:repeat(2,1fr);gap:var(--space-4)}
   .product-card .product-info{padding:var(--space-3)}
   .product-card .product-title{font-size:1rem;line-height:1.3}
@@ -428,8 +432,20 @@ img{max-width:100%;height:auto;display:block}ul{list-style:none}button{font-fami
    Give them a comfortable touch height without changing desktop looks. */
 @media(max-width:767.98px){
   /* 96px of padding top AND bottom between every section is desktop rhythm;
-     on a phone it reads as dead space. */
-  .section{padding:var(--space-8) 0}
+     on a phone it reads as dead space. Adjacent bands still stacked 48+48,
+     so pull the shared edge in and let the band background carry separation. */
+  .section{padding:var(--space-7) 0 var(--space-6)}
+  /* Headings sat a long way from the content they introduce. */
+  .section-head,.section-header{margin-bottom:var(--space-5)}
+  .section-head p,.section-header p{margin-bottom:0}
+  /* Form was 1231px: every field a full-width stacked block, and .form-row
+     only paired up at 560px so phones stacked those too (188px per pair). */
+  .form-group{margin-bottom:var(--space-3)}
+  .form-group label{margin-bottom:.25rem;display:block}
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-3)}
+  .form-row .form-group{margin-bottom:0}
+  /* Later rule sets min-height:120px on textareas; needs to lose here. */
+  .form-group textarea,.form-group textarea[rows]{min-height:88px;height:88px}
   .hero{padding-bottom:var(--space-8)}
   /* Trust bar stacked as 3 single-item rows. Two columns reads as a unit and
      saves ~80px; the third item spans the full width underneath. */
