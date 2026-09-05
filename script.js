@@ -165,6 +165,7 @@ let livePushed = { settings:false, theme:false, products:false, sections:false, 
 async function init() {
   setupSmoothScroll();
   setupMobileNav();
+  setupAutoHideHeader();
   setupAccordions();
   setupModal();
   updateYear();
@@ -450,8 +451,10 @@ function filterProducts(cat) {
 function closeMobileNav() {
   const toggle = document.querySelector('.mobile-toggle');
   const nav = document.getElementById('mobile-nav');
+  const hdr = document.querySelector('.site-header');
   if (nav) nav.classList.remove('open');
   if (toggle) toggle.setAttribute('aria-expanded','false');
+  if (hdr) hdr.classList.remove('nav-open');
 }
 
 function setupMobileNav() {
@@ -462,6 +465,11 @@ function setupMobileNav() {
     const exp = toggle.getAttribute('aria-expanded') === 'true';
     toggle.setAttribute('aria-expanded', String(!exp));
     nav.classList.toggle('open');
+    const hdr = document.querySelector('.site-header');
+    if (hdr) {
+      hdr.classList.toggle('nav-open', nav.classList.contains('open'));
+      if (nav.classList.contains('open')) hdr.classList.remove('header-hidden');
+    }
   });
   // Delegated: applyNavigation() replaces the menu's innerHTML after this runs,
   // so listeners bound directly to the anchors would be discarded.
@@ -469,6 +477,54 @@ function setupMobileNav() {
   // Close on Escape, and when returning to the desktop breakpoint.
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && nav.classList.contains('open')) closeMobileNav(); });
   window.addEventListener('resize', () => { if (window.innerWidth > 900 && nav.classList.contains('open')) closeMobileNav(); });
+}
+
+function setupAutoHideHeader() {
+  const header = document.querySelector('.site-header');
+  if (!header) return;
+  const nav = document.getElementById('mobile-nav');
+  let last = window.scrollY;
+  let ticking = false;
+  // Ignore sub-pixel jitter and the rubber-band overscroll at either end.
+  const DELTA = 6;
+  // Never hide over the hero; there is nothing to reclaim yet.
+  const OFFSET = 120;
+  // Programmatic anchor jumps move thousands of px at once. Suppress the
+  // controller briefly so a jump does not read as "scrolled down".
+  let suppressUntil = 0;
+  window.__headerSuppress = (ms) => { suppressUntil = Date.now() + (ms || 700); };
+
+  const update = () => {
+    ticking = false;
+    const y = window.scrollY;
+    header.classList.toggle('scrolled', y > 4);
+
+    // Menu open: always visible, and keep the baseline current.
+    if (nav && nav.classList.contains('open')) {
+      header.classList.remove('header-hidden');
+      last = y;
+      return;
+    }
+    if (Date.now() < suppressUntil) { last = y; return; }
+
+    const maxY = document.documentElement.scrollHeight - window.innerHeight;
+    if (y <= OFFSET || y >= maxY - 2) {        // top, or bounced at the bottom
+      header.classList.remove('header-hidden');
+      last = y;
+      return;
+    }
+    const diff = y - last;
+    if (Math.abs(diff) < DELTA) return;         // too small to be intent
+    header.classList.toggle('header-hidden', diff > 0);
+    last = y;
+  };
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) { ticking = true; requestAnimationFrame(update); }
+  }, { passive: true });
+  // A resize can change scrollHeight enough to strand a hidden header.
+  window.addEventListener('resize', () => { header.classList.remove('header-hidden'); last = window.scrollY; }, { passive: true });
+  update();
 }
 
 function setupAccordions() {
@@ -716,6 +772,11 @@ function setupSmoothScroll() {
     // Reveal anything we are about to land on BEFORE moving, so the section is
     // already painted on arrival instead of fading in afterwards.
     revealNow(t);
+    // Show the bar and pause auto-hide: the jump itself is not a user scroll,
+    // and scroll-margin-top assumes a visible header.
+    const hdr = document.querySelector('.site-header');
+    if (hdr) hdr.classList.remove('header-hidden');
+    if (window.__headerSuppress) window.__headerSuppress(behavior === 'instant' ? 350 : 900);
     t.scrollIntoView({ behavior: behavior, block: 'start' });
     // Catch reveals that the scroll handler may not fire for on an instant jump.
     requestAnimationFrame(() => { if (typeof revealVisible === 'function') revealVisible(); });

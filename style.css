@@ -111,6 +111,13 @@ img{max-width:100%;height:auto;display:block}ul{list-style:none}button{font-fami
 /* --- HEADER --- */
 .site-header{position:fixed;top:0;left:0;right:0;height:var(--header-h);background:var(--brand-header-background);backdrop-filter:blur(20px) saturate(1.3);-webkit-backdrop-filter:blur(20px) saturate(1.3);border-bottom:1px solid rgba(20,25,66,.06);z-index:1000;transition:box-shadow .3s}
 .site-header.scrolled{box-shadow:0 1px 4px rgba(20,25,66,.08)}
+/* Auto-hide on scroll down, reveal on scroll up. Transform (not top) so it
+   stays on the compositor and does not trigger layout on every frame. */
+.site-header{transition:box-shadow .3s,transform .28s var(--ease-out)}
+.site-header.header-hidden{transform:translateY(-100%)}
+/* Never hide while the mobile menu is open, or the menu detaches from the bar. */
+.site-header.nav-open{transform:none!important}
+@media(prefers-reduced-motion:reduce){.site-header{transition:box-shadow .3s}}
 .header-container{display:flex;align-items:center;justify-content:space-between;height:100%}
 .logo{display:flex;align-items:center;flex-shrink:0}
 /* Logo was a fixed 38px (36px on phones). Scale it with the viewport so it
