@@ -94,7 +94,7 @@ img{max-width:100%;height:auto;display:block}ul{list-style:none}button{font-fami
 
 /* --- TAG (EYEBROW) --- */
 .tag,.eyebrow{display:inline-flex;align-items:center;gap:8px;padding:0;background:transparent;border:none;border-radius:0;font-size:var(--fs-xs);font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--brand-muted);margin-bottom:var(--space-3)}
-.tag i{font-size:.85em}.tag .icon{width:1em;height:1em;color:var(--brand-primary)}.tag-gold{background:rgba(201,168,76,.12);border-color:rgba(201,168,76,.25);color:var(--brand-accent)}
+.tag i{font-size:.85em}.tag .icon{--icon-size:16px;color:var(--brand-primary)}.tag-gold{background:rgba(201,168,76,.12);border-color:rgba(201,168,76,.25);color:var(--brand-accent)}
 
 /* --- BUTTONS --- */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:.8rem 1.6rem;font-family:var(--sans);font-size:var(--fs-md);font-weight:500;line-height:1.35;border-radius:var(--button-radius,var(--radius-full));border:2px solid transparent;transition:all .25s var(--ease-out);white-space:normal;text-align:center;max-width:100%;min-height:48px}
@@ -112,7 +112,10 @@ img{max-width:100%;height:auto;display:block}ul{list-style:none}button{font-fami
 .site-header{position:fixed;top:0;left:0;right:0;height:var(--header-h);background:var(--brand-header-background);backdrop-filter:blur(20px) saturate(1.3);-webkit-backdrop-filter:blur(20px) saturate(1.3);border-bottom:1px solid rgba(20,25,66,.06);z-index:1000;transition:box-shadow .3s}
 .site-header.scrolled{box-shadow:0 1px 4px rgba(20,25,66,.08)}
 .header-container{display:flex;align-items:center;justify-content:space-between;height:100%}
-.logo{display:flex;align-items:center;flex-shrink:0}.brand-mark{height:38px;width:auto}
+.logo{display:flex;align-items:center;flex-shrink:0}
+/* Logo was a fixed 38px (36px on phones). Scale it with the viewport so it
+   holds its proportion instead of stepping at one breakpoint. */
+.brand-mark{height:clamp(34px,8.5vw,40px);width:auto}
 .desktop-nav{display:none}
 .nav-list{display:flex;align-items:center;gap:clamp(1.25rem,2.5vw,2.25rem)}
 .nav-list a{font-weight:400;font-size:var(--fs-md);color:var(--brand-heading);padding:.25rem 0;position:relative}
@@ -143,7 +146,7 @@ img{max-width:100%;height:auto;display:block}ul{list-style:none}button{font-fami
 .hero-desc{font-size:var(--fs-lg);line-height:var(--body-leading,1.75);color:var(--brand-text);margin-bottom:var(--space-5);max-width:56ch}
 .hero-highlights{display:flex;flex-wrap:wrap;gap:var(--space-2) var(--space-5);margin-bottom:var(--space-5)}
 .hero-highlights li{display:flex;align-items:center;gap:10px;font-size:var(--fs-md);font-weight:500;color:var(--brand-text)}
-.hero-highlights li .icon{color:var(--brand-primary);width:1.15em;height:1.15em}
+.hero-highlights li .icon{color:var(--brand-primary);--icon-size:20px}
 .hero-actions{display:flex;flex-direction:column;flex-wrap:wrap;gap:var(--space-3)}
 .hero-image{position:relative}
 .hero-img{width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center 30%;border-radius:var(--radius-lg);box-shadow:0 24px 60px rgba(20,25,66,.12);transition:transform .5s var(--ease-out)}
@@ -153,7 +156,7 @@ img{max-width:100%;height:auto;display:block}ul{list-style:none}button{font-fami
 .trust-bar{position:relative;z-index:2;margin-top:calc(var(--space-5) * -1)}
 .trust-bar-inner{display:flex;flex-direction:column;align-items:center;gap:var(--trust-gap,var(--space-3));background:var(--brand-background);border:1px solid var(--brand-border);border-radius:var(--radius-lg);box-shadow:0 4px 16px rgba(20,25,66,.05);padding:var(--trust-pad,var(--space-4)) var(--trust-pad,var(--space-5))}
 .trust-bar-item{display:flex;align-items:center;justify-content:center;gap:10px;font-size:var(--fs-md);font-weight:500;color:var(--brand-text)}
-.trust-bar-item .icon{color:var(--brand-primary);width:20px;height:20px}
+.trust-bar-item .icon{color:var(--brand-primary);--icon-size:20px}
 .trust-bar-divider{display:none;width:1px;height:1.5rem;background:var(--brand-border);align-self:center}
 
 /* --- FEATURES (Why JHALAR) --- */
@@ -244,7 +247,7 @@ img{max-width:100%;height:auto;display:block}ul{list-style:none}button{font-fami
 .contact-list{display:grid;gap:var(--space-2)}
 .contact-list li{display:flex;align-items:center;gap:12px;padding:var(--space-2) 0;font-size:var(--fs-sm);color:var(--brand-text);border-bottom:1px solid var(--brand-border)}
 .contact-list li:last-child{border-bottom:none}
-.contact-list li i,.contact-list li .icon{color:var(--brand-primary);width:20px;text-align:center;flex-shrink:0}
+.contact-list li i,.contact-list li .icon{color:var(--brand-primary);--icon-size:20px;text-align:center;flex-shrink:0}
 .contact-list strong{color:var(--brand-heading);font-weight:600}
 .contact-link{color:var(--brand-text);font-weight:500;min-width:0;overflow-wrap:anywhere}
 .contact-link:hover{color:var(--brand-primary)}
@@ -259,7 +262,7 @@ img{max-width:100%;height:auto;display:block}ul{list-style:none}button{font-fami
 .footer-col li{margin-bottom:.35rem}
 .footer-col a{color:rgba(255,255,255,.7);font-size:var(--fs-md);transition:color .2s;overflow-wrap:anywhere}
 .footer-col a:hover{color:var(--brand-accent);text-decoration:none}
-.footer-col li i,.footer-col li .icon{color:var(--brand-accent);width:16px;text-align:center}
+.footer-col li i,.footer-col li .icon{color:var(--brand-accent);--icon-size:16px;text-align:center}
 .footer-social{display:flex;gap:var(--space-4)}
 .footer-social a{color:rgba(255,255,255,.7);font-size:var(--fs-md);font-weight:500;transition:color .2s;display:flex;align-items:center;gap:8px}
 .footer-social a:hover{color:var(--brand-accent)}
@@ -421,6 +424,12 @@ img{max-width:100%;height:auto;display:block}ul{list-style:none}button{font-fami
      on a phone it reads as dead space. */
   .section{padding:var(--space-8) 0}
   .hero{padding-bottom:var(--space-8)}
+  /* Trust bar stacked as 3 single-item rows. Two columns reads as a unit and
+     saves ~80px; the third item spans the full width underneath. */
+  .trust-bar-inner{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-3);align-items:start}
+  .trust-bar-item{justify-content:flex-start;text-align:left;font-size:.875rem;line-height:1.35}
+  .trust-bar-item:last-child{grid-column:1 / -1}
+  .trust-bar-divider{display:none}
   /* Filter chips measured 43px - just under the 44px touch minimum. */
   .filters .filter-btn{min-height:44px;display:inline-flex;align-items:center;justify-content:center}
   /* 13px eyebrows were the smallest text on the page. */
@@ -431,7 +440,6 @@ img{max-width:100%;height:auto;display:block}ul{list-style:none}button{font-fami
      :root, which outranks any --header-h we set here. So override the concrete
      properties (and everything else keyed off the token) directly. */
   .site-header{height:88px}
-  .brand-mark{height:36px}
   .mobile-nav{top:88px;max-height:calc(100vh - 88px)}
   .hero{padding-top:calc(88px + var(--space-7))}
   html{scroll-padding-top:calc(88px + 24px)}
@@ -459,3 +467,7 @@ img{max-width:100%;height:auto;display:block}ul{list-style:none}button{font-fami
 /* --- PRINT --- */
 @media print{.site-header,.mobile-nav,.wa-float,.modal-overlay{display:none!important}body{background:#fff;color:#000}.section{padding:1rem 0}}
 .icon{display:inline-block;vertical-align:middle;flex-shrink:0}
+/* Icons rendered at 7 different sizes and several were squashed to 20x18 or
+   16x18: rules set width without height, so the height fell back to the
+   attribute while flex stretched the width. Pin both from one variable. */
+.icon{width:var(--icon-size,20px);height:var(--icon-size,20px)}
