@@ -431,13 +431,33 @@ img{max-width:100%;height:auto;display:block}ul{list-style:none}button{font-fami
 /* Inline links in the contact list / footer were 22-29px tall on phones.
    Give them a comfortable touch height without changing desktop looks. */
 @media(max-width:767.98px){
-  /* 96px of padding top AND bottom between every section is desktop rhythm;
-     on a phone it reads as dead space. Adjacent bands still stacked 48+48,
-     so pull the shared edge in and let the band background carry separation. */
-  .section{padding:var(--space-7) 0 var(--space-6)}
-  /* Headings sat a long way from the content they introduce. */
-  .section-head,.section-header{margin-bottom:var(--space-5)}
+  /* SPATIAL RHYTHM (proximity: related things close, unrelated things far).
+     Before, every gap was within 12-48px of every other, so nothing grouped:
+       eyebrow->h2 12px, h2->body 12px, inner gaps 48px, section break 72px.
+     A 48px inner gap against a 72px break is only 1.5x - too weak to read as
+     a boundary. Establish one scale with real contrast:
+       4px  label to its heading   (bound together)
+       12px heading to its body    (same thought)
+       28px block to block         (inside one section)
+       64px section to section     (new idea)  -> 2.3x the inner gap        */
+  .section{padding:var(--space-8) 0}
+  .section-head,.section-header{margin-bottom:var(--space-6)}
   .section-head p,.section-header p{margin-bottom:0}
+  /* Eyebrow is a label FOR the heading, not a sibling paragraph. */
+  .tag,.eyebrow{margin-bottom:.25rem}
+  /* Pull the big inner gaps down so the section break clearly wins. */
+  .hero-grid,.split-grid{gap:var(--space-6)}
+  .process{margin-top:var(--space-6);padding-top:var(--space-6)}
+  .collection-actions{margin-top:var(--space-5)}
+  .collection-note{margin-top:var(--space-5)}
+  /* Hero was 1123px = 133% of the viewport, so the product photo (the whole
+     point of a decor site) sat entirely below the fold and the first screen
+     was pure text. Tighten the stack so the image starts before the fold. */
+  .hero{padding-top:calc(88px + var(--space-5));padding-bottom:var(--space-7)}
+  .hero-grid{gap:var(--space-5)}
+  .hero-desc{margin-bottom:var(--space-4)}
+  .hero-highlights{gap:var(--space-2) var(--space-4);margin-bottom:var(--space-5)}
+  .hero-actions{gap:var(--space-3)}
   /* Form was 1231px: every field a full-width stacked block, and .form-row
      only paired up at 560px so phones stacked those too (188px per pair). */
   .form-group{margin-bottom:var(--space-3)}
