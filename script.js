@@ -189,13 +189,23 @@ async function init() {
 // ===== LOADERS =====
 async function loadProducts() {
   try {
-    const r = await fetch('content/products.json');
-    if (!r.ok) throw new Error('HTTP ' + r.status);
-    const d = await r.json();
+    const [r, nr] = await Promise.all([
+      fetch('content/products.json', { cache: 'no-store' }),
+      fetch('content/product-naming.json', { cache: 'no-store' })
+    ]);
+    if (!r.ok || !nr.ok) throw new Error('Catalogue or naming registry unavailable');
+    const [d, registry] = await Promise.all([r.json(), nr.json()]);
+    const review = window.JHALARNaming.validateCatalogue(d, registry);
+    if (review.errors.length || review.reviewCount || !d.products.length) {
+      throw new Error('Catalogue has unavailable or unapproved product identities');
+    }
     if (livePushed.products) return;
-    products = Array.isArray(d.products) ? d.products : [];
-    if (!products.length) showFallbackProducts();
-  } catch(e) { console.error('Products load failed:', e); if (!livePushed.products) showFallbackProducts(); }
+    products = d.products;
+  } catch(e) {
+    console.error('Products load failed:', e);
+    // Do not resurrect obsolete names or deleted image paths on a load failure.
+    if (!livePushed.products) products = [];
+  }
 }
 
 async function loadSettings() {
@@ -404,31 +414,23 @@ function applySEO() {
   }
 }
 
-function showFallbackProducts() {
-  products = [
-    {id:1,title:"Pink Pom Pom Gota Hanging",category:"Pom Pom Hangings",description:"Hand-tied pink pom poms with gota fan accents and a finishing bell.",image:"assets/images/products/pom-pom-pink-gota.jpg",b2bTag:"Repeat order"},
-    {id:7,title:"Marigold Floral Jhalar",category:"Floral Jhalars",description:"Full-petal orange marigold (genda) jhalar, cut for Diwali and Durga Puja installations.",image:"assets/images/products/floral-marigold-orange.jpg",b2bTag:"Large orders"},
-    {id:5,title:"Pink Blossom Bell Hanging",category:"Bell Hangings",description:"Pink blossoms set around a large golden temple bell, weighted at the base.",image:"assets/images/products/bell-pink-blossom.jpg",b2bTag:"Repeat order"},
-    {id:9,title:"Mogra Pearl Door Toran",category:"Torans",description:"White mogra-pearl toran with a bell centrepiece, cut to standard doorway width.",image:"assets/images/products/toran-mogra.jpg",b2bTag:"Heavier weight"}
-  ];
-}
-
 function renderProducts(productList) {
   const grid = document.getElementById('product-grid');
   if (!grid) return;
   if (!productList || !productList.length) {
-    grid.innerHTML = '<p style="text-align:center;color:#666;padding:2rem;">No products available right now. Please WhatsApp us for the latest catalog.</p>';
+    grid.innerHTML = '<p class="catalogue-error">We could not load the catalogue right now. Please reload the page or <a href="https://wa.me/' + esc(settings.whatsapp) + '" target="_blank" rel="noopener">message us on WhatsApp</a> for product details.</p>';
     return;
   }
   grid.innerHTML = productList.map(p => `
-    <div class="product-card" data-category="${esc(p.category)}">
+    <div class="product-card" data-category="${esc(p.category)}" data-product-id="${esc(p.id)}">
       <div class="product-image"><img src="${esc(p.image)}" alt="${esc(p.title)} - ${esc(p.category)}" width="1080" height="1080" loading="lazy" decoding="async"></div>
       <div class="product-info">
         <span class="product-category">${esc(p.category)}</span>
         <h3 class="product-title">${esc(p.title)}</h3>
+        <p class="product-reference">Catalogue ref: ${esc(window.JHALARNaming.productReference(p))}</p>
         <p class="product-desc">${esc(p.description)}</p>
         <span class="product-meta">${esc(p.b2bTag)}</span>
-        <button class="btn btn-primary product-details-btn" data-product-id="${p.id}" style="margin-top:1rem;width:100%;">View Details</button>
+        <button class="btn btn-primary product-details-btn" data-product-id="${esc(p.id)}" aria-label="View details for ${esc(p.title)}, reference ${esc(window.JHALARNaming.productReference(p))}" style="margin-top:1rem;width:100%;">View Details</button>
       </div>
     </div>
   `).join('');
@@ -436,18 +438,19 @@ function renderProducts(productList) {
   applyCollapse();
 }
 
-// Progressive disclosure: 16 cards inline made the collection 31% of the page
-// and pushed everything after it out of reach. Show a first screenful, let the
-// rest open on request. Filtered views are short already, so never collapse them.
+// Show a first screenful, with all catalogue entries available on request.
+// Category views show every match rather than hiding matching products.
 var PREVIEW_COUNT = 6;
 var collectionExpanded = false;
+var activeCategory = 'all';
 
 function applyCollapse() {
   const grid = document.getElementById('product-grid');
   const btn = document.getElementById('collection-toggle');
   if (!grid || !btn) return;
   const cards = [...grid.querySelectorAll('.product-card:not(.is-filtered-out)')];
-  const collapsible = !collectionExpanded && cards.length > PREVIEW_COUNT;
+  const canToggle = activeCategory === 'all' && cards.length > PREVIEW_COUNT;
+  const collapsible = canToggle && !collectionExpanded;
   cards.forEach((c, i) => {
     const hide = collapsible && i >= PREVIEW_COUNT;
     c.classList.toggle('is-collapsed', hide);
@@ -455,10 +458,9 @@ function applyCollapse() {
     c.querySelectorAll('button,a').forEach(el => el.tabIndex = hide ? -1 : 0);
     c.setAttribute('aria-hidden', hide ? 'true' : 'false');
   });
-  const hiddenCount = cards.length - PREVIEW_COUNT;
-  if (cards.length > PREVIEW_COUNT) {
+  if (canToggle) {
     btn.hidden = false;
-    btn.textContent = collectionExpanded ? 'Show fewer' : `View all ${cards.length} designs`;
+    btn.textContent = collectionExpanded ? 'Show fewer' : `View all ${cards.length} products`;
     btn.setAttribute('aria-expanded', String(collectionExpanded));
   } else {
     btn.hidden = true;
@@ -480,19 +482,30 @@ function setupCollectionToggle() {
 }
 
 function setupFilterButtons() {
-  const btns = document.querySelectorAll('.filter-btn');
+  const btns = [...document.querySelectorAll('.filter-btn')];
   if (!btns.length) return;
-  btns.forEach(b => b.addEventListener('click', () => {
-    btns.forEach(x => { x.classList.remove('active'); x.setAttribute('aria-selected','false'); });
-    b.classList.add('active'); b.setAttribute('aria-selected','true');
-    filterProducts(b.dataset.filter);
-  }));
+  const categories = new Set(products.map(p => p.category));
+  btns.forEach(b => {
+    b.hidden = b.dataset.filter !== 'all' && !categories.has(b.dataset.filter);
+    if (b.dataset.filterBound) return;
+    b.dataset.filterBound = 'true';
+    b.addEventListener('click', () => {
+      btns.forEach(x => { x.classList.remove('active'); x.setAttribute('aria-selected','false'); });
+      b.classList.add('active'); b.setAttribute('aria-selected','true');
+      filterProducts(b.dataset.filter);
+    });
+  });
+  let active = btns.find(b => b.classList.contains('active') && !b.hidden);
+  if (!active) active = btns.find(b => b.dataset.filter === 'all');
+  btns.forEach(b => { b.classList.toggle('active', b === active); b.setAttribute('aria-selected', String(b === active)); });
+  if (active) filterProducts(active.dataset.filter);
 }
 
 function filterProducts(cat) {
-  // A category holds only 2 items; collapsing it would hide real results.
+  // A filtered view must show every matching product.
   // "All" returns to the collapsed preview.
-  collectionExpanded = !!(cat && cat !== 'all');
+  activeCategory = cat || 'all';
+  collectionExpanded = activeCategory !== 'all';
   // Use a class, not inline display: an inline style would outrank
   // .is-collapsed{display:none} and defeat the preview entirely.
   document.querySelectorAll('.product-card').forEach(c => {
@@ -608,10 +621,12 @@ function openProductModal(id) {
   if (!modal) return;
   const s = (id, t) => { const e = document.getElementById(id); if (e) e.textContent = t; };
   s('modal-title', p.title); s('modal-category', p.category); s('modal-desc', p.description); s('modal-tag', p.b2bTag);
+  const reference = window.JHALARNaming.productReference(p);
+  s('modal-reference', 'Catalogue ref: ' + reference);
   const ph = document.getElementById('modal-photo');
   if (ph) { ph.src = p.image; ph.alt = p.title; }
   const wa = document.getElementById('modal-wa-btn');
-  if (wa) wa.href = `https://wa.me/${settings.whatsapp}?text=${encodeURIComponent('Hello JHALAR, I am interested in "' + p.title + '" (' + p.category + '). Could you share pricing?')}`;
+  if (wa) wa.href = `https://wa.me/${settings.whatsapp}?text=${encodeURIComponent('Hello JHALAR, I am interested in "' + p.title + '" (Catalogue ref: ' + reference + '). Could you share pricing?')}`;
   modal.setAttribute('aria-hidden','false'); modal.style.display = 'flex'; document.body.style.overflow = 'hidden';
   const cb = document.getElementById('modal-close'); if (cb) cb.focus();
 }

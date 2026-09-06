@@ -5,7 +5,7 @@ const GITHUB_OWNER = 'lokeshdugar040', GITHUB_REPO = 'jhalar-hanging-decor', GIT
 const FILES_TO_PUBLISH = ['content/site-settings.json','content/theme.json','content/products.json','content/sections.json','content/custom-css.json'];
 
 let state = {
-  settings: null, theme: null, products: [], sections: {}, sectionOrder: [],
+  settings: null, theme: null, products: [], namingRegistry: null, sections: {}, sectionOrder: [],
   customCSS: '', navItems: [], footerNavItems: [], socialLinks: {},
   imageManifest: [], fontManifest: [], selectedProductId: null, viewport: 'desktop',
   changed: false, githubToken: null, darkMode: false,
@@ -181,10 +181,10 @@ async function loadPublishedData() {
     const dsec = localStorage.getItem('jhalar_editor_sections');
     const dcss = localStorage.getItem('jhalar_editor_customcss');
 
-    const [sr,tr,pr,secr,ccr] = await Promise.all([
+    const [sr,tr,pr,secr,ccr,nr] = await Promise.all([
       fetch('content/site-settings.json'), fetch('content/theme.json'),
       fetch('content/products.json'), fetch('content/sections.json'),
-      fetch('content/custom-css.json')
+      fetch('content/custom-css.json'), fetch('content/product-naming.json', { cache: 'no-store' })
     ]);
 
     const ps = sr.ok ? await sr.json() : {};
@@ -192,6 +192,7 @@ async function loadPublishedData() {
     const pp = pr.ok ? await pr.json() : {products:[]};
     const psec = secr.ok ? await secr.json() : {sections:{},order:[]};
     const pcc = ccr.ok ? await ccr.json() : {css:''};
+    state.namingRegistry = nr.ok ? await nr.json() : null;
 
     state.settings = ds ? JSON.parse(ds) : ps;
     state.theme = deepMerge(defaultThemeTemplate(), dt ? JSON.parse(dt) : pt);
@@ -215,7 +216,7 @@ async function loadPublishedData() {
     state.settings.socialLinks = state.socialLinks;
     state.settings.sectionCopy = state.sectionCopy;
     state.heroHighlights = state.settings.heroHighlights||[{text:'Made to order',icon:'icon-check'},{text:'Custom colourways',icon:'icon-clock'},{text:'Any quantity',icon:'icon-route'}];
-    state.trustItems = state.settings.trustItems||[{label:'Our own karigars in Howrah',icon:'icon-mfr'},{label:'16 designs, 8 categories',icon:'icon-design'},{label:'Delivered across India',icon:'icon-location'}];
+    state.trustItems = state.settings.trustItems||[{label:'Our own karigars in Howrah',icon:'icon-mfr'},{label:'35 products, 18 series',icon:'icon-design'},{label:'Delivered across India',icon:'icon-location'}];
     state.faqItems = state.settings.faqItems||[
       {q:'What quantities do you take?',a:'From a few dozen to several thousand pieces per design. Tell us the design and the quantity and we will confirm.'},
       {q:'Can you match a specific colour?',a:'Yes. Share a reference photo or your palette and we will match it in the sample before production.'},
@@ -282,21 +283,17 @@ function populateFontOptions() {
 
 // ===== IMAGE MANIFEST =====
 async function loadImageManifest() {
+  const fallback = () => [...new Set([
+    'assets/images/about-collage.jpg', 'assets/images/custom-orders.jpg',
+    'assets/images/hero-jhalar.jpg', 'assets/images/og-cover.jpg',
+    ...state.products.map(p => p.image).filter(Boolean)
+  ])];
   try {
-    const r = await fetch('assets/images/manifest.json');
-    state.imageManifest = r.ok ? (await r.json()).images||[] : [
-      'assets/images/about-collage.jpg','assets/images/custom-orders.jpg','assets/images/hero-jhalar.jpg','assets/images/og-cover.jpg',
-      'assets/images/products/pom-pom-pink-gota.jpg','assets/images/products/pom-pom-green-gota.jpg',
-      'assets/images/products/bead-pearl-white.jpg','assets/images/products/bead-mogra-pearl.jpg',
-      'assets/images/products/bell-pink-blossom.jpg','assets/images/products/bell-rose-leaf.jpg',
-      'assets/images/products/floral-marigold-orange.jpg','assets/images/products/floral-red-white.jpg',
-      'assets/images/products/toran-mogra.jpg','assets/images/products/toran-bandhanwar.jpg',
-      'assets/images/products/tassel-tricolour.jpg','assets/images/products/tassel-red-floral.jpg',
-      'assets/images/products/string-golden-bead.jpg','assets/images/products/string-temple-bell.jpg',
-      'assets/images/products/custom-emerald-gota.jpg','assets/images/products/custom-sapphire.jpg'
-    ];
-    populateImageDropdowns();
-  } catch(e) { console.warn('Manifest:', e); }
+    const r = await fetch('assets/images/manifest.json', { cache: 'no-store' });
+    const data = r.ok ? await r.json() : null;
+    state.imageManifest = Array.isArray(data?.images) ? data.images : fallback();
+  } catch(e) { console.warn('Manifest:', e); state.imageManifest = fallback(); }
+  populateImageDropdowns();
 }
 
 function populateImageDropdowns() {
@@ -725,8 +722,8 @@ function renderProductList() {
   if (!state.products.length) { c.innerHTML = '<p style="color:var(--text3);font-size:12px;text-align:center;padding:16px;">No products. Click <strong>Add</strong> to create one.</p>'; return; }
   c.innerHTML = state.products.map((p,i) => `
     <div class="product-list-item ${state.selectedProductId===p.id?'active':''}" data-id="${p.id}" data-index="${i}">
-      <img class="thumb" src="${p.image||'assets/images/og-cover.jpg'}" alt="" onerror="this.src='assets/images/og-cover.jpg'">
-      <div class="info"><div class="name">${escapeHtml(p.title||'Untitled')}</div><div class="cat">${p.category||'Uncategorised'}</div></div>
+      <img class="thumb" src="${escapeHtml(p.image||'assets/images/og-cover.jpg')}" alt="" onerror="this.src='assets/images/og-cover.jpg'">
+      <div class="info"><div class="name">${escapeHtml(p.title||'Untitled')}</div><div class="cat">${escapeHtml(p.category||'Uncategorised')} · ${escapeHtml(window.JHALARNaming.productReference(p))}</div></div>
       <div class="actions">
         <button onclick="event.stopPropagation();moveProduct(${p.id},-1)" title="Up"><i class="fas fa-chevron-up"></i></button>
         <button onclick="event.stopPropagation();moveProduct(${p.id},1)" title="Down"><i class="fas fa-chevron-down"></i></button>
@@ -1300,6 +1297,23 @@ async function testGitHubToken() {
 }
 function updateTokenStatus(msg, type) { const el = document.getElementById('token-status'); if (el) { el.textContent = msg; el.className = 'token-status' + (type ? ' '+type : ''); } }
 
+// Validate against the published registry, not a candidate's self-approval flags.
+async function catalogueReadyToPublish() {
+  try {
+    const response = await fetch('content/product-naming.json', { cache: 'no-store' });
+    if (!response.ok) throw new Error('The approved naming registry could not be loaded.');
+    state.namingRegistry = await response.json();
+    const report = window.JHALARNaming.validateCatalogue({ products: state.products }, state.namingRegistry);
+    if (report.errors.length || report.reviewCount || !state.products.length) {
+      throw new Error(report.errors[0] || `${report.reviewCount} product(s) require naming review.`);
+    }
+    return true;
+  } catch (error) {
+    showToast('Publication blocked: ' + error.message, 'error');
+    return false;
+  }
+}
+
 // ===== GITHUB PUBLISH =====
 async function publishToGitHub() {
   const btn = document.getElementById('btn-publish');
@@ -1308,10 +1322,11 @@ async function publishToGitHub() {
   const status = document.getElementById('progress-status');
   const log = document.getElementById('progress-log');
 
+  collectAllData();
+  if (!await catalogueReadyToPublish()) return;
   const token = getVal('ed-github-token').trim();
   if (!token) { showToast('Enter GitHub token first','error'); return; }
   state.githubToken = token; saveGitHubToken();
-  collectAllData();
 
   const files = [
     { path: 'content/site-settings.json', content: JSON.stringify({...state.settings, navItems: state.navItems, footerNavItems: state.footerNavItems, socialLinks: state.socialLinks}, null, 2) },

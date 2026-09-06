@@ -17,6 +17,8 @@
 #   5. JS syntax check (node --check) + JSON validity for content/*.json.
 #   6. Drift check: key copy in index.html must equal content/site-settings.json
 #      (heroHeadline, heroIntro and all section titles).
+#   7. Naming registry and canonical title checks (unclassified legacy records
+#      remain pending; use npm run naming:review for the strict approval gate).
 # ============================================================================
 set -u
 
@@ -173,9 +175,12 @@ PYEOF
 }
 if drift_check; then :; else FAIL=1; fi
 
+# --- 7. controlled product naming --------------------------------------------
+if ! node scripts/product-naming.js; then fail "product naming checks failed"; fi
+
 # --- summary -----------------------------------------------------------------
 if [ "$FAIL" -eq 0 ]; then
-  note "VALIDATE PASS — copy, tokens, and theme files are clean and in sync."
+  note "VALIDATE PASS — copy, tokens, theme files and naming structure checks passed (pending reviews are not approvals)."
   exit 0
 fi
 note "VALIDATE FAIL — fix the issues above before merging to main."

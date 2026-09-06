@@ -1,0 +1,1397 @@
+{
+  "schemaVersion": 1,
+  "registryVersion": "2026-09-07.1",
+  "confidenceThreshold": 85,
+  "series": [
+    {
+      "id": "champa",
+      "name": "Champa Series",
+      "designCriteria": [
+        "Spaced, elongated trumpet-shaped floral elements on a slender strand, with a small flower at the end."
+      ],
+      "referenceImages": [
+        "assets/images/products/Products_0019_c0a4458c-7943-48e9-a162-c52ed0323635.jpg"
+      ],
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "id": "chandrika",
+      "name": "Chandrika Series",
+      "designCriteria": [
+        "Three circular, spoked gota-style medallions, pom-poms, bead connectors and a bell."
+      ],
+      "referenceImages": [
+        "assets/images/products/Products_0021_51eb2e52-6efa-4b69-b0c7-4406ff334627.jpg",
+        "assets/images/products/Products_0024_e84c5971-080e-45c2-9c8b-1662ee83f66f.jpg",
+        "assets/images/products/Products_0028_b9a15b29-4d31-410c-b69b-18a2507ff142.jpg",
+        "assets/images/products/Products_0034_10c5722d-cb19-4023-83d4-ede44dbf399d.jpg"
+      ],
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "id": "gulab",
+      "name": "Gulab Series",
+      "designCriteria": [
+        "Open rose forms with paired leaves along an exposed bead chain, ending in a bell."
+      ],
+      "referenceImages": [
+        "assets/images/products/Products_0017_b70aaf0a-b46e-4581-88eb-051c5d7d1865.jpg",
+        "assets/images/products/Products_0018_96897609-7cdb-47d0-b52d-d4e3f414bad7.jpg"
+      ],
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "id": "jharokha",
+      "name": "Jharokha Series",
+      "designCriteria": [
+        "Square ornamental frames alternating with small pom-poms on a bead strand, with a bell."
+      ],
+      "referenceImages": [
+        "assets/images/products/Products_0032_195c8b92-b628-4397-8af3-3feafd9c082e.jpg"
+      ],
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "id": "kalash",
+      "name": "Kalash Series",
+      "designCriteria": [
+        "Kalash-like vessel motifs and small pom-poms on a bead strand, with a bell finish."
+      ],
+      "referenceImages": [
+        "assets/images/products/Products_0016_a6e53143-4f3a-4d1d-bcaa-05d577b1fb27.jpg"
+      ],
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "id": "kanak",
+      "name": "Kanak Series",
+      "designCriteria": [
+        "A fine decorative bead string with small repeating motifs, without the larger flowers or pom-poms of the other families."
+      ],
+      "referenceImages": [
+        "assets/images/products/Products_0026_eu.jpg"
+      ],
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "id": "kusum",
+      "name": "Kusum Series",
+      "designCriteria": [
+        "A dense continuous floral strand with small contrasting accent details and beaded floral drops."
+      ],
+      "referenceImages": [
+        "assets/images/products/Kusum Series – Golden Marigold.jpg",
+        "assets/images/products/Kusum Series – Pearl White.jpg",
+        "assets/images/products/Kusum Series – Rani Pink.jpg",
+        "assets/images/products/Kusum Series – Ruby Red.jpg",
+        "assets/images/products/Kusum Series – dark pink.jpg"
+      ],
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "id": "latika",
+      "name": "Latika Series",
+      "designCriteria": [
+        "A short vertical floral body with leaf collars, pom-pom tiers and three lower pom-pom drops. Confirm that the two central floral textures belong to one family."
+      ],
+      "referenceImages": [
+        "assets/images/products/Products_0023_4a1bca9a-5390-4bbf-8cdd-948448c1608c.jpg",
+        "assets/images/products/Products_0025_fb80f4c3-73e8-4b45-a212-4dd17f894a68.jpg"
+      ],
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "id": "madhavi",
+      "name": "Madhavi Series",
+      "designCriteria": [
+        "Alternating short floral sections with small accent details between the petals and terminal floral drops."
+      ],
+      "referenceImages": [
+        "assets/images/products/Madhavi Series – Blue Orange & White.jpg",
+        "assets/images/products/Madhavi Series – Yellow Green & White.jpg",
+        "assets/images/products/Madhavi Series – green red & White.jpg"
+      ],
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "id": "mallika",
+      "name": "Mallika Series",
+      "designCriteria": [
+        "A continuous, dense bud-cluster strand with a decorative bell-shaped terminal."
+      ],
+      "referenceImages": [
+        "assets/images/products/Products_0020_a5da5c9e-9807-4bd1-aaa9-a60940699734.jpg"
+      ],
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "id": "mandira",
+      "name": "Mandira Series",
+      "designCriteria": [
+        "Long floral sections interspersed with leafy clusters and spherical ornaments, ending in beaded floral drops."
+      ],
+      "referenceImages": [
+        "assets/images/products/Mandira Series – Saffron Green.jpg"
+      ],
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "id": "manjari",
+      "name": "Manjari Series",
+      "designCriteria": [
+        "Bud/bead clusters alternating with pom-pom groups on a strand, with a bell finish."
+      ],
+      "referenceImages": [
+        "assets/images/products/Products_0022_e6d29bb1-22f0-4599-87c8-85a881b538cd.jpg",
+        "assets/images/products/Products_0029_cc3b6b64-e3a7-47c8-b7ef-92f3583ec2af.jpg"
+      ],
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "id": "pushpika",
+      "name": "Pushpika Series",
+      "designCriteria": [
+        "Repeated capped pom-poms on a bead strand, ending in a flower-shaped pendant rather than a bell."
+      ],
+      "referenceImages": [
+        "assets/images/products/Products_0015_782495e6-eee2-4eec-89d1-4e8dbacf0c1e.jpg"
+      ],
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "id": "ratnavali",
+      "name": "Ratnavali Series",
+      "designCriteria": [
+        "A bead strand with larger decorative spherical ornaments, textile bands and a square ceremonial-bell-style terminal."
+      ],
+      "referenceImages": [
+        "assets/images/products/Products_0033_787510cd-2eec-4eb6-a8ce-3a5b020f601b.jpg"
+      ],
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "id": "sangam",
+      "name": "Sangam Series",
+      "designCriteria": [
+        "Long floral blocks separated by shorter leafy sections, with contrasting sections and beaded floral end drops."
+      ],
+      "referenceImages": [
+        "assets/images/products/Sangam Series – Kesari Bloom.jpg",
+        "assets/images/products/Sangam Series – Rose Pink.jpg",
+        "assets/images/products/Sangam Series – Royal Crimson.jpg"
+      ],
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "id": "shobha",
+      "name": "Shobha Series",
+      "designCriteria": [
+        "Alternating floral sections dotted with contrasting star-shaped flowers, ending in bead strings with floral drops."
+      ],
+      "referenceImages": [
+        "assets/images/products/Shobha Series – Blue Yellow & White.jpg",
+        "assets/images/products/Shobha Series – Red Green & White.jpg",
+        "assets/images/products/Products_0027_39bd2a25-dec1-44ec-bd7e-736abd8bd039.jpg",
+        "assets/images/products/Shobha Series – Red Yellow & White.jpg"
+      ],
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "id": "vallari",
+      "name": "Vallari Series",
+      "designCriteria": [
+        "Slender bud/bead sections interrupted by small rosebud groups, with a bell finish."
+      ],
+      "referenceImages": [
+        "assets/images/products/Products_0030_3aed4651-77a7-4d81-855d-93b69c4c6154.jpg"
+      ],
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "id": "vasanti",
+      "name": "Vasanti Series",
+      "designCriteria": [
+        "Dense bud panels separated by open roses and leaf collars, with an ornamental terminal."
+      ],
+      "referenceImages": [
+        "assets/images/products/Products_0031_da89fbf2-324e-415a-b823-813d5ab888ac.jpg"
+      ],
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    }
+  ],
+  "colours": [
+    {
+      "id": "blue-orange-and-white",
+      "name": "Blue Orange & White",
+      "paletteCriteria": [
+        "Alternating blue and orange floral sections with small white accents."
+      ],
+      "referenceImages": [
+        "assets/images/products/Madhavi Series – Blue Orange & White.jpg"
+      ],
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "id": "blue-yellow-and-white",
+      "name": "Blue Yellow & White",
+      "paletteCriteria": [
+        "Blue and yellow floral sections with small white star-shaped flowers."
+      ],
+      "referenceImages": [
+        "assets/images/products/Shobha Series – Blue Yellow & White.jpg"
+      ],
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "id": "blush-pink",
+      "name": "Blush Pink",
+      "paletteCriteria": [
+        "Pale pink roses; leaf and hardware colours remain secondary"
+      ],
+      "referenceImages": [
+        "assets/images/products/Products_0018_96897609-7cdb-47d0-b52d-d4e3f414bad7.jpg"
+      ],
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "id": "classic-gold",
+      "name": "Classic Gold",
+      "paletteCriteria": [
+        "Gold-coloured finish"
+      ],
+      "referenceImages": [
+        "assets/images/products/Products_0026_eu.jpg"
+      ],
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "id": "crimson-kesari",
+      "name": "Crimson Kesari",
+      "paletteCriteria": [
+        "Red and orange accents; the base and separators vary by design"
+      ],
+      "referenceImages": [
+        "assets/images/products/Products_0022_e6d29bb1-22f0-4599-87c8-85a881b538cd.jpg",
+        "assets/images/products/Products_0025_fb80f4c3-73e8-4b45-a212-4dd17f894a68.jpg"
+      ],
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "id": "crimson-marigold",
+      "name": "Crimson Marigold",
+      "paletteCriteria": [
+        "Red and yellow accents over a light-coloured bead/bud base"
+      ],
+      "referenceImages": [
+        "assets/images/products/Products_0029_cc3b6b64-e3a7-47c8-b7ef-92f3583ec2af.jpg"
+      ],
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "id": "crimson-pearl",
+      "name": "Crimson Pearl",
+      "paletteCriteria": [
+        "Red rosebud accents with a white/cream bead/bud base"
+      ],
+      "referenceImages": [
+        "assets/images/products/Products_0030_3aed4651-77a7-4d81-855d-93b69c4c6154.jpg"
+      ],
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "id": "emerald-green",
+      "name": "Emerald Green",
+      "paletteCriteria": [
+        "Deep green pom-poms and medallion edging, with gold-coloured details"
+      ],
+      "referenceImages": [
+        "assets/images/products/Products_0034_10c5722d-cb19-4023-83d4-ede44dbf399d.jpg"
+      ],
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "id": "golden-marigold",
+      "name": "Golden Marigold",
+      "paletteCriteria": [
+        "Golden-yellow floral or pom-pom accents, with design-specific secondary details."
+      ],
+      "referenceImages": [
+        "assets/images/products/Kusum Series – Golden Marigold.jpg",
+        "assets/images/products/Products_0017_b70aaf0a-b46e-4581-88eb-051c5d7d1865.jpg",
+        "assets/images/products/Products_0024_e84c5971-080e-45c2-9c8b-1662ee83f66f.jpg"
+      ],
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "id": "kesari-bloom",
+      "name": "Kesari Bloom",
+      "paletteCriteria": [
+        "Orange or saffron-coloured floral/pom-pom accents with design-specific secondary details."
+      ],
+      "referenceImages": [
+        "assets/images/products/Sangam Series – Kesari Bloom.jpg",
+        "assets/images/products/Products_0021_51eb2e52-6efa-4b69-b0c7-4406ff334627.jpg"
+      ],
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "id": "marigold-pearl",
+      "name": "Marigold Pearl",
+      "paletteCriteria": [
+        "Yellow and white/cream, with secondary leaf accents"
+      ],
+      "referenceImages": [
+        "assets/images/products/Products_0023_4a1bca9a-5390-4bbf-8cdd-948448c1608c.jpg",
+        "assets/images/products/Products_0031_da89fbf2-324e-415a-b823-813d5ab888ac.jpg"
+      ],
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "id": "pearl-white",
+      "name": "Pearl White",
+      "paletteCriteria": [
+        "White or cream as the main visual palette, with design-specific small accent details."
+      ],
+      "referenceImages": [
+        "assets/images/products/Kusum Series – Pearl White.jpg",
+        "assets/images/products/Products_0019_c0a4458c-7943-48e9-a162-c52ed0323635.jpg",
+        "assets/images/products/Products_0020_a5da5c9e-9807-4bd1-aaa9-a60940699734.jpg"
+      ],
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "id": "rangoli-pearl",
+      "name": "Rangoli Pearl",
+      "paletteCriteria": [
+        "White/cream base with pink, yellow, green and gold-coloured accents"
+      ],
+      "referenceImages": [
+        "assets/images/products/Products_0033_787510cd-2eec-4eb6-a8ce-3a5b020f601b.jpg"
+      ],
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "id": "rani-marigold",
+      "name": "Rani Marigold",
+      "paletteCriteria": [
+        "Pink and yellow accents"
+      ],
+      "referenceImages": [
+        "assets/images/products/Products_0016_a6e53143-4f3a-4d1d-bcaa-05d577b1fb27.jpg"
+      ],
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "id": "rani-pink",
+      "name": "Rani Pink",
+      "paletteCriteria": [
+        "Vivid pink as the main accent colour, with secondary details determined by the design."
+      ],
+      "referenceImages": [
+        "assets/images/products/Kusum Series – Rani Pink.jpg",
+        "assets/images/products/Products_0015_782495e6-eee2-4eec-89d1-4e8dbacf0c1e.jpg",
+        "assets/images/products/Products_0028_b9a15b29-4d31-410c-b69b-18a2507ff142.jpg"
+      ],
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "id": "red-green-and-white",
+      "name": "Red Green & White",
+      "paletteCriteria": [
+        "Red and green floral sections with small white star-shaped flowers."
+      ],
+      "referenceImages": [
+        "assets/images/products/Shobha Series – Red Green & White.jpg"
+      ],
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "id": "red-yellow-and-white",
+      "name": "Red Yellow & White",
+      "paletteCriteria": [
+        "Red and yellow floral sections with small white star-shaped flowers."
+      ],
+      "referenceImages": [
+        "assets/images/products/Products_0027_39bd2a25-dec1-44ec-bd7e-736abd8bd039.jpg",
+        "assets/images/products/Shobha Series – Red Yellow & White.jpg"
+      ],
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "id": "rose-pink",
+      "name": "Rose Pink",
+      "paletteCriteria": [
+        "Bright pink floral blocks with white sections and green separators in the source reference."
+      ],
+      "referenceImages": [
+        "assets/images/products/Sangam Series – Rose Pink.jpg"
+      ],
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "id": "royal-crimson",
+      "name": "Royal Crimson",
+      "paletteCriteria": [
+        "Red floral blocks with white sections and green separators in the source reference."
+      ],
+      "referenceImages": [
+        "assets/images/products/Sangam Series – Royal Crimson.jpg"
+      ],
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "id": "ruby-red",
+      "name": "Ruby Red",
+      "paletteCriteria": [
+        "Bright red floral clusters with small light-coloured accents."
+      ],
+      "referenceImages": [
+        "assets/images/products/Kusum Series – Ruby Red.jpg"
+      ],
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "id": "saffron-green",
+      "name": "Saffron Green",
+      "paletteCriteria": [
+        "Orange and green accents, with design-specific white, red or gold-coloured secondary details."
+      ],
+      "referenceImages": [
+        "assets/images/products/Mandira Series – Saffron Green.jpg",
+        "assets/images/products/Products_0032_195c8b92-b628-4397-8af3-3feafd9c082e.jpg"
+      ],
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "id": "yellow-green-and-white",
+      "name": "Yellow Green & White",
+      "paletteCriteria": [
+        "Alternating yellow and green floral sections with small white accents."
+      ],
+      "referenceImages": [
+        "assets/images/products/Madhavi Series – Yellow Green & White.jpg"
+      ],
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "id": "dark-pink",
+      "name": "dark pink",
+      "paletteCriteria": [
+        "Deep pink floral clusters with small white details; spelling retained from the owner-labelled source."
+      ],
+      "referenceImages": [
+        "assets/images/products/Kusum Series – dark pink.jpg"
+      ],
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "id": "green-red-and-white",
+      "name": "green red & White",
+      "paletteCriteria": [
+        "Alternating red and green floral sections with white details; spelling retained from the owner-labelled source."
+      ],
+      "referenceImages": [
+        "assets/images/products/Madhavi Series – green red & White.jpg"
+      ],
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    }
+  ],
+  "approvedVariants": [
+    {
+      "seriesId": "kusum",
+      "colourId": "golden-marigold",
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "seriesId": "kusum",
+      "colourId": "pearl-white",
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "seriesId": "kusum",
+      "colourId": "rani-pink",
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "seriesId": "kusum",
+      "colourId": "ruby-red",
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "seriesId": "kusum",
+      "colourId": "dark-pink",
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "seriesId": "madhavi",
+      "colourId": "blue-orange-and-white",
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "seriesId": "madhavi",
+      "colourId": "yellow-green-and-white",
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "seriesId": "madhavi",
+      "colourId": "green-red-and-white",
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "seriesId": "mandira",
+      "colourId": "saffron-green",
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "seriesId": "sangam",
+      "colourId": "kesari-bloom",
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "seriesId": "sangam",
+      "colourId": "rose-pink",
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "seriesId": "sangam",
+      "colourId": "royal-crimson",
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "seriesId": "shobha",
+      "colourId": "blue-yellow-and-white",
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "seriesId": "shobha",
+      "colourId": "red-green-and-white",
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "seriesId": "pushpika",
+      "colourId": "rani-pink",
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "seriesId": "kalash",
+      "colourId": "rani-marigold",
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "seriesId": "gulab",
+      "colourId": "golden-marigold",
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "seriesId": "gulab",
+      "colourId": "blush-pink",
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "seriesId": "champa",
+      "colourId": "pearl-white",
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "seriesId": "mallika",
+      "colourId": "pearl-white",
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "seriesId": "chandrika",
+      "colourId": "kesari-bloom",
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "seriesId": "manjari",
+      "colourId": "crimson-kesari",
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "seriesId": "latika",
+      "colourId": "marigold-pearl",
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "seriesId": "chandrika",
+      "colourId": "golden-marigold",
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "seriesId": "latika",
+      "colourId": "crimson-kesari",
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "seriesId": "kanak",
+      "colourId": "classic-gold",
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "seriesId": "shobha",
+      "colourId": "red-yellow-and-white",
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "seriesId": "chandrika",
+      "colourId": "rani-pink",
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "seriesId": "manjari",
+      "colourId": "crimson-marigold",
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "seriesId": "vallari",
+      "colourId": "crimson-pearl",
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "seriesId": "vasanti",
+      "colourId": "marigold-pearl",
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "seriesId": "jharokha",
+      "colourId": "saffron-green",
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "seriesId": "ratnavali",
+      "colourId": "rangoli-pearl",
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "seriesId": "chandrika",
+      "colourId": "emerald-green",
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    }
+  ],
+  "approvedProducts": [
+    {
+      "productId": 1,
+      "seriesId": "kusum",
+      "colourId": "golden-marigold",
+      "sourceImage": "assets/images/products/Kusum Series – Golden Marigold.jpg",
+      "image": "assets/images/products/catalogue/jh-001.webp",
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "productId": 2,
+      "seriesId": "kusum",
+      "colourId": "pearl-white",
+      "sourceImage": "assets/images/products/Kusum Series – Pearl White.jpg",
+      "image": "assets/images/products/catalogue/jh-002.webp",
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "productId": 3,
+      "seriesId": "kusum",
+      "colourId": "rani-pink",
+      "sourceImage": "assets/images/products/Kusum Series – Rani Pink.jpg",
+      "image": "assets/images/products/catalogue/jh-003.webp",
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "productId": 4,
+      "seriesId": "kusum",
+      "colourId": "ruby-red",
+      "sourceImage": "assets/images/products/Kusum Series – Ruby Red.jpg",
+      "image": "assets/images/products/catalogue/jh-004.webp",
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "productId": 5,
+      "seriesId": "kusum",
+      "colourId": "dark-pink",
+      "sourceImage": "assets/images/products/Kusum Series – dark pink.jpg",
+      "image": "assets/images/products/catalogue/jh-005.webp",
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "productId": 6,
+      "seriesId": "madhavi",
+      "colourId": "blue-orange-and-white",
+      "sourceImage": "assets/images/products/Madhavi Series – Blue Orange & White.jpg",
+      "image": "assets/images/products/catalogue/jh-006.webp",
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "productId": 7,
+      "seriesId": "madhavi",
+      "colourId": "yellow-green-and-white",
+      "sourceImage": "assets/images/products/Madhavi Series – Yellow Green & White.jpg",
+      "image": "assets/images/products/catalogue/jh-007.webp",
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "productId": 8,
+      "seriesId": "madhavi",
+      "colourId": "green-red-and-white",
+      "sourceImage": "assets/images/products/Madhavi Series – green red & White.jpg",
+      "image": "assets/images/products/catalogue/jh-008.webp",
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "productId": 9,
+      "seriesId": "mandira",
+      "colourId": "saffron-green",
+      "sourceImage": "assets/images/products/Mandira Series – Saffron Green.jpg",
+      "image": "assets/images/products/catalogue/jh-009.webp",
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "productId": 10,
+      "seriesId": "sangam",
+      "colourId": "kesari-bloom",
+      "sourceImage": "assets/images/products/Sangam Series – Kesari Bloom.jpg",
+      "image": "assets/images/products/catalogue/jh-010.webp",
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "productId": 11,
+      "seriesId": "sangam",
+      "colourId": "rose-pink",
+      "sourceImage": "assets/images/products/Sangam Series – Rose Pink.jpg",
+      "image": "assets/images/products/catalogue/jh-011.webp",
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "productId": 12,
+      "seriesId": "sangam",
+      "colourId": "royal-crimson",
+      "sourceImage": "assets/images/products/Sangam Series – Royal Crimson.jpg",
+      "image": "assets/images/products/catalogue/jh-012.webp",
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "productId": 13,
+      "seriesId": "shobha",
+      "colourId": "blue-yellow-and-white",
+      "sourceImage": "assets/images/products/Shobha Series – Blue Yellow & White.jpg",
+      "image": "assets/images/products/catalogue/jh-013.webp",
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "productId": 14,
+      "seriesId": "shobha",
+      "colourId": "red-green-and-white",
+      "sourceImage": "assets/images/products/Shobha Series – Red Green & White.jpg",
+      "image": "assets/images/products/catalogue/jh-014.webp",
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "productId": 15,
+      "seriesId": "pushpika",
+      "colourId": "rani-pink",
+      "sourceImage": "assets/images/products/Products_0015_782495e6-eee2-4eec-89d1-4e8dbacf0c1e.jpg",
+      "image": "assets/images/products/catalogue/jh-015.webp",
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "productId": 16,
+      "seriesId": "kalash",
+      "colourId": "rani-marigold",
+      "sourceImage": "assets/images/products/Products_0016_a6e53143-4f3a-4d1d-bcaa-05d577b1fb27.jpg",
+      "image": "assets/images/products/catalogue/jh-016.webp",
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "productId": 17,
+      "seriesId": "gulab",
+      "colourId": "golden-marigold",
+      "sourceImage": "assets/images/products/Products_0017_b70aaf0a-b46e-4581-88eb-051c5d7d1865.jpg",
+      "image": "assets/images/products/catalogue/jh-017.webp",
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "productId": 18,
+      "seriesId": "gulab",
+      "colourId": "blush-pink",
+      "sourceImage": "assets/images/products/Products_0018_96897609-7cdb-47d0-b52d-d4e3f414bad7.jpg",
+      "image": "assets/images/products/catalogue/jh-018.webp",
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "productId": 19,
+      "seriesId": "champa",
+      "colourId": "pearl-white",
+      "sourceImage": "assets/images/products/Products_0019_c0a4458c-7943-48e9-a162-c52ed0323635.jpg",
+      "image": "assets/images/products/catalogue/jh-019.webp",
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "productId": 20,
+      "seriesId": "mallika",
+      "colourId": "pearl-white",
+      "sourceImage": "assets/images/products/Products_0020_a5da5c9e-9807-4bd1-aaa9-a60940699734.jpg",
+      "image": "assets/images/products/catalogue/jh-020.webp",
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "productId": 21,
+      "seriesId": "chandrika",
+      "colourId": "kesari-bloom",
+      "sourceImage": "assets/images/products/Products_0021_51eb2e52-6efa-4b69-b0c7-4406ff334627.jpg",
+      "image": "assets/images/products/catalogue/jh-021.webp",
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "productId": 22,
+      "seriesId": "manjari",
+      "colourId": "crimson-kesari",
+      "sourceImage": "assets/images/products/Products_0022_e6d29bb1-22f0-4599-87c8-85a881b538cd.jpg",
+      "image": "assets/images/products/catalogue/jh-022.webp",
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "productId": 23,
+      "seriesId": "latika",
+      "colourId": "marigold-pearl",
+      "sourceImage": "assets/images/products/Products_0023_4a1bca9a-5390-4bbf-8cdd-948448c1608c.jpg",
+      "image": "assets/images/products/catalogue/jh-023.webp",
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "productId": 24,
+      "seriesId": "chandrika",
+      "colourId": "golden-marigold",
+      "sourceImage": "assets/images/products/Products_0024_e84c5971-080e-45c2-9c8b-1662ee83f66f.jpg",
+      "image": "assets/images/products/catalogue/jh-024.webp",
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "productId": 25,
+      "seriesId": "latika",
+      "colourId": "crimson-kesari",
+      "sourceImage": "assets/images/products/Products_0025_fb80f4c3-73e8-4b45-a212-4dd17f894a68.jpg",
+      "image": "assets/images/products/catalogue/jh-025.webp",
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "productId": 26,
+      "seriesId": "kanak",
+      "colourId": "classic-gold",
+      "sourceImage": "assets/images/products/Products_0026_eu.jpg",
+      "image": "assets/images/products/catalogue/jh-026.webp",
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "productId": 27,
+      "seriesId": "shobha",
+      "colourId": "red-yellow-and-white",
+      "sourceImage": "assets/images/products/Products_0027_39bd2a25-dec1-44ec-bd7e-736abd8bd039.jpg",
+      "image": "assets/images/products/catalogue/jh-027.webp",
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "productId": 28,
+      "seriesId": "chandrika",
+      "colourId": "rani-pink",
+      "sourceImage": "assets/images/products/Products_0028_b9a15b29-4d31-410c-b69b-18a2507ff142.jpg",
+      "image": "assets/images/products/catalogue/jh-028.webp",
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "productId": 29,
+      "seriesId": "manjari",
+      "colourId": "crimson-marigold",
+      "sourceImage": "assets/images/products/Products_0029_cc3b6b64-e3a7-47c8-b7ef-92f3583ec2af.jpg",
+      "image": "assets/images/products/catalogue/jh-029.webp",
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "productId": 30,
+      "seriesId": "vallari",
+      "colourId": "crimson-pearl",
+      "sourceImage": "assets/images/products/Products_0030_3aed4651-77a7-4d81-855d-93b69c4c6154.jpg",
+      "image": "assets/images/products/catalogue/jh-030.webp",
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "productId": 31,
+      "seriesId": "vasanti",
+      "colourId": "marigold-pearl",
+      "sourceImage": "assets/images/products/Products_0031_da89fbf2-324e-415a-b823-813d5ab888ac.jpg",
+      "image": "assets/images/products/catalogue/jh-031.webp",
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "productId": 32,
+      "seriesId": "jharokha",
+      "colourId": "saffron-green",
+      "sourceImage": "assets/images/products/Products_0032_195c8b92-b628-4397-8af3-3feafd9c082e.jpg",
+      "image": "assets/images/products/catalogue/jh-032.webp",
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "productId": 33,
+      "seriesId": "ratnavali",
+      "colourId": "rangoli-pearl",
+      "sourceImage": "assets/images/products/Products_0033_787510cd-2eec-4eb6-a8ce-3a5b020f601b.jpg",
+      "image": "assets/images/products/catalogue/jh-033.webp",
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "productId": 34,
+      "seriesId": "chandrika",
+      "colourId": "emerald-green",
+      "sourceImage": "assets/images/products/Products_0034_10c5722d-cb19-4023-83d4-ede44dbf399d.jpg",
+      "image": "assets/images/products/catalogue/jh-034.webp",
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    },
+    {
+      "productId": 35,
+      "seriesId": "shobha",
+      "colourId": "red-yellow-and-white",
+      "sourceImage": "assets/images/products/Shobha Series – Red Yellow & White.jpg",
+      "image": "assets/images/products/catalogue/jh-035.webp",
+      "approval": {
+        "approvedBy": "JHALAR catalogue owner",
+        "approvedOn": "2026-09-07",
+        "reference": "docs/CATALOGUE-PUBLICATION.md#owner-instructions"
+      }
+    }
+  ]
+}

@@ -58,7 +58,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=20260907-catalogue">
 </head>
 <body>
     <!-- HEADER -->
@@ -130,7 +130,7 @@
             <div class="container trust-bar-inner">
                 <div class="trust-bar-item"><svg class="icon" aria-hidden="true" width="16" height="16"><use href="assets/icons.svg#icon-mfr"/></svg> Our own karigars in Howrah</div>
                 <div class="trust-bar-divider" aria-hidden="true"></div>
-                <div class="trust-bar-item"><svg class="icon" aria-hidden="true" width="16" height="16"><use href="assets/icons.svg#icon-design"/></svg> 16 designs, 8 categories</div>
+                <div class="trust-bar-item"><svg class="icon" aria-hidden="true" width="16" height="16"><use href="assets/icons.svg#icon-design"/></svg> 35 products, 18 series</div>
                 <div class="trust-bar-divider" aria-hidden="true"></div>
                 <div class="trust-bar-item"><svg class="icon" aria-hidden="true" width="16" height="16"><use href="assets/icons.svg#icon-location"/></svg> Delivered across India</div>
             </div>
@@ -187,7 +187,7 @@
                     <!-- Rendered by JavaScript -->
                 </div>
                 <div class="collection-actions">
-                    <button type="button" class="btn btn-outline" id="collection-toggle" hidden aria-expanded="false" aria-controls="product-grid">View all designs</button>
+                    <button type="button" class="btn btn-outline" id="collection-toggle" hidden aria-expanded="false" aria-controls="product-grid">View all products</button>
                 </div>
                 <p class="collection-note">Looking for something else? <a href="https://wa.me/918100656258" data-wa target="_blank" rel="noopener">Message us on WhatsApp</a> — we will share pricing and availability.</p>
             </div>
@@ -477,11 +477,12 @@
             <button class="modal-close" id="modal-close" aria-label="Close modal">&times;</button>
             <div class="modal-grid">
                 <div class="modal-img-wrap">
-                    <img class="modal-img" id="modal-photo" src="assets/images/products/pom-pom-pink-gota.jpg" alt="" width="1080" height="1080" decoding="async">
+                    <img class="modal-img" id="modal-photo" src="assets/images/products/catalogue/jh-028.webp" alt="" width="1080" height="1080" decoding="async">
                 </div>
                 <div class="modal-info">
                     <span class="modal-tag" id="modal-category">Category</span>
                     <h3 class="modal-title" id="modal-title">Product Name</h3>
+                    <p class="modal-reference" id="modal-reference"></p>
                     <span class="modal-badge" id="modal-tag">Product tag</span>
                     <p class="modal-desc" id="modal-desc">Product description goes here.</p>
                     <ul class="modal-bullets">
@@ -501,6 +502,7 @@
         <i class="fab fa-whatsapp" aria-hidden="true"></i>
     </a>
 
-    <script src="script.js" defer></script>
+    <script src="scripts/product-naming.js?v=20260907-catalogue" defer></script>
+    <script src="script.js?v=20260907-catalogue" defer></script>
 </body>
 </html>
