@@ -534,3 +534,10 @@ img{max-width:100%;height:auto;display:block}ul{list-style:none}button{font-fami
    16x18: rules set width without height, so the height fell back to the
    attribute while flex stretched the width. Pin both from one variable. */
 .icon{width:var(--icon-size,20px);height:var(--icon-size,20px)}
+
+/* Catalogue identities remain complete; references distinguish separate entries. */
+.product-reference,.modal-reference{font-size:var(--fs-xs);color:var(--brand-muted);margin:0 0 var(--space-3);letter-spacing:.01em}
+.filter-btn[hidden]{display:none}
+.catalogue-error{grid-column:1/-1;text-align:center;padding:2rem;max-width:100%}
+
+#collection-toggle[hidden]{display:none}
