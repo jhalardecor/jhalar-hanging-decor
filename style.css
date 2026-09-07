@@ -811,3 +811,37 @@ h1,h2,h3,h4,h5,h6{font-family:var(--font-heading);color:var(--navy);font-synthes
  .filter-btn{min-height:40px;padding:9px 14px;font-size:.82rem;border-radius:999px}
  .filter-btn.active{box-shadow:none}
 }
+
+
+/* TYPOGRAPHIC SCALE — fluid mathematical hierarchy (minor-third modular scale) */
+:root{
+ --type-ratio:1.2;
+ --text-xs:clamp(.68rem,.66rem + .08vw,.74rem);
+ --text-sm:clamp(.78rem,.74rem + .16vw,.88rem);
+ --text-base:clamp(.94rem,.89rem + .22vw,1.06rem);
+ --text-md:clamp(1.13rem,1.04rem + .42vw,1.28rem);
+ --text-lg:clamp(1.35rem,1.20rem + .70vw,1.62rem);
+ --text-xl:clamp(1.62rem,1.38rem + 1.05vw,2.05rem);
+ --text-2xl:clamp(1.95rem,1.56rem + 1.72vw,2.60rem);
+ --text-3xl:clamp(2.34rem,1.72rem + 2.70vw,3.72rem);
+ --text-display:clamp(2.85rem,1.82rem + 4.50vw,5.65rem);
+ --leading-tight:.98;
+ --leading-heading:1.06;
+ --leading-copy:1.58;
+ --leading-small:1.35;
+}
+body{font-size:var(--text-base);line-height:var(--leading-copy)}
+.eyebrow,.kicker{font-size:var(--text-xs);line-height:var(--leading-small);letter-spacing:.14em}
+.nav a,.filter-btn,.more-btn{font-size:var(--text-sm);line-height:1.2}
+.hero-banner-copy h1{font-size:var(--text-display)!important;line-height:var(--leading-tight)!important;letter-spacing:-.045em}
+.hero-lead{font-size:var(--text-md);line-height:var(--leading-copy)}
+.section-heading-group h2,.custom-copy h2,.story-copy h2{font-size:var(--text-3xl)!important;line-height:var(--leading-heading)!important;letter-spacing:-.035em}
+.contact-box h2{font-size:var(--text-3xl)!important;line-height:var(--leading-tight)!important}
+.section-support-group p,.custom-copy p,.story-copy p,.contact-box p:not(.eyebrow){font-size:var(--text-base);line-height:var(--leading-copy)}
+.product-category{font-size:var(--text-xs);line-height:var(--leading-small)}
+.product-title{font-size:var(--text-md);line-height:1.22}
+.product-details-btn{font-size:var(--text-sm);line-height:1.25}
+@media(max-width:760px){
+ .hero-banner-copy h1{font-size:clamp(2.45rem,11.5vw,3.65rem)!important}
+ .section-heading-group h2,.custom-copy h2,.story-copy h2,.contact-box h2{font-size:var(--text-2xl)!important}
+}
