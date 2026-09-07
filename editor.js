@@ -1556,3 +1556,27 @@ function showToast(msg, type) {
 function getVal(id) { const el = document.getElementById(id); return el ? el.value : ''; }
 function setVal(id, v) { const el = document.getElementById(id); if (el) el.value = v; }
 function escapeHtml(str) { const d = document.createElement('div'); d.textContent = str; return d.innerHTML; }
+
+// ===== PRO STUDIO UPGRADE =====
+function installProStudio(){
+  const panel=document.getElementById('panel-theme');
+  if(!panel||document.getElementById('pro-studio'))return;
+  const box=document.createElement('div');
+  box.className='pro-studio';box.id='pro-studio';
+  box.innerHTML='<div class="pro-studio-head"><h4>✦ Gradient Studio</h4><span class="help">Live preview</span></div><div id="studio-gradient-preview" class="gradient-preview"></div><div class="studio-row"><div><label>Color A</label><input id="studio-a" type="color" value="#FFFDF8"></div><div><label>Color B</label><input id="studio-b" type="color" value="#FDF4F1"></div></div><div class="studio-row"><div><label>Accent glow</label><input id="studio-c" type="color" value="#C82039"></div><div><label>Angle</label><input id="studio-angle" type="range" min="0" max="360" value="135"></div></div><div class="studio-actions"><button class="btn-sm primary" id="studio-contact">Apply to Contact</button><button class="btn-sm" id="studio-reset">Reset</button></div>';
+  panel.appendChild(box);
+  const q=id=>document.getElementById(id);
+  const paint=()=>{
+    const a=q('studio-a').value,b=q('studio-b').value,c=q('studio-c').value,ang=q('studio-angle').value;
+    q('studio-gradient-preview').style.background='radial-gradient(100% 130% at 100% 0%,'+c+'24 0%,transparent 58%),linear-gradient('+ang+'deg,'+a+','+b+')';
+  };
+  ['studio-a','studio-b','studio-c','studio-angle'].forEach(id=>q(id).addEventListener('input',paint));paint();
+  q('studio-contact').onclick=()=>{
+    const a=q('studio-a').value,b=q('studio-b').value,c=q('studio-c').value,ang=q('studio-angle').value;
+    const css='.shell.contact-box{background:radial-gradient(100% 130% at 100% 0%,'+c+'24 0%,transparent 58%),linear-gradient('+ang+'deg,'+a+' 0%,'+b+' 100%)!important}';
+    state.customCSS=(state.customCSS||'').replace(/\/\* PRO_STUDIO_CONTACT_START \*\/[\s\S]*?\/\* PRO_STUDIO_CONTACT_END \*\//,'')+'\\n/* PRO_STUDIO_CONTACT_START */\\n'+css+'\\n/* PRO_STUDIO_CONTACT_END */';
+    state.changed=true;updateSaveIndicator();applyPreview();showToast('Contact gradient applied live','success');
+  };
+  q('studio-reset').onclick=()=>{q('studio-a').value='#FFFDF8';q('studio-b').value='#FDF4F1';q('studio-c').value='#C82039';q('studio-angle').value=135;paint();};
+}
+document.addEventListener('DOMContentLoaded',()=>setTimeout(installProStudio,900));
