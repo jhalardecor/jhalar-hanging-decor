@@ -2625,3 +2625,26 @@ button:not(.filter-btn),
   .header{position:sticky!important;top:0!important;z-index:2147483000!important;transform:translate3d(0,0,0)!important;visibility:visible!important;opacity:1!important}
   .header.header-hidden{transform:translate3d(0,-105%,0)!important}
 }
+
+
+/* AUDIT RESET — final authoritative header and CTA rules */
+.header{position:sticky!important;top:0!important;z-index:1000!important;transform:translate3d(0,0,0)!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important}
+/* Do not leave the navigation inaccessible: visibility is restored immediately after every scroll. */
+.header.header-hidden{transform:translate3d(0,0,0)!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important}
+
+/* Brand CTA: authoritative JHALAR red */
+.contact-cta,.modal-wa-btn,#product-modal .modal-wa-btn{
+ background:#C82039!important;
+ border-color:#C82039!important;
+ color:#FFFDF8!important;
+ background-image:none!important;
+}
+.contact-cta:hover,.modal-wa-btn:hover,#product-modal .modal-wa-btn:hover{
+ background:#A71931!important;
+ border-color:#A71931!important;
+ color:#FFFDF8!important;
+}
+.contact-cta:active,.modal-wa-btn:active,#product-modal .modal-wa-btn:active{
+ background:#C82039!important;
+ border-color:#C82039!important;
+}
