@@ -3019,3 +3019,28 @@ body{padding-top:var(--header-h)!important}
     )!important;
   }
 }
+
+
+/* HERO GRADIENT — 90° bottom-to-top: solid ivory at bottom → transparent at top */
+.hero.hero-banner .hero-banner-shade{
+  background:linear-gradient(
+    0deg,
+    #FFFAF1 0%,
+    rgba(255,250,241,.96) 28%,
+    rgba(255,250,241,.72) 48%,
+    rgba(255,250,241,.38) 68%,
+    rgba(255,250,241,0) 100%
+  )!important;
+}
+@media(max-width:760px){
+  .hero.hero-banner .hero-banner-shade{
+    background:linear-gradient(
+      0deg,
+      #FFFAF1 0%,
+      rgba(255,250,241,.97) 32%,
+      rgba(255,250,241,.72) 52%,
+      rgba(255,250,241,.34) 72%,
+      rgba(255,250,241,0) 100%
+    )!important;
+  }
+}
