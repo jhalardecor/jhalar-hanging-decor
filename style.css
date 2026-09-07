@@ -102,3 +102,40 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--ink);outline-offset
 
 /* 14. SMALL MOBILE */
 @media (max-width:380px){.hero-banner{min-height:500px}.hero-banner-copy h1{font-size:2.7rem}.product-grid{gap:18px 12px}.filter-btn{padding-inline:13px}}
+
+
+/* 15. VISUAL DEPTH — GRADIENT SYSTEM */
+:root{
+ --grad-paper:linear-gradient(180deg,#fffaf1 0%,#f8eee5 100%);
+ --grad-warm:linear-gradient(135deg,#fffaf1 0%,#f3dfd2 48%,#ead0c2 100%);
+ --grad-ink:linear-gradient(135deg,#622331 0%,#3b1820 55%,#26181b 100%);
+ --grad-soft:radial-gradient(circle at 15% 10%,rgba(188,121,101,.20),transparent 36%),radial-gradient(circle at 88% 82%,rgba(98,35,49,.12),transparent 40%);
+}
+.section{position:relative}
+.section::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:-1}
+#collections.section::before{background:var(--grad-soft)}
+.custom{background:var(--grad-warm)}
+.story{background:var(--grad-paper)}
+.contact{background:var(--grad-ink)}
+
+/* Product cards: quiet, tactile hierarchy */
+.product-card{position:relative;padding:10px;transition:transform .28s var(--ease),box-shadow .28s var(--ease),background .28s ease}
+.product-card::before{content:"";position:absolute;inset:0;border:1px solid transparent;pointer-events:none;transition:border-color .28s ease}
+.product-card:hover{transform:translateY(-4px);background:rgba(255,250,241,.72);box-shadow:0 18px 42px rgba(98,35,49,.10)}
+.product-card:hover::before{border-color:rgba(98,35,49,.16)}
+.product-image{background:linear-gradient(145deg,#f3e7dd,#e9d8cb)}
+.product-image::after{content:"";position:absolute;inset:auto 0 0;height:22%;background:linear-gradient(transparent,rgba(38,24,27,.10));pointer-events:none;opacity:0;transition:opacity .3s ease}
+.product-card:hover .product-image::after{opacity:1}
+.product-info{padding:16px 4px 8px}
+.product-category{color:var(--ink-soft)}
+.product-title{font-size:1.08rem}
+.product-details-btn{margin-top:12px}
+
+/* Section transitions */
+.custom::after,.story::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:80px;pointer-events:none;background:linear-gradient(180deg,transparent,rgba(255,250,241,.42))}
+@media (max-width:760px){
+ .product-card{padding:6px}
+ .product-card:hover{transform:none;box-shadow:none;background:transparent}
+ .product-info{padding:13px 2px 7px}
+ .custom::after,.story::after{height:42px}
+}
