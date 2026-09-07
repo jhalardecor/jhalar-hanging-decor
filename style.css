@@ -196,3 +196,12 @@ h1,h2,h3,h4,h5,h6,.hero-banner-copy h1,.section-heading-group h2,.custom-copy h2
 
 /* 14. ACCESSIBILITY + MOTION */
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
+
+/* NEXT-LEVEL 2026 UX: purposeful feedback, intent continuity and calm motion */
+:root{--motion-fast:180ms;--motion-base:280ms}
+.intent-strip{border-bottom:1px solid var(--line);background:var(--surface)}.intent-strip-inner{min-height:58px;display:flex;align-items:center;justify-content:space-between;gap:24px}.intent-strip-label{margin:0;font-size:.88rem;color:var(--heritage)}.intent-strip-action{display:inline-flex;align-items:center;gap:8px;border:0;background:transparent;color:var(--navy);font:inherit;font-weight:700;padding:12px 0}.intent-strip-action span{transition:transform var(--motion-fast) var(--ease)}.intent-strip-action:hover span{transform:translateX(4px)}
+.product-card.is-recent .product-info::before{content:"Recently viewed";display:inline-block;margin-bottom:10px;padding:5px 8px;background:rgba(98,35,49,.08);color:var(--heritage);font-size:.64rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase}.filter-btn:active,.more-btn:active{transform:scale(.97)}
+.modal-status{min-height:1.4em;margin-top:14px;color:var(--heritage);font-size:.82rem}.modal-status.is-success{display:flex;align-items:center;gap:8px}.modal-status.is-success::before{content:"✓";display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--navy);color:var(--paper);font-weight:700;animation:status-pop 420ms var(--ease) both}@keyframes status-pop{0%{transform:scale(.55);opacity:0}70%{transform:scale(1.08)}100%{transform:scale(1);opacity:1}}
+.toast{position:fixed;left:50%;bottom:24px;z-index:200;max-width:min(440px,calc(100% - 40px));padding:12px 16px;background:var(--navy);color:var(--paper);box-shadow:0 16px 40px rgba(20,25,66,.22);transform:translate(-50%,18px);opacity:0;pointer-events:none;transition:opacity var(--motion-fast) ease,transform var(--motion-base) var(--ease)}.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:760px){.intent-strip-inner{align-items:flex-start;flex-direction:column;padding:14px 0;gap:2px}.intent-strip-action{padding:6px 0}.product-card.is-recent .product-info::before{margin-bottom:7px}}
