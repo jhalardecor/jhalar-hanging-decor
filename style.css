@@ -3046,17 +3046,18 @@ body{padding-top:var(--header-h)!important}
 }
 
 
-/* HERO DESKTOP ALIGNMENT — lock copy to the same left editorial grid */
+/* HERO DESKTOP ALIGNMENT — left aligned, positioned in the lower gradient reading zone */
 @media(min-width:761px){
   .hero.hero-banner .hero-banner-content{
     justify-content:flex-start!important;
+    align-items:flex-end!important;
     text-align:left!important;
   }
   .hero.hero-banner .hero-banner-copy{
     margin-left:0!important;
     margin-right:auto!important;
     text-align:left!important;
-    align-self:flex-start!important;
+    align-self:flex-end!important;
   }
   .hero.hero-banner .hero-banner-copy .kicker,
   .hero.hero-banner .hero-banner-copy h1,
