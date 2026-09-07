@@ -622,3 +622,13 @@ h1,h2,h3,h4,h5,h6{font-family:var(--font-heading);color:var(--navy);font-synthes
  .hero-banner-media img{object-position:center top}
  .hero-banner-content{padding-bottom:28px}
 }
+
+
+/* Audience strip — balanced mobile composition */
+@media(max-width:760px){
+ .audience-strip-inner{padding-block:24px;display:grid;grid-template-columns:1fr;gap:16px}
+ .audience-label{white-space:normal;text-align:center;font-size:.72rem;letter-spacing:.12em;color:var(--heritage)}
+ .audience-items{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;width:100%}
+ .audience-items span{white-space:normal;min-height:54px;display:flex;align-items:center;justify-content:center;text-align:center;padding:10px 12px;background:var(--surface);border:1px solid rgba(98,35,49,.12);color:var(--heritage);font-size:.86rem;line-height:1.25}
+ .audience-items span:last-child{grid-column:1/-1}
+}
