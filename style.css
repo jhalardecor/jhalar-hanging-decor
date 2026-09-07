@@ -1537,3 +1537,48 @@ button,.btn,.hero-banner-cta,.filter-btn{
 /* Trust-oriented microcopy hierarchy */
 .hero-lead{max-width:52ch}
 .hero-banner-cta{font-weight:600!important}
+
+
+/* CONTACT — canonical responsive layout */
+.contact.section{padding-block:clamp(40px,6vw,80px)!important}
+.shell.contact-box{
+  width:min(calc(100% - 48px),1200px)!important;
+  min-height:360px;
+  margin-inline:auto!important;
+  padding:clamp(40px,7vw,90px) clamp(24px,6vw,72px)!important;
+  display:flex!important;
+  align-items:flex-end!important;
+  justify-content:space-between!important;
+  gap:clamp(28px,5vw,64px)!important;
+  background:
+    radial-gradient(110% 150% at 0% 0%,rgba(200,32,57,.10),transparent 58%),
+    radial-gradient(90% 130% at 100% 100%,rgba(98,35,49,.11),transparent 60%),
+    linear-gradient(135deg,#FFFDF8 0%,#FFFAF1 48%,#F8EDEA 100%)!important;
+}
+.contact-copy{min-width:0;max-width:650px}
+.contact-box .eyebrow{margin:0 0 12px!important}
+.contact-box h2{margin:0!important;max-width:16ch!important}
+.contact-box p{margin:16px 0 0!important;max-width:56ch!important}
+.contact-cta{flex:0 0 auto;white-space:nowrap}
+
+@media(max-width:760px){
+  .contact.section{padding-block:32px!important}
+  .shell.contact-box{
+    width:calc(100% - 32px)!important;
+    min-height:0!important;
+    padding:40px 24px!important;
+    display:flex!important;
+    flex-direction:column!important;
+    align-items:flex-start!important;
+    justify-content:flex-start!important;
+    gap:28px!important;
+    background:
+      radial-gradient(130% 100% at 0% 0%,rgba(200,32,57,.09),transparent 60%),
+      radial-gradient(120% 100% at 100% 100%,rgba(98,35,49,.10),transparent 62%),
+      linear-gradient(145deg,#FFFDF8 0%,#FFFAF1 52%,#F8EDEA 100%)!important;
+  }
+  .contact-copy{width:100%!important;max-width:none!important}
+  .contact-box h2{max-width:13ch!important;font-size:clamp(1.9rem,9vw,2.5rem)!important}
+  .contact-box p{max-width:34ch!important;margin-top:14px!important}
+  .contact-cta{width:100%!important;min-height:52px!important;justify-content:space-between!important}
+}
