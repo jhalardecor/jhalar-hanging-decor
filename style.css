@@ -297,3 +297,21 @@ button,a{min-height:44px}.nav a{min-height:auto}
 .contact-box h2{margin:0}
 .contact-box p:not(.eyebrow){margin:24px 0 0}
 .contact-cta,.modal-card,.modal-copy .modal-wa-btn{border-radius:0}
+
+
+/* ==========================================================================
+   PRODUCT MODAL MEDIA CONTROLS
+   Zoom is always clipped by the existing media container.
+   ========================================================================== */
+.modal-media{position:relative;overflow:hidden}
+.modal-stage{position:relative;width:100%;height:100%;min-height:0;overflow:hidden;display:grid;place-items:center}
+.modal-stage>img,.modal-stage>video{width:100%;height:100%;display:block;object-fit:contain;object-position:center}
+.modal-stage>img{transform-origin:center;transition:transform .22s ease}
+.modal-stage.is-zoomed>img{cursor:zoom-out}
+.modal-zoom-controls{position:absolute;z-index:5;right:18px;top:18px;display:flex;align-items:center;border:1px solid rgba(56,39,43,.14);background:rgba(255,250,241,.92);backdrop-filter:blur(10px)}
+.modal-zoom-controls button{min-width:40px;height:40px;min-height:40px;padding:0 10px;border:0;border-left:1px solid rgba(56,39,43,.12);border-radius:0;background:transparent;color:#38272b;font-size:1rem;line-height:1;cursor:pointer}
+.modal-zoom-controls button:first-child{border-left:0}
+.modal-zoom-controls button:disabled{opacity:.38;cursor:not-allowed}
+.modal-zoom-controls button:hover:not(:disabled){background:#f1e3dc;color:#7a1e2c}
+.modal-thumb-video{display:grid;place-items:center;width:100%;height:100%;padding:6px;color:#7a1e2c;font-size:.68rem;font-weight:600;background:#f4ede7}
+@media(max-width:650px){.modal-zoom-controls{right:12px;top:12px}.modal-zoom-controls button{min-width:38px;height:38px;min-height:38px}}
