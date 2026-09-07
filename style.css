@@ -1484,3 +1484,24 @@ p,.section-head>p,.hero-banner-copy>p:not(.kicker){letter-spacing:.006em}
   object-fit:contain!important;
   object-position:center center!important;
 }
+
+
+/* START AN ENQUIRY — monochromatic red palette, soft and premium */
+.contact-cta{
+  background:linear-gradient(135deg,#9a3548 0%,#7f2638 52%,#651d2e 100%)!important;
+  color:#fff8f5!important;
+  border:1px solid rgba(255,230,225,.20)!important;
+  box-shadow:
+    0 10px 28px rgba(83,18,35,.22),
+    inset 0 1px 0 rgba(255,255,255,.16)!important;
+}
+.contact-cta:hover,
+.contact-cta:focus-visible{
+  background:linear-gradient(135deg,#ad4358 0%,#8f2e43 52%,#722033 100%)!important;
+  color:#fffaf8!important;
+  box-shadow:
+    0 14px 34px rgba(83,18,35,.28),
+    inset 0 1px 0 rgba(255,255,255,.18)!important;
+}
+.contact-cta span{color:#f8dfe1!important}
+.contact-cta:focus-visible{outline-color:rgba(154,53,72,.35)!important}
