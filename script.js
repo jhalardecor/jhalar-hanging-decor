@@ -7,7 +7,17 @@ const $=s=>document.querySelector(s);
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function categories(){return [...new Set(state.products.map(p=>p.category).filter(Boolean))]}
 
-function renderFilters(){const el=$('#product-filters');el.innerHTML=['all',...categories()].map(c=>'<button class="filter-btn '+(c===state.filter?'active':'')+'" data-filter="'+esc(c)+'" aria-pressed="'+(c===state.filter?'true':'false')+'">'+esc(c==='all'?'All designs':c)+'</button>').join('');el.onclick=e=>{const b=e.target.closest('[data-filter]');if(!b)return;const next=b.dataset.filter;if(next===state.filter)return;state.filter=next;state.expanded=next!=='all';el.querySelectorAll('[data-filter]').forEach(btn=>{const selected=btn===b;btn.classList.toggle('active',selected);btn.setAttribute('aria-pressed',String(selected));});const grid=$('#product-grid');if(grid){grid.classList.remove('filter-changing');void grid.offsetWidth;grid.classList.add('filter-changing');}renderProducts();requestAnimationFrame(()=>{requestAnimationFrame(()=>{const gridTarget=$('#product-grid');if(gridTarget){const headerH=document.querySelector('.header')?.getBoundingClientRect().height||0;const top=window.scrollY+gridTarget.getBoundingClientRect().top-headerH-20;window.scrollTo({top:Math.max(0,top),behavior:reducedMotion?'auto':'smooth'});}});const rail=el.closest('.filters-wrap')||el.parentElement;const next=b.nextElementSibling;if(rail&&next&&rail.scrollWidth>rail.clientWidth){const railRect=rail.getBoundingClientRect();const nextRect=next.getBoundingClientRect();const gap=18;if(nextRect.right>railRect.right-gap){rail.scrollBy({left:nextRect.right-railRect.right+gap,behavior:'smooth'});}else if(nextRect.left<railRect.left+gap){rail.scrollBy({left:nextRect.left-railRect.left-gap,behavior:'smooth'});}}const target=$('#product-grid');if(target){target.classList.remove('filter-changing');requestAnimationFrame(()=>target.classList.add('catalogue-ready'));}});}}
+function renderFilters(){const el=$('#product-filters');el.innerHTML=['all',...categories()].map(c=>'<button class="filter-btn '+(c===state.filter?'active':'')+'" data-filter="'+esc(c)+'" aria-pressed="'+(c===state.filter?'true':'false')+'">'+esc(c==='all'?'All designs':c)+'</button>').join('');el.onclick=e=>{const b=e.target.closest('[data-filter]');if(!b)return;const next=b.dataset.filter;if(next===state.filter)return;state.filter=next;state.expanded=next!=='all';el.querySelectorAll('[data-filter]').forEach(btn=>{const selected=btn===b;btn.classList.toggle('active',selected);btn.setAttribute('aria-pressed',String(selected));});const grid=$('#product-grid');if(grid){grid.classList.remove('filter-changing');void grid.offsetWidth;grid.classList.add('filter-changing');}renderProducts();requestAnimationFrame(()=>{requestAnimationFrame(()=>{const gridTarget=$('#product-grid');if(gridTarget){const headerH=document.querySelector('.header')?.getBoundingClientRect().height||0;const top=window.scrollY+gridTarget.getBoundingClientRect().top-headerH-20;window.scrollTo({top:Math.max(0,top),behavior:reducedMotion?'auto':'smooth'});}});const rail=el; // .filters is the actual horizontal scroll container
+const next=b.nextElementSibling;
+if(rail&&rail.scrollWidth>rail.clientWidth){
+  // Keep the selected pill comfortably visible and pull the next option into view.
+  const focusTarget=next||b;
+  const railRect=rail.getBoundingClientRect();
+  const targetRect=focusTarget.getBoundingClientRect();
+  const left=targetRect.left-railRect.left+rail.scrollLeft;
+  const centered=left-(rail.clientWidth-targetRect.width)/2;
+  rail.scrollTo({left:Math.max(0,Math.min(centered,rail.scrollWidth-rail.clientWidth)),behavior:reducedMotion?'auto':'smooth'});
+}const target=$('#product-grid');if(target){target.classList.remove('filter-changing');requestAnimationFrame(()=>target.classList.add('catalogue-ready'));}});}}
 function visibleProducts(){return state.filter==='all'?state.products:state.products.filter(p=>p.category===state.filter)}
 function mediaType(src,type){if(type)return type;return /\\.(mp4|webm|ogg|mov)(?:[?#]|$)/i.test(String(src))?'video':'image'}
 function normaliseMedia(item){if(typeof item==='string')return{src:item,type:mediaType(item)};if(item&&typeof item==='object'){const src=item.src||item.url||item.image||item.video||item.source;return src?{src,type:mediaType(src,item.type||item.mediaType)}:null}return null}
@@ -378,4 +388,4 @@ initProducts();initRuntime();
    ensureLatest(true).then(reloading=>{if(!reloading){window.scrollTo({top:0,behavior:'smooth'});history.replaceState(null,'',location.pathname+location.search)}});
  },true);
 })();
-/* build 20260908.23 — deterministic filter-to-results navigation */
+/* build 20260908.24 — filter rail auto-advance + results navigation */
