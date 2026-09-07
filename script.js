@@ -419,4 +419,4 @@ initProducts();initRuntime();
    ensureLatest(true).then(reloading=>{if(!reloading){window.scrollTo({top:0,behavior:'smooth'});history.replaceState(null,'',location.pathname+location.search)}});
  },true);
 })();
-/* filter rail advances horizontally while the page stays fixed */
+/* Filters remain fully user-controlled: no ticker, marquee, train or auto-running behavior. */
