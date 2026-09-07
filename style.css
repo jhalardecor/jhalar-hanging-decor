@@ -1959,16 +1959,25 @@ main{min-width:0}
 .header .brand{width:150px;height:48px;display:flex;align-items:center}
 .header .brand img{width:100%;max-height:48px;object-fit:contain}
 
-/* Hero: one message, one action */
+/* Hero: one system across desktop and mobile
+   Same typography and visual language; only composition reflows. */
 .hero-banner{
-  height:clamp(560px,66svh,760px);
+  height:clamp(600px,72svh,780px);
   position:relative;
+  overflow:hidden;
 }
 .hero-banner-shade{
   position:absolute;
   inset:0;
   z-index:1;
-  background:linear-gradient(90deg,rgba(255,250,245,.97) 0%,rgba(255,247,241,.93) 30%,rgba(252,232,222,.72) 48%,rgba(248,222,211,.28) 63%,rgba(248,222,211,0) 78%);
+  display:block;
+  opacity:1;
+  background:linear-gradient(90deg,
+    rgba(42,12,22,.88) 0%,
+    rgba(42,12,22,.66) 34%,
+    rgba(42,12,22,.30) 58%,
+    rgba(42,12,22,.04) 78%,
+    rgba(42,12,22,0) 100%);
 }
 .hero-banner-content{
   position:relative;
@@ -1979,16 +1988,74 @@ main{min-width:0}
   padding-block:clamp(48px,7vh,82px);
 }
 .hero-banner-copy{
-  width:min(100%,540px);
+  width:min(100%,560px);
   display:flex;
   flex-direction:column;
   align-items:flex-start;
 }
 .hero-banner .kicker{margin:0 0 16px}
-.hero-banner h1{max-inline-size:9ch;margin:0 0 22px;text-wrap:balance}
-.hero-banner-copy>.hero-lead{max-inline-size:34ch;margin:0 0 28px}
+.hero-banner h1{
+  max-inline-size:11ch;
+  font-size:clamp(3rem,4.6vw,5.25rem);
+  line-height:1.02;
+  letter-spacing:-.04em;
+  margin:0 0 22px;
+  text-wrap:balance;
+}
+.hero-banner-copy>.hero-lead{
+  max-inline-size:36ch;
+  font-size:clamp(1rem,1.1vw,1.125rem);
+  line-height:1.5;
+  margin:0 0 28px;
+}
 .hero-banner-cta{margin:0}
 .hero-audience{display:none!important}
+
+@media(max-width:760px){
+  .hero-banner{
+    height:100svh;
+    min-height:560px;
+    max-height:780px;
+  }
+  .hero-banner-content{
+    align-items:flex-end;
+    padding:0 var(--page-gutter) calc(32px + env(safe-area-inset-bottom));
+  }
+  .hero-banner-copy{width:100%;max-width:560px}
+  .hero-banner .kicker{
+    margin:0 0 14px;
+    font-size:inherit;
+    letter-spacing:inherit;
+  }
+  /* Same type scale as desktop, naturally constrained by the viewport. */
+  .hero-banner h1{
+    max-width:11ch;
+    font-size:clamp(3rem,12.5vw,4.35rem);
+    line-height:1.02;
+    letter-spacing:-.04em;
+    margin:0 0 18px;
+  }
+  .hero-banner-copy>.hero-lead{
+    max-width:34ch;
+    font-size:clamp(1rem,4vw,1.125rem);
+    line-height:1.5;
+    margin:0 0 24px;
+  }
+  .hero-banner-cta{min-height:48px}
+  /* Same brand gradient logic: directional image readability, not a different design. */
+  .hero-banner-shade{
+    background:linear-gradient(180deg,
+      rgba(42,12,22,.08) 0%,
+      rgba(42,12,22,.18) 38%,
+      rgba(42,12,22,.58) 67%,
+      rgba(42,12,22,.92) 100%);
+  }
+}
+@media(max-width:390px){
+  .hero-banner{min-height:540px}
+  .hero-banner h1{font-size:clamp(2.75rem,12vw,3.45rem)}
+  .hero-banner-copy>.hero-lead{margin-bottom:20px}
+}
 
 /* Audience transition */
 .audience-strip{background:var(--page-bg);border-bottom:1px solid var(--line)}
