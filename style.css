@@ -2513,3 +2513,16 @@ button:not(.filter-btn),
   .modal-nav{z-index:15!important}
   .modal-thumbs{z-index:15!important;max-width:calc(100% - 24px)!important}
 }
+
+
+/* FINAL MOBILE HEADER + PRODUCT MODAL FIX — remove conflicting viewport rules */
+@media(max-width:760px){
+  .header,.site-header{position:sticky!important;top:0!important;z-index:200!important;transform:translateY(0)!important;transition:transform 180ms var(--ease)!important}
+  .header.header-hidden{transform:translateY(-100%)!important}
+  .modal{z-index:150!important;padding:calc(var(--header-h) + 8px) 8px 8px!important;box-sizing:border-box!important}
+  .modal-card{height:calc(100dvh - var(--header-h) - 16px)!important;max-height:calc(100dvh - var(--header-h) - 16px)!important;overflow:hidden!important}
+  .modal-media{height:44dvh!important;max-height:44dvh!important;min-height:0!important;flex:0 0 44dvh!important}
+  .modal-stage{height:100%!important;width:100%!important;padding:8px!important;box-sizing:border-box!important;display:flex!important;align-items:center!important;justify-content:center!important;overflow:hidden!important}
+  .modal-stage img{width:auto!important;height:auto!important;max-width:100%!important;max-height:100%!important;object-fit:contain!important;transform:none!important}
+  .modal-stage video{width:100%!important;height:100%!important;object-fit:contain!important}
+}
