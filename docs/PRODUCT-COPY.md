@@ -1,6 +1,6 @@
 # JHALAR product copy: descriptions, SEO titles, meta descriptions, slugs and alt text
 
-Status: drafted 7 September 2026 for owner review. Written from the approved catalogue records in `content/products.json` (registry `2026-09-07.1`) and the catalogue photographs. Nothing here has been applied to `content/products.json`; the approved descriptions there stay unchanged until the owner signs these off.
+Status: approved by the owner on 8 September 2026 and applied to `content/products.json` (descriptions and `imageAlt`). Written from the approved catalogue records (registry `2026-09-07.1`) and the catalogue photographs. SEO titles, meta descriptions and slugs are held here for use when per-product pages or meta tags are added; the site is currently a single page.
 
 Ordered by catalogue reference. Product names are the exact approved titles. Descriptions cover visible arrangement, colour and finish plus intended use; no material, dimension, pack-quantity or origin claims are made. The two Shobha red, yellow and white entries stay separate, as instructed: the owner-labelled image (JH-035) keeps the base slug and JH-027 takes a `-2` suffix.
 

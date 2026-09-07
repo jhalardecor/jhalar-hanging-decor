@@ -3,6 +3,7 @@
   "category": "Floral Jhalars",
   "description": "",
   "image": "assets/images/products/catalogue/REPLACE.webp",
+  "imageAlt": "Optional. Start with the approved product name, then describe what the photo shows.",
   "sourceImage": "assets/images/products/SOURCE.jpg",
   "gallery": [
     "assets/images/products/catalogue/SECOND.webp"
