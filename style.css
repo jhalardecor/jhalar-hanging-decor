@@ -887,3 +887,26 @@ p,.section-head>p,.hero-banner-copy>p:not(.kicker){letter-spacing:.006em}
   .menu i{display:block!important;width:18px!important;height:1.5px!important;background:var(--ink)!important}
   .mobile-nav{z-index:99!important}
 }
+
+
+/* Zoom discoverability: subtle, contextual, premium */
+.zoom-hint{
+  position:absolute;left:50%;bottom:18px;transform:translateX(-50%);
+  z-index:8;display:flex;align-items:center;gap:8px;
+  padding:8px 12px;border-radius:999px;
+  background:rgba(255,250,241,.88);color:var(--ink);
+  border:1px solid rgba(47,36,39,.12);backdrop-filter:blur(10px);
+  font-size:12px;letter-spacing:.02em;pointer-events:none;
+  opacity:0;transition:opacity .35s ease,transform .35s ease;
+}
+.zoom-hint.is-visible{opacity:1;transform:translateX(-50%) translateY(0)}
+@media(min-width:761px){
+  .modal-stage img[data-zoomable="true"]{cursor:zoom-in}
+  .modal-stage.is-zoomed img[data-zoomable="true"]{cursor:grab}
+  .modal-stage.is-zoomed img[data-zoomable="true"]:active{cursor:grabbing}
+  .zoom-hint.desktop{display:flex}
+}
+@media(max-width:760px){
+  .zoom-hint.desktop{display:none!important}
+  .zoom-hint.mobile{display:flex}
+}
