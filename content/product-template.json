@@ -1,0 +1,16 @@
+{
+  "title": "",
+  "category": "Floral Jhalars",
+  "description": "",
+  "image": "assets/images/products/catalogue/REPLACE.webp",
+  "sourceImage": "assets/images/products/SOURCE.jpg",
+  "naming": {
+    "registryVersion": "CURRENT_REGISTRY_VERSION",
+    "reviewMethod": "human",
+    "seriesId": "approved-series-id",
+    "colourId": "approved-colour-id",
+    "confidence": { "series": null, "colour": null },
+    "evidence": { "series": "Why this design matches the approved series.", "colour": "Why this palette matches the approved colour." },
+    "requiresReview": false
+  }
+}
