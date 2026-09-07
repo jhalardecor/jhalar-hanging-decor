@@ -505,3 +505,71 @@ button,a{min-height:44px}.nav a{min-height:auto}
   #product-modal .modal-stage>img{cursor:inherit}
   #product-modal .modal-stage>video{cursor:default}
 }
+
+
+/* ==========================================================================
+   ACTION SYSTEM
+   One visual language for every primary enquiry / contact action.
+   ========================================================================== */
+:root{
+  --action-bg:#7a1e2c;
+  --action-fg:#fffaf1;
+  --action-hover:#8c2a39;
+  --action-height:48px;
+  --action-pad:22px;
+}
+.contact-cta,
+.modal-wa-btn{
+  appearance:none;
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  gap:10px !important;
+  min-height:var(--action-height) !important;
+  padding:0 var(--action-pad) !important;
+  margin:0 !important;
+  border:1px solid var(--action-bg) !important;
+  border-radius:999px !important;
+  background:var(--action-bg) !important;
+  color:var(--action-fg) !important;
+  box-shadow:none !important;
+  font-family:inherit !important;
+  font-size:.88rem !important;
+  font-weight:600 !important;
+  line-height:1 !important;
+  letter-spacing:.01em !important;
+  text-align:center !important;
+  text-decoration:none !important;
+  white-space:nowrap;
+  transition:background .2s ease,border-color .2s ease,transform .2s ease !important;
+}
+.contact-cta span,
+.modal-wa-btn span{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  line-height:1;
+}
+.contact-cta:hover,
+.modal-wa-btn:hover{
+  background:var(--action-hover) !important;
+  border-color:var(--action-hover) !important;
+  color:var(--action-fg) !important;
+  transform:translateY(-1px);
+}
+.contact-cta:focus-visible,
+.modal-wa-btn:focus-visible{
+  outline:2px solid #fffaf1;
+  outline-offset:3px;
+}
+.contact-box{
+  align-items:center;
+}
+.contact-box>div{
+  min-width:0;
+}
+@media(max-width:760px){
+  .contact-box{align-items:flex-start}
+  .contact-cta,.modal-wa-btn{min-height:46px !important;padding-inline:19px !important;font-size:.84rem !important}
+  .contact-cta{align-self:flex-start}
+}
