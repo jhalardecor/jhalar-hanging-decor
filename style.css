@@ -1251,3 +1251,67 @@ p,.section-head>p,.hero-banner-copy>p:not(.kicker){letter-spacing:.006em}
     min-height:520px!important;
   }
 }
+
+
+/* MOBILE HERO + HEADER READABILITY PASS */
+@media(max-width:760px){
+  /* A stronger header gives the logo and navigation proper visual weight. */
+  .header,
+  .header .header-row{
+    height:72px!important;
+    min-height:72px!important;
+  }
+  .header .header-row{padding-inline:20px!important}
+  .header .brand{
+    width:126px!important;
+    height:38px!important;
+  }
+  .header .brand img{
+    width:112px!important;
+    max-width:112px!important;
+    max-height:32px!important;
+  }
+  .header .menu{
+    width:44px!important;
+    height:44px!important;
+    min-width:44px!important;
+  }
+  .header .menu i{width:19px!important;height:2px!important}
+
+  /* Readable copy zone: same desktop gradient, reinforced only behind text. */
+  .hero-banner-shade{
+    background:linear-gradient(90deg,
+      rgba(255,250,245,.985) 0%,
+      rgba(255,247,241,.96) 38%,
+      rgba(252,232,222,.78) 58%,
+      rgba(248,222,211,.30) 76%,
+      rgba(248,222,211,0) 100%)!important;
+  }
+  .hero-banner-content{
+    padding:clamp(82px,16vw,112px) 22px 30px!important;
+    justify-content:flex-end!important;
+  }
+  .hero-banner-copy{
+    width:100%!important;
+    max-width:36rem!important;
+  }
+  .hero-banner .kicker{
+    color:#74303e!important;
+    font-size:.67rem!important;
+    line-height:1.45!important;
+    letter-spacing:.105em!important;
+  }
+  .hero-banner h1{
+    max-width:10.5ch!important;
+    font-size:clamp(2.65rem,10.8vw,3.75rem)!important;
+    line-height:1.02!important;
+    color:#4d1826!important;
+    text-shadow:0 1px 0 rgba(255,250,245,.35)!important;
+  }
+  .hero-banner-copy>p:not(.kicker){
+    max-width:33ch!important;
+    color:#4f3a40!important;
+    font-size:1rem!important;
+    line-height:1.62!important;
+  }
+}
