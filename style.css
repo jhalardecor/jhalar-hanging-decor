@@ -2888,3 +2888,52 @@ body{padding-top:var(--header-h)!important}
   .audience-items span:first-child{padding-left:0!important;}
   .audience-items span::before{content:none!important;display:none!important;}
 }
+
+
+/* HERO COPY POSITION — place typography fully into the ivory reading zone */
+.hero.hero-banner .hero-banner-content{
+  align-items:flex-end!important;
+}
+.hero.hero-banner .hero-banner-copy{
+  position:relative!important;
+  z-index:3!important;
+  background:#FFFAF1!important;
+  padding:clamp(28px,4vw,52px)!important;
+  box-sizing:border-box!important;
+}
+.hero.hero-banner .hero-banner-copy::before{
+  content:""!important;
+  position:absolute!important;
+  inset:-72px 0 auto 0!important;
+  height:72px!important;
+  background:linear-gradient(180deg,rgba(255,250,241,0),#FFFAF1)!important;
+  pointer-events:none!important;
+  z-index:-1!important;
+}
+.hero.hero-banner .hero-banner-copy h1,
+.hero.hero-banner .hero-banner-copy .hero-lead,
+.hero.hero-banner .hero-banner-copy .kicker{
+  position:relative!important;
+  z-index:1!important;
+}
+@media(min-width:761px){
+  .hero.hero-banner .hero-banner-copy{
+    margin-bottom:0!important;
+    width:min(100%,620px)!important;
+  }
+}
+@media(max-width:760px){
+  .hero.hero-banner .hero-banner-content{
+    padding-bottom:0!important;
+    align-items:flex-end!important;
+  }
+  .hero.hero-banner .hero-banner-copy{
+    width:100%!important;
+    padding:26px 16px 30px!important;
+    margin:0!important;
+  }
+  .hero.hero-banner .hero-banner-copy::before{
+    height:56px!important;
+    inset:-56px 0 auto 0!important;
+  }
+}
