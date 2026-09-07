@@ -2549,7 +2549,8 @@ button:not(.filter-btn),
 }
 .text-link:hover{color:#C82039!important;}
 
-/* PRODUCT POPUP — compact premium viewer */
+/* PRODUCT POPUP — single source of truth
+   Consolidated after audit: no stacked mobile padding or duplicate text-width overrides. */
 #product-modal{
   z-index:900!important;
   padding:calc(var(--header-h) + 20px) 20px 24px!important;
@@ -2567,7 +2568,7 @@ button:not(.filter-btn),
 }
 #product-modal .modal-media{
   width:100%!important;
-  aspect-ratio:1 / 1!important;
+  aspect-ratio:1/1!important;
   min-height:0!important;
   background:#FFFDF8!important;
 }
@@ -2575,7 +2576,7 @@ button:not(.filter-btn),
   position:relative!important;
   width:100%!important;
   height:100%!important;
-  aspect-ratio:1 / 1!important;
+  aspect-ratio:1/1!important;
   display:flex!important;
   align-items:center!important;
   justify-content:center!important;
@@ -2595,13 +2596,47 @@ button:not(.filter-btn),
   object-position:center!important;
 }
 #product-modal [hidden]{display:none!important;}
+
+/* Editorial copy */
 #product-modal .modal-copy{
   min-width:0!important;
+  width:100%!important;
+  box-sizing:border-box!important;
   padding:clamp(24px,3vw,42px)!important;
   overflow:auto!important;
 }
+#product-modal #modal-category{
+  margin:0 0 8px!important;
+  font-size:.72rem!important;
+  line-height:1.25!important;
+  letter-spacing:.12em!important;
+  text-transform:uppercase!important;
+  color:var(--red)!important;
+  font-weight:650!important;
+}
+#product-modal #modal-title{
+  margin:0 0 18px!important;
+  max-width:18ch!important;
+  text-wrap:balance;
+}
+#product-modal #modal-desc{
+  width:100%!important;
+  max-width:none!important;
+  margin:0!important;
+  padding:0!important;
+  box-sizing:border-box!important;
+  font-size:clamp(.95rem,1.05vw,1.05rem)!important;
+  line-height:1.65!important;
+  letter-spacing:0!important;
+  color:rgba(20,25,66,.78)!important;
+  text-align:left!important;
+  text-wrap:pretty;
+  overflow-wrap:normal!important;
+  word-break:normal!important;
+  hyphens:none!important;
+}
 #product-modal .modal-zoom-hint{
-  margin:12px 0 8px!important;
+  margin:14px 0 0!important;
   color:#C82039!important;
   font-size:.72rem!important;
   font-weight:700!important;
@@ -2609,13 +2644,21 @@ button:not(.filter-btn),
   text-transform:uppercase!important;
 }
 #product-modal .zoom-hint{display:none!important;}
+#product-modal .modal-wa-btn{
+  flex:0 0 auto!important;
+  align-self:stretch!important;
+  width:100%!important;
+  justify-content:center!important;
+  box-sizing:border-box!important;
+  margin-top:24px!important;
+}
 
 @media(pointer:fine){
   #product-modal .modal-stage{cursor:zoom-in;}
   #product-modal .modal-stage.is-zoomed{cursor:grab;}
 }
 
-/* MOBILE — same hierarchy, compact square media, scrollable details */
+/* MOBILE — one gutter system only */
 @media(max-width:760px){
   .header{
     z-index:1000!important;
@@ -2654,153 +2697,36 @@ button:not(.filter-btn),
     width:100%!important;
     height:auto!important;
     max-height:50dvh!important;
-    aspect-ratio:1 / 1!important;
+    aspect-ratio:1/1!important;
     flex:0 0 auto!important;
   }
-  #product-modal .modal-stage{
-    padding:6px!important;
-  }
+  #product-modal .modal-stage{padding:6px!important;}
+
   #product-modal .modal-copy{
     flex:1 1 auto!important;
     min-height:0!important;
     overflow-y:auto!important;
-    padding:18px 16px calc(20px + env(safe-area-inset-bottom))!important;
-  }
-  #product-modal .modal-wa-btn,
-  .contact-cta,
-  .hero-banner-cta{
-    width:100%!important;
-    justify-content:center!important;
-    box-sizing:border-box!important;
-  }
-}
-
-
-/* PRODUCT COPY READABILITY — editorial layout for approved long descriptions */
-#product-modal .modal-copy{
-  display:flex!important;
-  flex-direction:column!important;
-  align-items:flex-start!important;
-  min-width:0!important;
-}
-#product-modal #modal-category{
-  margin:0 0 8px!important;
-  font-size:.72rem!important;
-  line-height:1.25!important;
-  letter-spacing:.12em!important;
-  text-transform:uppercase!important;
-  color:var(--red)!important;
-  font-weight:650!important;
-}
-#product-modal #modal-title{
-  margin:0 0 18px!important;
-  max-width:18ch!important;
-  text-wrap:balance;
-}
-#product-modal #modal-desc{
-  margin:0!important;
-  max-width:62ch!important;
-  font-size:clamp(.95rem,1.05vw,1.05rem)!important;
-  line-height:1.68!important;
-  letter-spacing:0!important;
-  color:rgba(20,25,66,.78)!important;
-  text-wrap:pretty;
-  overflow-wrap:normal!important;
-  word-break:normal!important;
-  hyphens:auto;
-}
-#product-modal .modal-copy > * + .modal-wa-btn{
-  margin-top:24px!important;
-}
-#product-modal .modal-wa-btn{
-  flex:0 0 auto!important;
-}
-@media(max-width:760px){
-  #product-modal .modal-copy{
-    padding:20px 18px calc(24px + env(safe-area-inset-bottom))!important;
+    padding:16px 16px calc(18px + env(safe-area-inset-bottom))!important;
   }
   #product-modal #modal-category{
     margin-bottom:6px!important;
     font-size:.68rem!important;
   }
   #product-modal #modal-title{
-    margin-bottom:14px!important;
-    max-width:100%!important;
-  }
-  #product-modal #modal-desc{
-    max-width:100%!important;
-    font-size:.96rem!important;
-    line-height:1.62!important;
-    text-wrap:auto;
-  }
-  #product-modal .modal-copy > * + .modal-wa-btn{
-    margin-top:20px!important;
-  }
-}
-/* Keep catalogue cards compact and consistent; full approved copy belongs in the detail view. */
-.product-card .product-info{
-  min-width:0!important;
-}
-.product-card .product-title{
-  text-wrap:balance;
-  overflow-wrap:normal!important;
-  word-break:normal!important;
-}
-
-
-/* MOBILE PRODUCT COPY — avoid ragged/orphaned lines in long catalogue descriptions */
-@media(max-width:760px){
-  #product-modal #modal-desc{
-    max-width:42ch!important;
-    margin-right:auto!important;
-    text-wrap:pretty!important;
-    line-height:1.64!important;
-    font-size:clamp(.92rem,3.8vw,1rem)!important;
-  }
-}
-@supports not (text-wrap:pretty){
-  @media(max-width:760px){
-    #product-modal #modal-desc{
-      max-width:38em!important;
-    }
-  }
-}
-
-
-/* FINAL MOBILE COPY WIDTH — use the available modal width; do not create a narrow text column */
-@media(max-width:760px){
-  #product-modal .modal-copy{
-    width:100%!important;
-    max-width:none!important;
-    box-sizing:border-box!important;
-  }
-  #product-modal #modal-desc{
-    width:100%!important;
-    max-width:none!important;
-    margin:0!important;
-    text-wrap:pretty!important;
-    line-height:1.66!important;
-    hyphens:none!important;
-  }
-}
-
-
-/* MOBILE POPUP GUTTERS — align copy to the usable card width without wasted side space */
-@media(max-width:760px){
-  #product-modal .modal-copy{
-    padding:16px 14px calc(18px + env(safe-area-inset-bottom))!important;
-  }
-  #product-modal #modal-title{
     margin-bottom:12px!important;
+    max-width:100%!important;
   }
   #product-modal #modal-desc{
-    width:100%!important;
-    max-width:none!important;
-    padding:0!important;
-    margin:0!important;
-    box-sizing:border-box!important;
+    font-size:1rem!important;
+    line-height:1.62!important;
+    text-wrap:pretty;
   }
-  #product-modal .modal-wa-btn{
+  #product-modal .modal-zoom-hint{margin-top:14px!important;}
+  #product-modal .modal-wa-btn,
+  .contact-cta,
+  .hero-banner-cta{
     width:100%!important;
+    justify-content:center!important;
+    box-sizing:border-box!important;
   }
 }
