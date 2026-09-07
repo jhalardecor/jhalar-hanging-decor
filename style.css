@@ -632,3 +632,25 @@ h1,h2,h3,h4,h5,h6{font-family:var(--font-heading);color:var(--navy);font-synthes
  .audience-items span{white-space:normal;min-height:54px;display:flex;align-items:center;justify-content:center;text-align:center;padding:10px 12px;background:var(--surface);border:1px solid rgba(98,35,49,.12);color:var(--heritage);font-size:.86rem;line-height:1.25}
  .audience-items span:last-child{grid-column:1/-1}
 }
+
+
+/* Hero image ratio — stable editorial framing across real mobile viewports */
+@media(max-width:760px){
+ .hero-banner{
+   aspect-ratio:auto;
+   height:auto;
+   min-height:clamp(580px,165vw,720px);
+   max-height:none;
+ }
+ .hero-banner-media img{
+   object-position:center center;
+ }
+}
+@media(max-width:480px){
+ .hero-banner{
+   min-height:clamp(560px,175vw,680px);
+ }
+}
+@media(max-width:380px){
+ .hero-banner{min-height:560px}
+}
