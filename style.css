@@ -3101,44 +3101,14 @@ body{padding-top:var(--header-h)!important}
 }
 
 
-/* FOOTER SVG LOGO — centered with subtle horizontal motion */
-.footer.site-footer .footer-brand{
-  width:100%!important;
-  display:flex!important;
-  justify-content:center!important;
-  align-items:center!important;
-  text-align:center!important;
-}
-.footer.site-footer .footer-brand > a.logo{
-  margin:0 auto!important;
-  display:inline-flex!important;
-  justify-content:center!important;
-  align-items:center!important;
-}
-.footer.site-footer .footer-logo{
-  display:block!important;
-  transform-origin:center!important;
-  animation:footerLogoHorizontal 4.8s ease-in-out infinite!important;
-  will-change:transform!important;
-}
-.footer.site-footer .footer-brand > a.logo:hover .footer-logo,
-.footer.site-footer .footer-brand > a.logo:focus-visible .footer-logo{
-  animation-play-state:paused!important;
-  transform:scale(1.025)!important;
-}
-@keyframes footerLogoHorizontal{
-  0%,100%{transform:translateX(-5px)}
-  50%{transform:translateX(5px)}
-}
-@media(prefers-reduced-motion:reduce){
-  .footer.site-footer .footer-logo{animation:none!important;transform:none!important}
-}
-@media(max-width:760px){
-  .footer.site-footer .footer-brand{
-    justify-content:center!important;
-    align-items:center!important;
-  }
-}
+/* FOOTER SVG LOGO — centered; real motion-graphics reveal */
+.footer.site-footer .footer-brand{width:100%!important;display:flex!important;justify-content:center!important;align-items:center!important;text-align:center!important}
+.footer.site-footer .footer-brand>a.logo{margin:0 auto!important;display:inline-flex!important;justify-content:center!important;align-items:center!important}
+.footer.site-footer .footer-logo{display:block!important;margin:0!important;animation:none!important}
+.footer.site-footer .footer-brand>a.logo:hover .footer-logo{transform:none!important}
+/* The SVG itself contains staggered path motion; the logo box never moves. */
+@media(prefers-reduced-motion:reduce){.footer.site-footer .footer-logo{animation:none!important}}
+
 /* UX POLISH — purposeful micro-interactions */
 .product-card{transition:transform .28s ease,box-shadow .28s ease}
 .product-image{position:relative;overflow:hidden;isolation:isolate;background:rgba(255,250,241,.65)}
