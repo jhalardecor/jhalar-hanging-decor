@@ -16,7 +16,7 @@ let settings = {
   ogImage: "assets/images/og-cover.jpg",
   navItems: [{label:"Catalogue",href:"#collection"},{label:"Custom Enquiries",href:"#custom-orders"},{label:"About",href:"#about"},{label:"FAQ",href:"#faq"},{label:"Contact",href:"#contact"}],
   footerNavItems: [{label:"Catalogue",href:"#collection"},{label:"Custom Enquiries",href:"#custom-orders"},{label:"About",href:"#about"},{label:"FAQ",href:"#faq"},{label:"Contact",href:"#contact"}],
-  socialLinks: {instagram:{url:"#",label:"Instagram"},facebook:{url:"#",label:"Facebook"},whatsapp:{url:"https://wa.me/918100656258",label:"WhatsApp"}},
+  socialLinks: {whatsapp:{url:"https://wa.me/918100656258",label:"WhatsApp"}},
   heroHighlights: [],
   trustItems: [],
   faqItems: [
@@ -182,11 +182,19 @@ async function loadProducts() {
     if (!r.ok || !nr.ok) throw new Error('Catalogue or naming registry unavailable');
     const [d, registry] = await Promise.all([r.json(), nr.json()]);
     const review = window.JHALARNaming.validateCatalogue(d, registry);
-    if (review.errors.length || review.reviewCount || !d.products.length) {
-      throw new Error('Catalogue has unavailable or unapproved product identities');
-    }
+    if (!d.products.length) throw new Error('Catalogue is empty');
     if (livePushed.products) return;
-    products = d.products;
+    if (review.errors.length || review.reviewCount) {
+      console.warn('Some catalogue identities failed validation and were quarantined:', review);
+      const invalidIds = new Set([
+        ...(review.invalidIds || []),
+        ...(review.errors || []).map(item => item && item.id).filter(Boolean)
+      ]);
+      products = d.products.filter(product => !invalidIds.has(product.id));
+      if (!products.length) throw new Error('No approved catalogue products are available');
+    } else {
+      products = d.products;
+    }
   } catch(e) {
     console.error('Products load failed:', e);
     // Do not resurrect obsolete names or deleted image paths on a load failure.
