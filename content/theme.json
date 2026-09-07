@@ -1,19 +1,12 @@
 {
   "colors": {
-    "--brand-primary": "#C82039",
-    "--brand-primary-dark": "#901728",
-    "--brand-primary-light": "#F1B4BD",
-    "--brand-accent": "#C82039",
-    "--brand-cream": "#FFFAF1",
-    "--brand-background": "#FFFAF1",
-    "--brand-alt-background": "#FCF4E9",
-    "--brand-text": "#141942",
-    "--brand-muted": "#424564",
-    "--brand-heading": "#141942",
-    "--brand-border": "#E9DCCD",
-    "--brand-header-background": "#FFFAF1",
-    "--brand-footer-background": "#0E1232",
-    "--brand-footer-text": "#FFFAF1"
+    "primary": "#C82039",
+    "primaryDeep": "#A71931",
+    "ivory": "#FFFAF1",
+    "ivorySoft": "#FFFDF8",
+    "ivoryDeep": "#F6EFE4",
+    "ink": "#141942",
+    "oxblood": "#622331"
   },
   "fonts": {
     "heading": "Mogranx, Arial, sans-serif",
