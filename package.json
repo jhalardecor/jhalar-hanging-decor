@@ -1,7 +1,7 @@
 {
   "name": "jhalar-hanging-decor",
   "version": "2.0.0",
-  "description": "JHALAR Hanging Decor - B2B manufacturer & wholesale supplier website (static, no build step)",
+  "description": "JHALAR Hanging Decor - catalogue and enquiry website (static, no build step)",
   "private": true,
   "scripts": {
     "dev": "python3 -m http.server 8000 --bind 0.0.0.0",
@@ -9,7 +9,13 @@
     "validate": "bash scripts/validate.sh",
     "naming:review": "node scripts/product-naming.js --strict"
   },
-  "keywords": ["jhalar", "decor", "b2b", "static-site", "netlify"],
+  "keywords": [
+    "jhalar",
+    "decor",
+    "b2b",
+    "static-site",
+    "netlify"
+  ],
   "author": "lokeshdugar040",
   "license": "UNLICENSED"
 }

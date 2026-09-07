@@ -256,7 +256,7 @@ hr.divider{margin:12px 0;border:none;border-top:1px solid rgba(128,128,128,0.1)}
       <!-- CONTENT -->
       <div class="tab-panel active" id="panel-content">
         <h3><i class="fas fa-pencil-alt"></i> Content</h3>
-        <p class="hint">Edit contact info, hero, navigation, social links, trust bar, highlights and FAQ. All changes preview live.</p>
+        <p class="hint">Edit contact info, hero, navigation, social links, optional highlights and FAQ. All changes preview live.</p>
 
         <div class="panel-section">
           <h4><i class="fas fa-id-card"></i> Contact Info</h4>
@@ -268,20 +268,18 @@ hr.divider{margin:12px 0;border:none;border-top:1px solid rgba(128,128,128,0.1)}
 
         <div class="panel-section">
           <h4><i class="fas fa-star"></i> Hero Section</h4>
-          <div class="form-group"><label>Hero Badge / Tag Text</label><input type="text" id="ed-hero-tag-text" placeholder="Made in Howrah | Delivered across India"></div>
-          <div class="icon-row"><span class="icon-preview" id="preview-hero-tag-icon"><svg class="icon" width="16" height="16"><use href="assets/icons.svg#icon-mfr"/></svg></span><select id="ed-hero-tag-icon"></select></div>
-          <div class="form-group"><label>Hero Headline</label><input type="text" id="ed-hero-headline" placeholder="Handcrafted Jhalars and Hangings, Made to Order in Howrah"></div>
-          <div class="form-group"><label>Hero Intro</label><textarea id="ed-hero-intro" rows="2" placeholder="Pom pom garlands, torans, floral jhalars, bead and bell hangings — made to order for weddings, events, pandals and retail displays."></textarea></div>
-          <div class="form-group"><label>Hero Primary Button Text</label><input type="text" id="ed-hero-primary-label" placeholder="View Collection"></div>
+          <div class="form-group"><label>Hero Headline</label><input type="text" id="ed-hero-headline" placeholder="Jhalars and hanging decor for weddings and events"></div>
+          <div class="form-group"><label>Hero Intro</label><textarea id="ed-hero-intro" rows="2" placeholder="Browse designs and colour variants. Open a product for details or enquire on WhatsApp using its catalogue reference."></textarea></div>
+          <div class="form-group"><label>Hero Primary Button Text</label><input type="text" id="ed-hero-primary-label" placeholder="View catalogue"></div>
           <div class="form-group"><label>Hero Primary Button Link</label><input type="text" id="ed-hero-primary-href" placeholder="#collection"></div>
-          <div class="form-group"><label>Hero Secondary Button Text</label><input type="text" id="ed-hero-secondary-label" placeholder="Message on WhatsApp"></div>
+          <div class="form-group"><label>Hero Secondary Button Text</label><input type="text" id="ed-hero-secondary-label" placeholder="Enquire on WhatsApp"></div>
           <div class="form-group"><label>Hero Secondary Button Link</label><input type="text" id="ed-hero-secondary-href" placeholder="https://wa.me/..."></div>
           <div class="form-group"><label>Hero Image</label><select id="ed-hero-image"></select></div>
         </div>
 
         <div class="panel-section">
           <h4><i class="fas fa-list-check"></i> Hero Highlights</h4>
-          <p>Small bullet points under the hero intro (icon + text).</p>
+          <p>Small bullet points under the hero intro (icon + text). Leave empty to hide the list.</p>
           <div id="highlight-editor"></div>
           <button class="btn-sm" onclick="addHighlight()" style="margin-top:4px">+ Add Highlight</button>
         </div>
@@ -309,7 +307,7 @@ hr.divider{margin:12px 0;border:none;border-top:1px solid rgba(128,128,128,0.1)}
 
         <div class="panel-section">
           <h4><i class="fas fa-award"></i> Trust Bar</h4>
-          <p>The strip below the hero: icon + short label.</p>
+          <p>Optional strip below the hero: icon + short label. Leave empty to hide it.</p>
           <div id="trust-editor"></div>
           <button class="btn-sm" onclick="addTrustItem()" style="margin-top:4px">+ Add Trust Item</button>
         </div>
@@ -324,33 +322,23 @@ hr.divider{margin:12px 0;border:none;border-top:1px solid rgba(128,128,128,0.1)}
         </div>
 
         <div class="panel-section">
-          <h4><i class="fas fa-align-left"></i> Why JHALAR Copy</h4>
-          <div class="form-group"><label>Eyebrow</label><input type="text" id="ed-why-label" placeholder="Why JHALAR"></div>
-          <div class="form-group"><label>Title</label><input type="text" id="ed-why-title" placeholder="What You Get Working With Us"></div>
-          <div class="form-group"><label>Intro</label><textarea id="ed-why-intro" rows="2" placeholder="We are the makers, not a reseller — so the design, the price and the timeline all come from one place."></textarea></div>
-          <p>Feature cards (icon + title + description)</p>
-          <div id="feature-editor" class="stack"></div>
-          <button class="btn-sm" onclick="addFeatureItem()" style="margin-top:4px">+ Add Feature</button>
-        </div>
-
-        <div class="panel-section">
           <h4><i class="fas fa-cubes"></i> Collection Copy</h4>
-          <div class="form-group"><label>Eyebrow</label><input type="text" id="ed-collection-label" placeholder="Our Collection"></div>
-          <div class="form-group"><label>Title</label><input type="text" id="ed-collection-title" placeholder="Jhalars, Torans, Tassels and More"></div>
-          <div class="form-group"><label>Intro</label><textarea id="ed-collection-intro" rows="2" placeholder="Pom pom, bead, bell, floral, torans, tassels, strings and custom work."></textarea></div>
+          <div class="form-group"><label>Eyebrow</label><input type="text" id="ed-collection-label" placeholder="Catalogue"></div>
+          <div class="form-group"><label>Title</label><input type="text" id="ed-collection-title" placeholder="Browse the Collection"></div>
+          <div class="form-group"><label>Intro</label><textarea id="ed-collection-intro" rows="2" placeholder="Thirty-five designs and colour variants across pom pom, bead, bell and floral hangings and decorative strings."></textarea></div>
           <div class="form-group"><label>Bottom Note</label><input type="text" id="ed-collection-note" placeholder="Looking for something else? "></div>
         </div>
 
         <div class="panel-section">
-          <h4><i class="fas fa-palette"></i> Custom Orders Copy</h4>
-          <div class="form-group"><label>Eyebrow</label><input type="text" id="ed-custom-label" placeholder="Custom Orders"></div>
-          <div class="form-group"><label>Title</label><input type="text" id="ed-custom-title" placeholder="Order Something Made to Your Own Design"></div>
-          <div class="form-group"><label>Intro</label><textarea id="ed-custom-intro" rows="2" placeholder="Tell us what you need and we will make it."></textarea></div>
+          <h4><i class="fas fa-palette"></i> Custom Enquiries Copy</h4>
+          <div class="form-group"><label>Eyebrow</label><input type="text" id="ed-custom-label" placeholder="Custom Enquiries"></div>
+          <div class="form-group"><label>Title</label><input type="text" id="ed-custom-title" placeholder="Made to Your Own Design"></div>
+          <div class="form-group"><label>Intro</label><textarea id="ed-custom-intro" rows="2" placeholder="Any design in the catalogue can be remade in your colours and sizes — or send a reference of your own."></textarea></div>
           <div class="form-group"><label>Image</label><select id="ed-custom-image"></select></div>
           <p>Chips / tags</p>
           <div id="chip-editor" class="stack"></div>
           <button class="btn-sm" onclick="addChipItem()" style="margin-top:4px">+ Add Chip</button>
-          <div class="form-group" style="margin-top:8px"><label>Process Label</label><input type="text" id="ed-process-label" placeholder="How it works"></div>
+          <div class="form-group" style="margin-top:8px"><label>Process Label</label><input type="text" id="ed-process-label" placeholder="How an enquiry works"></div>
           <p>Process steps</p>
           <div id="process-editor" class="stack"></div>
           <button class="btn-sm" onclick="addProcessItem()" style="margin-top:4px">+ Add Step</button>
@@ -358,9 +346,9 @@ hr.divider{margin:12px 0;border:none;border-top:1px solid rgba(128,128,128,0.1)}
 
         <div class="panel-section">
           <h4><i class="fas fa-user-tie"></i> About Copy</h4>
-          <div class="form-group"><label>Eyebrow</label><input type="text" id="ed-about-label" placeholder="About JHALAR"></div>
-          <div class="form-group"><label>Title</label><input type="text" id="ed-about-title" placeholder="From Our Workshop in Howrah to Your Venue"></div>
-          <div class="form-group"><label>Intro</label><textarea id="ed-about-intro" rows="2" placeholder="JHALAR makes hanging decor in Howrah, West Bengal. Every piece is finished by hand, and one person stays on your order from the first message to dispatch."></textarea></div>
+          <div class="form-group"><label>Eyebrow</label><input type="text" id="ed-about-label" placeholder="About"></div>
+          <div class="form-group"><label>Title</label><input type="text" id="ed-about-title" placeholder="About JHALAR"></div>
+          <div class="form-group"><label>Intro</label><textarea id="ed-about-intro" rows="2" placeholder="JHALAR is a small maker of jhalars and hanging decor based in Howrah, West Bengal. Every design in this catalogue is handmade in our own workshop, and each enquiry is answered directly over WhatsApp or phone."></textarea></div>
           <div class="form-group"><label>Image</label><select id="ed-about-image"></select></div>
           <p>Value list</p>
           <div id="value-editor" class="stack"></div>
@@ -370,10 +358,10 @@ hr.divider{margin:12px 0;border:none;border-top:1px solid rgba(128,128,128,0.1)}
         <div class="panel-section">
           <h4><i class="fas fa-envelope-open-text"></i> Contact &amp; Footer Copy</h4>
           <div class="form-group"><label>Contact Eyebrow</label><input type="text" id="ed-contact-label" placeholder="Contact"></div>
-          <div class="form-group"><label>Contact Title</label><input type="text" id="ed-contact-title" placeholder="Get in Touch or Place an Order"></div>
-          <div class="form-group"><label>Contact Intro</label><textarea id="ed-contact-intro" rows="2" placeholder="Include a photo if you have one. The clearer the brief, the faster the quote."></textarea></div>
-          <div class="form-group"><label>Submit Button Text</label><input type="text" id="ed-contact-submit-label" placeholder="Message on WhatsApp"></div>
-          <div class="form-group"><label>Footer Tagline</label><input type="text" id="ed-footer-tagline" placeholder="Handcrafted jhalars and hangings, made in Howrah and delivered across India."></div>
+          <div class="form-group"><label>Contact Title</label><input type="text" id="ed-contact-title" placeholder="Send an Enquiry"></div>
+          <div class="form-group"><label>Contact Intro</label><textarea id="ed-contact-intro" rows="2" placeholder="Tell us what you need — a catalogue reference, quantities and your date."></textarea></div>
+          <div class="form-group"><label>Submit Button Text</label><input type="text" id="ed-contact-submit-label" placeholder="Review and Send on WhatsApp"></div>
+          <div class="form-group"><label>Footer Tagline</label><input type="text" id="ed-footer-tagline" placeholder="Jhalars and hanging decor for weddings and events. Browse the catalogue and enquire on WhatsApp."></div>
         </div>
       </div>
 
@@ -559,13 +547,6 @@ hr.divider{margin:12px 0;border:none;border-top:1px solid rgba(128,128,128,0.1)}
             </select>
             <span class="help">Images always stay 1:1, never cropped.</span>
           </div>
-          <div class="form-group"><label>Feature Card Columns</label>
-            <select id="ed-layout-feature-cols">
-              <option value="2">2 columns</option>
-              <option value="3" selected>3 columns - default</option>
-              <option value="4">4 columns</option>
-            </select>
-          </div>
           <div class="form-group"><label>Hero Layout</label>
             <select id="ed-layout-hero-cols">
               <option value="split" selected>Split (text + image)</option>
@@ -655,7 +636,6 @@ hr.divider{margin:12px 0;border:none;border-top:1px solid rgba(128,128,128,0.1)}
           <h4 style="margin:6px 0 8px;font-size:12px"><i class="fas fa-table-columns"></i> Inside Every Section</h4>
           <p style="margin-bottom:8px">Per-section spacing &amp; padding - changes apply instantly to that component only.</p>
           <div class="spacing-grid">
-            <div class="form-group"><label>Feature Card Gap</label><input type="range" id="ed-layout-feature-gap" min="12" max="48" step="4" value="24"><span class="help" id="help-feature-gap">24px</span></div>
             <div class="form-group"><label>Product Card Gap</label><input type="range" id="ed-layout-product-gap" min="12" max="48" step="4" value="24"><span class="help" id="help-product-gap">24px</span></div>
             <div class="form-group"><label>Split Section Gap</label><input type="range" id="ed-layout-split-gap" min="12" max="80" step="4" value="48"><span class="help" id="help-split-gap">48px</span></div>
             <div class="form-group"><label>Process Step Gap</label><input type="range" id="ed-layout-process-gap" min="8" max="48" step="4" value="24"><span class="help" id="help-process-gap">24px</span></div>
@@ -705,8 +685,7 @@ hr.divider{margin:12px 0;border:none;border-top:1px solid rgba(128,128,128,0.1)}
             </select>
           </div>
           <div class="form-group"><label>Description</label><textarea id="ed-prod-description" rows="2"></textarea></div>
-          <div class="form-row"><div class="form-group"><label>Product Badge</label><input type="text" id="ed-prod-b2b" placeholder="Repeat order"></div>
-          <div class="form-group"><label>Image</label><select id="ed-prod-image"></select></div></div>
+          <div class="form-group"><label>Image</label><select id="ed-prod-image"></select></div>
         </div>
       </div>
 
@@ -726,8 +705,8 @@ hr.divider{margin:12px 0;border:none;border-top:1px solid rgba(128,128,128,0.1)}
       <div class="tab-panel" id="panel-seo">
         <h3><i class="fas fa-search"></i> SEO Settings</h3>
         <p class="hint">Edit meta tags for search engines and social sharing. These control how your site appears in search results and social media previews.</p>
-        <div class="form-group"><label>Site Title (Browser Tab + Search)</label><input type="text" id="ed-seo-title" placeholder="JHALAR | Handcrafted Jhalars, Torans and Hangings — Made in Howrah"></div>
-        <div class="form-group"><label>Meta Description</label><textarea id="ed-seo-desc" rows="2" placeholder="Pom pom garlands, torans, floral jhalars, bead and bell hangings — handmade in Howrah."></textarea></div>
+        <div class="form-group"><label>Site Title (Browser Tab + Search)</label><input type="text" id="ed-seo-title" placeholder="JHALAR | Jhalars and Hanging Decor for Weddings and Events"></div>
+        <div class="form-group"><label>Meta Description</label><textarea id="ed-seo-desc" rows="2" placeholder="Browse the JHALAR catalogue of jhalars and hanging decor for weddings and events."></textarea></div>
         <div class="form-group"><label>OG Image (Social Share Preview)</label><select id="ed-seo-ogimage"></select></div>
         <hr class="divider">
         <div class="panel-section">
@@ -790,7 +769,7 @@ hr.divider{margin:12px 0;border:none;border-top:1px solid rgba(128,128,128,0.1)}
   </section>
 </div>
 <div class="toast" id="toast"></div>
-<script src="scripts/product-naming.js?v=20260907-catalogue"></script>
-<script src="editor.js?v=20260907-catalogue"></script>
+<script src="scripts/product-naming.js?v=20260908-catalogue"></script>
+<script src="editor.js?v=20260908-catalogue"></script>
 </body>
 </html>

@@ -8,82 +8,70 @@ let settings = {
   email: "lokeshdugar040@gmail.com",
   location: "Howrah, West Bengal, India",
   gst: "Available on request",
-  heroHeadline: "Handcrafted Jhalars and Hangings, Made to Order in Howrah",
-  heroIntro: "Pom pom garlands, torans, floral jhalars, bead and bell hangings — made to order for weddings, events, pandals and retail displays.",
+  heroHeadline: "Jhalars and hanging decor for weddings and events",
+  heroIntro: "Browse designs and colour variants. Open a product for details or enquire on WhatsApp using its catalogue reference.",
   heroImage: "assets/images/hero-jhalar.jpg",
-  siteTitle: "JHALAR | Handcrafted Jhalars, Torans and Hangings — Made in Howrah",
-  siteDescription: "Pom pom garlands, torans, floral jhalars, bead and bell hangings — handmade in Howrah and delivered across India. Custom colours and large orders welcome.",
+  siteTitle: "JHALAR | Jhalars and Hanging Decor for Weddings and Events",
+  siteDescription: "Browse the JHALAR catalogue of jhalars and hanging decor for weddings and events. Open a design for details or enquire on WhatsApp with its reference.",
   ogImage: "assets/images/og-cover.jpg",
-  navItems: [{label:"Collection",href:"#collection"},{label:"Custom Orders",href:"#custom-orders"},{label:"Who It's For",href:"#who-uses"},{label:"About",href:"#about"},{label:"FAQ",href:"#faq"},{label:"Contact",href:"#contact"}],
-  footerNavItems: [{label:"Collection",href:"#collection"},{label:"Custom Orders",href:"#custom-orders"},{label:"Who It's For",href:"#who-uses"},{label:"About",href:"#about"},{label:"Contact",href:"#contact"}],
+  navItems: [{label:"Catalogue",href:"#collection"},{label:"Custom Enquiries",href:"#custom-orders"},{label:"About",href:"#about"},{label:"FAQ",href:"#faq"},{label:"Contact",href:"#contact"}],
+  footerNavItems: [{label:"Catalogue",href:"#collection"},{label:"Custom Enquiries",href:"#custom-orders"},{label:"About",href:"#about"},{label:"FAQ",href:"#faq"},{label:"Contact",href:"#contact"}],
   socialLinks: {instagram:{url:"#",label:"Instagram"},facebook:{url:"#",label:"Facebook"},whatsapp:{url:"https://wa.me/918100656258",label:"WhatsApp"}},
+  heroHighlights: [],
+  trustItems: [],
+  faqItems: [
+    {q:"Do you show prices on the website?",a:"No. The website is a catalogue, so prices are shared on enquiry. Message us on WhatsApp with the design name or catalogue reference and we will send you a quote."},
+    {q:"What quantities do you take?",a:"From a few dozen to several thousand pieces per design. Tell us the design and the quantity and we will confirm."},
+    {q:"Can you match a specific colour?",a:"Yes. Share a reference photo or your palette and we will match it in the sample."},
+    {q:"Do you deliver outside West Bengal?",a:"Yes, we dispatch across India. Tell us where it needs to reach and we will confirm the arrangements."},
+    {q:"How long does an order take?",a:"It depends on the design and the quantity. Share the date you need it by and we will confirm whether we can meet it."},
+    {q:"How do I enquire about a design?",a:"Open the product and use its Enquire on WhatsApp button, or use the enquiry form below. Include the catalogue reference so we know exactly which design you mean."}
+  ],
   sectionCopy: {
-    heroTag: {icon:"icon-mfr", text:"Made in Howrah | Delivered across India"},
-    heroPrimary: {label:"View Collection", href:"#collection"},
-    heroSecondary: {label:"Message on WhatsApp", href:"https://wa.me/918100656258"},
-    why: {
-      label:"Why JHALAR",
-      title:"What You Get Working With Us",
-      intro:"We are the makers, not a reseller — so the design, the price and the timeline all come from one place.",
-      features:[
-        {icon:"icon-mfr", title:"No Middlemen", text:"You talk to the people who actually make the pieces, not a trading desk in between."},
-        {icon:"icon-palette", title:"Matched to Your Brief", text:"Send a reference photo or your palette and we will work to it."},
-        {icon:"icon-bulk", title:"Built for Volume", text:"From a few dozen pieces to several thousand per design, made to the same standard throughout."}
-      ]
-    },
+    heroPrimary: {label:"View catalogue", href:"#collection"},
+    heroSecondary: {label:"Enquire on WhatsApp", href:"https://wa.me/918100656258"},
     collection: {
-      label:"Our Collection",
-      title:"Jhalars, Torans, Tassels and More",
-      intro:"Pom pom, bead, bell, floral, torans, tassels, strings and custom work.",
+      label:"Catalogue",
+      title:"Browse the Collection",
+      intro:"Thirty-five designs and colour variants across pom pom, bead, bell and floral hangings and decorative strings.",
       note:"Looking for something else? "
     },
     customOrders: {
-      label:"Custom Orders",
-      title:"Order Something Made to Your Own Design",
-      intro:"Send a reference and your palette. Any design in the collection can be remade in your colours.",
+      label:"Custom Enquiries",
+      title:"Made to Your Own Design",
+      intro:"Any design in the catalogue can be remade in your colours and sizes — or send a reference of your own.",
       image:"assets/images/custom-orders.jpg",
       chips:[
         {icon:"icon-palette", text:"Colour matching"},
         {icon:"icon-ruler", text:"Size and length"},
         {icon:"icon-chart", text:"Order quantity"}
       ],
-      processLabel:"How it works",
+      processLabel:"How an enquiry works",
       steps:[
-        {title:"Send Your Brief", text:"The category, your colours, how many pieces, and the date you need them."},
-        {title:"Approve a Sample", text:"We make one piece to your brief. Nothing goes into production until you sign it off."},
-        {title:"Production and Dispatch", text:"Once you approve the sample, we confirm the price and the timeline, and production starts."}
-      ]
-    },
-    whoUses: {
-      label:"Who It's For",
-      title:"Who We Work With",
-      intro:"Event decorators, wedding planners, retailers and puja committees.",
-      personas:[
-        {icon:"icon-route", title:"Event Decorators", text:"Venue-scale quantities against a fixed install date. Give us the date and we work backwards from it."},
-        {icon:"icon-palette", title:"Wedding Planners", text:"Colours matched to your theme, so the whole setting works as one."},
-        {icon:"icon-bulk", title:"Retailers and Stores", text:"Designs you can reorder in the same colours, run after run."},
-        {icon:"icon-design", title:"Puja Committees", text:"Traditional torans and jhalars for pujas, pandals and festival programmes."}
+        {title:"Send Your Brief", text:"The design or reference, your colours, how many pieces, and the date you need them."},
+        {title:"Review a Sample", text:"We make one piece to your brief and share it for your approval."},
+        {title:"Confirm the Details", text:"We confirm the design, quantity and timeline with you, and the order goes ahead."}
       ]
     },
     about: {
-      label:"About JHALAR",
-      title:"From Our Workshop in Howrah to Your Venue",
-      intro:"JHALAR makes hanging decor in Howrah, West Bengal. Every piece is finished by hand, and one person stays on your order from the first message to dispatch.",
+      label:"About",
+      title:"About JHALAR",
+      intro:"JHALAR is a small maker of jhalars and hanging decor based in Howrah, West Bengal. Every design in this catalogue is handmade in our own workshop, and each enquiry is answered directly over WhatsApp or phone.",
       image:"assets/images/about-collage.jpg",
       values:[
         {icon:"icon-check", text:"Finished by hand, piece by piece"},
-        {icon:"icon-check", text:"One contact from quote to dispatch"},
-        {icon:"icon-check", text:"Repeat orders in the same colours"}
+        {icon:"icon-check", text:"One contact from enquiry to dispatch"},
+        {icon:"icon-check", text:"Dispatched across India"}
       ]
     },
     faq: {label:"FAQ", title:"Frequently Asked Questions"},
     contact: {
       label:"Contact",
-      title:"Get in Touch or Place an Order",
-      intro:"Include a photo if you have one. The clearer the brief, the faster the quote.",
+      title:"Send an Enquiry",
+      intro:"Tell us what you need — a catalogue reference, quantities and your date. The clearer the brief, the faster the answer.",
       submitLabel:"Review and Send on WhatsApp"
     },
-    footerTagline:"Handcrafted jhalars and hangings, made in Howrah and delivered across India."
+    footerTagline:"Jhalars and hanging decor for weddings and events. Browse the catalogue and enquire on WhatsApp."
   }
 };
 
@@ -133,7 +121,6 @@ let theme = {
     sectionHeaderGap: "48px",
     sectionAlign: "center",
     heroColumns: "split",
-    featureColumns: "3",
     splitLayout: "split",
     aboutLayout: "split",
     processColumns: "3",
@@ -141,7 +128,6 @@ let theme = {
     trustLayout: "auto",
     faqWidth: "740px",
     footerColumns: "4",
-    featureGap: "24px",
     productGap: "24px",
     splitGap: "48px",
     processGap: "24px",
@@ -311,7 +297,6 @@ function applyTheme() {
     }
     // rows / columns
     if (l.heroColumns) root.style.setProperty('--hero-cols', l.heroColumns === 'stack' ? '1fr' : '1.1fr .9fr');
-    if (l.featureColumns) root.style.setProperty('--feature-cols', l.featureColumns);
     if (l.splitLayout) root.style.setProperty('--split-cols', l.splitLayout === 'stack' ? '1fr' : '1.1fr 1fr');
     if (l.aboutLayout) root.style.setProperty('--about-cols', l.aboutLayout === 'stack' ? '1fr' : '1fr 1.1fr');
     if (l.processColumns) root.style.setProperty('--process-cols', l.processColumns);
@@ -319,7 +304,6 @@ function applyTheme() {
     if (l.trustLayout) root.style.setProperty('--trust-direction', l.trustLayout === 'stack' ? 'column' : 'row');
     if (l.faqWidth) root.style.setProperty('--faq-width', l.faqWidth);
     if (l.footerColumns) root.style.setProperty('--footer-cols', l.footerColumns === '2' ? '1.4fr 1fr' : (l.footerColumns === '3' ? '1.2fr 1fr 1fr' : '1.4fr 1fr 1.2fr 1fr'));
-    if (l.featureGap) root.style.setProperty('--feature-gap', l.featureGap);
     if (l.productGap) root.style.setProperty('--product-gap', l.productGap);
     if (l.splitGap) root.style.setProperty('--split-gap', l.splitGap);
     if (l.processGap) root.style.setProperty('--process-gap', l.processGap);
@@ -429,7 +413,6 @@ function renderProducts(productList) {
         <h3 class="product-title">${esc(p.title)}</h3>
         <p class="product-reference">Catalogue ref: ${esc(window.JHALARNaming.productReference(p))}</p>
         <p class="product-desc">${esc(p.description)}</p>
-        <span class="product-meta">${esc(p.b2bTag)}</span>
         <button class="btn btn-primary product-details-btn" data-product-id="${esc(p.id)}" aria-label="View details for ${esc(p.title)}, reference ${esc(window.JHALARNaming.productReference(p))}" style="margin-top:1rem;width:100%;">View Details</button>
       </div>
     </div>
@@ -620,7 +603,7 @@ function openProductModal(id) {
   const modal = document.getElementById('product-modal');
   if (!modal) return;
   const s = (id, t) => { const e = document.getElementById(id); if (e) e.textContent = t; };
-  s('modal-title', p.title); s('modal-category', p.category); s('modal-desc', p.description); s('modal-tag', p.b2bTag);
+  s('modal-title', p.title); s('modal-category', p.category); s('modal-desc', p.description);
   const reference = window.JHALARNaming.productReference(p);
   s('modal-reference', 'Catalogue ref: ' + reference);
   const ph = document.getElementById('modal-photo');
@@ -654,7 +637,6 @@ function applySiteSettings() {
   if (settings.heroHeadline) setText('.hero-title', settings.heroHeadline);
   if (settings.heroIntro) setText('.hero-desc', settings.heroIntro);
   if (settings.heroImage) { const t = document.querySelector('.hero-img'); if (t) t.src = settings.heroImage; }
-  if (copy.heroTag) { const tag = document.querySelector('.hero .tag'); if (tag) tag.innerHTML = svgIcon(copy.heroTag.icon, '', 18) + ' ' + esc(copy.heroTag.text); }
   const heroActions = document.querySelectorAll('.hero-actions a');
   if (copy.heroPrimary && heroActions[0]) { heroActions[0].textContent = copy.heroPrimary.label; heroActions[0].href = copy.heroPrimary.href || '#collection'; }
   if (copy.heroSecondary && heroActions[1]) {
@@ -662,32 +644,30 @@ function applySiteSettings() {
     heroActions[1].href = copy.heroSecondary.href || settings.socialLinks?.whatsapp?.url || `https://wa.me/${settings.whatsapp}`;
   }
 
-  // Hero highlights
-  if (Array.isArray(settings.heroHighlights) && settings.heroHighlights.length) {
-    const ul = document.querySelector('.hero-highlights');
-    if (ul) ul.innerHTML = settings.heroHighlights.map(h => `<li>${svgIcon(h.icon,'',18)} ${esc(h.text)}</li>`).join('');
+  // Hero highlights — an empty list hides the block entirely.
+  const hl = document.querySelector('.hero-highlights');
+  if (hl) {
+    const items = Array.isArray(settings.heroHighlights) ? settings.heroHighlights : [];
+    if (items.length) {
+      hl.innerHTML = items.map(h => `<li>${svgIcon(h.icon,'',18)} ${esc(h.text)}</li>`).join('');
+      hl.hidden = false;
+    } else {
+      hl.innerHTML = '';
+      hl.hidden = true;
+    }
   }
 
-  // Trust bar
-  if (Array.isArray(settings.trustItems) && settings.trustItems.length) {
-    const bar = document.querySelector('.trust-bar-inner');
-    if (bar) bar.innerHTML = settings.trustItems.map((t,i) => `${i ? '<div class="trust-bar-divider" aria-hidden="true"></div>' : ''}<div class="trust-bar-item">${svgIcon(t.icon,'',16)} ${esc(t.label)}</div>`).join('');
-  }
-
-  // Why JHALAR
-  if (copy.why) {
-    setText('#why-jhalar .eyebrow', copy.why.label);
-    setText('#why-jhalar .section-title', copy.why.title);
-    setText('#why-jhalar .section-subtitle', copy.why.intro);
-    const grid = document.querySelector('#why-jhalar .feature-grid');
-    if (grid && Array.isArray(copy.why.features)) {
-      grid.innerHTML = copy.why.features.map(f => `
-        <div class="feature-card">
-          <div class="feature-icon">${svgIcon(f.icon,'',20)}</div>
-          <h3>${esc(f.title)}</h3>
-          <p>${esc(f.text)}</p>
-        </div>
-      `).join('');
+  // Trust bar — an empty list hides the strip entirely.
+  const bar = document.querySelector('.trust-bar');
+  const barInner = document.querySelector('.trust-bar-inner');
+  if (bar && barInner) {
+    const items = Array.isArray(settings.trustItems) ? settings.trustItems : [];
+    if (items.length) {
+      barInner.innerHTML = items.map((t,i) => `${i ? '<div class="trust-bar-divider" aria-hidden="true"></div>' : ''}<div class="trust-bar-item">${svgIcon(t.icon,'',16)} ${esc(t.label)}</div>`).join('');
+      bar.hidden = false;
+    } else {
+      barInner.innerHTML = '';
+      bar.hidden = true;
     }
   }
 
@@ -697,7 +677,7 @@ function applySiteSettings() {
     setText('#collection .section-title', copy.collection.title);
     setText('#collection .section-subtitle', copy.collection.intro);
     const note = document.querySelector('#collection .collection-note');
-    if (note) note.innerHTML = esc(copy.collection.note) + ' <a href="https://wa.me/' + esc(settings.whatsapp) + '" data-wa target="_blank" rel="noopener">Message us on WhatsApp</a> — we will share pricing and availability.';
+    if (note) note.innerHTML = esc(copy.collection.note) + ' <a href="https://wa.me/' + esc(settings.whatsapp) + '" data-wa target="_blank" rel="noopener">Message us on WhatsApp</a>.';
   }
 
   // Custom orders

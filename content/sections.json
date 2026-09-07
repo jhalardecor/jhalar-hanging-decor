@@ -1,11 +1,9 @@
 {
   "sections": {
-    "hero": { "visible": true, "label": "Hero Banner" },
-    "trustStrip": { "visible": true, "label": "Trust Strip" },
-    "whyJhalar": { "visible": true, "label": "Why JHALAR (Features)" },
-    "collection": { "visible": true, "label": "Product Collection" },
-    "customOrders": { "visible": true, "label": "Custom Orders" },
-    "whoUses": { "visible": true, "label": "Who We Work With (Who Uses)" },
+    "hero": { "visible": true, "label": "Hero" },
+    "trustStrip": { "visible": true, "label": "Trust Strip (optional, hidden while empty)" },
+    "collection": { "visible": true, "label": "Catalogue (Products)" },
+    "customOrders": { "visible": true, "label": "Custom Enquiries" },
     "about": { "visible": true, "label": "About" },
     "faq": { "visible": true, "label": "FAQ" },
     "contact": { "visible": true, "label": "Contact" }
@@ -13,10 +11,8 @@
   "order": [
     "hero",
     "trustStrip",
-    "whyJhalar",
     "collection",
     "customOrders",
-    "whoUses",
     "about",
     "faq",
     "contact"

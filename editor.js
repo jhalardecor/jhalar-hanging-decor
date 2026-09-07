@@ -14,66 +14,46 @@ let state = {
 
 function defaultSectionCopy() {
   return {
-    heroTag: {icon:'icon-mfr', text:'Made in Howrah | Delivered across India'},
-    heroPrimary: {label:'View Collection', href:'#collection'},
-    heroSecondary: {label:'Message on WhatsApp', href:'https://wa.me/918100656258'},
-    why: {
-      label:'Why JHALAR', title:'What You Get Working With Us',
-      intro:'We are the makers, not a reseller — so the design, the price and the timeline all come from one place.',
-      features:[
-        {icon:'icon-mfr', title:'No Middlemen', text:'You talk to the people who actually make the pieces, not a trading desk in between.'},
-        {icon:'icon-palette', title:'Matched to Your Brief', text:'Send a reference photo or your palette and we will work to it.'},
-        {icon:'icon-bulk', title:'Built for Volume', text:'From a few dozen pieces to several thousand per design, made to the same standard throughout.'}
-      ]
-    },
+    heroPrimary: {label:'View catalogue', href:'#collection'},
+    heroSecondary: {label:'Enquire on WhatsApp', href:'https://wa.me/918100656258'},
     collection: {
-      label:'Our Collection', title:'Jhalars, Torans, Tassels and More',
-      intro:'Pom pom, bead, bell, floral, torans, tassels, strings and custom work.',
+      label:'Catalogue', title:'Browse the Collection',
+      intro:'Thirty-five designs and colour variants across pom pom, bead, bell and floral hangings and decorative strings.',
       note:'Looking for something else? '
     },
     customOrders: {
-      label:'Custom Orders', title:'Order Something Made to Your Own Design',
-      intro:'Send a reference and your palette. Any design in the collection can be remade in your colours.',
+      label:'Custom Enquiries', title:'Made to Your Own Design',
+      intro:'Any design in the catalogue can be remade in your colours and sizes — or send a reference of your own.',
       image:'assets/images/custom-orders.jpg',
       chips:[
         {icon:'icon-palette', text:'Colour matching'},
         {icon:'icon-ruler', text:'Size and length'},
         {icon:'icon-chart', text:'Order quantity'}
       ],
-      processLabel:'How it works',
+      processLabel:'How an enquiry works',
       steps:[
-        {title:'Send Your Brief', text:'The category, your colours, how many pieces, and the date you need them.'},
-        {title:'Approve a Sample', text:'We make one piece to your brief. Nothing goes into production until you sign it off.'},
-        {title:'Production and Dispatch', text:'Once you approve the sample, we confirm the price and the timeline, and production starts.'}
-      ]
-    },
-    whoUses: {
-      label:'Who It\'s For', title:'Who We Work With',
-      intro:'Event decorators, wedding planners, retailers and puja committees.',
-      personas:[
-        {icon:'icon-route', title:'Event Decorators', text:'Venue-scale quantities against a fixed install date. Give us the date and we work backwards from it.'},
-        {icon:'icon-palette', title:'Wedding Planners', text:'Colours matched to your theme, so the whole setting works as one.'},
-        {icon:'icon-bulk', title:'Retailers and Stores', text:'Designs you can reorder in the same colours, run after run.'},
-        {icon:'icon-design', title:'Puja Committees', text:'Traditional torans and jhalars for pujas, pandals and festival programmes.'}
+        {title:'Send Your Brief', text:'The design or reference, your colours, how many pieces, and the date you need them.'},
+        {title:'Review a Sample', text:'We make one piece to your brief and share it for your approval.'},
+        {title:'Confirm the Details', text:'We confirm the design, quantity and timeline with you, and the order goes ahead.'}
       ]
     },
     about: {
-      label:'About JHALAR', title:'From Our Workshop in Howrah to Your Venue',
-      intro:'JHALAR makes hanging decor in Howrah, West Bengal. Every piece is finished by hand, and one person stays on your order from the first message to dispatch.',
+      label:'About', title:'About JHALAR',
+      intro:'JHALAR is a small maker of jhalars and hanging decor based in Howrah, West Bengal. Every design in this catalogue is handmade in our own workshop, and each enquiry is answered directly over WhatsApp or phone.',
       image:'assets/images/about-collage.jpg',
       values:[
         {icon:'icon-check', text:'Finished by hand, piece by piece'},
-        {icon:'icon-check', text:'One contact from quote to dispatch'},
-        {icon:'icon-check', text:'Repeat orders in the same colours'}
+        {icon:'icon-check', text:'One contact from enquiry to dispatch'},
+        {icon:'icon-check', text:'Dispatched across India'}
       ]
     },
     faq: {label:'FAQ', title:'Frequently Asked Questions'},
     contact: {
-      label:'Contact', title:'Get in Touch or Place an Order',
-      intro:'Include a photo if you have one. The clearer the brief, the faster the quote.',
+      label:'Contact', title:'Send an Enquiry',
+      intro:'Tell us what you need — a catalogue reference, quantities and your date. The clearer the brief, the faster the answer.',
       submitLabel:'Review and Send on WhatsApp'
     },
-    footerTagline:'Handcrafted jhalars and hangings, made in Howrah and delivered across India.'
+    footerTagline:'Jhalars and hanging decor for weddings and events. Browse the catalogue and enquire on WhatsApp.'
   };
 }
 
@@ -107,9 +87,9 @@ function defaultThemeTemplate() {
       bodyWeight:'400', bodyTracking:'0', bodyLeading:'1.7',
       titleSize:'fluid', heroTitleSize:'fluid', cardTitleSize:'fluid',
       cardPad:'24px', gridGap:'24px', sectionHeaderGap:'48px', sectionAlign:'center',
-      heroColumns:'split', featureColumns:'3', splitLayout:'split', aboutLayout:'split', processColumns:'3',
+      heroColumns:'split', splitLayout:'split', aboutLayout:'split', processColumns:'3',
       contactLayout:'split', trustLayout:'auto', faqWidth:'740px', footerColumns:'4',
-      featureGap:'24px', productGap:'24px', splitGap:'48px', processGap:'24px', contactGap:'24px',
+      productGap:'24px', splitGap:'48px', processGap:'24px', contactGap:'24px',
       faqGap:'12px', trustGap:'12px', footerGap:'48px', productPad:'24px', faqPad:'20px',
       footerPad:'80px', trustPad:'16px'
     }
@@ -215,14 +195,15 @@ async function loadPublishedData() {
     state.settings.footerNavItems = state.footerNavItems;
     state.settings.socialLinks = state.socialLinks;
     state.settings.sectionCopy = state.sectionCopy;
-    state.heroHighlights = state.settings.heroHighlights||[{text:'Made to order',icon:'icon-check'},{text:'Custom colourways',icon:'icon-clock'},{text:'Any quantity',icon:'icon-route'}];
-    state.trustItems = state.settings.trustItems||[{label:'Our own karigars in Howrah',icon:'icon-mfr'},{label:'35 products, 18 series',icon:'icon-design'},{label:'Delivered across India',icon:'icon-location'}];
+    state.heroHighlights = state.settings.heroHighlights||[];
+    state.trustItems = state.settings.trustItems||[];
     state.faqItems = state.settings.faqItems||[
+      {q:'Do you show prices on the website?',a:'No. The website is a catalogue, so prices are shared on enquiry. Message us on WhatsApp with the design name or catalogue reference and we will send you a quote.'},
       {q:'What quantities do you take?',a:'From a few dozen to several thousand pieces per design. Tell us the design and the quantity and we will confirm.'},
-      {q:'Can you match a specific colour?',a:'Yes. Share a reference photo or your palette and we will match it in the sample before production.'},
+      {q:'Can you match a specific colour?',a:'Yes. Share a reference photo or your palette and we will match it in the sample.'},
       {q:'Do you deliver outside West Bengal?',a:'Yes, we dispatch across India. Tell us where it needs to reach and we will confirm the arrangements.'},
       {q:'How long does an order take?',a:'It depends on the design and the quantity. Share the date you need it by and we will confirm whether we can meet it.'},
-      {q:'How do I place an order?',a:'Message us on WhatsApp with the design and how many you need. We take it from there.'}
+      {q:'How do I enquire about a design?',a:'Open the product and use its Enquire on WhatsApp button, or use the enquiry form below. Include the catalogue reference so we know exactly which design you mean.'}
     ];
 
     ensureProductIds();
@@ -314,17 +295,10 @@ function populateAllForms() {
   setVal('ed-hero-image', state.settings.heroImage||'assets/images/hero-jhalar.jpg');
   const sc = state.sectionCopy || defaultSectionCopy();
   state.sectionCopy = deepMerge(defaultSectionCopy(), sc);
-  populateIconSelects();
-  setVal('ed-hero-tag-text', state.sectionCopy?.heroTag?.text||'');
-  setVal('ed-hero-tag-icon', state.sectionCopy?.heroTag?.icon||'icon-mfr');
-  const htp = document.getElementById('preview-hero-tag-icon'); if (htp) htp.innerHTML = svgSlot(getVal('ed-hero-tag-icon'), 16);
   setVal('ed-hero-primary-label', state.sectionCopy?.heroPrimary?.label||'');
   setVal('ed-hero-primary-href', state.sectionCopy?.heroPrimary?.href||'');
   setVal('ed-hero-secondary-label', state.sectionCopy?.heroSecondary?.label||'');
   setVal('ed-hero-secondary-href', state.sectionCopy?.heroSecondary?.href||'');
-  setVal('ed-why-label', state.sectionCopy?.why?.label||'');
-  setVal('ed-why-title', state.sectionCopy?.why?.title||'');
-  setVal('ed-why-intro', state.sectionCopy?.why?.intro||'');
   setVal('ed-collection-label', state.sectionCopy?.collection?.label||'');
   setVal('ed-collection-title', state.sectionCopy?.collection?.title||'');
   setVal('ed-collection-intro', state.sectionCopy?.collection?.intro||'');
@@ -403,7 +377,6 @@ function populateAllForms() {
     setVal('ed-font-body-tracking', l.bodyTracking||'0');
     setVal('ed-font-body-leading', String(l.bodyLeading||'1.7'));
     // Rows / columns / inner spacing
-    setVal('ed-layout-feature-cols', String(l.featureColumns||'3'));
     setVal('ed-layout-hero-cols', l.heroColumns==='stack'?'stack':'split');
     setVal('ed-layout-split', l.splitLayout==='stack'?'stack':'split');
     setVal('ed-layout-about', l.aboutLayout==='stack'?'stack':'split');
@@ -421,7 +394,6 @@ function populateAllForms() {
     setVal('ed-layout-title-size', tsz || 38);
     setVal('ed-layout-hero-title-size', hsz || 52);
     setVal('ed-layout-card-title-size', csz || 22);
-    setVal('ed-layout-feature-gap', parseInt(l.featureGap||'24px',10)||24);
     setVal('ed-layout-product-gap', parseInt(l.productGap||'24px',10)||24);
     setVal('ed-layout-split-gap', parseInt(l.splitGap||'48px',10)||48);
     setVal('ed-layout-process-gap', parseInt(l.processGap||'24px',10)||24);
@@ -442,7 +414,6 @@ function populateAllForms() {
     const ts = document.getElementById('help-title-size'); if (ts) ts.textContent = tsz ? tsz+'px' : 'Auto (responsive)';
     const hs = document.getElementById('help-hero-title-size'); if (hs) hs.textContent = hsz ? hsz+'px' : 'Auto (responsive)';
     const cts = document.getElementById('help-card-title-size'); if (cts) cts.textContent = csz ? csz+'px' : 'Auto (responsive)';
-    const fg = document.getElementById('help-feature-gap'); if (fg) fg.textContent = getVal('ed-layout-feature-gap');
     const pg = document.getElementById('help-product-gap'); if (pg) pg.textContent = getVal('ed-layout-product-gap');
     const sgl = document.getElementById('help-split-gap'); if (sgl) sgl.textContent = getVal('ed-layout-split-gap');
     const prg = document.getElementById('help-process-gap'); if (prg) prg.textContent = getVal('ed-layout-process-gap');
@@ -455,8 +426,7 @@ function populateAllForms() {
     const ftp = document.getElementById('help-footer-pad'); if (ftp) ftp.textContent = getVal('ed-layout-footer-pad');
     const tp = document.getElementById('help-trust-pad'); if (tp) tp.textContent = getVal('ed-layout-trust-pad');
   }
-  renderFeatureEditor();
-  renderChipEditor();
+
   renderProcessEditor();
   renderValueEditor();
 }
@@ -502,18 +472,6 @@ function iconOptionsHtml(sel) {
 }
 function svgSlot(icon, w) {
   return `<svg class="icon" width="${w||16}" height="${w||16}" aria-hidden="true"><use href="assets/icons.svg#${icon||'icon-check'}"/></svg>`;
-}
-function populateIconSelects() {
-  const sel = document.getElementById('ed-hero-tag-icon');
-  if (sel) {
-    sel.innerHTML = iconOptionsHtml(getVal('ed-hero-tag-icon')||'icon-mfr');
-    if (!sel.dataset.iconBound) {
-      sel.dataset.iconBound = '1';
-      sel.addEventListener('change', () => { const p = document.getElementById('preview-hero-tag-icon'); if (p) p.innerHTML = svgSlot(sel.value,16); onChange(); });
-    }
-  }
-  const p = document.getElementById('preview-hero-tag-icon');
-  if (p) p.innerHTML = svgSlot(getVal('ed-hero-tag-icon')||'icon-mfr',16);
 }
 function bindIconPreview(sel) {
   sel.addEventListener('change', () => {
@@ -567,33 +525,12 @@ function removeTrustItem(i) { state.trustItems.splice(i,1); renderTrustEditor();
 function ensureSectionCopy() {
   if (!state.sectionCopy) state.sectionCopy = defaultSectionCopy();
   state.sectionCopy = deepMerge(defaultSectionCopy(), state.sectionCopy);
-  if (!state.sectionCopy.why) state.sectionCopy.why = {features:[]};
-  if (!Array.isArray(state.sectionCopy.why.features)) state.sectionCopy.why.features = [];
   if (!state.sectionCopy.customOrders) state.sectionCopy.customOrders = {chips:[],steps:[]};
   if (!Array.isArray(state.sectionCopy.customOrders.chips)) state.sectionCopy.customOrders.chips = [];
   if (!Array.isArray(state.sectionCopy.customOrders.steps)) state.sectionCopy.customOrders.steps = [];
   if (!state.sectionCopy.about) state.sectionCopy.about = {values:[]};
   if (!Array.isArray(state.sectionCopy.about.values)) state.sectionCopy.about.values = [];
 }
-function renderFeatureEditor() {
-  ensureSectionCopy();
-  const c = document.getElementById('feature-editor'); if (!c) return;
-  c.innerHTML = state.sectionCopy.why.features.map((f,i) => `
-    <div class="icon-row" data-index="${i}">
-      <span class="icon-preview">${svgSlot(f.icon,16)}</span>
-      <select class="feat-icon">${iconOptionsHtml(f.icon)}</select>
-      <input type="text" class="feat-title" value="${escapeHtml(f.title)}" placeholder="Title">
-      <input type="text" class="feat-text" value="${escapeHtml(f.text)}" placeholder="Description">
-      <button class="del" onclick="removeFeatureItem(${i})"><i class="fas fa-times"></i></button>
-    </div>
-  `).join('');
-  c.querySelectorAll('.feat-icon').forEach((sel,i) => { bindIconPreview(sel); sel.addEventListener('change', () => { state.sectionCopy.why.features[i].icon = sel.value; markChanged(); saveDrafts(); applyPreview(); }); });
-  c.querySelectorAll('.feat-title').forEach((inp,i) => inp.addEventListener('input', () => { state.sectionCopy.why.features[i].title = inp.value; markChanged(); saveDrafts(); applyPreview(); }));
-  c.querySelectorAll('.feat-text').forEach((inp,i) => inp.addEventListener('input', () => { state.sectionCopy.why.features[i].text = inp.value; markChanged(); saveDrafts(); applyPreview(); }));
-}
-function addFeatureItem() { ensureSectionCopy(); state.sectionCopy.why.features.push({icon:'icon-check',title:'New feature',text:'Describe this feature.'}); renderFeatureEditor(); markChanged(); saveDrafts(); applyPreview(); }
-function removeFeatureItem(i) { state.sectionCopy.why.features.splice(i,1); renderFeatureEditor(); markChanged(); saveDrafts(); applyPreview(); }
-
 function renderChipEditor() {
   ensureSectionCopy();
   const c = document.getElementById('chip-editor'); if (!c) return;
@@ -743,9 +680,8 @@ function selectProduct(id) {
   setVal('ed-prod-title', p.title||'');
   setVal('ed-prod-category', p.category||'');
   setVal('ed-prod-description', p.description||'');
-  setVal('ed-prod-b2b', p.b2bTag||'');
   setVal('ed-prod-image', p.image||'assets/images/og-cover.jpg');
-  ['ed-prod-title','ed-prod-category','ed-prod-description','ed-prod-b2b','ed-prod-image'].forEach(fid => {
+  ['ed-prod-title','ed-prod-category','ed-prod-description','ed-prod-image'].forEach(fid => {
     const el = document.getElementById(fid);
     if (el) { el.removeEventListener('input', onProductChange); el.removeEventListener('change', onProductChange); el.addEventListener('input', onProductChange); el.addEventListener('change', onProductChange); }
   });
@@ -753,12 +689,12 @@ function selectProduct(id) {
 function onProductChange() {
   const p = state.products.find(x => x.id === state.selectedProductId); if (!p) return;
   p.title = getVal('ed-prod-title'); p.category = getVal('ed-prod-category');
-  p.description = getVal('ed-prod-description'); p.b2bTag = getVal('ed-prod-b2b'); p.image = getVal('ed-prod-image');
+  p.description = getVal('ed-prod-description'); p.image = getVal('ed-prod-image');
   renderProductList(); markChanged(); saveDrafts(); applyPreview();
 }
 function addProduct() {
   const m = state.products.reduce((a,p) => Math.max(a,p.id||0),0);
-  state.products.push({id:m+1,title:'New Product',category:'Custom Designs',description:'Describe this product...',image:'assets/images/og-cover.jpg',b2bTag:'New'});
+  state.products.push({id:m+1,title:'New Product',category:'Custom Designs',description:'Describe this product...',image:'assets/images/og-cover.jpg'});
   renderProductList(); selectProduct(state.products[state.products.length-1].id); markChanged(); saveDrafts(); applyPreview();
   showToast('Product added','success');
 }
@@ -942,9 +878,8 @@ function fileToBase64(file) {
 function setupAutoSave() {
   // Content fields
   ['ed-whatsapp','ed-phone','ed-email','ed-location','ed-gst',
-   'ed-hero-headline','ed-hero-intro','ed-hero-image','ed-hero-tag-text',
+   'ed-hero-headline','ed-hero-intro','ed-hero-image',
    'ed-hero-primary-label','ed-hero-primary-href','ed-hero-secondary-label','ed-hero-secondary-href',
-   'ed-why-label','ed-why-title','ed-why-intro',
    'ed-collection-label','ed-collection-title','ed-collection-intro','ed-collection-note',
    'ed-custom-label','ed-custom-title','ed-custom-intro','ed-custom-image','ed-process-label',
    'ed-about-label','ed-about-title','ed-about-intro','ed-about-image',
@@ -973,12 +908,12 @@ function setupAutoSave() {
     if (el) el.addEventListener('change', onChange);
   });
   // Layout selects
-  ['ed-layout-fs-base','ed-layout-product-cols','ed-layout-reveal','ed-layout-feature-cols','ed-layout-hero-cols','ed-layout-split','ed-layout-about','ed-layout-trust','ed-layout-process-cols','ed-layout-contact','ed-layout-faq-width','ed-layout-footer-cols','ed-layout-section-align'].forEach(id => {
+  ['ed-layout-fs-base','ed-layout-product-cols','ed-layout-reveal','ed-layout-hero-cols','ed-layout-split','ed-layout-about','ed-layout-trust','ed-layout-process-cols','ed-layout-contact','ed-layout-faq-width','ed-layout-footer-cols','ed-layout-section-align'].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.addEventListener('change', onChange);
   });
   // Layout ranges
-  ['ed-layout-section-y','ed-layout-radius','ed-layout-container','ed-layout-header-h','ed-layout-button-radius','ed-layout-shadow','ed-layout-card-pad','ed-layout-grid-gap','ed-layout-section-gap','ed-layout-title-size','ed-layout-hero-title-size','ed-layout-card-title-size','ed-layout-feature-gap','ed-layout-product-gap','ed-layout-split-gap','ed-layout-process-gap','ed-layout-contact-gap','ed-layout-faq-gap','ed-layout-trust-gap','ed-layout-footer-gap','ed-layout-product-pad','ed-layout-faq-pad','ed-layout-footer-pad','ed-layout-trust-pad'].forEach(id => {
+  ['ed-layout-section-y','ed-layout-radius','ed-layout-container','ed-layout-header-h','ed-layout-button-radius','ed-layout-shadow','ed-layout-card-pad','ed-layout-grid-gap','ed-layout-section-gap','ed-layout-title-size','ed-layout-hero-title-size','ed-layout-card-title-size','ed-layout-product-gap','ed-layout-split-gap','ed-layout-process-gap','ed-layout-contact-gap','ed-layout-faq-gap','ed-layout-trust-gap','ed-layout-footer-gap','ed-layout-product-pad','ed-layout-faq-pad','ed-layout-footer-pad','ed-layout-trust-pad'].forEach(id => {
     const el = document.getElementById(id);
     if (!el) return;
     el.addEventListener('input', () => {
@@ -1030,10 +965,8 @@ function collectAllData() {
   // Section copy
   ensureSectionCopy();
   const sc = state.sectionCopy;
-  sc.heroTag = { icon: getVal('ed-hero-tag-icon')||'icon-mfr', text: getVal('ed-hero-tag-text') };
   sc.heroPrimary = { label: getVal('ed-hero-primary-label'), href: getVal('ed-hero-primary-href') };
   sc.heroSecondary = { label: getVal('ed-hero-secondary-label'), href: getVal('ed-hero-secondary-href') };
-  sc.why.label = getVal('ed-why-label'); sc.why.title = getVal('ed-why-title'); sc.why.intro = getVal('ed-why-intro');
   sc.collection.label = getVal('ed-collection-label'); sc.collection.title = getVal('ed-collection-title');
   sc.collection.intro = getVal('ed-collection-intro'); sc.collection.note = getVal('ed-collection-note');
   sc.customOrders.label = getVal('ed-custom-label'); sc.customOrders.title = getVal('ed-custom-title');
@@ -1089,7 +1022,6 @@ function collectAllData() {
   l.bodyTracking = getVal('ed-font-body-tracking') || '0';
   l.bodyLeading = getVal('ed-font-body-leading') || '1.7';
   // Rows / columns / inner spacing
-  l.featureColumns = getVal('ed-layout-feature-cols') || '3';
   l.heroColumns = getVal('ed-layout-hero-cols') || 'split';
   l.splitLayout = getVal('ed-layout-split') || 'split';
   l.aboutLayout = getVal('ed-layout-about') || 'split';
@@ -1107,7 +1039,6 @@ function collectAllData() {
   l.titleSize = (state.theme && state.theme.layout && state.theme.layout.titleSize === 'fluid' && tsz === '38') ? 'fluid' : (Number(tsz)||38)+'px';
   l.heroTitleSize = (state.theme && state.theme.layout && state.theme.layout.heroTitleSize === 'fluid' && hsz === '52') ? 'fluid' : (Number(hsz)||52)+'px';
   l.cardTitleSize = (state.theme && state.theme.layout && state.theme.layout.cardTitleSize === 'fluid' && csz === '22') ? 'fluid' : (Number(csz)||22)+'px';
-  l.featureGap = (getVal('ed-layout-feature-gap') || '24') + 'px';
   l.productGap = (getVal('ed-layout-product-gap') || '24') + 'px';
   l.splitGap = (getVal('ed-layout-split-gap') || '48') + 'px';
   l.processGap = (getVal('ed-layout-process-gap') || '24') + 'px';
