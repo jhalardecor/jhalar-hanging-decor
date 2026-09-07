@@ -1645,3 +1645,42 @@ p,.section-head>p,.hero-banner-copy>p:not(.kicker){letter-spacing:.006em}
   .hero-banner-bottom{grid-template-columns:1fr!important;gap:7px!important}
   .hero-banner-bottom span{min-height:38px!important}
 }
+
+
+/* HERO OCCASION LINE — preserve desktop design language on mobile */
+@media(max-width:760px){
+  .hero-banner-bottom{
+    display:flex!important;
+    flex-wrap:wrap!important;
+    align-items:center!important;
+    gap:0!important;
+    width:auto!important;
+    padding:0!important;
+    font-size:.66rem!important;
+    line-height:1.4!important;
+    letter-spacing:.06em!important;
+    text-align:left!important;
+  }
+  .hero-banner-bottom span{
+    display:inline!important;
+    min-height:0!important;
+    padding:0!important;
+    border:0!important;
+    border-radius:0!important;
+    background:transparent!important;
+    white-space:nowrap!important;
+  }
+  .hero-banner-bottom span+span:before{
+    content:'·'!important;
+    display:inline-block!important;
+    margin-inline:11px!important;
+    color:#efb85f!important;
+  }
+}
+@media(max-width:390px){
+  .hero-banner-bottom{
+    font-size:.62rem!important;
+    letter-spacing:.045em!important;
+  }
+  .hero-banner-bottom span+span:before{margin-inline:8px!important}
+}
