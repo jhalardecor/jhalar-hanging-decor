@@ -2696,3 +2696,10 @@ body{padding-top:var(--header-h)!important}
   .header{height:var(--header-h)!important;min-height:var(--header-h)!important}
   body{padding-top:var(--header-h)!important}
 }
+
+
+/* MODAL MEDIA VISIBILITY — authoritative: never render image and video together */
+#product-modal .modal-stage > img[hidden],
+#product-modal .modal-stage > video[hidden]{display:none!important;}
+#product-modal .modal-stage > img:not([hidden]),
+#product-modal .modal-stage > video:not([hidden]){display:block!important;}
