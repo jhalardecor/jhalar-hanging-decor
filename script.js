@@ -458,264 +458,126 @@ initProducts();initRuntime();
 })();
 
 
-/* Premium product media engine — natural pan, focal-point pinch, hard containment. */
+/* UNIFIED PRODUCT GALLERY VIEWER — single controller, desktop + touch */
 (function(){
   const stage=document.getElementById('modal-stage');
   const img=document.getElementById('modal-photo');
   if(!stage||!img)return;
 
-  let points=new Map(), scale=1, x=0, y=0;
-  let pinchBase=null, dragBase=null;
+  let scale=1, tx=0, ty=0, raf=0;
+  const pointers=new Map();
+  let pan=null, pinch=null;
 
-  const bounds=()=>{
-    const r=stage.getBoundingClientRect();
-    const nw=img.naturalWidth||r.width, nh=img.naturalHeight||r.height;
-    const fit=Math.min(r.width/nw,r.height/nh);
-    const w=nw*fit*scale, h=nh*fit*scale;
-    return {maxX:Math.max(0,(w-r.width)/2),maxY:Math.max(0,(h-r.height)/2)};
-  };
-  const constrain=()=>{
-    const b=bounds();
-    x=Math.min(b.maxX,Math.max(-b.maxX,x));
-    y=Math.min(b.maxY,Math.max(-b.maxY,y));
-  };
-  const paint=()=>{
-    constrain();
-    img.style.transform='translate3d('+x+'px,'+y+'px,0) scale('+scale+')';
-    stage.classList.toggle('is-zoomed',scale>1.001);
-  };
-  const midpoint=()=>{
-    const p=[...points.values()];
-    return {x:(p[0].x+p[1].x)/2,y:(p[0].y+p[1].y)/2};
-  };
-  const distance=()=>{
-    const p=[...points.values()];
-    return Math.hypot(p[0].x-p[1].x,p[0].y-p[1].y);
-  };
-  const reset=()=>{scale=1;x=0;y=0;paint()};
-
-  stage.addEventListener('pointerdown',e=>{
-    if(stage.classList.contains('is-video'))return;
-    points.set(e.pointerId,{x:e.clientX,y:e.clientY});
-    stage.setPointerCapture?.(e.pointerId);
-
-    if(points.size===1) dragBase={x:e.clientX,y:e.clientY,tx:x,ty:y};
-    if(points.size===2){
-      const mid=midpoint();
-      pinchBase={distance:distance(),scale,x,y,mid};
-      dragBase=null;
-    }
-  });
-
-  stage.addEventListener('pointermove',e=>{
-    if(!points.has(e.pointerId)||stage.classList.contains('is-video'))return;
-    points.set(e.pointerId,{x:e.clientX,y:e.clientY});
-
-    if(points.size===2&&pinchBase){
-      const mid=midpoint();
-      const next=Math.max(1,Math.min(4,pinchBase.scale*(distance()/pinchBase.distance)));
-      const ratio=next/pinchBase.scale;
-      // Keep the content under the fingers stable while pinching.
-      const rect=stage.getBoundingClientRect();
-      const ox=pinchBase.mid.x-(rect.left+rect.width/2);
-      const oy=pinchBase.mid.y-(rect.top+rect.height/2);
-      scale=next;
-      x=pinchBase.x*ratio+ox*(1-ratio)+(mid.x-pinchBase.mid.x);
-      y=pinchBase.y*ratio+oy*(1-ratio)+(mid.y-pinchBase.mid.y);
-      paint();
-      return;
-    }
-
-    if(points.size===1&&dragBase&&scale>1.001){
-      // Direct manipulation: image follows the finger in the same direction.
-      x=dragBase.tx+(e.clientX-dragBase.x);
-      y=dragBase.ty+(e.clientY-dragBase.y);
-      paint();
-    }
-  });
-
-  const release=e=>{
-    points.delete(e.pointerId);
-    if(points.size===1){
-      const p=[...points.values()][0];
-      dragBase={x:p.x,y:p.y,tx:x,ty:y};
-      pinchBase=null;
-    } else if(points.size===0){
-      dragBase=null;pinchBase=null;
-    }
-  };
-  stage.addEventListener('pointerup',release);
-  stage.addEventListener('pointercancel',release);
-
-  // Reset on new media and when the modal closes.
-  img.addEventListener('load',reset);
-  const modal=document.getElementById('product-modal');
-  if(modal)new MutationObserver(()=>{if(!modal.classList.contains('open'))reset()})
-    .observe(modal,{attributes:true,attributeFilter:['class']});
-})();
-
-
-/* Framing correction: zoom from the fitted image, never from a forced stage-sized image. */
-(function(){
- const stage=document.getElementById('modal-stage'),img=document.getElementById('modal-photo');
- if(!stage||!img)return;
- const fitMetrics=()=>{
-   const r=stage.getBoundingClientRect(), nw=img.naturalWidth||1, nh=img.naturalHeight||1;
-   const fit=Math.min(r.width/nw,r.height/nh);
-   return {w:nw*fit,h:nh*fit,r};
- };
- window.__jhalarZoomMetrics=fitMetrics;
-})();
-
-
-/* Final media viewer interaction layer: simple, stable, direct manipulation.
-   This controller intentionally owns only mobile image interaction. */
-(function(){
-  const stage=document.getElementById('modal-stage');
-  const img=document.getElementById('modal-photo');
-  if(!stage||!img)return;
-
-  let pts=new Map(), z=1, tx=0, ty=0, pinch=null, drag=null;
-
-  function base(){
-    const r=stage.getBoundingClientRect();
-    const nw=img.naturalWidth||r.width, nh=img.naturalHeight||r.height;
-    const k=Math.min(r.width/nw,r.height/nh);
-    return {r,w:nw*k,h:nh*k};
-  }
-  function clamp(){
-    const b=base();
-    // Bounds are based on the fitted product image, not the whole modal.
-    const maxX=Math.max(0,(b.w*z-b.r.width)/2);
-    const maxY=Math.max(0,(b.h*z-b.r.height)/2);
-    tx=Math.max(-maxX,Math.min(maxX,tx));
-    ty=Math.max(-maxY,Math.min(maxY,ty));
-  }
-  function draw(){
-    clamp();
-    img.style.transform=`translate3d(${tx}px,${ty}px,0) scale(${z})`;
-    stage.classList.toggle('is-zoomed',z>1.01);
-  }
-  function reset(){z=1;tx=0;ty=0;pinch=null;drag=null;draw()}
-  function two(){
-    const a=[...pts.values()];
-    return {d:Math.hypot(a[0].x-a[1].x,a[0].y-a[1].y),
-      mx:(a[0].x+a[1].x)/2,my:(a[0].y+a[1].y)/2};
-  }
-
-  stage.addEventListener('pointerdown',e=>{
-    if(!matchMedia('(max-width:760px)').matches||stage.classList.contains('is-video'))return;
-    pts.set(e.pointerId,{x:e.clientX,y:e.clientY});
-    stage.setPointerCapture?.(e.pointerId);
-    if(pts.size===1)drag={x:e.clientX,y:e.clientY,tx,ty};
-    if(pts.size===2){
-      const q=two(); pinch={...q,z,tx,ty}; drag=null;
-    }
-  });
-  stage.addEventListener('pointermove',e=>{
-    if(!pts.has(e.pointerId)||stage.classList.contains('is-video'))return;
-    pts.set(e.pointerId,{x:e.clientX,y:e.clientY});
-    if(pts.size===2&&pinch){
-      const q=two(), next=Math.max(1,Math.min(2.5,pinch.z*(q.d/pinch.d)));
-      const rect=stage.getBoundingClientRect();
-      // Stable focal point: content stays under the fingers.
-      const fx=pinch.mx-(rect.left+rect.width/2), fy=pinch.my-(rect.top+rect.height/2);
-      const ratio=next/pinch.z;
-      z=next;
-      tx=pinch.tx*ratio+fx*(1-ratio)+(q.mx-pinch.mx);
-      ty=pinch.ty*ratio+fy*(1-ratio)+(q.my-pinch.my);
-      draw();
-    }else if(pts.size===1&&drag&&z>1.01){
-      tx=drag.tx+(e.clientX-drag.x);
-      ty=drag.ty+(e.clientY-drag.y);
-      draw();
-    }
-  });
-  function up(e){
-    pts.delete(e.pointerId);
-    if(pts.size===1){const p=[...pts.values()][0];drag={x:p.x,y:p.y,tx,ty};pinch=null}
-    if(!pts.size){drag=null;pinch=null}
-  }
-  stage.addEventListener('pointerup',up);
-  stage.addEventListener('pointercancel',up);
-  img.addEventListener('load',reset);
-  window.addEventListener('resize',()=>{if(z>1)draw()});
-})();
-
-
-/* Desktop media interaction: wheel zoom + direct mouse pan inside a padded canvas. */
-(function(){
-  const stage=document.getElementById('modal-stage');
-  const img=document.getElementById('modal-photo');
-  if(!stage||!img)return;
-
-  let zoom=1, x=0, y=0, dragging=false, sx=0, sy=0, bx=0, by=0;
-
-  function limits(){
+  function viewport(){
     const r=stage.getBoundingClientRect();
     const cs=getComputedStyle(stage);
-    const px=parseFloat(cs.paddingLeft)||0, py=parseFloat(cs.paddingTop)||0;
-    const vw=r.width-px*2, vh=r.height-py*2;
-    const nw=img.naturalWidth||vw, nh=img.naturalHeight||vh;
-    const fit=Math.min(vw/nw,vh/nh);
-    const w=nw*fit*zoom,h=nh*fit*zoom;
-    return {mx:Math.max(0,(w-vw)/2),my:Math.max(0,(h-vh)/2)};
+    const l=parseFloat(cs.paddingLeft)||0, rr=parseFloat(cs.paddingRight)||0;
+    const t=parseFloat(cs.paddingTop)||0, b=parseFloat(cs.paddingBottom)||0;
+    return {r,w:r.width-l-rr,h:r.height-t-b};
   }
-  function paint(){
-    const l=limits();
-    x=Math.max(-l.mx,Math.min(l.mx,x));
-    y=Math.max(-l.my,Math.min(l.my,y));
-    img.style.transform='translate3d('+x+'px,'+y+'px,0) scale('+zoom+')';
-    stage.classList.toggle('is-zoomed',zoom>1.01);
+  function fitted(){
+    const v=viewport(), nw=img.naturalWidth||v.w, nh=img.naturalHeight||v.h;
+    const k=Math.min(v.w/nw,v.h/nh);
+    return {w:nw*k,h:nh*k,v};
+  }
+  function clamp(){
+    const f=fitted();
+    const mx=Math.max(0,(f.w*scale-f.v.w)/2);
+    const my=Math.max(0,(f.h*scale-f.v.h)/2);
+    tx=Math.max(-mx,Math.min(mx,tx));
+    ty=Math.max(-my,Math.min(my,ty));
+  }
+  function render(){
+    raf=0; clamp();
+    img.style.transform='translate3d('+tx+'px,'+ty+'px,0) scale('+scale+')';
+    stage.classList.toggle('is-zoomed',scale>1.001);
+  }
+  function draw(){
+    if(!raf) raf=requestAnimationFrame(render);
+  }
+  function reset(){
+    scale=1;tx=0;ty=0;pan=null;pinch=null;draw();
+  }
+  function pair(){
+    const p=[...pointers.values()];
+    return {
+      d:Math.hypot(p[0].x-p[1].x,p[0].y-p[1].y),
+      x:(p[0].x+p[1].x)/2,
+      y:(p[0].y+p[1].y)/2
+    };
+  }
+  function zoomAt(next,cx,cy){
+    const old=scale;
+    next=Math.max(1,Math.min(3,next));
+    const r=stage.getBoundingClientRect();
+    const ox=cx-(r.left+r.width/2), oy=cy-(r.top+r.height/2);
+    const ratio=next/old;
+    // Keep the point under cursor/fingers visually anchored.
+    tx=tx*ratio+ox*(1-ratio);
+    ty=ty*ratio+oy*(1-ratio);
+    scale=next;
+    if(scale===1){tx=0;ty=0}
+    draw();
   }
 
   stage.addEventListener('wheel',e=>{
-    if(matchMedia('(max-width:760px)').matches||stage.classList.contains('is-video'))return;
+    if(stage.classList.contains('is-video'))return;
     e.preventDefault();
-    const old=zoom;
-    zoom=Math.max(1,Math.min(3,zoom*(e.deltaY<0?1.12:1/1.12)));
-    if(zoom===1){x=0;y=0}
-    else{
-      const r=stage.getBoundingClientRect();
-      const fx=e.clientX-(r.left+r.width/2),fy=e.clientY-(r.top+r.height/2);
-      const ratio=zoom/old;
-      x=x*ratio+fx*(1-ratio);
-      y=y*ratio+fy*(1-ratio);
-    }
-    paint();
+    const factor=Math.exp(-e.deltaY*0.0015);
+    zoomAt(scale*factor,e.clientX,e.clientY);
   },{passive:false});
 
+  stage.addEventListener('dblclick',e=>{
+    if(stage.classList.contains('is-video'))return;
+    zoomAt(scale>1.01?1:2,e.clientX,e.clientY);
+  });
+
   stage.addEventListener('pointerdown',e=>{
-    if(matchMedia('(max-width:760px)').matches||zoom<=1.01||stage.classList.contains('is-video'))return;
-    dragging=true;sx=e.clientX;sy=e.clientY;bx=x;by=y;
-    stage.classList.add('is-panning');
+    if(stage.classList.contains('is-video'))return;
+    pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});
     stage.setPointerCapture?.(e.pointerId);
-    e.preventDefault();
+
+    if(pointers.size===1){
+      pan={x:e.clientX,y:e.clientY,tx,ty};
+    }else if(pointers.size===2){
+      const q=pair();
+      pinch={...q,scale,tx,ty};
+      pan=null;
+    }
   });
+
   stage.addEventListener('pointermove',e=>{
-    if(!dragging)return;
-    x=bx+(e.clientX-sx);
-    y=by+(e.clientY-sy);
-    paint();
+    if(!pointers.has(e.pointerId)||stage.classList.contains('is-video'))return;
+    pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});
+
+    if(pointers.size===2&&pinch){
+      const q=pair();
+      const next=Math.max(1,Math.min(3,pinch.scale*(q.d/pinch.d)));
+      const ratio=next/pinch.scale;
+      const r=stage.getBoundingClientRect();
+      const ox=pinch.x-(r.left+r.width/2), oy=pinch.y-(r.top+r.height/2);
+      scale=next;
+      tx=pinch.tx*ratio+ox*(1-ratio)+(q.x-pinch.x);
+      ty=pinch.ty*ratio+oy*(1-ratio)+(q.y-pinch.y);
+      draw();
+    }else if(pointers.size===1&&pan&&scale>1.001){
+      tx=pan.tx+(e.clientX-pan.x);
+      ty=pan.ty+(e.clientY-pan.y);
+      draw();
+    }
   });
-  const stop=e=>{dragging=false;stage.classList.remove('is-panning');};
-  stage.addEventListener('pointerup',stop);
-  stage.addEventListener('pointercancel',stop);
-  stage.addEventListener('lostpointercapture',stop);
-})();
 
+  function release(e){
+    pointers.delete(e.pointerId);
+    if(pointers.size===1){
+      const p=[...pointers.values()][0];
+      pan={x:p.x,y:p.y,tx,ty}; pinch=null;
+    }else if(!pointers.size){pan=null;pinch=null}
+  }
+  stage.addEventListener('pointerup',release);
+  stage.addEventListener('pointercancel',release);
+  stage.addEventListener('lostpointercapture',release);
 
-/* Popup zoom bounds corrected to the padded safe viewport.
-   Translation is constrained against the inner canvas, leaving the gutter visible. */
-(function(){
- const stage=document.getElementById('modal-stage'),img=document.getElementById('modal-photo');
- if(!stage||!img)return;
-
- function innerViewport(){
-   const r=stage.getBoundingClientRect(),cs=getComputedStyle(stage);
-   const l=parseFloat(cs.paddingLeft)||0,t=parseFloat(cs.paddingTop)||0;
-   return {w:r.width-l*2,h:r.height-t*2};
- }
- /* Expose one consistent viewport metric for all viewer controllers. */
- window.__productMediaViewport=innerViewport;
+  img.addEventListener('load',reset);
+  window.addEventListener('resize',()=>draw());
 })();
