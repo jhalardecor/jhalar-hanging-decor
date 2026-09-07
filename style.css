@@ -769,3 +769,15 @@ h1,h2,h3,h4,h5,h6{font-family:var(--font-heading);color:var(--navy);font-synthes
  .footer{padding-block:34px}.footer-row{display:flex;flex-direction:column;align-items:flex-start;gap:16px}.footer-brand img{max-width:112px}
 }
 @media(max-width:390px){:root{--mobile-x:16px}.product-grid{gap:18px 10px}.hero-banner-copy h1{font-size:2.55rem}}
+
+
+/* Modal media — preserve the complete product, never crop catalogue imagery */
+.modal-media{background:var(--surface)!important}
+.modal-stage{background:#FFFDF8!important}
+.modal-stage img,.modal-stage video{object-fit:contain!important;object-position:center center!important;max-width:100%;max-height:100%}
+@media(max-width:760px){
+ .modal-card{grid-template-rows:auto auto!important;height:100svh}
+ .modal-media{height:min(62svh,640px);min-height:min(62svh,640px)!important;display:flex}
+ .modal-stage{width:100%;height:100%;min-height:0!important}
+ .modal-stage img,.modal-stage video{width:100%!important;height:100%!important;object-fit:contain!important}
+}
