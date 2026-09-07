@@ -1744,3 +1744,49 @@ p,.section-head>p,.hero-banner-copy>p:not(.kicker){letter-spacing:.006em}
   .hero-banner-bottom{font-size:.57rem!important;letter-spacing:.035em!important}
   .hero-banner-bottom span+span:before{margin-inline:6px!important}
 }
+
+
+/* HERO TYPE RESET — final mobile hierarchy without conflicting composition rules */
+@media(max-width:760px){
+  .hero-banner-content{
+    display:flex!important;
+    flex-direction:column!important;
+    justify-content:flex-end!important;
+    align-items:flex-start!important;
+    padding:96px 24px 28px!important;
+  }
+  .hero-banner-copy{
+    width:100%!important;
+    max-width:32rem!important;
+    margin:0!important;
+  }
+  .hero-banner .kicker{
+    margin:0 0 10px!important;
+    font-size:.64rem!important;
+    line-height:1.4!important;
+    letter-spacing:.1em!important;
+  }
+  .hero-banner h1{
+    max-width:11ch!important;
+    margin:0 0 14px!important;
+    font-size:clamp(2.65rem,10.5vw,3.7rem)!important;
+    line-height:1.04!important;
+    letter-spacing:-.025em!important;
+  }
+  .hero-banner-copy>p:not(.kicker){
+    max-width:32ch!important;
+    margin:0 0 20px!important;
+    font-size:.98rem!important;
+    line-height:1.6!important;
+  }
+  .hero-banner-cta{margin:0!important}
+  .hero-banner-bottom{
+    width:100%!important;
+    margin-top:28px!important;
+    align-self:stretch!important;
+  }
+}
+@media(max-width:390px){
+  .hero-banner-content{padding-inline:20px!important}
+  .hero-banner h1{font-size:clamp(2.4rem,10.3vw,3.15rem)!important}
+}
