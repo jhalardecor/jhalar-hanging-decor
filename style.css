@@ -927,3 +927,39 @@ img,video,svg{max-width:100%}
     )!important;
   }
 }
+
+
+/* 33. MOBILE NAV TOGGLE — TWO EQUAL LINES, PREMIUM LOTTIE-LIKE MOTION */
+@media(max-width:760px){
+  .header .menu{
+    display:grid!important;
+    place-items:center!important;
+    width:48px!important;
+    height:48px!important;
+    padding:0!important;
+    margin-right:-8px!important;
+    background:transparent!important;
+    border:0!important;
+    overflow:visible!important;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .header .menu span{
+    grid-area:1/1!important;
+    display:block!important;
+    width:24px!important;
+    height:2px!important;
+    margin:0!important;
+    background:#141942!important;
+    border-radius:999px!important;
+    transform-origin:center!important;
+    will-change:transform,opacity!important;
+    transition:
+      transform .42s cubic-bezier(.34,1.56,.64,1),
+      opacity .22s ease!important;
+  }
+  .header .menu span:nth-child(1){transform:translateY(-5px)!important}
+  .header .menu span:nth-child(2){transform:translateY(5px)!important}
+  .header .menu.open span:nth-child(1){transform:translateY(0) rotate(45deg)!important}
+  .header .menu.open span:nth-child(2){transform:translateY(0) rotate(-45deg)!important}
+  .header .menu:active{transform:scale(.90)!important}
+}
