@@ -553,3 +553,16 @@ initProducts();initRuntime();
   if(modal)new MutationObserver(()=>{if(!modal.classList.contains('open'))reset()})
     .observe(modal,{attributes:true,attributeFilter:['class']});
 })();
+
+
+/* Framing correction: zoom from the fitted image, never from a forced stage-sized image. */
+(function(){
+ const stage=document.getElementById('modal-stage'),img=document.getElementById('modal-photo');
+ if(!stage||!img)return;
+ const fitMetrics=()=>{
+   const r=stage.getBoundingClientRect(), nw=img.naturalWidth||1, nh=img.naturalHeight||1;
+   const fit=Math.min(r.width/nw,r.height/nh);
+   return {w:nw*fit,h:nh*fit,r};
+ };
+ window.__jhalarZoomMetrics=fitMetrics;
+})();
