@@ -55,14 +55,6 @@
     }
   ],
   "socialLinks": {
-    "instagram": {
-      "url": "#",
-      "label": "Instagram"
-    },
-    "facebook": {
-      "url": "#",
-      "label": "Facebook"
-    },
     "whatsapp": {
       "url": "https://wa.me/918100656258",
       "label": "WhatsApp"
@@ -102,7 +94,7 @@
       "href": "#collection"
     },
     "heroSecondary": {
-      "label": "Enquire on WhatsApp",
+      "label": "WhatsApp enquiry",
       "href": "https://wa.me/918100656258"
     },
     "collection": {
