@@ -2228,3 +2228,33 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
     padding-inline:0!important;
   }
 }
+
+
+/* HERO COLOR CORRECTION — original light JHALAR treatment */
+.hero-banner .hero-banner-shade{
+  background:linear-gradient(90deg,
+    rgba(255,250,241,.96) 0%,
+    rgba(255,250,241,.88) 38%,
+    rgba(255,250,241,.58) 62%,
+    rgba(255,250,241,.14) 82%,
+    rgba(255,250,241,0) 100%)!important;
+}
+.hero-banner .kicker,
+.hero-banner h1,
+.hero-banner-copy>p:not(.kicker),
+.hero-banner-copy>.hero-lead{
+  color:#622331!important;
+}
+@media(max-width:760px){
+  .hero-banner .hero-banner-shade{
+    background:linear-gradient(180deg,
+      rgba(255,250,241,.12) 0%,
+      rgba(255,250,241,.34) 38%,
+      rgba(255,250,241,.78) 68%,
+      rgba(255,250,241,.97) 100%)!important;
+  }
+  .hero-banner .kicker,
+  .hero-banner h1,
+  .hero-banner-copy>p:not(.kicker),
+  .hero-banner-copy>.hero-lead{color:#622331!important}
+}
