@@ -1210,8 +1210,11 @@ function restoreHistory() {
 
 // ===== SELECTED-ITEM INSPECTOR: STABLE VERSION =====
 function setupInspector(){
-  const ids=['ins-bg','ins-opacity','ins-color','ins-radius','ins-align','ins-width','ins-maxwidth','ins-padding','ins-gap','ins-fontsize','ins-weight','ins-leading','ins-tracking','ins-transform','ins-fit','ins-position'];
+  const ids=['ins-bg','ins-opacity','ins-color','ins-radius','ins-width','ins-maxwidth','ins-display','ins-padding','ins-margin','ins-gap','ins-fontsize','ins-weight','ins-leading','ins-tracking','ins-transform','ins-fit','ins-position'];
   ids.forEach(id=>{const el=document.getElementById(id);if(el)el.addEventListener('input',previewInspectorChange)});
+  document.querySelectorAll('[data-align]').forEach(b=>b.addEventListener('click',()=>applyInspectorAlignment(b.dataset.align)));
+  document.querySelectorAll('[data-container-align]').forEach(b=>b.addEventListener('click',()=>applyInspectorContainerAlignment(b.dataset.containerAlign)));
+  document.querySelectorAll('[data-direction]').forEach(b=>b.addEventListener('click',()=>applyInspectorDirection(b.dataset.direction)));
   document.getElementById('preview-frame')?.addEventListener('load',()=>setTimeout(bindPreviewInspector,100));
 }
 function bindPreviewInspector(){
@@ -1229,6 +1232,10 @@ function bindPreviewInspector(){
   doc.addEventListener('click',handler,true);
   doc.__jhalarInspectorHandler=handler;
 }
+function setInspectorActive(group,attr,value){document.querySelectorAll(group+' ['+attr+']').forEach(b=>b.classList.toggle('active',b.dataset[attr]===value))}
+function applyInspectorAlignment(value){const el=state.selectedPreview;if(!el)return;el.style.textAlign=value;setInspectorActive('#ins-text-align','align',value)}
+function applyInspectorContainerAlignment(value){const el=state.selectedPreview;if(!el)return;if(!['flex','grid'].includes(getComputedStyle(el).display))el.style.display='flex';el.style.justifyContent=value==='start'?'flex-start':value==='end'?'flex-end':value==='stretch'?'stretch':'center';setInspectorActive('#ins-container-align','containerAlign',value)}
+function applyInspectorDirection(value){const el=state.selectedPreview;if(!el)return;el.style.display='flex';el.style.flexDirection=value;setInspectorActive('#ins-direction','direction',value)}
 function inspectorSelector(el){
   if(el.id)return '#'+CSS.escape(el.id);
   if(el.dataset?.section)return '[data-section="'+el.dataset.section+'"]';
@@ -1256,16 +1263,19 @@ function rgbToHex(v){if(!v||v==='transparent'||v==='rgba(0, 0, 0, 0)')return '#f
 function syncInspectorFromElement(el){
  const cs=el.ownerDocument.defaultView.getComputedStyle(el),set=(id,v)=>{const x=document.getElementById(id);if(x)x.value=v};
  set('ins-bg',rgbToHex(cs.backgroundColor));set('ins-color',rgbToHex(cs.color));set('ins-opacity',cs.opacity||'1');set('ins-radius',parseFloat(cs.borderRadius)||0);
- ['width','maxWidth','padding','gap','fontSize','fontWeight','lineHeight','letterSpacing','textTransform','objectFit','objectPosition'].forEach(k=>set('ins-'+({maxWidth:'maxwidth',fontSize:'fontsize',fontWeight:'weight',lineHeight:'leading',letterSpacing:'tracking',textTransform:'transform',objectFit:'fit',objectPosition:'position'}[k]||k),el.style[k]||''));
+ ['width','maxWidth','display','padding','margin','gap','fontSize','fontWeight','lineHeight','letterSpacing','textTransform','objectFit','objectPosition'].forEach(k=>set('ins-'+({maxWidth:'maxwidth',fontSize:'fontsize',fontWeight:'weight',lineHeight:'leading',letterSpacing:'tracking',textTransform:'transform',objectFit:'fit',objectPosition:'position'}[k]||k),el.style[k]||''));
  document.getElementById('ins-opacity-value').textContent=Math.round((parseFloat(cs.opacity)||1)*100)+'%';
  document.getElementById('ins-radius-value').textContent=(parseFloat(cs.borderRadius)||0)+'px';
+ setInspectorActive('#ins-text-align','align',cs.textAlign);
+ const jc=cs.justifyContent;setInspectorActive('#ins-container-align','containerAlign',jc==='flex-start'?'start':jc==='flex-end'?'end':jc==='stretch'?'stretch':'center');
+ setInspectorActive('#ins-direction','direction',cs.flexDirection);
 }
 function previewInspectorChange(){
  const el=state.selectedPreview;if(!el)return;
  const v=id=>document.getElementById(id)?.value??'';
  const set=(k,x)=>{if(x!==''&&x!==null)el.style[k]=x};
  set('backgroundColor',v('ins-bg'));set('opacity',v('ins-opacity'));set('color',v('ins-color'));set('borderRadius',v('ins-radius')+'px');
- [['width','ins-width'],['maxWidth','ins-maxwidth'],['padding','ins-padding'],['gap','ins-gap'],['fontSize','ins-fontsize'],['fontWeight','ins-weight'],['lineHeight','ins-leading'],['letterSpacing','ins-tracking'],['textTransform','ins-transform'],['objectFit','ins-fit'],['objectPosition','ins-position']].forEach(([k,id])=>set(k,v(id)));
+ [['width','ins-width'],['maxWidth','ins-maxwidth'],['display','ins-display'],['padding','ins-padding'],['margin','ins-margin'],['gap','ins-gap'],['fontSize','ins-fontsize'],['fontWeight','ins-weight'],['lineHeight','ins-leading'],['letterSpacing','ins-tracking'],['textTransform','ins-transform'],['objectFit','ins-fit'],['objectPosition','ins-position']].forEach(([k,id])=>set(k,v(id)));
  const align=v('ins-align');if(align){el.style.textAlign=align}
  document.getElementById('ins-opacity-value').textContent=Math.round((parseFloat(v('ins-opacity'))||1)*100)+'%';
  document.getElementById('ins-radius-value').textContent=v('ins-radius')+'px';
