@@ -392,34 +392,43 @@ initProducts();initRuntime();
 /* build 20260907.16 */
 
 
-/* Header direction behavior + reliable logo navigation */
+/* Header controller — hide only during active downward scrolling, always return when interaction stops */
 (function(){
   const header=document.querySelector('.header');
   const mobileNav=document.getElementById('mobile-nav');
   const menu=document.getElementById('menu');
   if(header){
-    let lastY=window.scrollY;
-    let stopTimer=null;
-    const showHeader=()=>header.classList.remove('header-hidden');
+    let lastY=Math.max(0,window.scrollY);
+    let idleTimer=0;
+    const reveal=()=>{
+      header.classList.remove('header-hidden');
+      clearTimeout(idleTimer);
+    };
+    const armIdleReveal=()=>{
+      clearTimeout(idleTimer);
+      idleTimer=window.setTimeout(reveal,160);
+    };
     const onScroll=()=>{
       const y=Math.max(0,window.scrollY);
       const delta=y-lastY;
       header.classList.toggle('scrolled',y>8);
-      if(y<80 || delta<-2){
-        showHeader();
-      }else if(delta>4 && y>120 && !(mobileNav&&mobileNav.classList.contains('open'))){
+
+      if(y<=80 || delta<0){
+        reveal();
+      }else if(delta>3 && y>120 && !(mobileNav&&mobileNav.classList.contains('open'))){
         header.classList.add('header-hidden');
       }
+
       lastY=y;
-      clearTimeout(stopTimer);
-      stopTimer=setTimeout(showHeader,140);
+      armIdleReveal();
     };
+
     window.addEventListener('scroll',onScroll,{passive:true});
-    window.addEventListener('scrollend',showHeader,{passive:true});
-    window.addEventListener('touchend',()=>{
-      clearTimeout(stopTimer);
-      stopTimer=setTimeout(showHeader,60);
-    },{passive:true});
+    window.addEventListener('scrollend',reveal,{passive:true});
+    window.addEventListener('touchend',armIdleReveal,{passive:true});
+    window.addEventListener('pointerup',armIdleReveal,{passive:true});
+    window.addEventListener('focus',reveal);
+    document.addEventListener('visibilitychange',()=>{if(!document.hidden)reveal()});
     onScroll();
   }
 
