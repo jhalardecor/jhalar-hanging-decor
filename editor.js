@@ -170,16 +170,14 @@ function setupKeyboardShortcuts() {
 // ===== LOAD DATA =====
 async function loadPublishedData() {
   try {
-    const ds = localStorage.getItem('jhalar_editor_settings');
-    const dt = localStorage.getItem('jhalar_editor_theme');
-    const dp = localStorage.getItem('jhalar_editor_products');
-    const dsec = localStorage.getItem('jhalar_editor_sections');
-    const dcss = localStorage.getItem('jhalar_editor_customcss');
+    // Fresh published state is the source of truth on every editor open.
+    // Draft storage is retained only for explicit in-session recovery, never silently loaded as published data.
+    const ds = null, dt = null, dp = null, dsec = null, dcss = null;
 
     const [sr,tr,pr,secr,ccr,nr] = await Promise.all([
-      fetch('content/site-settings.json'), fetch('content/theme.json'),
-      fetch('content/products.json'), fetch('content/sections.json'),
-      fetch('content/custom-css.json'), fetch('content/product-naming.json', { cache: 'no-store' })
+      fetch('content/site-settings.json?_build='+Date.now(), {cache:'no-store'}), fetch('content/theme.json?_build='+Date.now(), {cache:'no-store'}),
+      fetch('content/products.json?_build='+Date.now(), {cache:'no-store'}), fetch('content/sections.json?_build='+Date.now(), {cache:'no-store'}),
+      fetch('content/custom-css.json?_build='+Date.now(), {cache:'no-store'}), fetch('content/product-naming.json?_build='+Date.now(), {cache:'no-store'})
     ]);
 
     const ps = sr.ok ? await sr.json() : {};
@@ -1360,7 +1358,7 @@ function previewChanges() {
   const ld = document.getElementById('preview-loading');
   if (ld) ld.style.display = 'block';
   collectAllData();
-  frame.src = 'index.html?_t='+Date.now();
+  frame.src = 'index.html?_build='+Date.now();
   frame.addEventListener('load', () => { if (ld) ld.style.display = 'none'; previewRetry = 0; setTimeout(schedulePreview, 200); }, { once: true });
   showToast('Preview refreshed','success');
 }
