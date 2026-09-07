@@ -2536,3 +2536,17 @@ button:not(.filter-btn),
   #product-modal .modal-stage{width:100%!important;height:100%!important;min-height:0!important;padding:8px!important;display:flex!important;align-items:center!important;justify-content:center!important;overflow:hidden!important;background:#FFFDF8!important;touch-action:pinch-zoom!important}
   #product-modal #modal-photo{display:block!important;width:auto!important;height:auto!important;max-width:100%!important;max-height:100%!important;object-fit:contain!important}
 }
+
+
+/* PRODUCT MEDIA — all catalogue assets are 1:1; preserve the original square ratio */
+.product-image{aspect-ratio:1 / 1!important;height:auto!important;background:#FFFDF8!important}
+.product-image img,.product-image .alt-img{width:100%!important;height:100%!important;aspect-ratio:1 / 1!important;object-fit:contain!important;object-position:center!important}
+.modal-media{aspect-ratio:1 / 1!important;height:auto!important;max-height:none!important;background:#FFFDF8!important}
+.modal-stage{aspect-ratio:1 / 1!important}
+.modal-stage img,#modal-photo{width:100%!important;height:100%!important;aspect-ratio:1 / 1!important;object-fit:contain!important;object-position:center!important}
+@media(max-width:760px){
+  .product-image{aspect-ratio:1 / 1!important;height:auto!important}
+  #product-modal .modal-media{width:100%!important;height:auto!important;aspect-ratio:1 / 1!important;max-height:52dvh!important;flex:0 0 auto!important}
+  #product-modal .modal-stage{width:100%!important;height:100%!important;aspect-ratio:1 / 1!important;padding:0!important}
+  #product-modal #modal-photo{width:100%!important;height:100%!important;object-fit:contain!important}
+}
