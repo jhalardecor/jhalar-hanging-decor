@@ -35,6 +35,9 @@
   for GitHub Pages subpath hosting and the preview environment.
 - Copy/contact: `content/site-settings.json`. Visual rules: `content/theme.json`
   and `style.css`. Catalogue: `content/products.json`.
+- New or rewritten copy must pass [the AI writing-pattern blacklist](docs/AI-WRITING-BLACKLIST.md):
+  no banned words, patterns, structures or punctuation habits. Approved product
+  descriptions and official names are records, not copy — never silently rewrite them.
 - Products retain original uploads in `sourceImage` and use WebP display copies
   in `image`. Update the image manifest and approval binding when reviewing a new
   product image; preserve originals unless explicitly asked otherwise.

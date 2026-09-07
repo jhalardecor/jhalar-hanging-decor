@@ -17,6 +17,7 @@ When asked how to handle `Products_0027`, the owner chose **“Keep it separate�
 - “dark pink” and “green red & White” retain the original label spelling. No silent colour-name cleanup is performed.
 - Descriptions describe visible arrangement, colour and finish only. Material composition, dimensions, weight, sound, durability, stock and pack quantities are not certified.
 - The original JPEGs are retained. WebP display derivatives are generated for the website without changing the original product filenames.
+- 7 September 2026 (late): an optional `gallery` array was added to product records for listing-style popups (extra photos per product; first extra photo also swaps in on card hover). Gate rule: every entry must be a local image path under `assets/images/`; anything else is rejected. All 35 approved bindings, names and images are unchanged. Video support is not yet implemented.
 
 ## Catalogue mapping
 

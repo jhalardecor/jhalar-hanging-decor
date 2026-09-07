@@ -4,4 +4,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://lokeshdugar040.github.io/jhalar-hanging-decor/sitemap.xml
+Sitemap: https://jhalardecor.github.io/jhalar-hanging-decor/sitemap.xml

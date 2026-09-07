@@ -1,20 +1,16 @@
 {
   "sections": {
     "hero": { "visible": true, "label": "Hero" },
-    "trustStrip": { "visible": true, "label": "Trust Strip (optional, hidden while empty)" },
     "collection": { "visible": true, "label": "Catalogue (Products)" },
-    "customOrders": { "visible": true, "label": "Custom Enquiries" },
-    "about": { "visible": true, "label": "About" },
-    "faq": { "visible": true, "label": "FAQ" },
+    "customOrders": { "visible": true, "label": "Custom Work" },
+    "about": { "visible": true, "label": "Our Story" },
     "contact": { "visible": true, "label": "Contact" }
   },
   "order": [
     "hero",
-    "trustStrip",
     "collection",
     "customOrders",
     "about",
-    "faq",
     "contact"
   ]
 }

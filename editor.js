@@ -1,7 +1,7 @@
 // ============================================
 // JHALAR Pro Editor
 // ============================================
-const GITHUB_OWNER = 'lokeshdugar040', GITHUB_REPO = 'jhalar-hanging-decor', GITHUB_BRANCH = 'main';
+const GITHUB_OWNER = 'jhalardecor', GITHUB_REPO = 'jhalar-hanging-decor', GITHUB_BRANCH = 'main';
 const FILES_TO_PUBLISH = ['content/site-settings.json','content/theme.json','content/products.json','content/sections.json','content/custom-css.json'];
 
 let state = {
@@ -9,21 +9,21 @@ let state = {
   customCSS: '', navItems: [], footerNavItems: [], socialLinks: {},
   imageManifest: [], fontManifest: [], selectedProductId: null, viewport: 'desktop',
   changed: false, githubToken: null, darkMode: false,
-  heroHighlights: [], trustItems: [], faqItems: [], sectionCopy: {}, imagePickTarget: null
+  heroHighlights: [], trustItems: [], faqItems: [], sectionCopy: {}, imagePickTarget: null, zoom: 1
 };
 
 function defaultSectionCopy() {
   return {
-    heroPrimary: {label:'View catalogue', href:'#collection'},
-    heroSecondary: {label:'Enquire on WhatsApp', href:'https://wa.me/918100656258'},
+    heroPrimary: {label:'View the collection', href:'#collection'},
+    heroSecondary: {label:'', href:''},
     collection: {
-      label:'Catalogue', title:'Browse the Collection',
-      intro:'Thirty-five designs and colour variants across pom pom, bead, bell and floral hangings and decorative strings.',
-      note:'Looking for something else? '
+      label:'BROWSE DESIGNS', title:'Find what fits the occasion.',
+      intro:'Compare colour, form and texture before you enquire.',
+      note:''
     },
     customOrders: {
-      label:'Custom Enquiries', title:'Made to Your Own Design',
-      intro:'Any design in the catalogue can be remade in your colours and sizes — or send a reference of your own.',
+      label:'CUSTOM WORK', title:'Start with your colour story.',
+      intro:'Bring a theme, palette or reference. We will discuss colour, size, quantity and timing for your setup.',
       image:'assets/images/custom-orders.jpg',
       chips:[
         {icon:'icon-palette', text:'Colour matching'},
@@ -38,8 +38,8 @@ function defaultSectionCopy() {
       ]
     },
     about: {
-      label:'About', title:'About JHALAR',
-      intro:'JHALAR is a small maker of jhalars and hanging decor based in Howrah, West Bengal. Every design in this catalogue is handmade in our own workshop, and each enquiry is answered directly over WhatsApp or phone.',
+      label:'JHALAR', title:'Made by hand. Chosen for the moment.',
+      intro:'We make hanging decor for the people who put celebrations together: decorators, planners, retailers and families.',
       image:'assets/images/about-collage.jpg',
       values:[
         {icon:'icon-check', text:'Finished by hand, piece by piece'},
@@ -49,11 +49,11 @@ function defaultSectionCopy() {
     },
     faq: {label:'FAQ', title:'Frequently Asked Questions'},
     contact: {
-      label:'Contact', title:'Send an Enquiry',
-      intro:'Tell us what you need — a catalogue reference, quantities and your date. The clearer the brief, the faster the answer.',
-      submitLabel:'Review and Send on WhatsApp'
+      label:'READY WHEN YOU ARE', title:'Tell us what you are creating.',
+      intro:'Send the design, quantity, location and date. We will take it from there.',
+      submitLabel:'Start an enquiry'
     },
-    footerTagline:'Jhalars and hanging decor for weddings and events. Browse the catalogue and enquire on WhatsApp.'
+    footerTagline:'Handcrafted hanging decor · Howrah, India'
   };
 }
 
@@ -70,15 +70,15 @@ function deepMerge(base, over) {
 function defaultThemeTemplate() {
   return {
     colors: {
-      '--brand-primary':'#C82039','--brand-primary-dark':'#A3182E','--brand-primary-light':'#E8485F',
-      '--brand-accent':'#C9A84C','--brand-navy':'#141942','--brand-cream':'#FFFAF1',
-      '--brand-background':'#FFFFFF','--brand-alt-background':'#F9F7F4','--brand-text':'#4A4752',
-      '--brand-muted':'#6B6874','--brand-heading':'#1F1D24','--brand-border':'#F0EFEB',
-      '--brand-header-background':'#FFFFFF','--brand-footer-background':'#141942','--brand-footer-text':'#FFFFFF'
+      '--brand-primary':'#6B2136','--brand-primary-dark':'#42101F','--brand-primary-light':'#C8909A',
+      '--brand-accent':'#B48A52','--brand-navy':'#2F1E25','--brand-cream':'#F4EEE4',
+      '--brand-background':'#FCFAF5','--brand-alt-background':'#ECE1D1','--brand-text':'#2F1E25',
+      '--brand-muted':'#7D6C72','--brand-heading':'#2F1E25','--brand-border':'#E6DACB',
+      '--brand-header-background':'#FCFAF5','--brand-footer-background':'#2C1220','--brand-footer-text':'#FCFAF5'
     },
     fonts: {
-      heading:"'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
-      body:"'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif"
+      heading:"Mogranx, Arial, sans-serif",
+      body:"Mogranx, Arial, sans-serif"
     },
     layout: {
       baseFontSize:'16px', sectionY:'96px', cardRadius:'20px', containerWidth:'1140px',
@@ -104,6 +104,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   await loadPublishedData(); await loadImageManifest(); await loadFontManifest();
   populateFontOptions(); populateAllForms(); renderSectionList(); renderProductList(); renderMediaGrid();
   applyPreview(); updatePreviewUrl(); pushHistory();
+  window.addEventListener('load', applyZoom);
+  window.addEventListener('resize', () => { clearTimeout(window.__zr); window.__zr = setTimeout(applyZoom, 150); });
 });
 
 // ===== TABS =====
@@ -125,9 +127,21 @@ function setViewport(m) {
   state.viewport = m;
   document.querySelectorAll('.vp-btn').forEach(b => b.classList.toggle('active', b.dataset.vp === m));
   const f = document.getElementById('preview-frame');
-  f.className = m === 'tablet' ? 'mobile' : m;
-  if (m === 'tablet') { f.style.width = '768px'; f.style.height = '1024px'; }
-  else { f.style.width = ''; f.style.height = ''; }
+  f.className = m;
+  f.style.width = ''; f.style.height = ''; f.style.transform = '';
+  const box = document.getElementById('zoom-box');
+  if (box) { box.style.width = ''; box.style.height = ''; }
+  applyZoom();
+}
+function setZoom(z) { state.zoom = z; applyZoom(); }
+function applyZoom() {
+  const f = document.getElementById('preview-frame'); const box = document.getElementById('zoom-box');
+  if (!f || !box) return;
+  const z = state.zoom || 1;
+  const w = f.offsetWidth, h = f.offsetHeight;
+  box.style.width = (w * z) + 'px';
+  box.style.height = (h * z) + 'px';
+  if (z !== 1) { f.style.transform = 'scale(' + z + ')'; } else { f.style.transform = ''; }
 }
 
 // ===== DARK MODE =====
@@ -292,8 +306,8 @@ function populateAllForms() {
   setVal('ed-gst', state.settings.gst||'');
   setVal('ed-hero-headline', state.settings.heroHeadline||'');
   setVal('ed-hero-intro', state.settings.heroIntro||'');
-  setVal('ed-hero-image', state.settings.heroImage||'assets/images/hero-jhalar.jpg');
-  updateHeroImagePreview(state.settings.heroImage||'assets/images/hero-jhalar.jpg');
+  setVal('ed-hero-image', state.settings.heroImage||'assets/images/hero-jhalar.webp');
+  updateHeroImagePreview(state.settings.heroImage||'assets/images/hero-jhalar.webp');
   const sc = state.sectionCopy || defaultSectionCopy();
   state.sectionCopy = deepMerge(defaultSectionCopy(), sc);
   setVal('ed-hero-primary-label', state.sectionCopy?.heroPrimary?.label||'');
@@ -308,11 +322,13 @@ function populateAllForms() {
   setVal('ed-custom-title', state.sectionCopy?.customOrders?.title||'');
   setVal('ed-custom-intro', state.sectionCopy?.customOrders?.intro||'');
   setVal('ed-custom-image', state.sectionCopy?.customOrders?.image||'assets/images/custom-orders.jpg');
+  updateSectionImagePreview('custom', state.sectionCopy?.customOrders?.image||'assets/images/custom-orders.jpg');
   setVal('ed-process-label', state.sectionCopy?.customOrders?.processLabel||'');
   setVal('ed-about-label', state.sectionCopy?.about?.label||'');
   setVal('ed-about-title', state.sectionCopy?.about?.title||'');
   setVal('ed-about-intro', state.sectionCopy?.about?.intro||'');
   setVal('ed-about-image', state.sectionCopy?.about?.image||'assets/images/about-collage.jpg');
+  updateSectionImagePreview('about', state.sectionCopy?.about?.image||'assets/images/about-collage.jpg');
   setVal('ed-faq-label', state.sectionCopy?.faq?.label||'');
   setVal('ed-faq-title', state.sectionCopy?.faq?.title||'');
   setVal('ed-contact-label', state.sectionCopy?.contact?.label||'');
@@ -343,25 +359,25 @@ function populateAllForms() {
   if (state.theme) {
     if (state.theme.colors) {
       const c = state.theme.colors;
-      setVal('ed-color-red', c['--brand-primary']||'#C82039');
-      setVal('ed-color-red-dark', c['--brand-primary-dark']||'#A3182E');
-      setVal('ed-color-red-light', c['--brand-primary-light']||'#E8485F');
-      setVal('ed-color-gold', c['--brand-accent']||'#C9A84C');
-      setVal('ed-color-navy', c['--brand-navy']||'#141942');
-      setVal('ed-color-cream', c['--brand-cream']||'#FFFAF1');
-      setVal('ed-color-bg', c['--brand-background']||'#FFFFFF');
-      setVal('ed-color-alt', c['--brand-alt-background']||'#F9F7F4');
-      setVal('ed-color-text', c['--brand-text']||'#4A4752');
-      setVal('ed-color-muted', c['--brand-muted']||'#6B6874');
-      setVal('ed-color-heading', c['--brand-heading']||'#1F1D24');
-      setVal('ed-color-border', c['--brand-border']||'#F0EFEB');
-      setVal('ed-color-header', c['--brand-header-background']||'#FFFFFF');
-      setVal('ed-color-footer-bg', c['--brand-footer-background']||'#141942');
-      setVal('ed-color-footer-text', c['--brand-footer-text']||'#FFFFFF');
+      setVal('ed-color-red', c['--brand-primary']||'#6B2136');
+      setVal('ed-color-red-dark', c['--brand-primary-dark']||'#42101F');
+      setVal('ed-color-red-light', c['--brand-primary-light']||'#C8909A');
+      setVal('ed-color-gold', c['--brand-accent']||'#B48A52');
+      setVal('ed-color-navy', c['--brand-navy']||'#2F1E25');
+      setVal('ed-color-cream', c['--brand-cream']||'#F4EEE4');
+      setVal('ed-color-bg', c['--brand-background']||'#FCFAF5');
+      setVal('ed-color-alt', c['--brand-alt-background']||'#ECE1D1');
+      setVal('ed-color-text', c['--brand-text']||'#2F1E25');
+      setVal('ed-color-muted', c['--brand-muted']||'#7D6C72');
+      setVal('ed-color-heading', c['--brand-heading']||'#2F1E25');
+      setVal('ed-color-border', c['--brand-border']||'#E6DACB');
+      setVal('ed-color-header', c['--brand-header-background']||'#FCFAF5');
+      setVal('ed-color-footer-bg', c['--brand-footer-background']||'#2C1220');
+      setVal('ed-color-footer-text', c['--brand-footer-text']||'#FCFAF5');
     }
     if (state.theme.fonts) {
-      setVal('ed-font-heading', state.theme.fonts.heading||"'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif");
-      setVal('ed-font-body', state.theme.fonts.body||"'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif");
+      setVal('ed-font-heading', state.theme.fonts.heading||'Mogranx, Arial, sans-serif');
+      setVal('ed-font-body', state.theme.fonts.body||'Mogranx, Arial, sans-serif');
     }
     const l = state.theme.layout || {};
     setVal('ed-layout-header-h', parseInt(l.headerHeight||'72px',10)||72);
@@ -682,6 +698,7 @@ function selectProduct(id) {
   setVal('ed-prod-category', p.category||'');
   setVal('ed-prod-description', p.description||'');
   setVal('ed-prod-image', p.image||'assets/images/og-cover.jpg');
+  renderProdGallery();
   ['ed-prod-title','ed-prod-category','ed-prod-description','ed-prod-image'].forEach(fid => {
     const el = document.getElementById(fid);
     if (el) { el.removeEventListener('input', onProductChange); el.removeEventListener('change', onProductChange); el.addEventListener('input', onProductChange); el.addEventListener('change', onProductChange); }
@@ -693,9 +710,39 @@ function onProductChange() {
   p.description = getVal('ed-prod-description'); p.image = getVal('ed-prod-image');
   renderProductList(); markChanged(); saveDrafts(); applyPreview();
 }
+function renderProdGallery() {
+  const c = document.getElementById('prod-gallery'); if (!c) return;
+  const p = state.products.find(x => x.id === state.selectedProductId);
+  if (!p) { c.innerHTML = '<p class="gal-empty">Select a product first.</p>'; return; }
+  if (!Array.isArray(p.gallery)) p.gallery = [];
+  if (!p.gallery.length) { c.innerHTML = '<p class="gal-empty">No gallery images yet — add a few so the popup shows a full set of photos.</p>'; return; }
+  c.innerHTML = p.gallery.map((g, i) =>
+    '<div class="gal-item"><img src="' + escapeHtml(g) + '" alt="" loading="lazy">' +
+    (i === 0 ? '<span class="gal-main">2nd on card</span>' : '') +
+    '<button class="gal-del" title="Remove" onclick="removeGalleryImage(' + i + ')"><i class="fas fa-times"></i></button></div>'
+  ).join('');
+}
+function removeGalleryImage(i) {
+  const p = state.products.find(x => x.id === state.selectedProductId); if (!p) return;
+  if (!Array.isArray(p.gallery)) p.gallery = [];
+  p.gallery.splice(i, 1);
+  renderProdGallery(); markChanged(); saveDrafts(); applyPreview();
+  showToast('Gallery image removed', 'success');
+}
+function addGalleryImage(path) {
+  if (!path) return;
+  const p = state.products.find(x => x.id === state.selectedProductId);
+  if (!p) { showToast('Select a product first', 'error'); return; }
+  if (!Array.isArray(p.gallery)) p.gallery = [];
+  if (p.gallery.includes(path) || path === p.image) { showToast('Already in this product', 'error'); return; }
+  p.gallery.push(path);
+  state.imagePickTarget = null;
+  renderProdGallery(); markChanged(); saveDrafts(); applyPreview();
+  showToast('Added to product gallery', 'success');
+}
 function addProduct() {
   const m = state.products.reduce((a,p) => Math.max(a,p.id||0),0);
-  state.products.push({id:m+1,title:'New Product',category:'Custom Designs',description:'Describe this product...',image:'assets/images/og-cover.jpg'});
+  state.products.push({id:m+1,title:'New Product',category:'Custom Designs',description:'Describe this product...',image:'assets/images/og-cover.jpg',gallery:[]});
   renderProductList(); selectProduct(state.products[state.products.length-1].id); markChanged(); saveDrafts(); applyPreview();
   showToast('Product added','success');
 }
@@ -754,16 +801,44 @@ function setHeroImage(path) {
   markChanged();saveDrafts();applyPreview();
   showToast('Hero image selected','success');
 }
-function chooseHeroImage() {
-  state.imagePickTarget='hero';
+function chooseHeroImage() { chooseImageFor('hero'); }
+function uploadHeroImage() { uploadImageFor('hero'); }
+const IMAGE_TARGET_NAMES = { hero:'hero banner', custom:'custom work', about:'our story', product:'product', 'product-gallery':'product gallery' };
+function chooseImageFor(target) {
+  state.imagePickTarget=target;
   const tab=document.querySelector('.sidebar-tab[data-tab="media"]');
   if(tab)tab.click();
-  showToast('Choose an image below to use as the hero banner','success');
+  showToast('Choose an image below to use as the '+(IMAGE_TARGET_NAMES[target]||'section')+' image','success');
 }
-function uploadHeroImage() {
-  state.imagePickTarget='hero';
+function uploadImageFor(target) {
+  state.imagePickTarget=target;
   const input=document.getElementById('file-input');
   if(input)input.click();
+}
+function updateSectionImagePreview(which, path) {
+  const wrap=document.getElementById(which+'-image-preview'), img=document.getElementById(which+'-image-preview-img');
+  if(!wrap||!img)return;
+  if(path){img.src=path;wrap.classList.remove('is-empty');}else{img.removeAttribute('src');wrap.classList.add('is-empty');}
+}
+function setSectionImage(which, path) {
+  if(!path)return;
+  ensureSectionCopy();
+  if(which==='custom'){ state.sectionCopy.customOrders.image=path; setVal('ed-custom-image',path); updateSectionImagePreview('custom',path); }
+  else if(which==='about'){ state.sectionCopy.about.image=path; setVal('ed-about-image',path); updateSectionImagePreview('about',path); }
+  state.imagePickTarget=null;
+  markChanged();saveDrafts();applyPreview();
+  showToast((which==='custom'?'Custom work':'Our story')+' image updated','success');
+}
+function setProductImage(path) {
+  if(!path)return;
+  const p=state.products.find(x=>x.id===state.selectedProductId);
+  if(!p){ showToast('Select a product first','error'); return; }
+  p.image=path;
+  setVal('ed-prod-image',path);
+  const ed=document.getElementById('product-editor'); if(ed)ed.style.display='block';
+  state.imagePickTarget=null;
+  markChanged();saveDrafts();applyPreview();
+  showToast('Product image updated','success');
 }
 function renderMediaGrid() {
   const c = document.getElementById('media-grid'); if (!c) return;
@@ -778,7 +853,11 @@ function renderMediaGrid() {
 }
 function selectMedia(path) {
   document.querySelectorAll('.media-item').forEach(el => el.classList.toggle('active', el.querySelector('img')?.src?.includes(path)));
-  if(state.imagePickTarget==='hero'){ setHeroImage(path); const tab=document.querySelector('.sidebar-tab[data-tab="content"]'); if(tab)tab.click(); }
+  const t=state.imagePickTarget;
+  if(t==='hero'){ setHeroImage(path); const tab=document.querySelector('.sidebar-tab[data-tab="content"]'); if(tab)tab.click(); }
+  else if(t==='custom'||t==='about'){ setSectionImage(t,path); const tab=document.querySelector('.sidebar-tab[data-tab="content"]'); if(tab)tab.click(); }
+  else if(t==='product'){ setProductImage(path); const tab=document.querySelector('.sidebar-tab[data-tab="products"]'); if(tab)tab.click(); }
+  else if(t==='product-gallery'){ addGalleryImage(path); const tab=document.querySelector('.sidebar-tab[data-tab="products"]'); if(tab)tab.click(); }
 }
 function triggerUpload() { document.getElementById('file-input').click(); }
 function setupUploadZone() {
@@ -876,6 +955,10 @@ async function handleFiles(files) {
           state.imageManifest = next;
         }
         if(state.imagePickTarget==='hero') setHeroImage(path);
+        else if(state.imagePickTarget==='custom') setSectionImage('custom',path);
+        else if(state.imagePickTarget==='about') setSectionImage('about',path);
+        else if(state.imagePickTarget==='product') setProductImage(path);
+        else if(state.imagePickTarget==='product-gallery') addGalleryImage(path);
         renderMediaGrid();
         populateImageDropdowns();
         showToast(`Uploaded ${file.name}`, 'success');

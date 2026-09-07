@@ -33,30 +33,34 @@ PYEOF
 
 # 4. Content source consistency: visible hero + section titles match the editable settings.
 python3 - <<'PYEOF' || FAIL=1
-import json,re,sys
+import json,sys
 from html.parser import HTMLParser
 raw=open('index.html',encoding='utf-8').read(); s=json.load(open('content/site-settings.json',encoding='utf-8'))
-sc=s.get('sectionCopy',{})
+sc={k:v for k,v in (s.get('sectionCopy') or {}).items() if isinstance(v,dict)}
 class P(HTMLParser):
  def __init__(self): super().__init__(convert_charrefs=True); self.hit=None; self.buf=[]; self.out={}; self.sec=None
  def handle_starttag(self,t,a):
   d=dict(a)
   if t=='section': self.sec=d.get('data-section')
+  if self.hit is not None and self.buf: self.buf.append(' ')
   if t=='h1': self.hit=('heroHeadline',); self.buf=[]
-  if t=='p' and 'hero-lead' in d.get('class',''): self.hit=('heroIntro',); self.buf=[]
-  if t=='h2' and self.sec in sc: self.hit=(self.sec,'title'); self.buf=[]
- def handle_data(self,d):
-  if self.hit:self.buf.append(d)
+  elif t=='p' and 'hero-lead' in d.get('class',''): self.hit=('heroIntro',); self.buf=[]
+  elif t=='h2' and self.sec in sc: self.hit=(self.sec,'title'); self.buf=[]
  def handle_endtag(self,t):
-  if not self.hit:return
+  if self.hit is None:return
   if (self.hit[0] in ('heroHeadline','heroIntro') and t in ('h1','p')) or (len(self.hit)>1 and t=='h2'):
    self.out[self.hit]=' '.join(''.join(self.buf).split());self.hit=None
+ def handle_data(self,d):
+  if self.hit is not None:self.buf.append(d)
 p=P();p.feed(raw)
-checks={('heroHeadline',):s.get('heroHeadline',''),('heroIntro',):s.get('heroIntro','')}
-for k,v in sc.items(): checks[(k,'title')]=(v or {}).get('title','')
+checks={('heroHeadline',):s.get('heroHeadline','') or '',('heroIntro',):s.get('heroIntro','') or ''}
+for k in p.out:
+ if len(k)>1 and isinstance(sc.get(k[0]),dict) and sc[k[0]].get('title'): checks[k]=sc[k[0]]['title']
+bad=0
 for k,v in checks.items():
  got=p.out.get(k,'')
- if got!=v: print('FAIL: content drift',k,got,v); FAIL=1
+ if got!=v: print('FAIL: content drift',k,repr(got),repr(v)); bad=1
+sys.exit(bad)
 PYEOF
 
 # 5. Naming gate; internal product IDs remain part of validation only.
