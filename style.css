@@ -2037,3 +2037,40 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
   .hero-banner h1{font-size:clamp(2.35rem,10.8vw,3rem);margin-bottom:14px}
   .hero-banner-copy>.hero-lead{margin-bottom:18px}
 }
+
+
+/* FILTER UX — no hidden horizontal slider on touch devices */
+.filters{
+  overflow:visible!important;
+  overflow-x:visible!important;
+  overflow-y:visible!important;
+  scroll-snap-type:none!important;
+  -webkit-overflow-scrolling:auto!important;
+  margin-right:0!important;
+  padding:0!important;
+}
+@media(max-width:760px){
+  .filters{
+    display:grid!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:8px!important;
+    margin-bottom:28px!important;
+    width:100%!important;
+  }
+  .filter-btn{
+    width:100%!important;
+    min-width:0!important;
+    min-height:44px!important;
+    padding:10px 12px!important;
+    white-space:normal!important;
+    line-height:1.2!important;
+    text-align:center!important;
+  }
+  .filter-btn:first-child{
+    grid-column:1 / -1;
+  }
+}
+@media(max-width:360px){
+  .filters{grid-template-columns:1fr!important}
+  .filter-btn:first-child{grid-column:auto}
+}
