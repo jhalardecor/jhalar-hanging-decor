@@ -19,18 +19,18 @@ function closeModal(){const m=$('#product-modal');if(!m.classList.contains('open
 /* ---------- runtime defaults: equal to the shipped HTML/settings ---------- */
 const DEFAULTS={
  heroImage:'assets/images/hero-jhalar.webp',
- heroHeadline:'Let the colour do the talking.',
- heroIntro:'Handmade jhalars and hanging decor for the weddings, events and festive spaces you are putting together.',
+ heroHeadline:'Hanging decor for celebrations and events.',
+ heroIntro:'Explore handmade designs for weddings, functions, festive spaces and larger orders.',
  heroCta:'View the collection',
- collectionLabel:'BROWSE DESIGNS',collectionTitle:'Find what fits the occasion.',collectionIntro:'Compare colour, form and texture before you enquire.',
- customLabel:'CUSTOM WORK',customTitle:'Start with your colour story.',customIntro:'Bring a theme, palette or reference. We will discuss colour, size, quantity and timing for your setup.',
+ collectionLabel:'BROWSE DESIGNS',collectionTitle:'Browse our collection',collectionIntro:'Explore our hanging designs and find options for your event, celebration or store.',
+ customLabel:'CUSTOM WORK',customTitle:'Looking for something specific?',customIntro:'Share your colour preference, size, quantity or reference image. We will be happy to discuss your requirement.',
  customImage:'assets/images/custom-orders.jpg',
- aboutLabel:'JHALAR',aboutTitle:'Made by hand. Chosen for the moment.',aboutIntro:'We make hanging decor for the people who put celebrations together: decorators, planners, retailers and families.',
+ aboutLabel:'JHALAR',aboutTitle:'Made by hand in Howrah',aboutIntro:'We make hanging decor for event decorators, planners, retailers, wholesalers and families.',
  aboutImage:'assets/images/about-collage.jpg',
- contactLabel:'READY WHEN YOU ARE',contactTitle:'Tell us what you are creating.',contactIntro:'Send the design, quantity, location and date. We will take it from there.',
- footerTagline:'Handcrafted hanging decor in Howrah, India',
- siteTitle:'JHALAR · Hanging Decor for Celebrations',
- siteDescription:'Handcrafted jhalars and hanging decor for weddings, events and festive spaces.',
+ contactLabel:'GET IN TOUCH',contactTitle:"Let's discuss your requirement",contactIntro:'Tell us about your event or order. If available, share the quantity, location and date as well.',
+ footerTagline:'Handmade hanging decor from Howrah, India',
+ siteTitle:'JHALAR | Hanging Decor',
+ siteDescription:'Handmade hanging decor for events, celebrations, decorators, retailers and wholesale buyers.',
  ogImage:'assets/images/og-cover.jpg',
  nav:[['Collection','#collection'],['Custom work','#custom'],['Our story','#story']]
 };
