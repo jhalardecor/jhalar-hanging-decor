@@ -488,3 +488,39 @@ button:focus-visible,a:focus-visible{outline-color:var(--brand-crimson)}
   }
 }
 
+
+
+/* 99. FINAL AUTHORITY — PALETTE + TYPOGRAPHY
+   This block intentionally comes last. Runtime settings must not redefine the visual hierarchy. */
+:root{
+  --paper:#FFFAF1;
+  --surface:#FFFDF8;
+  --red:#C82039;
+  --red-deep:#A71931;
+  --navy:#141942;
+  --heritage:#622331;
+  --ink:#141942;
+  --ink-soft:#622331;
+  --dark:#141942;
+  --line:rgba(20,25,66,.14);
+  --wash:#FFFDF8;
+  --font-heading:Mogranx,Arial,sans-serif;
+  --font-body:Arial,Helvetica,sans-serif;
+}
+/* Typography hierarchy: display font only where it earns emphasis. */
+body,button,input,textarea,select{font-family:var(--font-body);font-synthesis:none}
+h1,h2,h3,h4,h5,h6{font-family:var(--font-heading);color:var(--navy);font-synthesis:none}
+.hero-banner-copy h1{font-weight:700;letter-spacing:-.045em;line-height:.98}
+.hero-banner-copy h1 em{font-family:var(--font-heading);font-style:italic;font-weight:400}
+.section-heading-group h2,.custom-copy h2,.story-copy h2,.contact-box h2{font-weight:500;letter-spacing:-.03em}
+.eyebrow,.kicker{color:var(--heritage)}
+/* Palette hierarchy: red is a signal, not the default text colour. */
+.product-category{color:var(--heritage)}
+.product-title{color:var(--navy)}
+.product-details-btn{color:var(--heritage)!important;border-bottom-color:rgba(98,35,49,.28)!important}
+.product-card:hover .product-details-btn{color:var(--red-deep);border-color:var(--red-deep)!important}
+.filter-btn.active{background:var(--navy);border-color:var(--navy)}
+.hero-banner-cta{color:var(--navy)}
+.more-btn:hover,.modal-wa-btn:hover{background:var(--red);border-color:var(--red);color:var(--paper)}
+.contact,.footer{background:var(--navy)!important;color:var(--paper)}
+.modal-copy h3{color:var(--navy)}
