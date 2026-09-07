@@ -135,3 +135,32 @@ button,a{min-height:44px}.nav a{min-height:auto}
 @media(max-width:1100px){.product-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(max-width:760px){.product-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:36px 16px}.product-image{aspect-ratio:1/1.25;padding:14px}.product-info{padding-top:13px}.product-category{font-size:.61rem;margin-bottom:6px}.product-title{font-size:.94rem;line-height:1.4}.product-details-btn{margin-top:10px;font-size:.64rem}}
 @media(max-width:370px){.product-grid{grid-template-columns:1fr}.product-image{aspect-ratio:1/1.12}}
+
+
+/* === JHALAR CONTENT ARCHITECTURE RESET === */
+:root{--paper:#fffaf1;--surface:#f7efe8;--ink:#38272b;--muted:#66575a;--brand:#7a1e2c;--line:#e7dcd5;--shell:min(1200px,calc(100% - clamp(40px,7vw,128px)));--g1:8px;--g2:16px;--g3:24px;--g4:40px;--g5:64px;--g6:104px}
+body{background:var(--paper);color:var(--ink)}
+.section{padding-block:var(--g6)}
+/* Every section has a clear content group: context → message → supporting content */
+.eyebrow,.kicker{margin:0 0 var(--g2);font-size:.7rem;line-height:1.2;font-weight:600;letter-spacing:.075em;color:var(--brand)}
+h1,h2{letter-spacing:-.018em;text-wrap:balance}h1{line-height:1.05}h2{line-height:1.1}
+p{color:var(--muted);line-height:1.65}
+/* Hero: one primary message group, one supporting group */
+.hero-banner{height:min(760px,calc(100svh - 82px));min-height:580px}
+.hero-banner-copy{display:flex;flex-direction:column;align-items:flex-start;gap:0}.hero-banner-copy .kicker{margin-bottom:var(--g3)}.hero-banner h1{margin:0 0 var(--g3)}.hero-banner-copy>p:not(.kicker){margin:0 0 var(--g4)}
+.hero-banner-bottom{padding-top:var(--g3)}
+/* Collection: introduction, controls and results are deliberately separated */
+.section-head{margin:0 0 var(--g5);gap:clamp(48px,8vw,120px)}.section-head>div{display:grid;gap:0}.section-head h2{margin:0}.section-head>p{margin:0;max-width:34ch}
+.filters{margin:0 0 var(--g4);padding:0 0 var(--g2);gap:var(--g2)}
+.filter-btn{border-radius:999px;background:transparent}.filter-btn.active{background:#f3e5de;color:var(--brand);border-color:#d9b8ad}
+.product-grid{gap:clamp(40px,4vw,64px) clamp(20px,2.4vw,36px)}
+/* Product tile: image group → identity group → action */
+.product-card{display:flex;flex-direction:column}.product-image{aspect-ratio:1/1.16;padding:clamp(14px,1.8vw,24px);border:0;border-radius:0;background:#f6eee7}.product-image img{filter:none}.product-card:hover .product-image{transform:none;box-shadow:none;border:0}.product-info{padding:var(--g3) 0 0;display:flex;flex-direction:column;align-items:flex-start}.product-category{margin:0 0 var(--g1);font-size:.67rem;letter-spacing:.07em}.product-title{margin:0;line-height:1.38}.product-details-btn{margin-top:var(--g2);padding:0 0 4px;min-height:0;min-width:0;border:0;border-bottom:1px solid #b99f98;border-radius:0;background:none;font-size:.72rem;letter-spacing:.04em}.product-details-btn:hover{background:none;color:var(--brand);box-shadow:none;border-bottom-color:var(--brand)}
+/* Split sections: copy remains one readable group */
+.custom,.intro-band{background:#fbf5ef}.custom-copy,.story-copy{display:flex;flex-direction:column;align-items:flex-start}.custom-copy p:not(.eyebrow){margin:var(--g3) 0 var(--g4);max-width:42ch}.story-grid>div:last-child{padding-top:0}.story-copy h2{margin:0 0 var(--g3)}.story-copy p+p{margin-top:var(--g2)}
+/* Contact: message and action are one decision group */
+.contact{background:#7a1e2c}.contact-box>div{display:flex;flex-direction:column;align-items:flex-start}.contact-box h2{margin:0}.contact-box p:not(.eyebrow){margin:var(--g3) 0 0}.contact-cta{border-radius:0}
+/* Modal: media and enquiry content form two clear zones */
+.modal-card{border-radius:0}.modal-copy{display:flex;flex-direction:column;align-items:flex-start}.modal-copy h3{margin:0 0 var(--g3)}.modal-copy>p:not(.eyebrow){margin:0 0 var(--g4)}.modal-copy .modal-wa-btn{border-radius:0}
+@media(max-width:760px){:root{--shell:calc(100% - 40px);--g4:32px;--g5:48px;--g6:72px}.section-head{margin-bottom:var(--g4);gap:var(--g3)}.product-grid{gap:40px 16px}.hero-banner{min-height:620px}.hero-banner-bottom{font-size:.64rem}.contact-box{align-items:flex-start}.contact-cta{width:100%;justify-content:center}.custom-grid,.story-grid{gap:var(--g4)}}
+@media(max-width:390px){:root{--shell:calc(100% - 32px)}}
