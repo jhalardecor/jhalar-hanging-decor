@@ -585,3 +585,26 @@ body.no-reveal .reveal,.product-card.reveal.in,.product-card.reveal.visible{opac
     align-items:center;
   }
 }
+
+
+
+/* 20. JHALAR CANONICAL BRAND PALETTE — build 20260907.24 */
+:root{
+  --brand-crimson-50:#FCEDEF;--brand-crimson-100:#F8D9DE;--brand-crimson-200:#F1B4BD;--brand-crimson-300:#E98E9C;--brand-crimson-400:#D95367;--brand-crimson-500:#C82039;--brand-crimson-600:#AE1C31;--brand-crimson-700:#901728;--brand-crimson-800:#74121F;--brand-crimson-900:#531016;
+  --brand-ivory-50:#FFFCF7;--brand-ivory-100:#FFFAF1;--brand-ivory-200:#FCF4E9;--brand-ivory-300:#F5EBDD;--brand-ivory-400:#E9DCCD;--brand-ivory-500:#D8C7B6;
+  --brand-ink:#141942;--brand-ink-soft:#424564;--brand-oxblood:#622331;
+  --paper:var(--brand-ivory-100);--ink:var(--brand-ink);--ink-soft:var(--brand-ink-soft);--dark:var(--brand-ink);--line:rgba(20,25,66,.14);--wash:var(--brand-ivory-200);--shadow:0 20px 55px rgba(20,25,66,.12);
+  --grad-paper:linear-gradient(180deg,#FFFAF1 0%,#FCF4E9 100%);
+  --grad-warm:linear-gradient(135deg,#FFFAF1 0%,#FCF4E9 55%,#F5EBDD 100%);
+  --grad-ink:linear-gradient(135deg,#141942 0%,#20265A 52%,#0E1232 100%);
+  --grad-collection:radial-gradient(circle at 8% 8%,rgba(200,32,57,.10),transparent 30%),radial-gradient(circle at 92% 76%,rgba(20,25,66,.07),transparent 32%),linear-gradient(180deg,#FFFAF1 0%,#FCF4E9 100%);
+}
+body{background:var(--paper);color:var(--ink)}button:focus-visible,a:focus-visible{outline-color:var(--brand-crimson-500)}.header{background:rgba(255,250,241,.96)}.header.scrolled{box-shadow:0 8px 30px rgba(20,25,66,.07)}.menu i{background:var(--ink)}
+.hero-banner-shade{background:linear-gradient(90deg,rgba(255,250,241,.985) 0%,rgba(255,250,241,.91) 36%,rgba(255,250,241,.40) 59%,rgba(255,250,241,0) 77%)}.hero-banner-copy{color:var(--ink)}.kicker,.eyebrow{color:var(--brand-crimson-500)}.hero-banner-cta{color:var(--brand-crimson-500)}
+.filter-btn:hover,.filter-btn.active{background:var(--brand-crimson-500);border-color:var(--brand-crimson-500);color:#FFFAF1}.more-btn{border-color:var(--brand-crimson-500);color:var(--brand-crimson-500)}.more-btn:hover{background:var(--brand-crimson-500);color:#FFFAF1}.text-link,.product-details-btn{color:var(--brand-crimson-500)}.text-link{border-color:currentColor}
+.collection{background:var(--grad-collection)}.product-grid{background:rgba(20,25,66,.12);border-color:rgba(20,25,66,.12)}.product-card{background:#FFFAF1 !important}.product-card::before{border-color:rgba(20,25,66,.18);color:var(--brand-crimson-500)}
+.product-image{background:linear-gradient(rgba(20,25,66,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(20,25,66,.045) 1px,transparent 1px),#FCF4E9}.product-image::before{border-color:rgba(20,25,66,.13)}.product-category{color:rgba(20,25,66,.66)}.product-title{color:var(--ink)}.product-details-btn{border-bottom-color:rgba(200,32,57,.28)}.product-details-btn:hover{border-color:var(--brand-crimson-500)}.product-card:focus-within{outline-color:rgba(200,32,57,.62)}.product-image:focus-visible,.product-details-btn:focus-visible{outline-color:var(--brand-crimson-500)}
+@media (hover:hover){.product-card:hover{background:#FFFCF7 !important}.product-card:hover .product-image::before{border-color:rgba(200,32,57,.36)}.product-card:hover .product-details-btn{border-color:var(--brand-crimson-500)}}
+.custom{background:var(--grad-warm)}.story{background:var(--grad-paper)}.contact{background:var(--grad-ink);color:#FFFAF1}.contact::before{background:radial-gradient(circle,rgba(200,32,57,.24),transparent 68%)}.light-eyebrow{color:var(--brand-crimson-200)}.contact-box p:not(.eyebrow){color:rgba(255,250,241,.82)}.footer{background:#0E1232;color:rgba(255,250,241,.76)}.audience-strip{background:linear-gradient(90deg,#FFFAF1,#FCF4E9,#FFFAF1)}
+.modal-backdrop{background:rgba(14,18,50,.76)}.modal-media{background:#0E1232}.modal-thumb.active{border-color:var(--brand-crimson-500)}.modal-copy p:not(.eyebrow){color:var(--ink-soft)}.modal-wa-btn{color:var(--brand-crimson-500)}.zoom-hint{color:var(--ink);background:rgba(255,250,241,.94)}
+@media (max-width:760px){.hero-banner-shade{background:linear-gradient(180deg,rgba(255,250,241,.08) 0%,rgba(255,250,241,.36) 36%,rgba(255,250,241,.96) 68%,#FFFAF1 100%)}.collection{background:radial-gradient(circle at 10% 5%,rgba(200,32,57,.08),transparent 28%),linear-gradient(180deg,#FFFAF1,#FCF4E9)}}
