@@ -171,7 +171,7 @@ function markRevealTargets(){
 /* ---------- catalogue loader (fail-closed through the naming gate) ---------- */
 async function initProducts(){
  try{
-  const pr=await fetch('content/products.json',{cache:'no-store'});
+  const pr=await fetch('content/products.json?ts='+Date.now(),{cache:'no-store',headers:{'Cache-Control':'no-cache'}});
   if(!pr.ok)throw Error('Catalogue unavailable');
   const d=await pr.json();
   const products=Array.isArray(d.products)?d.products:[];
@@ -378,4 +378,4 @@ initProducts();initRuntime();
    ensureLatest(true).then(reloading=>{if(!reloading){window.scrollTo({top:0,behavior:'smooth'});history.replaceState(null,'',location.pathname+location.search)}});
  },true);
 })();
-/* build 20260908.19 */
+/* build 20260908.22 */
