@@ -1260,3 +1260,55 @@ button,.btn,.hero-banner-cta,.filter-btn{
 
   .header #menu i{display:none!important;}
 }
+
+
+/* MOBILE / TABLET HEADER SOURCE OF TRUTH
+   Phones must never inherit the desktop navigation. */
+@media (max-width: 900px){
+  .header .nav,
+  .header-row > .nav{
+    display:none!important;
+  }
+
+  .header #menu,
+  .header button.menu{
+    display:grid!important;
+    place-items:center!important;
+    width:48px!important;
+    height:48px!important;
+    padding:0!important;
+    border:0!important;
+    background:transparent!important;
+    font-size:0!important;
+    line-height:0!important;
+    color:transparent!important;
+  }
+
+  .header #menu::before,
+  .header #menu::after{
+    content:none!important;
+  }
+
+  .header #menu span{
+    display:block!important;
+    position:absolute!important;
+    left:50%!important;
+    width:24px!important;
+    height:2px!important;
+    margin:0!important;
+    padding:0!important;
+    background:#141942!important;
+    border-radius:999px!important;
+  }
+
+  .header #menu span:nth-child(1){transform:translate(-50%,-5px)!important}
+  .header #menu span:nth-child(2){transform:translate(-50%,5px)!important}
+
+  .header #menu.open span:nth-child(1){transform:translate(-50%,0) rotate(45deg)!important}
+  .header #menu.open span:nth-child(2){transform:translate(-50%,0) rotate(-45deg)!important}
+}
+
+@media (min-width: 901px){
+  .header #menu{display:none!important}
+  .header .nav{display:flex!important}
+}
