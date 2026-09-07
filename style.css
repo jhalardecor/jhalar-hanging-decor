@@ -448,3 +448,30 @@ button,a{min-height:44px}.nav a{min-height:auto}
   #product-modal .modal-nav.next{right:10px}
   #product-modal .modal-thumbs{left:12px;right:12px;bottom:12px}
 }
+
+
+/* ==========================================================================
+   PRODUCT MEDIA CORRECTION
+   Product artwork is never cropped in catalogue cards.
+   ========================================================================== */
+.product-image{
+  aspect-ratio:1 / 1;
+  background:#fffaf1;
+}
+.product-image img,
+.product-image .alt-img{
+  object-fit:contain !important;
+  object-position:center !important;
+  transform:none !important;
+}
+@media(hover:hover){
+  .product-card:hover .product-image>img:first-child{
+    transform:none !important;
+  }
+}
+
+/* The modal is the interaction surface for wheel zoom. */
+#product-modal .modal-media,
+#product-modal .modal-stage{
+  overflow:hidden;
+}
