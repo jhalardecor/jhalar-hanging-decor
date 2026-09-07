@@ -83,7 +83,7 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--ink);outline-offset
 .modal{position:fixed;inset:0;z-index:100;display:none}.modal.open{display:grid;place-items:center}.modal-backdrop{position:absolute;inset:0;background:rgba(20,10,13,.72);backdrop-filter:blur(5px)}.modal-card{position:relative;width:min(1080px,calc(100% - 32px));max-height:min(800px,calc(100svh - 32px));display:grid;grid-template-columns:minmax(0,1.35fr) minmax(280px,.65fr);overflow:auto;background:var(--paper);box-shadow:var(--shadow)}.modal-close{position:absolute;right:12px;top:12px;z-index:4;width:44px;height:44px;border:0;background:var(--paper);font-size:1.7rem}.modal-media{position:relative;min-width:0;background:#171214}.modal-stage{height:100%;min-height:500px;display:grid;place-items:center;overflow:hidden;touch-action:none}.modal-stage img,.modal-stage video{width:100%;height:100%;object-fit:contain}.modal-stage img{transform-origin:center;will-change:transform}.modal-stage.is-panning{cursor:grabbing}.modal-nav{position:absolute;top:50%;transform:translateY(-50%);width:42px;height:42px;border:0;border-radius:50%;background:rgba(255,250,241,.9);color:var(--ink);font-size:1.5rem}.modal-nav.prev{left:14px}.modal-nav.next{right:14px}.modal-thumbs{position:absolute;left:14px;right:14px;bottom:14px;display:flex;gap:8px;overflow:auto}.modal-thumb{width:56px;height:56px;padding:0;border:2px solid transparent;background:#fff}.modal-thumb.active{border-color:var(--ink)}.modal-thumb img{width:100%;height:100%;object-fit:cover}.modal-copy{padding:clamp(28px,4vw,52px);align-self:center}.modal-copy h3{margin:0;font-size:clamp(1.7rem,3vw,2.8rem);line-height:1.08}.modal-copy p:not(.eyebrow){color:var(--ink-soft)}.modal-wa-btn{display:inline-flex;margin-top:20px;padding-bottom:8px;border-bottom:1px solid currentColor;font-weight:700}.zoom-hint{position:absolute;left:50%;bottom:28px;transform:translateX(-50%);padding:8px 12px;background:rgba(255,250,241,.92);color:var(--ink);font-size:.8rem;opacity:0;transition:opacity .2s}.zoom-hint.is-visible{opacity:1}
 
 /* 11. MOTION */
-.reveal{opacity:1;transform:none}@media (prefers-reduced-motion:no-preference){.reveal{opacity:0;transform:translateY(14px);transition:opacity .55s var(--ease),transform .55s var(--ease)}.reveal.visible{opacity:1;transform:none}}
+.reveal{opacity:1;transform:none}@media (prefers-reduced-motion:no-preference){.reveal{opacity:0;transform:translateY(14px);transition:opacity .55s var(--ease),transform .55s var(--ease)}.reveal.visible,.reveal.in{opacity:1;transform:none}}
 
 /* 12. TABLET */
 @media (max-width:1000px){.product-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.section-head{grid-template-columns:1fr}.hero-banner-copy{width:min(590px,58%)}}
@@ -272,3 +272,7 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--ink);outline-offset
   font-size:.84rem;
  }
 }
+
+
+/* Reveal compatibility: JS uses .in; never leave catalogue cards invisible. */
+body.no-reveal .reveal,.product-card.reveal.in,.product-card.reveal.visible{opacity:1;transform:none}
