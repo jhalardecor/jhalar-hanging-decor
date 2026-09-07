@@ -276,3 +276,91 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--ink);outline-offset
 
 /* Reveal compatibility: JS uses .in; never leave catalogue cards invisible. */
 body.no-reveal .reveal,.product-card.reveal.in,.product-card.reveal.visible{opacity:1;transform:none}
+
+
+/* 17. PRODUCT CATALOGUE — PREMIUM EDITORIAL SYSTEM
+   No floating cards, no shadows, no decorative frames. The product is the visual object. */
+.product-grid{
+  gap:clamp(34px,4vw,64px) clamp(22px,2.6vw,42px);
+}
+.product-card{
+  padding:0;
+  background:transparent !important;
+  box-shadow:none !important;
+  border:0;
+  transform:none !important;
+}
+.product-card::before{display:none}
+.product-image{
+  aspect-ratio:1/1;
+  background:#f5f2ee;
+  box-shadow:none !important;
+  overflow:hidden;
+}
+.product-image img{
+  filter:none;
+  transition:transform .45s var(--ease);
+}
+.product-image::after{display:none !important}
+.product-info{
+  padding:18px 0 0;
+  display:block;
+}
+.product-category{
+  margin:0 0 8px;
+  min-height:0;
+  font-size:.70rem;
+  line-height:1.2;
+  letter-spacing:.055em;
+  color:rgba(98,35,49,.64);
+}
+.product-title{
+  margin:0;
+  font-size:clamp(1.02rem,1.25vw,1.22rem);
+  line-height:1.32;
+  font-weight:500;
+  color:#622331;
+  text-wrap:pretty;
+}
+.product-details-btn{
+  margin-top:15px;
+  padding:0 0 9px;
+  border:0;
+  border-bottom:1px solid rgba(98,35,49,.20);
+  border-radius:0;
+  background:transparent;
+  color:#622331;
+  font-size:.84rem;
+  font-weight:600;
+  letter-spacing:.01em;
+}
+.product-details-btn:hover{border-color:#622331;background:transparent}
+.product-details-btn .arr{margin-left:3px}
+
+@media (hover:hover){
+  .product-card:hover .product-image img{transform:scale(1.018)}
+  .product-card:hover{background:transparent !important;box-shadow:none !important}
+}
+@media (max-width:760px){
+  .product-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:38px 16px;
+  }
+  .product-card{padding:0}
+  .product-image{aspect-ratio:1/1}
+  .product-info{padding-top:13px}
+  .product-category{
+    margin-bottom:7px;
+    font-size:.64rem;
+    letter-spacing:.045em;
+  }
+  .product-title{
+    font-size:.98rem;
+    line-height:1.38;
+  }
+  .product-details-btn{
+    margin-top:12px;
+    padding-bottom:7px;
+    font-size:.80rem;
+  }
+}
