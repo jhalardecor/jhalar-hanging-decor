@@ -1450,3 +1450,37 @@ p,.section-head>p,.hero-banner-copy>p:not(.kicker){letter-spacing:.006em}
 }
 .contact-cta:focus-visible{outline:3px solid rgba(255,240,211,.72)!important;outline-offset:4px!important}
 .contact-cta span{color:#8a4250!important}
+
+
+/* PRODUCT LISTING + POPUP — never crop catalogue images */
+.product-image,
+.product-image img,
+.product-image>img:first-child,
+.product-image .alt-img{
+  object-fit:contain!important;
+  object-position:center center!important;
+}
+
+/* Keep the complete source image visible in the popup before interaction. */
+#product-modal .modal-media{
+  overflow:hidden!important;
+}
+#product-modal .modal-stage{
+  display:grid!important;
+  place-items:center!important;
+  overflow:hidden!important;
+}
+#product-modal .modal-stage>img#modal-photo{
+  width:100%!important;
+  height:100%!important;
+  max-width:100%!important;
+  max-height:100%!important;
+  object-fit:contain!important;
+  object-position:center center!important;
+}
+
+/* Remove any legacy crop behaviour from thumbnail/listing media. */
+.modal-thumb img{
+  object-fit:contain!important;
+  object-position:center center!important;
+}
