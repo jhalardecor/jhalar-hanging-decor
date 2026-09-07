@@ -174,7 +174,7 @@ function markRevealTargets(){
 /* ---------- catalogue loader (fail-closed through the naming gate) ---------- */
 async function initProducts(){
  try{
-  const pr=await fetch('content/products.json?_build='+Date.now(),{cache:'no-store'});
+  const pr=await fetch('content/products.json',{cache:'no-store'});
   if(!pr.ok)throw Error('Catalogue unavailable');
   const d=await pr.json();
   const products=Array.isArray(d.products)?d.products:[];
@@ -186,7 +186,7 @@ async function initProducts(){
   try{
    const gate=window.JHALARNaming;
    if(gate){
-    const nr=await fetch('content/product-naming.json?_build='+Date.now(),{cache:'no-store'});
+    const nr=await fetch('content/product-naming.json',{cache:'no-store'});
     if(nr.ok){
      const registry=await nr.json();
      const report=gate.validateCatalogue({products:state.products},registry);
@@ -201,16 +201,29 @@ async function initProducts(){
   $('#product-grid').innerHTML='<p>We are unable to load the collection right now. Please refresh the page or contact us directly.</p>';
  }
 }
-async function initRuntime(){try{const[ss,th,se,cc]=await Promise.all([fetch('content/site-settings.json?_build='+Date.now(),{cache:'no-store'}),fetch('content/theme.json?_build='+Date.now(),{cache:'no-store'}),fetch('content/sections.json?_build='+Date.now(),{cache:'no-store'}),fetch('content/custom-css.json?_build='+Date.now(),{cache:'no-store'})]);if(ss.ok)applySettings(await ss.json());if(th.ok)setTheme(await th.json());if(se.ok){const d=await se.json();setSections({sections:d.sections,order:d.order})}if(cc.ok)setCustomCSS((await cc.json()).css||'')}catch(e){console.warn('Runtime settings unavailable',e)}}
+async function initRuntime(){
+ try{
+  const [ss,th,se,cc]=await Promise.all([
+   fetch('content/site-settings.json',{cache:'no-store'}),
+   fetch('content/theme.json',{cache:'no-store'}),
+   fetch('content/sections.json',{cache:'no-store'}),
+   fetch('content/custom-css.json',{cache:'no-store'})
+  ]);
+  if(ss.ok) applySettings(await ss.json());
+  if(th.ok) setTheme(await th.json());
+  if(se.ok){const d=await se.json();setSections({sections:d.sections,order:d.order})}
+  if(cc.ok) setCustomCSS((await cc.json()).css||'');
+ }catch(e){console.warn('Runtime settings unavailable',e)}
+}
 
 
-$('#collection-toggle').onclick=()=>{state.expanded=!state.expanded;renderProducts();if(!state.expanded)$('#collection').scrollIntoView({behavior:'smooth'})};
-$('#menu').onclick=()=>{const b=$('#menu'),n=$('#mobile-nav'),open=!n.classList.contains('open');n.classList.toggle('open',open);b.setAttribute('aria-expanded',String(open))};
-$('#mobile-nav').onclick=e=>{if(e.target.matches('a')){$('#mobile-nav').classList.remove('open');$('#menu').setAttribute('aria-expanded','false')}};
+const __collectionToggle=$('#collection-toggle'); if(__collectionToggle) __collectionToggle.onclick=()=>{state.expanded=!state.expanded;renderProducts();if(!state.expanded)$('#collection').scrollIntoView({behavior:'smooth'})};
+const __menu=$('#menu'); if(__menu) __menu.onclick=()=>{const b=$('#menu'),n=$('#mobile-nav'),open=!n.classList.contains('open');n.classList.toggle('open',open);b.setAttribute('aria-expanded',String(open))};
+const __mobileNav=$('#mobile-nav'); if(__mobileNav) __mobileNav.onclick=e=>{if(e.target.matches('a')){$('#mobile-nav').classList.remove('open');$('#menu').setAttribute('aria-expanded','false')}};
 document.addEventListener('click',e=>{if(e.target.closest('[data-close]'))closeModal()});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
 document.querySelectorAll('.modal-nav').forEach(b=>b.addEventListener('click',()=>showModalMedia(state.modalIndex+Number(b.dataset.nav))));
 window.addEventListener('scroll',()=>{$('.header').classList.toggle('scrolled',window.scrollY>8)},{passive:true});
-$('#year').textContent=new Date().getFullYear();
+const __year=$('#year'); if(__year)__year.textContent=new Date().getFullYear();
 markRevealTargets();observeReveals();
 initProducts();initRuntime();
 
