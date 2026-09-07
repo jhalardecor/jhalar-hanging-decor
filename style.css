@@ -2043,3 +2043,121 @@ button{touch-action:manipulation}
 @media (min-width:1px){
   .hero-banner-copy,.section-head,.custom-copy,.story-copy,.contact-box,.modal-copy{min-width:0}
 }
+
+
+/* ==========================================================================
+   HERO RESET — one clear message, one action, one visual endpoint.
+   Audience information is intentionally outside the hero.
+   ========================================================================== */
+.hero-banner{
+  height:clamp(560px,66svh,760px);
+}
+.hero-banner-content{
+  align-items:center;
+  padding-block:clamp(48px,7vh,82px);
+}
+.hero-banner-copy{
+  width:min(100%,540px);
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+}
+.hero-banner .kicker{margin:0 0 16px}
+.hero-banner h1{
+  max-inline-size:9ch;
+  margin:0 0 22px;
+  text-wrap:balance;
+}
+.hero-banner-copy>.hero-lead{
+  max-inline-size:34ch;
+  margin:0 0 28px;
+}
+.hero-banner-cta{margin:0}
+.hero-audience{display:none!important}
+
+.audience-strip{
+  background:var(--page-bg);
+  border-bottom:1px solid var(--line);
+}
+.audience-strip-inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:32px;
+  min-height:96px;
+}
+.audience-label{
+  margin:0;
+  flex:0 0 auto;
+  font-size:.6875rem;
+  font-weight:600;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--wine);
+}
+.audience-items{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  flex-wrap:wrap;
+  gap:10px 0;
+  min-width:0;
+  font-size:.82rem;
+  font-weight:500;
+  letter-spacing:.02em;
+  color:var(--muted);
+}
+.audience-items span{white-space:nowrap}
+.audience-items span+span:before{
+  content:'·';
+  margin-inline:18px;
+  color:#c08a62;
+}
+@media(max-width:760px){
+  .hero-banner{
+    height:auto!important;
+    min-height:580px!important;
+  }
+  .hero-banner-content{
+    min-height:580px!important;
+    padding:64px 0 52px!important;
+    align-items:flex-end;
+  }
+  .hero-banner-copy{width:min(100%,34rem)}
+  .hero-banner h1{
+    max-inline-size:9ch!important;
+    font-size:clamp(2.8rem,12vw,4.15rem)!important;
+    line-height:1.04!important;
+    margin-bottom:18px!important;
+  }
+  .hero-banner-copy>.hero-lead{
+    max-inline-size:31ch!important;
+    margin-bottom:24px!important;
+    line-height:1.6!important;
+  }
+  .hero-banner-shade{
+    background:linear-gradient(180deg,rgba(44,7,20,.60) 0%,rgba(44,7,20,.42) 42%,rgba(44,7,20,.78) 100%)!important;
+  }
+  .hero-banner .kicker{margin-bottom:14px!important}
+  .audience-strip-inner{
+    min-height:0;
+    padding-block:28px;
+    align-items:flex-start;
+    flex-direction:column;
+    gap:14px;
+  }
+  .audience-items{
+    display:grid;
+    grid-template-columns:1fr;
+    justify-content:start;
+    gap:8px;
+    font-size:.86rem;
+  }
+  .audience-items span{white-space:normal}
+  .audience-items span+span:before{display:none}
+}
+@media(max-width:390px){
+  .hero-banner{min-height:550px!important}
+  .hero-banner-content{min-height:550px!important;padding-top:56px!important}
+  .hero-banner h1{font-size:clamp(2.65rem,12.5vw,3.4rem)!important}
+}
