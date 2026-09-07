@@ -119,7 +119,7 @@ h1,h2,h3,h4,h5,h6,.hero-banner-copy h1,.section-heading-group h2,.custom-copy h2
  .section{padding-block:68px}.section-head{gap:18px}.filters{flex-wrap:nowrap;overflow-x:auto;padding-bottom:4px;margin-inline:-2px}.filter-btn{white-space:nowrap;flex:0 0 auto}.product-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 14px}
  .custom-grid,.story-grid{grid-template-columns:1fr;gap:34px}.story-copy{order:0}.custom-image img,.story-image img{aspect-ratio:4/4.5}
  .contact-box{min-height:0;display:grid;align-items:start;gap:34px}.footer-row{padding-block:28px;min-height:0;display:grid;gap:18px}.footer-brand{width:130px}
- .modal-card{width:100%;height:100svh;max-height:none;grid-template-columns:1fr;grid-template-rows:minmax(46svh,1fr) auto}.modal-stage{min-height:46svh}.modal-copy{padding:26px 22px}.modal-nav{top:42%}.modal-close{right:10px;top:10px}.modal-thumbs{bottom:12px}
+ .product-card{box-shadow:none}.product-card:hover{transform:none;box-shadow:none}.product-image::after{display:none}.product-info{padding:14px 13px 16px}.product-title{font-size:1rem}.modal{padding:0}.modal-card{width:100%;height:100svh;max-height:none;grid-template-columns:1fr;grid-template-rows:minmax(48svh,1fr) auto;overflow:auto}.modal-media{min-height:48svh}.modal-stage{min-height:48svh}.modal-copy{padding:28px 22px 34px}.modal-copy h3{font-size:2rem}.modal-nav{top:42%}.modal-close{right:12px;top:12px}.modal-thumbs{left:12px;right:12px;bottom:12px}.modal-thumb{width:52px;height:52px}.zoom-hint{bottom:80px}
 }
 
 /* 14. SMALL MOBILE */
