@@ -4,24 +4,20 @@
   "email": "lokeshdugar040@gmail.com",
   "location": "Howrah, West Bengal, India",
   "gst": "Available on request",
-  "heroHeadline": "Handcrafted Jhalars and Hangings, Made to Order in Howrah",
-  "heroIntro": "Pom pom garlands, torans, floral jhalars, bead and bell hangings — made to order for weddings, events, pandals and retail displays.",
+  "heroHeadline": "Jhalars and hanging decor for weddings and events",
+  "heroIntro": "Browse designs and colour variants. Open a product for details or enquire on WhatsApp using its catalogue reference.",
   "heroImage": "assets/images/hero-jhalar.jpg",
-  "siteTitle": "JHALAR | Handcrafted Jhalars, Torans and Hangings — Made in Howrah",
-  "siteDescription": "Pom pom garlands, torans, floral jhalars, bead and bell hangings — handmade in Howrah and delivered across India. Custom colours and large orders welcome.",
+  "siteTitle": "JHALAR | Jhalars and Hanging Decor for Weddings and Events",
+  "siteDescription": "Browse the JHALAR catalogue of jhalars and hanging decor for weddings and events. Open a design for details or enquire on WhatsApp with its reference.",
   "ogImage": "assets/images/og-cover.jpg",
   "navItems": [
     {
-      "label": "Collection",
+      "label": "Catalogue",
       "href": "#collection"
     },
     {
-      "label": "Custom Orders",
+      "label": "Custom Enquiries",
       "href": "#custom-orders"
-    },
-    {
-      "label": "Who It's For",
-      "href": "#who-uses"
     },
     {
       "label": "About",
@@ -38,20 +34,20 @@
   ],
   "footerNavItems": [
     {
-      "label": "Collection",
+      "label": "Catalogue",
       "href": "#collection"
     },
     {
-      "label": "Custom Orders",
+      "label": "Custom Enquiries",
       "href": "#custom-orders"
-    },
-    {
-      "label": "Who It's For",
-      "href": "#who-uses"
     },
     {
       "label": "About",
       "href": "#about"
+    },
+    {
+      "label": "FAQ",
+      "href": "#faq"
     },
     {
       "label": "Contact",
@@ -72,42 +68,20 @@
       "label": "WhatsApp"
     }
   },
-  "heroHighlights": [
-    {
-      "icon": "icon-check",
-      "text": "Made to order"
-    },
-    {
-      "icon": "icon-clock",
-      "text": "Custom colourways"
-    },
-    {
-      "icon": "icon-route",
-      "text": "Any quantity"
-    }
-  ],
-  "trustItems": [
-    {
-      "icon": "icon-mfr",
-      "label": "Our own karigars in Howrah"
-    },
-    {
-      "icon": "icon-design",
-      "label": "35 products, 18 series"
-    },
-    {
-      "icon": "icon-location",
-      "label": "Delivered across India"
-    }
-  ],
+  "heroHighlights": [],
+  "trustItems": [],
   "faqItems": [
+    {
+      "q": "Do you show prices on the website?",
+      "a": "No. The website is a catalogue, so prices are shared on enquiry. Message us on WhatsApp with the design name or catalogue reference and we will send you a quote."
+    },
     {
       "q": "What quantities do you take?",
       "a": "From a few dozen to several thousand pieces per design. Tell us the design and the quantity and we will confirm."
     },
     {
       "q": "Can you match a specific colour?",
-      "a": "Yes. Share a reference photo or your palette and we will match it in the sample before production."
+      "a": "Yes. Share a reference photo or your palette and we will match it in the sample."
     },
     {
       "q": "Do you deliver outside West Bengal?",
@@ -118,55 +92,29 @@
       "a": "It depends on the design and the quantity. Share the date you need it by and we will confirm whether we can meet it."
     },
     {
-      "q": "How do I place an order?",
-      "a": "Message us on WhatsApp with the design and how many you need. We take it from there."
+      "q": "How do I enquire about a design?",
+      "a": "Open the product and use its Enquire on WhatsApp button, or use the enquiry form below. Include the catalogue reference so we know exactly which design you mean."
     }
   ],
   "sectionCopy": {
-    "heroTag": {
-      "icon": "icon-mfr",
-      "text": "Made in Howrah | Delivered across India"
-    },
     "heroPrimary": {
-      "label": "View Collection",
+      "label": "View catalogue",
       "href": "#collection"
     },
     "heroSecondary": {
-      "label": "Message on WhatsApp",
+      "label": "Enquire on WhatsApp",
       "href": "https://wa.me/918100656258"
     },
-    "why": {
-      "label": "Why JHALAR",
-      "title": "What You Get Working With Us",
-      "intro": "We are the makers, not a reseller — so the design, the price and the timeline all come from one place.",
-      "features": [
-        {
-          "icon": "icon-mfr",
-          "title": "No Middlemen",
-          "text": "You talk to the people who actually make the pieces, not a trading desk in between."
-        },
-        {
-          "icon": "icon-palette",
-          "title": "Matched to Your Brief",
-          "text": "Send a reference photo or your palette and we will work to it."
-        },
-        {
-          "icon": "icon-bulk",
-          "title": "Built for Volume",
-          "text": "From a few dozen pieces to several thousand per design, made to the same standard throughout."
-        }
-      ]
-    },
     "collection": {
-      "label": "Our Collection",
-      "title": "Jhalars, Torans, Tassels and More",
-      "intro": "Pom pom, bead, bell, floral, torans, tassels, strings and custom work.",
+      "label": "Catalogue",
+      "title": "Browse the Collection",
+      "intro": "Thirty-five designs and colour variants across pom pom, bead, bell and floral hangings and decorative strings.",
       "note": "Looking for something else? "
     },
     "customOrders": {
-      "label": "Custom Orders",
-      "title": "Order Something Made to Your Own Design",
-      "intro": "Send a reference and your palette. Any design in the collection can be remade in your colours.",
+      "label": "Custom Enquiries",
+      "title": "Made to Your Own Design",
+      "intro": "Any design in the catalogue can be remade in your colours and sizes — or send a reference of your own.",
       "image": "assets/images/custom-orders.jpg",
       "chips": [
         {
@@ -182,53 +130,26 @@
           "text": "Order quantity"
         }
       ],
-      "processLabel": "How it works",
+      "processLabel": "How an enquiry works",
       "steps": [
         {
           "title": "Send Your Brief",
-          "text": "The category, your colours, how many pieces, and the date you need them."
+          "text": "The design or reference, your colours, how many pieces, and the date you need them."
         },
         {
-          "title": "Approve a Sample",
-          "text": "We make one piece to your brief. Nothing goes into production until you sign it off."
+          "title": "Review a Sample",
+          "text": "We make one piece to your brief and share it for your approval."
         },
         {
-          "title": "Production and Dispatch",
-          "text": "Once you approve the sample, we confirm the price and the timeline, and production starts."
-        }
-      ]
-    },
-    "whoUses": {
-      "label": "Who It's For",
-      "title": "Who We Work With",
-      "intro": "Event decorators, wedding planners, retailers and puja committees.",
-      "personas": [
-        {
-          "icon": "icon-route",
-          "title": "Event Decorators",
-          "text": "Venue-scale quantities against a fixed install date. Give us the date and we work backwards from it."
-        },
-        {
-          "icon": "icon-palette",
-          "title": "Wedding Planners",
-          "text": "Colours matched to your theme, so the whole setting works as one."
-        },
-        {
-          "icon": "icon-bulk",
-          "title": "Retailers and Stores",
-          "text": "Designs you can reorder in the same colours, run after run."
-        },
-        {
-          "icon": "icon-design",
-          "title": "Puja Committees",
-          "text": "Traditional torans and jhalars for pujas, pandals and festival programmes."
+          "title": "Confirm the Details",
+          "text": "We confirm the design, quantity and timeline with you, and the order goes ahead."
         }
       ]
     },
     "about": {
-      "label": "About JHALAR",
-      "title": "From Our Workshop in Howrah to Your Venue",
-      "intro": "JHALAR makes hanging decor in Howrah, West Bengal. Every piece is finished by hand, and one person stays on your order from the first message to dispatch.",
+      "label": "About",
+      "title": "About JHALAR",
+      "intro": "JHALAR is a small maker of jhalars and hanging decor based in Howrah, West Bengal. Every design in this catalogue is handmade in our own workshop, and each enquiry is answered directly over WhatsApp or phone.",
       "image": "assets/images/about-collage.jpg",
       "values": [
         {
@@ -237,11 +158,11 @@
         },
         {
           "icon": "icon-check",
-          "text": "One contact from quote to dispatch"
+          "text": "One contact from enquiry to dispatch"
         },
         {
           "icon": "icon-check",
-          "text": "Repeat orders in the same colours"
+          "text": "Dispatched across India"
         }
       ]
     },
@@ -251,10 +172,10 @@
     },
     "contact": {
       "label": "Contact",
-      "title": "Get in Touch or Place an Order",
-      "intro": "Include a photo if you have one. The clearer the brief, the faster the quote.",
+      "title": "Send an Enquiry",
+      "intro": "Tell us what you need — a catalogue reference, quantities and your date. The clearer the brief, the faster the answer.",
       "submitLabel": "Review and Send on WhatsApp"
     },
-    "footerTagline": "Handcrafted jhalars and hangings, made in Howrah and delivered across India."
+    "footerTagline": "Jhalars and hanging decor for weddings and events. Browse the catalogue and enquire on WhatsApp."
   }
 }

@@ -1,6 +1,6 @@
-# JHALAR Hanging Decor - B2B Website
+# JHALAR Hanging Decor - Catalogue and Enquiry Website
 
-Marketing website for JHALAR Hanging Decor, a manufacturer and wholesale supplier of handcrafted decorative hangings (pom pom garlands, floral jhalars, bell hangings, torans, tassel hangings, decorative strings and custom designs) based in Howrah, West Bengal, India.
+Catalogue website for JHALAR Hanging Decor, a maker of handcrafted decorative hangings (pom pom garlands, floral jhalars, bell hangings, torans, tassel hangings, decorative strings and custom designs) based in Howrah, West Bengal, India. Visitors browse designs, open a product for details and enquire on WhatsApp using its catalogue reference.
 
 **Stack:** plain HTML + CSS + vanilla JS. No framework, no build step.
 **Hosting:** **GitHub Pages** -> https://lokeshdugar040.github.io/jhalar-hanging-decor/
@@ -88,6 +88,15 @@ Categories remain product-type metadata, not series. Allowed categories are
 `Tassel Hangings`, `Decorative Strings`, and `Custom Designs`. Empty category
 filters are hidden. The first six products appear initially; “View all” reveals
 all entries, while category views show every match.
+
+The homepage is catalogue-first: Hero → Catalogue → Custom enquiries → About →
+FAQ → Contact. Manufacturing is mentioned briefly in About; the location
+(Howrah, West Bengal) appears in contact details and structured data, not in
+page headlines. Optional highlight lists (hero highlights, trust strip) are
+empty by default and genuinely hidden — they only appear if entries are added
+in `content/site-settings.json` or the editor. Product cards and modals show
+name, category, description and catalogue reference only; there are no badges,
+prices, stock levels or ecommerce features.
 
 ```bash
 npm test                 # Dependency-free regression and catalogue integrity tests

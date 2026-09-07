@@ -117,3 +117,30 @@ All critical/moderate issues from this audit were addressed:
 - Note: CSP via `<meta>` cannot cover `frame-ancestors` - GitHub Pages response headers are not configurable; assessed as low risk for a brochure site.
 - **A11y:** `:focus-visible` states, `aria-label`/`aria-hidden` on decorative icons, fixed non-existent `fa-festival` icon -> `fa-fire`, modal focuses close button on open, product buttons are real `<button>` data-attributes (no inline `onclick`).
 - **License contradiction resolved:** `UNLICENSED`/All rights reserved consistently.
+
+## Fix Log - 2026-09-06 (catalogue-first homepage)
+
+- Page flow is now Hero → Catalogue → Custom enquiries → About → FAQ → Contact.
+  The "Why JHALAR" (No Middlemen) and "Who It's For" sections and the trust
+  strip content were removed; the hero badge, hero highlight chips and the
+  repeated "Made to order" card badge are gone.
+- Hero copy: "Jhalars and hanging decor for weddings and events" with the
+  browse/enquire intro and "View catalogue" / "Enquire on WhatsApp" actions.
+- Howrah/karigar/factory framing no longer drives the copy. The location stays
+  in the contact section, footer contact block and LocalBusiness structured
+  data; manufacturing is mentioned briefly in About.
+- Product modals show category, name, description, catalogue reference and the
+  WhatsApp enquiry button only (generic assurance bullets removed).
+- `heroHighlights` and `trustItems` are empty in `content/site-settings.json`;
+  empty lists now genuinely hide those blocks (static HTML ships them hidden,
+  and `script.js` shows them only when entries exist). A global
+  `[hidden]{display:none !important}` guard keeps `display:flex` containers
+  honouring the attribute.
+- SEO: catalogue-first title, description, OG/Twitter tags and keywords.
+- Synced everywhere: `site-settings.json`, `index.html`, `script.js` defaults,
+  `editor.js` defaults, editor panels/placeholders, `sections.json`,
+  `theme.json` (feature-card tokens removed with the sections), `style.css`
+  and `package.json` description. `b2bTag` was removed from `products.json`
+  (all 35 entries otherwise byte-identical).
+- All 35 catalogue entries, approved names, descriptions, images and JH-###
+  references are unchanged, including separate JH-027 / JH-035.
