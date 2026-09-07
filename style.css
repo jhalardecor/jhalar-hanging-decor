@@ -94,9 +94,9 @@ h1,h2,h3,h4,h5,h6,.hero-banner-copy h1,.section-heading-group h2,.custom-copy h2
 /* 09. CONTACT + FOOTER */
 .contact{padding-block:0;background:transparent;color:var(--ink)}
 .contact-box{
- width:var(--shell);margin-inline:auto;min-height:360px;
+ width:100%;max-width:none;margin:0;min-height:360px;
  display:flex;align-items:end;justify-content:space-between;
- padding-block:clamp(64px,9vw,110px);gap:40px;
+ padding:clamp(64px,9vw,110px) var(--gutter);gap:40px;
  position:relative;isolation:isolate;overflow:hidden;
  background:
   radial-gradient(120% 160% at 0% 0%,rgba(200,32,57,.12) 0%,rgba(200,32,57,0) 52%),
@@ -118,7 +118,7 @@ h1,h2,h3,h4,h5,h6,.hero-banner-copy h1,.section-heading-group h2,.custom-copy h2
 .contact-cta:hover span{transform:translate(2px,-2px)}
 @media (max-width:767px){
  .contact{padding-inline:0}
- .contact-box{width:min(calc(100% - 32px),1200px);min-height:0;padding-block:56px;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:28px}
+ .contact-box{width:100%;min-height:0;margin:0;padding:56px 16px;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:28px}
  .contact-box h2{max-width:12ch}
  .contact-cta{width:100%;justify-content:space-between;padding-bottom:12px}
 }
