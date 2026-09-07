@@ -1,4 +1,4 @@
-/* JHALAR — public site runtime
+/* JHALAR public site runtime
    - catalogue loader (fail-closed through the shared naming gate)
    - runtime settings/theme/sections/custom-css application (published state)
    - window.JHALAR API consumed by the Pro Editor live preview */
@@ -28,8 +28,8 @@ const DEFAULTS={
  aboutLabel:'JHALAR',aboutTitle:'Made by hand. Chosen for the moment.',aboutIntro:'We make hanging decor for the people who put celebrations together: decorators, planners, retailers and families.',
  aboutImage:'assets/images/about-collage.jpg',
  contactLabel:'READY WHEN YOU ARE',contactTitle:'Tell us what you are creating.',contactIntro:'Send the design, quantity, location and date. We will take it from there.',
- footerTagline:'Handcrafted hanging decor · Howrah, India',
- siteTitle:'JHALAR — Hanging Decor for Celebrations',
+ footerTagline:'Handcrafted hanging decor in Howrah, India',
+ siteTitle:'JHALAR · Hanging Decor for Celebrations',
  siteDescription:'Handcrafted jhalars and hanging decor for weddings, events and festive spaces.',
  ogImage:'assets/images/og-cover.jpg',
  nav:[['Collection','#collection'],['Custom work','#custom'],['Our story','#story']]
