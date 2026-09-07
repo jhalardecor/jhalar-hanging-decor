@@ -1862,3 +1862,50 @@ button,.btn,.hero-banner-cta,.filter-btn{
 .footer.site-footer *{border-color:rgba(98,35,49,.14)}
 .footer.site-footer .footer-col a,
 .footer.site-footer .footer-col span{color:rgba(20,25,66,.76)!important}
+
+
+/* MOBILE FOOTER — compact, balanced, not vertically stretched */
+@media (max-width:620px){
+  .footer.site-footer{
+    padding:32px 0 0!important;
+  }
+  .footer.site-footer .footer-grid{
+    width:min(calc(100% - 32px),1200px)!important;
+    grid-template-columns:1fr 1fr!important;
+    gap:24px 20px!important;
+    padding-bottom:32px!important;
+  }
+  .footer.site-footer .footer-brand{
+    grid-column:1/-1!important;
+  }
+  .footer.site-footer .footer-logo{
+    width:118px!important;
+  }
+  .footer.site-footer .footer-tagline{
+    max-width:42ch!important;
+    margin:12px 0 0!important;
+    font-size:.86rem!important;
+    line-height:1.5!important;
+  }
+  .footer.site-footer .footer-col h4{
+    margin:0 0 10px!important;
+    font-size:.68rem!important;
+  }
+  .footer.site-footer .footer-col ul{
+    gap:7px!important;
+  }
+  .footer.site-footer .footer-col a,
+  .footer.site-footer .footer-col span{
+    font-size:.82rem!important;
+    line-height:1.35!important;
+  }
+  .footer.site-footer .footer-bottom .container,
+  .footer.site-footer .footer-bottom .shell{
+    width:min(calc(100% - 32px),1200px)!important;
+    min-height:54px!important;
+  }
+  .footer.site-footer .footer-bottom p{
+    font-size:.7rem!important;
+    line-height:1.35!important;
+  }
+}
