@@ -910,3 +910,34 @@ p,.section-head>p,.hero-banner-copy>p:not(.kicker){letter-spacing:.006em}
   .zoom-hint.desktop{display:none!important}
   .zoom-hint.mobile{display:flex}
 }
+
+
+/* HEADER LOGO VISIBILITY — cream header always uses the dark master logo */
+.header .brand{position:relative!important;z-index:101!important}
+.header .brand img{
+  display:block!important;
+  visibility:visible!important;
+  opacity:1!important;
+  width:102px!important;
+  height:35px!important;
+  max-width:102px!important;
+  max-height:35px!important;
+  object-fit:contain!important;
+  filter:none!important;
+  mix-blend-mode:normal!important;
+}
+@media(max-width:760px){
+  .header{background:#fffaf1!important;color:#2f2427!important}
+  .header .brand img{
+    display:block!important;
+    visibility:visible!important;
+    opacity:1!important;
+    width:102px!important;
+    height:35px!important;
+    max-width:102px!important;
+    max-height:35px!important;
+    filter:none!important;
+  }
+  .header-row{min-height:68px!important}
+  .menu{position:relative!important;z-index:102!important}
+}
