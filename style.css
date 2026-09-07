@@ -2248,3 +2248,27 @@ button:not(.filter-btn),
 .nav a::after{display:none!important}
 .nav a{transition:color .18s var(--ease),opacity .18s var(--ease)!important}
 .nav a:hover,.nav a:focus-visible{color:#C82039!important;opacity:1!important}
+
+
+/* FILTER OPTIONS — independent, gentle auto-reveal rail */
+@media (max-width:760px){
+  .filters-wrap{
+    overflow:hidden!important;
+    position:relative;
+  }
+  .filters{
+    animation:filterOptionsReveal 12s var(--ease) 1.2s infinite alternate;
+    will-change:transform;
+  }
+  .filters-wrap:hover .filters,
+  .filters-wrap:focus-within .filters{
+    animation-play-state:paused;
+  }
+  @keyframes filterOptionsReveal{
+    0%,18%{transform:translateX(0)}
+    82%,100%{transform:translateX(calc(-1 * var(--filter-overflow, 120px)))}
+  }
+}
+@media (prefers-reduced-motion:reduce){
+  .filters{animation:none!important}
+}
