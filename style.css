@@ -2075,3 +2075,88 @@ button:not(.filter-btn),
     scroll-snap-align:center!important;
   }
 }
+
+
+/* =========================================================
+   BUTTON SYSTEM — canonical roles, no visual collisions
+   ========================================================= */
+:root{
+  --btn-radius:2px;
+  --btn-h:46px;
+}
+
+/* NORMAL ACTION BUTTONS: solid, compact, premium */
+.hero-banner-cta,
+.contact-cta,
+.modal-wa-btn,
+.more-btn{
+  border-radius:var(--btn-radius)!important;
+  min-height:var(--btn-h)!important;
+  font-family:Arial,Helvetica,sans-serif!important;
+  font-weight:600!important;
+  letter-spacing:.01em!important;
+}
+
+/* Primary CTA: distinct brand treatment */
+.contact-cta,
+.modal-wa-btn{
+  background:var(--brand-gradient)!important;
+  color:var(--surface)!important;
+  border:1px solid transparent!important;
+  padding:0 20px!important;
+}
+
+/* Hero CTA: editorial link-style, not another pill/button */
+.hero-banner-cta{
+  background:transparent!important;
+  color:var(--heritage)!important;
+  border:0!important;
+  border-bottom:1px solid currentColor!important;
+  padding:0 0 8px!important;
+  min-height:auto!important;
+  border-radius:0!important;
+}
+
+/* Secondary/normal button */
+.more-btn{
+  background:transparent!important;
+  color:var(--navy)!important;
+  border:1px solid var(--navy)!important;
+  padding:0 20px!important;
+}
+
+/* FILTERS ONLY are pills */
+#product-filters .filter-btn{
+  border-radius:999px!important;
+  background:transparent!important;
+  color:var(--ink)!important;
+  border:1px solid rgba(98,35,49,.20)!important;
+  min-height:42px!important;
+  padding:0 16px!important;
+}
+#product-filters .filter-btn.active{
+  background:var(--heritage)!important;
+  color:var(--surface)!important;
+  border-color:var(--heritage)!important;
+}
+
+.hero-banner-cta:hover{color:var(--red-deep)!important;background:transparent!important}
+.contact-cta:hover,.modal-wa-btn:hover{
+  filter:brightness(.96)!important;
+  transform:translateY(-2px)!important;
+}
+.more-btn:hover{
+  background:var(--navy)!important;
+  color:var(--surface)!important;
+}
+#product-filters .filter-btn:hover{border-color:var(--heritage)!important}
+#product-filters .filter-btn:active,
+.contact-cta:active,.modal-wa-btn:active,.more-btn:active{
+  transform:scale(.98)!important;
+}
+
+@media(max-width:760px){
+  .hero-banner-cta{width:auto!important}
+  .contact-cta,.modal-wa-btn,.more-btn{width:100%!important}
+  #product-filters .filter-btn{width:auto!important;flex:0 0 auto!important}
+}
