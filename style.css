@@ -2258,3 +2258,26 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
   .hero-banner-copy>p:not(.kicker),
   .hero-banner-copy>.hero-lead{color:#622331!important}
 }
+
+
+/* TYPOGRAPHY DENSITY CORRECTION — readable, natural body rhythm */
+body{
+  font-size:clamp(16px,.35vw + 14.5px,18px)!important;
+  line-height:1.55!important;
+  letter-spacing:0!important;
+}
+p{line-height:1.55!important}
+.section-head>p,
+.custom-copy p:not(.eyebrow),
+.story-grid>div:last-child,
+.contact p:not(.eyebrow),
+.modal-copy>p:not(.eyebrow){
+  line-height:1.6!important;
+}
+/* Product text stays compact so the catalogue does not look vertically stretched. */
+.product-category{line-height:1.3!important}
+.product-title{line-height:1.35!important}
+@media(max-width:760px){
+  body{font-size:16px!important;line-height:1.55!important}
+  p{line-height:1.55!important}
+}
