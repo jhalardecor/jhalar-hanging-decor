@@ -2765,3 +2765,21 @@ button:not(.filter-btn),
     }
   }
 }
+
+
+/* FINAL MOBILE COPY WIDTH — use the available modal width; do not create a narrow text column */
+@media(max-width:760px){
+  #product-modal .modal-copy{
+    width:100%!important;
+    max-width:none!important;
+    box-sizing:border-box!important;
+  }
+  #product-modal #modal-desc{
+    width:100%!important;
+    max-width:none!important;
+    margin:0!important;
+    text-wrap:pretty!important;
+    line-height:1.66!important;
+    hyphens:none!important;
+  }
+}
