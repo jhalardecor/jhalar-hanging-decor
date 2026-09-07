@@ -1822,3 +1822,55 @@ p,.section-head>p,.hero-banner-copy>p:not(.kicker){letter-spacing:.006em}
     order:1!important;
   }
 }
+
+
+/* HEADER SCALE — same design system, stronger responsive proportions */
+.site-header{
+  min-height:76px!important;
+}
+.site-header .header-inner,
+.site-header .nav-wrap{
+  min-height:76px!important;
+}
+.logo{
+  display:inline-flex!important;
+  align-items:center!important;
+  min-height:52px!important;
+}
+.logo img,
+.brand-logo img{
+  max-height:48px!important;
+  width:auto!important;
+  object-fit:contain!important;
+}
+.logo svg,
+.brand-logo svg{
+  width:auto!important;
+  height:48px!important;
+}
+@media(max-width:760px){
+  .site-header{
+    min-height:70px!important;
+  }
+  .site-header .header-inner,
+  .site-header .nav-wrap{
+    min-height:70px!important;
+    padding-inline:20px!important;
+  }
+  .logo{
+    min-height:50px!important;
+  }
+  .logo img,
+  .brand-logo img{
+    max-height:44px!important;
+  }
+  .logo svg,
+  .brand-logo svg{
+    height:44px!important;
+  }
+  .menu-toggle,
+  .nav-toggle{
+    min-width:44px!important;
+    min-height:44px!important;
+  }
+}
