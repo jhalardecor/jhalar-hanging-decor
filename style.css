@@ -1456,3 +1456,57 @@ button,.btn,.hero-banner-cta,.filter-btn{
   .header-row{width:calc(100% - 24px)!important}
   .brand img{width:138px!important}
 }
+
+
+/* HAMBURGER PRECISION RESET — BOTH BARS USE THE SAME GEOMETRY */
+@media(max-width:900px){
+  .header #menu{
+    display:block!important;
+    position:relative!important;
+    width:48px!important;
+    height:48px!important;
+    padding:0!important;
+    margin:0!important;
+    box-sizing:border-box!important;
+    overflow:visible!important;
+  }
+
+  .header #menu span,
+  .header #menu span:nth-child(1),
+  .header #menu span:nth-child(2){
+    position:absolute!important;
+    display:block!important;
+    left:12px!important;
+    right:auto!important;
+    width:24px!important;
+    height:2px!important;
+    min-width:24px!important;
+    max-width:24px!important;
+    margin:0!important;
+    padding:0!important;
+    box-sizing:border-box!important;
+    border:0!important;
+    border-radius:2px!important;
+    transform-origin:50% 50%!important;
+  }
+
+  .header #menu span:nth-child(1){
+    top:18px!important;
+    transform:translate3d(0,0,0)!important;
+  }
+
+  .header #menu span:nth-child(2){
+    top:28px!important;
+    transform:translate3d(0,0,0)!important;
+  }
+
+  .header #menu.open span:nth-child(1){
+    top:23px!important;
+    transform:rotate(45deg)!important;
+  }
+
+  .header #menu.open span:nth-child(2){
+    top:23px!important;
+    transform:rotate(-45deg)!important;
+  }
+}
