@@ -242,3 +242,15 @@ window.addEventListener('scroll',()=>{$('.header').classList.toggle('scrolled',w
 $('#year').textContent=new Date().getFullYear();
 markRevealTargets();observeReveals();
 initProducts();initRuntime();
+
+
+/* Mobile modal scroll isolation */
+(function(){
+  const modal=document.getElementById('product-modal');
+  if(!modal)return;
+  let scrollY=0, locked=false;
+  const lock=()=>{if(locked||!matchMedia('(max-width:760px)').matches)return;scrollY=window.scrollY;document.body.style.top='-'+scrollY+'px';document.body.classList.add('modal-open');locked=true};
+  const unlock=()=>{if(!locked)return;document.body.classList.remove('modal-open');document.body.style.top='';window.scrollTo(0,scrollY);locked=false};
+  new MutationObserver(()=>modal.classList.contains('open')?lock():unlock()).observe(modal,{attributes:true,attributeFilter:['class']});
+  modal.addEventListener('touchmove',e=>{if(e.target===modal)e.preventDefault()},{passive:false});
+})();
