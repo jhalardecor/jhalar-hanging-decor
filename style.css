@@ -1610,3 +1610,38 @@ p,.section-head>p,.hero-banner-copy>p:not(.kicker){letter-spacing:.006em}
 #product-modal .modal-stage:not(.is-video){cursor:zoom-in!important}
 #product-modal .modal-stage.is-zoomed:not(.is-video){cursor:grab!important}
 @media(max-width:760px){#product-modal .modal-stage{padding:18px!important}#product-modal .modal-stage::before{box-shadow:inset 0 0 0 18px var(--cream)!important}}
+
+
+/* HERO OCCASION TAGS — intentional mobile layout, not wrapped inline text */
+@media(max-width:760px){
+  .hero-banner-bottom{
+    display:grid!important;
+    grid-template-columns:repeat(3,minmax(0,1fr))!important;
+    gap:8px!important;
+    width:100%!important;
+    padding:0!important;
+    font-size:.62rem!important;
+    line-height:1.25!important;
+    letter-spacing:.045em!important;
+    text-align:center!important;
+  }
+  .hero-banner-bottom span{
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    min-height:42px!important;
+    padding:7px 6px!important;
+    border:1px solid rgba(118,86,93,.18)!important;
+    border-radius:999px!important;
+    background:rgba(255,255,255,.16)!important;
+    white-space:normal!important;
+  }
+  .hero-banner-bottom span+span:before{
+    content:none!important;
+    margin:0!important;
+  }
+}
+@media(max-width:390px){
+  .hero-banner-bottom{grid-template-columns:1fr!important;gap:7px!important}
+  .hero-banner-bottom span{min-height:38px!important}
+}
