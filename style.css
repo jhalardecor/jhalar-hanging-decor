@@ -525,3 +525,14 @@ h1,h2,h3,h4,h5,h6{font-family:var(--font-heading);color:var(--navy);font-synthes
 .more-btn:hover,.modal-wa-btn:hover{background:var(--red);border-color:var(--red);color:var(--paper)}
 .contact,.footer{background:var(--navy)!important;color:var(--paper)}
 .modal-copy h3{color:var(--navy)}
+
+
+/* CTA hierarchy — warm brand energy, not corporate navy */
+.hero-banner-cta,.text-link,.contact-cta{color:var(--heritage)}
+.hero-banner-cta:hover,.text-link:hover,.contact-cta:hover{color:var(--red)}
+.more-btn{border-color:var(--heritage);color:var(--heritage)}
+.more-btn:hover{background:var(--heritage);border-color:var(--heritage);color:var(--paper)}
+.modal-wa-btn{background:var(--red);border-color:var(--red);color:var(--paper)}
+.modal-wa-btn:hover{background:var(--red-deep);border-color:var(--red-deep);color:var(--paper)}
+.filter-btn.active{background:var(--heritage);border-color:var(--heritage)}
+.filter-btn:hover{border-color:var(--red-deep);color:var(--red-deep)}
