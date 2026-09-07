@@ -2161,3 +2161,81 @@ button{touch-action:manipulation}
   .hero-banner-content{min-height:550px!important;padding-top:56px!important}
   .hero-banner h1{font-size:clamp(2.65rem,12.5vw,3.4rem)!important}
 }
+
+
+/* ==========================================================================
+   MOBILE HERO COMPOSITION — compact, readable, intentional
+   Overrides legacy hero patches with one mobile composition.
+   ========================================================================== */
+@media(max-width:760px){
+  .hero-banner{
+    height:100svh!important;
+    min-height:560px!important;
+    max-height:720px!important;
+  }
+  .hero-banner-content{
+    min-height:100%!important;
+    padding:0 var(--page-gutter,20px) calc(32px + env(safe-area-inset-bottom))!important;
+    display:flex!important;
+    align-items:flex-end!important;
+  }
+  .hero-banner-copy{
+    width:100%!important;
+    max-width:31rem!important;
+    padding:0!important;
+  }
+  .hero-banner .kicker{
+    margin:0 0 12px!important;
+    font-size:.64rem!important;
+    letter-spacing:.13em!important;
+  }
+  .hero-banner h1{
+    max-width:10ch!important;
+    font-size:clamp(2.55rem,10.8vw,3.45rem)!important;
+    line-height:1.06!important;
+    letter-spacing:-.035em!important;
+    margin:0 0 16px!important;
+  }
+  .hero-banner-copy>.hero-lead{
+    max-width:30ch!important;
+    font-size:clamp(.95rem,3.8vw,1.05rem)!important;
+    line-height:1.5!important;
+    margin:0 0 22px!important;
+  }
+  .hero-banner-cta{
+    min-height:48px!important;
+    margin:0!important;
+  }
+  .hero-banner-shade{
+    background:
+      linear-gradient(180deg,
+        rgba(44,7,20,.18) 0%,
+        rgba(44,7,20,.16) 38%,
+        rgba(44,7,20,.82) 100%)!important;
+  }
+  .audience-strip-inner{
+    padding:24px 20px 26px!important;
+    gap:10px!important;
+  }
+  .audience-label{font-size:.64rem!important}
+  .audience-items{
+    display:flex!important;
+    flex-wrap:wrap!important;
+    gap:6px 0!important;
+    font-size:.78rem!important;
+    line-height:1.45!important;
+  }
+  .audience-items span{white-space:nowrap!important}
+  .audience-items span+span:before{
+    display:inline!important;
+    margin-inline:10px!important;
+  }
+}
+@media(max-width:390px){
+  .hero-banner{min-height:540px!important}
+  .hero-banner h1{
+    font-size:clamp(2.35rem,10.8vw,3rem)!important;
+    margin-bottom:14px!important;
+  }
+  .hero-banner-copy>.hero-lead{margin-bottom:18px!important}
+}
