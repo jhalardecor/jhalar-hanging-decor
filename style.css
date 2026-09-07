@@ -2708,3 +2708,13 @@ body{padding-top:var(--header-h)!important}
 /* SINGLE MEDIA MODE — structural guard against image + video split panels */
 #product-modal .modal-stage:not(.is-video) > video{display:none!important;}
 #product-modal .modal-stage.is-video > #modal-photo{display:none!important;}
+
+
+/* DEVICE-SPECIFIC ZOOM GUIDANCE */
+.modal-scroll-zoom,.modal-pinch-zoom{display:none!important;}
+@media(hover:hover) and (pointer:fine){
+  #product-modal .modal-scroll-zoom{display:block!important;}
+}
+@media(hover:none), (pointer:coarse){
+  #product-modal .modal-pinch-zoom{display:block!important;}
+}
