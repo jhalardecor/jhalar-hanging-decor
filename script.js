@@ -254,3 +254,23 @@ initProducts();initRuntime();
   new MutationObserver(()=>modal.classList.contains('open')?lock():unlock()).observe(modal,{attributes:true,attributeFilter:['class']});
   modal.addEventListener('touchmove',e=>{if(e.target===modal)e.preventDefault()},{passive:false});
 })();
+
+
+/* Zoom affordance: contextual hints without permanent controls */
+(function(){
+  const modal=document.getElementById('product-modal');
+  if(!modal)return;
+  const addHint=()=>{
+    const stage=modal.querySelector('.modal-stage');
+    if(!stage||stage.querySelector('.zoom-hint'))return;
+    const hint=document.createElement('div');
+    hint.className='zoom-hint '+(matchMedia('(max-width:760px)').matches?'mobile':'desktop');
+    hint.textContent=matchMedia('(max-width:760px)').matches?'Pinch to zoom':'Scroll to zoom';
+    stage.appendChild(hint);
+    requestAnimationFrame(()=>hint.classList.add('is-visible'));
+    setTimeout(()=>{hint.classList.remove('is-visible');setTimeout(()=>hint.remove(),400)},2800);
+  };
+  new MutationObserver(()=>{
+    if(modal.classList.contains('open'))setTimeout(addHint,180);
+  }).observe(modal,{attributes:true,attributeFilter:['class']});
+})();
