@@ -1563,7 +1563,7 @@ function installProStudio(){
   if(!panel||document.getElementById('pro-studio'))return;
   const box=document.createElement('div');
   box.className='pro-studio';box.id='pro-studio';
-  box.innerHTML='<div class="pro-studio-head"><h4>✦ Gradient Studio</h4><span class="help">Live preview</span></div><div id="studio-gradient-preview" class="gradient-preview"></div><div class="studio-row"><div><label>Color A</label><input id="studio-a" type="color" value="#FFFDF8"></div><div><label>Color B</label><input id="studio-b" type="color" value="#FDF4F1"></div></div><div class="studio-row"><div><label>Accent glow</label><input id="studio-c" type="color" value="#C82039"></div><div><label>Angle</label><input id="studio-angle" type="range" min="0" max="360" value="135"></div></div><div class="studio-actions"><button class="btn-sm primary" id="studio-contact">Apply to Contact</button><button class="btn-sm" id="studio-reset">Reset</button></div>';
+  box.innerHTML='<div class="pro-studio-head"><h4>✦ Gradient Studio</h4><span class="help">Live preview</span></div><div id="studio-gradient-preview" class="gradient-preview"></div><div class="studio-row"><div><label>Color A</label><input id="studio-a" type="color" value="#FFFDF8"></div><div><label>Color B</label><input id="studio-b" type="color" value="#FDF4F1"></div></div><div class="studio-row"><div><label>Accent glow</label><input id="studio-c" type="color" value="#C82039"></div><div><label>Angle</label><input id="studio-angle" type="range" min="0" max="360" value="135"></div></div><div class="studio-actions"><button class="btn-sm primary" id="studio-contact">Apply to Contact</button><button class="btn-sm primary" id="studio-hero">Apply Hero Overlay</button><button class="btn-sm" id="studio-reset">Reset</button></div>';
   panel.appendChild(box);
   const q=id=>document.getElementById(id);
   const paint=()=>{
@@ -1576,6 +1576,12 @@ function installProStudio(){
     const css='.shell.contact-box{background:radial-gradient(100% 130% at 100% 0%,'+c+'24 0%,transparent 58%),linear-gradient('+ang+'deg,'+a+' 0%,'+b+' 100%)!important}';
     state.customCSS=(state.customCSS||'').replace(/\/\* PRO_STUDIO_CONTACT_START \*\/[\s\S]*?\/\* PRO_STUDIO_CONTACT_END \*\//,'')+'\\n/* PRO_STUDIO_CONTACT_START */\\n'+css+'\\n/* PRO_STUDIO_CONTACT_END */';
     state.changed=true;updateSaveIndicator();applyPreview();showToast('Contact gradient applied live','success');
+  };
+  q('studio-hero').onclick=()=>{
+    const a=q('studio-a').value,b=q('studio-b').value,c=q('studio-c').value,ang=q('studio-angle').value;
+    const css='#hero{position:relative;isolation:isolate;overflow:hidden}#hero::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:1;background:radial-gradient(110% 130% at 0% 50%,'+c+'33 0%,transparent 58%),linear-gradient('+ang+'deg,'+a+'eF 0%,'+b+'00 100%)}#hero>*{position:relative;z-index:2}';
+    state.customCSS=(state.customCSS||'').replace(/\/\* PRO_STUDIO_HERO_START \*\/[\s\S]*?\/\* PRO_STUDIO_HERO_END \*\//,'')+'\\n/* PRO_STUDIO_HERO_START */\\n'+css+'\\n/* PRO_STUDIO_HERO_END */';
+    state.changed=true;updateSaveIndicator();applyPreview();showToast('Hero overlay applied live','success');
   };
   q('studio-reset').onclick=()=>{q('studio-a').value='#FFFDF8';q('studio-b').value='#FDF4F1';q('studio-c').value='#C82039';q('studio-angle').value=135;paint();};
 }
