@@ -2,13 +2,13 @@
   "whatsapp": "918100656258",
   "phone": "+91 81006 56258",
   "email": "lokeshdugar040@gmail.com",
-  "location": "Howrah, West Bengal, India",
+  "location": "Kolkata, West Bengal, India",
   "gst": "Available on request",
-  "heroHeadline": "Hanging decor for celebrations and events.",
-  "heroIntro": "Explore handmade designs for weddings, functions, festive spaces and larger orders.",
+  "heroHeadline": "Colour sets the mood.",
+  "heroIntro": "For wholesalers, retailers and event decorators looking for decorative products for their business and projects.",
   "heroImage": "assets/images/hero-jhalar.webp",
-  "siteTitle": "JHALAR | Hanging Decor",
-  "siteDescription": "Handmade hanging decor for events, celebrations, decorators, retailers and wholesale buyers.",
+  "siteTitle": "JHALAR | Decorative Hanging Products",
+  "siteDescription": "Decorative hanging products for wholesalers, retailers and event decorators.",
   "ogImage": "assets/images/og-cover.jpg",
   "navItems": [
     {
@@ -82,15 +82,15 @@
       "href": ""
     },
     "collection": {
-      "label": "BROWSE DESIGNS",
-      "title": "Browse our collection",
-      "intro": "Explore our hanging designs and find options for your event, celebration or store.",
+      "label": "PRODUCTS",
+      "title": "Explore the range",
+      "intro": "View the available styles and open any product for details.",
       "note": ""
     },
     "customOrders": {
-      "label": "CUSTOM WORK",
-      "title": "Looking for something specific?",
-      "intro": "Share your colour preference, size, quantity or reference image. We will be happy to discuss your requirement.",
+      "label": "YOUR REQUIREMENT",
+      "title": "Need something for a specific order?",
+      "intro": "Send us the design reference, colours, size and quantity you need. We can check the available options with you.",
       "image": "assets/images/custom-orders.jpg",
       "chips": [
         {
@@ -123,31 +123,17 @@
       ]
     },
     "about": {
-      "label": "JHALAR",
-      "title": "Made by hand in Howrah",
-      "intro": "We make hanging decor for event decorators, planners, retailers, wholesalers and families.",
-      "image": "assets/images/about-collage.jpg",
-      "values": [
-        {
-          "icon": "icon-check",
-          "text": "Finished by hand, piece by piece"
-        },
-        {
-          "icon": "icon-check",
-          "text": "Direct response from enquiry to dispatch"
-        },
-        {
-          "icon": "icon-check",
-          "text": "Custom colour and size discussions"
-        }
-      ]
+      "label": "ABOUT JHALAR",
+      "title": "A decor supplier based near Kolkata.",
+      "intro": "We work with wholesalers, retailers and event decorators who source decorative products for their customers and projects.",
+      "image": "assets/images/about-collage.jpg"
     },
     "contact": {
-      "label": "GET IN TOUCH",
-      "title": "Let's discuss your requirement",
-      "intro": "Tell us about your event or order. If available, share the quantity, location and date as well.",
+      "label": "SEND AN ENQUIRY",
+      "title": "Tell us what you need.",
+      "intro": "Send the product or design, quantity and any important details. We will take it from there.",
       "submitLabel": "Prepare enquiry"
     },
-    "footerTagline": "Handmade hanging decor from Howrah, India"
+    "footerTagline": "Decorative hanging products from near Kolkata, India"
   }
 }
