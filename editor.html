@@ -158,7 +158,7 @@ hr.divider{margin:12px 0;border:none;border-top:1px solid rgba(128,128,128,0.1)}
 .preview-container iframe{display:block;background:#fff;border:none;border-radius:6px;box-shadow:0 14px 44px rgba(47,30,37,0.2);transform-origin:0 0}
 .zoom-box iframe.desktop{width:1160px;height:calc(100vh - 122px)}
 .zoom-box iframe.tablet{width:768px;height:1024px}
-.zoom-box iframe.mobile{width:375px;height:812px}
+.zoom-box iframe.mobile{width:390px;height:844px}
 .preview-loading{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:var(--text3);font-size:13px;font-weight:600;z-index:1}
 .toast{position:fixed;bottom:20px;right:20px;padding:11px 16px;border-radius:var(--r-md);background:var(--ed-navy);color:#fff;font-size:12.5px;font-weight:600;box-shadow:var(--sh-md);z-index:9999;opacity:0;transform:translateY(10px);transition:all .3s;pointer-events:none;max-width:350px}
 .toast.show{opacity:1;transform:translateY(0)}
@@ -178,7 +178,7 @@ hr.divider{margin:12px 0;border:none;border-top:1px solid rgba(128,128,128,0.1)}
   .preview-toolbar{flex-wrap:wrap;height:auto;min-height:38px;padding:5px 8px;row-gap:5px}
   .preview-toolbar .preview-url{max-width:100%;margin-left:0;flex:1 1 100%;order:5}
   .preview-container{padding:8px}
-  .preview-container iframe.mobile{width:100%;max-width:375px}
+  .preview-container iframe.mobile{width:100%;max-width:390px}
 }
 
 /* Header: 7 fixed controls cannot fit a phone. Let it wrap and grow. */
@@ -273,6 +273,51 @@ hr.divider{margin:12px 0;border:none;border-top:1px solid rgba(128,128,128,0.1)}
 .ins-segmented button:hover{background:rgba(164,107,53,.08);color:var(--gold)}
 .ins-segmented button.active{background:var(--gold);color:#fff}
 
+/* ---- Shopify-style shell: section rail + scoped settings panel ---- */
+.section-rail{width:196px;min-width:196px;background:var(--bg2);border-right:1px solid rgba(128,128,128,.12);
+  overflow-y:auto;padding:10px 8px 24px;display:flex;flex-direction:column;gap:2px}
+.rail-group{margin:12px 4px 4px;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--text2);opacity:.75}
+.rail-item{display:flex;align-items:center;gap:9px;width:100%;padding:8px 10px;border:0;border-radius:8px;background:transparent;
+  color:var(--text);font:inherit;font-size:13px;text-align:left;cursor:pointer;transition:.12s}
+.rail-item i{width:15px;font-size:12px;color:var(--text2);flex-shrink:0}
+.rail-item:hover{background:rgba(164,107,53,.1)}
+.rail-item.active{background:var(--gold);color:#fff}
+.rail-item.active i{color:#fff}
+.rail-item .rail-dot{margin-left:auto;width:6px;height:6px;border-radius:50%;background:var(--gold);opacity:0}
+.rail-item.edited .rail-dot{opacity:1}
+.rail-item.active .rail-dot{background:#fff}
+.sidebar-tabs{display:none}
+.scope-head{display:flex;align-items:center;gap:10px;padding:10px 12px;border-bottom:1px solid rgba(128,128,128,.12);background:var(--bg2);flex-shrink:0}
+.scope-back{width:28px;height:28px;border:1px solid var(--border);border-radius:8px;background:var(--panel);color:var(--text2);cursor:pointer}
+.scope-back:hover{color:var(--gold);border-color:var(--gold)}
+.scope-title{display:block;font-size:13px;font-weight:600}
+.scope-sub{display:block;font-size:11px;color:var(--text2)}
+
+/* ---- hero design controls ---- */
+.hero-fields{display:flex;flex-direction:column;gap:14px}
+.hero-field-head{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:6px}
+.hero-field-head label{font-size:12px;font-weight:600;margin:0}
+.hero-field-val{font-size:11px;color:var(--text2)}
+.hero-seg{display:flex;flex-wrap:wrap;gap:4px}
+.hero-seg button{flex:1 1 auto;min-width:62px;height:32px;padding:0 8px;border:1px solid var(--border);border-radius:8px;
+  background:var(--panel);color:var(--text2);font:inherit;font-size:12px;cursor:pointer;transition:.12s}
+.hero-seg button:hover{border-color:var(--gold);color:var(--gold)}
+.hero-seg button.active{background:var(--gold);border-color:var(--gold);color:#fff}
+.hero-pos{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;max-width:120px}
+.hero-pos button{height:30px;border:1px solid var(--border);border-radius:6px;background:var(--panel);cursor:pointer;
+  display:grid;place-items:center}
+.hero-pos button span{width:7px;height:7px;border-radius:50%;background:var(--text2)}
+.hero-pos button.active{background:var(--gold);border-color:var(--gold)}
+.hero-pos button.active span{background:#fff}
+.hero-switch{display:flex;align-items:center;gap:8px;font-size:12px}
+.hero-readout{margin-top:12px;padding:9px 10px;border:1px dashed var(--border);border-radius:8px;background:var(--panel);
+  font-size:11px;line-height:1.55;color:var(--text2)}
+.hero-readout b{color:var(--text);font-weight:600}
+.hero-readout .ok{color:#2e7d32}
+.hero-readout .bad{color:#c62828}
+@media(max-width:900px){.section-rail{display:none}.sidebar-tabs{display:flex}}
+
+.btn[disabled]{opacity:.38;cursor:not-allowed;pointer-events:none}
 </style>
 </head>
 <body>
@@ -282,8 +327,8 @@ hr.divider{margin:12px 0;border:none;border-top:1px solid rgba(128,128,128,0.1)}
   </div>
   <div class="editor-header-right">
     <span class="save-indicator" id="save-indicator"><i class="fas fa-check-circle" style="color:#2e7d32"></i> Saved</span>
-    <button class="btn btn-icon" onclick="undo()" title="Undo (Ctrl+Z)"><i class="fas fa-undo"></i></button>
-    <button class="btn btn-icon" onclick="redo()" title="Redo (Ctrl+Shift+Z)"><i class="fas fa-redo"></i></button>
+    <button class="btn btn-icon" id="undo-btn" onclick="undo()" title="Undo (Ctrl+Z)" disabled><i class="fas fa-undo"></i></button>
+    <button class="btn btn-icon" id="redo-btn" onclick="redo()" title="Redo (Ctrl+Shift+Z)" disabled><i class="fas fa-redo"></i></button>
     <button class="btn" onclick="resetToPublished()" title="Reset to published state"><i class="fas fa-history"></i> Reset</button>
     <button class="btn btn-icon" id="dark-mode-btn" onclick="toggleDarkMode()" title="Dark Mode"><i class="fas fa-moon"></i></button>
     <button class="btn" onclick="previewChanges()"><i class="fas fa-eye"></i> Preview</button>
@@ -291,6 +336,7 @@ hr.divider{margin:12px 0;border:none;border-top:1px solid rgba(128,128,128,0.1)}
   </div>
 </header>
 <div class="editor-body">
+  <nav class="section-rail" id="section-rail" aria-label="Sections"></nav>
   <aside class="editor-sidebar">
     <nav class="sidebar-tabs">
       <button class="sidebar-tab active" data-tab="content"><i class="fas fa-pencil-alt"></i> Content</button>
@@ -302,6 +348,10 @@ hr.divider{margin:12px 0;border:none;border-top:1px solid rgba(128,128,128,0.1)}
       <button class="sidebar-tab" data-tab="inspector"><i class="fas fa-crosshairs"></i> Inspector</button>
       <button class="sidebar-tab" data-tab="publish"><i class="fas fa-upload"></i> Publish</button>
     </nav>
+    <div class="scope-head" id="scope-head" hidden>
+      <button type="button" class="scope-back" onclick="clearScope()" title="Show every setting"><i class="fas fa-arrow-left"></i></button>
+      <div><span class="scope-title" id="scope-title">Hero</span><span class="scope-sub" id="scope-sub">Section settings</span></div>
+    </div>
     <div class="sidebar-content">
 
 
@@ -366,7 +416,7 @@ hr.divider{margin:12px 0;border:none;border-top:1px solid rgba(128,128,128,0.1)}
         <h3><i class="fas fa-pencil-alt"></i> Content</h3>
         <p class="hint">Edit contact info, hero, navigation, social links, optional highlights and FAQ. All changes preview live.</p>
 
-        <div class="panel-section">
+        <div class="panel-section" data-scope="contact">
           <h4><i class="fas fa-id-card"></i> Contact Info</h4>
           <div class="form-group"><label>WhatsApp Number</label><input type="text" id="ed-whatsapp" placeholder="918100656258"><span class="help">Digits only, no + or spaces</span></div>
           <div class="form-group"><label>Display Phone</label><input type="text" id="ed-phone" placeholder="+91 81006 56258"></div>
@@ -374,7 +424,7 @@ hr.divider{margin:12px 0;border:none;border-top:1px solid rgba(128,128,128,0.1)}
           <div class="form-row"><div class="form-group"><label>Location</label><input type="text" id="ed-location" placeholder="Howrah, West Bengal, India"></div><div class="form-group"><label>GST Info</label><input type="text" id="ed-gst" placeholder="Available on request"></div></div>
         </div>
 
-        <div class="panel-section">
+        <div class="panel-section" data-scope="hero">
           <h4><i class="fas fa-star"></i> Hero Section</h4>
           <div class="form-group"><label>Hero Headline</label><input type="text" id="ed-hero-headline" placeholder="Let the colour do the talking." ></div>
           <div class="form-group"><label>Hero Intro</label><textarea id="ed-hero-intro" rows="2" placeholder="Handmade jhalars and hanging decor for the weddings, events and festive spaces you are putting together."></textarea></div>
@@ -394,42 +444,44 @@ hr.divider{margin:12px 0;border:none;border-top:1px solid rgba(128,128,128,0.1)}
 </div>
         </div>
 
-        <div class="panel-section">
+        <div class="panel-section" data-scope="hero" id="hero-design"></div>
+
+        <div class="panel-section" data-scope="hero">
           <h4><i class="fas fa-list-check"></i> Hero Highlights</h4>
           <p>Small bullet points under the hero intro (icon + text). Leave empty to hide the list.</p>
           <div id="highlight-editor"></div>
           <button class="btn-sm" onclick="addHighlight()" style="margin-top:4px">+ Add Highlight</button>
         </div>
 
-        <div class="panel-section">
+        <div class="panel-section" data-scope="header">
           <h4><i class="fas fa-bars"></i> Header Navigation</h4>
           <p>Top menu links.</p>
           <div id="nav-editor"></div>
           <button class="btn-sm" onclick="addNavItem()" style="margin-top:4px">+ Add Link</button>
         </div>
 
-        <div class="panel-section">
+        <div class="panel-section" data-scope="footer">
           <h4><i class="fas fa-sitemap"></i> Footer Navigation</h4>
           <p>Links shown in the footer column.</p>
           <div id="footer-nav-editor"></div>
           <button class="btn-sm" onclick="addFooterNavItem()" style="margin-top:4px">+ Add Footer Link</button>
         </div>
 
-        <div class="panel-section">
+        <div class="panel-section" data-scope="footer">
           <h4><i class="fas fa-link"></i> Social Links</h4>
           <div class="form-group"><label>Instagram URL</label><input type="text" id="ed-social-instagram" placeholder="#"></div>
           <div class="form-group"><label>Facebook URL</label><input type="text" id="ed-social-facebook" placeholder="#"></div>
           <div class="form-group"><label>WhatsApp Link</label><input type="text" id="ed-social-whatsapp" placeholder="https://wa.me/918100656258"></div>
         </div>
 
-        <div class="panel-section">
+        <div class="panel-section" data-scope="trust">
           <h4><i class="fas fa-award"></i> Trust Bar</h4>
           <p>Optional strip below the hero: icon + short label. Leave empty to hide it.</p>
           <div id="trust-editor"></div>
           <button class="btn-sm" onclick="addTrustItem()" style="margin-top:4px">+ Add Trust Item</button>
         </div>
 
-        <div class="panel-section">
+        <div class="panel-section" data-scope="faq">
           <h4><i class="fas fa-circle-question"></i> FAQ</h4>
           <p>Question / answer pairs shown in the FAQ section.</p>
           <div id="faq-editor"></div>
@@ -438,7 +490,7 @@ hr.divider{margin:12px 0;border:none;border-top:1px solid rgba(128,128,128,0.1)}
           <div class="form-group"><label>FAQ Title</label><input type="text" id="ed-faq-title" placeholder="Frequently Asked Questions"></div>
         </div>
 
-        <div class="panel-section">
+        <div class="panel-section" data-scope="collection">
           <h4><i class="fas fa-cubes"></i> Collection Copy</h4>
           <div class="form-group"><label>Eyebrow</label><input type="text" id="ed-collection-label" placeholder="Catalogue"></div>
           <div class="form-group"><label>Title</label><input type="text" id="ed-collection-title" placeholder="Browse the Collection"></div>
@@ -446,7 +498,7 @@ hr.divider{margin:12px 0;border:none;border-top:1px solid rgba(128,128,128,0.1)}
           <div class="form-group"><label>Bottom Note</label><input type="text" id="ed-collection-note" placeholder="Looking for something else? "></div>
         </div>
 
-        <div class="panel-section">
+        <div class="panel-section" data-scope="custom">
           <h4><i class="fas fa-palette"></i> Custom Enquiries Copy</h4>
           <div class="form-group"><label>Eyebrow</label><input type="text" id="ed-custom-label" placeholder="Custom Enquiries"></div>
           <div class="form-group"><label>Title</label><input type="text" id="ed-custom-title" placeholder="Made to Your Own Design"></div>
@@ -469,7 +521,7 @@ hr.divider{margin:12px 0;border:none;border-top:1px solid rgba(128,128,128,0.1)}
           <button class="btn-sm" onclick="addProcessItem()" style="margin-top:4px">+ Add Step</button>
         </div>
 
-        <div class="panel-section">
+        <div class="panel-section" data-scope="story">
           <h4><i class="fas fa-user-tie"></i> About Copy</h4>
           <div class="form-group"><label>Eyebrow</label><input type="text" id="ed-about-label" placeholder="About"></div>
           <div class="form-group"><label>Title</label><input type="text" id="ed-about-title" placeholder="About JHALAR"></div>
@@ -488,7 +540,7 @@ hr.divider{margin:12px 0;border:none;border-top:1px solid rgba(128,128,128,0.1)}
           <button class="btn-sm" onclick="addValueItem()" style="margin-top:4px">+ Add Value</button>
         </div>
 
-        <div class="panel-section">
+        <div class="panel-section" data-scope="contact">
           <h4><i class="fas fa-envelope-open-text"></i> Contact &amp; Footer Copy</h4>
           <div class="form-group"><label>Contact Eyebrow</label><input type="text" id="ed-contact-label" placeholder="Contact"></div>
           <div class="form-group"><label>Contact Title</label><input type="text" id="ed-contact-title" placeholder="Send an Enquiry"></div>
@@ -863,8 +915,8 @@ hr.divider{margin:12px 0;border:none;border-top:1px solid rgba(128,128,128,0.1)}
   <section class="editor-preview">
     <div class="preview-toolbar">
       <button class="vp-btn active" data-vp="desktop" onclick="setViewport('desktop')"><i class="fas fa-desktop"></i> Desktop</button>
-      <button class="vp-btn" data-vp="mobile" onclick="setViewport('mobile')"><i class="fas fa-mobile-alt"></i> Mobile</button>
-      <button class="vp-btn" data-vp="tablet" onclick="setViewport('tablet')"><i class="fas fa-tablet-alt"></i> Tablet</button>
+      <button class="vp-btn" data-vp="mobile" onclick="setViewport('mobile')" title="390px — real mobile media queries"><i class="fas fa-mobile-alt"></i> Mobile</button>
+      <button class="vp-btn" data-vp="tablet" onclick="setViewport('tablet')" title="768px — real tablet media queries"><i class="fas fa-tablet-alt"></i> Tablet</button>
       <span class="zoom-ctl" title="Zoom the preview canvas"><i class="fas fa-search-plus" style="font-size:11px;color:var(--text3)"></i>
         <select id="zoom-select" onchange="setZoom(Number(this.value))" style="padding:4px 6px;font-size:12px;font-weight:600;background:var(--bg);border:1px solid rgba(128,128,128,0.15);border-radius:var(--r-sm);color:var(--text);cursor:pointer">
           <option value="0.8">80%</option><option value="0.9">90%</option><option value="1" selected>100%</option><option value="1.1">110%</option><option value="1.25">125%</option><option value="1.4">140%</option>
@@ -883,6 +935,7 @@ hr.divider{margin:12px 0;border:none;border-top:1px solid rgba(128,128,128,0.1)}
   </section>
 </div>
 <div class="toast" id="toast"></div>
+<script src="scripts/hero-config.js?v=20260907.30"></script>
 <script src="scripts/product-naming.js?v=20260907-fresh-3"></script>
 <script src="editor.js?v=20260907-fresh-3"></script>
 </body>

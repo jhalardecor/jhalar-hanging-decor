@@ -102,7 +102,9 @@ function defaultThemeTemplate() {
       productGap:'24px', splitGap:'48px', processGap:'24px', contactGap:'24px',
       faqGap:'12px', trustGap:'12px', footerGap:'48px', productPad:'24px', faqPad:'20px',
       footerPad:'80px', trustPad:'16px'
-    }
+    },
+    // Hero geometry — shape of the object is owned by scripts/hero-config.js.
+    hero: globalThis.JHALARHero ? JSON.parse(JSON.stringify(globalThis.JHALARHero.DEFAULT_HERO)) : undefined
   };
 }
 let history = { stack: [], index: -1 };
@@ -117,8 +119,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   setupTabs(); setupViewport(); setupAutoSave(); setupInspector(); setupKeyboardShortcuts(); setupDragDrop();
   setupUploadZone(); restoreDarkMode(); restoreGitHubToken();
   await loadPublishedData(); await loadImageManifest(); await loadFontManifest();
-  populateFontOptions(); populateAllForms(); renderSectionList(); renderProductList(); renderMediaGrid();
-  applyPreview(); updatePreviewUrl(); pushHistory();
+  populateFontOptions(); renderHeroControls(); populateAllForms(); renderSectionList(); renderProductList(); renderMediaGrid();
+  renderSectionRail();
+  applyPreview(); updatePreviewUrl(); pushHistory(); updateHistoryButtons();
   window.addEventListener('load', applyZoom);
   window.addEventListener('resize', () => { clearTimeout(window.__zr); window.__zr = setTimeout(applyZoom, 150); });
 });
@@ -147,13 +150,14 @@ function setViewport(m) {
   const box = document.getElementById('zoom-box');
   if (box) { box.style.width = ''; box.style.height = ''; }
   applyZoom();
+  setTimeout(renderHeroReadout, 120);
 }
 function setZoom(z) { state.zoom = z; applyZoom(); }
 function applyZoom() {
   const f = document.getElementById('preview-frame'); const box = document.getElementById('zoom-box');
   if (!f || !box) return;
   const z = state.zoom || 1;
-  const sizes={desktop:[1160,Math.max(700,window.innerHeight-122)],tablet:[768,1024],mobile:[375,812]};
+  const sizes={desktop:[1160,Math.max(700,window.innerHeight-122)],tablet:[768,1024],mobile:[390,844]};
   const [w,h]=sizes[state.viewport||'desktop'];
   f.style.width=w+'px';f.style.height=h+'px';
   f.style.transform='scale('+z+')';
@@ -297,6 +301,7 @@ function populateImageDropdowns() {
 
 // ===== POPULATE ALL FORMS =====
 function populateAllForms() {
+  populateHeroForm();
   if (!state.settings) return;
   setVal('ed-whatsapp', state.settings.whatsapp||'');
   setVal('ed-phone', state.settings.phone||'');
@@ -972,6 +977,268 @@ function fileToBase64(file) {
   });
 }
 
+// ============================================
+// HERO DESIGN  (control -> state.theme.hero -> preview -> theme.json)
+// Every option comes from scripts/hero-config.js, the same module the public
+// site and the test suite use, so the editor cannot invent a value the site
+// does not understand. Nothing here writes CSS text or customCSS.
+// ============================================
+const heroLib = () => globalThis.JHALARHero;
+
+function heroConfig() {
+  const H = heroLib(); if (!H) return null;
+  if (!state.theme) state.theme = defaultThemeTemplate();
+  state.theme.hero = H.normaliseHero(state.theme.hero);
+  return state.theme.hero;
+}
+function heroValue(path) {
+  const cfg = heroConfig(); if (!cfg) return null;
+  return path.split('.').reduce((o, k) => (o == null ? o : o[k]), cfg);
+}
+// The only way a hero setting ever changes.
+function setHeroValue(path, value) {
+  const cfg = heroConfig(); if (!cfg) return;
+  const [group, key] = path.split('.');
+  cfg[group][key] = value;
+  state.theme.hero = heroLib().normaliseHero(cfg);
+  populateHeroForm();
+  markChanged(); applyPreview(); scheduleHistory();
+  markRailEdited('hero');
+}
+
+function heroFieldDefs() {
+  const H = heroLib(); if (!H) return [];
+  const opts = (table, labelOf) => Object.keys(table).map(v => ({ value: v, label: labelOf(table[v], v) }));
+  return [
+    { path:'desktop.height', label:'Desktop height', type:'seg',
+      help:'How tall the banner stands on laptops and desktops.',
+      options: opts(H.DESKTOP_HEIGHT, o => o.label) },
+    { path:'mobile.ratio', label:'Mobile shape', type:'seg',
+      help:'The hero is measured as a shape on phones, so the crop is predictable at any screen height.',
+      options: opts(H.MOBILE_RATIO, o => o.label) },
+    { path:'image.desktopPosition', label:'Image focus — desktop', type:'pos' },
+    { path:'image.mobilePosition', label:'Image focus — mobile', type:'pos' },
+    { path:'content.horizontal', label:'Text position', type:'seg',
+      help:'Desktop only — on phones the copy always settles at the bottom of the fade.',
+      options:[{value:'left',label:'Left'},{value:'center',label:'Centre'},{value:'right',label:'Right'}] },
+    { path:'content.vertical', label:'Text alignment', type:'seg',
+      options:[{value:'top',label:'Top'},{value:'center',label:'Middle'},{value:'bottom',label:'Bottom'}] },
+    { path:'overlay.strength', label:'Overlay strength', type:'overlay' },
+    { path:'typography.headingSize', label:'Heading size', type:'seg',
+      help:'Use Small when a long headline crowds a square hero.',
+      options: opts(H.HEADING_SIZE, o => o.label) }
+  ];
+}
+
+function renderHeroControls() {
+  const host = document.getElementById('hero-design');
+  const H = heroLib();
+  if (!host) return;
+  if (!H) { host.innerHTML = '<h4>Hero Layout</h4><p class="help">hero-config.js did not load, so hero layout is unavailable.</p>'; return; }
+  const esc = v => String(v).replace(/"/g, '&quot;');
+  const field = f => {
+    let control = '';
+    if (f.type === 'seg') {
+      control = '<div class="hero-seg">' + f.options.map(o =>
+        `<button type="button" data-hero="${f.path}" data-value="${esc(o.value)}">${o.label}</button>`).join('') + '</div>';
+    } else if (f.type === 'pos') {
+      control = '<div class="hero-pos">' + Object.keys(H.IMAGE_POSITION).map(v =>
+        `<button type="button" data-hero="${f.path}" data-value="${esc(v)}" title="${v}" aria-label="${v}"><span></span></button>`).join('') + '</div>';
+    } else if (f.type === 'overlay') {
+      control =
+        '<label class="hero-switch"><input type="checkbox" id="ed-hero-overlay-on"> Fade the photo behind the text</label>' +
+        `<input type="range" id="ed-hero-overlay" min="${H.OVERLAY_MIN * 100}" max="${H.OVERLAY_MAX * 100}" step="5" style="width:100%;margin-top:8px">`;
+    }
+    return `<div class="hero-field">
+      <div class="hero-field-head"><label>${f.label}</label><span class="hero-field-val" data-hero-val="${f.path}"></span></div>
+      ${control}
+      ${f.help ? `<span class="help">${f.help}</span>` : ''}
+    </div>`;
+  };
+  host.innerHTML =
+    '<h4><i class="fas fa-crop-simple"></i> Hero Layout</h4>' +
+    '<div class="hero-fields">' + heroFieldDefs().map(field).join('') + '</div>' +
+    '<div class="hero-readout" id="hero-readout"></div>' +
+    '<button class="btn-sm" style="margin-top:8px" onclick="runHeroSelfTest()"><i class="fas fa-vial"></i> Test the mobile shapes</button>';
+
+  host.querySelectorAll('[data-hero][data-value]').forEach(btn => {
+    btn.addEventListener('click', () => setHeroValue(btn.dataset.hero, btn.dataset.value));
+  });
+  const on = document.getElementById('ed-hero-overlay-on');
+  const range = document.getElementById('ed-hero-overlay');
+  if (on) on.addEventListener('change', () => setHeroValue('overlay.enabled', on.checked));
+  if (range) range.addEventListener('input', () => setHeroValue('overlay.strength', Number(range.value) / 100));
+  populateHeroForm();
+}
+
+// State -> controls. Called on load, on every change and after undo/redo, so a
+// control can never show something the state does not hold.
+function populateHeroForm() {
+  const H = heroLib(); const cfg = heroConfig();
+  const host = document.getElementById('hero-design');
+  if (!H || !cfg || !host) return;
+  host.querySelectorAll('[data-hero][data-value]').forEach(btn => {
+    btn.classList.toggle('active', String(heroValue(btn.dataset.hero)) === btn.dataset.value);
+  });
+  const labels = {
+    'desktop.height': H.DESKTOP_HEIGHT[cfg.desktop.height].label + ' · ' + H.DESKTOP_HEIGHT[cfg.desktop.height].css,
+    'mobile.ratio': H.MOBILE_RATIO[cfg.mobile.ratio].label + (H.MOBILE_RATIO[cfg.mobile.ratio].ratio ? ' · ' + H.MOBILE_RATIO[cfg.mobile.ratio].ratio : ''),
+    'image.desktopPosition': cfg.image.desktopPosition,
+    'image.mobilePosition': cfg.image.mobilePosition,
+    'content.horizontal': cfg.content.horizontal,
+    'content.vertical': cfg.content.vertical,
+    'overlay.strength': cfg.overlay.enabled ? Math.round(cfg.overlay.strength * 100) + '%' : 'off',
+    'typography.headingSize': H.HEADING_SIZE[cfg.typography.headingSize].label
+  };
+  host.querySelectorAll('[data-hero-val]').forEach(el => { el.textContent = labels[el.dataset.heroVal] || ''; });
+  const on = document.getElementById('ed-hero-overlay-on');
+  const range = document.getElementById('ed-hero-overlay');
+  if (on) on.checked = cfg.overlay.enabled;
+  if (range) { range.value = String(Math.round(cfg.overlay.strength * 100)); range.disabled = !cfg.overlay.enabled; }
+  renderHeroReadout();
+}
+
+// Reads the hero straight out of the preview document: what the editor claims
+// and what the browser actually rendered, side by side.
+function measureHeroInPreview() {
+  const frame = document.getElementById('preview-frame'); if (!frame) return null;
+  try {
+    const el = frame.contentDocument && frame.contentDocument.querySelector('.hero-banner');
+    if (!el) return null;
+    const r = el.getBoundingClientRect();
+    return { w: Math.round(r.width), h: Math.round(r.height) };
+  } catch (e) { return null; }
+}
+function renderHeroReadout(extra) {
+  const out = document.getElementById('hero-readout'); const H = heroLib();
+  if (!out || !H) return;
+  const cfg = heroConfig();
+  const m = measureHeroInPreview();
+  const mobile = state.viewport === 'mobile';
+  const expected = mobile ? H.heroMobileHeight(cfg, m ? m.w : 390) : null;
+  let line;
+  if (!m) line = 'Preview is still loading.';
+  else if (expected == null) line = `Rendered <b>${m.w} × ${m.h}px</b> — full screen follows the device height.`;
+  else {
+    const ok = Math.abs(m.h - expected) <= 2;
+    line = `Rendered <b>${m.w} × ${m.h}px</b>, expected <b>${Math.round(expected)}px</b> ` +
+      (ok ? '<span class="ok">✓ matches</span>' : '<span class="bad">✗ mismatch</span>');
+  }
+  if (!mobile) line += '<br>Switch the preview to Mobile to check the shape.';
+  out.innerHTML = line + (extra ? '<br>' + extra : '');
+}
+
+// The acceptance test, runnable inside the editor: cycle every shape and
+// measure the real hero each time.
+async function runHeroSelfTest() {
+  const H = heroLib(); if (!H) return;
+  const wait = ms => new Promise(r => setTimeout(r, ms));
+  const startRatio = heroValue('mobile.ratio');
+  const startViewport = state.viewport;
+  if (startViewport !== 'mobile') { setViewport('mobile'); await wait(150); }
+  const rows = [];
+  for (const key of ['square', '4:5', 'portrait', 'tall', 'square']) {
+    setHeroValue('mobile.ratio', key);
+    clearTimeout(previewTimer); syncPreview();
+    await wait(160);
+    const m = measureHeroInPreview();
+    const want = m ? H.heroMobileHeight({ mobile: { ratio: key } }, m.w) : null;
+    const ok = m && want && Math.abs(m.h - want) <= 2;
+    rows.push(`${H.MOBILE_RATIO[key].label}: ${m ? m.w + '×' + m.h : '—'} ` +
+      (ok ? '<span class="ok">✓</span>' : `<span class="bad">✗ wanted ${want ? Math.round(want) : '?'}</span>`));
+  }
+  setHeroValue('mobile.ratio', startRatio);
+  clearTimeout(previewTimer); syncPreview();
+  await wait(160);
+  if (startViewport !== 'mobile') setViewport(startViewport);
+  const passed = rows.filter(r => r.includes('✓')).length;
+  renderHeroReadout('<b>Shape test ' + passed + '/' + rows.length + '</b><br>' + rows.join('<br>'));
+  showToast(`Hero shape test: ${passed}/${rows.length} passed`, passed === rows.length ? 'success' : 'error');
+}
+
+// ============================================
+// SECTION RAIL  (Shopify-style navigation)
+// Page sections filter the settings panel to their own controls; global
+// entries open the panel they have always used.
+// ============================================
+const SECTION_RAIL = [
+  { group: 'Page sections' },
+  { id:'hero',       label:'Hero',            icon:'fa-star',              tab:'content', scope:'hero',       anchor:'#home' },
+  { id:'trust',      label:'Trust bar',       icon:'fa-award',             tab:'content', scope:'trust' },
+  { id:'collection', label:'Collection',      icon:'fa-cubes',             tab:'content', scope:'collection', anchor:'#collection' },
+  { id:'custom',     label:'Custom work',     icon:'fa-palette',           tab:'content', scope:'custom',     anchor:'#custom' },
+  { id:'story',      label:'Our story',       icon:'fa-user-tie',          tab:'content', scope:'story',      anchor:'#story' },
+  { id:'faq',        label:'FAQ',             icon:'fa-circle-question',   tab:'content', scope:'faq' },
+  { id:'contact',    label:'Contact',         icon:'fa-envelope-open-text',tab:'content', scope:'contact',    anchor:'#contact' },
+  { group: 'Theme areas' },
+  { id:'header',     label:'Header',          icon:'fa-bars',              tab:'content', scope:'header',     anchor:'#top' },
+  { id:'footer',     label:'Footer',          icon:'fa-sitemap',           tab:'content', scope:'footer' },
+  { id:'theme',      label:'Colours & type',  icon:'fa-palette',           tab:'theme' },
+  { id:'sections',   label:'Section order',   icon:'fa-layer-group',       tab:'sections' },
+  { group: 'Catalogue & assets' },
+  { id:'products',   label:'Products',        icon:'fa-box',               tab:'products' },
+  { id:'media',      label:'Media',           icon:'fa-images',            tab:'media' },
+  { id:'seo',        label:'SEO',             icon:'fa-search',            tab:'seo' },
+  { id:'inspector',  label:'Inspector',       icon:'fa-crosshairs',        tab:'inspector' },
+  { id:'publish',    label:'Publish',         icon:'fa-upload',            tab:'publish' }
+];
+let activeRailId = 'hero';
+
+function renderSectionRail() {
+  const rail = document.getElementById('section-rail'); if (!rail) return;
+  rail.innerHTML = SECTION_RAIL.map(item => item.group
+    ? `<div class="rail-group">${item.group}</div>`
+    : `<button type="button" class="rail-item" data-rail="${item.id}"><i class="fas ${item.icon}"></i> ${item.label}<span class="rail-dot"></span></button>`
+  ).join('');
+  rail.querySelectorAll('[data-rail]').forEach(btn =>
+    btn.addEventListener('click', () => selectRail(btn.dataset.rail)));
+  selectRail(activeRailId);
+}
+function selectRail(id) {
+  const item = SECTION_RAIL.find(i => i.id === id); if (!item) return;
+  activeRailId = id;
+  document.querySelectorAll('.rail-item').forEach(b => b.classList.toggle('active', b.dataset.rail === id));
+  const tab = document.querySelector('.sidebar-tab[data-tab="' + item.tab + '"]');
+  if (tab) tab.click();
+  applyScope(item.tab === 'content' ? item.scope : null, item.label);
+  const content = document.querySelector('.sidebar-content'); if (content) content.scrollTop = 0;
+  if (item.anchor) scrollPreviewTo(item.anchor);
+}
+// Shows only the panel sections belonging to the selected page section.
+function applyScope(scope, label) {
+  const panel = document.getElementById('panel-content');
+  const head = document.getElementById('scope-head');
+  if (!panel) return;
+  panel.querySelectorAll('.panel-section[data-scope]').forEach(sec => {
+    sec.hidden = !!scope && sec.dataset.scope !== scope;
+  });
+  const intro = panel.querySelector(':scope > .hint');
+  if (intro) intro.hidden = !!scope;
+  if (head) {
+    head.hidden = !scope;
+    if (scope) {
+      document.getElementById('scope-title').textContent = label || scope;
+      document.getElementById('scope-sub').textContent = 'Section settings';
+    }
+  }
+}
+function clearScope() { applyScope(null); }
+function markRailEdited(id) {
+  const btn = document.querySelector('.rail-item[data-rail="' + id + '"]');
+  if (btn) btn.classList.add('edited');
+}
+function clearRailEdited() {
+  document.querySelectorAll('.rail-item.edited').forEach(b => b.classList.remove('edited'));
+}
+function scrollPreviewTo(anchor) {
+  const frame = document.getElementById('preview-frame'); if (!frame) return;
+  try {
+    const doc = frame.contentDocument; if (!doc) return;
+    const target = anchor === '#top' ? doc.body : doc.querySelector(anchor);
+    if (target && target.scrollIntoView) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  } catch (e) {}
+}
+
 // ===== AUTO-SAVE =====
 function setupAutoSave() {
   // Content fields
@@ -1137,28 +1404,51 @@ function collectAllData() {
   l.faqPad = (getVal('ed-layout-faq-pad') || '20') + 'px';
   l.footerPad = (getVal('ed-layout-footer-pad') || '80') + 'px';
   l.trustPad = (getVal('ed-layout-trust-pad') || '16') + 'px';
+  // Hero geometry: state is the source of truth, the controls only reflect it.
+  if (globalThis.JHALARHero) state.theme.hero = globalThis.JHALARHero.normaliseHero(state.theme.hero);
   // Custom CSS
   state.customCSS = getVal('ed-custom-css');
 }
 
 // ===== HISTORY / UNDO / REDO =====
-function pushHistory() {
-  const snapshot = JSON.stringify({
+// A snapshot is taken when editing settles, not on every keystroke or slider
+// frame: scheduleHistory() debounces, and an unchanged snapshot is dropped, so
+// one drag of a slider is one undo step.
+let historyTimer = null;
+function historySnapshot() {
+  return JSON.stringify({
     settings: state.settings, theme: state.theme, products: state.products,
     sections: state.sections, sectionOrder: state.sectionOrder,
     customCSS: state.customCSS, navItems: state.navItems, socialLinks: state.socialLinks
   });
+}
+function scheduleHistory() {
+  clearTimeout(historyTimer);
+  historyTimer = setTimeout(pushHistory, 400);
+}
+function pushHistory() {
+  clearTimeout(historyTimer);
+  const snapshot = historySnapshot();
+  if (history.index >= 0 && history.stack[history.index] === snapshot) return;
   history.stack = history.stack.slice(0, history.index + 1);
   history.stack.push(snapshot);
   if (history.stack.length > 50) history.stack.shift();
   history.index = history.stack.length - 1;
+  updateHistoryButtons();
+}
+function updateHistoryButtons() {
+  const u = document.getElementById('undo-btn'), r = document.getElementById('redo-btn');
+  if (u) u.disabled = history.index <= 0;
+  if (r) r.disabled = history.index >= history.stack.length - 1;
 }
 function undo() {
+  clearTimeout(historyTimer);
   if (history.index <= 0) return;
   history.index--;
   restoreHistory();
 }
 function redo() {
+  clearTimeout(historyTimer);
   if (history.index >= history.stack.length - 1) return;
   history.index++;
   restoreHistory();
@@ -1178,7 +1468,7 @@ function restoreHistory() {
     state.sectionCopy = deepMerge(defaultSectionCopy(), state.settings.sectionCopy||{});
   }
   populateAllForms(); renderSectionList(); renderProductList();
-  markChanged(); saveDrafts(); applyPreview();
+  markChanged(); collectAllData(); applyPreview(); updateHistoryButtons();
   showToast(`Undo/Redo (${history.index+1}/${history.stack.length})`,'success');
 }
 
@@ -1289,6 +1579,7 @@ function syncPreview() {
       previewRetry = 0;
       setLiveBadge('live', 'Live');
       bindPreviewInspector();
+      setTimeout(renderHeroReadout, 80);
       return;
     }
   } catch(e) {}
@@ -1349,7 +1640,7 @@ function saveDrafts() {
   // Intentionally no persistent browser draft cache.
   // Editor state lives in memory and published GitHub files are always reloaded fresh.
   collectAllData();
-  pushHistory();
+  scheduleHistory();
 }
 function markChanged() { state.changed = true; updateSaveIndicator(); }
 function updateSaveIndicator() {
@@ -1369,7 +1660,7 @@ async function resetToPublished() {
   if (!confirm('Reset all changes? This reloads the latest published version.')) return;
   try {
     ['jhalar_editor_settings','jhalar_editor_theme','jhalar_editor_products','jhalar_editor_sections','jhalar_editor_customcss'].forEach(k => localStorage.removeItem(k));
-    state.changed = false; updateSaveIndicator();
+    state.changed = false; updateSaveIndicator(); clearRailEdited();
     await loadPublishedData(); await loadFontManifest(); populateFontOptions(); populateAllForms(); renderSectionList(); renderProductList(); applyPreview();
     showToast('Reloaded latest published state','success');
   } catch(e) { showToast('Reset failed','error'); }
@@ -1449,7 +1740,7 @@ async function publishToGitHub() {
     addLog('Published successfully!','done');
     addLog('GitHub Pages will rebuild in ~1-2 min.','done');
 
-    state.changed = false; updateSaveIndicator();
+    state.changed = false; updateSaveIndicator(); clearRailEdited();
     showToast('Published to GitHub!','success');
     btn.innerHTML = '<i class="fas fa-check"></i> Published!';
     setTimeout(() => { btn.disabled = false; btn.innerHTML = '<i class="fas fa-rocket"></i> Publish to GitHub'; }, 3000);

@@ -161,6 +161,16 @@ function setTheme(t){
  document.body.classList.toggle('stack-custom',l.splitLayout==='stack');
  document.body.classList.toggle('stack-about',l.aboutLayout==='stack');
  document.querySelectorAll('.section').forEach(sec=>sec.classList.toggle('align-center',l.sectionAlign==='center'));
+ applyHero(t.hero);
+}
+/* Hero geometry — every token comes from scripts/hero-config.js, so the editor
+   preview, the published site and the test suite share one mapping. If the
+   module is missing the stylesheet defaults simply stand. */
+function applyHero(cfg){
+ const H=globalThis.JHALARHero;if(!H)return;
+ const r=document.documentElement.style;
+ const vars=H.heroCssVars(cfg);
+ Object.keys(vars).forEach(k=>r.setProperty(k,vars[k]));
 }
 function setSections(d){
  if(!d||!d.sections)return;
@@ -178,7 +188,7 @@ function setProducts(list){
  state.products=Array.isArray(list)?list.filter(p=>p&&typeof p==='object'&&Number.isInteger(p.id)):[];
  renderFilters();renderProducts();
 }
-window.JHALAR={setSettings:applySettings,applySettings,setTheme,setSections,setCustomCSS,setProducts,
+window.JHALAR={setSettings:applySettings,applySettings,setTheme,setSections,setCustomCSS,setProducts,setHero:applyHero,
  setSectionHidden(key,hidden){const el=document.querySelector('[data-section="'+key+'"]');if(el)el.hidden=!!hidden}};
 
 /* ---------- scroll reveal + header shadow ---------- */

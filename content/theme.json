@@ -53,5 +53,28 @@
     "faqPad": "20px",
     "footerPad": "40px",
     "trustPad": "16px"
+  },
+  "hero": {
+    "desktop": {
+      "height": "standard"
+    },
+    "mobile": {
+      "ratio": "portrait"
+    },
+    "image": {
+      "desktopPosition": "center center",
+      "mobilePosition": "center center"
+    },
+    "content": {
+      "horizontal": "left",
+      "vertical": "center"
+    },
+    "overlay": {
+      "enabled": true,
+      "strength": 1
+    },
+    "typography": {
+      "headingSize": "medium"
+    }
   }
 }

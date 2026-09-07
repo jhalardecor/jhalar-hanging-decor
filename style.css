@@ -147,6 +147,24 @@
   --measure-prose:54ch;
   --measure-support:43ch;
 
+  /* --- 2.8b Hero geometry -------------------------------------------------
+     Written by scripts/hero-config.js (editor + published theme) and by
+     nothing else. These defaults are the published hero and must stay in step
+     with DEFAULT_HERO in that module. A ratio mode always ships
+     --hero-mobile-min-height:0px so no min-height can defeat aspect-ratio.  */
+  --hero-desktop-height:640px;          /* standard */
+  --hero-mobile-ratio:3 / 4;            /* portrait */
+  --hero-mobile-min-height:0px;
+  --hero-image-position:50% 50%;
+  --hero-image-position-mobile:50% 50%;
+  --hero-content-x:flex-start;
+  --hero-content-y:center;
+  --hero-text-align:left;
+  --hero-copy-inline:0;
+  --hero-scrim-angle:90deg;
+  --hero-overlay-strength:1;
+  --hero-heading-scale:1;
+
   /* --- 2.9 Space, shell, motion ------------------------------------------ */
   --s1:.5rem;--s2:.75rem;--s3:1rem;--s4:1.5rem;--s5:2rem;--s6:3rem;--s7:4.5rem;--s8:6rem;
   --flow:var(--s3);
@@ -323,28 +341,42 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--color-focus);outlin
 
 /* =============================================================================
    07. HERO
+   Geometry is token-driven (section 2.8b). There is exactly one min-height
+   declaration per breakpoint and exactly one aspect-ratio declaration, both
+   reading the same tokens, so a selected ratio always wins.
    ========================================================================== */
-.hero-banner{position:relative;isolation:isolate;min-height:clamp(500px,52vw,720px);display:grid;overflow:hidden}
+.hero-banner{
+  position:relative;isolation:isolate;display:grid;overflow:hidden;
+  min-height:var(--hero-desktop-height);
+}
 .hero-banner-media,.hero-banner-shade,.hero-banner-content{grid-area:1/1}
 .hero-banner-media{position:absolute;inset:0;z-index:-2}
-.hero-banner-media img{width:100%;height:100%;object-fit:cover;object-position:center}
-/* Scrim keeps display type on canvas, not on photography — contrast stays 11:1 */
+.hero-banner-media img{width:100%;height:100%;object-fit:cover;object-position:var(--hero-image-position)}
+/* Scrim keeps display type on canvas, not on photography — contrast stays 11:1
+   at full strength; the editor cannot take it below 0.4. */
 .hero-banner-shade{
   position:absolute;inset:0;z-index:-1;
-  background:linear-gradient(90deg,
-    rgba(var(--canvas-rgb),.98) 0%,
-    rgba(var(--canvas-rgb),.9) 35%,
-    rgba(var(--canvas-rgb),.35) 58%,
+  background:linear-gradient(var(--hero-scrim-angle),
+    rgba(var(--canvas-rgb),calc(.98 * var(--hero-overlay-strength))) 0%,
+    rgba(var(--canvas-rgb),calc(.9 * var(--hero-overlay-strength))) 35%,
+    rgba(var(--canvas-rgb),calc(.35 * var(--hero-overlay-strength))) 58%,
     rgba(var(--canvas-rgb),0) 76%);
 }
-.hero-banner-content{display:flex;align-items:center;padding-block:clamp(54px,7vw,96px)}
-.hero-banner-copy{width:min(560px,50%);color:var(--color-ink)}
+.hero-banner-content{
+  display:flex;
+  justify-content:var(--hero-content-x);
+  align-items:var(--hero-content-y);
+  padding-block:clamp(54px,7vw,96px);
+}
+.hero-banner-copy{width:min(560px,50%);color:var(--color-ink);text-align:var(--hero-text-align)}
 /* The single display moment on the site. */
 .hero-banner-copy h1{
   max-width:var(--measure-display);
-  font-size:var(--text-display);
+  margin-inline:var(--hero-copy-inline);
+  font-size:calc(var(--text-display) * var(--hero-heading-scale));
   line-height:var(--leading-display);
 }
+.hero-banner-copy .hero-lead{margin-inline:var(--hero-copy-inline)}
 .hero-banner-copy h1 em{font-style:italic;font-weight:var(--weight-regular)} /* real Mogranx Slanted */
 /* One deliberate red accent above the fold. */
 .hero-banner-copy .kicker{color:var(--color-primary)}
@@ -618,17 +650,26 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--color-focus);outlin
   .mobile-nav.open{transform:none;opacity:1;pointer-events:auto}
   .mobile-nav a{min-height:48px;display:flex;align-items:center;border-bottom:1px solid var(--color-border)}
 
-  /* hero — copy sits on the settled bottom of the scrim */
-  .hero-banner{min-height:clamp(560px,145vw,680px)}
-  .hero-banner-media img{object-position:58% center}
+  /* hero — copy sits on the settled bottom of the scrim.
+     Height comes from the ratio token; --hero-mobile-min-height is 0px for
+     every ratio and only becomes 100svh in Full screen, so this is the one
+     place mobile hero height is decided. */
+  .hero-banner{
+    aspect-ratio:var(--hero-mobile-ratio);
+    min-height:var(--hero-mobile-min-height);
+    height:auto;
+  }
+  .hero-banner-media img{object-position:var(--hero-image-position-mobile)}
   .hero-banner-shade{
     background:linear-gradient(to bottom,
       transparent 0%,
-      rgba(var(--canvas-rgb),.08) 48%,
-      rgba(var(--canvas-rgb),.5) 72%,
-      var(--color-canvas) 100%);
+      rgba(var(--canvas-rgb),calc(.08 * var(--hero-overlay-strength))) 48%,
+      rgba(var(--canvas-rgb),calc(.5 * var(--hero-overlay-strength))) 72%,
+      rgba(var(--canvas-rgb),calc(1 * var(--hero-overlay-strength))) 100%);
   }
-  .hero-banner-content{align-items:end;padding:72px 0 28px}
+  /* Bottom-anchored by design on mobile: the scrim settles downwards, so the
+     desktop vertical-position token is deliberately not applied here. */
+  .hero-banner-content{align-items:end;justify-content:flex-start;padding:24px 0 28px}
   .hero-banner-copy{width:100%;max-width:34rem}
   .hero-banner-copy h1{max-width:10ch}
   .hero-lead{max-width:32ch}
@@ -702,7 +743,7 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--color-focus);outlin
    ========================================================================== */
 @media (max-width:390px){
   :root{--shell:calc(100% - 32px);--gutter:16px}
-  .hero-banner{min-height:540px}
+  /* no hero min-height here: section 16 owns mobile hero geometry */
   .hero-banner-copy h1{max-width:11ch}
   .hero-lead{max-width:30ch}
   .product-grid{gap:24px 10px}
