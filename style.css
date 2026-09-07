@@ -617,3 +617,80 @@ img,video,svg{max-width:100%}
  .filters{gap:9px!important;padding:4px 16px 8px 0!important}
  .filter-btn{height:44px!important;min-height:44px!important;padding-inline:17px!important}
 }
+
+
+/* 25. MOBILE HERO — CLEAN SINGLE COMPOSITION (replaces accumulated overrides) */
+@media(max-width:760px){
+  .hero.hero-banner{
+    height:auto!important;
+    min-height:0!important;
+    aspect-ratio:4/5!important;
+    width:100%!important;
+    position:relative!important;
+    display:block!important;
+    overflow:hidden!important;
+    background:var(--canvas);
+  }
+  .hero-banner-media{
+    position:absolute!important;
+    inset:0!important;
+    width:100%!important;
+    height:100%!important;
+  }
+  .hero-banner-media img{
+    display:block!important;
+    width:100%!important;
+    height:100%!important;
+    object-fit:cover!important;
+    object-position:center center!important;
+  }
+  .hero-banner-shade{
+    position:absolute!important;
+    inset:0!important;
+    background:linear-gradient(
+      180deg,
+      rgba(255,250,241,0) 0%,
+      rgba(255,250,241,0) 55%,
+      rgba(255,250,241,.12) 63%,
+      rgba(255,250,241,.58) 78%,
+      rgba(255,250,241,.94) 92%,
+      #FFFAF1 100%
+    )!important;
+  }
+  .hero-banner-content.shell{
+    position:absolute!important;
+    inset:auto 0 0 0!important;
+    z-index:2!important;
+    width:100%!important;
+    margin:0!important;
+    padding:0 16px 18px!important;
+    display:block!important;
+  }
+  .hero-banner-copy{
+    width:100%!important;
+    max-width:100%!important;
+    margin:0!important;
+  }
+  .hero-banner-copy .kicker{
+    margin:0 0 6px!important;
+    font-size:.66rem!important;
+  }
+  .hero-banner-copy h1{
+    max-width:11ch!important;
+    margin:0!important;
+    font-size:clamp(2rem,8.6vw,2.8rem)!important;
+    line-height:1.02!important;
+  }
+  .hero-lead{
+    margin:8px 0 0!important;
+    max-width:33ch!important;
+    font-size:.88rem!important;
+    line-height:1.42!important;
+  }
+  .hero-banner-cta{
+    margin-top:10px!important;
+    min-height:38px!important;
+    padding:0!important;
+    font-size:.86rem!important;
+  }
+}
