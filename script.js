@@ -566,3 +566,78 @@ initProducts();initRuntime();
  };
  window.__jhalarZoomMetrics=fitMetrics;
 })();
+
+
+/* Final media viewer interaction layer: simple, stable, direct manipulation.
+   This controller intentionally owns only mobile image interaction. */
+(function(){
+  const stage=document.getElementById('modal-stage');
+  const img=document.getElementById('modal-photo');
+  if(!stage||!img)return;
+
+  let pts=new Map(), z=1, tx=0, ty=0, pinch=null, drag=null;
+
+  function base(){
+    const r=stage.getBoundingClientRect();
+    const nw=img.naturalWidth||r.width, nh=img.naturalHeight||r.height;
+    const k=Math.min(r.width/nw,r.height/nh);
+    return {r,w:nw*k,h:nh*k};
+  }
+  function clamp(){
+    const b=base();
+    // Bounds are based on the fitted product image, not the whole modal.
+    const maxX=Math.max(0,(b.w*z-b.r.width)/2);
+    const maxY=Math.max(0,(b.h*z-b.r.height)/2);
+    tx=Math.max(-maxX,Math.min(maxX,tx));
+    ty=Math.max(-maxY,Math.min(maxY,ty));
+  }
+  function draw(){
+    clamp();
+    img.style.transform=`translate3d(${tx}px,${ty}px,0) scale(${z})`;
+    stage.classList.toggle('is-zoomed',z>1.01);
+  }
+  function reset(){z=1;tx=0;ty=0;pinch=null;drag=null;draw()}
+  function two(){
+    const a=[...pts.values()];
+    return {d:Math.hypot(a[0].x-a[1].x,a[0].y-a[1].y),
+      mx:(a[0].x+a[1].x)/2,my:(a[0].y+a[1].y)/2};
+  }
+
+  stage.addEventListener('pointerdown',e=>{
+    if(!matchMedia('(max-width:760px)').matches||stage.classList.contains('is-video'))return;
+    pts.set(e.pointerId,{x:e.clientX,y:e.clientY});
+    stage.setPointerCapture?.(e.pointerId);
+    if(pts.size===1)drag={x:e.clientX,y:e.clientY,tx,ty};
+    if(pts.size===2){
+      const q=two(); pinch={...q,z,tx,ty}; drag=null;
+    }
+  });
+  stage.addEventListener('pointermove',e=>{
+    if(!pts.has(e.pointerId)||stage.classList.contains('is-video'))return;
+    pts.set(e.pointerId,{x:e.clientX,y:e.clientY});
+    if(pts.size===2&&pinch){
+      const q=two(), next=Math.max(1,Math.min(2.5,pinch.z*(q.d/pinch.d)));
+      const rect=stage.getBoundingClientRect();
+      // Stable focal point: content stays under the fingers.
+      const fx=pinch.mx-(rect.left+rect.width/2), fy=pinch.my-(rect.top+rect.height/2);
+      const ratio=next/pinch.z;
+      z=next;
+      tx=pinch.tx*ratio+fx*(1-ratio)+(q.mx-pinch.mx);
+      ty=pinch.ty*ratio+fy*(1-ratio)+(q.my-pinch.my);
+      draw();
+    }else if(pts.size===1&&drag&&z>1.01){
+      tx=drag.tx+(e.clientX-drag.x);
+      ty=drag.ty+(e.clientY-drag.y);
+      draw();
+    }
+  });
+  function up(e){
+    pts.delete(e.pointerId);
+    if(pts.size===1){const p=[...pts.values()][0];drag={x:p.x,y:p.y,tx,ty};pinch=null}
+    if(!pts.size){drag=null;pinch=null}
+  }
+  stage.addEventListener('pointerup',up);
+  stage.addEventListener('pointercancel',up);
+  img.addEventListener('load',reset);
+  window.addEventListener('resize',()=>{if(z>1)draw()});
+})();
