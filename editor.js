@@ -24,7 +24,7 @@ function defaultSectionCopy() {
     customOrders: {
       label:'CUSTOM WORK', title:'Start with your colour story.',
       intro:'Bring a theme, palette or reference. We will discuss colour, size, quantity and timing for your setup.',
-      image:'assets/images/custom-orders.jpg',
+      image:'assets/images/custom-work-8k.jpg',
       chips:[
         {icon:'icon-palette', text:'Colour matching'},
         {icon:'icon-ruler', text:'Size and length'},
@@ -40,7 +40,7 @@ function defaultSectionCopy() {
     about: {
       label:'JHALAR', title:'Made by hand. Chosen for the moment.',
       intro:'We make hanging decor for the people who put celebrations together: decorators, planners, retailers and families.',
-      image:'assets/images/about-collage.jpg',
+      image:'assets/images/about-jhalar-8k.jpg',
       values:[
         {icon:'icon-check', text:'Finished by hand, piece by piece'},
         {icon:'icon-check', text:'One contact from enquiry to dispatch'},
@@ -280,7 +280,7 @@ function populateFontOptions() {
 // ===== IMAGE MANIFEST =====
 async function loadImageManifest() {
   const fallback = () => [...new Set([
-    'assets/images/about-collage.jpg', 'assets/images/custom-orders.jpg',
+    'assets/images/about-jhalar-8k.jpg', 'assets/images/custom-work-8k.jpg',
     'assets/images/hero-jhalar.jpg', 'assets/images/og-cover.jpg',
     ...state.products.map(p => p.image).filter(Boolean)
   ])];
@@ -322,14 +322,14 @@ function populateAllForms() {
   setVal('ed-custom-label', state.sectionCopy?.customOrders?.label||'');
   setVal('ed-custom-title', state.sectionCopy?.customOrders?.title||'');
   setVal('ed-custom-intro', state.sectionCopy?.customOrders?.intro||'');
-  setVal('ed-custom-image', state.sectionCopy?.customOrders?.image||'assets/images/custom-orders.jpg');
-  updateSectionImagePreview('custom', state.sectionCopy?.customOrders?.image||'assets/images/custom-orders.jpg');
+  setVal('ed-custom-image', state.sectionCopy?.customOrders?.image||'assets/images/custom-work-8k.jpg');
+  updateSectionImagePreview('custom', state.sectionCopy?.customOrders?.image||'assets/images/custom-work-8k.jpg');
   setVal('ed-process-label', state.sectionCopy?.customOrders?.processLabel||'');
   setVal('ed-about-label', state.sectionCopy?.about?.label||'');
   setVal('ed-about-title', state.sectionCopy?.about?.title||'');
   setVal('ed-about-intro', state.sectionCopy?.about?.intro||'');
-  setVal('ed-about-image', state.sectionCopy?.about?.image||'assets/images/about-collage.jpg');
-  updateSectionImagePreview('about', state.sectionCopy?.about?.image||'assets/images/about-collage.jpg');
+  setVal('ed-about-image', state.sectionCopy?.about?.image||'assets/images/about-jhalar-8k.jpg');
+  updateSectionImagePreview('about', state.sectionCopy?.about?.image||'assets/images/about-jhalar-8k.jpg');
   setVal('ed-faq-label', state.sectionCopy?.faq?.label||'');
   setVal('ed-faq-title', state.sectionCopy?.faq?.title||'');
   setVal('ed-contact-label', state.sectionCopy?.contact?.label||'');
