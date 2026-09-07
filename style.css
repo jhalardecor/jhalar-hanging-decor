@@ -23,9 +23,10 @@
   --brand-text: #4A4752; --brand-muted: #6B6874; --brand-heading: #1F1D24;
   --brand-border: #F0EFEB;
   --brand-header-background: #FFFFFF; --brand-footer-background: #141942; --brand-footer-text: #FFFFFF;
-  --font-heading: 'Playfair Display', Georgia, 'Times New Roman', serif;
   --sans: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  --heading-weight: 600; --heading-tracking: -.01em; --heading-leading: 1.18;
+  /* One disciplined geometric family: hierarchy comes from scale, weight and spacing — not a decorative serif pairing. */
+  --font-heading: var(--sans);
+  --heading-weight: 700; --heading-tracking: -.045em; --heading-leading: .98;
   --body-weight: 400; --body-tracking: 0; --body-leading: 1.7;
   --measure: 62ch; --measure-tight: 46ch;
   --title-size: var(--fs-display);
@@ -1337,4 +1338,48 @@ body{min-width:320px}
   .hero-image-frame{aspect-ratio:1/1;border-radius:20px}
   .hero-float-card{display:none}
   .hero-proof-simple{line-height:1.5}
+}
+
+
+/* =====================================================
+   TYPOGRAPHY CORRECTION — NO DECORATIVE / CHEAP PAIRING
+   Single-family geometric system: DM Sans
+   ===================================================== */
+h1,h2,h3,h4,h5,.section-title,.hero-title{
+  font-family:var(--sans);
+  font-style:normal;
+}
+.hero-premium .hero-title{
+  font-weight:700;
+  letter-spacing:-.055em;
+  line-height:.93;
+}
+.section-title{
+  font-weight:700;
+  letter-spacing:-.04em;
+  line-height:1.02;
+}
+.split-text h2{
+  font-family:var(--sans);
+  font-weight:700;
+  letter-spacing:-.04em;
+}
+.nav-list a,
+.hero-premium .hero-kicker,
+.eyebrow,
+.footer-heading{
+  font-family:var(--sans);
+}
+.nav-list a{
+  font-weight:600;
+  letter-spacing:.045em;
+}
+.hero-premium .hero-kicker{
+  font-weight:600;
+  letter-spacing:.12em;
+}
+.product-title,.step-title,.accordion-header{
+  font-family:var(--sans);
+  font-weight:700;
+  letter-spacing:-.018em;
 }
