@@ -1033,3 +1033,25 @@ p,.section-head>p,.hero-banner-copy>p:not(.kicker){letter-spacing:.006em}
   #product-modal .modal-stage:not(.is-video){cursor:zoom-in!important}
   #product-modal .modal-stage.is-zoomed:not(.is-video){cursor:grab!important}
 }
+
+
+/* CONTAINED PRODUCT ZOOM — image never escapes the media frame */
+#product-modal .modal-stage{
+  position:relative!important;
+  overflow:hidden!important;
+  isolation:isolate!important;
+}
+#product-modal .modal-stage > img#modal-photo{
+  position:absolute!important;
+  inset:0!important;
+  width:100%!important;
+  height:100%!important;
+  max-width:none!important;
+  max-height:none!important;
+  object-fit:contain!important;
+  transform-origin:center center!important;
+  will-change:transform!important;
+}
+@media(max-width:760px){
+  #product-modal .modal-stage{touch-action:none!important}
+}
