@@ -5,59 +5,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Privacy Policy | JHALAR Hanging Decor</title>
     <link rel="stylesheet" href="style.css">
+    <meta name="theme-color" content="#FFFAF1">
     <style>
-        body {
-            background: linear-gradient(180deg, #fffdf9 0%, #fffaf2 100%);
-            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            line-height: 1.7;
-            color: #141942;
+        /* Long-form document composition. Type roles, colours and rhythm all
+           come from the design system in style.css. */
+        .container{
+            width:min(72ch,calc(100% - 2 * var(--gutter)));
+            margin-inline:auto;
+            padding-block:clamp(3rem,8vw,6rem);
         }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: clamp(2rem, 8vw, 4rem) clamp(1rem, 5vw, 2rem);
+        .container h1{font-size:var(--text-h1)}
+        .container h2{
+            margin-top:var(--s6);
+            font-size:var(--text-h3);
         }
-        h1 {
-            font-size: clamp(1.75rem, 7vw, 2.5rem);
-            color: #c82039;
-            margin-bottom: 1rem;
+        .doc-meta{
+            margin-top:var(--s3);
+            font-size:var(--text-eyebrow);font-weight:var(--weight-medium);
+            line-height:var(--leading-label);letter-spacing:var(--tracking-eyebrow);
+            text-transform:uppercase;color:var(--color-label);
         }
-        h2 {
-            font-size: 1.5rem;
-            color: #c82039;
-            margin-top: 2rem;
+        .container p,.container li{
+            font-size:var(--text-body);line-height:var(--leading-body);color:var(--color-ink);
         }
-        h1, h2 {
-            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        .container p{margin-top:var(--s3);text-wrap:pretty}
+        .container ul{margin:var(--s3) 0 0;padding-left:1.5rem}
+        .container li{margin-top:var(--s1)}
+        .container li::marker{color:var(--color-label)}
+        .back-link{
+            display:inline-flex;align-items:center;gap:10px;
+            margin-top:var(--s6);padding-bottom:6px;
+            border-bottom:1px solid currentColor;
+            font-size:var(--text-body);font-weight:var(--weight-medium);
+            color:var(--color-heading);transition:color .2s var(--ease);
         }
-        p {
-            margin: 1rem 0;
-            color: rgba(20, 25, 66, 0.8);
-        }
-        ul {
-            margin: 1rem 0;
-            padding-left: 2rem;
-        }
-        li {
-            margin: 0.5rem 0;
-            color: rgba(20, 25, 66, 0.8);
-        }
-        .back-link {
-            display: inline-block;
-            margin-top: 2rem;
-            color: #c82039;
-            text-decoration: none;
-            font-weight: 600;
-        }
-        .back-link:hover {
-            text-decoration: underline;
-        }
+        .back-link:hover{color:var(--color-primary-strong)}
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Privacy Policy</h1>
-        <p><strong>Last Updated:</strong> September 1, 2026</p>
+        <p class="doc-meta">Last updated 1 September 2026</p>
         
         <h2>1. How This Website Works</h2>
         <p>This is a static website. It has no server-side database and no backend that receives

@@ -4,6 +4,18 @@
 const GITHUB_OWNER = 'jhalardecor', GITHUB_REPO = 'jhalar-hanging-decor', GITHUB_BRANCH = 'main';
 const FILES_TO_PUBLISH = ['content/site-settings.json','content/theme.json','content/products.json','content/sections.json','content/custom-css.json'];
 
+// Design-system contract shared with style.css and script.js.
+// The brand face is locked here; only the six approved colours are editable.
+const BRAND_FONT_STACK = "Mogranx, 'Helvetica Neue', Arial, sans-serif";
+const PALETTE = {
+  canvas: '#FFFAF1',        // page
+  surface: '#FFFDF8',       // cards, modal, light surfaces
+  primary: '#C82039',       // brand accent + primary CTA
+  primaryStrong: '#A71931', // hover / active
+  ink: '#141942',           // body text, structural UI, dark sections
+  heading: '#622331'        // heritage headings
+};
+
 let state = {
   settings: null, theme: null, products: [], namingRegistry: null, sections: {}, sectionOrder: [],
   customCSS: '', navItems: [], footerNavItems: [], socialLinks: {},
@@ -70,21 +82,19 @@ function deepMerge(base, over) {
 function defaultThemeTemplate() {
   return {
     colors: {
-      '--brand-primary':'#6B2136','--brand-primary-dark':'#42101F','--brand-primary-light':'#C8909A',
-      '--brand-accent':'#B48A52','--brand-navy':'#2F1E25','--brand-cream':'#F4EEE4',
-      '--brand-background':'#FCFAF5','--brand-alt-background':'#ECE1D1','--brand-text':'#2F1E25',
-      '--brand-muted':'#7D6C72','--brand-heading':'#2F1E25','--brand-border':'#E6DACB',
-      '--brand-header-background':'#FCFAF5','--brand-footer-background':'#2C1220','--brand-footer-text':'#FCFAF5'
+      canvas:'#FFFAF1', surface:'#FFFDF8',
+      primary:'#C82039', primaryStrong:'#A71931',
+      ink:'#141942', heading:'#622331'
     },
     fonts: {
-      heading:"Mogranx, Arial, sans-serif",
-      body:"Mogranx, Arial, sans-serif"
+      heading:BRAND_FONT_STACK,
+      body:BRAND_FONT_STACK
     },
     layout: {
       baseFontSize:'16px', sectionY:'96px', cardRadius:'20px', containerWidth:'1140px',
       headerHeight:'72px', productColumns:'3', buttonRadius:'9999px', shadowIntensity:'0.12', revealAnimation:true,
-      headingWeight:'600', headingTracking:'-0.01em', headingLeading:'1.18',
-      bodyWeight:'400', bodyTracking:'0', bodyLeading:'1.7',
+      headingWeight:'400', headingTracking:'0', headingLeading:'1.14',
+      bodyWeight:'400', bodyTracking:'0', bodyLeading:'1.6',
       titleSize:'fluid', heroTitleSize:'fluid', cardTitleSize:'fluid',
       cardPad:'24px', gridGap:'24px', sectionHeaderGap:'48px', sectionAlign:'center',
       heroColumns:'split', splitLayout:'split', aboutLayout:'split', processColumns:'3',
@@ -259,25 +269,10 @@ function familyFromFilename(name) {
   return stem.replace(/\b\w/g, c => c.toUpperCase());
 }
 function populateFontOptions() {
-  const extra = state.fontManifest.map(f => ({
-    family: f.family,
-    heading: `'${f.family}', Georgia, 'Times New Roman', serif`,
-    body: `'${f.family}', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif`
-  }));
-  const headSel = document.getElementById('ed-font-heading');
-  const bodySel = document.getElementById('ed-font-body');
-  if (!headSel || !bodySel) return;
-  const curH = headSel.value, curB = bodySel.value;
-  extra.forEach(f => {
-    if (![...headSel.options].some(o => o.value === f.heading))
-      headSel.add(new Option(`${f.family} (self-hosted)`, f.heading));
-    if (![...bodySel.options].some(o => o.value === f.body))
-      bodySel.add(new Option(`${f.family} (self-hosted)`, f.body));
-  });
-  if (state.theme?.fonts?.heading) headSel.value = state.theme.fonts.heading;
-  else if (curH) headSel.value = curH;
-  if (state.theme?.fonts?.body) bodySel.value = state.theme.fonts.body;
-  else if (curB) bodySel.value = curB;
+  // The brand face (Mogranx) is locked by the design system, so there are no
+  // font-family pickers to fill. Uploaded faces stay recorded in the manifest
+  // for the Media tab; swapping the site face is a stylesheet decision.
+  return;
 }
 
 // ===== IMAGE MANIFEST =====
@@ -363,25 +358,13 @@ function populateAllForms() {
   if (state.theme) {
     if (state.theme.colors) {
       const c = state.theme.colors;
-      setVal('ed-color-red', c['--brand-primary']||'#6B2136');
-      setVal('ed-color-red-dark', c['--brand-primary-dark']||'#42101F');
-      setVal('ed-color-red-light', c['--brand-primary-light']||'#C8909A');
-      setVal('ed-color-gold', c['--brand-accent']||'#B48A52');
-      setVal('ed-color-navy', c['--brand-navy']||'#2F1E25');
-      setVal('ed-color-cream', c['--brand-cream']||'#F4EEE4');
-      setVal('ed-color-bg', c['--brand-background']||'#FCFAF5');
-      setVal('ed-color-alt', c['--brand-alt-background']||'#ECE1D1');
-      setVal('ed-color-text', c['--brand-text']||'#2F1E25');
-      setVal('ed-color-muted', c['--brand-muted']||'#7D6C72');
-      setVal('ed-color-heading', c['--brand-heading']||'#2F1E25');
-      setVal('ed-color-border', c['--brand-border']||'#E6DACB');
-      setVal('ed-color-header', c['--brand-header-background']||'#FCFAF5');
-      setVal('ed-color-footer-bg', c['--brand-footer-background']||'#2C1220');
-      setVal('ed-color-footer-text', c['--brand-footer-text']||'#FCFAF5');
-    }
-    if (state.theme.fonts) {
-      setVal('ed-font-heading', state.theme.fonts.heading||'Mogranx, Arial, sans-serif');
-      setVal('ed-font-body', state.theme.fonts.body||'Mogranx, Arial, sans-serif');
+      // Semantic roles, with the legacy --brand-* keys still readable.
+      setVal('ed-color-canvas', c.canvas || c['--brand-background'] || PALETTE.canvas);
+      setVal('ed-color-surface', c.surface || c['--brand-alt-background'] || PALETTE.surface);
+      setVal('ed-color-heading', c.heading || c['--brand-heading'] || PALETTE.heading);
+      setVal('ed-color-ink', c.ink || c['--brand-text'] || PALETTE.ink);
+      setVal('ed-color-primary', c.primary || c['--brand-primary'] || PALETTE.primary);
+      setVal('ed-color-primary-strong', c.primaryStrong || c['--brand-primary-dark'] || PALETTE.primaryStrong);
     }
     const l = state.theme.layout || {};
     setVal('ed-layout-header-h', parseInt(l.headerHeight||'72px',10)||72);
@@ -391,12 +374,12 @@ function populateAllForms() {
     setVal('ed-layout-shadow', Number(l.shadowIntensity??'0.12'));
     setVal('ed-layout-reveal', l.revealAnimation === false ? 'false' : 'true');
     // Typography
-    setVal('ed-font-heading-weight', String(l.headingWeight||'600'));
-    setVal('ed-font-heading-tracking', l.headingTracking||'-0.01em');
-    setVal('ed-font-heading-leading', String(l.headingLeading||'1.18'));
+    setVal('ed-font-heading-weight', String(l.headingWeight||'400'));
+    setVal('ed-font-heading-tracking', l.headingTracking||'0');
+    setVal('ed-font-heading-leading', String(l.headingLeading||'1.14'));
     setVal('ed-font-body-weight', String(l.bodyWeight||'400'));
     setVal('ed-font-body-tracking', l.bodyTracking||'0');
-    setVal('ed-font-body-leading', String(l.bodyLeading||'1.7'));
+    setVal('ed-font-body-leading', String(l.bodyLeading||'1.6'));
     // Rows / columns / inner spacing
     setVal('ed-layout-hero-cols', l.heroColumns==='stack'?'stack':'split');
     setVal('ed-layout-split', l.splitLayout==='stack'?'stack':'split');
@@ -574,7 +557,7 @@ function renderProcessEditor() {
   const c = document.getElementById('process-editor'); if (!c) return;
   c.innerHTML = state.sectionCopy.customOrders.steps.map((x,i) => `
     <div class="icon-row" style="align-items:flex-start" data-index="${i}">
-      <span class="icon-preview" style="font-weight:800;font-family:var(--mono);color:var(--navy)">${String(i+1).padStart(2,'0')}</span>
+      <span class="icon-preview" style="font-weight:800;font-family:var(--mono);color:var(--ed-navy)">${String(i+1).padStart(2,'0')}</span>
       <input type="text" class="proc-title" value="${escapeHtml(x.title)}" placeholder="Step title">
       <input type="text" class="proc-text" value="${escapeHtml(x.text)}" placeholder="Step description">
       <button class="del" onclick="removeProcessItem(${i})"><i class="fas fa-times"></i></button>
@@ -867,7 +850,7 @@ function triggerUpload() { document.getElementById('file-input').click(); }
 function setupUploadZone() {
   const zone = document.getElementById('upload-zone');
   if (!zone) return;
-  zone.addEventListener('dragover', e => { e.preventDefault(); zone.style.borderColor = 'var(--red)'; });
+  zone.addEventListener('dragover', e => { e.preventDefault(); zone.style.borderColor = 'var(--ed-red)'; });
   zone.addEventListener('dragleave', () => { zone.style.borderColor = ''; });
   zone.addEventListener('drop', e => { e.preventDefault(); zone.style.borderColor = ''; handleFiles(e.dataTransfer.files); });
 }
@@ -1006,16 +989,11 @@ function setupAutoSave() {
     if (el) { el.addEventListener('input', onChange); el.addEventListener('change', onChange); }
   });
   // Theme fields
-  ['ed-color-red','ed-color-red-dark','ed-color-red-light','ed-color-gold','ed-color-navy','ed-color-cream',
-   'ed-color-bg','ed-color-alt','ed-color-text','ed-color-muted','ed-color-heading','ed-color-border',
-   'ed-color-header','ed-color-footer-bg','ed-color-footer-text'
+  ['ed-color-canvas','ed-color-surface','ed-color-heading','ed-color-ink',
+   'ed-color-primary','ed-color-primary-strong'
   ].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.addEventListener('input', onChange);
-  });
-  ['ed-font-heading','ed-font-body'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.addEventListener('change', onChange);
   });
   // Typography selects
   ['ed-font-heading-weight','ed-font-heading-tracking','ed-font-heading-leading','ed-font-body-weight','ed-font-body-tracking','ed-font-body-leading'].forEach(id => {
@@ -1099,24 +1077,18 @@ function collectAllData() {
   if (!state.theme.colors) state.theme.colors = {};
   if (!state.theme.fonts) state.theme.fonts = {};
   if (!state.theme.layout) state.theme.layout = {};
+  // Six semantic colour roles; everything else is derived by the stylesheet.
   const c = state.theme.colors;
-  c['--brand-primary'] = getVal('ed-color-red');
-  c['--brand-primary-dark'] = getVal('ed-color-red-dark');
-  c['--brand-primary-light'] = getVal('ed-color-red-light');
-  c['--brand-accent'] = getVal('ed-color-gold');
-  c['--brand-navy'] = getVal('ed-color-navy');
-  c['--brand-cream'] = getVal('ed-color-cream');
-  c['--brand-background'] = getVal('ed-color-bg');
-  c['--brand-alt-background'] = getVal('ed-color-alt');
-  c['--brand-text'] = getVal('ed-color-text');
-  c['--brand-muted'] = getVal('ed-color-muted');
-  c['--brand-heading'] = getVal('ed-color-heading');
-  c['--brand-border'] = getVal('ed-color-border');
-  c['--brand-header-background'] = getVal('ed-color-header');
-  c['--brand-footer-background'] = getVal('ed-color-footer-bg');
-  c['--brand-footer-text'] = getVal('ed-color-footer-text');
-  state.theme.fonts.heading = getVal('ed-font-heading');
-  state.theme.fonts.body = getVal('ed-font-body');
+  Object.keys(c).forEach(k => { if (k.startsWith('--brand-')) delete c[k]; });
+  c.canvas = getVal('ed-color-canvas') || PALETTE.canvas;
+  c.surface = getVal('ed-color-surface') || PALETTE.surface;
+  c.heading = getVal('ed-color-heading') || PALETTE.heading;
+  c.ink = getVal('ed-color-ink') || PALETTE.ink;
+  c.primary = getVal('ed-color-primary') || PALETTE.primary;
+  c.primaryStrong = getVal('ed-color-primary-strong') || PALETTE.primaryStrong;
+  // The brand face is locked by the design system, not chosen in the editor.
+  state.theme.fonts.heading = BRAND_FONT_STACK;
+  state.theme.fonts.body = BRAND_FONT_STACK;
   // Layout
   const l = state.theme.layout;
   l.baseFontSize = getVal('ed-layout-fs-base') || '16px';
@@ -1130,12 +1102,12 @@ function collectAllData() {
   l.shadowIntensity = String(getVal('ed-layout-shadow') || '0.12');
   l.revealAnimation = getVal('ed-layout-reveal') !== 'false';
   // Typography
-  l.headingWeight = getVal('ed-font-heading-weight') || '600';
-  l.headingTracking = getVal('ed-font-heading-tracking') || '-0.01em';
-  l.headingLeading = getVal('ed-font-heading-leading') || '1.18';
+  l.headingWeight = getVal('ed-font-heading-weight') || '400';
+  l.headingTracking = getVal('ed-font-heading-tracking') || '0';
+  l.headingLeading = getVal('ed-font-heading-leading') || '1.14';
   l.bodyWeight = getVal('ed-font-body-weight') || '400';
   l.bodyTracking = getVal('ed-font-body-tracking') || '0';
-  l.bodyLeading = getVal('ed-font-body-leading') || '1.7';
+  l.bodyLeading = getVal('ed-font-body-leading') || '1.6';
   // Rows / columns / inner spacing
   l.heroColumns = getVal('ed-layout-hero-cols') || 'split';
   l.splitLayout = getVal('ed-layout-split') || 'split';
@@ -1483,7 +1455,7 @@ async function publishToGitHub() {
     setTimeout(() => { btn.disabled = false; btn.innerHTML = '<i class="fas fa-rocket"></i> Publish to GitHub'; }, 3000);
   } catch(e) {
     console.error('Publish:', e);
-    status.textContent = `[X] ${e.message}`; status.style.color = 'var(--red)';
+    status.textContent = `[X] ${e.message}`; status.style.color = 'var(--ed-red)';
     addLog(`Error: ${e.message}`,'err');
     showToast('Publish failed: '+e.message,'error');
     btn.disabled = false; btn.innerHTML = '<i class="fas fa-rocket"></i> Publish to GitHub';

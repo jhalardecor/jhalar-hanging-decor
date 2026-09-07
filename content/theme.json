@@ -1,33 +1,32 @@
 {
   "colors": {
+    "canvas": "#FFFAF1",
+    "surface": "#FFFDF8",
     "primary": "#C82039",
-    "primaryDeep": "#A71931",
-    "ivory": "#FFFAF1",
-    "ivorySoft": "#FFFDF8",
-    "ivoryDeep": "#F6EFE4",
+    "primaryStrong": "#A71931",
     "ink": "#141942",
-    "oxblood": "#622331"
+    "heading": "#622331"
   },
   "fonts": {
-    "heading": "Mogranx, Arial, sans-serif",
-    "body": "Arial, Helvetica, sans-serif"
+    "heading": "Mogranx, 'Helvetica Neue', Arial, sans-serif",
+    "body": "Mogranx, 'Helvetica Neue', Arial, sans-serif"
   },
   "layout": {
     "baseFontSize": "16px",
     "sectionY": "",
     "cardRadius": "0px",
-    "containerWidth": "1440px",
-    "headerHeight": "82px",
+    "containerWidth": "1200px",
+    "headerHeight": "84px",
     "productColumns": "4",
-    "buttonRadius": "2px",
+    "buttonRadius": "0px",
     "shadowIntensity": "0.12",
     "revealAnimation": true,
-    "headingWeight": "700",
-    "headingTracking": "-0.018em",
-    "headingLeading": "1.12",
+    "headingWeight": "400",
+    "headingTracking": "0",
+    "headingLeading": "1.14",
     "bodyWeight": "400",
     "bodyTracking": "0",
-    "bodyLeading": "1.7",
+    "bodyLeading": "1.6",
     "titleSize": "fluid",
     "heroTitleSize": "fluid",
     "cardTitleSize": "fluid",

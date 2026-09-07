@@ -102,31 +102,59 @@ function applySettings(s){
  if(s.ogImage&&s.ogImage!==DEFAULTS.ogImage){const og=absUrl(s.ogImage);['meta[property="og:image"]','meta[name="twitter:image"]'].forEach(sel=>{const el=$(sel);if(el)el.setAttribute('content',og)})}
 }
 
-/* ---------- theme application (editor Theme tab -> CSS variables) ---------- */
-const COLOR_MAP={'--brand-primary':'--wine','--brand-primary-dark':'--wine-deep','--brand-primary-light':'--blush','--brand-accent':'--gold','--brand-cream':'--cream','--brand-background':'--paper','--brand-alt-background':'--cream-deep','--brand-text':'--wine-ink','--brand-muted':'--muted','--brand-heading':'--wine-ink','--brand-border':'--line','--brand-header-background':'--header-bg','--brand-footer-background':'--footer-bg'};
+/* ---------- theme application (editor Theme tab -> design-system tokens) ----
+   The stylesheet is the single authority for fonts, the type scale, weights,
+   tracking and colour. The published theme may only re-point a fixed set of
+   semantic tokens, and only with values the system accepts:
+     - colours must be hex, and land on a semantic role (never a component)
+     - weights must be a Mogranx file that exists (400 / 500 / 700)
+     - tracking can never be negative (brand type is not compressed)
+     - leading must stay inside a readable range
+   Anything else is ignored and the stylesheet default stands. */
+const COLOR_ROLES={
+ canvas:'--color-canvas', surface:'--color-surface',
+ primary:'--color-primary', primaryStrong:'--color-primary-strong',
+ ink:'--color-ink', heading:'--color-heading',
+ /* legacy published keys kept readable so an old theme.json still resolves */
+ '--brand-background':'--color-canvas','--brand-alt-background':'--color-surface',
+ '--brand-primary':'--color-primary','--brand-primary-dark':'--color-primary-strong',
+ '--brand-text':'--color-ink','--brand-heading':'--color-heading'
+};
+const HEX=/^#(?:[0-9a-f]{3}|[0-9a-f]{6})$/i;
+const WEIGHTS=new Set(['400','500','700']);
 const px=v=>typeof v==='string'&&/\d/.test(v)?v:null;
+const tracking=v=>{const m=/^(-?\d*\.?\d+)(em|px)?$/.exec(String(v||'').trim());if(!m)return null;const n=Number(m[1]);if(!Number.isFinite(n)||n<0||n>0.12)return null;return n===0?'0':n+(m[2]||'em')};
+const leading=v=>{const n=Number(v);return Number.isFinite(n)&&n>=1&&n<=2?String(n):null};
 function setTheme(t){
  state.theme=t||null;
  if(!t||typeof t!=='object')return;
  const r=document.documentElement.style;
  const c=t.colors||{};
- Object.keys(COLOR_MAP).forEach(k=>{if(c[k])r.setProperty(COLOR_MAP[k],c[k]);else r.removeProperty(COLOR_MAP[k])});
- /* Font families are controlled by the production stylesheet to prevent late runtime swaps. */
+ const applied=new Set();
+ Object.entries(COLOR_ROLES).forEach(([key,token])=>{
+  const v=c[key];
+  if(HEX.test(String(v||''))){r.setProperty(token,v);applied.add(token);
+   if(token==='--color-ink')r.setProperty('--color-inverse-surface',v);}
+  else if(!applied.has(token)){r.removeProperty(token);
+   if(token==='--color-ink')r.removeProperty('--color-inverse-surface');}
+ });
+ /* Font families stay with the production stylesheet: the brand face is not swappable at runtime. */
  const l=t.layout||{};
+ const typo=(token,value)=>{if(value)r.setProperty(token,value);else r.removeProperty(token)};
+ typo('--heading-weight',WEIGHTS.has(String(l.headingWeight))?String(l.headingWeight):null);
+ typo('--body-weight',WEIGHTS.has(String(l.bodyWeight))?String(l.bodyWeight):null);
+ typo('--heading-tracking',tracking(l.headingTracking));
+ typo('--body-tracking',tracking(l.bodyTracking));
+ typo('--heading-leading',leading(l.headingLeading));
+ typo('--body-leading',leading(l.bodyLeading));
  const put=(v,val,unit)=>{const p=px(val);if(p)r.setProperty(v,unit==='num'?val:p);else r.removeProperty(v)};
- put('--h1-size',l.heroTitleSize);put('--h2-size',l.titleSize);put('--card-title-size',l.cardTitleSize);
+ /* Type sizes are not runtime-adjustable: the fluid role scale owns them. */
  put('--space-6',l.sectionY);put('--shell-max',l.containerWidth);put('--header-h',l.headerHeight);
  put('--radius-btn',l.buttonRadius);put('--radius-card',l.cardRadius);
  put('--grid-gap',l.gridGap||l.productGap);put('--section-head-gap',l.sectionHeaderGap);put('--split-gap',l.splitGap);
  if(l.cardPad){const v=px(l.cardPad);if(v)r.setProperty('--card-pad',v+' 0 '+(Math.round(parseInt(v,10)*2))+'px')}
  if(l.productColumns)r.setProperty('--product-cols',String(l.productColumns));
  if(l.baseFontSize&&l.baseFontSize!=='16px')r.fontSize=l.baseFontSize;else r.fontSize='';
- if(l.headingWeight)r.setProperty('--heading-weight',String(l.headingWeight));else r.removeProperty('--heading-weight');
- if(l.bodyWeight&&l.bodyWeight!=='400')r.setProperty('--body-weight',String(l.bodyWeight));else r.removeProperty('--body-weight');
- if(l.headingTracking)r.setProperty('--heading-tracking',l.headingTracking);else r.removeProperty('--heading-tracking');
- if(l.headingLeading)r.setProperty('--heading-leading',String(l.headingLeading));else r.removeProperty('--heading-leading');
- if(l.bodyTracking)r.setProperty('--body-tracking',l.bodyTracking);else r.removeProperty('--body-tracking');
- if(l.bodyLeading&&l.bodyLeading!=='1.7')r.setProperty('--body-leading',String(l.bodyLeading));else r.removeProperty('--body-leading');
  document.body.classList.toggle('no-shadow',l.shadowIntensity!==undefined&&Number(l.shadowIntensity)<=0.05);
  revealOn=l.revealAnimation!==false&&!reducedMotion;
  document.body.classList.toggle('no-reveal',!revealOn);

@@ -1,198 +1,732 @@
-/* JHALAR — CLEAN PRODUCTION DESIGN SYSTEM | build 20260907.19 */
+/* =============================================================================
+   JHALAR — PRODUCTION DESIGN SYSTEM | build 20260907.29
+   -----------------------------------------------------------------------------
+   ONE authority for: font faces, type scale, weights, tracking, leading, colour.
 
-/* 01. FONTS */
+   Reading order
+     01  Font faces          real files only — no synthesised weights or slants
+     02  Tokens              palette -> semantic colour, type roles, space, motion
+     03  Base + typography   the only place elements get a font, size or colour
+     04  Layout primitives   shell, section, editorial flow
+     05  Type roles          eyebrow, lede, caption, meta
+     06+ Components          consume tokens, never raw values
+
+   Rules of the system
+     - No component declares a font-family. Family comes from html/body + h1-h6.
+     - No component declares a raw hex/rgb. Colour comes from --color-* tokens.
+     - No component invents a font-size. Size comes from --text-* role tokens.
+     - Only 400 / 500 / 700 exist as real Mogranx files. Nothing else is used.
+     - Tracking is 0 for reading text; positive only on uppercase labels.
+     - Red is an accent and action signal, never a default text colour.
+   ========================================================================== */
+
+
+/* =============================================================================
+   01. FONT FACES
+   Mogranx ships as separate static files. Only the weights and slants that
+   exist on disk are declared, and font-synthesis is disabled globally, so the
+   browser can never fake a bold or an italic.
+   ========================================================================== */
 @font-face{font-family:Mogranx;src:url('assets/fonts/Mogranx-Regular.woff2') format('woff2');font-weight:400;font-style:normal;font-display:block}
 @font-face{font-family:Mogranx;src:url('assets/fonts/Mogranx-Medium.woff2') format('woff2');font-weight:500;font-style:normal;font-display:block}
 @font-face{font-family:Mogranx;src:url('assets/fonts/Mogranx-Bold.woff2') format('woff2');font-weight:700;font-style:normal;font-display:block}
+@font-face{font-family:Mogranx;src:url('assets/fonts/Mogranx-Slanted.woff2') format('woff2');font-weight:400;font-style:italic;font-display:block}
+@font-face{font-family:Mogranx;src:url('assets/fonts/Mogranx-MediumSlanted.woff2') format('woff2');font-weight:500;font-style:italic;font-display:block}
+@font-face{font-family:Mogranx;src:url('assets/fonts/Mogranx-BoldSlanted.woff2') format('woff2');font-weight:700;font-style:italic;font-display:block}
 
-/* 02. TOKENS */
+
+/* =============================================================================
+   02. TOKENS
+   ========================================================================== */
 :root{
- --font:Mogranx,Arial,sans-serif;
- --font-heading:Mogranx,Arial,sans-serif;
- --font-body:Mogranx,Arial,sans-serif;
- --paper:#FFFAF1;--surface:#FFFDF8;--red:#C82039;--red-deep:#A71931;--navy:#141942;--heritage:#622331;
- --ink:var(--navy);--ink-soft:var(--heritage);--dark:var(--navy);
- --line:rgba(20,25,66,.14);--wash:#FFFDF8;
- --shadow:0 20px 55px rgba(20,25,66,.12);
- --shell:min(1200px,calc(100% - 48px));
- --gutter:24px;
- --s1:.5rem;--s2:.75rem;--s3:1rem;--s4:1.5rem;--s5:2rem;--s6:3rem;--s7:4.5rem;--s8:6rem;
- --radius:0px;--ease:cubic-bezier(.22,.61,.36,1);
+  /* --- 2.1 Font families ------------------------------------------------- */
+  --font-heading:Mogranx,'Helvetica Neue',Arial,sans-serif;
+  --font-body:Mogranx,'Helvetica Neue',Arial,sans-serif;
+
+  /* --- 2.2 Font weights (real files only) -------------------------------- */
+  --weight-regular:400;
+  --weight-medium:500;
+  --weight-bold:700;
+
+  /* --- 2.3 Type scale ----------------------------------------------------
+     Fluid roles, 320px -> 1440px, ~1.25 modular ratio at the top end.
+     Display 44->84 | H1 40->68 | H2 34->56 | H3 24->34 | H4 20->24
+     Body L  17->19 | Body 16   | Body S 15 | Caption 13 | Eyebrow 12       */
+  --text-display:clamp(2.75rem,2.05rem + 3.5vw,5.25rem);
+  --text-h1:clamp(2.5rem,2.05rem + 2.25vw,4.25rem);
+  --text-h2:clamp(2.125rem,1.72rem + 2.03vw,3.5rem);
+  --text-h3:clamp(1.5rem,1.33rem + 0.85vw,2.125rem);
+  --text-h4:clamp(1.25rem,1.16rem + 0.42vw,1.5rem);
+  --text-body-lg:clamp(1.0625rem,1.02rem + 0.23vw,1.1875rem);
+  --text-body:1rem;
+  --text-body-sm:0.9375rem;
+  --text-caption:0.8125rem;
+  --text-eyebrow:0.75rem;
+
+  /* --- 2.4 Leading (semantic, never one value everywhere) ---------------- */
+  --leading-display:1.05;   /* hero / display */
+  --leading-heading:1.14;   /* h1 – h3 */
+  --leading-title:1.28;     /* h4, card + product titles */
+  --leading-lede:1.5;       /* body large */
+  --leading-body:1.6;       /* reading text */
+  --leading-ui:1.35;        /* nav, buttons, captions */
+  --leading-label:1.2;      /* eyebrows, uppercase metadata */
+
+  /* --- 2.5 Tracking ------------------------------------------------------
+     Reading text is never compressed. Positive tracking only on uppercase.  */
+  --tracking-normal:0;
+  --tracking-label:0.08em;
+  --tracking-eyebrow:0.1em;
+
+  /* --- 2.5b Runtime-adjustable typography ---------------------------------
+     The published theme (content/theme.json, written by the editor) may move
+     these six values only. They resolve from the tokens above, and script.js
+     rejects anything outside the system (no negative tracking, no weights
+     without a font file). Everything else is stylesheet-owned.              */
+  --heading-weight:var(--weight-regular);
+  --heading-leading:var(--leading-heading);
+  --heading-tracking:var(--tracking-normal);
+  --body-weight:var(--weight-regular);
+  --body-leading:var(--leading-body);
+  --body-tracking:var(--tracking-normal);
+
+  /* --- 2.6 Brand palette (raw values live here and nowhere else) --------- */
+  --brand-canvas:#FFFAF1;
+  --brand-surface:#FFFDF8;
+  --brand-red:#C82039;
+  --brand-red-deep:#A71931;
+  --brand-navy:#141942;
+  --brand-heritage:#622331;
+  /* channel lists so translucent variants stay derived from the palette */
+  --canvas-rgb:255,250,241;
+  --surface-rgb:255,253,248;
+  --navy-rgb:20,25,66;
+  --heritage-rgb:98,35,49;
+
+  /* --- 2.7 Semantic colour ----------------------------------------------- */
+  /* surfaces */
+  --color-canvas:var(--brand-canvas);
+  --color-surface:var(--brand-surface);
+  --color-surface-sunken:#F4EEEA;                                        /* fallback */
+  --color-surface-sunken:color-mix(in srgb,var(--brand-heritage) 7%,var(--brand-surface));
+  --color-surface-glass:rgba(var(--surface-rgb),.94);
+  --color-canvas-glass:rgba(var(--canvas-rgb),.97);
+  --color-inverse-surface:var(--brand-navy);
+
+  /* text on light */
+  --color-ink:var(--brand-navy);            /* primary body + structural UI  */
+  --color-ink-muted:#434665;                                             /* fallback */
+  --color-ink-muted:color-mix(in srgb,var(--brand-navy) 80%,var(--brand-canvas));
+  --color-heading:var(--brand-heritage);    /* premium editorial headings    */
+  --color-label:var(--brand-heritage);      /* eyebrows, category metadata   */
+
+  /* text on dark */
+  --color-ink-inverse:var(--brand-canvas);
+  --color-ink-inverse-muted:rgba(var(--canvas-rgb),.78);
+  --color-label-inverse:rgba(var(--canvas-rgb),.88);
+
+  /* brand action */
+  --color-primary:var(--brand-red);            /* accents, primary CTA fill  */
+  --color-primary-strong:var(--brand-red-deep);/* hover, active, red on text */
+  --color-on-primary:var(--brand-canvas);
+
+  /* lines, scrims, focus */
+  --color-border:rgba(var(--navy-rgb),.14);
+  --color-border-soft:rgba(var(--navy-rgb),.08);
+  --color-border-inverse:rgba(var(--canvas-rgb),.35);
+  --color-overlay:rgba(var(--navy-rgb),.58);
+  --color-focus:var(--brand-red-deep);
+
+  --shadow-header:0 8px 30px rgba(var(--heritage-rgb),.06);
+  --shadow-card:0 18px 42px rgba(var(--navy-rgb),.10);
+  --shadow-modal:0 30px 90px rgba(var(--navy-rgb),.28);
+
+  /* --- 2.8 Measure (line length is typography, not layout) --------------- */
+  --measure-display:9ch;
+  --measure-lede:46ch;
+  --measure-prose:54ch;
+  --measure-support:43ch;
+
+  /* --- 2.9 Space, shell, motion ------------------------------------------ */
+  --s1:.5rem;--s2:.75rem;--s3:1rem;--s4:1.5rem;--s5:2rem;--s6:3rem;--s7:4.5rem;--s8:6rem;
+  --flow:var(--s3);
+  --flow-loose:var(--s4);
+  --shell:min(1200px,calc(100% - 48px));
+  --gutter:24px;
+  --ease:cubic-bezier(.22,.61,.36,1);
 }
+
+
+/* =============================================================================
+   03. BASE + TYPOGRAPHY
+   The only place in the stylesheet where an element is given a family,
+   a size, a weight or a default colour.
+   ========================================================================== */
 *{box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:90px}
-body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--font-body);font-size:16px;line-height:1.55;overflow-x:hidden}
-img,video{display:block;max-width:100%}button,a{font:inherit}button{cursor:pointer}a{color:inherit;text-decoration:none}
-button:focus-visible,a:focus-visible{outline:2px solid var(--ink);outline-offset:4px}
+html{
+  scroll-behavior:smooth;
+  scroll-padding-top:90px;
+  -webkit-text-size-adjust:100%;
+  font-synthesis:none;                 /* no fake bold, no fake italic */
+  text-rendering:optimizeLegibility;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+body{
+  margin:0;
+  background:var(--color-canvas);
+  color:var(--color-ink);
+  font-family:var(--font-body);
+  font-size:var(--text-body);
+  font-weight:var(--body-weight);
+  line-height:var(--body-leading);
+  letter-spacing:var(--body-tracking);
+  overflow-x:hidden;
+}
+
+/* Headings — one system. Size, leading and colour come from role tokens;
+   hierarchy is carried by scale and space, not by weight. */
+h1,h2,h3,h4,h5,h6{
+  margin:0;
+  font-family:var(--font-heading);
+  color:var(--color-heading);
+  letter-spacing:var(--heading-tracking);
+  line-height:var(--heading-leading);
+  text-wrap:balance;                   /* kills orphans on wrapped headings */
+}
+h1{font-size:var(--text-h1);font-weight:var(--heading-weight)}
+h2{font-size:var(--text-h2);font-weight:var(--heading-weight)}
+h3{font-size:var(--text-h3);font-weight:var(--weight-medium)}
+h4{font-size:var(--text-h4);font-weight:var(--weight-medium);line-height:var(--leading-title)}
+h5{font-size:var(--text-body-lg);font-weight:var(--weight-medium);line-height:var(--leading-title)}
+h6{
+  font-size:var(--text-body);font-weight:var(--weight-medium);
+  line-height:var(--leading-title);letter-spacing:var(--tracking-label);text-transform:uppercase;
+}
+
+p{margin:0;text-wrap:pretty}
+strong,b{font-weight:var(--weight-bold)}
+em,i{font-style:italic;font-weight:inherit}
+small{font-size:var(--text-caption);line-height:var(--leading-ui)}
+
+img,video{display:block;max-width:100%}
+button,a{font:inherit;letter-spacing:inherit}
+button{cursor:pointer;color:inherit}
+a{color:inherit;text-decoration:none}
+button:focus-visible,a:focus-visible{outline:2px solid var(--color-focus);outline-offset:4px}
+::selection{background:var(--color-primary);color:var(--color-on-primary)}
+
+
+/* =============================================================================
+   04. LAYOUT PRIMITIVES
+   ========================================================================== */
 .shell{width:var(--shell);margin-inline:auto}
 .section{padding-block:clamp(64px,9vw,120px)}
-.eyebrow,.kicker{margin:0 0 var(--s3);font-size:.72rem;line-height:1.2;font-weight:700;letter-spacing:.13em;text-transform:uppercase}
 
-/* Lock all headings to the canonical Mogranx family so runtime theme loading cannot change them. */
-/* Runtime theme settings load after CSS; headings/body must keep the bundled Mogranx family. */
-html body{font-family:var(--font-body)!important;font-synthesis:none}
-h1,h2,h3,h4,h5,h6,.hero-banner-copy h1,.section-heading-group h2,.custom-copy h2,.story-copy h2,.contact-box h2,.modal-copy h3{font-family:Mogranx,Arial,sans-serif!important;font-synthesis:none}
+/* Editorial flow: deliberate vertical rhythm inside copy blocks, instead of
+   browser default paragraph margins fighting component margins.
+   label -> heading = 1 step, heading -> prose = 1.5 steps, prose -> prose = 1 step. */
+.hero-banner-copy>*+*,
+.section-heading-group>*+*,
+.section-support-group>*+*,
+.custom-copy>*+*,
+.story-copy>*+*,
+.contact-box>div>*+*,
+.modal-copy>*+*{margin-top:var(--flow)}
+.custom-copy h2+p,
+.story-copy h2+p,
+.contact-box h2+p,
+.modal-copy h3+p,
+.hero-banner-copy h1+p{margin-top:var(--flow-loose)}
 
 
-/* 03. HEADER */
-.header{position:sticky;top:0;z-index:50;background:rgba(255,250,241,.96);border-bottom:1px solid transparent;transition:transform .28s var(--ease),box-shadow .28s var(--ease),border-color .28s ease}
-.header.scrolled{border-color:var(--line);box-shadow:0 8px 30px rgba(50,20,28,.06)}
+/* =============================================================================
+   05. TYPE ROLES (shared, semantic)
+   ========================================================================== */
+/* Eyebrow / kicker — the only elements allowed positive tracking. */
+.eyebrow,.kicker,.audience-label,.product-category{
+  font-size:var(--text-eyebrow);
+  font-weight:var(--weight-medium);
+  line-height:var(--leading-label);
+  letter-spacing:var(--tracking-eyebrow);
+  text-transform:uppercase;
+  color:var(--color-label);
+}
+/* Lede — one step above body, used once per composition. */
+.hero-lead{
+  font-size:var(--text-body-lg);
+  line-height:var(--leading-lede);
+  color:var(--color-ink);
+  max-width:var(--measure-lede);
+}
+/* Inline UI actions (text links that behave like buttons). */
+.hero-banner-cta,.text-link,.contact-cta,.product-details-btn,.modal-wa-btn,.more-btn,.filter-btn{
+  font-weight:var(--weight-medium);
+  line-height:var(--leading-ui);
+  letter-spacing:var(--tracking-normal);
+}
+
+/* Dark surfaces re-point the semantic tokens instead of overriding colours
+   component by component. */
+.contact,.footer{
+  --color-heading:var(--color-ink-inverse);
+  --color-ink:var(--color-ink-inverse);
+  --color-ink-muted:var(--color-ink-inverse-muted);
+  --color-label:var(--color-label-inverse);
+  --color-border:var(--color-border-inverse);
+}
+
+
+/* =============================================================================
+   06. HEADER + NAVIGATION
+   ========================================================================== */
+.header{
+  position:sticky;top:0;z-index:50;
+  background:var(--color-canvas-glass);
+  border-bottom:1px solid transparent;
+  transition:transform .28s var(--ease),box-shadow .28s var(--ease),border-color .28s ease;
+}
+.header.scrolled{border-color:var(--color-border);box-shadow:var(--shadow-header)}
 .header.header-hidden{transform:translateY(-100%)}
 .header-row{height:84px;display:flex;align-items:center;justify-content:space-between;gap:24px}
-.brand{display:block;width:158px;flex:0 0 auto}.brand img{width:100%;height:auto}
-.nav{display:flex;align-items:center;gap:28px;font-size:.9rem}.nav a{position:relative}.nav a::after{content:"";position:absolute;left:0;bottom:-5px;width:100%;height:1px;background:currentColor;transform:scaleX(0);transform-origin:right;transition:transform .25s var(--ease)}.nav a:hover::after{transform:scaleX(1);transform-origin:left}
-.menu{display:none;border:0;background:transparent;width:44px;height:44px;padding:10px}.menu i{display:block;height:1.5px;background:var(--ink);margin:6px 0}
-.mobile-nav{display:none}
+.brand{display:block;width:158px;flex:0 0 auto}
+.brand img{width:100%;height:auto}
 
-/* 04. HERO — ONE CANONICAL SYSTEM */
+.nav{display:flex;align-items:center;gap:28px}
+.nav a{
+  position:relative;
+  font-size:var(--text-body-sm);
+  font-weight:var(--weight-medium);
+  line-height:var(--leading-ui);
+  color:var(--color-ink);
+  transition:color .2s var(--ease);
+}
+.nav a::after{
+  content:"";position:absolute;left:0;bottom:-5px;width:100%;height:1px;background:currentColor;
+  transform:scaleX(0);transform-origin:right;transition:transform .25s var(--ease);
+}
+.nav a:hover{color:var(--color-primary-strong)}
+.nav a:hover::after{transform:scaleX(1);transform-origin:left}
+
+.menu{display:none;border:0;background:transparent;width:44px;height:44px;padding:10px}
+.menu i{display:block;height:1.5px;background:var(--color-ink);margin:6px 0}
+/* Mobile drawer: typography lives with the nav component; the phone block below
+   only handles its position and touch targets. */
+.mobile-nav{display:none}
+.mobile-nav a{
+  font-size:var(--text-body);
+  font-weight:var(--weight-medium);
+  line-height:var(--leading-ui);
+  color:var(--color-ink);
+}
+
+
+/* =============================================================================
+   07. HERO
+   ========================================================================== */
 .hero-banner{position:relative;isolation:isolate;min-height:clamp(500px,52vw,720px);display:grid;overflow:hidden}
 .hero-banner-media,.hero-banner-shade,.hero-banner-content{grid-area:1/1}
-.hero-banner-media{position:absolute;inset:0;z-index:-2}.hero-banner-media img{width:100%;height:100%;object-fit:cover;object-position:center}
-.hero-banner-shade{position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(255,250,241,.98) 0%,rgba(255,250,241,.9) 35%,rgba(255,250,241,.35) 58%,rgba(255,250,241,0) 76%)}
+.hero-banner-media{position:absolute;inset:0;z-index:-2}
+.hero-banner-media img{width:100%;height:100%;object-fit:cover;object-position:center}
+/* Scrim keeps display type on canvas, not on photography — contrast stays 11:1 */
+.hero-banner-shade{
+  position:absolute;inset:0;z-index:-1;
+  background:linear-gradient(90deg,
+    rgba(var(--canvas-rgb),.98) 0%,
+    rgba(var(--canvas-rgb),.9) 35%,
+    rgba(var(--canvas-rgb),.35) 58%,
+    rgba(var(--canvas-rgb),0) 76%);
+}
 .hero-banner-content{display:flex;align-items:center;padding-block:clamp(54px,7vw,96px)}
-.hero-banner-copy{width:min(560px,50%);color:var(--ink)}
-.hero-banner-copy h1{margin:0;max-width:9ch;font-size:clamp(3rem,5.6vw,5.7rem);line-height:1.02;letter-spacing:0;font-weight:400}
-.hero-banner-copy h1 em{font-style:italic;font-weight:400}
-.hero-lead{margin:var(--s4) 0 0;max-width:47ch;font-size:clamp(1rem,1.25vw,1.18rem);line-height:1.55}
-.hero-banner-cta{display:inline-flex;align-items:center;gap:18px;margin-top:var(--s5);padding:0 0 8px;border-bottom:1px solid currentColor;font-weight:700}.hero-banner-cta span{font-size:1.2em;transition:transform .2s var(--ease)}.hero-banner-cta:hover span{transform:translateY(4px)}
+.hero-banner-copy{width:min(560px,50%);color:var(--color-ink)}
+/* The single display moment on the site. */
+.hero-banner-copy h1{
+  max-width:var(--measure-display);
+  font-size:var(--text-display);
+  line-height:var(--leading-display);
+}
+.hero-banner-copy h1 em{font-style:italic;font-weight:var(--weight-regular)} /* real Mogranx Slanted */
+/* One deliberate red accent above the fold. */
+.hero-banner-copy .kicker{color:var(--color-primary)}
+.hero-banner-cta{
+  display:inline-flex;align-items:center;gap:18px;
+  margin-top:var(--s5);padding:0 0 8px;
+  border-bottom:1px solid currentColor;
+  font-size:var(--text-body);
+  color:var(--color-heading);
+  transition:color .2s var(--ease);
+}
+.hero-banner-cta:hover{color:var(--color-primary-strong)}
+.hero-banner-cta span{font-size:1.2em;transition:transform .2s var(--ease)} /* arrow glyph, relative to its label */
+.hero-banner-cta:hover span{transform:translateY(4px)}
 
-/* 05. AUDIENCE */
-.audience-strip{border-bottom:1px solid var(--line);background:var(--paper)}
+
+/* =============================================================================
+   08. AUDIENCE STRIP
+   ========================================================================== */
+.audience-strip{border-bottom:1px solid var(--color-border);background:var(--color-canvas)}
 .audience-strip-inner{padding-block:22px;display:flex;align-items:center;gap:clamp(28px,6vw,90px)}
-.audience-label{margin:0;font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap}
-.audience-items{display:flex;flex-wrap:wrap;gap:8px 28px}.audience-items span{white-space:nowrap}
+.audience-label{white-space:nowrap}
+.audience-items{display:flex;flex-wrap:wrap;gap:8px 28px;color:var(--color-ink)}
+.audience-items span{white-space:nowrap;font-size:var(--text-body)}
 
-/* 06. SECTION SKELETON */
-.section-inner,.section-layout{display:grid;gap:clamp(28px,4vw,52px)}
+
+/* =============================================================================
+   09. SECTION SKELETON
+   ========================================================================== */
+.section-inner{display:grid;gap:clamp(28px,4vw,52px)}
 .section-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(260px,.72fr);align-items:end;gap:40px}
-.section-heading-group h2,.custom-copy h2,.story-copy h2,.contact-box h2{margin:0;font-size:clamp(2.1rem,4vw,4.4rem);line-height:1.04;letter-spacing:0}
-.section-support-group p{margin:0;max-width:43ch;color:var(--ink-soft)}
+.section-support-group p{
+  max-width:var(--measure-support);
+  font-size:var(--text-body);
+  line-height:var(--leading-body);
+  color:var(--color-ink-muted);
+}
 
-/* 07. FILTERS + PRODUCTS */
+
+/* =============================================================================
+   10. FILTERS + PRODUCT GRID
+   ========================================================================== */
 .filters{display:flex;gap:10px;flex-wrap:wrap}
-.filter-btn{border:1px solid var(--line);background:transparent;color:var(--ink);padding:10px 15px;min-height:44px;border-radius:999px;font-size:.88rem;transition:.2s var(--ease)}
-.filter-btn:hover{border-color:var(--heritage);color:var(--heritage)}.filter-btn.active{background:var(--navy);color:var(--paper);border-color:var(--navy)}
+.filter-btn{
+  border:1px solid var(--color-border);
+  background:transparent;
+  color:var(--color-ink-muted);
+  padding:10px 15px;min-height:44px;border-radius:999px;
+  font-size:var(--text-body-sm);
+  transition:.2s var(--ease);
+}
+.filter-btn:hover{border-color:var(--color-primary-strong);color:var(--color-primary-strong)}
+.filter-btn.active{
+  background:var(--color-primary-strong);   /* active state = strong interaction red */
+  color:var(--color-on-primary);
+  border-color:var(--color-primary-strong);
+}
+
 .product-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(18px,2.5vw,32px)}
-.product-card{min-width:0;background:var(--surface);border:1px solid rgba(20,25,66,.08);transition:transform .28s var(--ease),box-shadow .28s var(--ease);overflow:hidden}
-.product-card:hover{transform:translateY(-5px);box-shadow:0 18px 42px rgba(20,25,66,.10)}
-.product-image{position:relative;width:100%;aspect-ratio:4/5;padding:0;border:0;background:#f3eee8;overflow:hidden;cursor:pointer}
-.product-image::after{content:"View details";position:absolute;left:14px;bottom:14px;padding:8px 12px;background:rgba(255,253,248,.94);color:var(--navy);font-size:.72rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;opacity:0;transform:translateY(8px);transition:.25s var(--ease)}
-.product-image img{width:100%;height:100%;object-fit:cover;transition:transform .55s var(--ease),opacity .35s ease}.product-image .alt-img{position:absolute;inset:0;opacity:0}
-.product-card:hover .product-image>img:first-child{transform:scale(1.045)}.product-card:hover .product-image .alt-img{opacity:1}.product-card:hover .product-image::after{opacity:1;transform:none}
-.product-info{padding:16px 16px 18px}.product-category{display:block;margin-bottom:7px;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--heritage);font-weight:700}
-.product-title{margin:0;color:var(--navy);font-size:1.02rem;line-height:1.35;font-weight:600}
-.product-details-btn{display:inline-flex;gap:8px;align-items:center;margin-top:13px;padding:0;border:0;background:none;color:var(--heritage);font-size:.82rem;font-weight:700}.arr{transition:transform .2s}.product-details-btn:hover{color:var(--red-deep)}.product-details-btn:hover .arr{transform:translateX(4px)}
-.collection-more{text-align:center}.more-btn{border:1px solid var(--navy);background:transparent;color:var(--navy);padding:13px 22px;min-height:46px}.more-btn:hover{background:var(--navy);border-color:var(--navy);color:var(--paper)}
-
-/* 08. CUSTOM + STORY */
-.custom{background:var(--surface)}.custom-grid,.story-grid{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:clamp(36px,8vw,120px)}
-.custom-image,.story-image{overflow:hidden}.custom-image img,.story-image img{width:100%;aspect-ratio:4/5;object-fit:cover}
-.custom-copy p:not(.eyebrow),.story-copy p:not(.eyebrow){max-width:52ch;color:var(--ink-soft)}
-.text-link{display:inline-flex;gap:10px;margin-top:var(--s3);padding-bottom:6px;border-bottom:1px solid currentColor;font-weight:700}
-.story{background:var(--paper)}.story-copy{order:-1}
-
-/* 09. CONTACT + FOOTER */
-.contact{padding-block:0;background:var(--navy);color:var(--paper)}.contact-box{min-height:360px;padding-block:clamp(64px,9vw,110px);display:flex;align-items:end;justify-content:space-between;gap:40px}.light-eyebrow{color:#e7c9b8}.contact-box p:not(.eyebrow){max-width:48ch;margin-bottom:0;color:rgba(255,250,241,.78)}.contact-cta{display:inline-flex;align-items:center;gap:18px;flex:0 0 auto;border-bottom:1px solid currentColor;padding-bottom:8px;font-weight:700}.contact-cta span{font-size:1.2em}
-.footer{background:var(--navy);color:rgba(255,250,241,.72);border-top:1px solid rgba(255,250,241,.15)}.footer-row{min-height:110px;display:flex;align-items:center;justify-content:space-between;gap:24px;font-size:.82rem}.footer-brand{display:block;width:120px}.footer-brand img{width:100%}
-
-/* 10. MODAL */
-.modal{position:fixed;inset:0;z-index:100;display:none;padding:20px}.modal.open{display:grid;place-items:center}.modal-backdrop{position:absolute;inset:0;background:rgba(20,25,66,.58);backdrop-filter:blur(10px)}
-.modal-card{position:relative;width:min(1120px,100%);max-height:calc(100svh - 40px);display:grid;grid-template-columns:minmax(0,1.15fr) minmax(320px,.85fr);overflow:hidden;background:var(--surface);box-shadow:0 30px 90px rgba(20,25,66,.28)}
-.modal-close{position:absolute;right:14px;top:14px;z-index:5;width:42px;height:42px;border:1px solid rgba(20,25,66,.12);border-radius:50%;background:rgba(255,253,248,.94);color:var(--navy);font-size:1.5rem;line-height:1}.modal-close:hover{background:var(--navy);color:var(--paper)}
-.modal-media{position:relative;min-width:0;background:#f1ece6;min-height:clamp(460px,70vh,720px)}.modal-stage{height:100%;display:grid;place-items:center;overflow:hidden;touch-action:none}.modal-stage img,.modal-stage video{width:100%;height:100%;object-fit:contain}.modal-stage img{transform-origin:center;will-change:transform}.modal-stage.is-panning{cursor:grabbing}
-.modal-nav{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border:1px solid rgba(20,25,66,.1);border-radius:50%;background:rgba(255,253,248,.92);color:var(--navy);font-size:1.65rem}.modal-nav:hover{background:var(--navy);color:var(--paper)}.modal-nav.prev{left:16px}.modal-nav.next{right:16px}
-.modal-thumbs{position:absolute;left:18px;right:18px;bottom:18px;display:flex;gap:8px;overflow:auto;padding:4px}.modal-thumb{width:60px;height:60px;flex:0 0 auto;padding:0;border:2px solid transparent;background:#fff}.modal-thumb.active{border-color:var(--heritage)}.modal-thumb img{width:100%;height:100%;object-fit:cover}
-.modal-copy{padding:clamp(32px,4vw,60px);align-self:stretch;display:flex;flex-direction:column;justify-content:center;background:var(--surface)}.modal-copy h3{margin:0;color:var(--navy);font-size:clamp(2rem,3.2vw,3.25rem);line-height:1.02;font-weight:500}.modal-copy p:not(.eyebrow){color:var(--heritage);max-width:42ch}.modal-wa-btn{display:inline-flex;align-self:flex-start;margin-top:26px;padding:13px 18px;background:var(--navy);color:var(--paper);font-weight:700}.modal-wa-btn:hover{background:var(--heritage)}.zoom-hint{position:absolute;left:50%;bottom:92px;transform:translateX(-50%);padding:8px 12px;background:rgba(255,253,248,.94);color:var(--navy);font-size:.75rem;opacity:0;transition:opacity .2s}.zoom-hint.is-visible{opacity:1}
-
-/* 11. MOTION */
-.reveal{opacity:1;transform:none}@media (prefers-reduced-motion:no-preference){.reveal{opacity:0;transform:translateY(14px);transition:opacity .55s var(--ease),transform .55s var(--ease)}.reveal.visible,.reveal.in{opacity:1;transform:none}}
-
-/* 12. TABLET */
-@media (max-width:1000px){.product-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.section-head{grid-template-columns:1fr}.hero-banner-copy{width:min(590px,58%)}}
-
-
-
-/* 13. MOBILE — canonical phone composition */
-@media(max-width:760px){
- :root{--shell:calc(100% - 40px);--gutter:20px}
- html{scroll-padding-top:64px}
- .header-row{height:64px}.brand{width:126px}.nav{display:none}.menu{display:block}
- .mobile-nav{position:absolute;top:64px;left:0;right:0;padding:10px var(--gutter) 18px;background:var(--paper);border-bottom:1px solid var(--line);display:grid;gap:0;transform:translateY(-12px);opacity:0;pointer-events:none;transition:.22s var(--ease)}
- .mobile-nav.open{transform:none;opacity:1;pointer-events:auto}.mobile-nav a{min-height:48px;display:flex;align-items:center;border-bottom:1px solid var(--line)}
- .hero-banner{min-height:0;aspect-ratio:4/5}.hero-banner-content{align-items:end;padding:24px 0 28px}
- .hero-banner-shade{background:linear-gradient(to bottom,transparent 0%,rgba(255,250,241,.08) 48%,rgba(255,250,241,.5) 72%,var(--paper) 100%)}
- .hero-banner-copy{width:100%;max-width:34rem}.hero-banner-copy h1{font-size:clamp(2.55rem,11vw,3.7rem);max-width:9ch}.hero-lead{font-size:.98rem;max-width:34ch;margin-top:14px}.hero-banner-cta{margin-top:18px;min-height:44px}
- .audience-strip-inner{display:block;padding-block:28px}.audience-label{margin-bottom:14px}.audience-items{display:grid;grid-template-columns:1fr;gap:0;border-top:1px solid var(--line)}.audience-items span{padding:14px 0;border-bottom:1px solid var(--line)}
- .section{padding-block:clamp(56px,12vw,76px)}.section-head{display:block}.section-support-group{margin-top:16px}
- .filters-wrap{margin-inline:calc(var(--gutter) * -1);position:relative}.filters{display:flex;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;padding:0 var(--gutter) 8px;gap:8px}.filters::-webkit-scrollbar{display:none}.filter-btn{flex:0 0 auto;min-height:40px;border-radius:999px}
- .product-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 12px}.product-info{padding:12px 0 0}.product-title{font-size:.98rem}
- .custom-grid,.story-grid{grid-template-columns:1fr;gap:28px}.custom-image,.story-image{aspect-ratio:4/5}.custom-image img,.story-image img{width:100%;height:100%;object-fit:cover}
- .contact{padding-block:64px}.contact-box{grid-template-columns:1fr;gap:28px;padding:30px 24px}
- .footer-row{display:grid;gap:16px;padding-block:28px}
- .modal{padding:0}.modal-card{width:100%;height:100svh;max-height:none;grid-template-columns:1fr;grid-template-rows:58svh auto;overflow:auto;border-radius:0}.modal-media,.modal-stage{min-height:0;height:58svh}.modal-stage img{object-fit:contain}.modal-copy{padding:28px 22px 34px}.modal-nav{top:42%}.modal-close{right:12px;top:12px}
+.product-card{
+  min-width:0;background:var(--color-surface);border:1px solid var(--color-border-soft);
+  transition:transform .28s var(--ease),box-shadow .28s var(--ease);overflow:hidden;
 }
-@media(max-width:390px){:root{--shell:calc(100% - 32px);--gutter:16px}.hero-banner-copy h1{font-size:2.5rem}.product-grid{gap:18px 10px}}
-
-/* 13A. MOBILE EXPERIENCE REFINEMENT — hierarchy, touch and visual rhythm */
-@media(max-width:760px){
- body{font-size:16px;line-height:1.6}
- .shell{width:var(--shell)}
- .header{background:rgba(255,250,241,.98)}
- .menu{width:48px;height:48px;padding:12px;margin-right:-12px}
- .menu i{margin:7px 0}
- .hero-banner{aspect-ratio:auto;min-height:clamp(560px,145vw,680px)}
- .hero-banner-media img{object-position:58% center}
- .hero-banner-content{padding-top:72px;padding-bottom:28px}
- .kicker,.eyebrow{font-size:.69rem;letter-spacing:.11em;margin-bottom:10px}
- .hero-banner-copy h1{font-size:clamp(2.7rem,12vw,3.8rem);line-height:1.04;max-width:10ch}
- .hero-lead{font-size:1rem;line-height:1.5;max-width:31ch}
- .hero-banner-cta{min-height:48px;align-items:center;margin-top:20px;padding-bottom:0;border-bottom:0}
- .hero-banner-cta span{width:30px;height:30px;display:grid;place-items:center;border:1px solid currentColor;border-radius:50%}
- .audience-strip-inner{padding-block:32px}
- .audience-label{font-size:.72rem}
- .audience-items{gap:0}
- .audience-items span{font-size:1rem;padding:16px 0}
- .section-head{gap:0}
- .section-heading-group h2,.custom-copy h2,.story-copy h2,.contact-box h2{font-size:clamp(2.2rem,10vw,3.15rem);line-height:1.08}
- .section-support-group p{font-size:.98rem;line-height:1.55}
- .filters-wrap{margin-top:4px}
- .filters{scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;padding-bottom:12px}
- .filter-btn{scroll-snap-align:start;padding:9px 15px;font-size:.8rem;min-height:42px}
- .product-grid{gap:28px 12px}
- .product-card{border:0;background:transparent;overflow:visible}
- .product-card:hover{transform:none;box-shadow:none}
- .product-image{background:#F3EEE8}
- .product-image::after{display:none}
- .product-card:hover .product-image>img:first-child{transform:none}
- .product-info{padding:11px 2px 0}
- .product-category{font-size:.62rem;margin-bottom:5px}
- .product-title{font-size:.98rem;line-height:1.32;font-weight:500}
- .product-details-btn{min-height:40px;margin-top:5px;font-size:.76rem}
- .custom-grid,.story-grid{gap:24px}
- .custom-copy,.story-copy{padding-inline:0}
- .custom-copy p:not(.eyebrow),.story-copy p:not(.eyebrow){font-size:1rem;line-height:1.6}
- .text-link{min-height:48px;align-items:center;margin-top:18px}
- .contact{padding-block:0}
- .contact-box{min-height:0;padding:56px 0;display:flex;align-items:flex-start;gap:28px}
- .contact-box>div{max-width:34rem}
- .contact-box p:not(.eyebrow){font-size:1rem;line-height:1.55}
- .contact-cta{min-height:50px;width:100%;justify-content:space-between;border:1px solid rgba(255,250,241,.35);padding:0 16px}
- .footer-row{padding-block:32px;align-items:flex-start}
- .footer-brand{width:110px}
- .modal-card{grid-template-rows:minmax(48svh,58svh) auto}
- .modal-media,.modal-stage{height:58svh}
- .modal-nav{width:42px;height:42px;top:50%}
- .modal-thumbs{bottom:12px;left:12px;right:12px}
- .modal-copy{padding:28px 20px 38px}
- .modal-copy h3{font-size:clamp(1.9rem,9vw,2.6rem);line-height:1.08}
- .modal-wa-btn{min-height:50px;width:100%;justify-content:center}
+.product-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-card)}
+.product-image{
+  position:relative;width:100%;aspect-ratio:4/5;padding:0;border:0;
+  background:var(--color-surface-sunken);overflow:hidden;cursor:pointer;
 }
-@media(max-width:390px){
- .hero-banner{min-height:540px}
- .hero-banner-copy h1{font-size:2.55rem}
- .section-heading-group h2,.custom-copy h2,.story-copy h2,.contact-box h2{font-size:2.15rem}
- .product-grid{gap:24px 10px}
+.product-image::after{
+  content:"View details";position:absolute;left:14px;bottom:14px;padding:8px 12px;
+  background:var(--color-surface-glass);color:var(--color-ink);
+  font-size:var(--text-caption);font-weight:var(--weight-medium);
+  line-height:var(--leading-ui);letter-spacing:var(--tracking-label);text-transform:uppercase;
+  opacity:0;transform:translateY(8px);transition:.25s var(--ease);
+}
+.product-image img{width:100%;height:100%;object-fit:cover;transition:transform .55s var(--ease),opacity .35s ease}
+.product-image .alt-img{position:absolute;inset:0;opacity:0}
+.product-card:hover .product-image>img:first-child{transform:scale(1.045)}
+.product-card:hover .product-image .alt-img{opacity:1}
+.product-card:hover .product-image::after{opacity:1;transform:none}
+
+.product-info{padding:16px 16px 18px}
+.product-category{display:block;margin-bottom:7px}
+/* Product title is metadata, not an editorial heading: calm ink, medium weight. */
+.product-title{
+  font-size:var(--text-body-lg);
+  font-weight:var(--weight-medium);
+  line-height:var(--leading-title);
+  color:var(--color-ink);
+}
+.product-details-btn{
+  display:inline-flex;gap:8px;align-items:center;margin-top:13px;padding:0;border:0;background:none;
+  color:var(--color-label);
+  font-size:var(--text-body-sm);
+  transition:color .2s var(--ease);
+}
+.arr{transition:transform .2s}
+.product-details-btn:hover{color:var(--color-primary-strong)}
+.product-details-btn:hover .arr{transform:translateX(4px)}
+
+.collection-more{text-align:center}
+.more-btn{
+  border:1px solid var(--color-ink);background:transparent;color:var(--color-ink);
+  padding:13px 22px;min-height:46px;font-size:var(--text-body-sm);
+  transition:.2s var(--ease);
+}
+.more-btn:hover{background:var(--color-ink);color:var(--color-canvas)}
+
+
+/* =============================================================================
+   11. CUSTOM WORK + STORY
+   ========================================================================== */
+.custom{background:var(--color-surface)}
+.custom-grid,.story-grid{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:clamp(36px,8vw,120px)}
+.custom-image,.story-image{overflow:hidden}
+.custom-image img,.story-image img{width:100%;aspect-ratio:4/5;object-fit:cover}
+.custom-copy p:not(.eyebrow),.story-copy p:not(.eyebrow){
+  max-width:var(--measure-prose);
+  font-size:var(--text-body);
+  line-height:var(--leading-body);
+  color:var(--color-ink);
+}
+.text-link{
+  display:inline-flex;gap:10px;margin-top:var(--s3);padding-bottom:6px;
+  border-bottom:1px solid currentColor;
+  font-size:var(--text-body);
+  color:var(--color-heading);
+  transition:color .2s var(--ease);
+}
+.text-link:hover{color:var(--color-primary-strong)}
+.story{background:var(--color-canvas)}
+.story-copy{order:-1}
+
+
+/* =============================================================================
+   12. CONTACT + FOOTER  (dark scope, tokens re-pointed in section 05)
+   ========================================================================== */
+.contact{padding-block:0;background:var(--color-inverse-surface);color:var(--color-ink-inverse)}
+.contact-box{
+  min-height:360px;padding-block:clamp(64px,9vw,110px);
+  display:flex;align-items:end;justify-content:space-between;gap:40px;
+}
+.contact-box p:not(.eyebrow){
+  max-width:48ch;
+  font-size:var(--text-body);
+  line-height:var(--leading-body);
+  color:var(--color-ink-muted);
+}
+.contact-cta{
+  display:inline-flex;align-items:center;gap:18px;flex:0 0 auto;
+  border-bottom:1px solid currentColor;padding-bottom:8px;
+  font-size:var(--text-body);
+  color:var(--color-ink-inverse);
+}
+.contact-cta span{font-size:1.2em} /* arrow glyph, relative to its label */
+
+.footer{background:var(--color-inverse-surface);border-top:1px solid var(--color-border-inverse)}
+.footer-row{
+  min-height:110px;display:flex;align-items:center;justify-content:space-between;gap:24px;
+  font-size:var(--text-body-sm);line-height:var(--leading-ui);color:var(--color-ink-inverse-muted);
+}
+.footer-brand{display:block;width:120px}
+.footer-brand img{width:100%}
+
+
+/* =============================================================================
+   13. PRODUCT MODAL
+   ========================================================================== */
+.modal{position:fixed;inset:0;z-index:100;display:none;padding:20px}
+.modal.open{display:grid;place-items:center}
+.modal-backdrop{position:absolute;inset:0;background:var(--color-overlay);backdrop-filter:blur(10px)}
+.modal-card{
+  position:relative;width:min(1120px,100%);max-height:calc(100svh - 40px);
+  display:grid;grid-template-columns:minmax(0,1.15fr) minmax(320px,.85fr);
+  overflow:hidden;background:var(--color-surface);box-shadow:var(--shadow-modal);
+}
+.modal-close{
+  position:absolute;right:14px;top:14px;z-index:5;width:42px;height:42px;
+  border:1px solid var(--color-border);border-radius:50%;
+  background:var(--color-surface-glass);color:var(--color-ink);
+  font-size:1.5rem;line-height:1;   /* glyph icon (×), not text — outside the type scale by design */
+}
+.modal-close:hover{background:var(--color-ink);color:var(--color-canvas)}
+.modal-media{position:relative;min-width:0;background:var(--color-surface-sunken);min-height:clamp(460px,70vh,720px)}
+.modal-stage{height:100%;display:grid;place-items:center;overflow:hidden;touch-action:none}
+.modal-stage img,.modal-stage video{width:100%;height:100%;object-fit:contain}
+.modal-stage img{transform-origin:center;will-change:transform}
+.modal-stage.is-panning{cursor:grabbing}
+.modal-nav{
+  position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;
+  border:1px solid var(--color-border-soft);border-radius:50%;
+  background:var(--color-surface-glass);color:var(--color-ink);
+  font-size:1.65rem;                /* glyph icon (‹ ›) */
+}
+.modal-nav:hover{background:var(--color-ink);color:var(--color-canvas)}
+.modal-nav.prev{left:16px}
+.modal-nav.next{right:16px}
+.modal-thumbs{position:absolute;left:18px;right:18px;bottom:18px;display:flex;gap:8px;overflow:auto;padding:4px}
+.modal-thumb{width:60px;height:60px;flex:0 0 auto;padding:0;border:2px solid transparent;background:var(--color-surface)}
+.modal-thumb.active{border-color:var(--color-primary)}
+.modal-thumb img{width:100%;height:100%;object-fit:cover}
+
+.modal-copy{
+  padding:clamp(32px,4vw,60px);align-self:stretch;
+  display:flex;flex-direction:column;justify-content:center;background:var(--color-surface);
+}
+.modal-copy h3{font-size:var(--text-h3);line-height:var(--leading-heading)}
+.modal-copy p:not(.eyebrow){
+  max-width:42ch;
+  font-size:var(--text-body);
+  line-height:var(--leading-body);
+  color:var(--color-ink-muted);
+}
+/* The one true primary CTA on the site: brand red fill. */
+.modal-wa-btn{
+  display:inline-flex;align-self:flex-start;margin-top:26px;padding:14px 20px;
+  background:var(--color-primary);color:var(--color-on-primary);
+  font-size:var(--text-body);
+  transition:background .2s var(--ease);
+}
+.modal-wa-btn:hover{background:var(--color-primary-strong)}
+.zoom-hint{
+  position:absolute;left:50%;bottom:92px;transform:translateX(-50%);padding:8px 12px;
+  background:var(--color-surface-glass);color:var(--color-ink);
+  font-size:var(--text-caption);line-height:var(--leading-ui);
+  opacity:0;transition:opacity .2s;
+}
+.zoom-hint.is-visible{opacity:1}
+
+
+/* =============================================================================
+   14. MOTION
+   ========================================================================== */
+.reveal{opacity:1;transform:none}
+@media (prefers-reduced-motion:no-preference){
+  .reveal{opacity:0;transform:translateY(14px);transition:opacity .55s var(--ease),transform .55s var(--ease)}
+  .reveal.visible,.reveal.in{opacity:1;transform:none}
 }
 
-/* 14. ACCESSIBILITY + MOTION */
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
+/* =============================================================================
+   15. TABLET  (composition only — the type scale is already fluid)
+   ========================================================================== */
+@media (max-width:1000px){
+  .product-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .section-head{grid-template-columns:1fr}
+  .hero-banner-copy{width:min(590px,58%)}
+}
+
+
+/* =============================================================================
+   16. PHONE  (one block — intentional composition, not shrunken desktop)
+   Type sizes below are role swaps (body-lg -> body), never new values.
+   ========================================================================== */
+@media (max-width:760px){
+  :root{--shell:calc(100% - 40px);--gutter:20px}
+  html{scroll-padding-top:64px}
+
+  /* header */
+  .header-row{height:64px}
+  .brand{width:126px}
+  .nav{display:none}
+  .menu{display:block;width:48px;height:48px;padding:12px;margin-right:-12px}
+  .menu i{margin:7px 0}
+  .mobile-nav{
+    position:absolute;top:64px;left:0;right:0;padding:10px var(--gutter) 18px;
+    background:var(--color-canvas);border-bottom:1px solid var(--color-border);
+    display:grid;gap:0;transform:translateY(-12px);opacity:0;pointer-events:none;
+    transition:.22s var(--ease);
+  }
+  .mobile-nav.open{transform:none;opacity:1;pointer-events:auto}
+  .mobile-nav a{min-height:48px;display:flex;align-items:center;border-bottom:1px solid var(--color-border)}
+
+  /* hero — copy sits on the settled bottom of the scrim */
+  .hero-banner{min-height:clamp(560px,145vw,680px)}
+  .hero-banner-media img{object-position:58% center}
+  .hero-banner-shade{
+    background:linear-gradient(to bottom,
+      transparent 0%,
+      rgba(var(--canvas-rgb),.08) 48%,
+      rgba(var(--canvas-rgb),.5) 72%,
+      var(--color-canvas) 100%);
+  }
+  .hero-banner-content{align-items:end;padding:72px 0 28px}
+  .hero-banner-copy{width:100%;max-width:34rem}
+  .hero-banner-copy h1{max-width:10ch}
+  .hero-lead{max-width:32ch}
+  .hero-banner-cta{min-height:48px;align-items:center;margin-top:20px;padding-bottom:0;border-bottom:0}
+  .hero-banner-cta span{width:30px;height:30px;display:grid;place-items:center;border:1px solid currentColor;border-radius:50%}
+
+  /* audience */
+  .audience-strip-inner{display:block;padding-block:32px}
+  .audience-label{margin-bottom:14px}
+  .audience-items{display:grid;grid-template-columns:1fr;gap:0;border-top:1px solid var(--color-border)}
+  .audience-items span{padding:16px 0;border-bottom:1px solid var(--color-border)}
+
+  /* sections */
+  .section{padding-block:clamp(56px,12vw,76px)}
+  .section-head{display:block}
+  .section-support-group{margin-top:16px}
+
+  /* filters rail */
+  .filters-wrap{margin-inline:calc(var(--gutter) * -1);margin-top:4px;position:relative}
+  .filters{
+    display:flex;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;
+    padding:0 var(--gutter) 12px;gap:8px;
+    scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;
+  }
+  .filters::-webkit-scrollbar{display:none}
+  .filter-btn{flex:0 0 auto;scroll-snap-align:start;min-height:42px;padding:9px 15px}
+
+  /* products — borderless cards, tighter metadata */
+  .product-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 12px}
+  .product-card{border:0;background:transparent;overflow:visible}
+  .product-card:hover{transform:none;box-shadow:none}
+  .product-image::after{display:none}
+  .product-card:hover .product-image>img:first-child{transform:none}
+  .product-info{padding:11px 2px 0}
+  .product-category{margin-bottom:5px}
+  .product-title{font-size:var(--text-body)}
+  .product-details-btn{min-height:40px;margin-top:5px;font-size:var(--text-caption)}
+
+  /* split blocks */
+  .custom-grid,.story-grid{grid-template-columns:1fr;gap:24px}
+  .custom-image,.story-image{aspect-ratio:4/5}
+  .custom-image img,.story-image img{width:100%;height:100%;object-fit:cover}
+  .text-link{min-height:48px;align-items:center;margin-top:18px}
+
+  /* contact + footer */
+  .contact{padding-block:0}
+  .contact-box{min-height:0;padding:56px 0;flex-direction:column;align-items:stretch;gap:28px}
+  .contact-box>div{max-width:34rem}
+  .contact-cta{min-height:50px;justify-content:space-between;border:1px solid var(--color-border-inverse);padding:0 16px}
+  .footer-row{display:grid;gap:16px;padding-block:32px;align-items:flex-start}
+  .footer-brand{width:110px}
+
+  /* modal */
+  .modal{padding:0}
+  .modal-card{
+    width:100%;height:100svh;max-height:none;grid-template-columns:1fr;
+    grid-template-rows:minmax(48svh,58svh) auto;overflow:auto;border-radius:0;
+  }
+  .modal-media,.modal-stage{min-height:0;height:58svh}
+  .modal-stage img{object-fit:contain}
+  .modal-nav{width:42px;height:42px;top:50%}
+  .modal-close{right:12px;top:12px}
+  .modal-thumbs{bottom:12px;left:12px;right:12px}
+  .modal-copy{padding:28px 20px 38px}
+  .modal-wa-btn{min-height:50px;width:100%;justify-content:center}
+}
+
+
+/* =============================================================================
+   17. SMALL PHONE (320–390px) — gutters and measure only
+   ========================================================================== */
+@media (max-width:390px){
+  :root{--shell:calc(100% - 32px);--gutter:16px}
+  .hero-banner{min-height:540px}
+  .hero-banner-copy h1{max-width:11ch}
+  .hero-lead{max-width:30ch}
+  .product-grid{gap:24px 10px}
+}
+
+
+/* =============================================================================
+   18. LARGE DESKTOP — the fluid scale is capped, so only measure needs care
+   ========================================================================== */
+@media (min-width:1600px){
+  .hero-banner-copy{width:min(620px,46%)}
+}
+
+
+/* =============================================================================
+   19. ACCESSIBILITY + MOTION PREFERENCES
+   ========================================================================== */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}
+}
+@media (prefers-contrast:more){
+  :root{
+    --color-ink-muted:var(--brand-navy);
+    --color-border:rgba(var(--navy-rgb),.32);
+    --color-ink-inverse-muted:var(--brand-canvas);
+  }
+}

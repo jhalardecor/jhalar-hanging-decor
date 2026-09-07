@@ -9,42 +9,42 @@
 <title>JHALAR Pro Editor</title>
 <meta name="robots" content="noindex">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<link rel="stylesheet" href="style.css?v=20260907-fresh-3">
+<link rel="stylesheet" href="style.css?v=20260907.29">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-:root{--red:#6B2136;--red-dark:#4A1425;--red-light:#C8909A;--gold:#B48A52;--navy:#2F1E25;--cream:#FBF7F0;--text:#2F262B;--text2:#5C4F55;--text3:#8D7E84;--bg:#FFFFFF;--bg2:#F7F3ED;--bg3:#EFE7DC;--sidebar-w:430px;--h:52px;--r-sm:6px;--r-md:8px;--r-lg:12px;--sh-sm:0 1px 3px rgba(47,30,37,0.08);--sh-md:0 4px 14px rgba(47,30,37,0.14);--font:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;--mono:'SF Mono','Consolas','Liberation Mono',monospace}
-html,body{height:100%;font-family:var(--font);font-size:14.5px;color:var(--text);background:var(--bg2);overflow:hidden}
+:root{--ed-red:#6B2136;--red-dark:#4A1425;--red-light:#C8909A;--gold:#B48A52;--ed-navy:#2F1E25;--cream:#FBF7F0;--text:#2F262B;--text2:#5C4F55;--text3:#8D7E84;--bg:#FFFFFF;--bg2:#F7F3ED;--bg3:#EFE7DC;--sidebar-w:430px;--h:52px;--r-sm:6px;--r-md:8px;--r-lg:12px;--sh-sm:0 1px 3px rgba(47,30,37,0.08);--sh-md:0 4px 14px rgba(47,30,37,0.14);--ed-font:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;--mono:'SF Mono','Consolas','Liberation Mono',monospace}
+html,body{height:100%;font-family:var(--ed-font);font-size:14.5px;color:var(--text);background:var(--bg2);overflow:hidden}
 .dark{--text:#EFE9E6;--text2:#BBA9A8;--text3:#8D7E84;--bg:#221A1F;--bg2:#2B2227;--bg3:#382C33;--sh-sm:0 1px 3px rgba(0,0,0,0.3);--sh-md:0 4px 14px rgba(0,0,0,0.4)}
 .editor-header{height:var(--h);background:var(--bg);border-bottom:1px solid rgba(128,128,128,0.15);display:flex;align-items:center;justify-content:space-between;padding:0 16px;position:fixed;top:0;left:0;right:0;z-index:100;box-shadow:var(--sh-sm)}
 .editor-header-left{display:flex;align-items:center;gap:12px}
-.logo-text{font-weight:700;font-size:15px;color:var(--red);display:flex;align-items:center;gap:6px}
+.logo-text{font-weight:700;font-size:15px;color:var(--ed-red);display:flex;align-items:center;gap:6px}
 .logo-text span{font-weight:400;color:var(--text3);font-size:13px}
 .editor-header-right{display:flex;align-items:center;gap:6px}
-.editor-header-right .btn{padding:6px 13px;border-radius:var(--r-md);border:1px solid rgba(128,128,128,0.2);background:var(--bg);font-family:var(--font);font-size:12.5px;font-weight:600;cursor:pointer;transition:all .15s;display:inline-flex;align-items:center;gap:5px;color:var(--text)}
+.editor-header-right .btn{padding:6px 13px;border-radius:var(--r-md);border:1px solid rgba(128,128,128,0.2);background:var(--bg);font-family:var(--ed-font);font-size:12.5px;font-weight:600;cursor:pointer;transition:all .15s;display:inline-flex;align-items:center;gap:5px;color:var(--text)}
 .editor-header-right .btn:hover{background:var(--bg3)}
-.editor-header-right .btn-primary{background:var(--red);border-color:var(--red);color:#fff}
+.editor-header-right .btn-primary{background:var(--ed-red);border-color:var(--ed-red);color:#fff}
 .editor-header-right .btn-primary:hover{background:var(--red-dark)}
 .editor-header-right .btn-icon{width:32px;height:32px;padding:0;justify-content:center;border-radius:var(--r-sm)}
-.editor-header-right .btn-icon.active{background:var(--navy);border-color:var(--navy);color:#fff}
+.editor-header-right .btn-icon.active{background:var(--ed-navy);border-color:var(--ed-navy);color:#fff}
 .editor-header-right .kbd{font-size:10px;background:var(--bg2);border:1px solid rgba(128,128,128,0.15);border-radius:3px;padding:1px 4px;margin-left:2px;color:var(--text3)}
 .save-indicator{font-size:12px;color:var(--text3);padding:4px 8px;background:var(--bg2);border-radius:var(--r-sm);white-space:nowrap}
 .editor-body{display:flex;height:100vh;padding-top:var(--h)}
 .editor-sidebar{width:var(--sidebar-w);min-width:var(--sidebar-w);background:var(--bg);border-right:1px solid rgba(128,128,128,0.12);display:flex;flex-direction:column;height:100%;overflow:hidden}
 .sidebar-tabs{display:flex;border-bottom:1px solid rgba(128,128,128,0.12);background:var(--bg2);flex-shrink:0;overflow-x:auto}
-.sidebar-tab{flex:1;min-width:50px;padding:8px 2px;text-align:center;font-size:11px;font-weight:600;color:var(--text3);cursor:pointer;border:none;background:none;font-family:var(--font);transition:all .15s;border-bottom:2px solid transparent;display:flex;flex-direction:column;align-items:center;gap:1px;position:relative}
+.sidebar-tab{flex:1;min-width:50px;padding:8px 2px;text-align:center;font-size:11px;font-weight:600;color:var(--text3);cursor:pointer;border:none;background:none;font-family:var(--ed-font);transition:all .15s;border-bottom:2px solid transparent;display:flex;flex-direction:column;align-items:center;gap:1px;position:relative}
 .sidebar-tab i{font-size:15px}
 .sidebar-tab:hover{color:var(--text);background:rgba(0,0,0,0.02)}
-.sidebar-tab.active{color:var(--red);border-bottom-color:var(--red);background:var(--bg)}
+.sidebar-tab.active{color:var(--ed-red);border-bottom-color:var(--ed-red);background:var(--bg)}
 .sidebar-content{flex:1;overflow-y:auto;padding:12px 14px}
 .tab-panel{display:none}
 .tab-panel.active{display:block}
 .tab-panel h3{font-size:16px;font-weight:700;margin-bottom:8px;color:var(--text)}
-.tab-panel h3 i{color:var(--red);margin-right:6px}
+.tab-panel h3 i{color:var(--ed-red);margin-right:6px}
 .tab-panel .hint{font-size:12.5px;color:var(--text3);margin-bottom:12px;line-height:1.55}
 .form-group{margin-bottom:10px}
 .form-group label{display:block;font-size:12px;font-weight:600;color:var(--text2);margin-bottom:4px}
-.form-group input,.form-group textarea,.form-group select{width:100%;padding:6px 9px;font-family:var(--font);font-size:13px;color:var(--text);background:var(--bg2);border:1px solid rgba(128,128,128,0.15);border-radius:var(--r-sm);transition:all .15s}
-.form-group input:focus,.form-group textarea:focus,.form-group select:focus{outline:none;border-color:var(--red);box-shadow:0 0 0 3px rgba(200,32,57,0.1);background:var(--bg)}
+.form-group input,.form-group textarea,.form-group select{width:100%;padding:6px 9px;font-family:var(--ed-font);font-size:13px;color:var(--text);background:var(--bg2);border:1px solid rgba(128,128,128,0.15);border-radius:var(--r-sm);transition:all .15s}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{outline:none;border-color:var(--ed-red);box-shadow:0 0 0 3px rgba(200,32,57,0.1);background:var(--bg)}
 .form-group textarea{resize:vertical;min-height:48px}
 .form-group input[type="color"]{padding:2px;height:30px;cursor:pointer}
 .form-group .help{font-size:11px;color:var(--text3);margin-top:3px}
@@ -60,12 +60,12 @@ hr.divider{margin:12px 0;border:none;border-top:1px solid rgba(128,128,128,0.1)}
 .spacing-grid .form-group .help{font-size:9px;margin-top:1px}
 @media(max-width:520px){.spacing-grid{grid-template-columns:1fr}}
 .theme-actions{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px}
-.btn-sm{padding:5px 11px;border-radius:var(--r-sm);border:1px solid rgba(128,128,128,0.2);background:var(--bg);font-family:var(--font);font-size:12px;font-weight:600;cursor:pointer;transition:all .15s;display:inline-flex;align-items:center;gap:4px;color:var(--text)}
+.btn-sm{padding:5px 11px;border-radius:var(--r-sm);border:1px solid rgba(128,128,128,0.2);background:var(--bg);font-family:var(--ed-font);font-size:12px;font-weight:600;cursor:pointer;transition:all .15s;display:inline-flex;align-items:center;gap:4px;color:var(--text)}
 .btn-sm:hover{background:var(--bg3)}
-.btn-sm.primary{background:var(--red);border-color:var(--red);color:#fff}
+.btn-sm.primary{background:var(--ed-red);border-color:var(--ed-red);color:#fff}
 .btn-sm.primary:hover{background:var(--red-dark)}
-.btn-sm.danger{border-color:var(--red);color:var(--red)}
-.btn-sm.danger:hover{background:var(--red);color:#fff}
+.btn-sm.danger{border-color:var(--ed-red);color:var(--ed-red)}
+.btn-sm.danger:hover{background:var(--ed-red);color:#fff}
 .btn-sm.success{background:#2e7d32;border-color:#2e7d32;color:#fff}
 .btn-sm.success:hover{background:#1b5e20}
 .btn-sm:disabled{opacity:.5;cursor:not-allowed}
@@ -73,10 +73,10 @@ hr.divider{margin:12px 0;border:none;border-top:1px solid rgba(128,128,128,0.1)}
 .section-list{display:flex;flex-direction:column;gap:4px}
 .section-item{background:var(--bg2);border:1px solid rgba(128,128,128,0.1);border-radius:var(--r-md);padding:7px 10px;display:flex;align-items:center;gap:8px;transition:all .15s;cursor:grab}
 .section-item:hover{border-color:rgba(128,128,128,0.2)}
-.section-item.dragging{opacity:.5;border-color:var(--red)}
-.section-item.drag-over{border-color:var(--red);box-shadow:0 0 0 2px rgba(200,32,57,0.2)}
+.section-item.dragging{opacity:.5;border-color:var(--ed-red)}
+.section-item.drag-over{border-color:var(--ed-red);box-shadow:0 0 0 2px rgba(200,32,57,0.2)}
 .section-item .toggle{width:32px;height:18px;border-radius:9px;background:#999;cursor:pointer;position:relative;transition:all .2s;flex-shrink:0;border:none}
-.section-item .toggle.active{background:var(--red)}
+.section-item .toggle.active{background:var(--ed-red)}
 .section-item .toggle::after{content:'';position:absolute;top:2px;left:2px;width:14px;height:14px;border-radius:50%;background:#fff;transition:all .2s;box-shadow:0 1px 2px rgba(0,0,0,0.2)}
 .section-item .toggle.active::after{left:16px}
 .section-item .info{flex:1;min-width:0}
@@ -86,7 +86,7 @@ hr.divider{margin:12px 0;border:none;border-top:1px solid rgba(128,128,128,0.1)}
 .product-list{display:flex;flex-direction:column;gap:4px}
 .product-list-item{background:var(--bg2);border:1px solid rgba(128,128,128,0.1);border-radius:var(--r-md);padding:6px 8px;display:flex;align-items:center;gap:6px;transition:all .15s;cursor:pointer}
 .product-list-item:hover{border-color:rgba(128,128,128,0.2)}
-.product-list-item.active{border-color:var(--red);box-shadow:0 0 0 2px rgba(200,32,57,0.15)}
+.product-list-item.active{border-color:var(--ed-red);box-shadow:0 0 0 2px rgba(200,32,57,0.15)}
 .product-list-item .thumb{width:36px;height:36px;border-radius:var(--r-sm);object-fit:cover;background:#ddd;flex-shrink:0}
 .product-list-item .info{flex:1;min-width:0}
 .product-list-item .info .name{font-weight:600;font-size:12.5px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -94,63 +94,63 @@ hr.divider{margin:12px 0;border:none;border-top:1px solid rgba(128,128,128,0.1)}
 .product-list-item .actions{display:flex;gap:2px;flex-shrink:0}
 .product-list-item .actions button{width:22px;height:22px;border:none;background:none;cursor:pointer;border-radius:3px;color:var(--text3);font-size:10px;display:flex;align-items:center;justify-content:center;transition:all .15s}
 .product-list-item .actions button:hover{background:rgba(0,0,0,0.08);color:var(--text)}
-.product-list-item .actions button.del:hover{background:rgba(200,32,57,0.1);color:var(--red)}
+.product-list-item .actions button.del:hover{background:rgba(200,32,57,0.1);color:var(--ed-red)}
 .prod-editor{background:var(--bg2);border:1px solid rgba(128,128,128,0.1);border-radius:var(--r-md);padding:10px;margin-top:6px;display:none}
 .prod-editor h4{font-size:13px;font-weight:700;margin-bottom:8px;color:var(--text)}
 .media-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(70px,1fr));gap:6px;margin-bottom:10px}
 .media-item{aspect-ratio:1;border-radius:var(--r-sm);overflow:hidden;border:2px solid transparent;cursor:pointer;position:relative;background:var(--bg2)}
-.media-item.active{border-color:var(--red)}
+.media-item.active{border-color:var(--ed-red)}
 .media-item img{width:100%;height:100%;object-fit:cover}
 .media-item .del-overlay{position:absolute;top:2px;right:2px;width:18px;height:18px;background:rgba(200,32,57,0.85);color:#fff;border:none;border-radius:50%;font-size:9px;cursor:pointer;display:none;align-items:center;justify-content:center}
 .media-item:hover .del-overlay{display:flex}
 .upload-zone{border:2px dashed rgba(128,128,128,0.3);border-radius:var(--r-md);padding:14px;text-align:center;cursor:pointer;transition:all .15s;margin-bottom:10px}
-.upload-zone:hover{border-color:var(--red);background:rgba(200,32,57,0.03)}
+.upload-zone:hover{border-color:var(--ed-red);background:rgba(200,32,57,0.03)}
 .upload-zone i{font-size:20px;color:var(--text3);margin-bottom:4px}
 .upload-zone p{font-size:12px;color:var(--text3)}
 .nav-item-row{display:flex;gap:6px;margin-bottom:5px;align-items:center}
-.nav-item-row input{flex:1;padding:5px 8px;font-family:var(--font);font-size:12px;background:var(--bg2);border:1px solid rgba(128,128,128,0.15);border-radius:var(--r-sm);color:var(--text)}
-.nav-item-row input:focus{outline:none;border-color:var(--red);box-shadow:0 0 0 2px rgba(200,32,57,0.1);background:var(--bg)}
+.nav-item-row input{flex:1;padding:5px 8px;font-family:var(--ed-font);font-size:12px;background:var(--bg2);border:1px solid rgba(128,128,128,0.15);border-radius:var(--r-sm);color:var(--text)}
+.nav-item-row input:focus{outline:none;border-color:var(--ed-red);box-shadow:0 0 0 2px rgba(200,32,57,0.1);background:var(--bg)}
 .nav-item-row button{width:22px;height:22px;border:none;background:none;cursor:pointer;border-radius:3px;color:var(--text3);font-size:11px;display:flex;align-items:center;justify-content:center}
 .nav-item-row button:hover{background:rgba(0,0,0,0.08);color:var(--text)}
-.nav-item-row button.del:hover{background:rgba(200,32,57,0.1);color:var(--red)}
+.nav-item-row button.del:hover{background:rgba(200,32,57,0.1);color:var(--ed-red)}
 .icon-row{display:flex;align-items:center;gap:6px;margin:0 0 6px}
-.icon-row .icon-preview{width:32px;height:32px;flex:none;display:inline-flex;align-items:center;justify-content:center;background:var(--bg2);border:1px solid rgba(128,128,128,0.15);border-radius:var(--r-sm);color:var(--red)}
+.icon-row .icon-preview{width:32px;height:32px;flex:none;display:inline-flex;align-items:center;justify-content:center;background:var(--bg2);border:1px solid rgba(128,128,128,0.15);border-radius:var(--r-sm);color:var(--ed-red)}
 .icon-row .icon-preview svg{width:16px;height:16px}
-.icon-row select{width:108px;flex:none;padding:5px 7px;font-family:var(--font);font-size:12px;background:var(--bg2);border:1px solid rgba(128,128,128,0.15);border-radius:var(--r-sm);color:var(--text)}
-.icon-row input{flex:1;min-width:0;padding:5px 8px;font-family:var(--font);font-size:13px;background:var(--bg2);border:1px solid rgba(128,128,128,0.15);border-radius:var(--r-sm);color:var(--text)}
-.icon-row textarea{flex:1;min-width:0;padding:5px 8px;font-family:var(--font);font-size:12px;background:var(--bg2);border:1px solid rgba(128,128,128,0.15);border-radius:var(--r-sm);color:var(--text);resize:vertical}
-.icon-row:focus-within,.icon-row input:focus,.icon-row select:focus,.icon-row textarea:focus{outline:none;border-color:var(--red);box-shadow:0 0 0 2px rgba(200,32,57,0.1)}
+.icon-row select{width:108px;flex:none;padding:5px 7px;font-family:var(--ed-font);font-size:12px;background:var(--bg2);border:1px solid rgba(128,128,128,0.15);border-radius:var(--r-sm);color:var(--text)}
+.icon-row input{flex:1;min-width:0;padding:5px 8px;font-family:var(--ed-font);font-size:13px;background:var(--bg2);border:1px solid rgba(128,128,128,0.15);border-radius:var(--r-sm);color:var(--text)}
+.icon-row textarea{flex:1;min-width:0;padding:5px 8px;font-family:var(--ed-font);font-size:12px;background:var(--bg2);border:1px solid rgba(128,128,128,0.15);border-radius:var(--r-sm);color:var(--text);resize:vertical}
+.icon-row:focus-within,.icon-row input:focus,.icon-row select:focus,.icon-row textarea:focus{outline:none;border-color:var(--ed-red);box-shadow:0 0 0 2px rgba(200,32,57,0.1)}
 .icon-row button{width:22px;height:22px;flex:none;border:none;background:none;cursor:pointer;border-radius:3px;color:var(--text3);font-size:11px;display:flex;align-items:center;justify-content:center}
 .icon-row button:hover{background:rgba(0,0,0,0.08);color:var(--text)}
-.icon-row button.del:hover{background:rgba(200,32,57,0.1);color:var(--red)}
+.icon-row button.del:hover{background:rgba(200,32,57,0.1);color:var(--ed-red)}
 .stack{display:flex;flex-direction:column;gap:4px;margin-top:2px}
 .css-editor{width:100%;min-height:200px;font-family:var(--mono);font-size:13px;padding:8px;background:var(--bg2);border:1px solid rgba(128,128,128,0.15);border-radius:var(--r-sm);color:var(--text);resize:vertical;tab-size:2}
-.css-editor:focus{outline:none;border-color:var(--red);box-shadow:0 0 0 3px rgba(200,32,57,0.1);background:var(--bg)}
+.css-editor:focus{outline:none;border-color:var(--ed-red);box-shadow:0 0 0 3px rgba(200,32,57,0.1);background:var(--bg)}
 .publish-progress{display:none;margin-top:8px}
 .publish-progress.show{display:block}
 .progress-bar{height:4px;background:rgba(128,128,128,0.15);border-radius:2px;overflow:hidden;margin:6px 0}
-.progress-bar .fill{height:100%;background:var(--red);width:0;transition:width .3s}
+.progress-bar .fill{height:100%;background:var(--ed-red);width:0;transition:width .3s}
 .progress-status{font-size:12px;color:var(--text2)}
 .progress-log{font-size:11px;color:var(--text3);margin-top:5px;max-height:70px;overflow-y:auto;padding:4px 6px;background:rgba(0,0,0,0.03);border-radius:var(--r-sm);font-family:var(--mono)}
 .progress-log .done{color:#2e7d32}
-.progress-log .err{color:var(--red)}
-.progress-log .act{color:var(--navy);font-weight:600}
+.progress-log .err{color:var(--ed-red)}
+.progress-log .act{color:var(--ed-navy);font-weight:600}
 .token-row{display:flex;gap:5px}
 .token-row input{flex:1;font-family:var(--mono);font-size:11px;letter-spacing:.3px}
 .token-status{font-size:11px;margin-top:3px}
 .token-status.ok{color:#2e7d32}
-.token-status.bad{color:var(--red)}
+.token-status.bad{color:var(--ed-red)}
 .editor-preview{flex:1;display:flex;flex-direction:column;background:#e0e0e0;position:relative}
 .preview-toolbar{height:38px;background:var(--bg);border-bottom:1px solid rgba(128,128,128,0.12);display:flex;align-items:center;padding:0 10px;gap:6px;flex-shrink:0}
-.preview-toolbar .vp-btn{padding:5px 10px;border-radius:var(--r-sm);border:1px solid rgba(128,128,128,0.15);background:var(--bg);font-family:var(--font);font-size:12px;font-weight:600;cursor:pointer;transition:all .15s;color:var(--text3);display:inline-flex;align-items:center;gap:3px}
+.preview-toolbar .vp-btn{padding:5px 10px;border-radius:var(--r-sm);border:1px solid rgba(128,128,128,0.15);background:var(--bg);font-family:var(--ed-font);font-size:12px;font-weight:600;cursor:pointer;transition:all .15s;color:var(--text3);display:inline-flex;align-items:center;gap:3px}
 .preview-toolbar .vp-btn:hover{background:var(--bg3);color:var(--text)}
-.preview-toolbar .vp-btn.active{background:var(--navy);border-color:var(--navy);color:#fff}
+.preview-toolbar .vp-btn.active{background:var(--ed-navy);border-color:var(--ed-navy);color:#fff}
 .live-badge{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:var(--text3);padding:3px 8px;background:var(--bg2);border:1px solid rgba(128,128,128,0.15);border-radius:var(--r-sm);white-space:nowrap}
 .live-badge i{color:#999}
 .live-badge.live{color:#2e7d32;border-color:rgba(46,125,50,0.3);background:rgba(46,125,50,0.06)}
 .live-badge.live i{color:#2e7d32;animation:livePulse 2s infinite}
-.live-badge.err{color:var(--red);border-color:rgba(200,32,57,0.3)}
-.live-badge.err i{color:var(--red)}
+.live-badge.err{color:var(--ed-red);border-color:rgba(200,32,57,0.3)}
+.live-badge.err i{color:var(--ed-red)}
 @keyframes livePulse{0%,100%{opacity:1}50%{opacity:.4}}
 .preview-toolbar .preview-url{font-size:11px;color:var(--text3);margin-left:auto;padding:3px 6px;background:var(--bg2);border-radius:var(--r-sm);max-width:260px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .preview-container{flex:1;display:flex;align-items:flex-start;justify-content:center;padding:16px;background:radial-gradient(120% 90% at 50% 0%,#efe7db 0%,#e7dccb 100%);overflow:auto}
@@ -160,10 +160,10 @@ hr.divider{margin:12px 0;border:none;border-top:1px solid rgba(128,128,128,0.1)}
 .zoom-box iframe.tablet{width:768px;height:1024px}
 .zoom-box iframe.mobile{width:375px;height:812px}
 .preview-loading{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:var(--text3);font-size:13px;font-weight:600;z-index:1}
-.toast{position:fixed;bottom:20px;right:20px;padding:11px 16px;border-radius:var(--r-md);background:var(--navy);color:#fff;font-size:12.5px;font-weight:600;box-shadow:var(--sh-md);z-index:9999;opacity:0;transform:translateY(10px);transition:all .3s;pointer-events:none;max-width:350px}
+.toast{position:fixed;bottom:20px;right:20px;padding:11px 16px;border-radius:var(--r-md);background:var(--ed-navy);color:#fff;font-size:12.5px;font-weight:600;box-shadow:var(--sh-md);z-index:9999;opacity:0;transform:translateY(10px);transition:all .3s;pointer-events:none;max-width:350px}
 .toast.show{opacity:1;transform:translateY(0)}
 .toast.success{background:#2e7d32}
-.toast.error{background:var(--red)}
+.toast.error{background:var(--ed-red)}
 .sidebar-content::-webkit-scrollbar{width:4px}
 .sidebar-content::-webkit-scrollbar-track{background:transparent}
 .sidebar-content::-webkit-scrollbar-thumb{background:rgba(128,128,128,0.15);border-radius:2px}
@@ -278,7 +278,7 @@ hr.divider{margin:12px 0;border:none;border-top:1px solid rgba(128,128,128,0.1)}
 <body>
 <header class="editor-header">
   <div class="editor-header-left">
-    <span class="logo-text"><i class="fas fa-feather-alt" style="color:var(--red)"></i> JHALAR <span>Pro Editor</span></span>
+    <span class="logo-text"><i class="fas fa-feather-alt" style="color:var(--ed-red)"></i> JHALAR <span>Pro Editor</span></span>
   </div>
   <div class="editor-header-right">
     <span class="save-indicator" id="save-indicator"><i class="fas fa-check-circle" style="color:#2e7d32"></i> Saved</span>
@@ -508,70 +508,32 @@ hr.divider{margin:12px 0;border:none;border-top:1px solid rgba(128,128,128,0.1)}
       <!-- THEME -->
       <div class="tab-panel" id="panel-theme">
         <h3><i class="fas fa-palette"></i> Theme</h3>
-        <p class="hint">Theme controls are mapped to the live page like this: <strong>Colors</strong> -> brand, buttons, header, footer &amp; backgrounds. <strong>Fonts &amp; Text</strong> -> heading font/weight/letter spacing/line height, body font/weight/letter spacing/line height. <strong>Layout</strong> -> rows &amp; columns per section, card radius, shadows, reveal motion. <strong>Inside Every Section</strong> -> per-section gaps &amp; padding. Every value applies instantly in the preview - no reload needed.</p>
+        <p class="hint">Theme controls map onto the design system, not onto individual components. <strong>Brand Colours</strong> -> the six approved palette roles (canvas, surface, heading, ink, brand red, deep red); borders, muted text and scrims are derived from them. <strong>Typography</strong> -> weight, letter spacing and line height within system limits; the Mogranx brand face and the fluid size scale are locked. <strong>Layout</strong> -> rows &amp; columns per section, card radius, shadows, reveal motion. <strong>Inside Every Section</strong> -> per-section gaps &amp; padding. Every value applies instantly in the preview - no reload needed.</p>
         <div class="theme-actions">
           <button class="btn-sm primary" onclick="previewChanges()"><i class="fas fa-sync-alt"></i> Refresh Live Preview</button>
           <button class="btn-sm" onclick="resetThemeDefaults()"><i class="fas fa-rotate-left"></i> Restore Theme Defaults</button>
         </div>
 
         <div class="panel-section">
-          <h4><i class="fas fa-fill-drip"></i> Brand Colors</h4>
-          <p>The official JHALAR palette used across the site.</p>
+          <h4><i class="fas fa-fill-drip"></i> Brand Colours</h4>
+          <p>The approved JHALAR palette, mapped to <strong>semantic roles</strong>. Each swatch drives one role across the whole site - components never carry their own colour. Red is an accent and action colour; it is deliberately not used for headings or large areas.</p>
           <div class="form-row-3">
-            <div class="form-group"><label>Brand Wine</label><input type="color" id="ed-color-red" value="#6B2136"></div>
-            <div class="form-group"><label>Wine Deep</label><input type="color" id="ed-color-red-dark" value="#42101F"></div>
-            <div class="form-group"><label>Blush Highlight</label><input type="color" id="ed-color-red-light" value="#C8909A"></div>
+            <div class="form-group"><label>Canvas (page)</label><input type="color" id="ed-color-canvas" value="#FFFAF1"><span class="help">#FFFAF1</span></div>
+            <div class="form-group"><label>Surface (cards)</label><input type="color" id="ed-color-surface" value="#FFFDF8"><span class="help">#FFFDF8</span></div>
+            <div class="form-group"><label>Heading (heritage)</label><input type="color" id="ed-color-heading" value="#622331"><span class="help">#622331</span></div>
           </div>
           <div class="form-row-3">
-            <div class="form-group"><label>Brass Gold</label><input type="color" id="ed-color-gold" value="#B48A52"></div>
-            <div class="form-group"><label>Wine Ink (Text)</label><input type="color" id="ed-color-navy" value="#2F1E25"></div>
-            <div class="form-group"><label>Warm Cream</label><input type="color" id="ed-color-cream" value="#F4EEE4"></div>
+            <div class="form-group"><label>Ink &amp; dark sections</label><input type="color" id="ed-color-ink" value="#141942"><span class="help">#141942 body text, contact, footer</span></div>
+            <div class="form-group"><label>Brand red (accent / CTA)</label><input type="color" id="ed-color-primary" value="#C82039"><span class="help">#C82039</span></div>
+            <div class="form-group"><label>Deep red (active state)</label><input type="color" id="ed-color-primary-strong" value="#A71931"><span class="help">#A71931</span></div>
           </div>
-          <hr class="divider">
-          <p>Extended brand surfaces - change these to lighten or deepen the overall look.</p>
-          <div class="form-row-3">
-            <div class="form-group"><label>Page Background</label><input type="color" id="ed-color-bg" value="#FCFAF5"></div>
-            <div class="form-group"><label>Alt Section Background</label><input type="color" id="ed-color-alt" value="#ECE1D1"></div>
-            <div class="form-group"><label>Header Background</label><input type="color" id="ed-color-header" value="#FCFAF5"></div>
-          </div>
-          <div class="form-row-3">
-            <div class="form-group"><label>Body Text</label><input type="color" id="ed-color-text" value="#2F1E25"></div>
-            <div class="form-group"><label>Muted Text</label><input type="color" id="ed-color-muted" value="#7D6C72"></div>
-            <div class="form-group"><label>Heading Text</label><input type="color" id="ed-color-heading" value="#2F1E25"></div>
-          </div>
-          <div class="form-row-3">
-            <div class="form-group"><label>Border / Lines</label><input type="color" id="ed-color-border" value="#E6DACB"></div>
-            <div class="form-group"><label>Footer Background</label><input type="color" id="ed-color-footer-bg" value="#2C1220"></div>
-            <div class="form-group"><label>Footer Text</label><input type="color" id="ed-color-footer-text" value="#FCFAF5"></div>
-          </div>
+          <p style="margin-top:8px">Borders, muted text, scrims and shadows are derived from these six colours by the stylesheet, so they always stay in tune.</p>
         </div>
 
         <div class="panel-section">
-          <h4><i class="fas fa-font"></i> Fonts &amp; Text</h4>
-          <p>Fonts are <strong>self-hosted</strong> in <code>assets/fonts/</code> (offline-ready, fast). Upload your own <strong>.ttf / .otf / .woff / .woff2</strong> files in the <strong>Media</strong> tab - they appear here automatically and render fully. Other choices fall back to system fonts.</p>
-          <p style="margin-top:6px;padding:8px;background:rgba(200,32,57,.05);border-radius:var(--r-sm)"><strong>Readability tip:</strong> leave title sizes on <strong>Auto</strong> so the site stays readable on phones, tablets and desktops. Set a fixed size only if you want one size everywhere.</p>
-          <div class="form-row">
-            <div class="form-group"><label>Heading Font</label>
-              <select id="ed-font-heading">
-                <option value="Mogranx, Arial, sans-serif" selected>Mogranx (self-hosted, JHALAR brand face)</option>
-                <option value="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif">Apple System (SF Pro / Segoe UI)</option>
-                <option value="'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">DM Sans (self-hosted)</option>
-                <option value="'Playfair Display', Georgia, 'Times New Roman', serif">Playfair Display (self-hosted)</option>
-                <option value="'Georgia', 'Times New Roman', serif">Georgia</option>
-                <option value="'Times New Roman', serif">Times New Roman</option>
-              </select>
-            </div>
-            <div class="form-group"><label>Body Font</label>
-              <select id="ed-font-body">
-                <option value="Mogranx, Arial, sans-serif" selected>Mogranx (self-hosted, JHALAR brand face)</option>
-                <option value="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif">Apple System (SF Pro / Segoe UI)</option>
-                <option value="'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">DM Sans (self-hosted)</option>
-                <option value="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">System Stack</option>
-                <option value="'Segoe UI', Arial, sans-serif">Segoe UI</option>
-                <option value="'Arial', Helvetica, sans-serif">Arial</option>
-              </select>
-            </div>
-          </div>
+          <h4><i class="fas fa-font"></i> Typography</h4>
+          <p>The brand face is <strong>Mogranx</strong>, self-hosted in <code>assets/fonts/</code> and locked by the design system: headings and body both use it, so the identity cannot drift. Only the real weights that exist as font files (Regular 400, Medium 500, Bold 700) are offered - the browser is never asked to fake a bold or an italic.</p>
+          <p style="margin-top:6px;padding:8px;background:rgba(200,32,57,.05);border-radius:var(--r-sm)"><strong>Sizes are system-owned.</strong> Display, H1-H4, body, caption and eyebrow sizes come from one fluid scale that adapts from 320px to large desktop. That is why there is no font-size control here.</p>
           <div class="form-group"><label>Base Font Size</label>
             <select id="ed-layout-fs-base">
               <option value="15px">15px - Compact</option>
@@ -579,26 +541,23 @@ hr.divider{margin:12px 0;border:none;border-top:1px solid rgba(128,128,128,0.1)}
               <option value="17px">17px - Relaxed</option>
               <option value="18px">18px - Large</option>
             </select>
-            <span class="help">Scales all text sizes up/down proportionally.</span>
+            <span class="help">Scales the whole type scale proportionally (everything is in rem).</span>
           </div>
           <hr class="divider">
           <h4 style="margin:6px 0 8px;font-size:12px"><i class="fas fa-spell-check"></i> Weight</h4>
           <div class="form-row">
-            <div class="form-group"><label>Heading Weight</label>
+            <div class="form-group"><label>Heading Weight (H1/H2)</label>
               <select id="ed-font-heading-weight">
-                <option value="400">Regular</option>
+                <option value="400" selected>Regular - editorial</option>
                 <option value="500">Medium</option>
-                <option value="600" selected>Semibold</option>
                 <option value="700">Bold</option>
               </select>
-              <span class="help">H1/H2 stay Bold or heavier to preserve hierarchy.</span>
+              <span class="help">Hierarchy comes from scale and space. H3-H6 stay Medium.</span>
             </div>
             <div class="form-group"><label>Body Weight</label>
               <select id="ed-font-body-weight">
                 <option value="400" selected>Regular</option>
                 <option value="500">Medium</option>
-                <option value="600">Semibold</option>
-                <option value="700">Bold</option>
               </select>
             </div>
           </div>
@@ -606,18 +565,16 @@ hr.divider{margin:12px 0;border:none;border-top:1px solid rgba(128,128,128,0.1)}
           <div class="form-row">
             <div class="form-group"><label>Heading Letter Spacing</label>
               <select id="ed-font-heading-tracking">
-                <option value="-0.02em">Tight</option>
-                <option value="-0.015em">Slightly tight</option>
-                <option value="-0.01em" selected>Recommended</option>
-                <option value="0">Normal</option>
-                <option value="0.01em">Loose</option>
+                <option value="0" selected>Normal - recommended</option>
+                <option value="0.01em">Slightly open</option>
+                <option value="0.02em">Open</option>
               </select>
+              <span class="help">Negative tracking is not available: brand type is never compressed.</span>
             </div>
             <div class="form-group"><label>Body Letter Spacing</label>
               <select id="ed-font-body-tracking">
-                <option value="0" selected>Normal</option>
-                <option value="0.01em">Loose</option>
-                <option value="-0.005em">Tight</option>
+                <option value="0" selected>Normal - recommended</option>
+                <option value="0.01em">Slightly open</option>
               </select>
             </div>
           </div>
@@ -625,18 +582,17 @@ hr.divider{margin:12px 0;border:none;border-top:1px solid rgba(128,128,128,0.1)}
           <div class="form-row">
             <div class="form-group"><label>Heading Line Height</label>
               <select id="ed-font-heading-leading">
-                <option value="1.05">1.05 - compact</option>
-                <option value="1.1">1.1 - snug</option>
-                <option value="1.18" selected>1.18 - recommended</option>
-                <option value="1.3">1.3 - airy</option>
+                <option value="1.08">1.08 - tight</option>
+                <option value="1.14" selected>1.14 - recommended</option>
+                <option value="1.25">1.25 - airy</option>
               </select>
+              <span class="help">Hero display type keeps its own tighter leading.</span>
             </div>
             <div class="form-group"><label>Body Line Height</label>
               <select id="ed-font-body-leading">
                 <option value="1.5">1.5 - compact</option>
-                <option value="1.6">1.6 - balanced</option>
-                <option value="1.7" selected>1.7 - recommended</option>
-                <option value="1.8">1.8 - relaxed</option>
+                <option value="1.6" selected>1.6 - recommended</option>
+                <option value="1.7">1.7 - relaxed</option>
               </select>
             </div>
           </div>
