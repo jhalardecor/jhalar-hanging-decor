@@ -2239,3 +2239,28 @@ button{touch-action:manipulation}
   }
   .hero-banner-copy>.hero-lead{margin-bottom:18px!important}
 }
+
+
+/* Header scroll state + definitive mobile hero overlay */
+.header{transition:background .28s ease,box-shadow .28s ease,border-color .28s ease}
+.header.scrolled{
+  background:rgba(255,250,247,.98);
+  box-shadow:0 8px 28px rgba(36,21,26,.10);
+  border-bottom-color:rgba(36,21,26,.12);
+}
+@media(max-width:760px){
+  .header.scrolled{
+    background:rgba(255,250,247,.98)!important;
+    box-shadow:0 8px 24px rgba(36,21,26,.13)!important;
+  }
+  .hero-banner-shade{
+    background:
+      linear-gradient(180deg,
+        rgba(44,7,20,.12) 0%,
+        rgba(44,7,20,.20) 42%,
+        rgba(44,7,20,.88) 100%)!important;
+    opacity:1!important;
+    display:block!important;
+    visibility:visible!important;
+  }
+}
