@@ -2612,3 +2612,9 @@ button:not(.filter-btn),
 /* PRODUCT IMAGE ZOOM INPUTS */
 #product-modal .modal-stage{touch-action:none!important}
 @media(pointer:fine){#product-modal .modal-stage{cursor:zoom-in}#product-modal .modal-stage.is-zoomed{cursor:grab}}
+
+
+/* HEADER FINAL STATE — no competing visibility rules */
+.header{transform:translate3d(0,0,0)!important;backface-visibility:hidden!important}
+.header.header-hidden{transform:translate3d(0,-105%,0)!important;pointer-events:none!important}
+.header:not(.header-hidden){pointer-events:auto!important}
