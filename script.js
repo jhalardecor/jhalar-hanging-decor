@@ -276,3 +276,19 @@ initProducts();initRuntime();
  img.addEventListener('load',reset);
  new MutationObserver(()=>{if(!modal.classList.contains('open'))reset()}).observe(modal,{attributes:true,attributeFilter:['class']});
 })();
+
+
+/* Fresh navigation guard */
+(function(){
+ document.addEventListener('click',function(e){
+   const logo=e.target.closest('a.logo,a.brand,[data-home-logo]');
+   if(!logo)return;
+   const href=logo.getAttribute('href')||'';
+   if(href==='/'||href==='index.html'||href==='./'){
+     e.preventDefault();
+     const u=new URL(location.href);
+     u.searchParams.set('_fresh',Date.now().toString());
+     location.replace(u.pathname+u.search+u.hash);
+   }
+ },true);
+})();
