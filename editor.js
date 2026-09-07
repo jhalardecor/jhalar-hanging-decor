@@ -1579,11 +1579,11 @@ function installProStudio(){
   };
   q('studio-hero').onclick=()=>{
     const a=q('studio-a').value,b=q('studio-b').value,c=q('studio-c').value,ang=q('studio-angle').value;
-    const css='.hero-banner-shade{display:block!important;position:absolute!important;inset:0!important;pointer-events:none!important;background:radial-gradient(110% 130% at 0% 50%,'+c+'33 0%,transparent 58%),linear-gradient('+ang+'deg,'+a+'EF 0%,'+b+'00 100%)!important}.hero-banner-content{position:relative!important;z-index:2!important}';
+    const css='.hero-banner-shade{display:block!important;position:absolute!important;inset:0!important;pointer-events:none!important;background:linear-gradient('+ang+'deg,'+a+' 0%,'+b+'00 72%,transparent 100%)!important}.hero-banner-content{position:relative!important;z-index:2!important}';
     state.customCSS=(state.customCSS||'').replace(/\/\* PRO_STUDIO_HERO_START \*\/[\s\S]*?\/\* PRO_STUDIO_HERO_END \*\//,'')+'\\n/* PRO_STUDIO_HERO_START */\\n'+css+'\\n/* PRO_STUDIO_HERO_END */';
     state.changed=true;updateSaveIndicator();applyPreview();showToast('Hero overlay applied live','success');
   };
-  q('studio-reset').onclick=()=>{q('studio-a').value='#FFFDF8';q('studio-b').value='#FDF4F1';q('studio-c').value='#C82039';q('studio-angle').value=90;paint();};
+  q('studio-reset').onclick=()=>{q('studio-a').value='#FFFAF1';q('studio-b').value='#FFFAF1';q('studio-c').value='#C82039';q('studio-angle').value=0;paint();};
 }
 document.addEventListener('DOMContentLoaded',()=>setTimeout(installProStudio,900));
 
