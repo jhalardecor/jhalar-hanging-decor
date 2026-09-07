@@ -874,51 +874,46 @@ function setupUploadZone() {
 async function handleUpload(e) { handleFiles(e.target.files); e.target.value = ''; }
 // ===== GITHUB COMMIT HELPER (retries non-fast-forward races) =====
 async function createCommitWithRetry(token, entries, message, onLog) {
-  const headers = { 'Authorization': `Bearer ${token}`, 'Accept': 'application/vnd.github.v3+json', 'Content-Type': 'application/json' };
-  const baseUrl = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}`;
-  let lastErr = null;
-  for (let attempt = 1; attempt <= 5; attempt++) {
-    try {
-      if (onLog && attempt > 1) onLog(`Retry ${attempt}/5 - branch moved, rebuilding...`, 'act');
-      const br = await fetch(`${baseUrl}/git/ref/heads/${GITHUB_BRANCH}`, {headers});
-      if (!br.ok) throw new Error(`Failed to get branch: ${br.status}`);
-      const bd = await br.json();
-      const currentSha = bd.object.sha;
-      if (onLog && attempt === 1) onLog(`Branch: ${currentSha.substring(0,7)}`, 'done');
-      const commitResp = await fetch(`${baseUrl}/git/commits/${currentSha}`, {headers});
-      if (!commitResp.ok) throw new Error(`Commit error: ${commitResp.status}`);
-      const cd = await commitResp.json();
-      if (onLog && attempt === 1) onLog(`Tree: ${cd.tree.sha.substring(0,7)}`, 'done');
-      const blobs = [];
-      for (const e of entries) {
-        if (onLog) onLog(`Blob: ${e.path}...`, 'act');
-        const body = e.base64 ? {content:e.base64, encoding:'base64'} : {content:e.content, encoding:'utf-8'};
-        const blobResp = await fetch(`${baseUrl}/git/blobs`, { method:'POST', headers, body: JSON.stringify(body) });
-        if (!blobResp.ok) throw new Error(`Blob error for ${e.path}: ${blobResp.status}`);
-        const blob = await blobResp.json();
-        blobs.push({path:e.path, mode:'100644', type:'blob', sha:blob.sha});
-        if (onLog) onLog(`  ${e.path} [ok]`, 'done');
-      }
-      const treeResp = await fetch(`${baseUrl}/git/trees`, { method:'POST', headers, body: JSON.stringify({base_tree:cd.tree.sha, tree:blobs}) });
-      if (!treeResp.ok) throw new Error(`Tree error: ${treeResp.status}`);
-      const td = await treeResp.json();
-      const ncResp = await fetch(`${baseUrl}/git/commits`, { method:'POST', headers, body: JSON.stringify({message, tree:td.sha, parents:[currentSha]}) });
-      if (!ncResp.ok) throw new Error(`Commit error: ${ncResp.status}`);
-      const ncd = await ncResp.json();
-      if (onLog) onLog(`Commit: ${ncd.sha.substring(0,7)}`, 'done');
-      const ur = await fetch(`${baseUrl}/git/refs/heads/${GITHUB_BRANCH}`, { method:'PATCH', headers, body: JSON.stringify({sha:ncd.sha, force:false}) });
-      if (ur.ok) return ncd.sha;
-      if (ur.status === 422) { lastErr = new Error('Branch update error: 422 (branch moved)'); continue; }
-      throw new Error(`Branch update error: ${ur.status}`);
-    } catch(e) {
-      lastErr = e;
-      if (String(e.message).includes('422')) continue;
-      throw e;
-    }
-  }
-  throw lastErr || new Error('Failed after 5 attempts');
-}
+  /* Use the Contents API instead of the Git Blob API.
+     This works with fine-grained GitHub tokens that have Contents: Read/Write. */
+  const headers = {
+    'Authorization': `Bearer ${token}`,
+    'Accept': 'application/vnd.github+json',
+    'Content-Type': 'application/json'
+  };
+  const baseUrl = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents`;
+  const branch = GITHUB_BRANCH;
+  const enc = new TextEncoder();
 
+  for (const e of entries) {
+    if (onLog) onLog(`Saving: ${e.path}...`, 'act');
+    const url = `${baseUrl}/${e.path}`;
+    let sha = null;
+    const existing = await fetch(`${url}?ref=${encodeURIComponent(branch)}`, {headers});
+    if (existing.ok) {
+      const data = await existing.json();
+      sha = data.sha;
+    } else if (existing.status !== 404) {
+      throw new Error(`Read error for ${e.path}: ${existing.status}`);
+    }
+
+    const base64 = e.base64 || btoa(String.fromCharCode(...enc.encode(e.content)));
+    const body = {message, content: base64, branch};
+    if (sha) body.sha = sha;
+
+    const saved = await fetch(url, {method:'PUT', headers, body:JSON.stringify(body)});
+    if (!saved.ok) {
+      if (saved.status === 403) {
+        throw new Error('GitHub permission denied (403). Your token needs Contents: Read and Write access to this repository.');
+      }
+      throw new Error(`Save error for ${e.path}: ${saved.status}`);
+    }
+    const result = await saved.json();
+    if (onLog) onLog(`  ${e.path} [saved]`, 'done');
+    if (result.commit?.sha) lastCommit = result.commit.sha;
+  }
+  return typeof lastCommit !== 'undefined' ? lastCommit : null;
+}
 async function handleFiles(files) {
   if (!files.length) return;
   const token = getVal('ed-github-token').trim();
