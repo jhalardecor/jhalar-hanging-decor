@@ -2746,3 +2746,22 @@ button:not(.filter-btn),
   overflow-wrap:normal!important;
   word-break:normal!important;
 }
+
+
+/* MOBILE PRODUCT COPY — avoid ragged/orphaned lines in long catalogue descriptions */
+@media(max-width:760px){
+  #product-modal #modal-desc{
+    max-width:42ch!important;
+    margin-right:auto!important;
+    text-wrap:pretty!important;
+    line-height:1.64!important;
+    font-size:clamp(.92rem,3.8vw,1rem)!important;
+  }
+}
+@supports not (text-wrap:pretty){
+  @media(max-width:760px){
+    #product-modal #modal-desc{
+      max-width:38em!important;
+    }
+  }
+}
