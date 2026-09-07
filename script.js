@@ -784,45 +784,26 @@ function setupEnquiryForm() {
     if (!form.checkValidity()) { form.reportValidity(); return; }
     const v = id => { const el = document.getElementById(id); return el ? el.value.trim() : ''; };
 
-    var sep = '\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500';
-    var lines = [];
+    var NL = '\n';
+    var L = [];
 
-    // Header
-    lines.push('\u2728 *NEW ENQUIRY \u2014 JHALAR* \u2728');
-    lines.push(sep);
-
-    // Customer details
-    lines.push('');
-    lines.push('\ud83d\udc64 *CUSTOMER DETAILS*');
-    lines.push('\u251c\u2500 Name: ' + v('name'));
-    if (v('company')) lines.push('\u251c\u2500 Company: ' + v('company'));
-    lines.push('\u251c\u2500 Buyer Type: ' + v('buyer-type'));
-    lines.push('\u251c\u2500 Phone: ' + v('phone'));
-    if (v('email')) lines.push('\u2514\u2500 Email: ' + v('email'));
-
-    // Location
-    lines.push('');
-    lines.push('\ud83d\udccd *LOCATION*');
-    lines.push('\u2514\u2500 City/State: ' + v('location'));
-
-    // Order details
-    lines.push('');
-    lines.push('\ud83d\udccb *ORDER DETAILS*');
-    lines.push('\u251c\u2500 Category: ' + v('category'));
-    if (v('quantity')) lines.push('\u251c\u2500 Quantity: ' + v('quantity'));
+    L.push('*New Enquiry — JHALAR*');
+    L.push(NL);
+    L.push('Name : ' + v('name'));
+    if (v('company')) L.push('Company : ' + v('company'));
+    L.push('Buyer Type : ' + v('buyer-type'));
+    L.push('Phone : ' + v('phone'));
+    if (v('email')) L.push('Email : ' + v('email'));
+    L.push('City / State : ' + v('location'));
+    L.push('Category : ' + v('category'));
+    if (v('quantity')) L.push('Quantity : ' + v('quantity'));
     if (v('date')) {
       var d = new Date(v('date'));
-      var formatted = !isNaN(d) ? d.toLocaleDateString('en-IN', { day:'numeric', month:'long', year:'numeric' }) : v('date');
-      lines.push('\u251c\u2500 Date Required: ' + formatted);
+      L.push('Date Required : ' + (!isNaN(d) ? d.toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' }) : v('date')));
     }
-    if (v('details')) lines.push('\u2514\u2500 Details: ' + v('details'));
+    if (v('details')) L.push(NL + v('details'));
 
-    // Footer
-    lines.push('');
-    lines.push(sep);
-    lines.push('\ud83d\udce7 Sent via jhalar.in enquiry form');
-
-    window.open('https://wa.me/' + settings.whatsapp + '?text=' + encodeURIComponent(lines.join('\n')), '_blank', 'noopener');
+    window.open('https://wa.me/' + settings.whatsapp + '?text=' + encodeURIComponent(L.join('\n')), '_blank', 'noopener');
     var st = document.getElementById('form-status');
     if (st) { st.textContent = 'WhatsApp is open with your enquiry filled in. Review it and press send there.'; st.classList.add('visible'); }
   });
