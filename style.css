@@ -2272,3 +2272,39 @@ button:not(.filter-btn),
 @media (prefers-reduced-motion:reduce){
   .filters{animation:none!important}
 }
+
+
+/* AUDIENCE COPY — prevent overflow and keep the long statement balanced */
+.audience-strip,
+.audience-strip-inner,
+.audience-label,
+.audience-items,
+.audience-items span{
+  min-width:0;
+  max-width:100%;
+}
+.audience-label{
+  overflow-wrap:anywhere;
+  word-break:normal;
+  text-wrap:balance;
+}
+@media(max-width:760px){
+  .audience-strip{overflow:hidden!important}
+  .audience-strip-inner{
+    width:min(100% - 32px,1200px)!important;
+    margin-inline:auto!important;
+    padding-inline:0!important;
+    box-sizing:border-box!important;
+  }
+  .audience-label{
+    max-width:100%!important;
+    font-size:clamp(1.25rem,6vw,1.75rem)!important;
+    line-height:1.15!important;
+    overflow-wrap:break-word!important;
+  }
+  .audience-items,
+  .audience-items span{
+    width:100%!important;
+    box-sizing:border-box!important;
+  }
+}
