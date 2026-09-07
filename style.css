@@ -447,3 +447,39 @@ img,video,svg{max-width:100%}
       linear-gradient(135deg,#FFFDF8 0%,#FFFAF1 52%,#FDF4F1 100%);
   }
 }
+
+
+/* 19. RESPONSIVE FIT + PRODUCT FILTER FLOW REFINEMENT */
+.product-grid{width:100%;min-width:0}
+.filters-wrap{width:100%;max-width:100%;scrollbar-width:none}
+.filters-wrap::-webkit-scrollbar{display:none}
+.filters{display:flex;align-items:center;gap:10px;min-width:max-content}
+.filter-btn{flex:0 0 auto;transition:background .22s var(--ease),color .22s var(--ease),border-color .22s var(--ease),transform .22s var(--ease),box-shadow .22s var(--ease)}
+.filter-btn.active{box-shadow:0 8px 20px rgba(98,35,49,.12)}
+#product-grid.filter-changing{opacity:.68;transform:translateY(4px);transition:opacity .12s ease,transform .12s ease}
+#product-grid.catalogue-ready{animation:catalogue-settle .32s var(--ease) both}
+@keyframes catalogue-settle{from{opacity:.68;transform:translateY(5px)}to{opacity:1;transform:none}}
+
+@media(max-width:760px){
+ /* Keep the same visual system; only scale and constrain it to the viewport. */
+ :root{--shell:min(100% - 32px,1200px)}
+ .hero-banner{min-height:clamp(460px,125vw,620px)}
+ .hero-banner-content{align-items:center;padding-block:clamp(42px,11vw,72px)}
+ .hero-banner-copy{width:min(100%,560px)}
+ .hero-banner-copy h1{font-size:clamp(2.65rem,12vw,4.25rem);max-width:9ch}
+ .hero-lead{font-size:clamp(.96rem,4vw,1.08rem)}
+ .hero-banner-shade{background:linear-gradient(90deg,rgba(255,250,241,.96) 0%,rgba(255,250,241,.80) 48%,rgba(255,250,241,.24) 78%,rgba(255,250,241,0) 100%)}
+ .filters-wrap{margin:0;overflow-x:auto;padding:4px 0 12px}
+ .filters{padding-right:12px}
+ .filter-btn{min-height:42px;padding-inline:16px}
+ .product-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;width:100%}
+ .product-card{width:100%;max-width:100%;overflow:hidden}
+ .product-image{width:100%;aspect-ratio:1/1}
+ .product-image img,.product-image .alt-img{width:100%;height:100%;object-fit:contain}
+}
+@media(max-width:480px){
+ :root{--shell:min(100% - 24px,1200px)}
+ .section{padding-block:clamp(48px,13vw,72px)}
+ .product-grid{gap:14px 10px!important}
+ .hero-banner-copy h1{font-size:clamp(2.45rem,12.5vw,3.3rem)}
+}
