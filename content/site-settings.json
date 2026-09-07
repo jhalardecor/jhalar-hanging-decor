@@ -6,7 +6,7 @@
   "gst": "Available on request",
   "heroHeadline": "Let the colour do the talking.",
   "heroIntro": "Jhalars that bring instant colour, depth and celebration to the space you are creating.",
-  "heroImage": "assets/images/hero-jhalar.jpg",
+  "heroImage": "assets/images/hero-jhalar.webp",
   "siteTitle": "JHALAR — Hanging Decor for Celebrations",
   "siteDescription": "Handcrafted jhalars and hanging decor for weddings, events and festive spaces.",
   "ogImage": "assets/images/og-cover.jpg",
@@ -74,7 +74,7 @@
   ],
   "sectionCopy": {
     "heroPrimary": {
-      "label": "Explore Collection",
+      "label": "Explore the collection",
       "href": "#collection"
     },
     "heroSecondary": {
@@ -82,13 +82,13 @@
       "href": ""
     },
     "collection": {
-      "label": "Collection",
+      "label": "BROWSE DESIGNS",
       "title": "Find what fits the occasion.",
       "intro": "Every design is shown clearly so you can compare colour, form and texture before you enquire.",
       "note": ""
     },
     "customOrders": {
-      "label": "Custom Orders",
+      "label": "CUSTOM WORK",
       "title": "Start with your colour story.",
       "intro": "Already have a theme, palette or reference? Use it as the starting point. We can discuss colour, size, quantity and the practical details needed for your setup.",
       "image": "assets/images/custom-orders.jpg",
@@ -123,9 +123,9 @@
       ]
     },
     "about": {
-      "label": "About",
+      "label": "JHALAR",
       "title": "Made by hand. Chosen for the moment.",
-      "intro": "We create hanging decor for the people building celebrations—decorators, planners, retailers and families who know that the small visual details change how a space feels. Our work begins in Howrah and travels into wedding venues, festive installations and celebrations across India.",
+      "intro": "We create hanging decor for the people building celebrations—decorators, planners, retailers and families who know that the small visual details change how a space feels.",
       "image": "assets/images/about-collage.jpg",
       "values": [
         {
@@ -143,7 +143,7 @@
       ]
     },
     "contact": {
-      "label": "Contact",
+      "label": "READY WHEN YOU ARE",
       "title": "Tell us what you are creating.",
       "intro": "Share the design, quantity, location and date. We will take the conversation from there.",
       "submitLabel": "Prepare enquiry"

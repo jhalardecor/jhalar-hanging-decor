@@ -9,55 +9,55 @@
 <link rel="stylesheet" href="style.css">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-:root{--red:#C82039;--red-dark:#A3182E;--red-light:#E8485F;--gold:#C9A84C;--navy:#141942;--cream:#FFFAF1;--text:#1A1A1A;--text2:#4A4A4A;--text3:#6B6B6B;--bg:#FFFFFF;--bg2:#F8F9FA;--bg3:#F0F0F0;--sidebar-w:420px;--h:52px;--r-sm:6px;--r-md:8px;--r-lg:12px;--sh-sm:0 1px 3px rgba(0,0,0,0.08);--sh-md:0 4px 12px rgba(0,0,0,0.1);--font:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;--mono:'SF Mono','Consolas','Liberation Mono',monospace}
-html,body{height:100%;font-family:var(--font);font-size:14px;color:var(--text);background:var(--bg2);overflow:hidden}
-.dark{--text:#E8E8E8;--text2:#B0B0B0;--text3:#888;--bg:#1E1E2A;--bg2:#2A2A3A;--bg3:#333348;--sh-sm:0 1px 3px rgba(0,0,0,0.3);--sh-md:0 4px 12px rgba(0,0,0,0.4)}
+:root{--red:#6B2136;--red-dark:#4A1425;--red-light:#C8909A;--gold:#B48A52;--navy:#2F1E25;--cream:#FBF7F0;--text:#2F262B;--text2:#5C4F55;--text3:#8D7E84;--bg:#FFFFFF;--bg2:#F7F3ED;--bg3:#EFE7DC;--sidebar-w:430px;--h:52px;--r-sm:6px;--r-md:8px;--r-lg:12px;--sh-sm:0 1px 3px rgba(47,30,37,0.08);--sh-md:0 4px 14px rgba(47,30,37,0.14);--font:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;--mono:'SF Mono','Consolas','Liberation Mono',monospace}
+html,body{height:100%;font-family:var(--font);font-size:14.5px;color:var(--text);background:var(--bg2);overflow:hidden}
+.dark{--text:#EFE9E6;--text2:#BBA9A8;--text3:#8D7E84;--bg:#221A1F;--bg2:#2B2227;--bg3:#382C33;--sh-sm:0 1px 3px rgba(0,0,0,0.3);--sh-md:0 4px 14px rgba(0,0,0,0.4)}
 .editor-header{height:var(--h);background:var(--bg);border-bottom:1px solid rgba(128,128,128,0.15);display:flex;align-items:center;justify-content:space-between;padding:0 16px;position:fixed;top:0;left:0;right:0;z-index:100;box-shadow:var(--sh-sm)}
 .editor-header-left{display:flex;align-items:center;gap:12px}
 .logo-text{font-weight:700;font-size:15px;color:var(--red);display:flex;align-items:center;gap:6px}
 .logo-text span{font-weight:400;color:var(--text3);font-size:13px}
 .editor-header-right{display:flex;align-items:center;gap:6px}
-.editor-header-right .btn{padding:5px 12px;border-radius:var(--r-md);border:1px solid rgba(128,128,128,0.2);background:var(--bg);font-family:var(--font);font-size:12px;font-weight:600;cursor:pointer;transition:all .15s;display:inline-flex;align-items:center;gap:5px;color:var(--text)}
+.editor-header-right .btn{padding:6px 13px;border-radius:var(--r-md);border:1px solid rgba(128,128,128,0.2);background:var(--bg);font-family:var(--font);font-size:12.5px;font-weight:600;cursor:pointer;transition:all .15s;display:inline-flex;align-items:center;gap:5px;color:var(--text)}
 .editor-header-right .btn:hover{background:var(--bg3)}
 .editor-header-right .btn-primary{background:var(--red);border-color:var(--red);color:#fff}
 .editor-header-right .btn-primary:hover{background:var(--red-dark)}
 .editor-header-right .btn-icon{width:32px;height:32px;padding:0;justify-content:center;border-radius:var(--r-sm)}
 .editor-header-right .btn-icon.active{background:var(--navy);border-color:var(--navy);color:#fff}
 .editor-header-right .kbd{font-size:10px;background:var(--bg2);border:1px solid rgba(128,128,128,0.15);border-radius:3px;padding:1px 4px;margin-left:2px;color:var(--text3)}
-.save-indicator{font-size:11px;color:var(--text3);padding:4px 8px;background:var(--bg2);border-radius:var(--r-sm);white-space:nowrap}
+.save-indicator{font-size:12px;color:var(--text3);padding:4px 8px;background:var(--bg2);border-radius:var(--r-sm);white-space:nowrap}
 .editor-body{display:flex;height:100vh;padding-top:var(--h)}
 .editor-sidebar{width:var(--sidebar-w);min-width:var(--sidebar-w);background:var(--bg);border-right:1px solid rgba(128,128,128,0.12);display:flex;flex-direction:column;height:100%;overflow:hidden}
 .sidebar-tabs{display:flex;border-bottom:1px solid rgba(128,128,128,0.12);background:var(--bg2);flex-shrink:0;overflow-x:auto}
-.sidebar-tab{flex:1;min-width:50px;padding:7px 2px;text-align:center;font-size:10px;font-weight:600;color:var(--text3);cursor:pointer;border:none;background:none;font-family:var(--font);transition:all .15s;border-bottom:2px solid transparent;display:flex;flex-direction:column;align-items:center;gap:1px;position:relative}
+.sidebar-tab{flex:1;min-width:50px;padding:8px 2px;text-align:center;font-size:11px;font-weight:600;color:var(--text3);cursor:pointer;border:none;background:none;font-family:var(--font);transition:all .15s;border-bottom:2px solid transparent;display:flex;flex-direction:column;align-items:center;gap:1px;position:relative}
 .sidebar-tab i{font-size:15px}
 .sidebar-tab:hover{color:var(--text);background:rgba(0,0,0,0.02)}
 .sidebar-tab.active{color:var(--red);border-bottom-color:var(--red);background:var(--bg)}
 .sidebar-content{flex:1;overflow-y:auto;padding:12px 14px}
 .tab-panel{display:none}
 .tab-panel.active{display:block}
-.tab-panel h3{font-size:15px;font-weight:700;margin-bottom:8px;color:var(--text)}
+.tab-panel h3{font-size:16px;font-weight:700;margin-bottom:8px;color:var(--text)}
 .tab-panel h3 i{color:var(--red);margin-right:6px}
-.tab-panel .hint{font-size:12px;color:var(--text3);margin-bottom:12px;line-height:1.5}
+.tab-panel .hint{font-size:12.5px;color:var(--text3);margin-bottom:12px;line-height:1.55}
 .form-group{margin-bottom:10px}
-.form-group label{display:block;font-size:11px;font-weight:600;color:var(--text2);margin-bottom:3px}
-.form-group input,.form-group textarea,.form-group select{width:100%;padding:6px 9px;font-family:var(--font);font-size:12px;color:var(--text);background:var(--bg2);border:1px solid rgba(128,128,128,0.15);border-radius:var(--r-sm);transition:all .15s}
+.form-group label{display:block;font-size:12px;font-weight:600;color:var(--text2);margin-bottom:4px}
+.form-group input,.form-group textarea,.form-group select{width:100%;padding:6px 9px;font-family:var(--font);font-size:13px;color:var(--text);background:var(--bg2);border:1px solid rgba(128,128,128,0.15);border-radius:var(--r-sm);transition:all .15s}
 .form-group input:focus,.form-group textarea:focus,.form-group select:focus{outline:none;border-color:var(--red);box-shadow:0 0 0 3px rgba(200,32,57,0.1);background:var(--bg)}
 .form-group textarea{resize:vertical;min-height:48px}
 .form-group input[type="color"]{padding:2px;height:30px;cursor:pointer}
-.form-group .help{font-size:10px;color:var(--text3);margin-top:2px}
+.form-group .help{font-size:11px;color:var(--text3);margin-top:3px}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .form-row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
 hr.divider{margin:12px 0;border:none;border-top:1px solid rgba(128,128,128,0.1)}
 .panel-section{background:var(--bg2);border:1px solid rgba(128,128,128,0.1);border-radius:var(--r-md);padding:12px;margin-bottom:10px}
-.panel-section h4{font-size:12px;font-weight:700;margin-bottom:6px;color:var(--text)}
-.panel-section p{font-size:11px;color:var(--text2);line-height:1.5;margin-bottom:8px}
+.panel-section h4{font-size:13px;font-weight:700;margin-bottom:6px;color:var(--text)}
+.panel-section p{font-size:12px;color:var(--text2);line-height:1.55;margin-bottom:8px}
 .spacing-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .spacing-grid .form-group{margin-bottom:0}
 .spacing-grid .form-group label{font-size:10px;margin-bottom:2px}
 .spacing-grid .form-group .help{font-size:9px;margin-top:1px}
 @media(max-width:520px){.spacing-grid{grid-template-columns:1fr}}
 .theme-actions{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px}
-.btn-sm{padding:4px 10px;border-radius:var(--r-sm);border:1px solid rgba(128,128,128,0.2);background:var(--bg);font-family:var(--font);font-size:11px;font-weight:600;cursor:pointer;transition:all .15s;display:inline-flex;align-items:center;gap:4px;color:var(--text)}
+.btn-sm{padding:5px 11px;border-radius:var(--r-sm);border:1px solid rgba(128,128,128,0.2);background:var(--bg);font-family:var(--font);font-size:12px;font-weight:600;cursor:pointer;transition:all .15s;display:inline-flex;align-items:center;gap:4px;color:var(--text)}
 .btn-sm:hover{background:var(--bg3)}
 .btn-sm.primary{background:var(--red);border-color:var(--red);color:#fff}
 .btn-sm.primary:hover{background:var(--red-dark)}
@@ -77,8 +77,8 @@ hr.divider{margin:12px 0;border:none;border-top:1px solid rgba(128,128,128,0.1)}
 .section-item .toggle::after{content:'';position:absolute;top:2px;left:2px;width:14px;height:14px;border-radius:50%;background:#fff;transition:all .2s;box-shadow:0 1px 2px rgba(0,0,0,0.2)}
 .section-item .toggle.active::after{left:16px}
 .section-item .info{flex:1;min-width:0}
-.section-item .info .name{font-weight:600;font-size:12px;color:var(--text)}
-.section-item .info .status{font-size:10px;color:var(--text3)}
+.section-item .info .name{font-weight:600;font-size:12.5px;color:var(--text)}
+.section-item .info .status{font-size:11px;color:var(--text3)}
 .section-item .drag-handle{color:var(--text3);cursor:grab;font-size:13px;padding:2px}
 .product-list{display:flex;flex-direction:column;gap:4px}
 .product-list-item{background:var(--bg2);border:1px solid rgba(128,128,128,0.1);border-radius:var(--r-md);padding:6px 8px;display:flex;align-items:center;gap:6px;transition:all .15s;cursor:pointer}
@@ -86,14 +86,14 @@ hr.divider{margin:12px 0;border:none;border-top:1px solid rgba(128,128,128,0.1)}
 .product-list-item.active{border-color:var(--red);box-shadow:0 0 0 2px rgba(200,32,57,0.15)}
 .product-list-item .thumb{width:36px;height:36px;border-radius:var(--r-sm);object-fit:cover;background:#ddd;flex-shrink:0}
 .product-list-item .info{flex:1;min-width:0}
-.product-list-item .info .name{font-weight:600;font-size:12px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.product-list-item .info .cat{font-size:10px;color:var(--text3)}
+.product-list-item .info .name{font-weight:600;font-size:12.5px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.product-list-item .info .cat{font-size:11px;color:var(--text3)}
 .product-list-item .actions{display:flex;gap:2px;flex-shrink:0}
 .product-list-item .actions button{width:22px;height:22px;border:none;background:none;cursor:pointer;border-radius:3px;color:var(--text3);font-size:10px;display:flex;align-items:center;justify-content:center;transition:all .15s}
 .product-list-item .actions button:hover{background:rgba(0,0,0,0.08);color:var(--text)}
 .product-list-item .actions button.del:hover{background:rgba(200,32,57,0.1);color:var(--red)}
 .prod-editor{background:var(--bg2);border:1px solid rgba(128,128,128,0.1);border-radius:var(--r-md);padding:10px;margin-top:6px;display:none}
-.prod-editor h4{font-size:12px;font-weight:700;margin-bottom:8px;color:var(--text)}
+.prod-editor h4{font-size:13px;font-weight:700;margin-bottom:8px;color:var(--text)}
 .media-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(70px,1fr));gap:6px;margin-bottom:10px}
 .media-item{aspect-ratio:1;border-radius:var(--r-sm);overflow:hidden;border:2px solid transparent;cursor:pointer;position:relative;background:var(--bg2)}
 .media-item.active{border-color:var(--red)}
@@ -103,7 +103,7 @@ hr.divider{margin:12px 0;border:none;border-top:1px solid rgba(128,128,128,0.1)}
 .upload-zone{border:2px dashed rgba(128,128,128,0.3);border-radius:var(--r-md);padding:14px;text-align:center;cursor:pointer;transition:all .15s;margin-bottom:10px}
 .upload-zone:hover{border-color:var(--red);background:rgba(200,32,57,0.03)}
 .upload-zone i{font-size:20px;color:var(--text3);margin-bottom:4px}
-.upload-zone p{font-size:11px;color:var(--text3)}
+.upload-zone p{font-size:12px;color:var(--text3)}
 .nav-item-row{display:flex;gap:6px;margin-bottom:5px;align-items:center}
 .nav-item-row input{flex:1;padding:5px 8px;font-family:var(--font);font-size:12px;background:var(--bg2);border:1px solid rgba(128,128,128,0.15);border-radius:var(--r-sm);color:var(--text)}
 .nav-item-row input:focus{outline:none;border-color:var(--red);box-shadow:0 0 0 2px rgba(200,32,57,0.1);background:var(--bg)}
@@ -113,49 +113,51 @@ hr.divider{margin:12px 0;border:none;border-top:1px solid rgba(128,128,128,0.1)}
 .icon-row{display:flex;align-items:center;gap:6px;margin:0 0 6px}
 .icon-row .icon-preview{width:32px;height:32px;flex:none;display:inline-flex;align-items:center;justify-content:center;background:var(--bg2);border:1px solid rgba(128,128,128,0.15);border-radius:var(--r-sm);color:var(--red)}
 .icon-row .icon-preview svg{width:16px;height:16px}
-.icon-row select{width:108px;flex:none;padding:5px 7px;font-family:var(--font);font-size:11px;background:var(--bg2);border:1px solid rgba(128,128,128,0.15);border-radius:var(--r-sm);color:var(--text)}
-.icon-row input{flex:1;min-width:0;padding:5px 8px;font-family:var(--font);font-size:12px;background:var(--bg2);border:1px solid rgba(128,128,128,0.15);border-radius:var(--r-sm);color:var(--text)}
+.icon-row select{width:108px;flex:none;padding:5px 7px;font-family:var(--font);font-size:12px;background:var(--bg2);border:1px solid rgba(128,128,128,0.15);border-radius:var(--r-sm);color:var(--text)}
+.icon-row input{flex:1;min-width:0;padding:5px 8px;font-family:var(--font);font-size:13px;background:var(--bg2);border:1px solid rgba(128,128,128,0.15);border-radius:var(--r-sm);color:var(--text)}
 .icon-row textarea{flex:1;min-width:0;padding:5px 8px;font-family:var(--font);font-size:12px;background:var(--bg2);border:1px solid rgba(128,128,128,0.15);border-radius:var(--r-sm);color:var(--text);resize:vertical}
 .icon-row:focus-within,.icon-row input:focus,.icon-row select:focus,.icon-row textarea:focus{outline:none;border-color:var(--red);box-shadow:0 0 0 2px rgba(200,32,57,0.1)}
 .icon-row button{width:22px;height:22px;flex:none;border:none;background:none;cursor:pointer;border-radius:3px;color:var(--text3);font-size:11px;display:flex;align-items:center;justify-content:center}
 .icon-row button:hover{background:rgba(0,0,0,0.08);color:var(--text)}
 .icon-row button.del:hover{background:rgba(200,32,57,0.1);color:var(--red)}
 .stack{display:flex;flex-direction:column;gap:4px;margin-top:2px}
-.css-editor{width:100%;min-height:200px;font-family:var(--mono);font-size:12px;padding:8px;background:var(--bg2);border:1px solid rgba(128,128,128,0.15);border-radius:var(--r-sm);color:var(--text);resize:vertical;tab-size:2}
+.css-editor{width:100%;min-height:200px;font-family:var(--mono);font-size:13px;padding:8px;background:var(--bg2);border:1px solid rgba(128,128,128,0.15);border-radius:var(--r-sm);color:var(--text);resize:vertical;tab-size:2}
 .css-editor:focus{outline:none;border-color:var(--red);box-shadow:0 0 0 3px rgba(200,32,57,0.1);background:var(--bg)}
 .publish-progress{display:none;margin-top:8px}
 .publish-progress.show{display:block}
 .progress-bar{height:4px;background:rgba(128,128,128,0.15);border-radius:2px;overflow:hidden;margin:6px 0}
 .progress-bar .fill{height:100%;background:var(--red);width:0;transition:width .3s}
-.progress-status{font-size:11px;color:var(--text2)}
-.progress-log{font-size:10px;color:var(--text3);margin-top:5px;max-height:70px;overflow-y:auto;padding:4px 6px;background:rgba(0,0,0,0.03);border-radius:var(--r-sm);font-family:var(--mono)}
+.progress-status{font-size:12px;color:var(--text2)}
+.progress-log{font-size:11px;color:var(--text3);margin-top:5px;max-height:70px;overflow-y:auto;padding:4px 6px;background:rgba(0,0,0,0.03);border-radius:var(--r-sm);font-family:var(--mono)}
 .progress-log .done{color:#2e7d32}
 .progress-log .err{color:var(--red)}
 .progress-log .act{color:var(--navy);font-weight:600}
 .token-row{display:flex;gap:5px}
 .token-row input{flex:1;font-family:var(--mono);font-size:11px;letter-spacing:.3px}
-.token-status{font-size:10px;margin-top:3px}
+.token-status{font-size:11px;margin-top:3px}
 .token-status.ok{color:#2e7d32}
 .token-status.bad{color:var(--red)}
 .editor-preview{flex:1;display:flex;flex-direction:column;background:#e0e0e0;position:relative}
 .preview-toolbar{height:38px;background:var(--bg);border-bottom:1px solid rgba(128,128,128,0.12);display:flex;align-items:center;padding:0 10px;gap:6px;flex-shrink:0}
-.preview-toolbar .vp-btn{padding:3px 8px;border-radius:var(--r-sm);border:1px solid rgba(128,128,128,0.15);background:var(--bg);font-family:var(--font);font-size:11px;font-weight:600;cursor:pointer;transition:all .15s;color:var(--text3);display:inline-flex;align-items:center;gap:3px}
+.preview-toolbar .vp-btn{padding:5px 10px;border-radius:var(--r-sm);border:1px solid rgba(128,128,128,0.15);background:var(--bg);font-family:var(--font);font-size:12px;font-weight:600;cursor:pointer;transition:all .15s;color:var(--text3);display:inline-flex;align-items:center;gap:3px}
 .preview-toolbar .vp-btn:hover{background:var(--bg3);color:var(--text)}
 .preview-toolbar .vp-btn.active{background:var(--navy);border-color:var(--navy);color:#fff}
-.live-badge{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:700;color:var(--text3);padding:3px 8px;background:var(--bg2);border:1px solid rgba(128,128,128,0.15);border-radius:var(--r-sm);white-space:nowrap}
+.live-badge{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:var(--text3);padding:3px 8px;background:var(--bg2);border:1px solid rgba(128,128,128,0.15);border-radius:var(--r-sm);white-space:nowrap}
 .live-badge i{color:#999}
 .live-badge.live{color:#2e7d32;border-color:rgba(46,125,50,0.3);background:rgba(46,125,50,0.06)}
 .live-badge.live i{color:#2e7d32;animation:livePulse 2s infinite}
 .live-badge.err{color:var(--red);border-color:rgba(200,32,57,0.3)}
 .live-badge.err i{color:var(--red)}
 @keyframes livePulse{0%,100%{opacity:1}50%{opacity:.4}}
-.preview-toolbar .preview-url{font-size:10px;color:var(--text3);margin-left:auto;padding:3px 6px;background:var(--bg2);border-radius:var(--r-sm);max-width:260px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.preview-container{flex:1;display:flex;align-items:center;justify-content:center;padding:12px;background:#e8e8e8;overflow:auto}
-.preview-container iframe{background:#fff;border:none;border-radius:4px;box-shadow:0 2px 20px rgba(0,0,0,0.15);transition:all .3s}
-.preview-container iframe.desktop{width:100%;height:100%;max-width:1200px;max-height:calc(100vh - var(--h) - 38px - 24px)}
-.preview-container iframe.mobile{width:375px;height:812px}
+.preview-toolbar .preview-url{font-size:11px;color:var(--text3);margin-left:auto;padding:3px 6px;background:var(--bg2);border-radius:var(--r-sm);max-width:260px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.preview-container{flex:1;display:flex;align-items:flex-start;justify-content:center;padding:16px;background:radial-gradient(120% 90% at 50% 0%,#efe7db 0%,#e7dccb 100%);overflow:auto}
+.zoom-box{flex:none;overflow:hidden}
+.preview-container iframe{display:block;background:#fff;border:none;border-radius:6px;box-shadow:0 14px 44px rgba(47,30,37,0.2);transform-origin:0 0}
+.zoom-box iframe.desktop{width:1160px;height:calc(100vh - 122px)}
+.zoom-box iframe.tablet{width:768px;height:1024px}
+.zoom-box iframe.mobile{width:375px;height:812px}
 .preview-loading{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:var(--text3);font-size:13px;font-weight:600;z-index:1}
-.toast{position:fixed;bottom:20px;right:20px;padding:10px 16px;border-radius:var(--r-md);background:var(--navy);color:#fff;font-size:12px;font-weight:600;box-shadow:var(--sh-md);z-index:9999;opacity:0;transform:translateY(10px);transition:all .3s;pointer-events:none;max-width:350px}
+.toast{position:fixed;bottom:20px;right:20px;padding:11px 16px;border-radius:var(--r-md);background:var(--navy);color:#fff;font-size:12.5px;font-weight:600;box-shadow:var(--sh-md);z-index:9999;opacity:0;transform:translateY(10px);transition:all .3s;pointer-events:none;max-width:350px}
 .toast.show{opacity:1;transform:translateY(0)}
 .toast.success{background:#2e7d32}
 .toast.error{background:var(--red)}
@@ -224,7 +226,23 @@ hr.divider{margin:12px 0;border:none;border-top:1px solid rgba(128,128,128,0.1)}
   img,iframe,table{max-width:100%}
 }
 
-.hero-image-editor{margin-top:8px}.hero-image-preview{height:150px;background:var(--bg3);border:1px solid rgba(128,128,128,.18);border-radius:var(--r-md);overflow:hidden;position:relative;margin-bottom:8px}.hero-image-preview img{width:100%;height:100%;object-fit:cover;display:block}.hero-image-preview-empty{position:absolute;inset:0;display:none;align-items:center;justify-content:center;color:var(--text3);font-size:11px}.hero-image-preview.is-empty img{display:none}.hero-image-preview.is-empty .hero-image-preview-empty{display:flex}.hero-image-actions{display:flex;gap:6px;margin-top:7px}.hero-image-actions .btn-sm{flex:1;justify-content:center}
+.section-image-editor{margin-top:8px}
+.section-image-preview{height:150px;background:var(--bg3);border:1px solid rgba(128,128,128,.18);border-radius:var(--r-md);overflow:hidden;position:relative;margin-bottom:8px}
+.section-image-preview img{width:100%;height:100%;object-fit:cover;display:block}
+.section-image-preview-empty{position:absolute;inset:0;display:none;align-items:center;justify-content:center;color:var(--text3);font-size:11px}
+.section-image-preview.is-empty img{display:none}
+.section-image-preview.is-empty .section-image-preview-empty{display:flex}
+.section-image-actions{display:flex;gap:6px;margin-top:7px}
+.section-image-actions .btn-sm{flex:1;justify-content:center}
+.hero-image-editor{margin-top:8px}
+.hero-image-preview{height:150px;background:var(--bg3);border:1px solid rgba(128,128,128,.18);border-radius:var(--r-md);overflow:hidden;position:relative;margin-bottom:8px}
+.hero-image-preview img{width:100%;height:100%;object-fit:cover;display:block}
+.hero-image-preview-empty{position:absolute;inset:0;display:none;align-items:center;justify-content:center;color:var(--text3);font-size:11px}
+.hero-image-preview.is-empty img{display:none}
+.hero-image-preview.is-empty .hero-image-preview-empty{display:flex}
+.hero-image-actions{display:flex;gap:6px;margin-top:7px}
+.hero-image-actions .btn-sm{flex:1;justify-content:center}
+.zoom-ctl{display:inline-flex;align-items:center;gap:5px;padding-left:2px}
 </style>
 </head>
 <body>
@@ -270,11 +288,11 @@ hr.divider{margin:12px 0;border:none;border-top:1px solid rgba(128,128,128,0.1)}
 
         <div class="panel-section">
           <h4><i class="fas fa-star"></i> Hero Section</h4>
-          <div class="form-group"><label>Hero Headline</label><input type="text" id="ed-hero-headline" placeholder="Jhalars and hanging decor for weddings and events"></div>
-          <div class="form-group"><label>Hero Intro</label><textarea id="ed-hero-intro" rows="2" placeholder="Browse designs and colour variants. Open a product for details or enquire on WhatsApp using its catalogue reference."></textarea></div>
-          <div class="form-group"><label>Hero Primary Button Text</label><input type="text" id="ed-hero-primary-label" placeholder="View catalogue"></div>
+          <div class="form-group"><label>Hero Headline</label><input type="text" id="ed-hero-headline" placeholder="Let the colour do the talking." ></div>
+          <div class="form-group"><label>Hero Intro</label><textarea id="ed-hero-intro" rows="2" placeholder="Jhalars that bring instant colour, depth and celebration to the space you are creating."></textarea></div>
+          <div class="form-group"><label>Hero Primary Button Text</label><input type="text" id="ed-hero-primary-label" placeholder="Explore the collection"></div>
           <div class="form-group"><label>Hero Primary Button Link</label><input type="text" id="ed-hero-primary-href" placeholder="#collection"></div>
-          <div class="form-group"><label>Hero Secondary Button Text</label><input type="text" id="ed-hero-secondary-label" placeholder="Enquire on WhatsApp"></div>
+          <div class="form-group"><label>Hero Secondary Button Text</label><input type="text" id="ed-hero-secondary-label" placeholder="Leave blank to hide"></div>
           <div class="form-group"><label>Hero Secondary Button Link</label><input type="text" id="ed-hero-secondary-href" placeholder="https://wa.me/..."></div>
           <div class="form-group hero-image-editor">
   <label>Hero Image</label>
@@ -345,7 +363,15 @@ hr.divider{margin:12px 0;border:none;border-top:1px solid rgba(128,128,128,0.1)}
           <div class="form-group"><label>Eyebrow</label><input type="text" id="ed-custom-label" placeholder="Custom Enquiries"></div>
           <div class="form-group"><label>Title</label><input type="text" id="ed-custom-title" placeholder="Made to Your Own Design"></div>
           <div class="form-group"><label>Intro</label><textarea id="ed-custom-intro" rows="2" placeholder="Any design in the catalogue can be remade in your colours and sizes — or send a reference of your own."></textarea></div>
-          <div class="form-group"><label>Image</label><select id="ed-custom-image"></select></div>
+          <div class="form-group section-image-editor">
+            <label>Image</label>
+            <div class="section-image-preview" id="custom-image-preview"><img id="custom-image-preview-img" src="" alt="Current custom section image"><div class="section-image-preview-empty">No image selected</div></div>
+            <select id="ed-custom-image"></select>
+            <div class="section-image-actions">
+              <button type="button" class="btn-sm" onclick="chooseImageFor('custom')"><i class="fas fa-images"></i> Choose from Media</button>
+              <button type="button" class="btn-sm primary" onclick="uploadImageFor('custom')"><i class="fas fa-upload"></i> Upload new</button>
+            </div>
+          </div>
           <p>Chips / tags</p>
           <div id="chip-editor" class="stack"></div>
           <button class="btn-sm" onclick="addChipItem()" style="margin-top:4px">+ Add Chip</button>
@@ -360,7 +386,15 @@ hr.divider{margin:12px 0;border:none;border-top:1px solid rgba(128,128,128,0.1)}
           <div class="form-group"><label>Eyebrow</label><input type="text" id="ed-about-label" placeholder="About"></div>
           <div class="form-group"><label>Title</label><input type="text" id="ed-about-title" placeholder="About JHALAR"></div>
           <div class="form-group"><label>Intro</label><textarea id="ed-about-intro" rows="2" placeholder="JHALAR is a small maker of jhalars and hanging decor based in Howrah, West Bengal. Every design in this catalogue is handmade in our own workshop, and each enquiry is answered directly over WhatsApp or phone."></textarea></div>
-          <div class="form-group"><label>Image</label><select id="ed-about-image"></select></div>
+          <div class="form-group section-image-editor">
+            <label>Image</label>
+            <div class="section-image-preview" id="about-image-preview"><img id="about-image-preview-img" src="" alt="Current story section image"><div class="section-image-preview-empty">No image selected</div></div>
+            <select id="ed-about-image"></select>
+            <div class="section-image-actions">
+              <button type="button" class="btn-sm" onclick="chooseImageFor('about')"><i class="fas fa-images"></i> Choose from Media</button>
+              <button type="button" class="btn-sm primary" onclick="uploadImageFor('about')"><i class="fas fa-upload"></i> Upload new</button>
+            </div>
+          </div>
           <p>Value list</p>
           <div id="value-editor" class="stack"></div>
           <button class="btn-sm" onclick="addValueItem()" style="margin-top:4px">+ Add Value</button>
@@ -396,31 +430,31 @@ hr.divider{margin:12px 0;border:none;border-top:1px solid rgba(128,128,128,0.1)}
           <h4><i class="fas fa-fill-drip"></i> Brand Colors</h4>
           <p>The official JHALAR palette used across the site.</p>
           <div class="form-row-3">
-            <div class="form-group"><label>Brand Red</label><input type="color" id="ed-color-red" value="#C82039"></div>
-            <div class="form-group"><label>Red Dark</label><input type="color" id="ed-color-red-dark" value="#A3182E"></div>
-            <div class="form-group"><label>Red Light</label><input type="color" id="ed-color-red-light" value="#E8485F"></div>
+            <div class="form-group"><label>Brand Wine</label><input type="color" id="ed-color-red" value="#6B2136"></div>
+            <div class="form-group"><label>Wine Deep</label><input type="color" id="ed-color-red-dark" value="#42101F"></div>
+            <div class="form-group"><label>Blush Highlight</label><input type="color" id="ed-color-red-light" value="#C8909A"></div>
           </div>
           <div class="form-row-3">
-            <div class="form-group"><label>Accent Gold</label><input type="color" id="ed-color-gold" value="#C9A84C"></div>
-            <div class="form-group"><label>Deep Navy</label><input type="color" id="ed-color-navy" value="#141942"></div>
-            <div class="form-group"><label>Warm Cream</label><input type="color" id="ed-color-cream" value="#FFFAF1"></div>
+            <div class="form-group"><label>Brass Gold</label><input type="color" id="ed-color-gold" value="#B48A52"></div>
+            <div class="form-group"><label>Wine Ink (Text)</label><input type="color" id="ed-color-navy" value="#2F1E25"></div>
+            <div class="form-group"><label>Warm Cream</label><input type="color" id="ed-color-cream" value="#F4EEE4"></div>
           </div>
           <hr class="divider">
           <p>Extended brand surfaces - change these to lighten or deepen the overall look.</p>
           <div class="form-row-3">
-            <div class="form-group"><label>Page Background</label><input type="color" id="ed-color-bg" value="#FFFFFF"></div>
-            <div class="form-group"><label>Alt Section Background</label><input type="color" id="ed-color-alt" value="#F9F7F4"></div>
-            <div class="form-group"><label>Header Background</label><input type="color" id="ed-color-header" value="#FFFFFF"></div>
+            <div class="form-group"><label>Page Background</label><input type="color" id="ed-color-bg" value="#FCFAF5"></div>
+            <div class="form-group"><label>Alt Section Background</label><input type="color" id="ed-color-alt" value="#ECE1D1"></div>
+            <div class="form-group"><label>Header Background</label><input type="color" id="ed-color-header" value="#FCFAF5"></div>
           </div>
           <div class="form-row-3">
-            <div class="form-group"><label>Body Text</label><input type="color" id="ed-color-text" value="#4A4752"></div>
-            <div class="form-group"><label>Muted Text</label><input type="color" id="ed-color-muted" value="#6B6874"></div>
-            <div class="form-group"><label>Heading Text</label><input type="color" id="ed-color-heading" value="#1F1D24"></div>
+            <div class="form-group"><label>Body Text</label><input type="color" id="ed-color-text" value="#2F1E25"></div>
+            <div class="form-group"><label>Muted Text</label><input type="color" id="ed-color-muted" value="#7D6C72"></div>
+            <div class="form-group"><label>Heading Text</label><input type="color" id="ed-color-heading" value="#2F1E25"></div>
           </div>
           <div class="form-row-3">
-            <div class="form-group"><label>Border / Lines</label><input type="color" id="ed-color-border" value="#F0EFEB"></div>
-            <div class="form-group"><label>Footer Background</label><input type="color" id="ed-color-footer-bg" value="#141942"></div>
-            <div class="form-group"><label>Footer Text</label><input type="color" id="ed-color-footer-text" value="#FFFFFF"></div>
+            <div class="form-group"><label>Border / Lines</label><input type="color" id="ed-color-border" value="#E6DACB"></div>
+            <div class="form-group"><label>Footer Background</label><input type="color" id="ed-color-footer-bg" value="#2C1220"></div>
+            <div class="form-group"><label>Footer Text</label><input type="color" id="ed-color-footer-text" value="#FCFAF5"></div>
           </div>
         </div>
 
@@ -431,8 +465,9 @@ hr.divider{margin:12px 0;border:none;border-top:1px solid rgba(128,128,128,0.1)}
           <div class="form-row">
             <div class="form-group"><label>Heading Font</label>
               <select id="ed-font-heading">
+                <option value="Mogranx, Arial, sans-serif" selected>Mogranx (self-hosted — JHALAR brand face)</option>
                 <option value="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif">Apple System (SF Pro / Segoe UI)</option>
-                <option value="'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" selected>DM Sans (self-hosted)</option>
+                <option value="'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">DM Sans (self-hosted)</option>
                 <option value="'Playfair Display', Georgia, 'Times New Roman', serif">Playfair Display (self-hosted)</option>
                 <option value="'Georgia', 'Times New Roman', serif">Georgia</option>
                 <option value="'Times New Roman', serif">Times New Roman</option>
@@ -440,8 +475,9 @@ hr.divider{margin:12px 0;border:none;border-top:1px solid rgba(128,128,128,0.1)}
             </div>
             <div class="form-group"><label>Body Font</label>
               <select id="ed-font-body">
+                <option value="Mogranx, Arial, sans-serif" selected>Mogranx (self-hosted — JHALAR brand face)</option>
                 <option value="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif">Apple System (SF Pro / Segoe UI)</option>
-                <option value="'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" selected>DM Sans (self-hosted)</option>
+                <option value="'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">DM Sans (self-hosted)</option>
                 <option value="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">System Stack</option>
                 <option value="'Segoe UI', Arial, sans-serif">Segoe UI</option>
                 <option value="'Arial', Helvetica, sans-serif">Arial</option>
@@ -696,7 +732,14 @@ hr.divider{margin:12px 0;border:none;border-top:1px solid rgba(128,128,128,0.1)}
             </select>
           </div>
           <div class="form-group"><label>Description</label><textarea id="ed-prod-description" rows="2"></textarea></div>
-          <div class="form-group"><label>Image</label><select id="ed-prod-image"></select></div>
+          <div class="form-group section-image-editor">
+            <label>Image</label>
+            <select id="ed-prod-image"></select>
+            <div class="section-image-actions">
+              <button type="button" class="btn-sm" onclick="chooseImageFor('product')"><i class="fas fa-images"></i> Choose from Media</button>
+              <button type="button" class="btn-sm primary" onclick="uploadImageFor('product')"><i class="fas fa-upload"></i> Upload new</button>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -769,13 +812,20 @@ hr.divider{margin:12px 0;border:none;border-top:1px solid rgba(128,128,128,0.1)}
       <button class="vp-btn active" data-vp="desktop" onclick="setViewport('desktop')"><i class="fas fa-desktop"></i> Desktop</button>
       <button class="vp-btn" data-vp="mobile" onclick="setViewport('mobile')"><i class="fas fa-mobile-alt"></i> Mobile</button>
       <button class="vp-btn" data-vp="tablet" onclick="setViewport('tablet')"><i class="fas fa-tablet-alt"></i> Tablet</button>
+      <span class="zoom-ctl" title="Zoom the preview canvas"><i class="fas fa-search-plus" style="font-size:11px;color:var(--text3)"></i>
+        <select id="zoom-select" onchange="setZoom(Number(this.value))" style="padding:4px 6px;font-size:12px;font-weight:600;background:var(--bg);border:1px solid rgba(128,128,128,0.15);border-radius:var(--r-sm);color:var(--text);cursor:pointer">
+          <option value="0.8">80%</option><option value="0.9">90%</option><option value="1" selected>100%</option><option value="1.1">110%</option><option value="1.25">125%</option><option value="1.4">140%</option>
+        </select>
+      </span>
       <span class="live-badge" id="live-badge" title="Live preview sync status"><i class="fas fa-circle" style="font-size:8px"></i> <span id="live-badge-text">Syncing</span></span>
       <button class="vp-btn" onclick="previewChanges()" title="Reload preview (Ctrl+P)" style="margin-left:auto"><i class="fas fa-sync-alt"></i> Reload</button>
       <span class="preview-url" id="preview-url"></span>
     </div>
     <div class="preview-container">
       <div class="preview-loading" id="preview-loading">Loading preview...</div>
-      <iframe id="preview-frame" class="desktop" src="index.html" title="Preview"></iframe>
+      <div class="zoom-box" id="zoom-box">
+        <iframe id="preview-frame" class="desktop" src="index.html" title="Preview"></iframe>
+      </div>
     </div>
   </section>
 </div>
