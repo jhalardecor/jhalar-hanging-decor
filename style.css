@@ -1091,3 +1091,144 @@ h1,h2,h3,.hero-title,.section-title,.modal-title,.product-title{
   .hero-float-card{display:none}
   .hero-image-frame{border-radius:24px}
 }
+
+
+/* =====================================================
+   RESPONSIVE GEOMETRIC HEADER SYSTEM
+   Equation: container = min(1280px, 100vw - 2*fluid-gutter)
+   gutter = clamp(16px, 4vw, 64px)
+   header scale = clamp(64px, 5vw, 82px)
+   ===================================================== */
+:root{
+  --header-h:clamp(64px,5vw,82px);
+  --shell:max(16px, min(4vw,64px));
+  --header-ink:#2b0712;
+  --header-wine:#5d0d24;
+  --header-paper:rgba(255,250,244,.94);
+}
+.site-header{
+  height:var(--header-h);
+  background:linear-gradient(90deg,rgba(255,250,244,.97),rgba(255,248,240,.92));
+  border-bottom:1px solid rgba(93,13,36,.10);
+  box-shadow:0 10px 32px rgba(52,7,21,.06);
+}
+.header-container{
+  width:100%;
+  max-width:1280px;
+  padding-inline:var(--shell);
+  margin:auto;
+  gap:clamp(14px,2vw,32px);
+}
+.logo{
+  min-width:clamp(112px,13vw,168px);
+  position:relative;
+  z-index:2;
+}
+.brand-mark{
+  width:clamp(110px,11vw,154px);
+  height:auto;
+  max-height:clamp(32px,4vw,46px);
+  object-fit:contain;
+}
+.desktop-nav{
+  flex:1;
+  justify-content:center;
+  margin-left:0;
+}
+.nav-list{
+  gap:clamp(16px,2.1vw,38px);
+}
+.nav-list a{
+  font-family:var(--sans);
+  font-size:clamp(.76rem,.76rem + .16vw,.94rem);
+  font-weight:600;
+  letter-spacing:.055em;
+  text-transform:uppercase;
+  color:var(--header-ink);
+  white-space:nowrap;
+}
+.nav-list a::after{
+  height:1px;
+  bottom:-7px;
+  background:var(--header-wine);
+}
+.header-actions{flex:0 0 auto}
+.header-actions .b2b-btn{
+  display:inline-flex;
+  min-height:clamp(40px,3.4vw,48px);
+  padding-inline:clamp(14px,1.6vw,24px);
+  font-size:clamp(.78rem,.78rem + .12vw,.92rem);
+  font-weight:700;
+  letter-spacing:.035em;
+  text-transform:uppercase;
+  border-radius:10px;
+  background:var(--header-wine);
+  border-color:var(--header-wine);
+  box-shadow:none;
+}
+.header-actions .b2b-btn:hover{background:#7f1530;border-color:#7f1530}
+.mobile-toggle{
+  width:44px;height:44px;border:1px solid rgba(93,13,36,.14);
+  border-radius:10px;color:var(--header-wine);
+}
+.mobile-nav{
+  top:var(--header-h);
+  background:rgba(255,250,244,.98);
+  backdrop-filter:blur(20px);
+  padding:18px var(--shell) 28px;
+}
+.mobile-nav-list{gap:4px}
+.mobile-link{
+  padding:15px 12px;
+  font-family:var(--sans);
+  font-size:1rem;
+  font-weight:650;
+  letter-spacing:.025em;
+  text-transform:uppercase;
+}
+.mobile-nav-cta{
+  width:100%;
+  margin-top:18px;
+  border-radius:10px;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+  font-size:.84rem;
+  font-weight:700;
+}
+
+/* Prevent navigation collision: menu collapses before items become cramped */
+@media(min-width:1040px){
+  .desktop-nav{display:flex}
+  .header-actions .b2b-btn{display:inline-flex}
+  .mobile-toggle{display:none}
+}
+@media(max-width:1039px){
+  .desktop-nav{display:none!important}
+  .header-actions .b2b-btn{display:none!important}
+  .mobile-toggle{display:inline-flex!important}
+}
+@media(max-width:420px){
+  :root{--shell:16px}
+  .brand-mark{width:118px}
+}
+
+/* Geometric responsive rules for every viewport */
+html{overflow-x:hidden}
+body{min-width:320px}
+.container{
+  width:min(100%,1280px);
+  max-width:none;
+  padding-inline:var(--shell);
+}
+.hero-premium .hero-grid{
+  width:min(100%,1280px);
+  margin-inline:auto;
+  padding-left:var(--shell);
+  padding-right:var(--shell);
+}
+@media(min-width:1440px){
+  .hero-premium .hero-grid{padding-left:64px;padding-right:64px}
+}
+@media(max-width:899px){
+  .hero-premium .hero-grid{padding-left:var(--shell);padding-right:var(--shell)}
+}
