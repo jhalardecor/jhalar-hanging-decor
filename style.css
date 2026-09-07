@@ -654,3 +654,17 @@ h1,h2,h3,h4,h5,h6{font-family:var(--font-heading);color:var(--navy);font-synthes
 @media(max-width:380px){
  .hero-banner{min-height:560px}
 }
+
+
+/* Audience strip refinement — editorial list, not boxed UI */
+@media(max-width:760px){
+ .audience-strip{background:var(--paper)}
+ .audience-strip-inner{padding:28px 0 30px;display:block}
+ .audience-label{margin:0 0 18px;text-align:left;font-size:.68rem;letter-spacing:.14em;color:var(--heritage)}
+ .audience-items{display:flex;flex-wrap:wrap;gap:0;width:auto;border-top:1px solid rgba(98,35,49,.16)}
+ .audience-items span{
+   display:block;min-height:0;padding:14px 0 13px;background:none;border:0;border-bottom:1px solid rgba(98,35,49,.16);
+   color:var(--heritage);font-size:1rem;line-height:1.25;text-align:left;white-space:normal
+ }
+ .audience-items span:last-child{grid-column:auto}
+}
