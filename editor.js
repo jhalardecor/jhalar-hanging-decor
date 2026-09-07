@@ -1596,3 +1596,32 @@ function installShopifyHeroControls(){
  document.getElementById('hero-clear').onclick=()=>{state.customCSS=(state.customCSS||'').replace(/\/\* SHOPIFY_HERO \*[\s\S]*?(?=\/\*|$)/,'');state.changed=true;updateSaveIndicator();applyPreview();showToast('Hero reset','success');};
 }
 document.addEventListener('DOMContentLoaded',()=>setTimeout(installShopifyHeroControls,1100));
+
+// ===== JHALAR DESIGN TOKENS — TYPOGRAPHY, SPACING & HEADER =====
+function installDesignSystemControls(){
+ const panel=document.getElementById('panel-theme')||document.getElementById('panel-sections');
+ if(!panel||document.getElementById('jhalar-design-system'))return;
+ const box=document.createElement('div');box.id='jhalar-design-system';box.className='panel-section shopify-controls';
+ box.innerHTML='<h4>Design system</h4><p>Consistent typography, spacing and logo sizing.</p>'+
+ '<div><label>Typography scale</label><div class="choice-grid" id="type-scale"><button class="choice-btn" data-v="compact">Compact</button><button class="choice-btn active" data-v="standard">Standard</button><button class="choice-btn" data-v="editorial">Editorial</button></div></div>'+
+ '<div><label>Section spacing</label><div class="choice-grid" id="space-scale"><button class="choice-btn" data-v="compact">Compact</button><button class="choice-btn active" data-v="standard">Standard</button><button class="choice-btn" data-v="spacious">Spacious</button></div></div>'+
+ '<div><label>Desktop logo width</label><div class="range-line"><input id="logo-desktop" type="range" min="200" max="350" value="250"><output id="logo-desktop-out">250px</output></div></div>'+
+ '<div><label>Mobile logo width</label><div class="range-line"><input id="logo-mobile" type="range" min="120" max="200" value="150"><output id="logo-mobile-out">150px</output></div></div>'+
+ '<div class="studio-actions"><button class="btn-sm primary" id="design-system-apply">Apply system</button><button class="btn-sm" id="design-system-reset">Reset</button></div>';
+ panel.appendChild(box);
+ const pick=(id,key)=>box.querySelectorAll('#'+id+' button').forEach(b=>b.onclick=()=>{box.querySelectorAll('#'+id+' button').forEach(x=>x.classList.remove('active'));b.classList.add('active');box.dataset[key]=b.dataset.v;});
+ pick('type-scale','type');pick('space-scale','space');
+ const ld=document.getElementById('logo-desktop'),lm=document.getElementById('logo-mobile');
+ ld.oninput=()=>document.getElementById('logo-desktop-out').textContent=ld.value+'px';
+ lm.oninput=()=>document.getElementById('logo-mobile-out').textContent=lm.value+'px';
+ document.getElementById('design-system-apply').onclick=()=>{
+   const type=box.dataset.type||'standard',space=box.dataset.space||'standard';
+   const typeMap={compact:['clamp(32px,4vw,42px)','clamp(24px,3vw,32px)','clamp(19px,2vw,22px)'],standard:['clamp(36px,4.5vw,52px)','clamp(28px,3.5vw,40px)','clamp(20px,2.2vw,26px)'],editorial:['clamp(40px,5vw,58px)','clamp(30px,4vw,44px)','clamp(21px,2.5vw,28px)']}[type];
+   const gapMap={compact:['32px','16px'],standard:['56px','32px'],spacious:['72px','40px']}[space];
+   const css='/* JHALAR_DESIGN_SYSTEM */:root{--j-h1:'+typeMap[0]+';--j-h2:'+typeMap[1]+';--j-h3:'+typeMap[2]+';--j-section:'+gapMap[0]+';--j-section-mobile:'+gapMap[1]+';--j-logo:'+ld.value+'px;--j-logo-mobile:'+lm.value+'px}h1{font-size:var(--j-h1);line-height:1.25}h2{font-size:var(--j-h2);line-height:1.25}h3{font-size:var(--j-h3);line-height:1.35}body{font-size:16px;line-height:1.55}.section,.page-section{padding-block:var(--j-section)}@media(max-width:760px){.section,.page-section{padding-block:var(--j-section-mobile)}body{font-size:16px}.site-logo,.logo img{max-width:var(--j-logo-mobile);width:100%}}@media(min-width:761px){.site-logo,.logo img{max-width:var(--j-logo);width:100%}}';
+   state.customCSS=(state.customCSS||'').replace(/\/\* JHALAR_DESIGN_SYSTEM \*[\s\S]*?(?=\/\*|$)/,'')+css;
+   state.changed=true;updateSaveIndicator();applyPreview();showToast('Design system applied live','success');
+ };
+ document.getElementById('design-system-reset').onclick=()=>{state.customCSS=(state.customCSS||'').replace(/\/\* JHALAR_DESIGN_SYSTEM \*[\s\S]*?(?=\/\*|$)/,'');state.changed=true;updateSaveIndicator();applyPreview();showToast('Design system reset','success');};
+}
+document.addEventListener('DOMContentLoaded',()=>setTimeout(installDesignSystemControls,1300));
