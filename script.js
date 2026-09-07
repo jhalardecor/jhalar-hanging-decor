@@ -379,9 +379,29 @@ initProducts();initRuntime();
  stage.addEventListener('touchend',endPinch,{passive:true});
  stage.addEventListener('touchcancel',()=>{pinch=null},{passive:true});
 
- stage.addEventListener('pointerdown',e=>{if(e.pointerType==='touch'||z<=1.001||stage.classList.contains('is-video'))return;drag={id:e.pointerId,cx:e.clientX,cy:e.clientY,x,y};stage.setPointerCapture(e.pointerId);stage.classList.add('is-panning');e.preventDefault()});
- stage.addEventListener('pointermove',e=>{if(!drag||drag.id!==e.pointerId)return;x=drag.x+e.clientX-drag.cx;y=drag.y+e.clientY-drag.cy;paint()});
- const stop=()=>{drag=null;stage.classList.remove('is-panning')};stage.addEventListener('pointerup',stop);stage.addEventListener('pointercancel',stop);
+ // Pan works with mouse AND with one finger on touch screens after zooming.
+ // Pointer Events are used here so mobile dragging is not blocked by the desktop-only handler.
+ stage.addEventListener('pointerdown',e=>{
+   if(!modal.classList.contains('open')||z<=1.001||stage.classList.contains('is-video'))return;
+   if(e.pointerType==='touch'&&pinch)return;
+   drag={id:e.pointerId,cx:e.clientX,cy:e.clientY,x,y};
+   try{stage.setPointerCapture(e.pointerId)}catch(err){}
+   stage.classList.add('is-panning');
+   e.preventDefault();
+ },{passive:false});
+ stage.addEventListener('pointermove',e=>{
+   if(!drag||drag.id!==e.pointerId)return;
+   x=drag.x+e.clientX-drag.cx;
+   y=drag.y+e.clientY-drag.cy;
+   paint();
+   e.preventDefault();
+ },{passive:false});
+ const stop=e=>{
+   if(e&&drag&&e.pointerId!==undefined&&drag.id!==e.pointerId)return;
+   drag=null;stage.classList.remove('is-panning');
+ };
+ stage.addEventListener('pointerup',stop);
+ stage.addEventListener('pointercancel',stop);
  stage.addEventListener('dblclick',e=>zoom(z>1.01?1:2,e.clientX,e.clientY));
  img.addEventListener('load',reset);
  new MutationObserver(()=>{if(!modal.classList.contains('open'))reset()}).observe(modal,{attributes:true,attributeFilter:['class']});
