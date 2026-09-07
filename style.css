@@ -892,3 +892,12 @@ img,video,svg{max-width:100%}
  .header .menu span{transition:transform .32s cubic-bezier(.22,1,.36,1),width .28s cubic-bezier(.22,1,.36,1),opacity .2s ease!important}
  .header .menu:active{transform:scale(.92)!important}
 }
+
+
+/* 31. HERO READABILITY OVERLAY — BRAND-WARM, NO WHITE COPY */
+.hero.hero-banner{background:#FFFAF1!important}
+.hero-banner-shade{background:linear-gradient(180deg,rgba(255,250,241,.02) 0%,rgba(255,250,241,.10) 35%,rgba(255,250,241,.58) 68%,rgba(255,250,241,.96) 100%)!important}
+.hero-banner-copy,.hero-banner-copy h1,.hero-banner-copy h1 em{color:#622331!important;text-shadow:none!important}
+.hero-banner-copy .kicker{color:#C82039!important}
+.hero-lead{color:#141942!important}
+@media(max-width:760px){.hero-banner-shade{background:linear-gradient(180deg,rgba(255,250,241,0) 0%,rgba(255,250,241,.04) 32%,rgba(255,250,241,.18) 52%,rgba(255,250,241,.62) 74%,#FFFAF1 100%)!important}.hero-banner-copy,.hero-banner-copy h1,.hero-banner-copy h1 em{color:#622331!important}.hero-lead{color:#141942!important}}
