@@ -4,11 +4,11 @@
   "email": "lokeshdugar040@gmail.com",
   "location": "Howrah, West Bengal, India",
   "gst": "Available on request",
-  "heroHeadline": "Let the colour do the talking.",
-  "heroIntro": "Handmade jhalars and hanging decor for the weddings, events and festive spaces you are putting together.",
+  "heroHeadline": "Colour sets the mood.",
+  "heroIntro": "Handmade jhalars and hanging decor for weddings, functions and festive spaces.",
   "heroImage": "assets/images/hero-jhalar.webp",
-  "siteTitle": "JHALAR — Hanging Decor for Celebrations",
-  "siteDescription": "Handcrafted jhalars and hanging decor for weddings, events and festive spaces.",
+  "siteTitle": "JHALAR | Hanging Decor",
+  "siteDescription": "Handmade jhalars and hanging decor for weddings, functions and festive spaces.",
   "ogImage": "assets/images/og-cover.jpg",
   "navItems": [
     {
@@ -83,14 +83,14 @@
     },
     "collection": {
       "label": "BROWSE DESIGNS",
-      "title": "Find what fits the occasion.",
-      "intro": "Compare colour, form and texture before you enquire.",
+      "title": "Browse designs for your space.",
+      "intro": "Choose a design, check the colours and send us the one you like.",
       "note": ""
     },
     "customOrders": {
       "label": "CUSTOM WORK",
-      "title": "Start with your colour story.",
-      "intro": "Bring a theme, palette or reference. We will discuss colour, size, quantity and timing for your setup.",
+      "title": "Need a different colour or size?",
+      "intro": "Send us your reference, colours, size and quantity. We will discuss what can be made for your order.",
       "image": "assets/images/custom-orders.jpg",
       "chips": [
         {
@@ -106,26 +106,26 @@
           "text": "Order quantity"
         }
       ],
-      "processLabel": "A simple three-step enquiry",
+      "processLabel": "How custom orders work",
       "steps": [
         {
-          "title": "Share the look",
-          "text": "Send a design, reference image or brief."
+          "title": "Send your reference",
+          "text": "Share a design, photo or colour reference."
         },
         {
-          "title": "Refine the details",
-          "text": "Confirm colours, dimensions, quantity and date."
+          "title": "Confirm the details",
+          "text": "We discuss colours, size, quantity and delivery date."
         },
         {
-          "title": "Approve and order",
-          "text": "Review the sample details and move ahead."
+          "title": "Place your order",
+          "text": "Once the details are confirmed, your order can move ahead."
         }
       ]
     },
     "about": {
       "label": "JHALAR",
-      "title": "Made by hand. Chosen for the moment.",
-      "intro": "We make hanging decor for the people who put celebrations together: decorators, planners, retailers and families.",
+      "title": "Made by hand in Howrah.",
+      "intro": "JHALAR makes hanging decor for decorators, event planners, retailers and families.",
       "image": "assets/images/about-collage.jpg",
       "values": [
         {
@@ -143,11 +143,11 @@
       ]
     },
     "contact": {
-      "label": "READY WHEN YOU ARE",
-      "title": "Tell us what you are creating.",
-      "intro": "Send the design, quantity, location and date. We will take it from there.",
+      "label": "LET'S TALK",
+      "title": "Tell us what you need.",
+      "intro": "Send the design, quantity, location and date. We will reply with the next details.",
       "submitLabel": "Prepare enquiry"
     },
-    "footerTagline": "Handcrafted hanging decor · Howrah, India"
+    "footerTagline": "Handmade hanging decor from Howrah, India"
   }
 }
