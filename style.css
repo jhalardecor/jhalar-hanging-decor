@@ -1427,3 +1427,26 @@ p,.section-head>p,.hero-banner-copy>p:not(.kicker){letter-spacing:.006em}
     min-width:42px!important;
   }
 }
+
+
+/* PREMIUM ENQUIRY CTA — soft, bright and warm without looking loud */
+.contact-cta{
+  background:linear-gradient(135deg,#fff8ee 0%,#f8dfc7 52%,#efd0b0 100%)!important;
+  color:#5a1f2b!important;
+  border:1px solid rgba(255,255,255,.58)!important;
+  box-shadow:
+    0 10px 28px rgba(54,18,26,.16),
+    inset 0 1px 0 rgba(255,255,255,.72)!important;
+  transition:transform .22s var(--ease),box-shadow .22s var(--ease),filter .22s var(--ease)!important;
+}
+.contact-cta:hover,
+.contact-cta:focus-visible{
+  background:linear-gradient(135deg,#fffaf2 0%,#f9e6d1 50%,#f1d7bc 100%)!important;
+  color:#4a1824!important;
+  transform:translateY(-2px)!important;
+  box-shadow:
+    0 14px 34px rgba(54,18,26,.20),
+    inset 0 1px 0 rgba(255,255,255,.82)!important;
+}
+.contact-cta:focus-visible{outline:3px solid rgba(255,240,211,.72)!important;outline-offset:4px!important}
+.contact-cta span{color:#8a4250!important}
