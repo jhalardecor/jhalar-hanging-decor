@@ -345,50 +345,6 @@ initProducts();initRuntime();
 /* build: 20260907.18 */
 
 
-/* NEXT-LEVEL 2026 UX: transparent continuity + functional micro-feedback */
-(function(){
- const storageKey='jhalar-recent-category';
- const recentKey='jhalar-recent-product';
- const strip=document.getElementById('intent-strip'),label=document.getElementById('intent-label'),action=document.getElementById('intent-action');
- const toast=document.getElementById('site-toast');
- let toastTimer=0;
- function showToast(message){if(!toast)return;toast.textContent=message;toast.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>toast.classList.remove('show'),3200)}
- function refreshIntent(){
-   const category=localStorage.getItem(storageKey);
-   if(!category||!strip||!label||!action)return;
-   label.textContent='Continue exploring '+category+' — based on your recent visit.';
-   strip.hidden=false;
-   action.onclick=()=>{
-     const filter=[...document.querySelectorAll('.filter-btn')].find(b=>b.dataset.filter===category);
-     if(filter)filter.click();
-     document.getElementById('collection')?.scrollIntoView({behavior:'smooth',block:'start'});
-   };
- }
- document.addEventListener('click',e=>{
-   const filter=e.target.closest('.filter-btn[data-filter]');
-   if(filter&&filter.dataset.filter!=='all')localStorage.setItem(storageKey,filter.dataset.filter);
-   const product=e.target.closest('[data-id]');
-   if(product&&product.dataset.id)localStorage.setItem(recentKey,product.dataset.id);
- });
- const originalRender=window.JHALAR&&window.JHALAR.setProducts;
- function markRecent(){
-   const id=localStorage.getItem(recentKey);if(!id)return;
-   const card=document.querySelector('.product-card [data-id="'+CSS.escape(id)+'"]')?.closest('.product-card');
-   if(card)card.classList.add('is-recent');
- }
- const observer=new MutationObserver(()=>{markRecent();refreshIntent()});
- const grid=document.getElementById('product-grid');if(grid)observer.observe(grid,{childList:true});
- refreshIntent();markRecent();
- const wa=document.getElementById('modal-wa-btn');
- if(wa)wa.addEventListener('click',()=>{
-   const status=document.getElementById('modal-status');
-   if(status){status.textContent='Opening WhatsApp with your selected design.';status.classList.add('is-success')}
-   showToast('Your selected design has been prepared for enquiry.');
- });
- const contact=document.querySelector('.contact-cta');
- if(contact)contact.addEventListener('click',()=>showToast('Opening WhatsApp so you can send your requirement.'));
-})();
-
 
 /* JHALAR DEPLOYMENT UPDATE MANAGER — canonical cache recovery */
 (function(){
