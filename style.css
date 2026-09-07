@@ -2550,3 +2550,19 @@ button:not(.filter-btn),
   #product-modal .modal-stage{width:100%!important;height:100%!important;aspect-ratio:1 / 1!important;padding:0!important}
   #product-modal #modal-photo{width:100%!important;height:100%!important;object-fit:contain!important}
 }
+
+
+/* PREMIUM COMPACT PRODUCT VIEWER — refined, not oversized */
+@media(min-width:761px){
+  #product-modal{padding:calc(var(--header-h) + 24px) 24px 28px!important;align-items:flex-start!important}
+  #product-modal .modal-card{width:min(860px,calc(100vw - 48px))!important;height:auto!important;max-height:min(680px,calc(100dvh - var(--header-h) - 52px))!important;grid-template-columns:minmax(0,1fr) minmax(280px,.72fr)!important;overflow:hidden!important;background:#FFFDF8!important;box-shadow:0 28px 80px rgba(20,25,66,.16)!important}
+  #product-modal .modal-media{aspect-ratio:1/1!important;width:100%!important;max-height:680px!important;background:#FFFDF8!important}
+  #product-modal .modal-stage{padding:18px!important}
+  #product-modal .modal-copy{padding:clamp(24px,3vw,42px)!important;display:flex!important;flex-direction:column!important;justify-content:center!important;overflow:auto!important}
+  #product-modal .modal-title{font-size:clamp(1.6rem,2.4vw,2.35rem)!important;line-height:1.08!important;margin-bottom:12px!important}
+  #product-modal .modal-description{font-size:.96rem!important;line-height:1.65!important}
+}
+@media(min-width:761px) and (max-height:760px){
+  #product-modal .modal-card{max-height:calc(100dvh - var(--header-h) - 28px)!important;width:min(780px,calc(100vw - 40px))!important}
+  #product-modal .modal-copy{padding:22px 28px!important}
+}
