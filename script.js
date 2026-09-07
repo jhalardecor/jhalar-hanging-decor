@@ -346,3 +346,48 @@ initProducts();initRuntime();
     lastTap=now;
   });
 })();
+
+
+/* Product zoom UX controller — replaces conflicting mobile zoom handlers. */
+(function(){
+  const stage=document.getElementById('modal-stage');
+  const photo=document.getElementById('modal-photo');
+  const modal=document.getElementById('product-modal');
+  if(!stage||!photo||!modal)return;
+
+  let activePointers=new Map(), pinchStart=0, zoomStart=1;
+  const mobile=()=>matchMedia('(max-width:760px)').matches;
+  const apply=()=>{
+    photo.style.transform='scale('+state.modalZoom+')';
+    stage.classList.toggle('is-zoomed',state.modalZoom>1.01);
+  };
+  const reset=()=>{state.modalZoom=1;photo.style.transformOrigin='50% 50%';apply()};
+
+  stage.addEventListener('pointerdown',e=>{
+    if(!mobile()||stage.classList.contains('is-video'))return;
+    activePointers.set(e.pointerId,{x:e.clientX,y:e.clientY});
+    if(activePointers.size===2){
+      const p=[...activePointers.values()];
+      pinchStart=Math.hypot(p[0].x-p[1].x,p[0].y-p[1].y);
+      zoomStart=state.modalZoom;
+    }
+  });
+
+  stage.addEventListener('pointermove',e=>{
+    if(!mobile()||!activePointers.has(e.pointerId)||activePointers.size!==2)return;
+    activePointers.set(e.pointerId,{x:e.clientX,y:e.clientY});
+    const p=[...activePointers.values()];
+    const d=Math.hypot(p[0].x-p[1].x,p[0].y-p[1].y);
+    if(!pinchStart)return;
+    state.modalZoom=Math.max(1,Math.min(3,zoomStart*(d/pinchStart)));
+    apply();
+  });
+
+  const release=e=>{activePointers.delete(e.pointerId);if(activePointers.size<2)pinchStart=0};
+  stage.addEventListener('pointerup',release);
+  stage.addEventListener('pointercancel',release);
+
+  /* Reset automatically when switching media or closing. */
+  new MutationObserver(()=>{if(!modal.classList.contains('open'))reset()})
+    .observe(modal,{attributes:true,attributeFilter:['class']});
+})();
