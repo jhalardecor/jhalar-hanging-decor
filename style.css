@@ -521,3 +521,67 @@ body.no-reveal .reveal,.product-card.reveal.in,.product-card.reveal.visible{opac
     font-size:.76rem;
   }
 }
+
+
+/* 19. INTERACTION MODEL — CURRENT, QUIET, DIRECT MANIPULATION
+   Replace old "button → page/modal" feeling with responsive states and intent cues. */
+.product-card{
+  content-visibility:auto;
+  contain-intrinsic-size:420px;
+  cursor:pointer;
+  transition:background .22s ease !important;
+}
+.product-image{
+  transform:translateZ(0);
+  touch-action:manipulation;
+}
+.product-card .product-info{position:relative}
+.product-card .product-details-btn{
+  opacity:.72;
+  transition:opacity .2s ease,letter-spacing .2s ease;
+}
+@media (hover:hover){
+  .product-card:hover .product-details-btn,
+  .product-card:focus-within .product-details-btn{
+    opacity:1;
+    letter-spacing:.025em;
+  }
+  .product-card:hover .product-image img{
+    transform:scale(1.012) !important;
+  }
+}
+/* Press feedback is immediate and physical, not an old animated button effect. */
+.product-card:active .product-image{transform:scale(.985)}
+.product-card:active .product-details-btn{opacity:1}
+
+/* Touch devices: reveal affordance by default; never depend on hover. */
+@media (hover:none){
+  .product-card .product-details-btn{opacity:1}
+}
+
+/* Respect reduced motion while preserving visibility and hierarchy. */
+@media (prefers-reduced-motion:reduce){
+  .product-card,.product-image,.product-image img,.product-details-btn{
+    transition:none !important;
+  }
+}
+
+/* Modern focus treatment: visible only for keyboard navigation. */
+.product-card:focus-within{
+  outline:1px solid rgba(98,35,49,.55);
+  outline-offset:-1px;
+}
+.product-image:focus:not(:focus-visible),
+.product-details-btn:focus:not(:focus-visible){outline:none}
+
+/* Mobile interaction density: larger tap areas, less visual chrome. */
+@media (max-width:760px){
+  .product-card{
+    min-height:0;
+  }
+  .product-details-btn{
+    min-height:44px;
+    display:inline-flex;
+    align-items:center;
+  }
+}
