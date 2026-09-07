@@ -223,6 +223,8 @@ hr.divider{margin:12px 0;border:none;border-top:1px solid rgba(128,128,128,0.1)}
   .field-row > *,.form-row > *{flex:1 1 100%;min-width:0}
   img,iframe,table{max-width:100%}
 }
+
+.hero-image-editor{margin-top:8px}.hero-image-preview{height:150px;background:var(--bg3);border:1px solid rgba(128,128,128,.18);border-radius:var(--r-md);overflow:hidden;position:relative;margin-bottom:8px}.hero-image-preview img{width:100%;height:100%;object-fit:cover;display:block}.hero-image-preview-empty{position:absolute;inset:0;display:none;align-items:center;justify-content:center;color:var(--text3);font-size:11px}.hero-image-preview.is-empty img{display:none}.hero-image-preview.is-empty .hero-image-preview-empty{display:flex}.hero-image-actions{display:flex;gap:6px;margin-top:7px}.hero-image-actions .btn-sm{flex:1;justify-content:center}
 </style>
 </head>
 <body>
@@ -274,7 +276,16 @@ hr.divider{margin:12px 0;border:none;border-top:1px solid rgba(128,128,128,0.1)}
           <div class="form-group"><label>Hero Primary Button Link</label><input type="text" id="ed-hero-primary-href" placeholder="#collection"></div>
           <div class="form-group"><label>Hero Secondary Button Text</label><input type="text" id="ed-hero-secondary-label" placeholder="Enquire on WhatsApp"></div>
           <div class="form-group"><label>Hero Secondary Button Link</label><input type="text" id="ed-hero-secondary-href" placeholder="https://wa.me/..."></div>
-          <div class="form-group"><label>Hero Image</label><select id="ed-hero-image"></select></div>
+          <div class="form-group hero-image-editor">
+  <label>Hero Image</label>
+  <div class="hero-image-preview" id="hero-image-preview"><img id="hero-image-preview-img" src="" alt="Current hero image"><div class="hero-image-preview-empty">No hero image selected</div></div>
+  <select id="ed-hero-image"></select>
+  <div class="hero-image-actions">
+    <button type="button" class="btn-sm" onclick="chooseHeroImage()"><i class="fas fa-images"></i> Choose from Media</button>
+    <button type="button" class="btn-sm primary" onclick="uploadHeroImage()"><i class="fas fa-upload"></i> Upload new</button>
+  </div>
+  <p class="help">Choose an existing image or upload a new hero banner. Your selection updates the live preview.</p>
+</div>
         </div>
 
         <div class="panel-section">
