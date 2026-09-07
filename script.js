@@ -215,8 +215,8 @@ async function initRuntime(){
 
 
 const __collectionToggle=$('#collection-toggle'); if(__collectionToggle) __collectionToggle.onclick=()=>{state.expanded=!state.expanded;renderProducts();if(!state.expanded)$('#collection').scrollIntoView({behavior:'smooth'})};
-const __menu=$('#menu'); if(__menu) __menu.onclick=()=>{const b=$('#menu'),n=$('#mobile-nav'),open=!n.classList.contains('open');n.classList.toggle('open',open);b.setAttribute('aria-expanded',String(open))};
-const __mobileNav=$('#mobile-nav'); if(__mobileNav) __mobileNav.onclick=e=>{if(e.target.matches('a')){$('#mobile-nav').classList.remove('open');$('#menu').setAttribute('aria-expanded','false')}};
+const __menu=$('#menu'); if(__menu) __menu.onclick=()=>{const b=$('#menu'),n=$('#mobile-nav'),open=!n.classList.contains('open');n.classList.toggle('open',open);b.classList.toggle('open',open);b.setAttribute('aria-expanded',String(open));b.setAttribute('aria-label',open?'Close navigation menu':'Open navigation menu')};
+const __mobileNav=$('#mobile-nav'); if(__mobileNav) __mobileNav.onclick=e=>{if(e.target.matches('a')){$('#mobile-nav').classList.remove('open');$('#menu').classList.remove('open');$('#menu').setAttribute('aria-expanded','false')}};
 document.addEventListener('click',e=>{if(e.target.closest('[data-close]'))closeModal()});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
 document.querySelectorAll('.modal-nav').forEach(b=>b.addEventListener('click',()=>showModalMedia(state.modalIndex+Number(b.dataset.nav))));
 const __syncHeader=()=>{$('.header')?.classList.toggle('scrolled',window.scrollY>8)};window.addEventListener('scroll',__syncHeader,{passive:true});__syncHeader();
