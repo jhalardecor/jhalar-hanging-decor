@@ -1684,3 +1684,63 @@ p,.section-head>p,.hero-banner-copy>p:not(.kicker){letter-spacing:.006em}
   }
   .hero-banner-bottom span+span:before{margin-inline:8px!important}
 }
+
+
+/* HERO MOBILE TYPOGRAPHY — preserve desktop hierarchy with a deliberate compact composition */
+@media(max-width:760px){
+  .hero-banner{
+    height:clamp(590px,82svh,700px)!important;
+  }
+  .hero-banner-content{
+    display:grid!important;
+    grid-template-rows:1fr auto!important;
+    padding:88px 22px 24px!important;
+  }
+  .hero-banner-copy{
+    width:100%!important;
+    max-width:34rem!important;
+    align-self:center!important;
+  }
+  .hero-banner .kicker{
+    margin:0 0 13px!important;
+    font-size:.62rem!important;
+    line-height:1.35!important;
+    letter-spacing:.105em!important;
+  }
+  .hero-banner h1{
+    max-width:10.5ch!important;
+    margin:0 0 17px!important;
+    font-size:clamp(2.75rem,11.2vw,4rem)!important;
+    line-height:1.02!important;
+    letter-spacing:-.025em!important;
+    text-wrap:balance!important;
+  }
+  .hero-banner h1 em{white-space:normal!important}
+  .hero-banner-copy>p:not(.kicker){
+    max-width:31ch!important;
+    margin:0 0 23px!important;
+    font-size:1rem!important;
+    line-height:1.58!important;
+    text-wrap:pretty!important;
+  }
+  .hero-banner-cta{
+    padding:15px 20px!important;
+    font-size:.82rem!important;
+  }
+  .hero-banner-bottom{
+    width:100%!important;
+    align-self:end!important;
+    font-size:.61rem!important;
+    line-height:1.35!important;
+    letter-spacing:.055em!important;
+  }
+  .hero-banner-bottom span+span:before{margin-inline:9px!important}
+}
+@media(max-width:390px){
+  .hero-banner{height:600px!important}
+  .hero-banner-content{padding-inline:18px!important}
+  .hero-banner h1{font-size:clamp(2.45rem,10.8vw,3.25rem)!important}
+  .hero-banner-copy>p:not(.kicker){font-size:.94rem!important;max-width:30ch!important}
+  .hero-banner-bottom{font-size:.57rem!important;letter-spacing:.035em!important}
+  .hero-banner-bottom span+span:before{margin-inline:6px!important}
+}
