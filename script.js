@@ -456,3 +456,100 @@ initProducts();initRuntime();
   /* Always reset when a new modal image loads. */
   img.addEventListener('load',reset);
 })();
+
+
+/* Premium product media engine — natural pan, focal-point pinch, hard containment. */
+(function(){
+  const stage=document.getElementById('modal-stage');
+  const img=document.getElementById('modal-photo');
+  if(!stage||!img)return;
+
+  let points=new Map(), scale=1, x=0, y=0;
+  let pinchBase=null, dragBase=null;
+
+  const bounds=()=>{
+    const r=stage.getBoundingClientRect();
+    const nw=img.naturalWidth||r.width, nh=img.naturalHeight||r.height;
+    const fit=Math.min(r.width/nw,r.height/nh);
+    const w=nw*fit*scale, h=nh*fit*scale;
+    return {maxX:Math.max(0,(w-r.width)/2),maxY:Math.max(0,(h-r.height)/2)};
+  };
+  const constrain=()=>{
+    const b=bounds();
+    x=Math.min(b.maxX,Math.max(-b.maxX,x));
+    y=Math.min(b.maxY,Math.max(-b.maxY,y));
+  };
+  const paint=()=>{
+    constrain();
+    img.style.transform='translate3d('+x+'px,'+y+'px,0) scale('+scale+')';
+    stage.classList.toggle('is-zoomed',scale>1.001);
+  };
+  const midpoint=()=>{
+    const p=[...points.values()];
+    return {x:(p[0].x+p[1].x)/2,y:(p[0].y+p[1].y)/2};
+  };
+  const distance=()=>{
+    const p=[...points.values()];
+    return Math.hypot(p[0].x-p[1].x,p[0].y-p[1].y);
+  };
+  const reset=()=>{scale=1;x=0;y=0;paint()};
+
+  stage.addEventListener('pointerdown',e=>{
+    if(stage.classList.contains('is-video'))return;
+    points.set(e.pointerId,{x:e.clientX,y:e.clientY});
+    stage.setPointerCapture?.(e.pointerId);
+
+    if(points.size===1) dragBase={x:e.clientX,y:e.clientY,tx:x,ty:y};
+    if(points.size===2){
+      const mid=midpoint();
+      pinchBase={distance:distance(),scale,x,y,mid};
+      dragBase=null;
+    }
+  });
+
+  stage.addEventListener('pointermove',e=>{
+    if(!points.has(e.pointerId)||stage.classList.contains('is-video'))return;
+    points.set(e.pointerId,{x:e.clientX,y:e.clientY});
+
+    if(points.size===2&&pinchBase){
+      const mid=midpoint();
+      const next=Math.max(1,Math.min(4,pinchBase.scale*(distance()/pinchBase.distance)));
+      const ratio=next/pinchBase.scale;
+      // Keep the content under the fingers stable while pinching.
+      const rect=stage.getBoundingClientRect();
+      const ox=pinchBase.mid.x-(rect.left+rect.width/2);
+      const oy=pinchBase.mid.y-(rect.top+rect.height/2);
+      scale=next;
+      x=pinchBase.x*ratio+ox*(1-ratio)+(mid.x-pinchBase.mid.x);
+      y=pinchBase.y*ratio+oy*(1-ratio)+(mid.y-pinchBase.mid.y);
+      paint();
+      return;
+    }
+
+    if(points.size===1&&dragBase&&scale>1.001){
+      // Direct manipulation: image follows the finger in the same direction.
+      x=dragBase.tx+(e.clientX-dragBase.x);
+      y=dragBase.ty+(e.clientY-dragBase.y);
+      paint();
+    }
+  });
+
+  const release=e=>{
+    points.delete(e.pointerId);
+    if(points.size===1){
+      const p=[...points.values()][0];
+      dragBase={x:p.x,y:p.y,tx:x,ty:y};
+      pinchBase=null;
+    } else if(points.size===0){
+      dragBase=null;pinchBase=null;
+    }
+  };
+  stage.addEventListener('pointerup',release);
+  stage.addEventListener('pointercancel',release);
+
+  // Reset on new media and when the modal closes.
+  img.addEventListener('load',reset);
+  const modal=document.getElementById('product-modal');
+  if(modal)new MutationObserver(()=>{if(!modal.classList.contains('open'))reset()})
+    .observe(modal,{attributes:true,attributeFilter:['class']});
+})();
