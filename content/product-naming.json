@@ -104,11 +104,11 @@
         "A dense continuous floral strand with small contrasting accent details and beaded floral drops."
       ],
       "referenceImages": [
-        "assets/images/products/Kusum Series – Golden Marigold.jpg",
-        "assets/images/products/Kusum Series – Pearl White.jpg",
-        "assets/images/products/Kusum Series – Rani Pink.jpg",
-        "assets/images/products/Kusum Series – Ruby Red.jpg",
-        "assets/images/products/Kusum Series – dark pink.jpg"
+        "assets/images/products/Kusum Series, Golden Marigold.jpg",
+        "assets/images/products/Kusum Series, Pearl White.jpg",
+        "assets/images/products/Kusum Series, Rani Pink.jpg",
+        "assets/images/products/Kusum Series, Ruby Red.jpg",
+        "assets/images/products/Kusum Series, Dark Pink.jpg"
       ],
       "approval": {
         "approvedBy": "JHALAR catalogue owner",
@@ -139,9 +139,9 @@
         "Alternating short floral sections with small accent details between the petals and terminal floral drops."
       ],
       "referenceImages": [
-        "assets/images/products/Madhavi Series – Blue Orange & White.jpg",
-        "assets/images/products/Madhavi Series – Yellow Green & White.jpg",
-        "assets/images/products/Madhavi Series – green red & White.jpg"
+        "assets/images/products/Madhavi Series, Blue Orange & White.jpg",
+        "assets/images/products/Madhavi Series, Yellow Green & White.jpg",
+        "assets/images/products/Madhavi Series, Green, Red & White.jpg"
       ],
       "approval": {
         "approvedBy": "JHALAR catalogue owner",
@@ -171,7 +171,7 @@
         "Long floral sections interspersed with leafy clusters and spherical ornaments, ending in beaded floral drops."
       ],
       "referenceImages": [
-        "assets/images/products/Mandira Series – Saffron Green.jpg"
+        "assets/images/products/Mandira Series, Saffron Green.jpg"
       ],
       "approval": {
         "approvedBy": "JHALAR catalogue owner",
@@ -232,9 +232,9 @@
         "Long floral blocks separated by shorter leafy sections, with contrasting sections and beaded floral end drops."
       ],
       "referenceImages": [
-        "assets/images/products/Sangam Series – Kesari Bloom.jpg",
-        "assets/images/products/Sangam Series – Rose Pink.jpg",
-        "assets/images/products/Sangam Series – Royal Crimson.jpg"
+        "assets/images/products/Sangam Series, Kesari Bloom.jpg",
+        "assets/images/products/Sangam Series, Rose Pink.jpg",
+        "assets/images/products/Sangam Series, Royal Crimson.jpg"
       ],
       "approval": {
         "approvedBy": "JHALAR catalogue owner",
@@ -249,10 +249,10 @@
         "Alternating floral sections dotted with contrasting star-shaped flowers, ending in bead strings with floral drops."
       ],
       "referenceImages": [
-        "assets/images/products/Shobha Series – Blue Yellow & White.jpg",
-        "assets/images/products/Shobha Series – Red Green & White.jpg",
+        "assets/images/products/Shobha Series, Blue, Yellow & White.jpg",
+        "assets/images/products/Shobha Series, Red Green & White.jpg",
         "assets/images/products/Products_0027_39bd2a25-dec1-44ec-bd7e-736abd8bd039.jpg",
-        "assets/images/products/Shobha Series – Red Yellow & White.jpg"
+        "assets/images/products/Shobha Series, Red Yellow & White.jpg"
       ],
       "approval": {
         "approvedBy": "JHALAR catalogue owner",
@@ -299,7 +299,7 @@
         "Alternating blue and orange floral sections with small white accents."
       ],
       "referenceImages": [
-        "assets/images/products/Madhavi Series – Blue Orange & White.jpg"
+        "assets/images/products/Madhavi Series, Blue Orange & White.jpg"
       ],
       "approval": {
         "approvedBy": "JHALAR catalogue owner",
@@ -309,12 +309,12 @@
     },
     {
       "id": "blue-yellow-and-white",
-      "name": "Blue Yellow & White",
+      "name": "Blue, Yellow & White",
       "paletteCriteria": [
         "Blue and yellow floral sections with small white star-shaped flowers."
       ],
       "referenceImages": [
-        "assets/images/products/Shobha Series – Blue Yellow & White.jpg"
+        "assets/images/products/Shobha Series, Blue, Yellow & White.jpg"
       ],
       "approval": {
         "approvedBy": "JHALAR catalogue owner",
@@ -420,7 +420,7 @@
         "Golden-yellow floral or pom-pom accents, with design-specific secondary details."
       ],
       "referenceImages": [
-        "assets/images/products/Kusum Series – Golden Marigold.jpg",
+        "assets/images/products/Kusum Series, Golden Marigold.jpg",
         "assets/images/products/Products_0017_b70aaf0a-b46e-4581-88eb-051c5d7d1865.jpg",
         "assets/images/products/Products_0024_e84c5971-080e-45c2-9c8b-1662ee83f66f.jpg"
       ],
@@ -437,7 +437,7 @@
         "Orange or saffron-coloured floral/pom-pom accents with design-specific secondary details."
       ],
       "referenceImages": [
-        "assets/images/products/Sangam Series – Kesari Bloom.jpg",
+        "assets/images/products/Sangam Series, Kesari Bloom.jpg",
         "assets/images/products/Products_0021_51eb2e52-6efa-4b69-b0c7-4406ff334627.jpg"
       ],
       "approval": {
@@ -469,7 +469,7 @@
         "White or cream as the main visual palette, with design-specific small accent details."
       ],
       "referenceImages": [
-        "assets/images/products/Kusum Series – Pearl White.jpg",
+        "assets/images/products/Kusum Series, Pearl White.jpg",
         "assets/images/products/Products_0019_c0a4458c-7943-48e9-a162-c52ed0323635.jpg",
         "assets/images/products/Products_0020_a5da5c9e-9807-4bd1-aaa9-a60940699734.jpg"
       ],
@@ -516,7 +516,7 @@
         "Vivid pink as the main accent colour, with secondary details determined by the design."
       ],
       "referenceImages": [
-        "assets/images/products/Kusum Series – Rani Pink.jpg",
+        "assets/images/products/Kusum Series, Rani Pink.jpg",
         "assets/images/products/Products_0015_782495e6-eee2-4eec-89d1-4e8dbacf0c1e.jpg",
         "assets/images/products/Products_0028_b9a15b29-4d31-410c-b69b-18a2507ff142.jpg"
       ],
@@ -533,7 +533,7 @@
         "Red and green floral sections with small white star-shaped flowers."
       ],
       "referenceImages": [
-        "assets/images/products/Shobha Series – Red Green & White.jpg"
+        "assets/images/products/Shobha Series, Red Green & White.jpg"
       ],
       "approval": {
         "approvedBy": "JHALAR catalogue owner",
@@ -549,7 +549,7 @@
       ],
       "referenceImages": [
         "assets/images/products/Products_0027_39bd2a25-dec1-44ec-bd7e-736abd8bd039.jpg",
-        "assets/images/products/Shobha Series – Red Yellow & White.jpg"
+        "assets/images/products/Shobha Series, Red Yellow & White.jpg"
       ],
       "approval": {
         "approvedBy": "JHALAR catalogue owner",
@@ -564,7 +564,7 @@
         "Bright pink floral blocks with white sections and green separators in the source reference."
       ],
       "referenceImages": [
-        "assets/images/products/Sangam Series – Rose Pink.jpg"
+        "assets/images/products/Sangam Series, Rose Pink.jpg"
       ],
       "approval": {
         "approvedBy": "JHALAR catalogue owner",
@@ -579,7 +579,7 @@
         "Red floral blocks with white sections and green separators in the source reference."
       ],
       "referenceImages": [
-        "assets/images/products/Sangam Series – Royal Crimson.jpg"
+        "assets/images/products/Sangam Series, Royal Crimson.jpg"
       ],
       "approval": {
         "approvedBy": "JHALAR catalogue owner",
@@ -594,7 +594,7 @@
         "Bright red floral clusters with small light-coloured accents."
       ],
       "referenceImages": [
-        "assets/images/products/Kusum Series – Ruby Red.jpg"
+        "assets/images/products/Kusum Series, Ruby Red.jpg"
       ],
       "approval": {
         "approvedBy": "JHALAR catalogue owner",
@@ -609,7 +609,7 @@
         "Orange and green accents, with design-specific white, red or gold-coloured secondary details."
       ],
       "referenceImages": [
-        "assets/images/products/Mandira Series – Saffron Green.jpg",
+        "assets/images/products/Mandira Series, Saffron Green.jpg",
         "assets/images/products/Products_0032_195c8b92-b628-4397-8af3-3feafd9c082e.jpg"
       ],
       "approval": {
@@ -625,7 +625,7 @@
         "Alternating yellow and green floral sections with small white accents."
       ],
       "referenceImages": [
-        "assets/images/products/Madhavi Series – Yellow Green & White.jpg"
+        "assets/images/products/Madhavi Series, Yellow Green & White.jpg"
       ],
       "approval": {
         "approvedBy": "JHALAR catalogue owner",
@@ -635,12 +635,12 @@
     },
     {
       "id": "dark-pink",
-      "name": "dark pink",
+      "name": "Dark Pink",
       "paletteCriteria": [
         "Deep pink floral clusters with small white details; spelling retained from the owner-labelled source."
       ],
       "referenceImages": [
-        "assets/images/products/Kusum Series – dark pink.jpg"
+        "assets/images/products/Kusum Series, Dark Pink.jpg"
       ],
       "approval": {
         "approvedBy": "JHALAR catalogue owner",
@@ -650,12 +650,12 @@
     },
     {
       "id": "green-red-and-white",
-      "name": "green red & White",
+      "name": "Green, Red & White",
       "paletteCriteria": [
         "Alternating red and green floral sections with white details; spelling retained from the owner-labelled source."
       ],
       "referenceImages": [
-        "assets/images/products/Madhavi Series – green red & White.jpg"
+        "assets/images/products/Madhavi Series, Green, Red & White.jpg"
       ],
       "approval": {
         "approvedBy": "JHALAR catalogue owner",
@@ -977,7 +977,7 @@
       "productId": 1,
       "seriesId": "kusum",
       "colourId": "golden-marigold",
-      "sourceImage": "assets/images/products/Kusum Series – Golden Marigold.jpg",
+      "sourceImage": "assets/images/products/Kusum Series, Golden Marigold.jpg",
       "image": "assets/images/products/catalogue/jh-001.webp",
       "approval": {
         "approvedBy": "JHALAR catalogue owner",
@@ -989,7 +989,7 @@
       "productId": 2,
       "seriesId": "kusum",
       "colourId": "pearl-white",
-      "sourceImage": "assets/images/products/Kusum Series – Pearl White.jpg",
+      "sourceImage": "assets/images/products/Kusum Series, Pearl White.jpg",
       "image": "assets/images/products/catalogue/jh-002.webp",
       "approval": {
         "approvedBy": "JHALAR catalogue owner",
@@ -1001,7 +1001,7 @@
       "productId": 3,
       "seriesId": "kusum",
       "colourId": "rani-pink",
-      "sourceImage": "assets/images/products/Kusum Series – Rani Pink.jpg",
+      "sourceImage": "assets/images/products/Kusum Series, Rani Pink.jpg",
       "image": "assets/images/products/catalogue/jh-003.webp",
       "approval": {
         "approvedBy": "JHALAR catalogue owner",
@@ -1013,7 +1013,7 @@
       "productId": 4,
       "seriesId": "kusum",
       "colourId": "ruby-red",
-      "sourceImage": "assets/images/products/Kusum Series – Ruby Red.jpg",
+      "sourceImage": "assets/images/products/Kusum Series, Ruby Red.jpg",
       "image": "assets/images/products/catalogue/jh-004.webp",
       "approval": {
         "approvedBy": "JHALAR catalogue owner",
@@ -1025,7 +1025,7 @@
       "productId": 5,
       "seriesId": "kusum",
       "colourId": "dark-pink",
-      "sourceImage": "assets/images/products/Kusum Series – dark pink.jpg",
+      "sourceImage": "assets/images/products/Kusum Series, Dark Pink.jpg",
       "image": "assets/images/products/catalogue/jh-005.webp",
       "approval": {
         "approvedBy": "JHALAR catalogue owner",
@@ -1037,7 +1037,7 @@
       "productId": 6,
       "seriesId": "madhavi",
       "colourId": "blue-orange-and-white",
-      "sourceImage": "assets/images/products/Madhavi Series – Blue Orange & White.jpg",
+      "sourceImage": "assets/images/products/Madhavi Series, Blue Orange & White.jpg",
       "image": "assets/images/products/catalogue/jh-006.webp",
       "approval": {
         "approvedBy": "JHALAR catalogue owner",
@@ -1049,7 +1049,7 @@
       "productId": 7,
       "seriesId": "madhavi",
       "colourId": "yellow-green-and-white",
-      "sourceImage": "assets/images/products/Madhavi Series – Yellow Green & White.jpg",
+      "sourceImage": "assets/images/products/Madhavi Series, Yellow Green & White.jpg",
       "image": "assets/images/products/catalogue/jh-007.webp",
       "approval": {
         "approvedBy": "JHALAR catalogue owner",
@@ -1061,7 +1061,7 @@
       "productId": 8,
       "seriesId": "madhavi",
       "colourId": "green-red-and-white",
-      "sourceImage": "assets/images/products/Madhavi Series – green red & White.jpg",
+      "sourceImage": "assets/images/products/Madhavi Series, Green, Red & White.jpg",
       "image": "assets/images/products/catalogue/jh-008.webp",
       "approval": {
         "approvedBy": "JHALAR catalogue owner",
@@ -1073,7 +1073,7 @@
       "productId": 9,
       "seriesId": "mandira",
       "colourId": "saffron-green",
-      "sourceImage": "assets/images/products/Mandira Series – Saffron Green.jpg",
+      "sourceImage": "assets/images/products/Mandira Series, Saffron Green.jpg",
       "image": "assets/images/products/catalogue/jh-009.webp",
       "approval": {
         "approvedBy": "JHALAR catalogue owner",
@@ -1085,7 +1085,7 @@
       "productId": 10,
       "seriesId": "sangam",
       "colourId": "kesari-bloom",
-      "sourceImage": "assets/images/products/Sangam Series – Kesari Bloom.jpg",
+      "sourceImage": "assets/images/products/Sangam Series, Kesari Bloom.jpg",
       "image": "assets/images/products/catalogue/jh-010.webp",
       "approval": {
         "approvedBy": "JHALAR catalogue owner",
@@ -1097,7 +1097,7 @@
       "productId": 11,
       "seriesId": "sangam",
       "colourId": "rose-pink",
-      "sourceImage": "assets/images/products/Sangam Series – Rose Pink.jpg",
+      "sourceImage": "assets/images/products/Sangam Series, Rose Pink.jpg",
       "image": "assets/images/products/catalogue/jh-011.webp",
       "approval": {
         "approvedBy": "JHALAR catalogue owner",
@@ -1109,7 +1109,7 @@
       "productId": 12,
       "seriesId": "sangam",
       "colourId": "royal-crimson",
-      "sourceImage": "assets/images/products/Sangam Series – Royal Crimson.jpg",
+      "sourceImage": "assets/images/products/Sangam Series, Royal Crimson.jpg",
       "image": "assets/images/products/catalogue/jh-012.webp",
       "approval": {
         "approvedBy": "JHALAR catalogue owner",
@@ -1121,7 +1121,7 @@
       "productId": 13,
       "seriesId": "shobha",
       "colourId": "blue-yellow-and-white",
-      "sourceImage": "assets/images/products/Shobha Series – Blue Yellow & White.jpg",
+      "sourceImage": "assets/images/products/Shobha Series, Blue, Yellow & White.jpg",
       "image": "assets/images/products/catalogue/jh-013.webp",
       "approval": {
         "approvedBy": "JHALAR catalogue owner",
@@ -1133,7 +1133,7 @@
       "productId": 14,
       "seriesId": "shobha",
       "colourId": "red-green-and-white",
-      "sourceImage": "assets/images/products/Shobha Series – Red Green & White.jpg",
+      "sourceImage": "assets/images/products/Shobha Series, Red Green & White.jpg",
       "image": "assets/images/products/catalogue/jh-014.webp",
       "approval": {
         "approvedBy": "JHALAR catalogue owner",
@@ -1385,7 +1385,7 @@
       "productId": 35,
       "seriesId": "shobha",
       "colourId": "red-yellow-and-white",
-      "sourceImage": "assets/images/products/Shobha Series – Red Yellow & White.jpg",
+      "sourceImage": "assets/images/products/Shobha Series, Red Yellow & White.jpg",
       "image": "assets/images/products/catalogue/jh-035.webp",
       "approval": {
         "approvedBy": "JHALAR catalogue owner",

@@ -35,7 +35,7 @@ test('registered human approval resolves review without inventing confidence per
   assert.deepEqual(validateRegistry(registry), []);
   const result = evaluateNaming(candidate, registry);
   assert.equal(result.status, STATUS.APPROVED);
-  assert.equal(result.finalProductName, 'Test Series — Test Colour');
+  assert.equal(result.finalProductName, 'Test Series, Test Colour');
   assert.equal(result.approvalMethod, 'human');
   assert.deepEqual(result.confidence, { series: null, colour: null });
   assert.equal(result.humanReviewRequired, false);
@@ -96,7 +96,7 @@ test('malformed or duplicate human registry bindings fail closed', () => {
 
 test('catalogue checks bind outer identity fields instead of imported metadata claims', () => {
   const { registry, candidate } = fixture();
-  const product = { id: 42, title: 'Test Series — Test Colour', image: candidate.image, sourceImage: candidate.sourceImage, naming: candidate };
+  const product = { id: 42, title: 'Test Series, Test Colour', image: candidate.image, sourceImage: candidate.sourceImage, naming: candidate };
   assert.equal(validateCatalogue({ products: [product] }, registry).approvedCount, 1);
   for (const change of [{ id: 43 }, { image: 'assets/images/other.webp' }, { sourceImage: 'assets/images/other.jpg' }, { title: 'Test Series - Test Colour' }]) {
     const report = validateCatalogue({ products: [{ ...product, ...change }] }, registry);
