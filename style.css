@@ -1922,137 +1922,59 @@ p,.section-head>p,.hero-banner-copy>p:not(.kicker){letter-spacing:.006em}
 
 @media(max-width:700px){.hero-banner-content{padding-block:clamp(34px,8svh,58px) 22px}.hero-audience{width:100%;gap:10px;margin-top:24px;padding-top:16px}.hero-audience-items{display:grid;grid-template-columns:1fr;gap:8px;font-size:.72rem;line-height:1.35}.hero-audience-items span+span:before{display:none}.hero-audience-items span{white-space:normal}.hero-audience-items span{padding-left:13px;position:relative}.hero-audience-items span:after{content:'';position:absolute;left:0;top:.5em;width:4px;height:4px;border-radius:50%;background:#efb85f}}
 
+/* ==========================================================================
+   JHALAR CANONICAL LAYOUT LAYER
+   Single source of truth for page composition, hero and responsive behavior.
+   ========================================================================== */
 
-/* ===== PAGE COMPOSITION SYSTEM ===== */
-.page-section{position:relative}
-.section-inner{width:100%;margin-inline:auto}
-.section-layout{min-width:0}
-.section-head{min-width:0}
-.section-head>div{display:grid;gap:var(--space-2,8px)}
-.section-head>p{margin:0}
-.hero-banner-content,.section-inner{padding-inline:var(--page-gutter,clamp(20px,4vw,72px))}
-@media(max-width:700px){
-  .hero-banner-content,.section-inner{padding-inline:var(--page-gutter,20px)}
-  .section-head{gap:22px}
-}
-
-
-/* ===== HOMEPAGE FLOW: DISCOVERY SECTION ===== */
-.collection .section-layout{display:grid;gap:0}
-.collection .section-head{margin-bottom:clamp(32px,4vw,56px)}
-.section-heading-group,.section-support-group{min-width:0}
-.section-support-group{display:flex;justify-content:flex-end;align-items:flex-end}
-.section-support-group p{margin:0}
-@media(max-width:700px){
- .collection .section-head{display:grid;grid-template-columns:1fr;gap:16px;margin-bottom:28px}
- .section-support-group{justify-content:flex-start}
-}
-
-
-/* =========================================================
-   UX STANDARD v1 — SYSTEM ENFORCEMENT
-   Structure, reflow, readable text and accessible interaction
-   ========================================================= */
 :root{
   --content-measure:72ch;
   --section-space:clamp(56px,8vw,120px);
-  --group-gap:clamp(20px,3vw,40px);
+  --page-gutter:clamp(20px,4vw,72px);
 }
+
 html{overflow-x:clip}
 body{min-width:320px}
 main{min-width:0}
-.section{padding-block:var(--section-space)}
-.shell,.section-inner,.section-layout,.section-head,
-.custom-grid,.story-grid,.contact-box,.product-card,.modal-card{min-width:0}
-p{max-width:var(--content-measure)}
-button,a,input,select,textarea{max-width:100%}
-button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{
-  outline:3px solid rgba(122,30,44,.72);
-  outline-offset:3px;
+.header,.section-inner,.section-layout,.section-head,.hero-banner-content{min-width:0}
+.hero-banner-content,.section-inner{padding-inline:var(--page-gutter)}
+
+/* Header */
+.header{
+  position:sticky;
+  top:0;
+  z-index:50;
+  height:76px;
+  background:rgba(255,250,247,.92);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(36,21,26,.08);
+  transition:background .28s ease,box-shadow .28s ease,border-color .28s ease;
 }
-button{touch-action:manipulation}
-@media(pointer:coarse){
-  .nav a,.mobile-nav a,.filter-btn,.product-details-btn,.hero-banner-cta,
-  .contact-cta,.text-link,.modal-close,.modal-nav,.modal-thumb{min-height:44px}
+.header.scrolled{
+  background:rgba(255,250,247,.98);
+  box-shadow:0 8px 28px rgba(36,21,26,.10);
+  border-bottom-color:rgba(36,21,26,.12);
 }
+.header .header-row{height:100%;padding-inline:0}
+.header .brand{width:150px;height:48px;display:flex;align-items:center}
+.header .brand img{width:100%;max-height:48px;object-fit:contain}
 
-/* Content grouping: supporting copy stays close to its heading, sections stay distinct. */
-.section-head{margin-bottom:clamp(28px,4vw,52px)}
-.section-heading-group{display:grid;gap:10px}
-.section-support-group{min-width:0}
-.section-support-group p{max-width:42ch}
-.collection .filters{margin-bottom:clamp(20px,3vw,32px)}
-.collection .filters::-webkit-scrollbar{height:6px}
-.collection .filters{scrollbar-width:thin}
-
-/* Text-heavy flex layouts must reflow instead of forcing a single line. */
-.hero-audience-items,.contact-box,.footer-row{min-width:0}
-.hero-audience-items span{min-width:0;overflow-wrap:anywhere}
-.contact-box{flex-wrap:wrap}
-.contact-box>div{min-width:0}
-.contact-cta{white-space:normal;overflow-wrap:anywhere}
-.footer-row{flex-wrap:wrap}
-
-/* Product cards are content-driven: long names cannot clip or overflow. */
-.product-title,.product-category,.modal-copy h3,.modal-copy>p{overflow-wrap:anywhere}
-.product-details-btn{max-width:100%;white-space:normal;text-align:left}
-.product-info{min-width:0}
-
-/* Modal viewport is the hard interaction boundary. */
-#product-modal .modal-card{overflow:hidden}
-#product-modal .modal-media{min-width:0}
-#product-modal .modal-stage{
-  width:100%;
-  min-width:0;
-  min-height:clamp(300px,52vh,620px);
-  overscroll-behavior:contain;
-}
-#product-modal .modal-stage #modal-photo,
-#product-modal .modal-stage #modal-video{max-width:100%;max-height:100%}
-#product-modal .modal-close{min-width:44px;min-height:44px}
-#product-modal .modal-nav{min-width:44px;min-height:44px}
-#product-modal .modal-thumbs{max-width:100%}
-.modal-thumb{min-width:44px;min-height:44px}
-
-/* Mobile is a reflowed composition, not a compressed desktop. */
-@media(max-width:700px){
-  :root{--section-space:clamp(48px,13vw,72px);--group-gap:20px}
-  .section-head,.collection .section-head{gap:14px}
-  .section-support-group{display:block}
-  .section-support-group p{max-width:36ch}
-  .custom-grid,.story-grid{gap:32px}
-  .contact-box{gap:28px}
-  .footer-row{gap:14px}
-  .hero-audience{margin-top:22px}
-  .hero-audience-items{display:grid;grid-template-columns:1fr;gap:7px}
-  .hero-audience-items span{white-space:normal;padding-left:13px;position:relative}
-  .hero-audience-items span+span:before{display:none}
-  .hero-audience-items span:after{content:'';position:absolute;left:0;top:.55em;width:4px;height:4px;border-radius:50%;background:#efb85f}
-  .contact-cta{width:100%;min-height:48px;display:flex;align-items:center;justify-content:center}
-  #product-modal .modal-card{max-height:calc(100svh - 20px)}
-  #product-modal .modal-stage{min-height:clamp(260px,42svh,420px)}
-  #product-modal .modal-copy{overflow-wrap:anywhere}
-}
-@media(max-width:380px){
-  body{min-width:0}
-  .product-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .product-details-btn{min-width:0;width:100%}
-}
-
-/* Text enlargement safety: remove assumptions that require fixed text heights. */
-@media (min-width:1px){
-  .hero-banner-copy,.section-head,.custom-copy,.story-copy,.contact-box,.modal-copy{min-width:0}
-}
-
-
-/* ==========================================================================
-   HERO RESET — one clear message, one action, one visual endpoint.
-   Audience information is intentionally outside the hero.
-   ========================================================================== */
+/* Hero: one message, one action */
 .hero-banner{
   height:clamp(560px,66svh,760px);
+  position:relative;
+}
+.hero-banner-shade{
+  position:absolute;
+  inset:0;
+  z-index:1;
+  background:linear-gradient(90deg,rgba(255,250,245,.97) 0%,rgba(255,247,241,.93) 30%,rgba(252,232,222,.72) 48%,rgba(248,222,211,.28) 63%,rgba(248,222,211,0) 78%);
 }
 .hero-banner-content{
+  position:relative;
+  z-index:2;
+  height:100%;
+  display:flex;
   align-items:center;
   padding-block:clamp(48px,7vh,82px);
 }
@@ -2063,204 +1985,55 @@ button{touch-action:manipulation}
   align-items:flex-start;
 }
 .hero-banner .kicker{margin:0 0 16px}
-.hero-banner h1{
-  max-inline-size:9ch;
-  margin:0 0 22px;
-  text-wrap:balance;
-}
-.hero-banner-copy>.hero-lead{
-  max-inline-size:34ch;
-  margin:0 0 28px;
-}
+.hero-banner h1{max-inline-size:9ch;margin:0 0 22px;text-wrap:balance}
+.hero-banner-copy>.hero-lead{max-inline-size:34ch;margin:0 0 28px}
 .hero-banner-cta{margin:0}
 .hero-audience{display:none!important}
 
-.audience-strip{
-  background:var(--page-bg);
-  border-bottom:1px solid var(--line);
-}
-.audience-strip-inner{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:32px;
-  min-height:96px;
-}
-.audience-label{
-  margin:0;
-  flex:0 0 auto;
-  font-size:.6875rem;
-  font-weight:600;
-  letter-spacing:.1em;
-  text-transform:uppercase;
-  color:var(--wine);
-}
-.audience-items{
-  display:flex;
-  align-items:center;
-  justify-content:flex-end;
-  flex-wrap:wrap;
-  gap:10px 0;
-  min-width:0;
-  font-size:.82rem;
-  font-weight:500;
-  letter-spacing:.02em;
-  color:var(--muted);
-}
+/* Audience transition */
+.audience-strip{background:var(--page-bg);border-bottom:1px solid var(--line)}
+.audience-strip-inner{display:flex;align-items:center;justify-content:space-between;gap:32px;min-height:96px}
+.audience-label{margin:0;flex:0 0 auto;font-size:.6875rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--wine)}
+.audience-items{display:flex;align-items:center;justify-content:flex-end;flex-wrap:wrap;gap:10px 0;min-width:0;font-size:.82rem;font-weight:500;letter-spacing:.02em;color:var(--muted)}
 .audience-items span{white-space:nowrap}
-.audience-items span+span:before{
-  content:'·';
-  margin-inline:18px;
-  color:#c08a62;
-}
+.audience-items span+span:before{content:'·';margin-inline:18px;color:#c08a62}
+
+/* General responsive safety */
+.section{padding-block:var(--section-space)}
+p{max-width:var(--content-measure)}
+button,a,input,select,textarea{max-width:100%}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid rgba(122,30,44,.72);outline-offset:3px}
+.product-title,.product-category,.modal-copy h3,.modal-copy>p{overflow-wrap:anywhere}
+
 @media(max-width:760px){
-  .hero-banner{
-    height:auto!important;
-    min-height:580px!important;
-  }
-  .hero-banner-content{
-    min-height:580px!important;
-    padding:64px 0 52px!important;
-    align-items:flex-end;
-  }
-  .hero-banner-copy{width:min(100%,34rem)}
-  .hero-banner h1{
-    max-inline-size:9ch!important;
-    font-size:clamp(2.8rem,12vw,4.15rem)!important;
-    line-height:1.04!important;
-    margin-bottom:18px!important;
-  }
-  .hero-banner-copy>.hero-lead{
-    max-inline-size:31ch!important;
-    margin-bottom:24px!important;
-    line-height:1.6!important;
-  }
+  :root{--page-gutter:20px;--section-space:clamp(48px,13vw,72px)}
+  .header{height:72px}
+  .header.scrolled{background:rgba(255,250,247,.98);box-shadow:0 8px 24px rgba(36,21,26,.13)}
+  .header .brand{width:132px;height:42px}
+  .header .brand img{max-height:42px}
+  .header .menu{width:46px;min-width:46px;height:46px}
+
+  .hero-banner{height:100svh;min-height:560px;max-height:720px}
+  .hero-banner-content{height:100%;align-items:flex-end;padding:0 var(--page-gutter) calc(32px + env(safe-area-inset-bottom))}
+  .hero-banner-copy{width:100%;max-width:31rem;padding:0}
+  .hero-banner .kicker{margin:0 0 12px;font-size:.64rem;letter-spacing:.13em}
+  .hero-banner h1{max-width:10ch;font-size:clamp(2.55rem,10.8vw,3.45rem);line-height:1.06;letter-spacing:-.035em;margin:0 0 16px}
+  .hero-banner-copy>.hero-lead{max-width:30ch;font-size:clamp(.95rem,3.8vw,1.05rem);line-height:1.5;margin:0 0 22px}
+  .hero-banner-cta{min-height:48px;margin:0}
   .hero-banner-shade{
-    background:linear-gradient(180deg,rgba(44,7,20,.60) 0%,rgba(44,7,20,.42) 42%,rgba(44,7,20,.78) 100%)!important;
+    display:block;
+    visibility:visible;
+    opacity:1;
+    background:linear-gradient(180deg,rgba(44,7,20,.12) 0%,rgba(44,7,20,.20) 42%,rgba(44,7,20,.88) 100%);
   }
-  .hero-banner .kicker{margin-bottom:14px!important}
-  .audience-strip-inner{
-    min-height:0;
-    padding-block:28px;
-    align-items:flex-start;
-    flex-direction:column;
-    gap:14px;
-  }
-  .audience-items{
-    display:grid;
-    grid-template-columns:1fr;
-    justify-content:start;
-    gap:8px;
-    font-size:.86rem;
-  }
-  .audience-items span{white-space:normal}
-  .audience-items span+span:before{display:none}
+
+  .audience-strip-inner{min-height:0;padding:24px 0 26px;align-items:flex-start;flex-direction:column;gap:10px}
+  .audience-label{font-size:.64rem}
+  .audience-items{justify-content:flex-start;font-size:.78rem;line-height:1.45}
+  .audience-items span+span:before{margin-inline:10px}
 }
 @media(max-width:390px){
-  .hero-banner{min-height:550px!important}
-  .hero-banner-content{min-height:550px!important;padding-top:56px!important}
-  .hero-banner h1{font-size:clamp(2.65rem,12.5vw,3.4rem)!important}
-}
-
-
-/* ==========================================================================
-   MOBILE HERO COMPOSITION — compact, readable, intentional
-   Overrides legacy hero patches with one mobile composition.
-   ========================================================================== */
-@media(max-width:760px){
-  .hero-banner{
-    height:100svh!important;
-    min-height:560px!important;
-    max-height:720px!important;
-  }
-  .hero-banner-content{
-    min-height:100%!important;
-    padding:0 var(--page-gutter,20px) calc(32px + env(safe-area-inset-bottom))!important;
-    display:flex!important;
-    align-items:flex-end!important;
-  }
-  .hero-banner-copy{
-    width:100%!important;
-    max-width:31rem!important;
-    padding:0!important;
-  }
-  .hero-banner .kicker{
-    margin:0 0 12px!important;
-    font-size:.64rem!important;
-    letter-spacing:.13em!important;
-  }
-  .hero-banner h1{
-    max-width:10ch!important;
-    font-size:clamp(2.55rem,10.8vw,3.45rem)!important;
-    line-height:1.06!important;
-    letter-spacing:-.035em!important;
-    margin:0 0 16px!important;
-  }
-  .hero-banner-copy>.hero-lead{
-    max-width:30ch!important;
-    font-size:clamp(.95rem,3.8vw,1.05rem)!important;
-    line-height:1.5!important;
-    margin:0 0 22px!important;
-  }
-  .hero-banner-cta{
-    min-height:48px!important;
-    margin:0!important;
-  }
-  .hero-banner-shade{
-    background:
-      linear-gradient(180deg,
-        rgba(44,7,20,.18) 0%,
-        rgba(44,7,20,.16) 38%,
-        rgba(44,7,20,.82) 100%)!important;
-  }
-  .audience-strip-inner{
-    padding:24px 20px 26px!important;
-    gap:10px!important;
-  }
-  .audience-label{font-size:.64rem!important}
-  .audience-items{
-    display:flex!important;
-    flex-wrap:wrap!important;
-    gap:6px 0!important;
-    font-size:.78rem!important;
-    line-height:1.45!important;
-  }
-  .audience-items span{white-space:nowrap!important}
-  .audience-items span+span:before{
-    display:inline!important;
-    margin-inline:10px!important;
-  }
-}
-@media(max-width:390px){
-  .hero-banner{min-height:540px!important}
-  .hero-banner h1{
-    font-size:clamp(2.35rem,10.8vw,3rem)!important;
-    margin-bottom:14px!important;
-  }
-  .hero-banner-copy>.hero-lead{margin-bottom:18px!important}
-}
-
-
-/* Header scroll state + definitive mobile hero overlay */
-.header{transition:background .28s ease,box-shadow .28s ease,border-color .28s ease}
-.header.scrolled{
-  background:rgba(255,250,247,.98);
-  box-shadow:0 8px 28px rgba(36,21,26,.10);
-  border-bottom-color:rgba(36,21,26,.12);
-}
-@media(max-width:760px){
-  .header.scrolled{
-    background:rgba(255,250,247,.98)!important;
-    box-shadow:0 8px 24px rgba(36,21,26,.13)!important;
-  }
-  .hero-banner-shade{
-    background:
-      linear-gradient(180deg,
-        rgba(44,7,20,.12) 0%,
-        rgba(44,7,20,.20) 42%,
-        rgba(44,7,20,.88) 100%)!important;
-    opacity:1!important;
-    display:block!important;
-    visibility:visible!important;
-  }
+  .hero-banner{min-height:540px}
+  .hero-banner h1{font-size:clamp(2.35rem,10.8vw,3rem);margin-bottom:14px}
+  .hero-banner-copy>.hero-lead{margin-bottom:18px}
 }
