@@ -1007,3 +1007,87 @@ h1,h2,h3,.hero-title,.section-title,.modal-title,.product-title{
   background:#c82039;border-color:#c82039;
 }
 
+
+
+/* =====================================================
+   CONVERSION HERO REDESIGN — catalogue-first journey
+   ===================================================== */
+:root{
+  --wine:#3d0718;
+  --wine-deep:#24030d;
+  --maroon:#7f1530;
+  --maroon-rich:#9d2042;
+  --rose-glow:#d35b73;
+  --ivory:#fff8f0;
+  --gold-soft:#d8b56a;
+}
+.hero.hero-premium{
+  padding:0;
+  background:var(--wine-deep);
+  overflow:hidden;
+}
+.hero-premium .hero-stage{
+  min-height:calc(100vh - var(--header-h));
+  position:relative;
+  isolation:isolate;
+  background:
+    radial-gradient(900px 600px at 8% 15%,rgba(211,91,115,.28),transparent 62%),
+    radial-gradient(700px 520px at 92% 84%,rgba(216,181,106,.10),transparent 64%),
+    linear-gradient(128deg,var(--wine-deep) 0%,var(--wine) 38%,var(--maroon) 72%,#4c0a1d 100%);
+}
+.hero-ambient{position:absolute;border-radius:999px;filter:blur(4px);pointer-events:none;z-index:-1}
+.hero-ambient-one{width:38vw;height:38vw;left:-18vw;top:14%;background:rgba(216,181,106,.08)}
+.hero-ambient-two{width:30vw;height:30vw;right:-12vw;bottom:-10%;background:rgba(211,91,115,.16)}
+.hero-premium .hero-grid{
+  min-height:calc(100vh - var(--header-h));
+  grid-template-columns:minmax(0,5fr) minmax(360px,6fr);
+  gap:clamp(2rem,6vw,6rem);
+  padding:calc(var(--header-h) + clamp(2rem,5vw,5rem)) 0 clamp(3rem,6vw,6rem);
+}
+.hero-premium .hero-text{grid-column:auto;max-width:650px}
+.hero-proof-line{display:flex;align-items:center;gap:.65rem;color:rgba(255,248,240,.78);font-size:.78rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-bottom:1.4rem}
+.hero-proof-dot{width:8px;height:8px;border-radius:50%;background:var(--gold-soft);box-shadow:0 0 0 5px rgba(216,181,106,.12)}
+.hero-premium .hero-kicker{color:var(--gold-soft);border:0;background:transparent;padding:0;margin:0 0 1rem;font-size:.74rem;letter-spacing:.18em}
+.hero-premium .hero-title{color:var(--ivory);font-size:clamp(3rem,5.3vw,5.9rem);line-height:.98;letter-spacing:-.045em;max-width:10ch;margin-bottom:1.35rem}
+.hero-premium .hero-desc{color:rgba(255,248,240,.82);font-size:clamp(1.02rem,1.2vw,1.18rem);line-height:1.7;max-width:52ch;margin-bottom:1.8rem}
+.hero-premium .hero-actions{align-items:center;margin:0 0 2rem}
+.hero-premium .hero-primary-cta{flex:0 0 auto;min-width:0;background:var(--ivory);border-color:var(--ivory);color:var(--wine);padding:1rem 1.45rem;box-shadow:0 18px 40px rgba(0,0,0,.22)}
+.hero-premium .hero-primary-cta:hover{background:#fff;color:var(--wine);transform:translateY(-2px)}
+.hero-text-link{display:inline-flex;align-items:center;gap:.55rem;color:var(--ivory);font-weight:600;padding:.85rem .25rem;border-bottom:1px solid rgba(255,248,240,.28)}
+.hero-text-link:hover{color:var(--gold-soft);border-color:var(--gold-soft)}
+.hero-reassurance{display:flex;flex-wrap:wrap;gap:.75rem 1.5rem;padding-top:1.4rem;border-top:1px solid rgba(255,248,240,.16)}
+.hero-reassurance-item{display:flex;align-items:center;gap:.55rem;color:rgba(255,248,240,.75);font-size:.84rem}
+.hero-reassurance-num{font-size:.7rem;color:var(--gold-soft);font-weight:700;letter-spacing:.08em}
+.hero-image-wrap{position:relative;align-self:center;min-width:0}
+.hero-image-frame{position:relative;overflow:hidden;border-radius:clamp(22px,3vw,42px);box-shadow:0 35px 90px rgba(0,0,0,.34)}
+.hero-premium .hero-img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center;border-radius:inherit;transform:none!important}
+.hero-image-frame::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 58%,rgba(36,3,13,.62));pointer-events:none}
+.hero-image-label{position:absolute;left:1.5rem;bottom:1.35rem;z-index:2;color:var(--ivory);font-size:.78rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+.hero-float-card{position:absolute;z-index:3;display:flex;align-items:center;gap:.75rem;background:rgba(255,248,240,.94);backdrop-filter:blur(14px);padding:.8rem 1rem;border-radius:16px;box-shadow:0 18px 45px rgba(0,0,0,.22);min-width:190px}
+.hero-float-card strong{display:block;color:var(--wine);font-size:.82rem}
+.hero-float-card small{display:block;color:#765d64;font-size:.72rem;margin-top:.12rem}
+.hero-float-icon{width:34px;height:34px;display:grid;place-items:center;border-radius:10px;background:rgba(127,21,48,.08);color:var(--maroon)}
+.hero-float-card-top{right:-1.5rem;top:12%}
+.hero-float-card-bottom{left:-2rem;bottom:10%}
+
+.site-header{background:rgba(255,248,240,.92)}
+@media(min-width:980px){.desktop-nav{display:flex}.header-actions .b2b-btn{display:inline-flex}.mobile-toggle{display:none}}
+@media(max-width:899px){
+  .hero-premium .hero-grid{grid-template-columns:1fr;padding-left:0;padding-right:0}
+  .hero-premium .hero-text{padding:0 clamp(1rem,4vw,2rem)}
+  .hero-premium .hero-title{font-size:clamp(2.8rem,10vw,4.7rem)}
+  .hero-image-wrap{padding:0 clamp(1rem,4vw,2rem)}
+  .hero-float-card-top{right:1rem}.hero-float-card-bottom{left:1rem}
+}
+@media(max-width:560px){
+  .hero-proof-line{font-size:.68rem;letter-spacing:.06em}
+  .hero-premium .hero-grid{gap:2rem;padding-bottom:2rem}
+  .hero-premium .hero-title{font-size:clamp(2.55rem,13vw,3.7rem)}
+  .hero-premium .hero-actions{display:grid;grid-template-columns:1fr}
+  .hero-premium .hero-primary-cta{width:100%}
+  .hero-text-link{justify-content:center;border:0}
+  .hero-reassurance{display:grid;grid-template-columns:1fr 1fr}
+  .hero-reassurance-item:last-child{grid-column:1/-1}
+  .hero-float-card{display:none}
+  .hero-image-frame{border-radius:24px}
+}
