@@ -9,7 +9,7 @@ let state = {
   customCSS: '', navItems: [], footerNavItems: [], socialLinks: {},
   imageManifest: [], fontManifest: [], selectedProductId: null, viewport: 'desktop',
   changed: false, githubToken: null, darkMode: false,
-  heroHighlights: [], trustItems: [], faqItems: [], sectionCopy: {}, imagePickTarget: null, zoom: 1, selectedPreview: null, inspectorRuleId: 0
+  heroHighlights: [], trustItems: [], faqItems: [], sectionCopy: {}, imagePickTarget: null, zoom: 1, selectedPreview: null, inspectorRuleId: 0, moveMode: false, dragRules: {}
 };
 
 function defaultSectionCopy() {
@@ -1215,10 +1215,75 @@ function setupInspector(){
   document.querySelectorAll('[data-direction]').forEach(b=>b.addEventListener('click',()=>applyInspectorDirection(b.dataset.direction)));
   document.getElementById('preview-frame')?.addEventListener('load',()=>setTimeout(bindPreviewInspector,100));
 }
+function toggleMoveMode(){
+  state.moveMode=!state.moveMode;
+  const b=document.getElementById('move-mode-btn');
+  if(b){b.classList.toggle('active',state.moveMode);b.innerHTML=state.moveMode?'<i class="fas fa-check"></i> Moving':'<i class="fas fa-arrows-alt"></i> Move';}
+  const frame=document.getElementById('preview-frame');
+  try{frame?.contentDocument?.documentElement?.classList.toggle('editor-move-mode',state.moveMode)}catch(e){}
+  showToast(state.moveMode?'Move mode on — drag any element in the preview':'Move mode off','success');
+}
+
+function stableEditorSelector(el){
+  if(el.id)return '#'+CSS.escape(el.id);
+  if(el.dataset?.section)return '[data-section="'+el.dataset.section+'"]';
+  const parts=[];let node=el;
+  while(node&&node.nodeType===1&&node.tagName.toLowerCase()!=='html'){
+    if(node.id){parts.unshift('#'+CSS.escape(node.id));break;}
+    let part=node.tagName.toLowerCase();
+    const classes=[...node.classList].filter(c=>!c.startsWith('editor-')&&!c.startsWith('is-')).slice(0,2);
+    if(classes.length)part+='.'+classes.map(CSS.escape).join('.');
+    else{
+      const parent=node.parentElement;
+      if(parent){const siblings=[...parent.children].filter(x=>x.tagName===node.tagName);if(siblings.length>1)part+=':nth-of-type('+(siblings.indexOf(node)+1)+')';}
+    }
+    parts.unshift(part);node=node.parentElement;
+    if(parts.length>=6)break;
+  }
+  return parts.join(' > ');
+}
+function persistDragRule(el){
+  const selector=stableEditorSelector(el);
+  const x=Number(el.dataset.editorDragX||0),y=Number(el.dataset.editorDragY||0);
+  state.dragRules[selector]={x,y};
+  const rules=Object.entries(state.dragRules).map(([sel,p])=>sel+'{transform:translate('+p.x+'px,'+p.y+'px)!important}').join('\n');
+  state.customCSS=(state.customCSS||'').replace(/\/\* EDITOR_DRAG_RULES_START \*\/[\s\S]*?\/\* EDITOR_DRAG_RULES_END \*\//,'').trim()
+    +'\n/* EDITOR_DRAG_RULES_START */\n'+rules+'\n/* EDITOR_DRAG_RULES_END */';
+  markChanged();saveDrafts();
+}
+function installCanvasDrag(doc){
+  if(doc.__jhalarCanvasDrag)return;
+  const style=doc.createElement('style');style.textContent='html.editor-move-mode *{cursor:move!important}html.editor-move-mode [data-editor-selected="true"]{outline:2px solid #C82039!important;outline-offset:3px!important}';doc.head.appendChild(style);
+  let drag=null;
+  const pick=e=>e.target?.closest?.('section,[data-section],.shell,.section-head,.hero-banner-copy,.custom-copy,.story-copy,.contact-box,.product-card,.product-info,h1,h2,h3,p,a,button,img,video');
+  doc.addEventListener('pointerdown',e=>{
+    if(!state.moveMode)return;
+    const el=pick(e);if(!el)return;
+    e.preventDefault();e.stopPropagation();
+    selectPreviewElement(el);
+    drag={el,startX:e.clientX,startY:e.clientY,baseX:Number(el.dataset.editorDragX||0),baseY:Number(el.dataset.editorDragY||0),baseTransform:el.style.transform||''};
+    try{el.setPointerCapture(e.pointerId)}catch(err){}
+  },true);
+  doc.addEventListener('pointermove',e=>{
+    if(!drag)return;
+    const x=Math.round(drag.baseX+(e.clientX-drag.startX)),y=Math.round(drag.baseY+(e.clientY-drag.startY));
+    drag.el.dataset.editorDragX=x;drag.el.dataset.editorDragY=y;
+    drag.el.style.transform='translate('+x+'px,'+y+'px) '+drag.baseTransform;
+  },true);
+  const end=e=>{
+    if(!drag)return;
+    const el=drag.el;drag=null;persistDragRule(el);showToast('Position saved — publish when ready','success');
+  };
+  doc.addEventListener('pointerup',end,true);doc.addEventListener('pointercancel',end,true);
+  doc.__jhalarCanvasDrag=true;
+}
+
 function bindPreviewInspector(){
   const frame=document.getElementById('preview-frame'); if(!frame)return;
   let doc;try{doc=frame.contentDocument}catch(e){return}
   if(!doc)return;
+  installCanvasDrag(doc);
+  doc.documentElement.classList.toggle('editor-move-mode',state.moveMode);
   if(doc.__jhalarInspectorHandler)return;
   const handler=e=>{
     const raw=e.target;
