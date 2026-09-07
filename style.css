@@ -586,3 +586,14 @@ h1,h2,h3,h4,h5,h6{font-family:var(--font-heading);color:var(--navy);font-synthes
  .modal.open .modal-card{animation:mobileModalIn .32s var(--ease-premium) both}
  @keyframes mobileModalIn{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
 }
+
+
+/* Premium tonal gradients — warm, restrained, never rainbow-like */
+.hero-banner::after{background:linear-gradient(110deg,rgba(255,250,241,.98) 0%,rgba(255,250,241,.82) 32%,rgba(255,250,241,.26) 58%,rgba(98,35,49,.08) 100%)!important}
+.contact{background:linear-gradient(135deg,#622331 0%,#7a2a3a 46%,#A71931 100%)!important}
+.contact::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 82% 18%,rgba(255,250,241,.12),transparent 30%),linear-gradient(120deg,transparent 0%,rgba(255,250,241,.045) 48%,transparent 100%);pointer-events:none}
+.modal-backdrop{background:radial-gradient(circle at 50% 15%,rgba(200,32,57,.16),transparent 42%),linear-gradient(135deg,rgba(54,18,27,.82),rgba(20,25,66,.72))}
+.hero-banner-cta{background:linear-gradient(135deg,#C82039,#A71931);color:#FFFDF8!important;padding:14px 20px;box-shadow:0 12px 30px rgba(200,32,57,.18)}
+.hero-banner-cta:hover{background:linear-gradient(135deg,#A71931,#622331);box-shadow:0 18px 38px rgba(98,35,49,.24)}
+.contact-cta,.modal-wa-btn{background:linear-gradient(135deg,#C82039 0%,#A71931 100%)!important}
+.contact-cta:hover,.modal-wa-btn:hover{background:linear-gradient(135deg,#A71931 0%,#622331 100%)!important}
