@@ -14,7 +14,18 @@ function normaliseMedia(item){if(typeof item==='string')return{src:item,type:med
 function mediaList(p){const raw=[p.image||p.sourceImage,...(Array.isArray(p.gallery)?p.gallery:[])];const seen=new Set;return raw.map(normaliseMedia).filter(m=>m&&m.src&&!seen.has(m.src)&&(seen.add(m.src),true))}
 function renderProducts(){const all=visibleProducts(),limit=state.expanded?all.length:Math.min(all.length,8);const grid=$('#product-grid');grid.innerHTML=all.slice(0,limit).map((p,i)=>{const m=mediaList(p),main=m[0]?.src||'',alt=m[1]?.src||'';return '<article class="product-card reveal" style="transition-delay:'+Math.min(i*45,320)+'ms"><button class="product-image" data-id="'+p.id+'" aria-label="View '+esc(p.title)+'"><img src="'+esc(main)+'" alt="'+esc(p.title)+'" loading="lazy">'+(alt?'<img class="alt-img" src="'+esc(alt)+'" alt="" aria-hidden="true" loading="lazy">':'')+'</button><div class="product-info"><span class="product-category">'+esc(p.category)+'</span><h3 class="product-title">'+esc(p.title)+'</h3><button class="product-details-btn" data-id="'+p.id+'">View details <span class="arr">→</span></button></div></article>'}).join('');grid.onclick=e=>{const b=e.target.closest('[data-id]');if(b)openProduct(Number(b.dataset.id))};const more=$('#collection-toggle');if(all.length>8&&state.filter==='all'){more.hidden=false;more.textContent=state.expanded?'Show fewer':'View all '+all.length+' designs'}else more.hidden=true;observeReveals()}
 let lastFocus=null;
-function setModalZoom(next){state.modalZoom=Math.max(1,Math.min(3,Number(next)||1));const stage=$('#modal-stage');const image=$('#modal-photo');stage.classList.toggle('is-zoomed',state.modalZoom>1);if(image)image.style.transform='scale('+state.modalZoom+')';const out=$('#modal-zoom-out'),reset=$('#modal-zoom-reset');if(out)out.disabled=state.modalZoom<=1;if(reset)reset.hidden=state.modalZoom<=1}
+function setModalZoom(next){
+  state.modalZoom=Math.max(1,Math.min(3,Number(next)||1));
+  const stage=$('#modal-stage');
+  const media=stage?.querySelector('#modal-photo:not([hidden]),#modal-video:not([hidden])');
+  if(!stage||!media)return;
+  stage.classList.toggle('is-zoomed',state.modalZoom>1);
+  media.style.transform='scale('+state.modalZoom+')';
+  const out=$('#modal-zoom-out'),reset=$('#modal-zoom-reset'),label=$('#modal-zoom-level');
+  if(out)out.disabled=state.modalZoom<=1;
+  if(reset)reset.hidden=state.modalZoom<=1;
+  if(label)label.textContent=Math.round(state.modalZoom*100)+'%';
+}
 function showModalMedia(i){const m=state.modalMedia||[];if(!m.length)return;const n=m.length;state.modalIndex=((i%n)+n)%n;state.modalZoom=1;const item=m[state.modalIndex],stage=$('#modal-stage'),photo=$('#modal-photo'),video=$('#modal-video');stage.classList.remove('is-video');if(item.type==='video'){photo.hidden=true;video.hidden=false;video.src=item.src;video.load();stage.classList.add('is-video')}else{video.pause();video.removeAttribute('src');video.load();video.hidden=true;photo.hidden=false;photo.src=item.src;photo.alt=$('#modal-title')?.textContent||'Product media'}setModalZoom(1);const thumbs=$('#modal-thumbs');if(n>1){thumbs.innerHTML=m.map((item,j)=>'<button class="modal-thumb'+(j===state.modalIndex?' active':'')+'" data-thumb="'+j+'" aria-label="'+(item.type==='video'?'Video':'Photo')+' '+(j+1)+' of '+n+'">'+(item.type==='video'?'<span class="modal-thumb-video">Video</span>':'<img src="'+esc(item.src)+'" alt="">')+'</button>').join('');$('.modal-nav.prev').hidden=false;$('.modal-nav.next').hidden=false}else{thumbs.innerHTML='';$('.modal-nav.prev').hidden=true;$('.modal-nav.next').hidden=true}}
 function openProduct(id){const p=state.products.find(x=>Number(x.id)===id);if(!p)return;const m=mediaList(p);state.modalMedia=m;state.modalIndex=0;const photo=$('#modal-photo');photo.alt=p.title;showModalMedia(0);$('#modal-category').textContent=p.category;$('#modal-title').textContent=p.title;$('#modal-desc').textContent=p.description||'';const wa=$('#modal-wa-btn');wa.href='https://wa.me/'+state.whatsapp+'?text='+encodeURIComponent('Hello JHALAR, I am interested in '+p.title+'.');wa.innerHTML='Enquire about this design <span aria-hidden="true">→</span>';const modal=$('#product-modal');lastFocus=document.activeElement;modal.classList.add('open');modal.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';$('#modal-close').focus()}
 function closeModal(){const m=$('#product-modal');if(!m.classList.contains('open'))return;m.classList.remove('open');m.setAttribute('aria-hidden','true');document.body.style.overflow='';if(lastFocus&&typeof lastFocus.focus==='function')lastFocus.focus();lastFocus=null}
@@ -188,7 +199,17 @@ $('#collection-toggle').onclick=()=>{state.expanded=!state.expanded;renderProduc
 $('#menu').onclick=()=>{const b=$('#menu'),n=$('#mobile-nav'),open=!n.classList.contains('open');n.classList.toggle('open',open);b.setAttribute('aria-expanded',String(open))};
 $('#mobile-nav').onclick=e=>{if(e.target.matches('a')){$('#mobile-nav').classList.remove('open');$('#menu').setAttribute('aria-expanded','false')}};
 document.addEventListener('click',e=>{if(e.target.closest('[data-close]'))closeModal()});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
-document.querySelectorAll('.modal-nav').forEach(b=>b.addEventListener('click',()=>showModalMedia(state.modalIndex+Number(b.dataset.nav))));document.querySelectorAll('[data-zoom]').forEach(b=>b.addEventListener('click',()=>setModalZoom(b.dataset.zoom==='reset'?1:state.modalZoom+Number(b.dataset.zoom))));
+document.querySelectorAll('.modal-nav').forEach(b=>b.addEventListener('click',()=>showModalMedia(state.modalIndex+Number(b.dataset.nav))));
+document.querySelectorAll('[data-zoom]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();setModalZoom(b.dataset.zoom==='reset'?1:state.modalZoom+Number(b.dataset.zoom))}));
+const modalStage=$('#modal-stage');
+if(modalStage){
+  modalStage.addEventListener('dblclick',()=>setModalZoom(state.modalZoom>1?1:2));
+  modalStage.addEventListener('wheel',e=>{
+    if(!$('#product-modal')?.classList.contains('open'))return;
+    e.preventDefault();
+    setModalZoom(state.modalZoom+(e.deltaY<0?.2:-.2));
+  },{passive:false});
+}
 $('#modal-thumbs').addEventListener('click',e=>{const b=e.target.closest('[data-thumb]');if(b)showModalMedia(Number(b.dataset.thumb))});
 window.addEventListener('scroll',()=>{$('.header').classList.toggle('scrolled',window.scrollY>8)},{passive:true});
 $('#year').textContent=new Date().getFullYear();
