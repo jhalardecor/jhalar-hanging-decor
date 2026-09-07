@@ -3138,3 +3138,33 @@ body{padding-top:var(--header-h)!important}
     align-items:center!important;
   }
 }
+
+/* UX POLISH — purposeful micro-interactions */
+.product-card{transition:transform .28s ease,box-shadow .28s ease}
+.product-image{position:relative;overflow:hidden;isolation:isolate;background:rgba(255,250,241,.65)}
+.product-image::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,rgba(255,255,255,0),rgba(255,255,255,.38),rgba(255,255,255,0));transform:translateX(-110%);transition:transform .55s ease;pointer-events:none}
+.product-image img{opacity:0;transition:opacity .35s ease,transform .45s ease}
+.product-image.media-ready img,.product-image img[src]{opacity:1}
+@media(hover:hover) and (pointer:fine){.product-card:hover{transform:translateY(-4px);box-shadow:0 14px 34px rgba(20,25,66,.08)}.product-card:hover .product-image img{transform:scale(1.025)}.product-card:hover .product-image::after{transform:translateX(110%)}}
+@media(hover:none){.product-card:active{transform:scale(.985)}}
+.filter-btn{transition:background .22s ease,color .22s ease,transform .22s ease,box-shadow .22s ease}
+.filter-btn.active{transform:translateY(-1px);box-shadow:0 5px 14px rgba(20,25,66,.10)}
+.product-grid.filter-changing .product-card{animation:catalogueRefresh .24s ease both}
+@keyframes catalogueRefresh{from{opacity:.5;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+.audience-item,.planning-option{appearance:none;border:0;background:transparent;font:inherit;cursor:pointer;transition:color .2s ease,opacity .2s ease,transform .2s ease}
+.audience-item{padding:0;margin:0;color:inherit;opacity:.55}
+.audience-item.active{opacity:1;color:#C82039;font-weight:600}
+.audience-note{margin:.8rem 0 0;min-height:1.5em;max-width:48ch}
+.interaction-swap{animation:copySwap .28s ease}
+@keyframes copySwap{from{opacity:.25;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+.planning-picker{margin:1.25rem 0}
+.planning-label{display:block;margin-bottom:.7rem;font-size:.82rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+.planning-options{display:flex;flex-wrap:wrap;gap:.45rem}
+.planning-option{padding:.5rem .7rem;border-radius:999px;background:rgba(20,25,66,.06);color:#141942}
+.planning-option.active{background:#C82039;color:#fff;box-shadow:0 5px 14px rgba(200,32,57,.18)}
+.header .nav a{transition:color .2s ease,font-weight .2s ease,opacity .2s ease}
+.header .nav a.nav-current{color:#C82039;font-weight:600}
+.header a[href*="wa.me"],.contact-cta,#modal-wa-btn{transition:transform .16s ease,filter .16s ease}
+.header a[href*="wa.me"]:active,.contact-cta:active,#modal-wa-btn:active{transform:scale(.97)}
+@media(max-width:760px){.audience-items{display:flex;flex-wrap:wrap;gap:.55rem}.audience-item{padding:.48rem .65rem;background:rgba(20,25,66,.05);border-radius:999px}.audience-item.active{background:rgba(200,32,57,.10)}}
+@media(prefers-reduced-motion:reduce){.product-card,.product-image::after,.product-image img,.filter-btn,.interaction-swap{transition:none!important;animation:none!important}}
