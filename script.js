@@ -391,3 +391,68 @@ initProducts();initRuntime();
   new MutationObserver(()=>{if(!modal.classList.contains('open'))reset()})
     .observe(modal,{attributes:true,attributeFilter:['class']});
 })();
+
+
+/* Single contained pan + pinch controller. Replaces scale-only drifting behavior. */
+(function(){
+  const stage=document.getElementById('modal-stage');
+  const img=document.getElementById('modal-photo');
+  if(!stage||!img)return;
+  let pts=new Map(), scale=1, tx=0, ty=0, startScale=1, startTx=0, startTy=0;
+  let startDist=0,startMid=null,dragStart=null;
+
+  const clamp=()=>{
+    const r=stage.getBoundingClientRect();
+    const iw=img.naturalWidth||r.width, ih=img.naturalHeight||r.height;
+    const fit=Math.min(r.width/iw,r.height/ih);
+    const bw=iw*fit*scale,bh=ih*fit*scale;
+    const maxX=Math.max(0,(bw-r.width)/2),maxY=Math.max(0,(bh-r.height)/2);
+    tx=Math.max(-maxX,Math.min(maxX,tx));
+    ty=Math.max(-maxY,Math.min(maxY,ty));
+  };
+  const render=()=>{
+    clamp();
+    img.style.transform='translate('+tx+'px,'+ty+'px) scale('+scale+')';
+    stage.classList.toggle('is-zoomed',scale>1.01);
+  };
+  const reset=()=>{scale=1;tx=0;ty=0;render()};
+
+  stage.addEventListener('pointerdown',e=>{
+    if(matchMedia('(min-width:761px)').matches||stage.classList.contains('is-video'))return;
+    pts.set(e.pointerId,{x:e.clientX,y:e.clientY});
+    stage.setPointerCapture?.(e.pointerId);
+    if(pts.size===1){dragStart={x:e.clientX,y:e.clientY};startTx=tx;startTy=ty}
+    if(pts.size===2){
+      const p=[...pts.values()];
+      startDist=Math.hypot(p[0].x-p[1].x,p[0].y-p[1].y);
+      startScale=scale;
+      startMid={x:(p[0].x+p[1].x)/2,y:(p[0].y+p[1].y)/2};
+    }
+  });
+  stage.addEventListener('pointermove',e=>{
+    if(matchMedia('(min-width:761px)').matches||!pts.has(e.pointerId))return;
+    pts.set(e.pointerId,{x:e.clientX,y:e.clientY});
+    if(pts.size===2){
+      const p=[...pts.values()];
+      const d=Math.hypot(p[0].x-p[1].x,p[0].y-p[1].y);
+      scale=Math.max(1,Math.min(3,startScale*(d/startDist)));
+      render();
+      return;
+    }
+    if(pts.size===1&&scale>1.01&&dragStart){
+      tx=startTx+(e.clientX-dragStart.x);
+      ty=startTy+(e.clientY-dragStart.y);
+      render();
+    }
+  });
+  const end=e=>{
+    pts.delete(e.pointerId);
+    if(pts.size===0){startDist=0;dragStart=null}
+    else if(pts.size===1){const p=[...pts.values()][0];dragStart={x:p.x,y:p.y};startTx=tx;startTy=ty}
+  };
+  stage.addEventListener('pointerup',end);
+  stage.addEventListener('pointercancel',end);
+
+  /* Always reset when a new modal image loads. */
+  img.addEventListener('load',reset);
+})();
