@@ -920,6 +920,7 @@ hr.divider{margin:12px 0;border:none;border-top:1px solid rgba(128,128,128,0.1)}
       <button class="vp-btn active" data-vp="desktop" onclick="setViewport('desktop')"><i class="fas fa-desktop"></i> Desktop</button>
       <button class="vp-btn" data-vp="mobile" onclick="setViewport('mobile')"><i class="fas fa-mobile-alt"></i> Mobile</button>
       <button class="vp-btn" data-vp="tablet" onclick="setViewport('tablet')"><i class="fas fa-tablet-alt"></i> Tablet</button>
+      <button class="vp-btn" id="move-mode-btn" onclick="toggleMoveMode()" title="Move elements directly on the canvas"><i class="fas fa-arrows-alt"></i> Move</button>
       <span class="zoom-ctl" title="Zoom the preview canvas"><i class="fas fa-search-plus" style="font-size:11px;color:var(--text3)"></i>
         <select id="zoom-select" onchange="setZoom(Number(this.value))" style="padding:4px 6px;font-size:12px;font-weight:600;background:var(--bg);border:1px solid rgba(128,128,128,0.15);border-radius:var(--r-sm);color:var(--text);cursor:pointer">
           <option value="0.8">80%</option><option value="0.9">90%</option><option value="1" selected>100%</option><option value="1.1">110%</option><option value="1.25">125%</option><option value="1.4">140%</option>
