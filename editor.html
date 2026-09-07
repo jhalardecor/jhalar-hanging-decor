@@ -250,6 +250,18 @@ hr.divider{margin:12px 0;border:none;border-top:1px solid rgba(128,128,128,0.1)}
 .prod-gallery .gal-item .gal-del{position:absolute;top:3px;right:3px;width:18px;height:18px;border:none;border-radius:50%;background:rgba(47,30,37,0.75);color:#fff;font-size:9px;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .15s}
 .prod-gallery .gal-item:hover .gal-del{opacity:1}
 .prod-gallery .gal-empty{grid-column:1/-1;font-size:11.5px;color:var(--text3);padding:8px 2px}
+
+/* === Ultra Inspector + uncropped preview canvas === */
+.sidebar-tab[data-tab="inspector"]{color:var(--gold)}
+.inspector-breadcrumb{font-family:var(--mono);font-size:10px;line-height:1.5;color:var(--text3);word-break:break-word;margin-bottom:9px}
+.inspector-actions{display:flex;gap:6px}
+.inspector-actions .btn-sm{flex:1;justify-content:center}
+#panel-inspector input[type="range"]{width:100%;padding:0;min-height:24px}
+#panel-inspector input[type="color"]{width:100%;height:34px}
+.preview-container{align-items:flex-start;justify-content:flex-start;padding:20px;overflow:auto}
+.zoom-box{overflow:visible;flex:none}
+.preview-container iframe{transform-origin:0 0}
+
 </style>
 </head>
 <body>
@@ -276,9 +288,48 @@ hr.divider{margin:12px 0;border:none;border-top:1px solid rgba(128,128,128,0.1)}
       <button class="sidebar-tab" data-tab="products"><i class="fas fa-box"></i> Products</button>
       <button class="sidebar-tab" data-tab="media"><i class="fas fa-images"></i> Media</button>
       <button class="sidebar-tab" data-tab="seo"><i class="fas fa-search"></i> SEO</button>
+      <button class="sidebar-tab" data-tab="inspector"><i class="fas fa-crosshairs"></i> Inspector</button>
       <button class="sidebar-tab" data-tab="publish"><i class="fas fa-upload"></i> Publish</button>
     </nav>
     <div class="sidebar-content">
+
+
+
+      <!-- INSPECTOR -->
+      <div class="tab-panel" id="panel-inspector">
+        <h3><i class="fas fa-crosshairs"></i> Selected item</h3>
+        <p class="hint">Click any section, group, text block or image in the live preview. Edit the selected element without losing the preview.</p>
+        <div id="inspector-empty" class="panel-section"><p>Select something in the preview to begin.</p></div>
+        <div id="inspector-panel" style="display:none">
+          <div class="panel-section inspector-target">
+            <div class="inspector-breadcrumb" id="inspector-path">Nothing selected</div>
+            <div class="inspector-actions">
+              <button class="btn-sm" onclick="selectInspectorParent()"><i class="fas fa-level-up-alt"></i> Parent</button>
+              <button class="btn-sm danger" onclick="clearInspectorSelection()"><i class="fas fa-times"></i> Clear</button>
+            </div>
+          </div>
+          <div class="panel-section">
+            <h4>Surface</h4>
+            <div class="form-row"><div class="form-group"><label>Background</label><input id="ins-bg" type="color"></div><div class="form-group"><label>Opacity</label><input id="ins-opacity" type="range" min="0" max="1" step="0.05"><span class="help" id="ins-opacity-value"></span></div></div>
+            <div class="form-row"><div class="form-group"><label>Text colour</label><input id="ins-color" type="color"></div><div class="form-group"><label>Corner radius</label><input id="ins-radius" type="range" min="0" max="80" step="1"><span class="help" id="ins-radius-value"></span></div></div>
+          </div>
+          <div class="panel-section">
+            <h4>Layout</h4>
+            <div class="form-row-3"><div class="form-group"><label>Align</label><select id="ins-align"><option value="">Auto</option><option value="left">Left</option><option value="center">Center</option><option value="right">Right</option></select></div><div class="form-group"><label>Width</label><input id="ins-width" type="text" placeholder="Auto / 60%"></div><div class="form-group"><label>Max width</label><input id="ins-maxwidth" type="text" placeholder="None / 900px"></div></div>
+            <div class="form-row"><div class="form-group"><label>Padding</label><input id="ins-padding" type="text" placeholder="24px"></div><div class="form-group"><label>Gap</label><input id="ins-gap" type="text" placeholder="16px"></div></div>
+          </div>
+          <div class="panel-section">
+            <h4>Typography</h4>
+            <div class="form-row-3"><div class="form-group"><label>Size</label><input id="ins-fontsize" type="text" placeholder="Auto"></div><div class="form-group"><label>Weight</label><input id="ins-weight" type="number" min="100" max="900" step="100"></div><div class="form-group"><label>Line height</label><input id="ins-leading" type="text" placeholder="Auto"></div></div>
+            <div class="form-row"><div class="form-group"><label>Letter spacing</label><input id="ins-tracking" type="text" placeholder="Auto"></div><div class="form-group"><label>Transform</label><select id="ins-transform"><option value="">Auto</option><option value="none">Normal</option><option value="uppercase">UPPERCASE</option><option value="lowercase">lowercase</option></select></div></div>
+          </div>
+          <div class="panel-section">
+            <h4>Image</h4>
+            <div class="form-row"><div class="form-group"><label>Fit</label><select id="ins-fit"><option value="">Auto</option><option value="contain">Contain</option><option value="cover">Cover</option></select></div><div class="form-group"><label>Position</label><select id="ins-position"><option value="">Auto</option><option value="center">Center</option><option value="top">Top</option><option value="bottom">Bottom</option></select></div></div>
+          </div>
+          <button class="btn-sm primary" style="width:100%;justify-content:center" onclick="applyInspectorToAll()">Apply selected settings</button>
+        </div>
+      </div>
 
       <!-- CONTENT -->
       <div class="tab-panel active" id="panel-content">
@@ -847,6 +898,6 @@ hr.divider{margin:12px 0;border:none;border-top:1px solid rgba(128,128,128,0.1)}
 </div>
 <div class="toast" id="toast"></div>
 <script src="scripts/product-naming.js?v=20260908-catalogue"></script>
-<script src="editor.js?v=20260908-shopify-hero"></script>
+<script src="editor.js?v=ultra-inspector-28"></script>
 </body>
 </html>
