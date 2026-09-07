@@ -591,3 +591,29 @@ img,video,svg{max-width:100%}
   .hero-banner-copy h1{font-size:clamp(2rem,9vw,3rem)!important;line-height:1!important;margin-bottom:10px}
   .hero-lead{font-size:clamp(.85rem,3.7vw,1rem)!important;line-height:1.45;margin-bottom:14px}
 }
+
+
+/* 24. HEADER + FILTER ALIGNMENT — FINAL VISUAL BASELINE */
+.header{min-height:82px;border-bottom:1px solid rgba(98,35,49,.10);box-shadow:0 1px 0 rgba(20,25,66,.03)}
+.header-row{min-height:82px!important;height:auto!important;display:flex;align-items:center}
+.brand{display:flex!important;align-items:center;flex:0 0 auto;max-width:none!important}
+.brand img{display:block;width:250px!important;height:auto!important;max-height:64px!important;object-fit:contain}
+.nav{margin-left:auto;display:flex;align-items:center;gap:clamp(20px,2.8vw,40px)}
+.nav a{font-size:16px;line-height:44px}
+
+.collection .section-head{align-items:end}
+.filters-wrap{display:flex;align-items:center;width:100%;min-height:52px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.filters{display:flex!important;align-items:center!important;gap:10px!important;width:max-content!important;min-width:100%!important;margin:0!important;padding:4px 2px 8px!important}
+.filter-btn{display:inline-flex!important;align-items:center!important;justify-content:center!important;height:44px!important;min-height:44px!important;margin:0!important;flex:0 0 auto!important}
+.filters-wrap::after{content:"";display:block;flex:0 0 18px}
+
+@media(max-width:760px){
+ .header{min-height:76px!important}
+ .header-row{min-height:76px!important;height:76px!important;width:calc(100% - 32px)!important}
+ .brand img{width:160px!important;max-width:calc(100vw - 130px)!important;max-height:52px!important}
+ .menu{width:48px!important;height:48px!important;flex:0 0 48px}
+ .collection .section-head{align-items:stretch}
+ .filters-wrap{margin:0!important;padding:2px 0 10px!important;min-height:58px}
+ .filters{gap:9px!important;padding:4px 16px 8px 0!important}
+ .filter-btn{height:44px!important;min-height:44px!important;padding-inline:17px!important}
+}
