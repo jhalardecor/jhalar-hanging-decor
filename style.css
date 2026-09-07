@@ -3168,3 +3168,20 @@ body{padding-top:var(--header-h)!important}
 .header a[href*="wa.me"]:active,.contact-cta:active,#modal-wa-btn:active{transform:scale(.97)}
 @media(max-width:760px){.audience-items{display:flex;flex-wrap:wrap;gap:.55rem}.audience-item{padding:.48rem .65rem;background:rgba(20,25,66,.05);border-radius:999px}.audience-item.active{background:rgba(200,32,57,.10)}}
 @media(prefers-reduced-motion:reduce){.product-card,.product-image::after,.product-image img,.filter-btn,.interaction-swap{transition:none!important;animation:none!important}}
+
+
+/* PRODUCT CARD TAP STATE — prevent mobile browser highlight from lingering after modal opens */
+.product-card,
+.product-card *,
+.product-card a,
+.product-card button{
+  -webkit-tap-highlight-color:transparent!important;
+}
+.product-card:focus,
+.product-card:focus-within{outline:none!important}
+@media(hover:none){
+  .product-card:active{
+    transform:scale(.99)!important;
+    transition-duration:.08s!important;
+  }
+}
