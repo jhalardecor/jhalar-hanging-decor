@@ -38,7 +38,27 @@ function renderFilters(){
 
     renderProducts();
 
+    /* Keep the page fixed, but move the horizontal filter rail so the next choices
+       remain visible without asking the user to swipe manually. */
     requestAnimationFrame(()=>{
+      const rail=el.closest('.filters-wrap');
+      if(rail){
+        const buttons=[...el.querySelectorAll('[data-filter]')];
+        const index=buttons.indexOf(b);
+        const next=buttons[index+1];
+        const previous=buttons[index-1];
+        const railRect=rail.getBoundingClientRect();
+        const candidate=next||b;
+        const candidateRect=candidate.getBoundingClientRect();
+
+        if(candidateRect.right>railRect.right-16){
+          rail.scrollBy({left:candidateRect.right-(railRect.right-16),behavior:'smooth'});
+        }else if(previous && candidateRect.left<railRect.left+16){
+          rail.scrollBy({left:candidateRect.left-(railRect.left+16),behavior:'smooth'});
+        }
+      }
+
+      /* Restore exact document position after rendering; only the filter rail moves. */
       window.scrollTo(scrollX,scrollY);
       const target=$('#product-grid');
       if(target){
@@ -418,4 +438,4 @@ initProducts();initRuntime();
    ensureLatest(true).then(reloading=>{if(!reloading){window.scrollTo({top:0,behavior:'smooth'});history.replaceState(null,'',location.pathname+location.search)}});
  },true);
 })();
-/* build 20260908.24 — filter rail auto-advance + results navigation */
+/* filter rail advances horizontally while the page stays fixed */
