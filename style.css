@@ -199,3 +199,76 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--ink);outline-offset
  .custom-image,.story-image{box-shadow:0 14px 36px rgba(98,35,49,.10)}
  .custom::before,.story::before{height:56px}
 }
+
+
+/* 16. PRODUCT CARD SYSTEM — real product asset first, UI second */
+.product-grid{
+ align-items:start;
+}
+.product-card{
+ display:flex;
+ flex-direction:column;
+ min-width:0;
+ isolation:isolate;
+}
+.product-image{
+ display:block;
+ cursor:pointer;
+ appearance:none;
+ border:0;
+ text-align:left;
+}
+.product-image img{
+ filter:drop-shadow(0 8px 14px rgba(98,35,49,.08));
+}
+.product-info{
+ display:flex;
+ flex-direction:column;
+ align-items:flex-start;
+ min-width:0;
+}
+.product-category{
+ min-height:1.1em;
+ font-weight:700;
+}
+.product-title{
+ min-width:0;
+ text-wrap:balance;
+}
+.product-details-btn{
+ color:#622331;
+ border-bottom:1px solid rgba(98,35,49,.18);
+ padding-bottom:8px;
+}
+.product-details-btn:hover{
+ border-color:#622331;
+}
+.product-card:focus-within::before{
+ border-color:#622331;
+}
+.product-image:focus-visible,
+.product-details-btn:focus-visible{
+ outline:2px solid #622331;
+ outline-offset:4px;
+}
+
+@media (max-width:760px){
+ .product-grid{
+  gap:28px 16px;
+ }
+ .product-image{
+  aspect-ratio:1/1;
+ }
+ .product-category{
+  font-size:.68rem;
+  letter-spacing:.065em;
+ }
+ .product-title{
+  font-size:clamp(.98rem,4.1vw,1.08rem);
+  line-height:1.35;
+ }
+ .product-details-btn{
+  margin-top:10px;
+  font-size:.84rem;
+ }
+}
