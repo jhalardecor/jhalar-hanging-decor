@@ -694,3 +694,39 @@ img,video,svg{max-width:100%}
     font-size:.86rem!important;
   }
 }
+
+
+/* 26. HERO COPY CONTAINMENT — NEVER ALLOW COPY TO ESCAPE 4:5 FRAME */
+@media(max-width:760px){
+  .hero.hero-banner{isolation:isolate!important}
+  .hero-banner-content.shell{
+    box-sizing:border-box!important;
+    max-height:45%!important;
+    overflow:hidden!important;
+    transform:none!important;
+    top:auto!important;
+    bottom:0!important;
+  }
+  .hero-banner-copy,
+  .hero-banner-copy *{
+    box-sizing:border-box!important;
+  }
+  .hero-banner-copy{
+    position:relative!important;
+    transform:none!important;
+  }
+  .hero-banner-copy .kicker{display:none!important}
+  .hero-banner-copy h1{
+    font-size:clamp(1.8rem,7.8vw,2.5rem)!important;
+    line-height:1.04!important;
+  }
+  .hero-lead{
+    font-size:.82rem!important;
+    line-height:1.35!important;
+    margin-top:6px!important;
+  }
+  .hero-banner-cta{
+    display:inline-flex!important;
+    margin-top:7px!important;
+  }
+}
