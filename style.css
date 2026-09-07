@@ -1510,3 +1510,30 @@ button,.btn,.hero-banner-cta,.filter-btn{
     transform:rotate(-45deg)!important;
   }
 }
+
+
+
+/* HUMAN-FIRST JOURNEY SYSTEM — CALM, TRUST-BUILDING UX */
+.audience-strip{background:linear-gradient(180deg,#fffdf8 0%,#fffaf1 100%);border-top:1px solid rgba(20,25,66,.08)}
+.audience-label{color:#622331;letter-spacing:.04em;text-transform:none;font-size:1rem;font-weight:600}
+.audience-items span{color:#141942}
+.section-support-group p,.custom-copy p,.story-copy p{color:rgba(20,25,66,.82)}
+.custom-copy h2,.story-copy h2,.contact-box h2{max-width:15ch}
+.custom-copy,.story-copy{position:relative}
+.custom-copy::before,.story-copy::before{content:"";display:block;width:42px;height:2px;background:#c82039;margin-bottom:18px}
+.contact-box{position:relative}
+.contact-box>div{max-width:680px}
+.contact-box h2{max-width:18ch}
+.contact-box p{max-width:58ch!important}
+.contact-cta{transition:transform .25s var(--ease),background .25s var(--ease),border-color .25s var(--ease)}
+.contact-cta:hover{transform:translateY(-2px)}
+.product-card{transition:transform .28s var(--ease),box-shadow .28s var(--ease),border-color .28s var(--ease)}
+.filter-btn{transition:background .2s var(--ease),color .2s var(--ease),border-color .2s var(--ease),transform .2s var(--ease)}
+@media(max-width:900px){
+ .audience-label{font-size:1.05rem;line-height:1.35}
+ .contact-box h2{max-width:15ch}
+}
+
+/* Trust-oriented microcopy hierarchy */
+.hero-lead{max-width:52ch}
+.hero-banner-cta{font-weight:600!important}
