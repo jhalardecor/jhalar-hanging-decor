@@ -2783,3 +2783,24 @@ button:not(.filter-btn),
     hyphens:none!important;
   }
 }
+
+
+/* MOBILE POPUP GUTTERS — align copy to the usable card width without wasted side space */
+@media(max-width:760px){
+  #product-modal .modal-copy{
+    padding:16px 14px calc(18px + env(safe-area-inset-bottom))!important;
+  }
+  #product-modal #modal-title{
+    margin-bottom:12px!important;
+  }
+  #product-modal #modal-desc{
+    width:100%!important;
+    max-width:none!important;
+    padding:0!important;
+    margin:0!important;
+    box-sizing:border-box!important;
+  }
+  #product-modal .modal-wa-btn{
+    width:100%!important;
+  }
+}
