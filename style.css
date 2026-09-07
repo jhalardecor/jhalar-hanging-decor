@@ -1921,3 +1921,17 @@ p,.section-head>p,.hero-banner-copy>p:not(.kicker){letter-spacing:.006em}
 }
 
 @media(max-width:700px){.hero-banner-content{padding-block:clamp(34px,8svh,58px) 22px}.hero-banner-bottom{align-items:flex-start}.hero-audience{width:100%;gap:10px;padding-top:16px}.hero-audience-items{display:grid;grid-template-columns:1fr;gap:8px;font-size:.72rem;line-height:1.35}.hero-audience-items span+span:before{display:none}.hero-audience-items span{white-space:normal}.hero-audience-items span{padding-left:13px;position:relative}.hero-audience-items span:after{content:'';position:absolute;left:0;top:.5em;width:4px;height:4px;border-radius:50%;background:#efb85f}}
+
+
+/* ===== PAGE COMPOSITION SYSTEM ===== */
+.page-section{position:relative}
+.section-inner{width:100%;margin-inline:auto}
+.section-layout{min-width:0}
+.section-head{min-width:0}
+.section-head>div{display:grid;gap:var(--space-2,8px)}
+.section-head>p{margin:0}
+.hero-banner-content,.section-inner{padding-inline:var(--page-gutter,clamp(20px,4vw,72px))}
+@media(max-width:700px){
+  .hero-banner-content,.section-inner{padding-inline:var(--page-gutter,20px)}
+  .section-head{gap:22px}
+}
