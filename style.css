@@ -1055,3 +1055,16 @@ p,.section-head>p,.hero-banner-copy>p:not(.kicker){letter-spacing:.006em}
 @media(max-width:760px){
   #product-modal .modal-stage{touch-action:none!important}
 }
+
+
+/* MOBILE HERO — exactly the same gradient treatment as desktop */
+@media(max-width:760px){
+  .hero-banner-shade{
+    background:linear-gradient(90deg,
+      rgba(255,250,245,.97) 0%,
+      rgba(255,247,241,.93) 30%,
+      rgba(252,232,222,.72) 48%,
+      rgba(248,222,211,.28) 63%,
+      rgba(248,222,211,0) 78%)!important;
+  }
+}
