@@ -131,6 +131,10 @@ function validateCatalogue(catalogue, registry) {
     const errors=[];
     if(!Number.isSafeInteger(product.id)||product.id<=0||ids.has(product.id)) errors.push('Product ID must be a unique positive integer.'); ids.add(product.id);
     if(!hasText(product.title)) errors.push('Product title is required.');
+    if(Object.prototype.hasOwnProperty.call(product,'gallery')){
+      if(!Array.isArray(product.gallery)) errors.push('Gallery must be an array of local image paths.');
+      else product.gallery.forEach((entry,gi)=>{if(!isLocalImage(entry)) errors.push(`gallery[${gi}] must be a local image path under assets/images/.`)});
+    }
     const hasNaming=Object.prototype.hasOwnProperty.call(product,'naming');
     const assessment=isObject(product.naming)?{...product.naming,productId:product.id,image:product.image,sourceImage:product.sourceImage}:product.naming;
     const result=evaluateNaming(assessment,registry);

@@ -698,6 +698,7 @@ function selectProduct(id) {
   setVal('ed-prod-category', p.category||'');
   setVal('ed-prod-description', p.description||'');
   setVal('ed-prod-image', p.image||'assets/images/og-cover.jpg');
+  renderProdGallery();
   ['ed-prod-title','ed-prod-category','ed-prod-description','ed-prod-image'].forEach(fid => {
     const el = document.getElementById(fid);
     if (el) { el.removeEventListener('input', onProductChange); el.removeEventListener('change', onProductChange); el.addEventListener('input', onProductChange); el.addEventListener('change', onProductChange); }
@@ -709,9 +710,39 @@ function onProductChange() {
   p.description = getVal('ed-prod-description'); p.image = getVal('ed-prod-image');
   renderProductList(); markChanged(); saveDrafts(); applyPreview();
 }
+function renderProdGallery() {
+  const c = document.getElementById('prod-gallery'); if (!c) return;
+  const p = state.products.find(x => x.id === state.selectedProductId);
+  if (!p) { c.innerHTML = '<p class="gal-empty">Select a product first.</p>'; return; }
+  if (!Array.isArray(p.gallery)) p.gallery = [];
+  if (!p.gallery.length) { c.innerHTML = '<p class="gal-empty">No gallery images yet — add a few so the popup shows a full set of photos.</p>'; return; }
+  c.innerHTML = p.gallery.map((g, i) =>
+    '<div class="gal-item"><img src="' + escapeHtml(g) + '" alt="" loading="lazy">' +
+    (i === 0 ? '<span class="gal-main">2nd on card</span>' : '') +
+    '<button class="gal-del" title="Remove" onclick="removeGalleryImage(' + i + ')"><i class="fas fa-times"></i></button></div>'
+  ).join('');
+}
+function removeGalleryImage(i) {
+  const p = state.products.find(x => x.id === state.selectedProductId); if (!p) return;
+  if (!Array.isArray(p.gallery)) p.gallery = [];
+  p.gallery.splice(i, 1);
+  renderProdGallery(); markChanged(); saveDrafts(); applyPreview();
+  showToast('Gallery image removed', 'success');
+}
+function addGalleryImage(path) {
+  if (!path) return;
+  const p = state.products.find(x => x.id === state.selectedProductId);
+  if (!p) { showToast('Select a product first', 'error'); return; }
+  if (!Array.isArray(p.gallery)) p.gallery = [];
+  if (p.gallery.includes(path) || path === p.image) { showToast('Already in this product', 'error'); return; }
+  p.gallery.push(path);
+  state.imagePickTarget = null;
+  renderProdGallery(); markChanged(); saveDrafts(); applyPreview();
+  showToast('Added to product gallery', 'success');
+}
 function addProduct() {
   const m = state.products.reduce((a,p) => Math.max(a,p.id||0),0);
-  state.products.push({id:m+1,title:'New Product',category:'Custom Designs',description:'Describe this product...',image:'assets/images/og-cover.jpg'});
+  state.products.push({id:m+1,title:'New Product',category:'Custom Designs',description:'Describe this product...',image:'assets/images/og-cover.jpg',gallery:[]});
   renderProductList(); selectProduct(state.products[state.products.length-1].id); markChanged(); saveDrafts(); applyPreview();
   showToast('Product added','success');
 }
@@ -772,7 +803,7 @@ function setHeroImage(path) {
 }
 function chooseHeroImage() { chooseImageFor('hero'); }
 function uploadHeroImage() { uploadImageFor('hero'); }
-const IMAGE_TARGET_NAMES = { hero:'hero banner', custom:'custom work', about:'our story', product:'product' };
+const IMAGE_TARGET_NAMES = { hero:'hero banner', custom:'custom work', about:'our story', product:'product', 'product-gallery':'product gallery' };
 function chooseImageFor(target) {
   state.imagePickTarget=target;
   const tab=document.querySelector('.sidebar-tab[data-tab="media"]');
@@ -826,6 +857,7 @@ function selectMedia(path) {
   if(t==='hero'){ setHeroImage(path); const tab=document.querySelector('.sidebar-tab[data-tab="content"]'); if(tab)tab.click(); }
   else if(t==='custom'||t==='about'){ setSectionImage(t,path); const tab=document.querySelector('.sidebar-tab[data-tab="content"]'); if(tab)tab.click(); }
   else if(t==='product'){ setProductImage(path); const tab=document.querySelector('.sidebar-tab[data-tab="products"]'); if(tab)tab.click(); }
+  else if(t==='product-gallery'){ addGalleryImage(path); const tab=document.querySelector('.sidebar-tab[data-tab="products"]'); if(tab)tab.click(); }
 }
 function triggerUpload() { document.getElementById('file-input').click(); }
 function setupUploadZone() {
@@ -926,6 +958,7 @@ async function handleFiles(files) {
         else if(state.imagePickTarget==='custom') setSectionImage('custom',path);
         else if(state.imagePickTarget==='about') setSectionImage('about',path);
         else if(state.imagePickTarget==='product') setProductImage(path);
+        else if(state.imagePickTarget==='product-gallery') addGalleryImage(path);
         renderMediaGrid();
         populateImageDropdowns();
         showToast(`Uploaded ${file.name}`, 'success');

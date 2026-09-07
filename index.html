@@ -112,7 +112,12 @@
  <div class="modal-backdrop" data-close></div>
  <article class="modal-card">
   <button id="modal-close" class="modal-close" data-close aria-label="Close">×</button>
-  <div class="modal-media"><img id="modal-photo" src="" alt=""></div>
+  <div class="modal-media">
+    <img id="modal-photo" src="" alt="">
+    <button class="modal-nav prev" data-nav="-1" aria-label="Previous image">‹</button>
+    <button class="modal-nav next" data-nav="1" aria-label="Next image">›</button>
+    <div class="modal-thumbs" id="modal-thumbs" aria-label="Product photos"></div>
+  </div>
   <div class="modal-copy"><p class="eyebrow" id="modal-category"></p><h3 id="modal-title"></h3><p id="modal-desc"></p><a id="modal-wa-btn" class="text-link" target="_blank" rel="noopener">Enquire about this design <span>→</span></a></div>
  </article>
 </div>

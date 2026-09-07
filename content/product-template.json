@@ -4,6 +4,9 @@
   "description": "",
   "image": "assets/images/products/catalogue/REPLACE.webp",
   "sourceImage": "assets/images/products/SOURCE.jpg",
+  "gallery": [
+    "assets/images/products/catalogue/SECOND.webp"
+  ],
   "naming": {
     "registryVersion": "CURRENT_REGISTRY_VERSION",
     "reviewMethod": "human",

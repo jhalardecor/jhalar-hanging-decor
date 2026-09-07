@@ -243,6 +243,13 @@ hr.divider{margin:12px 0;border:none;border-top:1px solid rgba(128,128,128,0.1)}
 .hero-image-actions{display:flex;gap:6px;margin-top:7px}
 .hero-image-actions .btn-sm{flex:1;justify-content:center}
 .zoom-ctl{display:inline-flex;align-items:center;gap:5px;padding-left:2px}
+.prod-gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(72px,1fr));gap:8px;margin-bottom:8px}
+.prod-gallery .gal-item{position:relative;aspect-ratio:1;border-radius:var(--r-sm);overflow:hidden;border:2px solid rgba(128,128,128,0.18);background:var(--bg2)}
+.prod-gallery .gal-item img{width:100%;height:100%;object-fit:cover;display:block}
+.prod-gallery .gal-item .gal-main{position:absolute;left:0;right:0;bottom:0;background:var(--gold);color:#fff;font-size:9px;font-weight:700;text-align:center;padding:2px 0;letter-spacing:.04em}
+.prod-gallery .gal-item .gal-del{position:absolute;top:3px;right:3px;width:18px;height:18px;border:none;border-radius:50%;background:rgba(47,30,37,0.75);color:#fff;font-size:9px;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .15s}
+.prod-gallery .gal-item:hover .gal-del{opacity:1}
+.prod-gallery .gal-empty{grid-column:1/-1;font-size:11.5px;color:var(--text3);padding:8px 2px}
 </style>
 </head>
 <body>
@@ -733,11 +740,20 @@ hr.divider{margin:12px 0;border:none;border-top:1px solid rgba(128,128,128,0.1)}
           </div>
           <div class="form-group"><label>Description</label><textarea id="ed-prod-description" rows="2"></textarea></div>
           <div class="form-group section-image-editor">
-            <label>Image</label>
+            <label>Main Image</label>
             <select id="ed-prod-image"></select>
             <div class="section-image-actions">
               <button type="button" class="btn-sm" onclick="chooseImageFor('product')"><i class="fas fa-images"></i> Choose from Media</button>
               <button type="button" class="btn-sm primary" onclick="uploadImageFor('product')"><i class="fas fa-upload"></i> Upload new</button>
+            </div>
+          </div>
+          <div class="form-group section-image-editor" style="margin-top:4px">
+            <label>Gallery Images</label>
+            <span class="help" style="display:block;margin:-2px 0 6px">Shown in the product popup like a listing: first image swaps in on card hover, the rest appear as photos in the popup. (Video support comes next.)</span>
+            <div id="prod-gallery" class="prod-gallery"></div>
+            <div class="section-image-actions">
+              <button type="button" class="btn-sm" onclick="chooseImageFor('product-gallery')"><i class="fas fa-images"></i> Add from Media</button>
+              <button type="button" class="btn-sm primary" onclick="uploadImageFor('product-gallery')"><i class="fas fa-upload"></i> Upload new</button>
             </div>
           </div>
         </div>
