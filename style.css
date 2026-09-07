@@ -2674,3 +2674,75 @@ button:not(.filter-btn),
     box-sizing:border-box!important;
   }
 }
+
+
+/* PRODUCT COPY READABILITY — editorial layout for approved long descriptions */
+#product-modal .modal-copy{
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:flex-start!important;
+  min-width:0!important;
+}
+#product-modal #modal-category{
+  margin:0 0 8px!important;
+  font-size:.72rem!important;
+  line-height:1.25!important;
+  letter-spacing:.12em!important;
+  text-transform:uppercase!important;
+  color:var(--red)!important;
+  font-weight:650!important;
+}
+#product-modal #modal-title{
+  margin:0 0 18px!important;
+  max-width:18ch!important;
+  text-wrap:balance;
+}
+#product-modal #modal-desc{
+  margin:0!important;
+  max-width:62ch!important;
+  font-size:clamp(.95rem,1.05vw,1.05rem)!important;
+  line-height:1.68!important;
+  letter-spacing:0!important;
+  color:rgba(20,25,66,.78)!important;
+  text-wrap:pretty;
+  overflow-wrap:normal!important;
+  word-break:normal!important;
+  hyphens:auto;
+}
+#product-modal .modal-copy > * + .modal-wa-btn{
+  margin-top:24px!important;
+}
+#product-modal .modal-wa-btn{
+  flex:0 0 auto!important;
+}
+@media(max-width:760px){
+  #product-modal .modal-copy{
+    padding:20px 18px calc(24px + env(safe-area-inset-bottom))!important;
+  }
+  #product-modal #modal-category{
+    margin-bottom:6px!important;
+    font-size:.68rem!important;
+  }
+  #product-modal #modal-title{
+    margin-bottom:14px!important;
+    max-width:100%!important;
+  }
+  #product-modal #modal-desc{
+    max-width:100%!important;
+    font-size:.96rem!important;
+    line-height:1.62!important;
+    text-wrap:auto;
+  }
+  #product-modal .modal-copy > * + .modal-wa-btn{
+    margin-top:20px!important;
+  }
+}
+/* Keep catalogue cards compact and consistent; full approved copy belongs in the detail view. */
+.product-card .product-info{
+  min-width:0!important;
+}
+.product-card .product-title{
+  text-wrap:balance;
+  overflow-wrap:normal!important;
+  word-break:normal!important;
+}
