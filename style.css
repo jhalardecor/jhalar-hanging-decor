@@ -1994,36 +1994,59 @@ button,.btn,.hero-banner-cta,.filter-btn{
 }
 
 
-/* CONTACT CTA — PREMIUM RED ACTION */
-.contact.section .contact-cta{
+
+
+/* FINAL CTA + FILTER SHAPE SYSTEM — authoritative */
+/* CTAs are refined rectangles. Pills are reserved for filters only. */
+:root{--radius-btn:2px}
+button:not(.filter-btn),
+.more-btn,
+.modal-wa-btn,
+.contact-cta,
+.hero-banner-cta,
+.product-details-btn,
+.text-link{
+  border-radius:var(--radius-btn)!important;
+}
+.filter-btn{
+  border-radius:999px!important;
+}
+
+/* Premium monochromatic JHALAR footer */
+.footer.site-footer{
   position:relative!important;
+  overflow:hidden!important;
+  background:
+    radial-gradient(ellipse at 15% 0%,rgba(255,250,241,.12) 0%,rgba(255,250,241,0) 42%),
+    radial-gradient(ellipse at 100% 100%,rgba(98,35,49,.45) 0%,rgba(98,35,49,0) 55%),
+    linear-gradient(135deg,#C82039 0%,#BD1E37 30%,#A71931 62%,#7D2634 100%)!important;
+  color:#FFFAF1!important;
+  border-top:1px solid rgba(255,250,241,.18)!important;
+}
+.footer.site-footer *{border-color:rgba(255,250,241,.18)!important}
+.footer.site-footer .footer-tagline,
+.footer.site-footer .footer-col a,
+.footer.site-footer .footer-col span,
+.footer.site-footer .footer-bottom p{color:rgba(255,250,241,.78)!important}
+.footer.site-footer .footer-col h4{color:#FFFAF1!important}
+.footer.site-footer .footer-col a:hover{color:#FFFAF1!important}
+.footer.site-footer .footer-bottom{border-top:1px solid rgba(255,250,241,.18)!important}
+
+/* One premium CTA language across the site */
+.contact.section .contact-cta,
+.modal-wa-btn,
+.more-btn{
+  border-radius:2px!important;
+}
+.contact.section .contact-cta{
   min-width:270px!important;
-  min-height:60px!important;
-  padding:0 24px 0 28px!important;
+  min-height:58px!important;
+  padding:0 24px!important;
   border:1px solid rgba(255,250,241,.28)!important;
   background:linear-gradient(135deg,#C82039 0%,#A71931 58%,#622331 100%)!important;
   color:#FFFAF1!important;
-  box-shadow:0 16px 34px rgba(98,35,49,.22), inset 0 1px 0 rgba(255,250,241,.22)!important;
-  letter-spacing:.01em!important;
-}
-.contact.section .contact-cta::before{
-  content:"";
-  position:absolute;
-  inset:1px;
-  pointer-events:none;
-  background:linear-gradient(110deg,rgba(255,255,255,.14),transparent 42%);
-}
-.contact.section .contact-cta-label,.contact.section .contact-cta-arrow{position:relative;z-index:1}
-.contact.section .contact-cta-arrow{
-  width:30px;height:30px;
-  display:grid;place-items:center;
-  border:1px solid rgba(255,250,241,.38);
-  border-radius:50%;
-}
-.contact.section .contact-cta:hover{
-  background:linear-gradient(135deg,#A71931 0%,#622331 100%)!important;
-  box-shadow:0 20px 42px rgba(98,35,49,.30), inset 0 1px 0 rgba(255,250,241,.18)!important;
+  box-shadow:0 14px 30px rgba(98,35,49,.20)!important;
 }
 @media(max-width:760px){
- .contact.section .contact-cta{width:100%!important;min-width:0!important;min-height:58px!important}
+ .contact.section .contact-cta{width:100%!important;min-width:0!important}
 }
