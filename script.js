@@ -179,7 +179,7 @@ function markRevealTargets(){
 /* ---------- catalogue loader (fail-closed through the naming gate) ---------- */
 async function initProducts(){
  try{
-  const pr=await fetch('content/products.json',{cache:'no-store'});
+  const pr=await fetch('content/products.json?_build='+Date.now(),{cache:'no-store'});
   if(!pr.ok)throw Error('Catalogue unavailable');
   const d=await pr.json();
   const products=Array.isArray(d.products)?d.products:[];
@@ -191,7 +191,7 @@ async function initProducts(){
   try{
    const gate=window.JHALARNaming;
    if(gate){
-    const nr=await fetch('content/product-naming.json',{cache:'no-store'});
+    const nr=await fetch('content/product-naming.json?_build='+Date.now(),{cache:'no-store'});
     if(nr.ok){
      const registry=await nr.json();
      const report=gate.validateCatalogue({products:state.products},registry);
@@ -206,7 +206,7 @@ async function initProducts(){
   $('#product-grid').innerHTML='<p>We are unable to load the collection right now. Please refresh the page or contact us directly.</p>';
  }
 }
-async function initRuntime(){try{const[ss,th,se,cc]=await Promise.all([fetch('content/site-settings.json',{cache:'no-store'}),fetch('content/theme.json',{cache:'no-store'}),fetch('content/sections.json',{cache:'no-store'}),fetch('content/custom-css.json',{cache:'no-store'})]);if(ss.ok)applySettings(await ss.json());if(th.ok)setTheme(await th.json());if(se.ok){const d=await se.json();setSections({sections:d.sections,order:d.order})}if(cc.ok)setCustomCSS((await cc.json()).css||'')}catch(e){console.warn('Runtime settings unavailable',e)}}
+async function initRuntime(){try{const[ss,th,se,cc]=await Promise.all([fetch('content/site-settings.json?_build='+Date.now(),{cache:'no-store'}),fetch('content/theme.json?_build='+Date.now(),{cache:'no-store'}),fetch('content/sections.json?_build='+Date.now(),{cache:'no-store'}),fetch('content/custom-css.json?_build='+Date.now(),{cache:'no-store'})]);if(ss.ok)applySettings(await ss.json());if(th.ok)setTheme(await th.json());if(se.ok){const d=await se.json();setSections({sections:d.sections,order:d.order})}if(cc.ok)setCustomCSS((await cc.json()).css||'')}catch(e){console.warn('Runtime settings unavailable',e)}}
 
 
 $('#collection-toggle').onclick=()=>{state.expanded=!state.expanded;renderProducts();if(!state.expanded)$('#collection').scrollIntoView({behavior:'smooth'})};
