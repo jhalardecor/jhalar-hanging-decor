@@ -222,7 +222,7 @@ const __menu=$('#menu'); if(__menu) __menu.onclick=()=>{const b=$('#menu'),n=$('
 const __mobileNav=$('#mobile-nav'); if(__mobileNav) __mobileNav.onclick=e=>{if(e.target.matches('a')){$('#mobile-nav').classList.remove('open');$('#menu').setAttribute('aria-expanded','false')}};
 document.addEventListener('click',e=>{if(e.target.closest('[data-close]'))closeModal()});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
 document.querySelectorAll('.modal-nav').forEach(b=>b.addEventListener('click',()=>showModalMedia(state.modalIndex+Number(b.dataset.nav))));
-window.addEventListener('scroll',()=>{$('.header').classList.toggle('scrolled',window.scrollY>8)},{passive:true});
+const __syncHeader=()=>{$('.header')?.classList.toggle('scrolled',window.scrollY>8)};window.addEventListener('scroll',__syncHeader,{passive:true});__syncHeader();
 const __year=$('#year'); if(__year)__year.textContent=new Date().getFullYear();
 markRevealTargets();observeReveals();
 initProducts();initRuntime();
