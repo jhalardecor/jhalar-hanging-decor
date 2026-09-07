@@ -65,6 +65,44 @@ function renderFilters(){
     });
   };
 }
+
+// Premium interaction layer
+function initPremiumInteractions(){
+  const audienceCopy={
+    wholesale:'Decorative products suitable for bulk business requirements.',
+    retail:'Distinctive hanging decor selected for stores and customers.',
+    event:'Flexible decorative options for weddings, functions and event spaces.'
+  };
+  const audienceItems=[...document.querySelectorAll('.audience-item')],audienceNote=$('#audience-note');
+  audienceItems.forEach(btn=>btn.addEventListener('click',()=>{
+    audienceItems.forEach(x=>{x.classList.toggle('active',x===btn);x.setAttribute('aria-selected',String(x===btn))});
+    if(audienceNote){audienceNote.classList.remove('interaction-swap');void audienceNote.offsetWidth;audienceNote.textContent=audienceCopy[btn.dataset.audience]||'';audienceNote.classList.add('interaction-swap')}
+  }));
+  const plans={
+    wedding:'Planning wedding decor? Share your colours, venue style and quantity and we’ll help you find what works.',
+    retail:'Looking for your store? Share your preferred styles, quantity and customer profile.',
+    event:'Working on an event? Share your theme, space and quantity requirements with us.',
+    custom:'Have a specific idea? Send your reference, colours, size and quantity and we’ll discuss what can be made.'
+  };
+  const planButtons=[...document.querySelectorAll('.planning-option')],planCopy=$('#custom-plan-copy');
+  planButtons.forEach(btn=>btn.addEventListener('click',()=>{
+    planButtons.forEach(x=>x.classList.toggle('active',x===btn));
+    if(planCopy){planCopy.classList.remove('interaction-swap');void planCopy.offsetWidth;planCopy.textContent=plans[btn.dataset.plan];planCopy.classList.add('interaction-swap')}
+  }));
+  // Product image reveal without layout shift.
+  document.addEventListener('load',e=>{const img=e.target;if(img.matches?.('.product-image img'))img.closest('.product-image')?.classList.add('media-ready')},true);
+  // Active desktop navigation section, no underline.
+  if(window.matchMedia('(min-width:761px)').matches){
+    const navLinks=[...document.querySelectorAll('.header .nav a[href^="#"]')];
+    const sections=navLinks.map(a=>[a,document.querySelector(a.getAttribute('href'))]).filter(([,el])=>el);
+    const io=new IntersectionObserver(entries=>{
+      const visible=entries.filter(x=>x.isIntersecting).sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];
+      if(!visible)return;navLinks.forEach(a=>a.classList.toggle('nav-current',a.getAttribute('href')==='#'+visible.target.id));
+    },{rootMargin:'-25% 0px -60% 0px',threshold:[0,.1,.25]});
+    sections.forEach(([,el])=>io.observe(el));
+  }
+}
+
 function visibleProducts(){return state.filter==='all'?state.products:state.products.filter(p=>p.category===state.filter)}
 function mediaType(src,type){if(type)return type;return /\\.(mp4|webm|ogg|mov)(?:[?#]|$)/i.test(String(src))?'video':'image'}
 function normaliseMedia(item){if(typeof item==='string')return{src:item,type:mediaType(item)};if(item&&typeof item==='object'){const src=item.src||item.url||item.image||item.video||item.source;return src?{src,type:mediaType(src,item.type||item.mediaType)}:null}return null}
