@@ -14,35 +14,31 @@ function normaliseMedia(item){if(typeof item==='string')return{src:item,type:med
 function mediaList(p){const raw=[p.image||p.sourceImage,...(Array.isArray(p.gallery)?p.gallery:[])];const seen=new Set;return raw.map(normaliseMedia).filter(m=>m&&m.src&&!seen.has(m.src)&&(seen.add(m.src),true))}
 function renderProducts(){const all=visibleProducts(),limit=state.expanded?all.length:Math.min(all.length,8);const grid=$('#product-grid');grid.innerHTML=all.slice(0,limit).map((p,i)=>{const m=mediaList(p),main=m[0]?.src||'',alt=m[1]?.src||'';return '<article class="product-card reveal" style="transition-delay:'+Math.min(i*45,320)+'ms"><button class="product-image" data-id="'+p.id+'" aria-label="View '+esc(p.title)+'"><img src="'+esc(main)+'" alt="'+esc(p.title)+'" loading="lazy">'+(alt?'<img class="alt-img" src="'+esc(alt)+'" alt="" aria-hidden="true" loading="lazy">':'')+'</button><div class="product-info"><span class="product-category">'+esc(p.category)+'</span><h3 class="product-title">'+esc(p.title)+'</h3><button class="product-details-btn" data-id="'+p.id+'">View details <span class="arr">→</span></button></div></article>'}).join('');grid.onclick=e=>{const b=e.target.closest('[data-id]');if(b)openProduct(Number(b.dataset.id))};const more=$('#collection-toggle');if(all.length>8&&state.filter==='all'){more.hidden=false;more.textContent=state.expanded?'Show fewer':'View all '+all.length+' designs'}else more.hidden=true;observeReveals()}
 let lastFocus=null;
-function setModalZoom(next){
-  state.modalZoom=Math.max(1,Math.min(3,Number(next)||1));
-  const stage=$('#modal-stage');
-  const image=$('#modal-photo');
-  const video=$('#modal-video');
-  if(!stage)return;
-  const activeMedia=stage?.classList.contains('is-video')?video:image;
-  if(!activeMedia)return;
-  stage.classList.toggle('is-zoomed',state.modalZoom>1);
-  activeMedia.style.transform='scale('+state.modalZoom+')';
-  const out=$('#modal-zoom-out');
-  const reset=$('#modal-zoom-reset');
-  if(out)out.disabled=state.modalZoom<=1;
-  if(reset)reset.hidden=state.modalZoom<=1;
+let lastFocus=null;
+function showModalMedia(i){
+ const m=state.modalMedia||[];if(!m.length)return;
+ state.modalIndex=((i%m.length)+m.length)%m.length;
+ const item=m[state.modalIndex],stage=$('#modal-stage'),photo=$('#modal-photo'),video=$('#modal-video');
+ stage.classList.toggle('is-video',item.type==='video');
+ if(item.type==='video'){
+   photo.hidden=true;video.hidden=false;video.src=item.src;video.load();
+ }else{
+   video.pause();video.removeAttribute('src');video.load();video.hidden=true;
+   photo.hidden=false;photo.src=item.src;photo.alt=$('#modal-title')?.textContent||'Product media';
+ }
+ const thumbs=$('#modal-thumbs');
+ thumbs.innerHTML=m.length>1?m.map((x,j)=>'<button class="modal-thumb'+(j===state.modalIndex?' active':'')+'" data-thumb="'+j+'">'+(x.type==='video'?'<span>Video</span>':'<img src="'+esc(x.src)+'" alt="">')+'</button>').join(''):'';
+ $('.modal-nav.prev').hidden=m.length<=1;$('.modal-nav.next').hidden=m.length<=1;
 }
-function setModalZoomOrigin(e){
-  const stage=$('#modal-stage');
-  if(!stage||!e)return;
-  const rect=stage.getBoundingClientRect();
-  const x=Math.max(0,Math.min(100,((e.clientX-rect.left)/rect.width)*100));
-  const y=Math.max(0,Math.min(100,((e.clientY-rect.top)/rect.height)*100));
-  const image=$('#modal-photo');
-  const video=$('#modal-video');
-  const activeMedia=stage?.classList.contains('is-video')?video:image;
-  if(activeMedia)activeMedia.style.transformOrigin=x+'% '+y+'%';
+function openProduct(id){
+ const p=state.products.find(x=>Number(x.id)===id);if(!p)return;
+ state.modalMedia=mediaList(p);state.modalIndex=0;
+ $('#modal-category').textContent=p.category;$('#modal-title').textContent=p.title;$('#modal-desc').textContent=p.description||'';
+ const wa=$('#modal-wa-btn');wa.href='https://wa.me/'+state.whatsapp+'?text='+encodeURIComponent('Hello JHALAR, I am interested in '+p.title+'.');
+ showModalMedia(0);
+ const modal=$('#product-modal');lastFocus=document.activeElement;modal.classList.add('open');modal.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';$('#modal-close').focus();
 }
-function showModalMedia(i){const m=state.modalMedia||[];if(!m.length)return;const n=m.length;state.modalIndex=((i%n)+n)%n;state.modalZoom=1;const item=m[state.modalIndex],stage=$('#modal-stage'),photo=$('#modal-photo'),video=$('#modal-video');stage.classList.remove('is-video');if(item.type==='video'){photo.hidden=true;video.hidden=false;video.src=item.src;video.load();stage.classList.add('is-video')}else{video.pause();video.removeAttribute('src');video.load();video.hidden=true;photo.hidden=false;photo.src=item.src;photo.alt=$('#modal-title')?.textContent||'Product media'}setModalZoom(1);const thumbs=$('#modal-thumbs');if(n>1){thumbs.innerHTML=m.map((item,j)=>'<button class="modal-thumb'+(j===state.modalIndex?' active':'')+'" data-thumb="'+j+'" aria-label="'+(item.type==='video'?'Video':'Photo')+' '+(j+1)+' of '+n+'">'+(item.type==='video'?'<span class="modal-thumb-video">Video</span>':'<img src="'+esc(item.src)+'" alt="">')+'</button>').join('');$('.modal-nav.prev').hidden=false;$('.modal-nav.next').hidden=false}else{thumbs.innerHTML='';$('.modal-nav.prev').hidden=true;$('.modal-nav.next').hidden=true}}
-function openProduct(id){const p=state.products.find(x=>Number(x.id)===id);if(!p)return;const m=mediaList(p);state.modalMedia=m;state.modalIndex=0;const photo=$('#modal-photo');photo.alt=p.title;showModalMedia(0);$('#modal-category').textContent=p.category;$('#modal-title').textContent=p.title;$('#modal-desc').textContent=p.description||'';const wa=$('#modal-wa-btn');wa.href='https://wa.me/'+state.whatsapp+'?text='+encodeURIComponent('Hello JHALAR, I am interested in '+p.title+'.');wa.innerHTML='Enquire about this design <span aria-hidden="true">→</span>';const modal=$('#product-modal');lastFocus=document.activeElement;modal.classList.add('open');modal.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';$('#modal-close').focus()}
-function closeModal(){const m=$('#product-modal');if(!m.classList.contains('open'))return;m.classList.remove('open');m.setAttribute('aria-hidden','true');document.body.style.overflow='';if(lastFocus&&typeof lastFocus.focus==='function')lastFocus.focus();lastFocus=null}
+function closeModal(){const m=$('#product-modal');if(!m.classList.contains('open'))return;m.classList.remove('open');m.setAttribute('aria-hidden','true');document.body.style.overflow='';if(lastFocus?.focus)lastFocus.focus();lastFocus=null}
 
 /* ---------- runtime defaults: equal to the shipped HTML/settings ---------- */
 const DEFAULTS={
@@ -214,30 +210,6 @@ $('#menu').onclick=()=>{const b=$('#menu'),n=$('#mobile-nav'),open=!n.classList.
 $('#mobile-nav').onclick=e=>{if(e.target.matches('a')){$('#mobile-nav').classList.remove('open');$('#menu').setAttribute('aria-expanded','false')}};
 document.addEventListener('click',e=>{if(e.target.closest('[data-close]'))closeModal()});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
 document.querySelectorAll('.modal-nav').forEach(b=>b.addEventListener('click',()=>showModalMedia(state.modalIndex+Number(b.dataset.nav))));
-document.querySelectorAll('[data-zoom]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();setModalZoom(b.dataset.zoom==='reset'?1:state.modalZoom+Number(b.dataset.zoom))}));
-const modalStage=$('#modal-stage');
-const modalMedia=$('#product-modal .modal-media');
-const handleModalWheel=e=>{
-  if(matchMedia('(hover:none),(pointer:coarse)').matches)return;
-  if(!$('#product-modal')?.classList.contains('open'))return;
-  if(Math.abs(e.deltaY)<1)return;
-  e.preventDefault();
-  e.stopPropagation();
-  setModalZoom(state.modalZoom+(e.deltaY<0?.2:-.2));
-};
-[modalStage,modalMedia].filter(Boolean).forEach(el=>el.addEventListener('wheel',handleModalWheel,{passive:false}));
-if(modalStage){
-  modalStage.addEventListener('pointermove',setModalZoomOrigin);
-  modalStage.addEventListener('dblclick',e=>{setModalZoomOrigin(e);setModalZoom(state.modalZoom>1?1:2)});
-  modalStage.addEventListener('click',e=>{
-    if(matchMedia('(hover:none),(pointer:coarse)').matches)return;
-    const video=$('#modal-video');
-    if(video&&!video.hidden)return;
-    setModalZoomOrigin(e);
-    setModalZoom(state.modalZoom>1?1:2);
-  });
-}
-$('#modal-thumbs').addEventListener('click',e=>{const b=e.target.closest('[data-thumb]');if(b)showModalMedia(Number(b.dataset.thumb))});
 window.addEventListener('scroll',()=>{$('.header').classList.toggle('scrolled',window.scrollY>8)},{passive:true});
 $('#year').textContent=new Date().getFullYear();
 markRevealTargets();observeReveals();
@@ -275,56 +247,33 @@ initProducts();initRuntime();
   }).observe(modal,{attributes:true,attributeFilter:['class']});
 })();
 
-
-/* PRODUCT MEDIA VIEWER — audited single interaction engine */
+/* SINGLE PRODUCT VIEWER ENGINE — only zoom/pan controller */
 (function(){
- const stage=document.getElementById('modal-stage'), img=document.getElementById('modal-photo');
- if(!stage||!img)return;
- let scale=1,tx=0,ty=0,raf=0,pan=null,pinch=null;
- const pts=new Map();
- const MIN=1,MAX=3;
-
- function metrics(){
-   const r=stage.getBoundingClientRect(),cs=getComputedStyle(stage);
-   const pl=parseFloat(cs.paddingLeft)||0,pr=parseFloat(cs.paddingRight)||0,pt=parseFloat(cs.paddingTop)||0,pb=parseFloat(cs.paddingBottom)||0;
-   const w=r.width-pl-pr,h=r.height-pt-pb;
-   const nw=img.naturalWidth||w,nh=img.naturalHeight||h;
-   const fit=Math.min(w/nw,h/nh);
-   return {r,w,h,bw:nw*fit,bh:nh*fit};
+ const stage=document.getElementById('modal-stage'),img=document.getElementById('modal-photo'),modal=document.getElementById('product-modal');
+ if(!stage||!img||!modal)return;
+ let z=1,x=0,y=0,drag=null,raf=0;
+ const MAX=2.8;
+ function frame(){
+   const r=stage.getBoundingClientRect(),cs=getComputedStyle(stage),px=(parseFloat(cs.paddingLeft)||0)*2,py=(parseFloat(cs.paddingTop)||0)*2;
+   return {r,w:r.width-px,h:r.height-py};
  }
- function constrain(){
-   const m=metrics();
-   const mx=Math.max(0,(m.bw*scale-m.w)/2),my=Math.max(0,(m.bh*scale-m.h)/2);
-   tx=Math.max(-mx,Math.min(mx,tx));ty=Math.max(-my,Math.min(my,ty));
+ function bounds(){
+   const f=frame(),nw=img.naturalWidth||f.w,nh=img.naturalHeight||f.h,k=Math.min(f.w/nw,f.h/nh);
+   return {mx:Math.max(0,(nw*k*z-f.w)/2),my:Math.max(0,(nh*k*z-f.h)/2)};
  }
- function paint(){raf=0;constrain();img.style.transform=`translate3d(${tx}px,${ty}px,0) scale(${scale})`;stage.classList.toggle('is-zoomed',scale>1.001)}
- function draw(){if(!raf)raf=requestAnimationFrame(paint)}
- function reset(){scale=1;tx=0;ty=0;pan=pinch=null;draw()}
+ function render(){raf=0;const b=bounds();x=Math.max(-b.mx,Math.min(b.mx,x));y=Math.max(-b.my,Math.min(b.my,y));img.style.transform='translate3d('+x+'px,'+y+'px,0) scale('+z+')';stage.classList.toggle('is-zoomed',z>1.001)}
+ function paint(){if(!raf)raf=requestAnimationFrame(render)}
+ function reset(){z=1;x=y=0;drag=null;paint()}
  function zoom(next,cx,cy){
-   const old=scale;next=Math.max(MIN,Math.min(MAX,next));if(next===old)return;
-   const m=metrics(),x=cx-(m.r.left+m.r.width/2),y=cy-(m.r.top+m.r.height/2),k=next/old;
-   tx=x-(x-tx)*k;ty=y-(y-ty)*k;scale=next;if(scale===1){tx=ty=0}draw();
+   next=Math.max(1,Math.min(MAX,next));const old=z;if(Math.abs(next-old)<.0001)return;
+   const r=stage.getBoundingClientRect(),ox=cx-(r.left+r.width/2),oy=cy-(r.top+r.height/2),ratio=next/old;
+   x=ox-(ox-x)*ratio;y=oy-(oy-y)*ratio;z=next;if(z===1)x=y=0;paint();
  }
- function two(){const p=[...pts.values()];return {x:(p[0].x+p[1].x)/2,y:(p[0].y+p[1].y)/2,d:Math.hypot(p[0].x-p[1].x,p[0].y-p[1].y)}}
-
- stage.addEventListener('wheel',e=>{if(stage.classList.contains('is-video'))return;e.preventDefault();zoom(scale*Math.exp(-e.deltaY*.0012),e.clientX,e.clientY)},{passive:false});
- stage.addEventListener('dblclick',e=>{if(!stage.classList.contains('is-video'))zoom(scale>1.01?1:2,e.clientX,e.clientY)});
-
- stage.addEventListener('pointerdown',e=>{
-   if(stage.classList.contains('is-video'))return;
-   pts.set(e.pointerId,{x:e.clientX,y:e.clientY});stage.setPointerCapture?.(e.pointerId);
-   if(pts.size===1)pan={x:e.clientX,y:e.clientY,tx,ty};
-   if(pts.size===2){const q=two();pinch={...q,scale,tx,ty};pan=null}
- });
- stage.addEventListener('pointermove',e=>{
-   if(!pts.has(e.pointerId)||stage.classList.contains('is-video'))return;
-   pts.set(e.pointerId,{x:e.clientX,y:e.clientY});
-   if(pts.size===2&&pinch){
-     const q=two(),next=Math.max(MIN,Math.min(MAX,pinch.scale*q.d/pinch.d));
-     scale=next;const k=next/pinch.scale;tx=pinch.tx*k+(q.x-pinch.x);ty=pinch.ty*k+(q.y-pinch.y);draw();
-   }else if(pts.size===1&&pan&&scale>1.001){tx=pan.tx+e.clientX-pan.x;ty=pan.ty+e.clientY-pan.y;draw()}
- });
- function up(e){pts.delete(e.pointerId);if(pts.size===1){const p=[...pts.values()][0];pan={x:p.x,y:p.y,tx,ty};pinch=null}else if(!pts.size){pan=pinch=null}}
- stage.addEventListener('pointerup',up);stage.addEventListener('pointercancel',up);stage.addEventListener('lostpointercapture',up);
- img.addEventListener('load',reset);window.addEventListener('resize',draw);
+ stage.addEventListener('wheel',e=>{if(!modal.classList.contains('open')||stage.classList.contains('is-video'))return;e.preventDefault();zoom(z*Math.exp(-e.deltaY*.001),e.clientX,e.clientY)},{passive:false});
+ stage.addEventListener('pointerdown',e=>{if(z<=1.001||stage.classList.contains('is-video'))return;drag={id:e.pointerId,cx:e.clientX,cy:e.clientY,x,y};stage.setPointerCapture(e.pointerId);stage.classList.add('is-panning');e.preventDefault()});
+ stage.addEventListener('pointermove',e=>{if(!drag||drag.id!==e.pointerId)return;x=drag.x+e.clientX-drag.cx;y=drag.y+e.clientY-drag.cy;paint()});
+ const stop=()=>{drag=null;stage.classList.remove('is-panning')};stage.addEventListener('pointerup',stop);stage.addEventListener('pointercancel',stop);
+ stage.addEventListener('dblclick',e=>zoom(z>1.01?1:2,e.clientX,e.clientY));
+ img.addEventListener('load',reset);
+ new MutationObserver(()=>{if(!modal.classList.contains('open'))reset()}).observe(modal,{attributes:true,attributeFilter:['class']});
 })();
