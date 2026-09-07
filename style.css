@@ -2601,3 +2601,9 @@ button:not(.filter-btn),
 #product-modal .modal-wa-btn:hover,
 #product-modal .modal-wa-btn:focus-visible{background:#A71931!important;border-color:#A71931!important;color:#FFFDF8!important}
 #product-modal .modal-wa-btn:active{background:#C82039!important;border-color:#C82039!important}
+
+
+/* PRODUCT CARDS — remove useless hover-only “View details” popup overlay */
+.product-image::after{content:none!important;display:none!important}
+.product-card:hover .product-image::after{opacity:0!important;transform:none!important}
+/* Keep interaction hierarchy intentional: image/title stay clean; explicit details action remains the only cue. */
