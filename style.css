@@ -347,3 +347,54 @@ h1,h2,h3,h4,h5,h6,.hero-banner-copy h1,.section-heading-group h2,.custom-copy h2
   .modal-nav:hover,.modal-nav:active,
   .modal-thumb:hover{transform:none}
 }
+
+
+/* 17. MOBILE RESPONSIVE STABILITY — PHONE-FIRST REPAIR */
+html,body{max-width:100%;overflow-x:hidden}
+img,video,svg{max-width:100%}
+@media(max-width:760px){
+ .shell{width:min(100% - 28px,1200px);margin-inline:auto}
+ .header-row{min-height:64px;gap:12px}
+ .nav{display:none}
+ .brand{max-width:132px}
+ .hero-banner{min-height:auto}
+ .hero-banner-content{padding-top:clamp(220px,62vw,360px);padding-bottom:42px}
+ .hero-banner-copy{max-width:100%}
+ .hero-banner-copy h1{font-size:clamp(2.35rem,11vw,3.4rem);line-height:.98}
+ .hero-lead{max-width:34ch}
+ .audience-strip-inner{align-items:flex-start;flex-direction:column;gap:12px;padding-block:18px}
+ .audience-items{display:flex;flex-wrap:wrap;gap:8px 16px}
+ .section{padding-block:58px}
+ .section-layout,.section-head,.custom-grid,.story-grid,.contact-box{grid-template-columns:1fr!important}
+ .section-head{display:flex;flex-direction:column;gap:16px}
+ .section-support-group{max-width:none}
+ .filters-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin-inline:-14px;padding-inline:14px}
+ .filters{width:max-content;min-width:100%;flex-wrap:nowrap}
+ .filter-btn{white-space:nowrap}
+ .product-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:18px 10px}
+ .product-card{min-width:0}
+ .product-image{width:100%;min-width:0}
+ .product-info{padding:12px}
+ .product-title{font-size:1rem;overflow-wrap:anywhere}
+ .product-category{font-size:.68rem}
+ .custom-image,.story-image{width:100%;min-height:0}
+ .custom-copy,.story-copy{padding-top:8px}
+ .contact-box{gap:28px;padding:30px 22px}
+ .contact-cta{max-width:100%;min-width:0;width:100%}
+ .footer-row{flex-direction:column;align-items:flex-start;gap:14px}
+ .modal{padding:0}
+ .modal-card{width:100%;height:100dvh;max-height:100dvh;border-radius:0;display:flex;flex-direction:column;overflow:hidden}
+ .modal-media{flex:0 0 auto;min-height:0}
+ .modal-stage{height:min(58dvh,520px);padding:12px}
+ .modal-copy{overflow:auto;padding:20px 18px calc(26px + env(safe-area-inset-bottom));flex:1}
+ .modal-close{top:12px;right:12px;width:42px;height:42px}
+ .modal-nav{width:38px;height:38px}
+ .modal-thumbs{padding-inline:12px;overflow-x:auto}
+}
+@media(max-width:390px){
+ .shell{width:min(100% - 22px,1200px)}
+ .product-grid{gap:14px 8px}
+ .product-info{padding:10px}
+ .product-title{font-size:.92rem}
+ .hero-banner-copy h1{font-size:2.25rem}
+}
