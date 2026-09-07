@@ -218,6 +218,7 @@ document.querySelectorAll('[data-zoom]').forEach(b=>b.addEventListener('click',e
 const modalStage=$('#modal-stage');
 const modalMedia=$('#product-modal .modal-media');
 const handleModalWheel=e=>{
+  if(matchMedia('(hover:none),(pointer:coarse)').matches)return;
   if(!$('#product-modal')?.classList.contains('open'))return;
   if(Math.abs(e.deltaY)<1)return;
   e.preventDefault();
@@ -229,6 +230,7 @@ if(modalStage){
   modalStage.addEventListener('pointermove',setModalZoomOrigin);
   modalStage.addEventListener('dblclick',e=>{setModalZoomOrigin(e);setModalZoom(state.modalZoom>1?1:2)});
   modalStage.addEventListener('click',e=>{
+    if(matchMedia('(hover:none),(pointer:coarse)').matches)return;
     const video=$('#modal-video');
     if(video&&!video.hidden)return;
     setModalZoomOrigin(e);
