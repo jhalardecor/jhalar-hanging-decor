@@ -2284,9 +2284,8 @@ p{line-height:1.55!important}
 
 
 /* ==========================================================================
-   MOBILE = SAME JHALAR HERO SYSTEM
-   No second hero design. Mobile keeps desktop typography, gradient and
-   composition logic; only the available width changes.
+   CANONICAL HERO SYSTEM
+   One visual identity. Responsive canvas and composition only.
    ========================================================================== */
 .header{
   will-change:transform;
@@ -2294,81 +2293,43 @@ p{line-height:1.55!important}
 }
 .header.header-hidden{transform:translateY(-100%)}
 .footer-brand{display:block;width:105px}
-.footer-brand img{width:100%}
+.footer-brand img{display:block;width:100%}
 
+/* The earlier richer hero treatment is preserved by existing base rules.
+   This block controls only responsive geometry, not palette or typography. */
 .hero-banner{
-  height:clamp(600px,72svh,780px)!important;
-  min-height:600px!important;
-  max-height:780px!important;
+  height:clamp(520px,52vw,720px);
+  min-height:0;
+  max-height:720px;
 }
-.hero-banner-media img{
-  object-position:center!important;
-}
+.hero-banner-media img{object-position:center}
 .hero-banner-content{
-  align-items:center!important;
-  padding-block:clamp(48px,7vh,82px)!important;
+  align-items:center;
+  padding-block:clamp(42px,5vw,76px);
 }
 .hero-banner-copy{
-  width:min(100%,560px)!important;
-  max-width:560px!important;
-}
-.hero-banner .kicker{
-  color:#622331!important;
-  margin:0 0 16px!important;
-  font-size:.68rem!important;
-  letter-spacing:.12em!important;
-}
-.hero-banner h1{
-  color:#622331!important;
-  max-width:11.5ch!important;
-  font-size:clamp(3.15rem,4.65vw,5.65rem)!important;
-  line-height:1.03!important;
-  letter-spacing:-.014em!important;
-  margin:0 0 24px!important;
-}
-.hero-banner-copy>.hero-lead{
-  color:#622331!important;
-  max-width:37ch!important;
-  font-size:clamp(.98rem,1vw,1.08rem)!important;
-  line-height:1.55!important;
-  margin:0 0 30px!important;
-}
-.hero-banner .hero-banner-shade{
-  background:linear-gradient(90deg,
-    rgba(255,250,241,.96) 0%,
-    rgba(255,250,241,.88) 38%,
-    rgba(255,250,241,.58) 62%,
-    rgba(255,250,241,.14) 82%,
-    rgba(255,250,241,0) 100%)!important;
+  width:min(100%,560px);
+  max-width:560px;
 }
 
-@media(max-width:760px){
-  /* Keep exactly the same hierarchy and visual language as desktop. */
+/* Tablet: transitional canvas */
+@media (min-width:761px) and (max-width:1100px){
+  .hero-banner{height:clamp(540px,62vw,680px)}
+  .hero-banner-copy{max-width:500px}
+}
+
+/* Mobile: portrait canvas, same visual language, no forced redesign */
+@media (max-width:760px){
   .hero-banner{
-    height:clamp(600px,72svh,780px)!important;
-    min-height:600px!important;
-    max-height:780px!important;
+    height:auto;
+    min-height:clamp(500px,128vw,620px);
+    max-height:none;
   }
   .hero-banner-content{
-    align-items:center!important;
-    padding:clamp(48px,7vh,82px) var(--page-gutter)!important;
+    padding:clamp(40px,10vw,58px) var(--page-gutter);
   }
-  .hero-banner-copy{width:min(100%,560px)!important}
-  .hero-banner h1{
-    font-size:clamp(3.15rem,4.65vw,5.65rem)!important;
-    line-height:1.03!important;
-    letter-spacing:-.014em!important;
-  }
-  .hero-banner-copy>.hero-lead{
-    font-size:clamp(.98rem,1vw,1.08rem)!important;
-    line-height:1.55!important;
-  }
-  .hero-banner .hero-banner-shade{
-    background:linear-gradient(90deg,
-      rgba(255,250,241,.96) 0%,
-      rgba(255,250,241,.88) 38%,
-      rgba(255,250,241,.58) 62%,
-      rgba(255,250,241,.14) 82%,
-      rgba(255,250,241,0) 100%)!important;
+  .hero-banner-copy{
+    width:100%;
+    max-width:none;
   }
 }
