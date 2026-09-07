@@ -1002,3 +1002,17 @@ p,.section-head>p,.hero-banner-copy>p:not(.kicker){letter-spacing:.006em}
 }
 
 
+
+
+/* PRODUCT MEDIA ZOOM — native pinch gesture, contained inside the stage */
+@media(max-width:760px){
+  #product-modal .modal-stage{
+    touch-action:none!important;
+    overflow:hidden!important;
+  }
+  #product-modal .modal-stage>img[data-zoomable="true"]{
+    touch-action:none!important;
+    transform-origin:center center;
+    will-change:transform;
+  }
+}
