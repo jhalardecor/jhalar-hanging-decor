@@ -483,3 +483,17 @@ img,video,svg{max-width:100%}
  .product-grid{gap:14px 10px!important}
  .hero-banner-copy h1{font-size:clamp(2.45rem,12.5vw,3.3rem)}
 }
+
+
+/* 20. ALWAYS-AVAILABLE HEADER — no auto-hide while browsing */
+.header{
+ position:sticky!important;
+ top:0;
+ transform:none!important;
+ z-index:1000;
+}
+.header.header-hidden{transform:none!important}
+@media(max-width:760px){
+ .header-row{height:68px}
+ .header{background:rgba(255,250,241,.98)}
+}
