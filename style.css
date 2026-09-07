@@ -730,3 +730,62 @@ img,video,svg{max-width:100%}
     margin-top:7px!important;
   }
 }
+
+
+/* 27. MOBILE HERO — SAME DESKTOP CTA LANGUAGE, FITTED INSIDE 4:5 */
+@media(max-width:760px){
+  .hero.hero-banner{
+    aspect-ratio:4/5!important;
+    height:auto!important;
+    min-height:0!important;
+    display:grid!important;
+    grid-template-rows:1fr!important;
+  }
+  .hero-banner-content.shell{
+    position:relative!important;
+    inset:auto!important;
+    grid-area:1/1!important;
+    align-self:end!important;
+    z-index:2!important;
+    width:100%!important;
+    max-width:none!important;
+    height:auto!important;
+    max-height:none!important;
+    overflow:visible!important;
+    margin:0!important;
+    padding:0 16px 20px!important;
+    display:block!important;
+  }
+  .hero-banner-copy{
+    width:100%!important;
+    max-width:100%!important;
+    margin:0!important;
+  }
+  .hero-banner-copy .kicker{display:block!important;margin:0 0 6px!important}
+  .hero-banner-copy h1{
+    max-width:9ch!important;
+    font-size:clamp(2rem,8vw,2.75rem)!important;
+    line-height:1.02!important;
+    margin:0!important;
+  }
+  .hero-lead{
+    margin:10px 0 0!important;
+    max-width:42ch!important;
+    font-size:.9rem!important;
+    line-height:1.48!important;
+  }
+  .hero-banner-cta{
+    display:inline-flex!important;
+    align-items:center!important;
+    gap:18px!important;
+    margin-top:16px!important;
+    padding:0 0 8px!important;
+    min-height:0!important;
+    border-bottom:1px solid currentColor!important;
+    font-size:inherit!important;
+    font-weight:700!important;
+    line-height:normal!important;
+    white-space:nowrap!important;
+  }
+  .hero-banner-cta span{font-size:1.2em!important}
+}
