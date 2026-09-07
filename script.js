@@ -381,8 +381,8 @@ function applyNavigation() {
   if (socialContainer && settings.socialLinks) {
     socialContainer.innerHTML = '';
     const sl = settings.socialLinks;
-    if (sl.instagram) socialContainer.innerHTML += `<li><a href="${esc(sl.instagram.url)}" aria-label="Instagram"><i class="fab fa-instagram"></i> ${esc(sl.instagram.label)}</a></li>`;
-    if (sl.facebook) socialContainer.innerHTML += `<li><a href="${esc(sl.facebook.url)}" aria-label="Facebook"><i class="fab fa-facebook"></i> ${esc(sl.facebook.label)}</a></li>`;
+    if (sl.instagram && sl.instagram.url && sl.instagram.url !== "#") socialContainer.innerHTML += `<li><a href="${esc(sl.instagram.url)}" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i> ${esc(sl.instagram.label)}</a></li>`;
+    if (sl.facebook && sl.facebook.url && sl.facebook.url !== "#") socialContainer.innerHTML += `<li><a href="${esc(sl.facebook.url)}" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook"></i> ${esc(sl.facebook.label)}</a></li>`;
     if (sl.whatsapp) socialContainer.innerHTML += `<li><a href="${esc(sl.whatsapp.url)}" data-wa target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i> ${esc(sl.whatsapp.label)}</a></li>`;
   }
 }
