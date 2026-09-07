@@ -1339,3 +1339,17 @@ p,.section-head>p,.hero-banner-copy>p:not(.kicker){letter-spacing:.006em}
   #product-modal .modal-stage.is-zoomed:not(.is-video){cursor:grab!important}
   #product-modal .modal-stage.is-panning:not(.is-video){cursor:grabbing!important}
 }
+
+
+/* MOBILE HERO GRADIENT — portrait direction for reliable copy contrast */
+@media(max-width:760px){
+  .hero-banner-shade{
+    background:
+      linear-gradient(180deg,
+        rgba(255,250,245,.98) 0%,
+        rgba(255,247,241,.96) 28%,
+        rgba(252,232,222,.88) 52%,
+        rgba(248,222,211,.58) 70%,
+        rgba(248,222,211,.12) 100%)!important;
+  }
+}
