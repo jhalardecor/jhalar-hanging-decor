@@ -4,178 +4,80 @@
   "email": "lokeshdugar040@gmail.com",
   "location": "Howrah, West Bengal, India",
   "gst": "Available on request",
-  "heroHeadline": "Jhalars and hanging decor for weddings and events",
-  "heroIntro": "Browse designs and colour variants. Open a product for details or enquire on WhatsApp using its catalogue reference.",
+  "heroHeadline": "Colour that hangs in the air.",
+  "heroIntro": "Floral jhalars, torans and hanging details made to give weddings, events and festive spaces a richer sense of place.",
   "heroImage": "assets/images/hero-jhalar.jpg",
-  "siteTitle": "JHALAR | Jhalars and Hanging Decor for Weddings and Events",
-  "siteDescription": "Browse the JHALAR catalogue of jhalars and hanging decor for weddings and events. Open a design for details or enquire on WhatsApp with its reference.",
+  "siteTitle": "JHALAR | Jhalars and Hanging Decor",
+  "siteDescription": "Browse JHALAR handmade jhalars, floral hangings, torans and decorative strings for weddings, events and festive spaces.",
   "ogImage": "assets/images/og-cover.jpg",
   "navItems": [
-    {
-      "label": "Catalogue",
-      "href": "#collection"
-    },
-    {
-      "label": "Custom Enquiries",
-      "href": "#custom-orders"
-    },
-    {
-      "label": "About",
-      "href": "#about"
-    },
-    {
-      "label": "FAQ",
-      "href": "#faq"
-    },
-    {
-      "label": "Contact",
-      "href": "#contact"
-    }
+    { "label": "Collection", "href": "#collection" },
+    { "label": "Custom", "href": "#custom-orders" },
+    { "label": "About", "href": "#about" }
   ],
   "footerNavItems": [
-    {
-      "label": "Catalogue",
-      "href": "#collection"
-    },
-    {
-      "label": "Custom Enquiries",
-      "href": "#custom-orders"
-    },
-    {
-      "label": "About",
-      "href": "#about"
-    },
-    {
-      "label": "FAQ",
-      "href": "#faq"
-    },
-    {
-      "label": "Contact",
-      "href": "#contact"
-    }
+    { "label": "Collection", "href": "#collection" },
+    { "label": "Custom Orders", "href": "#custom-orders" },
+    { "label": "About", "href": "#about" },
+    { "label": "FAQ", "href": "#faq" },
+    { "label": "Contact", "href": "#contact" }
   ],
   "socialLinks": {
-    "instagram": {
-      "url": "#",
-      "label": "Instagram"
-    },
-    "facebook": {
-      "url": "#",
-      "label": "Facebook"
-    },
-    "whatsapp": {
-      "url": "https://wa.me/918100656258",
-      "label": "WhatsApp"
-    }
+    "instagram": { "url": "#", "label": "Instagram" },
+    "facebook": { "url": "#", "label": "Facebook" },
+    "whatsapp": { "url": "https://wa.me/918100656258", "label": "WhatsApp" }
   },
   "heroHighlights": [],
   "trustItems": [],
   "faqItems": [
-    {
-      "q": "Do you show prices on the website?",
-      "a": "No. The website is a catalogue, so prices are shared on enquiry. Message us on WhatsApp with the design name or catalogue reference and we will send you a quote."
-    },
-    {
-      "q": "What quantities do you take?",
-      "a": "From a few dozen to several thousand pieces per design. Tell us the design and the quantity and we will confirm."
-    },
-    {
-      "q": "Can you match a specific colour?",
-      "a": "Yes. Share a reference photo or your palette and we will match it in the sample."
-    },
-    {
-      "q": "Do you deliver outside West Bengal?",
-      "a": "Yes, we dispatch across India. Tell us where it needs to reach and we will confirm the arrangements."
-    },
-    {
-      "q": "How long does an order take?",
-      "a": "It depends on the design and the quantity. Share the date you need it by and we will confirm whether we can meet it."
-    },
-    {
-      "q": "How do I enquire about a design?",
-      "a": "Open the product and use its Enquire on WhatsApp button, or use the enquiry form below. Include the catalogue reference so we know exactly which design you mean."
-    }
+    { "q": "Do you show prices on the website?", "a": "Prices are shared on enquiry. Tell us the design and quantity and we will quote." },
+    { "q": "Can you match colours?", "a": "Yes. Share a reference photo or palette and we can discuss a matching sample." },
+    { "q": "Do you dispatch outside West Bengal?", "a": "Yes. We dispatch across India; share your location and required date for confirmation." }
   ],
   "sectionCopy": {
-    "heroPrimary": {
-      "label": "View catalogue",
-      "href": "#collection"
-    },
-    "heroSecondary": {
-      "label": "Enquire on WhatsApp",
-      "href": "https://wa.me/918100656258"
-    },
+    "heroPrimary": { "label": "Explore Collection", "href": "#collection" },
+    "heroSecondary": { "label": "", "href": "" },
     "collection": {
-      "label": "Catalogue",
-      "title": "Browse the Collection",
-      "intro": "Thirty-five designs and colour variants across pom pom, bead, bell and floral hangings and decorative strings.",
-      "note": "Looking for something else? "
+      "label": "Collection",
+      "title": "Choose by form, colour or mood.",
+      "intro": "Browse the current selection, open any design for a closer look, then enquire when something feels right.",
+      "note": ""
     },
     "customOrders": {
-      "label": "Custom Enquiries",
-      "title": "Made to Your Own Design",
-      "intro": "Any design in the catalogue can be remade in your colours and sizes — or send a reference of your own.",
+      "label": "Custom Orders",
+      "title": "Start with a look. Finish it your way.",
+      "intro": "Use a catalogue design as the starting point, then discuss colour, size, quantity and timing for your event.",
       "image": "assets/images/custom-orders.jpg",
       "chips": [
-        {
-          "icon": "icon-palette",
-          "text": "Colour matching"
-        },
-        {
-          "icon": "icon-ruler",
-          "text": "Size and length"
-        },
-        {
-          "icon": "icon-chart",
-          "text": "Order quantity"
-        }
+        { "icon": "icon-palette", "text": "Colour matching" },
+        { "icon": "icon-ruler", "text": "Size and length" },
+        { "icon": "icon-chart", "text": "Order quantity" }
       ],
-      "processLabel": "How an enquiry works",
+      "processLabel": "A simple three-step enquiry",
       "steps": [
-        {
-          "title": "Send Your Brief",
-          "text": "The design or reference, your colours, how many pieces, and the date you need them."
-        },
-        {
-          "title": "Review a Sample",
-          "text": "We make one piece to your brief and share it for your approval."
-        },
-        {
-          "title": "Confirm the Details",
-          "text": "We confirm the design, quantity and timeline with you, and the order goes ahead."
-        }
+        { "title": "Share the look", "text": "Send a design, reference image or brief." },
+        { "title": "Refine the details", "text": "Confirm colours, dimensions, quantity and date." },
+        { "title": "Approve and order", "text": "Review the sample details and move ahead." }
       ]
     },
     "about": {
       "label": "About",
-      "title": "About JHALAR",
-      "intro": "JHALAR is a small maker of jhalars and hanging decor based in Howrah, West Bengal. Every design in this catalogue is handmade in our own workshop, and each enquiry is answered directly over WhatsApp or phone.",
+      "title": "Made by hand in Howrah.",
+      "intro": "JHALAR is a small maker of hanging decor in West Bengal, creating pieces directly for decorators, planners, retailers and celebrations across India.",
       "image": "assets/images/about-collage.jpg",
       "values": [
-        {
-          "icon": "icon-check",
-          "text": "Finished by hand, piece by piece"
-        },
-        {
-          "icon": "icon-check",
-          "text": "One contact from enquiry to dispatch"
-        },
-        {
-          "icon": "icon-check",
-          "text": "Dispatched across India"
-        }
+        { "icon": "icon-check", "text": "Finished by hand, piece by piece" },
+        { "icon": "icon-check", "text": "Direct response from enquiry to dispatch" },
+        { "icon": "icon-check", "text": "Custom colour and size discussions" }
       ]
     },
-    "faq": {
-      "label": "FAQ",
-      "title": "Frequently Asked Questions"
-    },
+    "faq": { "label": "FAQ", "title": "Useful answers before you enquire." },
     "contact": {
       "label": "Contact",
-      "title": "Send an Enquiry",
-      "intro": "Tell us what you need — a catalogue reference, quantities and your date. The clearer the brief, the faster the answer.",
-      "submitLabel": "Review and Send on WhatsApp"
+      "title": "Tell us what you are planning.",
+      "intro": "Share the design, quantity, location and date. The enquiry form will prepare the details for WhatsApp.",
+      "submitLabel": "Prepare enquiry"
     },
-    "footerTagline": "Jhalars and hanging decor for weddings and events. Browse the catalogue and enquire on WhatsApp."
+    "footerTagline": "Handmade hanging decor for weddings, events and festive spaces."
   }
 }
