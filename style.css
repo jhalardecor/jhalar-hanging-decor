@@ -497,3 +497,30 @@ img,video,svg{max-width:100%}
  .header-row{height:68px}
  .header{background:rgba(255,250,241,.98)}
 }
+
+
+/* 21. FLUID ALIGNMENT SYSTEM — SAME DESIGN, EVERY SCREEN */
+*,*::before,*::after{box-sizing:border-box}
+.shell{width:min(calc(100% - clamp(24px,5vw,80px)),1200px);margin-inline:auto}
+.section,.page-section{width:100%;min-width:0}
+.section-head,.section-layout,.custom-grid,.story-grid,.contact-box{width:100%;min-width:0}
+.hero-banner-content{width:min(calc(100% - clamp(24px,5vw,80px)),1200px);margin-inline:auto}
+.section-heading-group,.section-support-group,.custom-copy,.story-copy,.contact-copy{min-width:0}
+.product-grid{align-items:stretch}
+.product-card{display:flex;flex-direction:column;height:100%}
+.product-info{display:flex;flex-direction:column;flex:1}
+.product-details-btn{margin-top:auto}
+.filters-wrap{position:relative;overscroll-behavior-inline:contain;scroll-snap-type:x proximity}
+.filter-btn{scroll-snap-align:start}
+@media(min-width:761px){
+ .filters-wrap{overflow-x:auto;padding-bottom:8px}
+ .section-head{align-items:end}
+ .product-grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))!important}
+}
+@media(max-width:760px){
+ .shell,.hero-banner-content{width:calc(100% - 24px)}
+ .section-head,.section-layout,.custom-grid,.story-grid,.contact-box{align-items:stretch}
+ .product-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ .product-card{min-width:0}
+ .filter-btn{min-height:44px}
+}
