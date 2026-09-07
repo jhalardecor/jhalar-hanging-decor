@@ -262,6 +262,14 @@ hr.divider{margin:12px 0;border:none;border-top:1px solid rgba(128,128,128,0.1)}
 .zoom-box{overflow:visible;flex:none}
 .preview-container iframe{transform-origin:0 0}
 
+
+/* Inspector alignment controls */
+.ins-segmented{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--border);border-radius:8px;overflow:hidden;background:var(--panel)}
+.ins-segmented button{height:36px;border:0;border-right:1px solid var(--border);background:transparent;color:var(--text2);cursor:pointer;font:inherit;font-size:12px}
+.ins-segmented button:last-child{border-right:0}
+.ins-segmented button:hover{background:rgba(164,107,53,.08);color:var(--gold)}
+.ins-segmented button.active{background:var(--gold);color:#fff}
+
 </style>
 </head>
 <body>
@@ -315,8 +323,27 @@ hr.divider{margin:12px 0;border:none;border-top:1px solid rgba(128,128,128,0.1)}
           </div>
           <div class="panel-section">
             <h4>Layout</h4>
-            <div class="form-row-3"><div class="form-group"><label>Align</label><select id="ins-align"><option value="">Auto</option><option value="left">Left</option><option value="center">Center</option><option value="right">Right</option></select></div><div class="form-group"><label>Width</label><input id="ins-width" type="text" placeholder="Auto / 60%"></div><div class="form-group"><label>Max width</label><input id="ins-maxwidth" type="text" placeholder="None / 900px"></div></div>
-            <div class="form-row"><div class="form-group"><label>Padding</label><input id="ins-padding" type="text" placeholder="24px"></div><div class="form-group"><label>Gap</label><input id="ins-gap" type="text" placeholder="16px"></div></div>
+            <div class="form-group">
+              <label>Text alignment</label>
+              <div class="ins-segmented" id="ins-text-align">
+                <button type="button" data-align="left" title="Align left"><i class="fas fa-align-left"></i></button>
+                <button type="button" data-align="center" title="Align center"><i class="fas fa-align-center"></i></button>
+                <button type="button" data-align="right" title="Align right"><i class="fas fa-align-right"></i></button>
+                <button type="button" data-align="justify" title="Justify"><i class="fas fa-align-justify"></i></button>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Container alignment</label>
+              <div class="ins-segmented" id="ins-container-align">
+                <button type="button" data-container-align="start" title="Start"><i class="fas fa-arrow-left"></i></button>
+                <button type="button" data-container-align="center" title="Center"><i class="fas fa-dot-circle"></i></button>
+                <button type="button" data-container-align="end" title="End"><i class="fas fa-arrow-right"></i></button>
+                <button type="button" data-container-align="stretch" title="Stretch"><i class="fas fa-expand-arrows-alt"></i></button>
+              </div>
+            </div>
+            <div class="form-row-3"><div class="form-group"><label>Width</label><input id="ins-width" type="text" placeholder="Auto / 60%"></div><div class="form-group"><label>Max width</label><input id="ins-maxwidth" type="text" placeholder="None / 900px"></div><div class="form-group"><label>Display</label><select id="ins-display"><option value="">Auto</option><option value="block">Block</option><option value="flex">Flex</option><option value="grid">Grid</option></select></div></div>
+            <div class="form-row-3"><div class="form-group"><label>Padding</label><input id="ins-padding" type="text" placeholder="24px"></div><div class="form-group"><label>Margin</label><input id="ins-margin" type="text" placeholder="0 auto"></div><div class="form-group"><label>Gap</label><input id="ins-gap" type="text" placeholder="16px"></div></div>
+            <div class="form-group"><label>Flex / group direction</label><div class="ins-segmented" id="ins-direction"><button type="button" data-direction="row">Row</button><button type="button" data-direction="column">Column</button><button type="button" data-direction="row-reverse">Row rev</button><button type="button" data-direction="column-reverse">Column rev</button></div></div>
           </div>
           <div class="panel-section">
             <h4>Typography</h4>
@@ -898,6 +925,6 @@ hr.divider{margin:12px 0;border:none;border-top:1px solid rgba(128,128,128,0.1)}
 </div>
 <div class="toast" id="toast"></div>
 <script src="scripts/product-naming.js?v=20260908-catalogue"></script>
-<script src="editor.js?v=stable-inspector-29"></script>
+<script src="editor.js?v=inspector-align-30"></script>
 </body>
 </html>
