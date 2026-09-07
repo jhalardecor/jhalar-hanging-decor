@@ -1385,3 +1385,24 @@ p,.section-head>p,.hero-banner-copy>p:not(.kicker){letter-spacing:.006em}
   #product-modal .modal-stage{padding:18px!important}
   #product-modal .modal-stage::before{box-shadow:inset 0 0 0 18px var(--cream)!important}
 }
+
+
+/* UNIFIED GALLERY VIEWER — stable framed canvas */
+#product-modal .modal-stage{
+  position:relative!important;
+  overflow:hidden!important;
+  isolation:isolate!important;
+  touch-action:none!important;
+  cursor:zoom-in!important;
+}
+#product-modal .modal-stage.is-zoomed{cursor:grab!important}
+#product-modal .modal-stage.is-panning{cursor:grabbing!important}
+#product-modal .modal-stage #modal-photo{
+  display:block!important;
+  margin:auto!important;
+  object-fit:contain!important;
+  will-change:transform!important;
+  backface-visibility:hidden!important;
+  -webkit-user-drag:none!important;
+  user-select:none!important;
+}
