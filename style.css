@@ -2937,3 +2937,27 @@ body{padding-top:var(--header-h)!important}
     inset:-56px 0 auto 0!important;
   }
 }
+
+
+/* HERO COPY ALIGNMENT — match the site's left-aligned editorial grid */
+.hero.hero-banner .hero-banner-content{
+  justify-content:flex-start!important;
+  text-align:left!important;
+}
+.hero.hero-banner .hero-banner-copy,
+.hero.hero-banner .hero-banner-copy h1,
+.hero.hero-banner .hero-banner-copy .hero-lead,
+.hero.hero-banner .hero-banner-copy .kicker{
+  text-align:left!important;
+  margin-left:0!important;
+  margin-right:auto!important;
+}
+.hero.hero-banner .hero-banner-copy{
+  align-self:flex-start!important;
+}
+@media(max-width:760px){
+  .hero.hero-banner .hero-banner-copy{
+    align-self:stretch!important;
+    text-align:left!important;
+  }
+}
