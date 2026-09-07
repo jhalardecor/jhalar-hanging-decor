@@ -82,13 +82,40 @@ img{max-width:100%;height:auto;display:block}ul{list-style:none}button{font-fami
 [hidden]{display:none !important}
 :focus-visible{outline:2px solid rgba(200,32,57,.5);outline-offset:2px;border-radius:4px}
 
-/* --- LAYOUT --- */
-.container{width:100%;max-width:var(--container);margin:0 auto;padding:0 var(--space-4)}
-.section{padding:var(--section-y) 0}
-.section-header{max-width:620px;margin:var(--section-header-margin,0 auto var(--section-header-gap,var(--space-7)));text-align:var(--section-align,center)}
-.section-title{font-size:var(--title-size);font-family:var(--font-heading);font-weight:var(--heading-weight-strong,700);letter-spacing:var(--heading-tracking,-.01em);color:var(--brand-heading);margin-bottom:var(--space-3);line-height:var(--heading-leading,1.18)}
-.section-subtitle{font-size:var(--fs-lg);color:var(--brand-text);max-width:56ch;margin:var(--section-subtitle-margin,0 auto);line-height:var(--body-leading,1.7)}
-.bg-cream{background:var(--brand-cream)}.bg-off-white{background:var(--brand-alt-background)}.bg-alt{background:var(--brand-alt-background)}
+/* --- LAYOUT --- Fluid container */
+.container{
+  width:100%;
+  max-width: min(95vw, var(--container));
+  margin:0 auto;
+  padding:0 clamp(1rem, 4vw, var(--space-4))
+}
+.section{
+  padding: clamp(2rem, 5vw, var(--section-y)) 0
+}
+.section-header{
+  max-width: min(90vw, 620px);
+  margin: var(--section-header-margin, 0 auto var(--section-header-gap, clamp(2rem, 4vw, var(--space-7))));
+  text-align: var(--section-align, center)
+}
+.section-title{
+  font-size: var(--title-size);
+  font-family: var(--font-heading);
+  font-weight: var(--heading-weight-strong, 700);
+  letter-spacing: var(--heading-tracking, -.01em);
+  color: var(--brand-heading);
+  margin-bottom: var(--space-3);
+  line-height: var(--heading-leading, 1.18)
+}
+.section-subtitle{
+  font-size: var(--fs-lg);
+  color: var(--brand-text);
+  max-width: min(80vw, 56ch);
+  margin: var(--section-subtitle-margin, 0 auto);
+  line-height: var(--body-leading, 1.7)
+}
+.bg-cream{background:var(--brand-cream)}
+.bg-off-white{background:var(--brand-alt-background)}
+.bg-alt{background:var(--brand-alt-background)}
 .bg-navy{background:var(--brand-navy);color:var(--brand-background)}
 .bg-navy p{color:rgba(255,255,255,.7)}
 .text-center{text-align:center}
@@ -109,55 +136,186 @@ img{max-width:100%;height:auto;display:block}ul{list-style:none}button{font-fami
 .btn-white{background:var(--brand-background);color:var(--brand-navy);border-color:var(--brand-background)}
 .btn-white:hover{background:rgba(255,255,255,.85);transform:translateY(-1px)}
 
-/* --- HEADER --- */
-.site-header{position:fixed;top:0;left:0;right:0;height:var(--header-h);background:var(--brand-header-background);backdrop-filter:blur(20px) saturate(1.3);-webkit-backdrop-filter:blur(20px) saturate(1.3);border-bottom:1px solid rgba(20,25,66,.06);z-index:1000;transition:box-shadow .3s}
+/* --- HEADER --- Fluid responsive */
+.site-header{
+  position:fixed;top:0;left:0;right:0;
+  height: clamp(64px, 10vw, 88px);
+  background:var(--brand-header-background);
+  backdrop-filter:blur(20px) saturate(1.3);
+  -webkit-backdrop-filter:blur(20px) saturate(1.3);
+  border-bottom:1px solid rgba(20,25,66,.06);
+  z-index:1000;
+  transition:box-shadow .3s,transform .28s var(--ease-out)
+}
 .site-header.scrolled{box-shadow:0 1px 4px rgba(20,25,66,.08)}
-/* Auto-hide on scroll down, reveal on scroll up. Transform (not top) so it
-   stays on the compositor and does not trigger layout on every frame. */
-.site-header{transition:box-shadow .3s,transform .28s var(--ease-out)}
 .site-header.header-hidden{transform:translateY(-100%)}
-/* Never hide while the mobile menu is open, or the menu detaches from the bar. */
 .site-header.nav-open{transform:none!important}
 @media(prefers-reduced-motion:reduce){.site-header{transition:box-shadow .3s}}
-.header-container{display:flex;align-items:center;justify-content:space-between;height:100%}
+
+.header-container{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  height:100%;
+  padding:0 clamp(1rem, 4vw, var(--space-6))
+}
 .logo{display:flex;align-items:center;flex-shrink:0}
-/* Logo was a fixed 38px (36px on phones). Scale it with the viewport so it
-   holds its proportion instead of stepping at one breakpoint. */
-.brand-mark{height:clamp(34px,8.5vw,40px);width:auto}
-.desktop-nav{display:none}
-.nav-list{display:flex;align-items:center;gap:clamp(1.25rem,2.5vw,2.25rem)}
-.nav-list a{font-weight:400;font-size:var(--fs-md);color:var(--brand-heading);padding:.25rem 0;position:relative}
-.nav-list a::after{content:'';position:absolute;left:0;right:0;bottom:-2px;height:2px;background:var(--brand-primary);border-radius:2px;transform:scaleX(0);transform-origin:left;transition:transform .3s var(--ease-out)}
-.nav-list a:hover{color:var(--brand-primary)}.nav-list a:hover::after{transform:scaleX(1)}
-.header-actions{display:inline-flex;align-items:center;gap:var(--space-3)}
-.header-actions .b2b-btn{padding:.55rem 1.35rem;font-size:var(--fs-md);display:none}
-.mobile-toggle{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:var(--radius-sm);font-size:1.25rem;color:var(--brand-navy)}
+.brand-mark{height:clamp(30px, 6vw, 40px);width:auto}
+
+/* Fluid navigation - shows on wider screens */
+.desktop-nav{
+  display: none;
+  flex: 1;
+  justify-content: flex-end;
+  margin-left: clamp(1rem, 3vw, 2rem)
+}
+.nav-list{
+  display:flex;
+  align-items:center;
+  gap:clamp(1rem, 2vw, 2.25rem)
+}
+.nav-list a{
+  font-weight:400;
+  font-size: clamp(0.9rem, 1.2vw, 1rem);
+  color:var(--brand-heading);
+  padding:.25rem 0;
+  position:relative
+}
+.nav-list a::after{
+  content:'';
+  position:absolute;left:0;right:0;bottom:-2px;
+  height:2px;
+  background:var(--brand-primary);
+  border-radius:2px;
+  transform:scaleX(0);
+  transform-origin:left;
+  transition:transform .3s var(--ease-out)
+}
+.nav-list a:hover{color:var(--brand-primary)}
+.nav-list a:hover::after{transform:scaleX(1)}
+
+.header-actions{
+  display:inline-flex;
+  align-items:center;
+  gap:clamp(0.5rem, 1vw, var(--space-3))
+}
+.header-actions .b2b-btn{
+  padding:.55rem 1.35rem;
+  font-size:var(--fs-md);
+  display:none
+}
+
+.mobile-toggle{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width: clamp(40px, 8vw, 44px);
+  height: clamp(40px, 8vw, 44px);
+  border-radius:var(--radius-sm);
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  color:var(--brand-navy)
+}
 .mobile-toggle:hover{background:var(--brand-alt-background)}
 .mobile-toggle .close-icon{display:none}
 .mobile-toggle[aria-expanded="true"] .close-icon{display:inline}
 .mobile-toggle[aria-expanded="true"] .open-icon{display:none}
 
 /* Mobile nav */
-.mobile-nav{display:none;position:fixed;top:var(--header-h);left:0;right:0;background:var(--brand-background);border-bottom:1px solid var(--brand-border);box-shadow:var(--shadow-md);padding:var(--space-4) var(--space-5) var(--space-6);max-height:calc(100vh - var(--header-h));overflow-y:auto;z-index:999}
+.mobile-nav{
+  display:none;
+  position:fixed;
+  top: clamp(64px, 10vw, 88px);
+  left:0;right:0;
+  background:var(--brand-background);
+  border-bottom:1px solid var(--brand-border);
+  box-shadow:var(--shadow-md);
+  padding:var(--space-4) var(--space-5) var(--space-6);
+  max-height:calc(100vh - clamp(64px, 10vw, 88px));
+  overflow-y:auto;
+  z-index:999
+}
 .mobile-nav.open{display:block;animation:slideDown .25s ease}
 @keyframes slideDown{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
 .mobile-nav-list{display:grid;gap:2px}
-.mobile-link{display:block;padding:.85rem var(--space-3);font-weight:500;font-size:var(--fs-lg);color:var(--brand-heading);border-radius:var(--radius-md);transition:all .15s}
+.mobile-link{
+  display:block;
+  padding:.85rem var(--space-3);
+  font-weight:500;
+  font-size:var(--fs-lg);
+  color:var(--brand-heading);
+  border-radius:var(--radius-md);
+  transition:all .15s
+}
 .mobile-link:hover{background:var(--brand-alt-background);color:var(--brand-primary);padding-left:var(--space-5)}
 .mobile-nav-cta{margin-top:var(--space-4);display:block;text-align:center}
 
-/* --- HERO --- */
-.hero{position:relative;padding:calc(var(--header-h) + var(--space-7)) 0 var(--space-10);background:linear-gradient(180deg,#fbfbfd 0%,#f5f5f7 45%,var(--brand-background) 100%);overflow:hidden}
-.hero-grid{display:grid;grid-template-columns:1fr;gap:var(--space-8);align-items:center;position:relative;z-index:1}
-.hero-text{max-width:600px}
-.hero-title{font-size:var(--hero-title-size);font-weight:var(--heading-weight-strong,700);letter-spacing:var(--heading-tracking,-.01em);line-height:1.14;margin-bottom:var(--space-4);color:var(--brand-heading);text-wrap:balance}
-.hero-desc{font-size:var(--fs-lg);line-height:var(--body-leading,1.75);color:var(--brand-text);margin-bottom:var(--space-5);max-width:56ch}
-.hero-highlights{display:flex;flex-wrap:wrap;gap:var(--space-2) var(--space-5);margin-bottom:var(--space-5)}
+/* --- HERO --- Fluid responsive */
+.hero{
+  position:relative;
+  padding: calc(clamp(64px, 10vw, 88px) + clamp(1.5rem, 4vw, var(--space-7))) 0 clamp(3rem, 8vw, var(--space-10));
+  background: linear-gradient(180deg, #fbfbfd 0%, #f5f5f7 45%, var(--brand-background) 100%);
+  overflow:hidden
+}
+.hero-grid{
+  display:grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(1.5rem, 4vw, var(--space-8));
+  align-items:center;
+  position:relative;
+  z-index:1
+}
+.hero-text{
+  max-width: min(90vw, 600px);
+  grid-column: 1 / -1
+}
+.hero-title{
+  font-size: var(--hero-title-size);
+  font-weight: var(--heading-weight-strong, 700);
+  letter-spacing: var(--heading-tracking, -.01em);
+  line-height: 1.14;
+  margin-bottom: var(--space-4);
+  color: var(--brand-heading);
+  text-wrap: balance
+}
+.hero-desc{
+  font-size: var(--fs-lg);
+  line-height: var(--body-leading, 1.75);
+  color: var(--brand-text);
+  margin-bottom: var(--space-5);
+  max-width: min(80vw, 56ch)
+}
+.hero-highlights{
+  display:flex;
+  flex-wrap:wrap;
+  gap: clamp(0.5rem, 1vw, var(--space-2)) clamp(1rem, 2vw, var(--space-5));
+  margin-bottom: var(--space-5)
+}
 .hero-highlights li{display:flex;align-items:center;gap:10px;font-size:var(--fs-md);font-weight:500;color:var(--brand-text)}
 .hero-highlights li .icon{color:var(--brand-primary);--icon-size:20px}
-.hero-actions{display:flex;flex-direction:column;flex-wrap:wrap;gap:var(--space-3)}
-.hero-image{position:relative}
-.hero-img{width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center 30%;border-radius:var(--radius-lg);box-shadow:0 24px 60px rgba(20,25,66,.12);transition:transform .5s var(--ease-out)}
+.hero-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap: clamp(0.75rem, 1.5vw, var(--space-3));
+  padding-left:0;
+  margin-top: clamp(1rem, 2vw, var(--space-4))
+}
+.hero-actions .btn{
+  flex: 1;
+  min-width: clamp(200px, 40vw, 280px)
+}
+.hero-image{
+  position:relative;
+  grid-column: 1 / -1
+}
+.hero-img{
+  width:100%;
+  aspect-ratio: 1/1;
+  object-fit:cover;
+  object-position:center 30%;
+  border-radius:var(--radius-lg);
+  box-shadow:0 24px 60px rgba(20,25,66,.12);
+  transition:transform .5s var(--ease-out)
+}
 .hero:hover .hero-img{transform:scale(1.02)}
 
 /* --- TRUST BAR --- */
@@ -213,7 +371,7 @@ img{max-width:100%;height:auto;display:block}ul{list-style:none}button{font-fami
 .process-label .icon{color:var(--brand-primary)}
 .process-grid{display:grid;grid-template-columns:1fr;gap:var(--process-gap,var(--grid-gap,var(--space-4)))}
 .step{display:flex;gap:var(--space-4);align-items:flex-start}
-.step-num{flex-shrink:0;width:44px;height:44px;display:flex;align-items:center;justify-content:center;font-family:var(--sans);font-size:1rem;font-weight:600;color:var(--brand-primary);background:rgba(200,32,57,.06);border-radius:var(--radius-md)}
+.step-num{flex-shrink:0;width:44px;height:44px;display:flex;align-items:center;justify-content:center;font-family:var(--sans);font-size:1rem;font-weight:600;color:var(--brand-primary);background:rgba(200,32,57,.06);border-radius:var(--radius-sm);}
 .step-title{font-size:var(--fs-h5);font-weight:var(--heading-weight,600);margin-bottom:2px;color:var(--brand-heading);line-height:1.3}
 .step-desc{font-size:var(--fs-md);line-height:var(--body-leading,1.65);color:var(--brand-text)}
 
@@ -280,7 +438,7 @@ img{max-width:100%;height:auto;display:block}ul{list-style:none}button{font-fami
 .modal-overlay[aria-hidden="false"]{display:flex}
 .modal-box{background:var(--brand-background);border-radius:var(--radius-lg);max-width:840px;width:100%;max-height:90vh;overflow-y:auto;position:relative;box-shadow:0 24px 80px rgba(15,19,48,.4);animation:modalIn .3s var(--ease-out)}
 @keyframes modalIn{from{opacity:0;transform:translateY(16px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
-.modal-close{position:absolute;top:var(--space-3);right:var(--space-3);width:38px;height:38px;background:rgba(255,255,255,.9);border:1px solid var(--brand-border);border-radius:50%;font-size:1.25rem;display:flex;align-items:center;justify-content:center;z-index:10;color:var(--brand-heading);transition:all .2s}
+.modal-close{position:absolute;top:var(--space-3);right:var(--space-3);width:38px;height:38px;background:rgba(255,255,255,.9);border:1px solid var(--brand-border);border-radius:var(--radius-sm);font-size:1.25rem;display:flex;align-items:center;justify-content:center;z-index:10;color:var(--brand-heading);transition:all .2s}
 .modal-close:hover{background:var(--brand-primary);color:var(--brand-background)}
 .modal-grid{display:grid;grid-template-columns:1fr}
 .modal-img-wrap{background:var(--brand-alt-background);min-height:200px}
@@ -301,190 +459,189 @@ img{max-width:100%;height:auto;display:block}ul{list-style:none}button{font-fami
 @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
 .no-reveal .reveal{opacity:1;transform:none;transition:none}
 
-/* --- TABLET (>= 768px) --- */
-@media(min-width:768px){
-.desktop-nav{display:block}.mobile-toggle,.mobile-nav{display:none!important}
-.header-actions .b2b-btn{display:inline-flex}
-.container{padding:0 var(--space-6)}
-.hero-grid{grid-template-columns:var(--hero-cols,1.1fr .9fr)}
-.hero-actions{flex-direction:row}
-.hero-highlights{gap:var(--space-2) var(--space-5)}
-.trust-bar-inner{flex-direction:row;flex-wrap:wrap;justify-content:center;gap:0;padding:var(--space-3) var(--space-5)}
-.trust-bar-item{padding:var(--space-1) var(--space-4)}
-.trust-bar-divider{display:block}
-.trust-bar-inner{flex-direction:var(--trust-direction,row);gap:var(--trust-gap,0)}
-.split-grid{grid-template-columns:var(--split-cols,1.1fr 1fr)}
-.split-grid.reverse{grid-template-columns:var(--about-cols,var(--split-cols,1.1fr 1fr))}
-.split-grid.reverse .split-text{order:2}
-.split-grid.reverse .split-img{order:1}
-.process-grid{grid-template-columns:repeat(var(--process-cols,3),1fr);gap:var(--process-gap,var(--grid-gap,var(--space-5)))}
-.contact-grid{grid-template-columns:var(--contact-cols,1.15fr .85fr)}
-.form-row{grid-template-columns:1fr 1fr}
-.footer-grid{grid-template-columns:var(--footer-cols,1.4fr 1fr 1.2fr 1fr)}
-}
-
-/* --- DESKTOP (>= 1024px) --- */
-@media(min-width:1024px){
-.modal-grid{grid-template-columns:1fr 1fr}
-.modal-img{aspect-ratio:auto;min-height:100%}
-}
-
-/* --- RESPONSIVE REFINEMENTS (mobile / tablet wrapping) --- */
-
-/* Small tablet + large phone landscape: go 2-up instead of wasting a full column */
-/* Phones showed ONE 673px card per row: the collection ran 11890px, 53.6% of
-   a 26-screen page. Go 2-across from 320px so the grid reads as a grid and
-   the section shrinks to roughly half its height. */
-@media(min-width:320px) and (max-width:559.98px){
-  .product-grid{grid-template-columns:repeat(2,1fr);gap:var(--space-4)}
-  .product-card .product-info{padding:var(--space-3)}
-  .product-card .product-title{font-size:1rem;line-height:1.3}
-  .product-card .product-desc{font-size:.8125rem;-webkit-line-clamp:3;min-height:calc(3em * 1.5)}
-  .product-card .product-category{font-size:.75rem;padding:.15rem .4rem}
-  .product-card .product-details-btn{font-size:.875rem;padding:.6rem .5rem}
-}
-@media(min-width:560px) and (max-width:767.98px){
-  .product-grid{grid-template-columns:repeat(2,1fr)}
-  .footer-grid{grid-template-columns:1fr 1fr}
+/* --- RESPONSIVE ADJUSTMENTS --- */
+/* Desktop nav shows when there's enough space */
+@media(min-width: 700px){
+  .desktop-nav{display:block}
+  .mobile-toggle,.mobile-nav{display:none!important}
+  .header-actions .b2b-btn{display:inline-flex}
+  .hero-grid{grid-template-columns: var(--hero-cols, 1.1fr .9fr)}
+  .hero-actions{flex-direction:row}
+  .hero-highlights{gap:var(--space-2) var(--space-5)}
+  .trust-bar-inner{flex-direction:row;flex-wrap:wrap;justify-content:center;gap:0;padding:var(--space-3) var(--space-5)}
+  .trust-bar-item{padding:var(--space-1) var(--space-4)}
+  .trust-bar-divider{display:block}
+  .trust-bar-inner{flex-direction:var(--trust-direction,row);gap:var(--trust-gap,0)}
+  .split-grid{grid-template-columns:var(--split-cols,1.1fr 1fr)}
+  .split-grid.reverse{grid-template-columns:var(--about-cols,var(--split-cols,1.1fr 1fr))}
+  .split-grid.reverse .split-text{order:2}
+  .split-grid.reverse .split-img{order:1}
+  .process-grid{grid-template-columns:repeat(var(--process-cols,3),1fr);gap:var(--process-gap,var(--grid-gap,var(--space-5)))}
+  .contact-grid{grid-template-columns:var(--contact-cols,1.15fr .85fr)}
   .form-row{grid-template-columns:1fr 1fr}
-  .trust-bar-inner{flex-direction:row;flex-wrap:wrap;justify-content:center;gap:var(--space-2) var(--space-4)}
-  .trust-bar-item{padding:var(--space-1) var(--space-2)}
+  .footer-grid{grid-template-columns:var(--footer-cols,1.4fr 1fr 1.2fr 1fr)}
+  .modal-grid{grid-template-columns:1fr 1fr}
+  .modal-img{aspect-ratio:auto;min-height:100%}
 }
 
-/* "How it works" is now a full-width band below the split, so the steps have
-   real room: a vertical list on phones, 3 across from tablet up. Numbered
-   <ol> for semantics - the counter is the visible .step-num. */
-.process{margin-top:var(--space-8);padding-top:var(--space-7);border-top:1px solid var(--brand-border)}
+/* Very narrow screens - stack hero */
+@media(max-width: 600px){
+  .hero-grid{grid-template-columns: 1fr}
+  .hero-text{grid-column: auto}
+  .hero-image{grid-column: auto}
+}
+
+/* --- RESPONSIVE REFINEMENTS --- */
+
+/* Product grid - fluid with auto-fit */
+.product-grid{
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, clamp(250px, 60vw, 300px)), 1fr));
+  gap: clamp(1rem, 2vw, var(--space-5))
+}
+
+/* "How it works" - fluid steps */
+.process{
+  margin-top: clamp(2rem, 4vw, var(--space-8));
+  padding-top: clamp(2rem, 4vw, var(--space-7));
+  border-top:1px solid var(--brand-border)
+}
 .process-label{display:flex;align-items:center;gap:var(--space-2)}
-.process-grid{list-style:none;margin:0;padding:0;grid-template-columns:1fr;gap:var(--space-5)}
+.process-grid{
+  list-style:none;
+  margin:0;
+  padding:0;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+  gap: clamp(1rem, 2vw, var(--space-5))
+}
 .step{position:relative}
-@media(min-width:768px){
-  .process-grid{grid-template-columns:repeat(3,1fr);gap:var(--space-6)}
-  /* connector line between steps, drawn from the number pill outward */
-  .step:not(:last-child)::after{
-    content:"";position:absolute;top:22px;left:calc(44px + var(--space-4));
-    width:calc(100% - 44px - var(--space-4));height:1px;
-    background:linear-gradient(90deg,var(--brand-border),transparent);
-  }
-}
-/* Tablet band: 3 columns are ~224px, too narrow for a side-by-side number.
-   Stack the number above the text so titles get the full column width. */
-@media(min-width:768px) and (max-width:1023.98px){
-  .process-grid{gap:var(--space-4)}
-  .step{flex-direction:column;gap:var(--space-3)}
-  .step:not(:last-child)::after{display:none}
+
+/* Footer grid - fluid */
+.footer-grid{
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr));
+  gap: clamp(1.5rem, 3vw, var(--space-7));
+  margin-bottom: var(--space-6)
 }
 
-/* Footer: four 120px columns on an iPad is unreadable - use 2x2 first */
-@media(min-width:768px) and (max-width:1023.98px){
-  .footer-grid{grid-template-columns:1fr 1fr}
+/* Contact grid - fluid */
+.contact-grid{
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: clamp(1rem, 2vw, var(--space-6))
 }
 
-/* Contact form + info card need width before sitting side by side */
-@media(max-width:899.98px){
-  .contact-grid{grid-template-columns:1fr}
-}
-
-/* Header: nav + logo + CTA all collide around 768-900 */
-@media(min-width:768px) and (max-width:899.98px){
-  .header-actions .b2b-btn{display:none}
+/* Form row - fluid */
+.form-row{
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+  gap: clamp(1rem, 2vw, var(--space-4))
 }
 
 /* Long unbroken strings (emails, WhatsApp numbers) must never push layout */
 .contact-list li{flex-wrap:wrap}
 .accordion-header{gap:var(--space-3)}
 
-/* Very small phones: tighten padding so cards keep usable inner width */
-@media(max-width:359.98px){
-  :root{--card-pad:1.15rem}
-  .container{padding:0 var(--space-3)}
-  .hero-actions .btn,.filters .filter-btn{width:100%}
-  .filters{gap:var(--space-2)}
+/* Trust bar - fluid */
+.trust-bar-inner{
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: clamp(0.5rem, 1vw, var(--space-3));
+  padding: clamp(0.75rem, 1.5vw, var(--space-3)) var(--space-5)
+}
+.trust-bar-item{
+  padding: clamp(0.25rem, 0.5vw, var(--space-1)) clamp(0.75rem, 1.5vw, var(--space-4))
 }
 
-/* --- TOUCH TARGETS + SECONDARY PAGES ------------------------------------- */
-/* Inline links in the contact list / footer were 22-29px tall on phones.
-   Give them a comfortable touch height without changing desktop looks. */
-@media(max-width:767.98px){
-  /* SPATIAL RHYTHM (proximity: related things close, unrelated things far).
-     Before, every gap was within 12-48px of every other, so nothing grouped:
-       eyebrow->h2 12px, h2->body 12px, inner gaps 48px, section break 72px.
-     A 48px inner gap against a 72px break is only 1.5x - too weak to read as
-     a boundary. Establish one scale with real contrast:
-       4px  label to its heading   (bound together)
-       12px heading to its body    (same thought)
-       28px block to block         (inside one section)
-       64px section to section     (new idea)  -> 2.3x the inner gap        */
-  .section{padding:var(--space-8) 0}
-  .section-head,.section-header{margin-bottom:var(--space-6)}
-  .section-head p,.section-header p{margin-bottom:0}
-  /* Eyebrow is a label FOR the heading, not a sibling paragraph. */
-  .tag,.eyebrow{margin-bottom:.25rem}
-  /* Pull the big inner gaps down so the section break clearly wins. */
-  .hero-grid,.split-grid{gap:var(--space-6)}
-  .process{margin-top:var(--space-6);padding-top:var(--space-6)}
-  .collection-actions{margin-top:var(--space-5)}
-  .collection-note{margin-top:var(--space-5)}
-  /* BALANCE / ALIGNMENT.
-     Sections disagreed: collection, faq and contact centred their headers
-     while custom-orders and about were left-aligned.
-     Worse, centred multi-line body copy gives a ragged LEFT edge - measured
-     line starts of 26,24,133px in one paragraph - so nothing lines up with
-     the cards below it. On a 358px column, left-align everything onto one
-     axis. Short eyebrow labels stay put; only the block alignment changes. */
+/* Header actions - hide b2b button on narrow screens */
+@media(max-width: 800px){
+  .header-actions .b2b-btn{display:none}
+}
+
+/* Small screens - stack hero */
+@media(max-width: 600px){
+  .hero-grid{grid-template-columns: 1fr}
+  .hero-text{grid-column: auto}
+  .hero-image{grid-column: auto}
+  .hero-actions .btn{width: 100%}
+  .filters .filter-btn{width: 100%}
+  .filters{gap: clamp(0.5rem, 1vw, var(--space-2))}
+}
+
+/* --- TOUCH TARGETS + FLUID RESPONSIVE --- */
+/* Inline links in the contact list / footer - comfortable touch height */
+
+/* SPATIAL RHYTHM - fluid spacing */
+.section{padding: clamp(2rem, 5vw, var(--section-y)) 0}
+.section-head,.section-header{
+  margin-bottom: clamp(1.5rem, 3vw, var(--space-6))
+}
+.section-head p,.section-header p{margin-bottom:0}
+
+/* Eyebrow is a label FOR the heading */
+.tag,.eyebrow{margin-bottom: clamp(0.25rem, 0.5vw, .25rem)}
+
+/* Fluid gaps */
+.hero-grid,.split-grid{gap: clamp(1.5rem, 3vw, var(--space-6))}
+.process{margin-top: clamp(2rem, 4vw, var(--space-6));padding-top: clamp(2rem, 4vw, var(--space-6))}
+.collection-actions{margin-top: clamp(1.5rem, 3vw, var(--space-5))}
+.collection-note{margin-top: clamp(1.5rem, 3vw, var(--space-5))}
+
+/* BALANCE / ALIGNMENT - left-align on narrow screens */
+@media(max-width: 800px){
   .section-header,.section-head{text-align:left}
   .section-header h2,.section-head h2,
   .section-title,.section-subtitle{text-align:left;margin-inline:0}
   .section-subtitle{max-width:none}
   /* FAQ buttons sat at x=17: a 1px border pushed them off the 16px axis. */
   .accordion-header{padding-left:calc(var(--faq-pad,1rem) - 1px)}
-  /* Hero was 1123px = 133% of the viewport, so the product photo (the whole
-     point of a decor site) sat entirely below the fold and the first screen
-     was pure text. Tighten the stack so the image starts before the fold. */
-  .hero{padding-top:calc(88px + var(--space-5));padding-bottom:var(--space-7)}
-  .hero-grid{gap:var(--space-5)}
-  .hero-desc{margin-bottom:var(--space-4)}
-  .hero-highlights{gap:var(--space-2) var(--space-4);margin-bottom:var(--space-5)}
-  .hero-actions{gap:var(--space-3)}
-  /* Form was 1231px: every field a full-width stacked block, and .form-row
-     only paired up at 560px so phones stacked those too (188px per pair). */
-  .form-group{margin-bottom:var(--space-3)}
-  .form-group label{margin-bottom:.25rem;display:block}
-  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-3)}
+}
+
+/* Hero adjustments for narrow screens */
+@media(max-width: 800px){
+  .hero{
+    padding-top: calc(clamp(64px, 10vw, 88px) + clamp(1rem, 2vw, var(--space-5)));
+    padding-bottom: clamp(2rem, 4vw, var(--space-7))
+  }
+  .hero-grid{gap: clamp(1rem, 2vw, var(--space-5))}
+  .hero-desc{margin-bottom: clamp(0.75rem, 1.5vw, var(--space-4))}
+  .hero-highlights{gap: clamp(0.5rem, 1vw, var(--space-2)) clamp(0.75rem, 1.5vw, var(--space-4));margin-bottom: clamp(1rem, 2vw, var(--space-5))}
+  .hero-actions{gap: clamp(0.75rem, 1.5vw, var(--space-3))}
+  /* Form adjustments */
+  .form-group{margin-bottom: clamp(0.75rem, 1.5vw, var(--space-3))}
+  .form-group label{margin-bottom: clamp(0.25rem, 0.5vw, .25rem);display:block}
   .form-row .form-group{margin-bottom:0}
-  /* Later rule sets min-height:120px on textareas; needs to lose here. */
-  .form-group textarea,.form-group textarea[rows]{min-height:88px;height:88px}
-  .hero{padding-bottom:var(--space-8)}
-  /* Trust bar stacked as 3 single-item rows. Two columns reads as a unit and
-     saves ~80px; the third item spans the full width underneath. */
-  .trust-bar-inner{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-3);align-items:start}
-  .trust-bar-item{justify-content:flex-start;text-align:left;font-size:.875rem;line-height:1.35}
+  .form-group textarea,.form-group textarea[rows]{min-height: clamp(80px, 15vw, 120px)}
+  /* Trust bar - grid on narrow */
+  .trust-bar-inner{display:grid;grid-template-columns:1fr 1fr;gap: clamp(0.75rem, 1.5vw, var(--space-3));align-items:start}
+  .trust-bar-item{justify-content:flex-start;text-align:left;font-size: clamp(0.8rem, 1vw, .875rem);line-height:1.35}
   .trust-bar-item:last-child{grid-column:1 / -1}
   .trust-bar-divider{display:none}
-  /* Filter chips measured 43px - just under the 44px touch minimum. */
-  .filters .filter-btn{min-height:44px;display:inline-flex;align-items:center;justify-content:center}
-  /* 13px eyebrows were the smallest text on the page. */
-  .tag,.eyebrow{font-size:.875rem}
-  /* Header read as cramped on phones: a 44px logo inside a 72px bar left only
-     ~14px of clearance. Give the bar more height and trim the mark.
-     NOTE: applyTheme() writes theme.json's headerHeight as an INLINE style on
-     :root, which outranks any --header-h we set here. So override the concrete
-     properties (and everything else keyed off the token) directly. */
-  .site-header{height:88px}
-  .mobile-nav{top:88px;max-height:calc(100vh - 88px)}
-  .hero{padding-top:calc(88px + var(--space-7))}
-  html{scroll-padding-top:calc(88px + 24px)}
-  .contact-list li{padding:var(--space-3) 0}
-  .contact-list li a,.contact-link{display:inline-flex;align-items:center;min-height:44px}
+  /* Filter chips - ensure touch minimum */
+  .filters .filter-btn{
+    min-height: clamp(40px, 8vw, 44px);
+    display:inline-flex;
+    align-items:center;
+    justify-content:center
+  }
+  /* Eyebrow sizing */
+  .tag,.eyebrow{font-size: clamp(0.75rem, 1vw, .875rem)}
+  /* Header */
+  .site-header{height: clamp(64px, 10vw, 88px)}
+  .mobile-nav{top: clamp(64px, 10vw, 88px);max-height:calc(100vh - clamp(64px, 10vw, 88px))}
+  .hero{padding-top:calc(clamp(64px, 10vw, 88px) + clamp(1rem, 2vw, var(--space-7)))}
+  html{scroll-padding-top:calc(clamp(64px, 10vw, 88px) + 24px)}
+  .contact-list li{padding: clamp(0.75rem, 1.5vw, var(--space-3)) 0}
+  .contact-list li a,.contact-link{display:inline-flex;align-items:center;min-height: clamp(40px, 8vw, 44px)}
   .footer-col li{margin-bottom:0}
-  .footer-col li a{display:inline-flex;align-items:center;min-height:44px}
-  .footer-social a{min-height:44px}
-  .legal-links a,.footer-bottom a,.footer p a{display:inline-flex;align-items:center;min-height:44px}
-  .logo{display:inline-flex;align-items:center;min-height:44px}
-  .accordion-header{min-height:56px}
-  /* 16px inputs prevent iOS Safari auto-zoom on focus */
-  .form-group input,.form-group select,.form-group textarea{font-size:16px;min-height:48px}
-  .form-group textarea{min-height:120px}
+  .footer-col li a{display:inline-flex;align-items:center;min-height: clamp(40px, 8vw, 44px)}
+  .footer-social a{min-height: clamp(40px, 8vw, 44px)}
+  .legal-links a,.footer-bottom a,.footer p a{display:inline-flex;align-items:center;min-height: clamp(40px, 8vw, 44px)}
+  .logo{display:inline-flex;align-items:center;min-height: clamp(40px, 8vw, 44px)}
+  .accordion-header{min-height: clamp(50px, 8vw, 56px)}
+  /* Input sizing */
+  .form-group input,.form-group select,.form-group textarea{
+    font-size: clamp(14px, 2vw, 16px);
+    min-height: clamp(44px, 8vw, 48px)
+  }
+  .form-group textarea{min-height: clamp(80px, 15vw, 120px)}
 }
 
 /* privacy.html / 404.html use their own inline styles - make them fluid */
@@ -512,6 +669,8 @@ img{max-width:100%;height:auto;display:block}ul{list-style:none}button{font-fami
 
 /* =====================================================
    Lookbook template — full visual rewrite of surfaces
+   Fluid responsive design - no fixed breakpoints
+   NO BLACK COLORS - using maroon/cream palette only
    ===================================================== */
 body{
   background:#f4e6d4;
@@ -525,29 +684,35 @@ h1,h2,h3,.hero-title,.section-title,.modal-title,.product-title{
   border-bottom:1px solid rgba(201,168,76,.4);
 }
 
-.hero{padding:0;background:#1a0e14;overflow:hidden}
+/* Fluid hero - NO BLACK, using maroon palette */
+.hero{padding:0;background:#C82039;overflow:hidden}
 .hero-stage{
   min-height:calc(100vh - var(--header-h));
   background:
-    radial-gradient(950px 540px at 18% 16%, rgba(255,116,132,.30), transparent 60%),
-    radial-gradient(720px 480px at 88% 92%, rgba(26,6,10,.5), transparent 62%),
-    linear-gradient(135deg, #4a0d18 0%, #C82039 45%, #1a0e14 100%);
+    radial-gradient(clamp(600px, 60vw, 950px) clamp(300px, 30vw, 540px) at 18% 16%, rgba(255,116,132,.30), transparent 60%),
+    radial-gradient(clamp(400px, 40vw, 720px) clamp(240px, 24vw, 480px) at 88% 92%, rgba(80,24,32,.5), transparent 62%),
+    linear-gradient(135deg, #8a1c2c 0%, #C82039 45%, #4a0d18 100%);
 }
 .hero-grid{
   min-height:calc(100vh - var(--header-h));
-  padding:calc(var(--header-h) + 1.5rem) var(--space-4) 3rem;
-  gap:2.5rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(1rem, 4vw, 2.5rem);
+  padding: calc(var(--header-h) + clamp(1rem, 2vw, 1.5rem)) clamp(1rem, 4vw, var(--space-4)) clamp(2rem, 5vw, 3rem);
+  align-items: center;
 }
+
+/* Fluid hero text - scales with viewport */
 .hero-kicker{
   display:inline-block;
-  margin:0 0 1rem;
-  padding:.4rem .9rem;
+  margin:0 0 clamp(0.5rem, 1vw, 1rem);
+  padding: clamp(0.25rem, 0.5vw, 0.4rem) clamp(0.75rem, 1.5vw, 0.9rem);
   border:1px solid rgba(201,168,76,.55);
   border-radius:999px;
   color:#e8c56a;
   letter-spacing:.18em;
   text-transform:uppercase;
-  font-size:.72rem;
+  font-size: clamp(0.65rem, 1vw, .72rem);
   font-weight:600;
   background:transparent;
 }
@@ -557,34 +722,75 @@ h1,h2,h3,.hero-title,.section-title,.modal-title,.product-title{
   font-weight:700;
   letter-spacing:-.02em;
   max-width:16ch;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  line-height: clamp(1.1, 1.15, 1.2);
+  margin-bottom: clamp(0.75rem, 1.5vw, 1rem);
 }
-.hero-desc{color:#fff;max-width:42ch}
+.hero-desc{
+  color:#fff;
+  max-width:42ch;
+  font-size: clamp(0.95rem, 1.2vw, 1.1rem);
+  line-height: clamp(1.4, 1.5, 1.6);
+  margin-bottom: clamp(1rem, 2vw, 1.5rem);
+}
+
+/* Fluid hero actions - buttons stack on narrow, row on wide */
+.hero-actions{
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(0.75rem, 1.5vw, 1rem);
+  margin-bottom: clamp(1rem, 2vw, 1.5rem);
+}
+.hero-actions .btn{
+  flex: 1;
+  min-width: clamp(200px, 40vw, 280px);
+}
+
 .hero-actions .btn-primary{
   background:#fff;border-color:#fff;color:#c82039;
 }
 .hero-actions .btn-primary:hover{
-  background:#fff;border-color:#fff;color:#c82039;transform:translateY(-1px);
+  background:#fff;border-color:#fff;color:#c82039;transform:translateY(-1px);box-shadow:0 10px 24px rgba(200,32,57,.28);
 }
 .hero-actions .btn-outline{
   background:transparent;color:#fff;border-color:#fff;
 }
 .hero-actions .btn-outline:hover{
-  background:#fff;color:#c82039;border-color:#fff;transform:translateY(-1px);
+  background:#fff;color:#c82039;border-color:#fff;transform:translateY(-1px);box-shadow:0 10px 24px rgba(200,32,57,.28);
 }
+/* Fix 7: White focus ring for hero CTAs on maroon background */
+.hero-actions .btn:focus-visible{
+  outline:2px solid #fff;outline-offset:2px;border-radius:4px;
+}
+
+/* Fluid hero image - fills available space */
 .hero-image{
   position:relative;
-  margin-left:calc(-1 * var(--space-4));
-  margin-right:calc(-1 * var(--space-4));
+  margin-left: calc(-1 * clamp(1rem, 4vw, var(--space-4)));
+  margin-right: calc(-1 * clamp(1rem, 4vw, var(--space-4)));
 }
 .hero-img{
   width:100%;
-  aspect-ratio:4/5;
+  aspect-ratio:1/1;
   object-fit:cover;
+  object-position:center top;
   border-radius:0;
   border:0;
   padding:0;
   box-shadow:none;
   transform:none !important;
+}
+/* Fix 5: Maroon blend overlay on photo's left edge */
+.hero-image::before{
+  content:'';
+  position:absolute;
+  left:0;
+  top:0;
+  bottom:0;
+  width:clamp(20px, 5vw, 40px);
+  background:linear-gradient(90deg,#C82039,#C82039 20%,transparent 100%);
+  pointer-events:none;
+  z-index:1;
 }
 .hero:hover .hero-img{transform:none}
 
@@ -595,12 +801,21 @@ h1,h2,h3,.hero-title,.section-title,.modal-title,.product-title{
 }
 .section-title{color:#1a0e14}
 
-.filters{justify-content:center}
+/* Fluid filters */
+.filters{
+  display:flex;
+  flex-wrap:wrap;
+  gap: clamp(0.25rem, 0.5vw, 0.5rem);
+  justify-content:center;
+  margin-bottom: clamp(1rem, 2vw, 1.5rem);
+}
 .filter-btn{
+  padding: clamp(0.4rem, 0.75vw, 0.6rem) clamp(0.8rem, 1.5vw, 1.2rem);
   background:#fffaf1;
   border:1px solid rgba(80,24,32,.12);
   border-radius:999px;
   color:#5a4046;
+  font-size: clamp(0.8rem, 1vw, 0.95rem);
 }
 .filter-btn.active{
   background:#1a0e14;
@@ -609,71 +824,186 @@ h1,h2,h3,.hero-title,.section-title,.modal-title,.product-title{
   box-shadow:none;
 }
 
-.product-grid{gap:1.75rem}
+/* Fluid product grid - auto-fit with minmax */
+.product-grid{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, clamp(280px, 70vw, 320px)), 1fr));
+  gap: clamp(1rem, 2vw, 1.75rem);
+  justify-content: center;
+}
 .product-card{
   background:#fffaf1;
   border:0;
   border-radius:22px;
   overflow:hidden;
   box-shadow:0 16px 40px rgba(80,24,32,.1);
+  max-width: clamp(300px, 70vw, 420px);
+  width: 100%;
 }
 .product-card:hover{
   transform:translateY(-6px);
   box-shadow:0 28px 56px rgba(80,24,32,.16);
 }
 .product-image{position:relative}
-.product-ref-badge{
-  position:absolute;left:12px;bottom:12px;
-  padding:.25rem .55rem;
-  background:rgba(20,12,18,.82);
-  color:#f7efe4;
-  font-size:.7rem;
-  letter-spacing:.08em;
-  border-radius:999px;
+/* NO PRODUCT ID ON IMAGE - removed product-ref-badge */
+.product-info{
+  padding: clamp(1rem, 2vw, 1.15rem) clamp(1rem, 2vw, 1.2rem) clamp(1rem, 2vw, 1.35rem);
+  display:flex;flex-direction:column;flex:1
 }
-.product-info{padding:1.15rem 1.2rem 1.35rem}
 .product-category{
   background:#f3d6c4;color:#8a1c2c;border-radius:999px;
+  font-size: clamp(0.75rem, 1vw, 0.875rem);
 }
-.product-details-btn{width:100%;margin-top:auto}
+.product-title{font-size: var(--card-title-size);margin-bottom:var(--space-2);color:var(--brand-heading);line-height:1.25;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.product-desc{font-size:var(--fs-md);line-height:var(--body-leading,1.65);margin-bottom:var(--space-3);color:var(--brand-muted);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.product-details-btn{width:100%;margin-top:auto;padding:.65rem 1.2rem;font-size:var(--fs-md)}
 
+/* Fluid split sections */
+.split-grid{
+  display:grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(1.5rem, 4vw, 3rem);
+  align-items:center;
+}
+.split-text{max-width:540px}
 .split-img{
+  width:100%;
+  aspect-ratio:1/1;
+  object-fit:cover;
+  object-position:center;
   border:0;border-radius:24px;
   box-shadow:0 30px 60px rgba(80,24,32,.16);
 }
-.chip{background:#fffaf1;border-color:#e8c56a}
-.step-num{
-  background:#1a0e14;color:#e8c56a;border-radius:50%;
-}
+.split-grid.reverse{grid-template-columns: repeat(2, 1fr)}
+.split-grid.reverse .split-text{order:2}
+.split-grid.reverse .split-img{order:1}
 
-.accordion-item,.form-card,.info-card{
-  background:#fffaf1;
-  border:1px solid rgba(80,24,32,.08);
-  box-shadow:0 12px 32px rgba(80,24,32,.06);
+.chips{display:flex;flex-wrap:wrap;gap:var(--space-2);margin:var(--space-4) 0 var(--space-5)}
+.chip{display:inline-flex;align-items:center;gap:8px;padding:.55rem .95rem;background:var(--brand-background);border:1px solid var(--brand-border);border-radius:var(--radius-md);font-size:var(--fs-sm);font-weight:500;color:var(--brand-text);box-shadow:0 1px 2px rgba(20,25,66,.03)}
+.chip i,.chip .icon{color:var(--brand-primary)}
+
+.process{margin-top:var(--space-7);padding-top:var(--space-7);border-top:1px solid var(--brand-border)}
+.process-label{font-family:var(--sans);font-size:var(--fs-md);font-weight:600;text-transform:none;letter-spacing:0;color:var(--brand-heading);margin-bottom:var(--space-4)}
+.process-label .icon{color:var(--brand-primary)}
+.process-grid{display:grid;grid-template-columns:repeat(auto-fit, minmax(min(100%, 250px), 1fr));gap:var(--process-gap,var(--grid-gap,var(--space-4)))}
+.step{display:flex;gap:var(--space-4);align-items:flex-start}
+.step-num{flex-shrink:0;width:44px;height:44px;display:flex;align-items:center;justify-content:center;font-family:var(--sans);font-size:1rem;font-weight:600;color:var(--brand-primary);background:rgba(200,32,57,.06);border-radius:var(--radius-sm);}
+.step-title{font-size:var(--fs-h5);font-weight:var(--heading-weight,600);margin-bottom:2px;color:var(--brand-heading);line-height:1.3}
+.step-desc{font-size:var(--fs-md);line-height:var(--body-leading,1.65);color:var(--brand-text)}
+
+/* Fluid values */
+.values{display:grid;gap:var(--space-2);margin-top:var(--space-6)}
+.values li{display:flex;align-items:center;gap:12px;padding:var(--space-2) 0;font-weight:500;color:var(--brand-text)}
+.values li .icon{color:var(--brand-primary);flex-shrink:0}
+
+/* NO CIRCLES - Step numbers use squared design */
+.process-grid{display:grid;grid-template-columns:repeat(auto-fit, minmax(min(100%, 250px), 1fr));gap:var(--process-gap,var(--grid-gap,var(--space-4)))}
+.step{display:flex;gap:var(--space-4);align-items:flex-start}
+.step-num{flex-shrink:0;width:44px;height:44px;display:flex;align-items:center;justify-content:center;font-family:var(--sans);font-size:1rem;font-weight:600;color:#fff;background:#C82039;border-radius:var(--radius-sm);}
+
+/* Fluid FAQ */
+.accordion{display:grid;gap:var(--faq-gap,var(--space-2));max-width:min(90vw, 740px);margin:var(--faq-margin,0 auto)}
+.accordion-item{background:var(--brand-background);border:1px solid var(--brand-border);border-radius:var(--radius-md);overflow:hidden;transition:all .2s}
+.accordion-item:hover{border-color:var(--brand-border);box-shadow:0 4px 12px rgba(20,25,66,.04)}
+.accordion-header{width:100%;padding:var(--faq-pad,var(--space-4)) var(--faq-pad,var(--space-5));font-family:var(--sans);font-size:var(--fs-md);font-weight:var(--heading-weight,600);color:var(--brand-heading);text-align:left;display:flex;align-items:center;justify-content:space-between;gap:var(--space-5);transition:color .2s;line-height:1.4}
+.accordion-header:hover{color:var(--brand-primary)}
+.accordion-header::after{content:'+';font-size:1.3rem;font-weight:300;color:var(--brand-primary);flex-shrink:0;line-height:1;transition:transform .2s}
+.accordion-header[aria-expanded="true"]::after{content:'+';transform:rotate(45deg)}
+.accordion-content{padding:0 var(--faq-pad,var(--space-5)) var(--faq-pad,var(--space-5));font-size:var(--fs-md);line-height:var(--body-leading,1.7);color:var(--brand-text);max-width:var(--measure)}
+.accordion-content p{color:inherit;max-width:none}
+
+/* Fluid contact */
+.contact-grid{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+  gap:var(--contact-gap,var(--grid-gap,var(--space-6)))
 }
-.site-footer{
-  background:#120a10;
-  border-top:4px solid #c9a84c;
+.form-card{background:var(--brand-background);border:1px solid var(--brand-border);border-radius:var(--radius-lg);padding:var(--card-pad,var(--space-6));box-shadow:0 4px 16px rgba(20,25,66,.05)}
+.form-group{margin-bottom:var(--space-4)}
+.form-group label{display:block;font-weight:600;font-size:var(--fs-sm);color:var(--brand-heading);margin-bottom:6px}
+.form-group input,.form-group select,.form-group textarea{width:100%;padding:.75rem .9rem;font-family:var(--sans);font-size:var(--fs-md);color:var(--brand-heading);background:var(--brand-alt-background);border:1px solid var(--brand-border);border-radius:var(--radius-md);transition:all .2s;line-height:1.4}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{outline:none;border-color:var(--brand-primary);background:var(--brand-background);box-shadow:0 0 0 3px rgba(200,32,57,.1)}
+.form-row{display:grid;grid-template-columns:repeat(auto-fit, minmax(min(100%, 200px), 1fr));gap:var(--space-4)}
+.form-group.half{min-width:0}
+.submit-btn{width:100%}
+.form-note{font-size:var(--fs-md);color:var(--brand-muted);text-align:center;margin:var(--space-3) 0 0;max-width:none}
+.form-status{display:none;margin-top:var(--space-3);padding:var(--space-2) var(--space-3);border-radius:var(--radius-md);background:rgba(46,125,50,.1);color:#2e7d32;font-size:var(--fs-sm);font-weight:600;text-align:center}
+.form-status.visible{display:block}
+.info-card{background:var(--brand-background);border:1px solid var(--brand-border);border-radius:var(--radius-lg);padding:var(--card-pad,var(--space-6));box-shadow:0 4px 16px rgba(20,25,66,.05)}
+.info-card h3{font-size:var(--card-title-size);margin-bottom:var(--space-5);color:var(--brand-heading);line-height:1.25}
+.contact-list{display:grid;gap:var(--space-2)}
+.contact-list li{display:flex;align-items:center;gap:12px;padding:var(--space-2) 0;font-size:var(--fs-sm);color:var(--brand-text);border-bottom:1px solid var(--brand-border)}
+.contact-list li:last-child{border-bottom:none}
+.contact-list li i,.contact-list li .icon{color:var(--brand-primary);--icon-size:20px;text-align:center;flex-shrink:0}
+.contact-list strong{color:var(--brand-heading);font-weight:600}
+.contact-link{color:var(--brand-text);font-weight:500;min-width:0;overflow-wrap:anywhere}
+.contact-link:hover{color:var(--brand-primary)}
+
+/* Fluid footer - NO BLACK, using maroon/cream palette */
+.site-footer{background:#C82039;color:#fff;padding:var(--footer-pad,var(--space-9)) 0 var(--space-5)}
+.footer-grid{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+  gap:var(--footer-gap,var(--space-7));
+  margin-bottom:var(--space-6)
 }
+.footer-brand .logo{margin-bottom:var(--space-3)}
+.footer-tagline{font-size:var(--fs-md);color:rgba(255,255,255,.72);max-width:34ch;line-height:var(--body-leading,1.65);text-wrap:pretty}
+.footer-col h4{color:#fff;font-size:var(--fs-md);font-weight:600;text-transform:none;letter-spacing:0;margin-bottom:var(--space-4);opacity:.75}
+.footer-col li{margin-bottom:.35rem}
+.footer-col a{color:rgba(255,255,255,.7);font-size:var(--fs-md);transition:color .2s;overflow-wrap:anywhere}
+.footer-col a:hover{color:#C9A84C;text-decoration:none}
+.footer-col li i,.footer-col li .icon{color:#C9A84C;--icon-size:16px;text-align:center}
+.footer-social{display:flex;gap:var(--space-4);flex-wrap: wrap}
+.footer-social a{color:rgba(255,255,255,.7);font-size:var(--fs-md);font-weight:500;transition:color .2s;display:flex;align-items:center;gap:8px}
+.footer-social a:hover{color:#C9A84C}
+.footer-bottom{padding-top:var(--space-5);border-top:1px solid rgba(255,255,255,.15);text-align:center;color:rgba(255,255,255,.72);font-size:var(--fs-sm);max-width:none}
+.footer-bottom p{color:inherit;max-width:none;margin:0}
+
+/* Fluid modal */
+.modal-overlay{position:fixed;inset:0;background:rgba(15,19,48,.72);display:none;align-items:center;justify-content:center;z-index:2000;padding:var(--space-4)}
+.modal-overlay[aria-hidden="false"]{display:flex}
+.modal-box{
+  background:var(--brand-background);
+  border-radius:var(--radius-lg);
+  max-width: min(90vw, 840px);
+  width:100%;
+  max-height:90vh;
+  overflow-y:auto;
+  position:relative;
+  box-shadow:0 24px 80px rgba(15,19,48,.4);
+  animation:modalIn .3s var(--ease-out)
+}
+@keyframes modalIn{from{opacity:0;transform:translateY(16px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
+.modal-close{position:absolute;top:var(--space-3);right:var(--space-3);width:38px;height:38px;background:rgba(255,255,255,.9);border:1px solid var(--brand-border);border-radius:var(--radius-sm);font-size:1.25rem;display:flex;align-items:center;justify-content:center;z-index:10;color:var(--brand-heading);transition:all .2s}
+.modal-close:hover{background:var(--brand-primary);color:var(--brand-background)}
+.modal-grid{display:grid;grid-template-columns:repeat(2, 1fr)}
+.modal-img-wrap{background:var(--brand-alt-background);min-height:200px}
+.modal-img{width:100%;height:100%;object-fit:cover;object-position:center;aspect-ratio:1/1}
+.modal-info{padding:var(--space-6)}
+.modal-tag{display:inline-block;padding:.2rem .55rem;background:rgba(0,0,0,.04);color:var(--brand-muted);border-radius:var(--radius-sm);font-size:var(--fs-xs);font-weight:500;text-transform:none;letter-spacing:0;margin-bottom:var(--space-2)}
+.modal-title{font-size:var(--fs-h2);margin-bottom:var(--space-2);line-height:1.2}
+.modal-desc{font-size:var(--fs-md);line-height:var(--body-leading,1.7);margin-bottom:var(--space-4);color:var(--brand-text)}
+.modal-btn{width:100%}
+
+/* WhatsApp float - fluid sizing */
+.wa-float{
+  position:fixed;
+  right: clamp(12px, 3vw, 20px);
+  bottom: clamp(12px, 3vw, 20px);
+  width: clamp(48px, 10vw, 56px);
+  height: clamp(48px, 10vw, 56px);
+  display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,#25D366,#1DA851);
+  color:#fff;border-radius:50%;
+  font-size: clamp(1.3rem, 3vw, 1.6rem);
+  box-shadow:0 6px 24px rgba(37,211,102,.4);
+  z-index:1500;
+  transition:all .3s var(--ease-out)
+}
+.wa-float:hover{color:#fff;transform:scale(1.1) rotate(-5deg);box-shadow:0 10px 32px rgba(37,211,102,.5)}
+
 .btn-primary{
   background:#c82039;border-color:#c82039;
 }
 
-@media(min-width:768px){
-  /* Hero photo runs flush to the right viewport edge while the text column
-     stays on the same left axis as every other section. */
-  .hero-grid{
-    align-items:center;
-    max-width:none;
-    padding-right:0;
-    padding-left:max(var(--space-6), calc((100vw - var(--container)) / 2 + var(--space-6)));
-  }
-  .hero-image{margin-left:0;margin-right:0}
-  .hero-img{aspect-ratio:1/1;max-height:78vh}
-}
-
-/* Very small phones: keep the hero on the site axis and the photo full-bleed. */
-@media(max-width:359.98px){
-  .hero-grid{padding-left:var(--space-3);padding-right:var(--space-3)}
-  .hero-image{margin-left:calc(-1 * var(--space-3));margin-right:calc(-1 * var(--space-3))}
-}
