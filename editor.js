@@ -14,16 +14,16 @@ let state = {
 
 function defaultSectionCopy() {
   return {
-    heroPrimary: {label:'Explore the collection', href:'#collection'},
+    heroPrimary: {label:'View the collection', href:'#collection'},
     heroSecondary: {label:'', href:''},
     collection: {
       label:'BROWSE DESIGNS', title:'Find what fits the occasion.',
-      intro:'Every design is shown clearly so you can compare colour, form and texture before you enquire.',
+      intro:'Compare colour, form and texture before you enquire.',
       note:''
     },
     customOrders: {
       label:'CUSTOM WORK', title:'Start with your colour story.',
-      intro:'Already have a theme, palette or reference? Use it as the starting point. We can discuss colour, size, quantity and the practical details needed for your setup.',
+      intro:'Bring a theme, palette or reference. We will discuss colour, size, quantity and timing for your setup.',
       image:'assets/images/custom-orders.jpg',
       chips:[
         {icon:'icon-palette', text:'Colour matching'},
@@ -39,7 +39,7 @@ function defaultSectionCopy() {
     },
     about: {
       label:'JHALAR', title:'Made by hand. Chosen for the moment.',
-      intro:'We create hanging decor for the people building celebrations—decorators, planners, retailers and families who know that the small visual details change how a space feels. Our work begins in Howrah and travels into wedding venues, festive installations and celebrations across India.',
+      intro:'We make hanging decor for the people who put celebrations together: decorators, planners, retailers and families.',
       image:'assets/images/about-collage.jpg',
       values:[
         {icon:'icon-check', text:'Finished by hand, piece by piece'},
@@ -50,7 +50,7 @@ function defaultSectionCopy() {
     faq: {label:'FAQ', title:'Frequently Asked Questions'},
     contact: {
       label:'READY WHEN YOU ARE', title:'Tell us what you are creating.',
-      intro:'Share the design, quantity, location and date. We will take the conversation from there.',
+      intro:'Send the design, quantity, location and date. We will take it from there.',
       submitLabel:'Start an enquiry'
     },
     footerTagline:'Handcrafted hanging decor · Howrah, India'
