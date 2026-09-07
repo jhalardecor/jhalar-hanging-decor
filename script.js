@@ -276,308 +276,55 @@ initProducts();initRuntime();
 })();
 
 
-/* Prevent browser double-tap page zoom only on interactive product media.
-   Pinch remains available for image zoom. */
+/* PRODUCT MEDIA VIEWER — audited single interaction engine */
 (function(){
-  const modal=document.getElementById('product-modal');
-  if(!modal)return;
-  let lastTap=0;
-  modal.addEventListener('touchend',function(e){
-    const stage=e.target.closest('.modal-stage');
-    const image=stage&&e.target.closest('img[data-zoomable="true"]');
-    if(!image)return;
-    const now=Date.now();
-    if(now-lastTap<320)e.preventDefault();
-    lastTap=now;
-  },{passive:false});
-})();
+ const stage=document.getElementById('modal-stage'), img=document.getElementById('modal-photo');
+ if(!stage||!img)return;
+ let scale=1,tx=0,ty=0,raf=0,pan=null,pinch=null;
+ const pts=new Map();
+ const MIN=1,MAX=3;
 
+ function metrics(){
+   const r=stage.getBoundingClientRect(),cs=getComputedStyle(stage);
+   const pl=parseFloat(cs.paddingLeft)||0,pr=parseFloat(cs.paddingRight)||0,pt=parseFloat(cs.paddingTop)||0,pb=parseFloat(cs.paddingBottom)||0;
+   const w=r.width-pl-pr,h=r.height-pt-pb;
+   const nw=img.naturalWidth||w,nh=img.naturalHeight||h;
+   const fit=Math.min(w/nw,h/nh);
+   return {r,w,h,bw:nw*fit,bh:nh*fit};
+ }
+ function constrain(){
+   const m=metrics();
+   const mx=Math.max(0,(m.bw*scale-m.w)/2),my=Math.max(0,(m.bh*scale-m.h)/2);
+   tx=Math.max(-mx,Math.min(mx,tx));ty=Math.max(-my,Math.min(my,ty));
+ }
+ function paint(){raf=0;constrain();img.style.transform=`translate3d(${tx}px,${ty}px,0) scale(${scale})`;stage.classList.toggle('is-zoomed',scale>1.001)}
+ function draw(){if(!raf)raf=requestAnimationFrame(paint)}
+ function reset(){scale=1;tx=0;ty=0;pan=pinch=null;draw()}
+ function zoom(next,cx,cy){
+   const old=scale;next=Math.max(MIN,Math.min(MAX,next));if(next===old)return;
+   const m=metrics(),x=cx-(m.r.left+m.r.width/2),y=cy-(m.r.top+m.r.height/2),k=next/old;
+   tx=x-(x-tx)*k;ty=y-(y-ty)*k;scale=next;if(scale===1){tx=ty=0}draw();
+ }
+ function two(){const p=[...pts.values()];return {x:(p[0].x+p[1].x)/2,y:(p[0].y+p[1].y)/2,d:Math.hypot(p[0].x-p[1].x,p[0].y-p[1].y)}}
 
-/* Real mobile pinch-to-zoom for product images. No double-tap zoom. */
-(function(){
-  const modal=document.getElementById('product-modal');
-  const stage=document.getElementById('modal-stage');
-  const image=document.getElementById('modal-photo');
-  if(!modal||!stage||!image)return;
-  let pointers=new Map(),startDistance=0,startZoom=1,dragging=false;
+ stage.addEventListener('wheel',e=>{if(stage.classList.contains('is-video'))return;e.preventDefault();zoom(scale*Math.exp(-e.deltaY*.0012),e.clientX,e.clientY)},{passive:false});
+ stage.addEventListener('dblclick',e=>{if(!stage.classList.contains('is-video'))zoom(scale>1.01?1:2,e.clientX,e.clientY)});
 
-  const distance=()=>{
-    const p=[...pointers.values()];
-    return p.length===2?Math.hypot(p[0].x-p[1].x,p[0].y-p[1].y):0;
-  };
-  const update=()=>{
-    image.style.transform='scale('+state.modalZoom+')';
-    stage.classList.toggle('is-zoomed',state.modalZoom>1);
-  };
-
-  stage.addEventListener('pointerdown',e=>{
-    if(matchMedia('(min-width:761px)').matches)return;
-    if(stage.classList.contains('is-video'))return;
-    pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});
-    stage.setPointerCapture?.(e.pointerId);
-    if(pointers.size===2){startDistance=distance();startZoom=state.modalZoom;dragging=true;}
-  });
-  stage.addEventListener('pointermove',e=>{
-    if(matchMedia('(min-width:761px)').matches||!pointers.has(e.pointerId))return;
-    pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});
-    if(pointers.size===2&&startDistance){
-      e.preventDefault();
-      state.modalZoom=Math.max(1,Math.min(3,startZoom*(distance()/startDistance)));
-      update();
-    }
-  },{passive:false});
-  const end=e=>{
-    pointers.delete(e.pointerId);
-    if(pointers.size<2){startDistance=0;dragging=false;}
-  };
-  stage.addEventListener('pointerup',end);
-  stage.addEventListener('pointercancel',end);
-
-  stage.addEventListener('dblclick',e=>{
-    if(matchMedia('(max-width:760px)').matches)e.preventDefault();
-  });
-
-  /* Suppress browser double-tap gesture without affecting normal pinch. */
-  let lastTap=0;
-  stage.addEventListener('pointerup',e=>{
-    if(matchMedia('(min-width:761px)').matches||dragging)return;
-    const now=Date.now();
-    if(now-lastTap<350)e.preventDefault();
-    lastTap=now;
-  });
-})();
-
-
-/* Product zoom UX controller — replaces conflicting mobile zoom handlers. */
-(function(){
-  const stage=document.getElementById('modal-stage');
-  const photo=document.getElementById('modal-photo');
-  const modal=document.getElementById('product-modal');
-  if(!stage||!photo||!modal)return;
-
-  let activePointers=new Map(), pinchStart=0, zoomStart=1;
-  const mobile=()=>matchMedia('(max-width:760px)').matches;
-  const apply=()=>{
-    photo.style.transform='scale('+state.modalZoom+')';
-    stage.classList.toggle('is-zoomed',state.modalZoom>1.01);
-  };
-  const reset=()=>{state.modalZoom=1;photo.style.transformOrigin='50% 50%';apply()};
-
-  stage.addEventListener('pointerdown',e=>{
-    if(!mobile()||stage.classList.contains('is-video'))return;
-    activePointers.set(e.pointerId,{x:e.clientX,y:e.clientY});
-    if(activePointers.size===2){
-      const p=[...activePointers.values()];
-      pinchStart=Math.hypot(p[0].x-p[1].x,p[0].y-p[1].y);
-      zoomStart=state.modalZoom;
-    }
-  });
-
-  stage.addEventListener('pointermove',e=>{
-    if(!mobile()||!activePointers.has(e.pointerId)||activePointers.size!==2)return;
-    activePointers.set(e.pointerId,{x:e.clientX,y:e.clientY});
-    const p=[...activePointers.values()];
-    const d=Math.hypot(p[0].x-p[1].x,p[0].y-p[1].y);
-    if(!pinchStart)return;
-    state.modalZoom=Math.max(1,Math.min(3,zoomStart*(d/pinchStart)));
-    apply();
-  });
-
-  const release=e=>{activePointers.delete(e.pointerId);if(activePointers.size<2)pinchStart=0};
-  stage.addEventListener('pointerup',release);
-  stage.addEventListener('pointercancel',release);
-
-  /* Reset automatically when switching media or closing. */
-  new MutationObserver(()=>{if(!modal.classList.contains('open'))reset()})
-    .observe(modal,{attributes:true,attributeFilter:['class']});
-})();
-
-
-/* Single contained pan + pinch controller. Replaces scale-only drifting behavior. */
-(function(){
-  const stage=document.getElementById('modal-stage');
-  const img=document.getElementById('modal-photo');
-  if(!stage||!img)return;
-  let pts=new Map(), scale=1, tx=0, ty=0, startScale=1, startTx=0, startTy=0;
-  let startDist=0,startMid=null,dragStart=null;
-
-  const clamp=()=>{
-    const r=stage.getBoundingClientRect();
-    const iw=img.naturalWidth||r.width, ih=img.naturalHeight||r.height;
-    const fit=Math.min(r.width/iw,r.height/ih);
-    const bw=iw*fit*scale,bh=ih*fit*scale;
-    const maxX=Math.max(0,(bw-r.width)/2),maxY=Math.max(0,(bh-r.height)/2);
-    tx=Math.max(-maxX,Math.min(maxX,tx));
-    ty=Math.max(-maxY,Math.min(maxY,ty));
-  };
-  const render=()=>{
-    clamp();
-    img.style.transform='translate('+tx+'px,'+ty+'px) scale('+scale+')';
-    stage.classList.toggle('is-zoomed',scale>1.01);
-  };
-  const reset=()=>{scale=1;tx=0;ty=0;render()};
-
-  stage.addEventListener('pointerdown',e=>{
-    if(matchMedia('(min-width:761px)').matches||stage.classList.contains('is-video'))return;
-    pts.set(e.pointerId,{x:e.clientX,y:e.clientY});
-    stage.setPointerCapture?.(e.pointerId);
-    if(pts.size===1){dragStart={x:e.clientX,y:e.clientY};startTx=tx;startTy=ty}
-    if(pts.size===2){
-      const p=[...pts.values()];
-      startDist=Math.hypot(p[0].x-p[1].x,p[0].y-p[1].y);
-      startScale=scale;
-      startMid={x:(p[0].x+p[1].x)/2,y:(p[0].y+p[1].y)/2};
-    }
-  });
-  stage.addEventListener('pointermove',e=>{
-    if(matchMedia('(min-width:761px)').matches||!pts.has(e.pointerId))return;
-    pts.set(e.pointerId,{x:e.clientX,y:e.clientY});
-    if(pts.size===2){
-      const p=[...pts.values()];
-      const d=Math.hypot(p[0].x-p[1].x,p[0].y-p[1].y);
-      scale=Math.max(1,Math.min(3,startScale*(d/startDist)));
-      render();
-      return;
-    }
-    if(pts.size===1&&scale>1.01&&dragStart){
-      tx=startTx+(e.clientX-dragStart.x);
-      ty=startTy+(e.clientY-dragStart.y);
-      render();
-    }
-  });
-  const end=e=>{
-    pts.delete(e.pointerId);
-    if(pts.size===0){startDist=0;dragStart=null}
-    else if(pts.size===1){const p=[...pts.values()][0];dragStart={x:p.x,y:p.y};startTx=tx;startTy=ty}
-  };
-  stage.addEventListener('pointerup',end);
-  stage.addEventListener('pointercancel',end);
-
-  /* Always reset when a new modal image loads. */
-  img.addEventListener('load',reset);
-})();
-
-
-/* UNIFIED PRODUCT GALLERY VIEWER — single controller, desktop + touch */
-(function(){
-  const stage=document.getElementById('modal-stage');
-  const img=document.getElementById('modal-photo');
-  if(!stage||!img)return;
-
-  let scale=1, tx=0, ty=0, raf=0;
-  const pointers=new Map();
-  let pan=null, pinch=null;
-
-  function viewport(){
-    const r=stage.getBoundingClientRect();
-    const cs=getComputedStyle(stage);
-    const l=parseFloat(cs.paddingLeft)||0, rr=parseFloat(cs.paddingRight)||0;
-    const t=parseFloat(cs.paddingTop)||0, b=parseFloat(cs.paddingBottom)||0;
-    return {r,w:r.width-l-rr,h:r.height-t-b};
-  }
-  function fitted(){
-    const v=viewport(), nw=img.naturalWidth||v.w, nh=img.naturalHeight||v.h;
-    const k=Math.min(v.w/nw,v.h/nh);
-    return {w:nw*k,h:nh*k,v};
-  }
-  function clamp(){
-    const f=fitted();
-    const mx=Math.max(0,(f.w*scale-f.v.w)/2);
-    const my=Math.max(0,(f.h*scale-f.v.h)/2);
-    tx=Math.max(-mx,Math.min(mx,tx));
-    ty=Math.max(-my,Math.min(my,ty));
-  }
-  function render(){
-    raf=0; clamp();
-    img.style.transform='translate3d('+tx+'px,'+ty+'px,0) scale('+scale+')';
-    stage.classList.toggle('is-zoomed',scale>1.001);
-  }
-  function draw(){
-    if(!raf) raf=requestAnimationFrame(render);
-  }
-  function reset(){
-    scale=1;tx=0;ty=0;pan=null;pinch=null;draw();
-  }
-  function pair(){
-    const p=[...pointers.values()];
-    return {
-      d:Math.hypot(p[0].x-p[1].x,p[0].y-p[1].y),
-      x:(p[0].x+p[1].x)/2,
-      y:(p[0].y+p[1].y)/2
-    };
-  }
-  function zoomAt(next,cx,cy){
-    const old=scale;
-    next=Math.max(1,Math.min(3,next));
-    const r=stage.getBoundingClientRect();
-    const ox=cx-(r.left+r.width/2), oy=cy-(r.top+r.height/2);
-    const ratio=next/old;
-    // Keep the point under cursor/fingers visually anchored.
-    tx=tx*ratio+ox*(1-ratio);
-    ty=ty*ratio+oy*(1-ratio);
-    scale=next;
-    if(scale===1){tx=0;ty=0}
-    draw();
-  }
-
-  stage.addEventListener('wheel',e=>{
-    if(stage.classList.contains('is-video'))return;
-    e.preventDefault();
-    const factor=Math.exp(-e.deltaY*0.0015);
-    zoomAt(scale*factor,e.clientX,e.clientY);
-  },{passive:false});
-
-  stage.addEventListener('dblclick',e=>{
-    if(stage.classList.contains('is-video'))return;
-    zoomAt(scale>1.01?1:2,e.clientX,e.clientY);
-  });
-
-  stage.addEventListener('pointerdown',e=>{
-    if(stage.classList.contains('is-video'))return;
-    pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});
-    stage.setPointerCapture?.(e.pointerId);
-
-    if(pointers.size===1){
-      pan={x:e.clientX,y:e.clientY,tx,ty};
-    }else if(pointers.size===2){
-      const q=pair();
-      pinch={...q,scale,tx,ty};
-      pan=null;
-    }
-  });
-
-  stage.addEventListener('pointermove',e=>{
-    if(!pointers.has(e.pointerId)||stage.classList.contains('is-video'))return;
-    pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});
-
-    if(pointers.size===2&&pinch){
-      const q=pair();
-      const next=Math.max(1,Math.min(3,pinch.scale*(q.d/pinch.d)));
-      const ratio=next/pinch.scale;
-      const r=stage.getBoundingClientRect();
-      const ox=pinch.x-(r.left+r.width/2), oy=pinch.y-(r.top+r.height/2);
-      scale=next;
-      tx=pinch.tx*ratio+ox*(1-ratio)+(q.x-pinch.x);
-      ty=pinch.ty*ratio+oy*(1-ratio)+(q.y-pinch.y);
-      draw();
-    }else if(pointers.size===1&&pan&&scale>1.001){
-      tx=pan.tx+(e.clientX-pan.x);
-      ty=pan.ty+(e.clientY-pan.y);
-      draw();
-    }
-  });
-
-  function release(e){
-    pointers.delete(e.pointerId);
-    if(pointers.size===1){
-      const p=[...pointers.values()][0];
-      pan={x:p.x,y:p.y,tx,ty}; pinch=null;
-    }else if(!pointers.size){pan=null;pinch=null}
-  }
-  stage.addEventListener('pointerup',release);
-  stage.addEventListener('pointercancel',release);
-  stage.addEventListener('lostpointercapture',release);
-
-  img.addEventListener('load',reset);
-  window.addEventListener('resize',()=>draw());
+ stage.addEventListener('pointerdown',e=>{
+   if(stage.classList.contains('is-video'))return;
+   pts.set(e.pointerId,{x:e.clientX,y:e.clientY});stage.setPointerCapture?.(e.pointerId);
+   if(pts.size===1)pan={x:e.clientX,y:e.clientY,tx,ty};
+   if(pts.size===2){const q=two();pinch={...q,scale,tx,ty};pan=null}
+ });
+ stage.addEventListener('pointermove',e=>{
+   if(!pts.has(e.pointerId)||stage.classList.contains('is-video'))return;
+   pts.set(e.pointerId,{x:e.clientX,y:e.clientY});
+   if(pts.size===2&&pinch){
+     const q=two(),next=Math.max(MIN,Math.min(MAX,pinch.scale*q.d/pinch.d));
+     scale=next;const k=next/pinch.scale;tx=pinch.tx*k+(q.x-pinch.x);ty=pinch.ty*k+(q.y-pinch.y);draw();
+   }else if(pts.size===1&&pan&&scale>1.001){tx=pan.tx+e.clientX-pan.x;ty=pan.ty+e.clientY-pan.y;draw()}
+ });
+ function up(e){pts.delete(e.pointerId);if(pts.size===1){const p=[...pts.values()][0];pan={x:p.x,y:p.y,tx,ty};pinch=null}else if(!pts.size){pan=pinch=null}}
+ stage.addEventListener('pointerup',up);stage.addEventListener('pointercancel',up);stage.addEventListener('lostpointercapture',up);
+ img.addEventListener('load',reset);window.addEventListener('resize',draw);
 })();
