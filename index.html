@@ -6,7 +6,21 @@
 <title>JHALAR — Hanging Decor for Celebrations</title>
 <meta name="description" content="Handcrafted jhalars and hanging decor for weddings, events and festive spaces.">
 <meta name="theme-color" content="#65142b">
+<link rel="canonical" href="https://jhalardecor.github.io/jhalar-hanging-decor/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="JHALAR">
+<meta property="og:title" content="JHALAR — Hanging Decor for Celebrations">
+<meta property="og:description" content="Handcrafted jhalars and hanging decor for weddings, events and festive spaces.">
+<meta property="og:url" content="https://jhalardecor.github.io/jhalar-hanging-decor/">
+<meta property="og:image" content="https://jhalardecor.github.io/jhalar-hanging-decor/assets/images/og-cover.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="JHALAR — Hanging Decor for Celebrations">
+<meta name="twitter:description" content="Handcrafted jhalars and hanging decor for weddings, events and festive spaces.">
+<meta name="twitter:image" content="https://jhalardecor.github.io/jhalar-hanging-decor/assets/images/og-cover.jpg">
 <link rel="icon" href="favicon.svg">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"LocalBusiness","name":"JHALAR","description":"Handcrafted jhalars and hanging decor for weddings, events and festive spaces.","url":"https://jhalardecor.github.io/jhalar-hanging-decor/","image":"https://jhalardecor.github.io/jhalar-hanging-decor/assets/images/og-cover.jpg","telephone":"+91 81006 56258","email":"lokeshdugar040@gmail.com","address":{"@type":"PostalAddress","addressLocality":"Howrah","addressRegion":"West Bengal","addressCountry":"IN"}}</script>
 <link rel="stylesheet" href="style.css?v=restored-audit-1">
 </head>
 <body>
@@ -31,7 +45,7 @@
     <div class="hero-banner-copy">
       <p class="kicker">HANDCRAFTED FLORAL HANGINGS · HOWRAH</p>
       <h1>Let the colour<br><em>do the talking.</em></h1>
-      <p>Jhalars that bring instant colour, depth and celebration to the space you are creating.</p>
+      <p class="hero-lead">Jhalars that bring instant colour, depth and celebration to the space you are creating.</p>
       <a class="hero-banner-cta" href="#collection">Explore the collection <span>↓</span></a>
     </div>
     <div class="hero-banner-bottom">
@@ -47,19 +61,26 @@
  </div>
 </section>
 
-<section class="collection section" id="collection">
+<section class="collection section" id="collection" data-section="collection">
  <div class="shell">
   <div class="section-head">
    <div><p class="eyebrow">BROWSE DESIGNS</p><h2>Find what fits the occasion.</h2></div>
    <p>Every design is shown clearly so you can compare colour, form and texture before you enquire.</p>
   </div>
-  <div class="filters" id="product-filters" aria-label="Product filters"></div>
+  <div class="filters" id="product-filters" aria-label="Product filters">
+   <button class="filter-btn active" data-filter="all">All designs</button>
+   <button class="filter-btn" data-filter="Pom Pom Hangings">Pom Pom Hangings</button>
+   <button class="filter-btn" data-filter="Decorative Strings">Decorative Strings</button>
+   <button class="filter-btn" data-filter="Bead Hangings">Bead Hangings</button>
+   <button class="filter-btn" data-filter="Bell Hangings">Bell Hangings</button>
+   <button class="filter-btn" data-filter="Floral Jhalars">Floral Jhalars</button>
+  </div>
   <div class="product-grid" id="product-grid" aria-live="polite"></div>
   <div class="collection-more"><button id="collection-toggle" class="more-btn" hidden></button></div>
  </div>
 </section>
 
-<section class="custom section" id="custom">
+<section class="custom section" id="custom" data-section="customOrders">
  <div class="shell custom-grid">
   <div class="custom-image"><img src="assets/images/custom-orders.jpg" alt="Custom JHALAR decor"></div>
   <div class="custom-copy">
@@ -70,14 +91,14 @@
  </div>
 </section>
 
-<section class="story section" id="story">
+<section class="story section" id="story" data-section="about">
  <div class="shell story-grid">
   <div><p class="eyebrow">JHALAR</p><h2>Made by hand. Chosen for the moment.</h2></div>
   <div><p>We create hanging decor for the people building celebrations—decorators, planners, retailers and families who know that the small visual details change how a space feels.</p><p>Our work begins in Howrah and travels into wedding venues, festive installations and celebrations across India.</p></div>
  </div>
 </section>
 
-<section class="contact section" id="contact">
+<section class="contact section" id="contact" data-section="contact">
  <div class="shell contact-box">
   <div><p class="eyebrow light-eyebrow">READY WHEN YOU ARE</p><h2>Tell us what you are creating.</h2><p>Share the design, quantity, location and date. We will take the conversation from there.</p></div>
   <a class="contact-cta" href="https://wa.me/918100656258" target="_blank" rel="noopener">Start an enquiry <span>↗</span></a>
@@ -90,10 +111,11 @@
 <div class="modal" id="product-modal" aria-hidden="true">
  <div class="modal-backdrop" data-close></div>
  <article class="modal-card">
-  <button class="modal-close" data-close aria-label="Close">×</button>
+  <button id="modal-close" class="modal-close" data-close aria-label="Close">×</button>
   <div class="modal-media"><img id="modal-photo" src="" alt=""></div>
   <div class="modal-copy"><p class="eyebrow" id="modal-category"></p><h3 id="modal-title"></h3><p id="modal-desc"></p><a id="modal-wa-btn" class="text-link" target="_blank" rel="noopener">Enquire about this design <span>→</span></a></div>
  </article>
 </div>
-<script src="script.js?v=2050" defer></script>
+<script src="scripts/product-naming.js?v=20260908-catalogue" defer></script>
+<script src="script.js?v=2051" defer></script>
 </body></html>

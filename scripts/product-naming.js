@@ -2,8 +2,9 @@
 (function () {
 'use strict';
 
-// Deterministic classification gate. Public product references are intentionally
-// not derived or displayed; product IDs remain internal data keys only.
+// Deterministic classification gate. Internal product references (JH-###) are
+// derived only for validation and tooling so same-name entries such as JH-027
+// and JH-035 can be told apart; they are never rendered on the public site.
 const STATUS = Object.freeze({
   DATABASE: 'NAMING DATABASE UNAVAILABLE — HUMAN REVIEW REQUIRED',
   SERIES: 'SERIES NOT IDENTIFIED — HUMAN REVIEW REQUIRED',
@@ -18,6 +19,12 @@ const isPercentage = value => typeof value === 'number' && Number.isFinite(value
 const isId = value => typeof value === 'string' && /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(value);
 const isLocalImage = value => typeof value === 'string' && /^assets\/images\/.+\.(?:jpe?g|png|webp|avif|gif)$/i.test(value) && !value.split('/').includes('..') && !/[\u0000-\u001f\u007f]/.test(value);
 const isName = value => hasText(value) && value === value.trim() && !/[\u0000-\u001f\u007f]/.test(value);
+
+function productReference(product) {
+  const id = isObject(product) ? product.id : undefined;
+  if (!Number.isSafeInteger(id) || id <= 0) return 'Unassigned';
+  return 'JH-' + String(id).padStart(3, '0');
+}
 
 function validateRegistry(registry) {
   const errors = [];
@@ -51,7 +58,7 @@ function validateRegistry(registry) {
       if(ids[list].has(entry.id)) errors.push(`${label}.id duplicates ${entry.id}.`); ids[list].add(entry.id);
       if(!isName(entry.name)) errors.push(`${label}.name must be exact and single-line.`);
       if(names.has(entry.name)) errors.push(`${label}.name duplicates ${entry.name}.`); names.add(entry.name);
-      if(list==='series' && !/^.+ Series$/.test(entry.name)) errors.push(`${label}.name must end in " Series" exactly once.`);
+      if(list==='series' && (!entry.name.endsWith(' Series') || String(entry.name).slice(0,-7).endsWith(' Series'))) errors.push(`${label}.name must end in " Series" exactly once.`);
       checkTextList(entry[criteria],`${label}.${criteria}`); checkTextList(entry.referenceImages,`${label}.referenceImages`); checkApproval(entry.approval,`${label}.approval`);
     });
   }
@@ -142,9 +149,9 @@ function run(args){
   if(args.includes('--help')){console.log('Usage: node scripts/product-naming.js [--strict] [--json]');return;}
   let report; try{const root=path.resolve(__dirname,'..');const registry=JSON.parse(fs.readFileSync(path.join(root,'content/product-naming.json'),'utf8'));const catalogue=JSON.parse(fs.readFileSync(path.join(root,'content/products.json'),'utf8'));report=validateCatalogue(catalogue,registry);}catch(error){report={registryVersion:null,confidenceThreshold:null,approvedCount:0,reviewCount:0,errors:[error.message],products:[]};}
   const failed=report.errors.length>0||(args.includes('--strict')&&report.reviewCount>0);
-  if(args.includes('--json')) console.log(JSON.stringify(report,null,2)); else {for(const error of report.errors) console.error(`FAIL: ${error}`);console.log(`NAMING CHECK ${failed?'FAIL':'PASS'} — ${report.approvedCount} approved; ${report.reviewCount} require human review.`);}
+  if(args.includes('--json')) console.log(JSON.stringify(report,null,2)); else {for(const error of report.errors) console.error(`FAIL: ${error}`);console.log(`NAMING CHECK ${failed?'FAIL':'PASS'} — ${report.approvedCount} approved; ${report.reviewCount} require human review.`);if(!args.includes('--strict')&&report.reviewCount>0) console.log(`Pending records are incomplete naming migrations, not naming approval — each needs owner review before it can be published.`);}
   process.exitCode=failed?1:0;
 }
-const api=Object.freeze({STATUS,validateRegistry,evaluateNaming,validateCatalogue});
+const api=Object.freeze({STATUS,validateRegistry,evaluateNaming,validateCatalogue,productReference});
 if(typeof module!=='undefined'&&module.exports){module.exports=api;if(require.main===module)run(process.argv.slice(2));}else globalThis.JHALARNaming=api;
 })();
