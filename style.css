@@ -827,3 +827,46 @@ p,.section-head>p,.hero-banner-copy>p:not(.kicker){letter-spacing:.006em}
   .product-category,.eyebrow,.kicker{letter-spacing:.075em}
   .nav a,.filter-btn,.product-details-btn,.contact-cta,.modal-wa-btn{letter-spacing:.008em}
 }
+
+
+/* ==========================================================================
+   MOBILE HEADER BALANCE — audited separately from page layout
+   ========================================================================== */
+@media(max-width:760px){
+  .header{height:68px!important}
+  .header-row{
+    height:68px!important;
+    margin:0 20px!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:space-between!important;
+  }
+  .brand{width:auto!important;display:flex!important;align-items:center!important;flex:0 0 auto}
+  .brand img{display:block!important;width:auto!important;max-width:124px!important;max-height:30px!important}
+  .menu{
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    width:42px!important;height:42px!important;
+    margin:0!important;
+    border-radius:50%!important;
+    flex:0 0 42px!important;
+  }
+  .mobile-nav{
+    position:absolute!important;
+    top:68px!important;
+    left:0!important;right:0!important;
+    width:100%!important;
+    box-sizing:border-box!important;
+    padding:10px 20px 18px!important;
+    background:var(--page-bg)!important;
+    border-bottom:1px solid var(--line)!important;
+    box-shadow:0 12px 24px rgba(47,36,39,.08)!important;
+  }
+  .mobile-nav a{display:block!important;padding:14px 0!important}
+}
+@media(max-width:430px){
+  .header-row{margin-inline:16px!important}
+  .brand img{max-width:112px!important;max-height:28px!important}
+  .menu{width:40px!important;height:40px!important;flex-basis:40px!important}
+}
