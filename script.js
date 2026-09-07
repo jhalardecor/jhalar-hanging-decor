@@ -17,10 +17,25 @@ let sections = {}; let sectionOrder = []; let customCSS = ''; let livePushed = {
 async function init(){
   setupSmoothScroll(); setupMobileNav(); setupAutoHideHeader(); setupAccordions(); setupModal(); updateYear(); setupReveal(); setupEnquiryForm();
   await Promise.allSettled([loadSettings(),loadProducts(),loadTheme(),loadSections(),loadCustomCSS()]);
-  applySiteSettings(); applyTheme(); applySectionVisibility(); applySectionOrder(); applyNavigation(); applySEO(); applyCustomCSS(); renderProducts(products); setupFilterButtons(); setupCollectionToggle(); applyCollapse();
+  applySiteSettings(); applyTheme(); applySectionVisibility(); applySectionOrder(); applyNavigation(); applySEO(); applyCustomCSS(); renderProducts(products); renderFilters(); setupFilterButtons(); setupCollectionToggle(); applyCollapse();
 }
 async function loadProducts(){
-  try{const [r,nr]=await Promise.all([fetch('content/products.json',{cache:'no-store'}),fetch('content/product-naming.json',{cache:'no-store'})]); if(!r.ok||!nr.ok) throw new Error('Catalogue unavailable'); const [d,registry]=await Promise.all([r.json(),nr.json()]); const review=window.JHALARNaming.validateCatalogue(d,registry); if(review.errors.length||review.reviewCount||!d.products.length) throw new Error('Published catalogue failed validation'); if(!livePushed.products) products=d.products;}catch(e){console.error(e);if(!livePushed.products) products=[];}
+  try{
+    const r=await fetch('content/products.json',{cache:'no-store'});
+    if(!r.ok) throw new Error('Catalogue unavailable');
+    const d=await r.json();
+    if(!Array.isArray(d.products)||!d.products.length) throw new Error('No published products');
+    /* Naming registry is editorial QA, never a public storefront dependency. */
+    try{
+      const nr=await fetch('content/product-naming.json',{cache:'no-store'});
+      if(nr.ok&&window.JHALARNaming){
+        const registry=await nr.json();
+        const review=window.JHALARNaming.validateCatalogue(d,registry);
+        if(review.errors.length) console.warn('Naming QA warnings',review.errors);
+      }
+    }catch(e){console.warn('Naming registry unavailable; storefront continues.',e);}
+    if(!livePushed.products) products=d.products;
+  }catch(e){console.error(e);if(!livePushed.products) products=[];}
 }
 async function loadSettings(){try{const r=await fetch('content/site-settings.json');if(!r.ok)throw new Error('HTTP '+r.status);const d=await r.json();if(!livePushed.settings)settings=Object.assign({},settings,d);}catch(e){console.warn('Settings fallback',e);}}
 async function loadTheme(){try{const r=await fetch('content/theme.json');if(!r.ok)throw new Error('HTTP '+r.status);const d=await r.json();if(!livePushed.theme)theme=Object.assign({},theme,d);}catch(e){console.warn('Theme fallback',e);}}
@@ -37,6 +52,11 @@ function renderProducts(list){const grid=document.getElementById('product-grid')
 let PREVIEW_COUNT=6,collectionExpanded=false,activeCategory='all';
 function applyCollapse(){const grid=document.getElementById('product-grid'),btn=document.getElementById('collection-toggle');if(!grid||!btn)return;const cards=[...grid.querySelectorAll('.product-card:not(.is-filtered-out)')],can=activeCategory==='all'&&cards.length>PREVIEW_COUNT,hidden=can&&!collectionExpanded;cards.forEach((c,i)=>c.classList.toggle('is-collapsed',hidden&&i>=PREVIEW_COUNT));if(can){btn.hidden=false;btn.textContent=collectionExpanded? 'Show fewer':`View all ${cards.length} products`;btn.setAttribute('aria-expanded',String(collectionExpanded));}else btn.hidden=true;}
 function setupCollectionToggle(){const btn=document.getElementById('collection-toggle');if(btn)btn.addEventListener('click',()=>{collectionExpanded=!collectionExpanded;applyCollapse();if(!collectionExpanded)document.getElementById('collection')?.scrollIntoView({behavior:'smooth',block:'start'});});}
+function renderFilters(){
+  const box=document.getElementById('product-filters'); if(!box)return;
+  const categories=[...new Set(products.map(p=>p.category).filter(Boolean))];
+  box.innerHTML=[['all','All designs'],...categories.map(c=>[c,c])].map(([value,label],i=>`<button class="filter-btn${i===0?' active':''}" type="button" data-filter="${esc(value)}" role="tab" aria-selected="${i===0?'true':'false'}">${esc(label)}</button>`).join('');
+}
 function setupFilterButtons(){const btns=[...document.querySelectorAll('.filter-btn')];if(!btns.length)return;const cats=new Set(products.map(p=>p.category));btns.forEach(b=>{b.hidden=b.dataset.filter!=='all'&&!cats.has(b.dataset.filter);if(b.dataset.bound)return;b.dataset.bound='1';b.addEventListener('click',()=>{btns.forEach(x=>{x.classList.remove('active');x.setAttribute('aria-selected','false')});b.classList.add('active');b.setAttribute('aria-selected','true');filterProducts(b.dataset.filter);});});const active=btns.find(b=>b.classList.contains('active')&&!b.hidden)||btns.find(b=>b.dataset.filter==='all');if(active)filterProducts(active.dataset.filter);}
 function filterProducts(cat){activeCategory=cat||'all';collectionExpanded=activeCategory!=='all';document.querySelectorAll('.product-card').forEach(c=>c.classList.toggle('is-filtered-out',!(cat==='all'||c.dataset.category===cat)));applyCollapse();}
 function closeMobileNav(){const t=document.querySelector('.mobile-toggle'),n=document.getElementById('mobile-nav'),h=document.querySelector('.site-header');n?.classList.remove('open');t?.setAttribute('aria-expanded','false');h?.classList.remove('nav-open');}
