@@ -99,6 +99,11 @@ let history = { stack: [], index: -1 };
 
 // ===== INIT =====
 document.addEventListener('DOMContentLoaded', async () => {
+  // Never allow legacy browser drafts to override published content.
+  try {
+    ['jhalar_editor_settings','jhalar_editor_theme','jhalar_editor_products','jhalar_editor_sections','jhalar_editor_customcss']
+      .forEach(k => localStorage.removeItem(k));
+  } catch(e) { console.warn('Legacy draft cleanup failed', e); }
   setupTabs(); setupViewport(); setupAutoSave(); setupInspector(); setupKeyboardShortcuts(); setupDragDrop();
   setupUploadZone(); restoreDarkMode(); restoreGitHubToken();
   await loadPublishedData(); await loadImageManifest(); await loadFontManifest();
@@ -232,7 +237,7 @@ function ensureProductIds() {
 // ===== FONT MANIFEST =====
 async function loadFontManifest() {
   try {
-    const r = await fetch('assets/fonts/manifest.json');
+    const r = await fetch('assets/fonts/manifest.json?_build='+Date.now(), {cache:'no-store'});
     state.fontManifest = r.ok ? (await r.json()).fonts||[] : [];
   } catch(e) { console.warn('Font manifest:', e); state.fontManifest = []; }
 }
@@ -283,7 +288,7 @@ async function loadImageManifest() {
     ...state.products.map(p => p.image).filter(Boolean)
   ])];
   try {
-    const r = await fetch('assets/images/manifest.json', { cache: 'no-store' });
+    const r = await fetch('assets/images/manifest.json?_build='+Date.now(), {cache:'no-store'});
     const data = r.ok ? await r.json() : null;
     state.imageManifest = Array.isArray(data?.images) ? data.images : fallback();
   } catch(e) { console.warn('Manifest:', e); state.imageManifest = fallback(); }
@@ -1369,15 +1374,10 @@ function updatePreviewUrl() {
 
 // ===== DRAFTS =====
 function saveDrafts() {
+  // Intentionally no persistent browser draft cache.
+  // Editor state lives in memory and published GitHub files are always reloaded fresh.
   collectAllData();
-  try {
-    localStorage.setItem('jhalar_editor_settings', JSON.stringify(state.settings));
-    localStorage.setItem('jhalar_editor_theme', JSON.stringify(state.theme));
-    localStorage.setItem('jhalar_editor_products', JSON.stringify(state.products));
-    localStorage.setItem('jhalar_editor_sections', JSON.stringify({ sections: state.sections, order: state.sectionOrder }));
-    localStorage.setItem('jhalar_editor_customcss', state.customCSS || '');
-    pushHistory();
-  } catch(e) { console.warn('Save drafts:', e); }
+  pushHistory();
 }
 function markChanged() { state.changed = true; updateSaveIndicator(); }
 function updateSaveIndicator() {
@@ -1394,12 +1394,12 @@ function resetThemeDefaults() {
   showToast('Theme restored to defaults','success');
 }
 async function resetToPublished() {
-  if (!confirm('Reset all changes? This discards drafts.')) return;
+  if (!confirm('Reset all changes? This reloads the latest published version.')) return;
   try {
     ['jhalar_editor_settings','jhalar_editor_theme','jhalar_editor_products','jhalar_editor_sections','jhalar_editor_customcss'].forEach(k => localStorage.removeItem(k));
     state.changed = false; updateSaveIndicator();
     await loadPublishedData(); await loadFontManifest(); populateFontOptions(); populateAllForms(); renderSectionList(); renderProductList(); applyPreview();
-    showToast('Reset to published state','success');
+    showToast('Reloaded latest published state','success');
   } catch(e) { showToast('Reset failed','error'); }
 }
 
@@ -1425,7 +1425,7 @@ function updateTokenStatus(msg, type) { const el = document.getElementById('toke
 // Validate against the published registry, not a candidate's self-approval flags.
 async function catalogueReadyToPublish() {
   try {
-    const response = await fetch('content/product-naming.json', { cache: 'no-store' });
+    const response = await fetch('content/product-naming.json?_build='+Date.now(), {cache:'no-store'});
     if (!response.ok) throw new Error('The approved naming registry could not be loaded.');
     state.namingRegistry = await response.json();
     const report = window.JHALARNaming.validateCatalogue({ products: state.products }, state.namingRegistry);
