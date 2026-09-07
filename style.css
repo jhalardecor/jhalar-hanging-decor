@@ -1068,3 +1068,19 @@ p,.section-head>p,.hero-banner-copy>p:not(.kicker){letter-spacing:.006em}
       rgba(248,222,211,0) 78%)!important;
   }
 }
+
+
+/* PRODUCT MEDIA ENGINE — authoritative premium pan/zoom layer */
+#product-modal .modal-stage { position:relative!important; overflow:hidden!important; }
+#product-modal #modal-photo {
+  transform-origin:center center!important;
+  transition:transform 0s!important;
+  will-change:transform!important;
+}
+@media(max-width:760px){
+  #product-modal .modal-stage{touch-action:none!important;cursor:default!important}
+}
+@media(min-width:761px){
+  #product-modal .modal-stage:not(.is-video){cursor:zoom-in!important}
+  #product-modal .modal-stage.is-zoomed:not(.is-video){cursor:grab!important}
+}
