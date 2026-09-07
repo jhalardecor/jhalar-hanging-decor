@@ -703,3 +703,19 @@ initProducts();initRuntime();
   stage.addEventListener('pointercancel',stop);
   stage.addEventListener('lostpointercapture',stop);
 })();
+
+
+/* Popup zoom bounds corrected to the padded safe viewport.
+   Translation is constrained against the inner canvas, leaving the gutter visible. */
+(function(){
+ const stage=document.getElementById('modal-stage'),img=document.getElementById('modal-photo');
+ if(!stage||!img)return;
+
+ function innerViewport(){
+   const r=stage.getBoundingClientRect(),cs=getComputedStyle(stage);
+   const l=parseFloat(cs.paddingLeft)||0,t=parseFloat(cs.paddingTop)||0;
+   return {w:r.width-l*2,h:r.height-t*2};
+ }
+ /* Expose one consistent viewport metric for all viewer controllers. */
+ window.__productMediaViewport=innerViewport;
+})();
