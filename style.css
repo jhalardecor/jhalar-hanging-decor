@@ -1084,3 +1084,26 @@ p,.section-head>p,.hero-banner-copy>p:not(.kicker){letter-spacing:.006em}
   #product-modal .modal-stage:not(.is-video){cursor:zoom-in!important}
   #product-modal .modal-stage.is-zoomed:not(.is-video){cursor:grab!important}
 }
+
+
+/* MODAL MEDIA SYSTEM — preserve product framing at every zoom level */
+#product-modal .modal-stage{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  overflow:hidden!important;
+  background:var(--cream)!important;
+}
+#product-modal .modal-stage #modal-photo{
+  width:auto!important;
+  height:auto!important;
+  max-width:100%!important;
+  max-height:100%!important;
+  object-fit:contain!important;
+  object-position:center!important;
+}
+#product-modal .modal-stage.is-zoomed #modal-photo{
+  /* Zoom is visual only; never switch the image to edge-to-edge layout */
+  max-width:100%!important;
+  max-height:100%!important;
+}
