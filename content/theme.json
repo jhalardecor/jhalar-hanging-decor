@@ -10,7 +10,7 @@
   },
   "fonts": {
     "heading": "Mogranx, Arial, sans-serif",
-    "body": "Mogranx, Arial, sans-serif"
+    "body": "Arial, Helvetica, sans-serif"
   },
   "layout": {
     "baseFontSize": "16px",
