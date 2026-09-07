@@ -870,3 +870,20 @@ p,.section-head>p,.hero-banner-copy>p:not(.kicker){letter-spacing:.006em}
   .brand img{max-width:112px!important;max-height:28px!important}
   .menu{width:40px!important;height:40px!important;flex-basis:40px!important}
 }
+
+
+/* MOBILE STABILITY AUDIT — modal isolation, pinch containment, header visibility */
+@media(max-width:760px){
+  html,body{overscroll-behavior:none!important}
+  body.modal-open{position:fixed!important;left:0!important;right:0!important;width:100%!important;overflow:hidden!important}
+  #product-modal{position:fixed!important;inset:0!important;width:100%!important;height:100dvh!important;overscroll-behavior:contain!important}
+  #product-modal.open{display:flex!important}
+  #product-modal .modal-card{overscroll-behavior:contain!important;touch-action:pan-y!important}
+  #product-modal .modal-stage{touch-action:pan-y!important}
+  .header{display:block!important;visibility:visible!important;opacity:1!important;position:relative!important;z-index:100!important}
+  .brand,.brand img,.menu{visibility:visible!important;opacity:1!important}
+  .brand img{object-fit:contain!important}
+  .menu{display:flex!important;background:transparent!important;border:1px solid var(--line)!important}
+  .menu i{display:block!important;width:18px!important;height:1.5px!important;background:var(--ink)!important}
+  .mobile-nav{z-index:99!important}
+}
