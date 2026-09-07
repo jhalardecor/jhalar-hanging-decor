@@ -1792,3 +1792,33 @@ p,.section-head>p,.hero-banner-copy>p:not(.kicker){letter-spacing:.006em}
 }
 
 /* build 20260907.4 */
+
+
+/* HERO CONTENT GROUPING — occasion line belongs directly below the CTA */
+@media(max-width:760px){
+  .hero-banner-content{
+    display:flex!important;
+    flex-direction:column!important;
+    justify-content:flex-end!important;
+    align-items:flex-start!important;
+  }
+
+  .hero-banner-copy{
+    display:flex!important;
+    flex-direction:column!important;
+    align-items:flex-start!important;
+  }
+
+  /* Keep the CTA and occasion context as one visual group. */
+  .hero-banner-bottom{
+    order:2!important;
+    width:auto!important;
+    margin:16px 0 0!important;
+    align-self:flex-start!important;
+    text-align:left!important;
+  }
+
+  .hero-banner-cta{
+    order:1!important;
+  }
+}
