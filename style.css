@@ -1553,3 +1553,47 @@ p,.section-head>p,.hero-banner-copy>p:not(.kicker){letter-spacing:.006em}
     margin-bottom:12px!important;
   }
 }
+
+
+/* HERO FINAL COMPOSITION FIX — treat all copy as one balanced content block */
+.hero-banner-content{
+  display:flex!important;
+  align-items:center!important;
+}
+.hero-banner-copy{
+  width:min(100%,580px)!important;
+  margin:0!important;
+}
+.hero-banner .kicker{
+  margin:0 0 12px!important;
+}
+.hero-banner h1{
+  margin:0 0 18px!important;
+  max-width:12.8ch!important;
+}
+.hero-banner-copy>p:not(.kicker){
+  margin:0 0 24px!important;
+  max-width:40ch!important;
+}
+.hero-banner-cta{margin:0!important}
+
+@media(max-width:760px){
+  .hero-banner-content{
+    display:flex!important;
+    align-items:flex-end!important;
+    padding:92px 22px 32px!important;
+  }
+  .hero-banner-copy{
+    width:100%!important;
+    max-width:100%!important;
+  }
+  .hero-banner h1{
+    max-width:11.8ch!important;
+    font-size:clamp(2.45rem,9.7vw,3.45rem)!important;
+    line-height:1.05!important;
+  }
+  .hero-banner-copy>p:not(.kicker){
+    max-width:34ch!important;
+    margin-bottom:22px!important;
+  }
+}
