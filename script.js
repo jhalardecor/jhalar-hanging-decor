@@ -381,9 +381,14 @@ initProducts();initRuntime();
       clearTimeout(stopTimer);
       stopTimer=setTimeout(showHeader,180);
     };
+    // Show the header immediately when scrolling becomes idle.
+    // The debounce is outside requestAnimationFrame so the final scroll event always resets it.
     window.addEventListener('scroll',()=>{
+      clearTimeout(stopTimer);
       if(!ticking){ticking=true;requestAnimationFrame(update)}
+      stopTimer=setTimeout(showHeader,120);
     },{passive:true});
+    window.addEventListener('touchend',()=>setTimeout(showHeader,80),{passive:true});
     update();
   }
 
