@@ -6,8 +6,8 @@
     "--brand-accent": "#C9A84C",
     "--brand-navy": "#141942",
     "--brand-cream": "#FFFAF1",
-    "--brand-background": "#FFFFFF",
-    "--brand-alt-background": "#F9F7F4",
+    "--brand-background": "#FFF8F0",
+    "--brand-alt-background": "#F6EDE3",
     "--brand-text": "#4A4752",
     "--brand-muted": "#6B6874",
     "--brand-heading": "#1F1D24",
@@ -17,7 +17,7 @@
     "--brand-footer-text": "#FFFFFF"
   },
   "fonts": {
-    "heading": "'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
+    "heading": "'Playfair Display', Georgia, 'Times New Roman', serif",
     "body": "'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif"
   },
   "layout": {

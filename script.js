@@ -83,8 +83,8 @@ let theme = {
     "--brand-accent": "#C9A84C",
     "--brand-navy": "#141942",
     "--brand-cream": "#FFFAF1",
-    "--brand-background": "#FFFFFF",
-    "--brand-alt-background": "#F9F7F4",
+    "--brand-background": "#FFF8F0",
+    "--brand-alt-background": "#F6EDE3",
     "--brand-text": "#4A4752",
     "--brand-muted": "#6B6874",
     "--brand-heading": "#1F1D24",
@@ -94,7 +94,7 @@ let theme = {
     "--brand-footer-text": "#FFFFFF"
   },
   fonts: {
-    heading: "'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
+    heading: "'Playfair Display', Georgia, 'Times New Roman', serif",
     body: "'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif"
   },
   layout: {
@@ -405,15 +405,18 @@ function renderProducts(productList) {
     grid.innerHTML = '<p class="catalogue-error">We could not load the catalogue right now. Please reload the page or <a href="https://wa.me/' + esc(settings.whatsapp) + '" target="_blank" rel="noopener">message us on WhatsApp</a> for product details.</p>';
     return;
   }
-  grid.innerHTML = productList.map(p => `
+    grid.innerHTML = productList.map(p => `
     <div class="product-card" data-category="${esc(p.category)}" data-product-id="${esc(p.id)}">
-      <div class="product-image"><img src="${esc(p.image)}" alt="${esc(p.title)} - ${esc(p.category)}" width="1080" height="1080" loading="lazy" decoding="async"></div>
+      <div class="product-image">
+        <img src="${esc(p.image)}" alt="${esc(p.title)} - ${esc(p.category)}" width="1080" height="1080" loading="lazy" decoding="async">
+        <span class="product-ref-badge">${esc(window.JHALARNaming.productReference(p))}</span>
+      </div>
       <div class="product-info">
         <span class="product-category">${esc(p.category)}</span>
         <h3 class="product-title">${esc(p.title)}</h3>
         <p class="product-reference">Catalogue ref: ${esc(window.JHALARNaming.productReference(p))}</p>
         <p class="product-desc">${esc(p.description)}</p>
-        <button class="btn btn-primary product-details-btn" data-product-id="${esc(p.id)}" aria-label="View details for ${esc(p.title)}, reference ${esc(window.JHALARNaming.productReference(p))}" style="margin-top:1rem;width:100%;">View Details</button>
+        <button class="btn btn-primary product-details-btn" data-product-id="${esc(p.id)}" aria-label="View details for ${esc(p.title)}, reference ${esc(window.JHALARNaming.productReference(p))}">View details</button>
       </div>
     </div>
   `).join('');
@@ -630,7 +633,7 @@ function applySiteSettings() {
   document.querySelectorAll('[data-contact]').forEach(el => { const k = el.dataset.contact; if (settings[k]) el.textContent = settings[k]; });
   document.querySelectorAll('a[data-wa]').forEach(a => { a.href = `https://wa.me/${settings.whatsapp}`; });
   document.querySelectorAll('a[data-wa-msg]').forEach(a => { a.href = `https://wa.me/${settings.whatsapp}?text=${encodeURIComponent(a.dataset.waMsg||'Hello JHALAR, I would like a quote.')}`; });
-  document.querySelectorAll('a[data-tel]').forEach(a => { a.href = `tel:+${String(settings.whatsapp).replace(/\\D/g,'')}`; });
+  document.querySelectorAll('a[data-tel]').forEach(a => { a.href = `tel:+${String(settings.whatsapp).replace(/\D/g,'')}`; });
   document.querySelectorAll('a[data-mailto]').forEach(a => { a.href = `mailto:${settings.email}`; });
 
   // Hero
@@ -803,7 +806,8 @@ function setupEnquiryForm() {
     if (v('details')) L.push(v('details'));
     L.push('------------------------------');
 
-    window.open('https://wa.me/' + settings.whatsapp + '?text=' + encodeURIComponent(L.join('\n')), '_blank', 'noopener');
+    var waText = L.map(encodeURIComponent).join('%0A');
+    window.open('https://wa.me/' + settings.whatsapp + '?text=' + waText, '_blank', 'noopener');
     var st = document.getElementById('form-status');
     if (st) { st.textContent = 'WhatsApp is open with your enquiry filled in. Review it and press send there.'; st.classList.add('visible'); }
   });
