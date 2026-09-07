@@ -3099,3 +3099,42 @@ body{padding-top:var(--header-h)!important}
     text-align:left!important;
   }
 }
+
+
+/* FOOTER SVG LOGO — centered, subtle premium motion */
+.footer.site-footer .footer-brand{
+  width:100%!important;
+  display:flex!important;
+  justify-content:center!important;
+  align-items:center!important;
+  text-align:center!important;
+}
+.footer.site-footer .footer-brand > a.logo{
+  margin:0 auto!important;
+  display:inline-flex!important;
+  justify-content:center!important;
+  align-items:center!important;
+}
+.footer.site-footer .footer-logo{
+  transform-origin:center!important;
+  animation:footerLogoFloat 5s ease-in-out infinite!important;
+  will-change:transform!important;
+}
+.footer.site-footer .footer-brand > a.logo:hover .footer-logo,
+.footer.site-footer .footer-brand > a.logo:focus-visible .footer-logo{
+  animation-play-state:paused!important;
+  transform:scale(1.045)!important;
+}
+@keyframes footerLogoFloat{
+  0%,100%{transform:translateY(0) scale(1)}
+  50%{transform:translateY(-4px) scale(1.012)}
+}
+@media(prefers-reduced-motion:reduce){
+  .footer.site-footer .footer-logo{animation:none!important}
+}
+@media(max-width:760px){
+  .footer.site-footer .footer-brand{
+    justify-content:center!important;
+    align-items:center!important;
+  }
+}
