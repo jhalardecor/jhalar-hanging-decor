@@ -315,3 +315,136 @@ button,a{min-height:44px}.nav a{min-height:auto}
 .modal-zoom-controls button:hover:not(:disabled){background:#f1e3dc;color:#7a1e2c}
 .modal-thumb-video{display:grid;place-items:center;width:100%;height:100%;padding:6px;color:#7a1e2c;font-size:.68rem;font-weight:600;background:#f4ede7}
 @media(max-width:650px){.modal-zoom-controls{right:12px;top:12px}.modal-zoom-controls button{min-width:38px;height:38px;min-height:38px}}
+
+
+/* ==========================================================================
+   MODAL MEDIA: CONTAINED ZOOM, DESKTOP + MOBILE
+   This replaces the previous modal-media geometry.
+   ========================================================================== */
+#product-modal .modal-card{
+  width:min(1120px,calc(100vw - 48px));
+  max-height:min(86dvh,780px);
+  overflow:hidden;
+  display:grid;
+  grid-template-columns:minmax(0,1.08fr) minmax(360px,.92fr);
+}
+#product-modal .modal-media{
+  position:relative;
+  min-width:0;
+  min-height:0;
+  height:100%;
+  padding:0;
+  display:block;
+  overflow:hidden;
+  background:#f4ede7;
+}
+#product-modal .modal-stage{
+  position:relative;
+  width:100%;
+  height:100%;
+  min-height:520px;
+  overflow:hidden;
+  display:grid;
+  place-items:center;
+  background:#f4ede7;
+  touch-action:manipulation;
+}
+#product-modal .modal-stage>img,
+#product-modal .modal-stage>video{
+  width:100%;
+  height:100%;
+  max-width:none;
+  max-height:none;
+  object-fit:contain;
+  object-position:center;
+  transform-origin:center;
+  transition:transform .2s ease;
+  will-change:transform;
+}
+#product-modal .modal-stage.is-zoomed{cursor:zoom-out}
+#product-modal .modal-stage.is-zoomed>img,
+#product-modal .modal-stage.is-zoomed>video{cursor:zoom-out}
+
+#product-modal .modal-zoom-controls{
+  position:absolute;
+  z-index:8;
+  top:18px;
+  right:18px;
+  display:flex;
+  align-items:center;
+  gap:0;
+  border:1px solid rgba(56,39,43,.14);
+  background:rgba(255,250,241,.96);
+  box-shadow:0 8px 24px rgba(56,39,43,.08);
+}
+#product-modal .modal-zoom-controls button{
+  display:grid;
+  place-items:center;
+  width:42px;
+  min-width:42px;
+  height:42px;
+  min-height:42px;
+  margin:0;
+  padding:0;
+  border:0;
+  border-left:1px solid rgba(56,39,43,.12);
+  border-radius:0;
+  background:transparent;
+  color:#38272b;
+  font-size:1.15rem;
+  line-height:1;
+}
+#product-modal .modal-zoom-controls button:first-child{border-left:0}
+#product-modal .modal-zoom-controls button:hover:not(:disabled){background:#f1e3dc;color:#7a1e2c}
+#product-modal .modal-zoom-controls button:disabled{opacity:.35}
+#product-modal .modal-zoom-level{
+  display:none;
+  min-width:48px;
+  padding-inline:8px;
+  color:#66575a;
+  font-size:.68rem;
+  text-align:center;
+}
+
+#product-modal .modal-nav{z-index:7}
+#product-modal .modal-thumbs{
+  position:absolute;
+  z-index:7;
+  left:18px;
+  right:18px;
+  bottom:18px;
+  margin:0;
+  pointer-events:auto;
+}
+
+@media(max-width:980px){
+  #product-modal.open{padding:12px}
+  #product-modal .modal-card{
+    width:min(680px,100%);
+    max-height:calc(100dvh - 24px);
+    grid-template-columns:1fr;
+    grid-template-rows:auto auto;
+    overflow:auto;
+  }
+  #product-modal .modal-media{height:auto;aspect-ratio:4/3}
+  #product-modal .modal-stage{height:auto;min-height:0;aspect-ratio:4/3}
+  #product-modal .modal-copy{padding:30px 28px 34px}
+}
+@media(max-width:650px){
+  #product-modal.open{padding:8px}
+  #product-modal .modal-card{
+    width:100%;
+    max-height:calc(100dvh - 16px);
+    border-radius:14px;
+  }
+  #product-modal .modal-media{aspect-ratio:1/1}
+  #product-modal .modal-stage{aspect-ratio:1/1}
+  #product-modal .modal-copy{padding:24px 20px 28px}
+  #product-modal .modal-copy h3{font-size:clamp(1.8rem,8vw,2.6rem)}
+  #product-modal .modal-zoom-controls{top:12px;right:12px}
+  #product-modal .modal-zoom-controls button{width:38px;min-width:38px;height:38px;min-height:38px}
+  #product-modal .modal-nav{width:38px;height:38px}
+  #product-modal .modal-nav.prev{left:10px}
+  #product-modal .modal-nav.next{right:10px}
+  #product-modal .modal-thumbs{left:12px;right:12px;bottom:12px}
+}
