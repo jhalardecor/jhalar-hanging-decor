@@ -2498,3 +2498,18 @@ button:not(.filter-btn),
 .modal-copy{border:0!important;box-shadow:none!important}
 .modal-close{border:1px solid rgba(98,35,49,.14)!important;background:#FFFAF1!important;color:#622331!important}
 @media(max-width:760px){.modal{padding:calc(var(--header-h) + 8px) 8px 8px!important}.modal-card{width:100%!important;height:calc(100dvh - var(--header-h) - 16px)!important;max-height:calc(100dvh - var(--header-h) - 16px)!important;border-radius:0!important}.modal-media{height:48dvh!important;flex-basis:48dvh!important}}
+
+
+/* MOBILE PRODUCT POPUP — final safe viewport layout */
+@media(max-width:760px){
+  .modal{position:fixed!important;inset:0!important;z-index:90!important;padding:calc(var(--header-h) + 6px) 6px 6px!important;display:none!important;overflow:hidden!important}
+  .modal.open{display:flex!important;align-items:flex-start!important;justify-content:center!important}
+  .modal-card{position:relative!important;width:100%!important;height:calc(100dvh - var(--header-h) - 12px)!important;max-height:calc(100dvh - var(--header-h) - 12px)!important;display:flex!important;flex-direction:column!important;overflow:hidden!important;background:#FFFDF8!important}
+  .modal-media{width:100%!important;height:42dvh!important;max-height:42dvh!important;min-height:180px!important;flex:0 0 42dvh!important;overflow:hidden!important;background:#FFFDF8!important}
+  .modal-stage{width:100%!important;height:100%!important;padding:10px!important;overflow:hidden!important}
+  .modal-stage img,.modal-stage video{width:100%!important;height:100%!important;max-width:100%!important;max-height:100%!important;object-fit:contain!important}
+  .modal-copy{width:100%!important;min-width:0!important;flex:1 1 auto!important;min-height:0!important;overflow-y:auto!important;-webkit-overflow-scrolling:touch!important;padding:18px 16px calc(20px + env(safe-area-inset-bottom))!important}
+  .modal-close{position:absolute!important;top:10px!important;right:10px!important;z-index:20!important}
+  .modal-nav{z-index:15!important}
+  .modal-thumbs{z-index:15!important;max-width:calc(100% - 24px)!important}
+}
