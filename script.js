@@ -369,17 +369,17 @@ initProducts();initRuntime();
   const mobileNav=document.getElementById('mobile-nav');
   const menu=document.getElementById('menu');
   if(header){
-    let lastY=window.scrollY, ticking=false;
+    let lastY=window.scrollY, ticking=false, stopTimer=null;
+    const showHeader=()=>header.classList.remove('header-hidden');
     const update=()=>{
       const y=Math.max(0,window.scrollY);
       const delta=y-lastY;
       header.classList.toggle('scrolled',y>8);
-      if(y<80 || delta<-4){
-        header.classList.remove('header-hidden');
-      }else if(delta>6 && y>120 && !(mobileNav&&mobileNav.classList.contains('open'))){
-        header.classList.add('header-hidden');
-      }
+      if(y<80 || delta<-4) showHeader();
+      else if(delta>6 && y>120 && !(mobileNav&&mobileNav.classList.contains('open'))) header.classList.add('header-hidden');
       lastY=y;ticking=false;
+      clearTimeout(stopTimer);
+      stopTimer=setTimeout(showHeader,180);
     };
     window.addEventListener('scroll',()=>{
       if(!ticking){ticking=true;requestAnimationFrame(update)}
