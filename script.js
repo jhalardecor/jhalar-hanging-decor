@@ -20,7 +20,7 @@ function setModalZoom(next){
   const image=$('#modal-photo');
   const video=$('#modal-video');
   if(!stage)return;
-  const activeMedia=video&&!video.hidden?video:image;
+  const activeMedia=stage?.classList.contains('is-video')?video:image;
   if(!activeMedia)return;
   stage.classList.toggle('is-zoomed',state.modalZoom>1);
   activeMedia.style.transform='scale('+state.modalZoom+')';
@@ -37,7 +37,7 @@ function setModalZoomOrigin(e){
   const y=Math.max(0,Math.min(100,((e.clientY-rect.top)/rect.height)*100));
   const image=$('#modal-photo');
   const video=$('#modal-video');
-  const activeMedia=video&&!video.hidden?video:image;
+  const activeMedia=stage?.classList.contains('is-video')?video:image;
   if(activeMedia)activeMedia.style.transformOrigin=x+'% '+y+'%';
 }
 function showModalMedia(i){const m=state.modalMedia||[];if(!m.length)return;const n=m.length;state.modalIndex=((i%n)+n)%n;state.modalZoom=1;const item=m[state.modalIndex],stage=$('#modal-stage'),photo=$('#modal-photo'),video=$('#modal-video');stage.classList.remove('is-video');if(item.type==='video'){photo.hidden=true;video.hidden=false;video.src=item.src;video.load();stage.classList.add('is-video')}else{video.pause();video.removeAttribute('src');video.load();video.hidden=true;photo.hidden=false;photo.src=item.src;photo.alt=$('#modal-title')?.textContent||'Product media'}setModalZoom(1);const thumbs=$('#modal-thumbs');if(n>1){thumbs.innerHTML=m.map((item,j)=>'<button class="modal-thumb'+(j===state.modalIndex?' active':'')+'" data-thumb="'+j+'" aria-label="'+(item.type==='video'?'Video':'Photo')+' '+(j+1)+' of '+n+'">'+(item.type==='video'?'<span class="modal-thumb-video">Video</span>':'<img src="'+esc(item.src)+'" alt="">')+'</button>').join('');$('.modal-nav.prev').hidden=false;$('.modal-nav.next').hidden=false}else{thumbs.innerHTML='';$('.modal-nav.prev').hidden=true;$('.modal-nav.next').hidden=true}}
