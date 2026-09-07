@@ -1874,3 +1874,48 @@ p,.section-head>p,.hero-banner-copy>p:not(.kicker){letter-spacing:.006em}
     min-height:44px!important;
   }
 }
+
+
+/* JHALAR ACTUAL HEADER / BRAND SCALE */
+.header,
+.header .header-row{
+  min-height:76px!important;
+  height:76px!important;
+}
+.header .header-row{
+  padding-inline:clamp(20px,3vw,44px)!important;
+}
+.header .brand{
+  width:150px!important;
+  height:48px!important;
+  display:flex!important;
+  align-items:center!important;
+}
+.header .brand img{
+  width:100%!important;
+  max-width:150px!important;
+  max-height:48px!important;
+  height:auto!important;
+  object-fit:contain!important;
+}
+@media(max-width:760px){
+  .header,
+  .header .header-row{
+    min-height:72px!important;
+    height:72px!important;
+  }
+  .header .header-row{padding-inline:20px!important}
+  .header .brand{
+    width:132px!important;
+    height:42px!important;
+  }
+  .header .brand img{
+    max-width:132px!important;
+    max-height:42px!important;
+  }
+  .header .menu{
+    width:46px!important;
+    height:46px!important;
+    min-width:46px!important;
+  }
+}
