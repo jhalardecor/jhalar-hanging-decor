@@ -1388,3 +1388,71 @@ button,.btn,.hero-banner-cta,.filter-btn{
     max-width:calc(100vw - 104px)!important;
   }
 }
+
+
+/* HEADER GEOMETRY RESET — LOGO + HAMBURGER SHARE ONE CENTER LINE */
+.header{
+  position:sticky!important;
+  top:0!important;
+  z-index:1000!important;
+}
+.header-row{
+  box-sizing:border-box!important;
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) auto minmax(0,1fr)!important;
+  align-items:center!important;
+}
+.brand{grid-column:1!important;justify-self:start!important}
+.nav{grid-column:2!important;justify-self:center!important;margin:0!important}
+.header #menu{grid-column:3!important;justify-self:end!important;margin:0!important}
+
+@media(min-width:901px){
+  .header-row{
+    width:min(calc(100% - 64px),1200px)!important;
+    height:88px!important;
+    min-height:88px!important;
+  }
+  .brand img{
+    width:210px!important;
+    max-height:58px!important;
+  }
+}
+
+@media(max-width:900px){
+  .header-row{
+    width:calc(100% - 32px)!important;
+    height:72px!important;
+    min-height:72px!important;
+    grid-template-columns:minmax(0,1fr) 48px!important;
+  }
+  .brand{
+    grid-column:1!important;
+    height:72px!important;
+    display:flex!important;
+    align-items:center!important;
+  }
+  .brand img{
+    width:148px!important;
+    height:auto!important;
+    max-height:46px!important;
+    object-fit:contain!important;
+    object-position:left center!important;
+  }
+  .header #menu{
+    grid-column:2!important;
+    justify-self:end!important;
+    align-self:center!important;
+    width:48px!important;
+    height:48px!important;
+    position:relative!important;
+  }
+  .header #menu span{
+    left:50%!important;
+    width:24px!important;
+  }
+}
+
+@media(max-width:390px){
+  .header-row{width:calc(100% - 24px)!important}
+  .brand img{width:138px!important}
+}
