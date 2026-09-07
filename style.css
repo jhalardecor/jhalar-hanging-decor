@@ -1191,3 +1191,72 @@ button,.btn,.hero-banner-cta,.filter-btn{
     font-size:13px!important;
   }
 }
+
+
+/* 36. FINAL MOBILE HAMBURGER — EXACTLY TWO EQUAL LINES */
+@media(max-width:760px){
+  #menu.header-menu,.header #menu,
+  .header button.menu{
+    display:grid!important;
+    place-items:center!important;
+    position:relative!important;
+    width:48px!important;
+    height:48px!important;
+    padding:0!important;
+    margin:0 -8px 0 0!important;
+    border:0!important;
+    background:transparent!important;
+    gap:0!important;
+    overflow:visible!important;
+    font-size:0!important;
+    color:transparent!important;
+    -webkit-tap-highlight-color:transparent!important;
+  }
+
+  .header #menu span,
+  .header button.menu span{
+    position:absolute!important;
+    left:50%!important;
+    display:block!important;
+    width:24px!important;
+    height:2px!important;
+    min-height:2px!important;
+    margin:0!important;
+    padding:0!important;
+    background:#141942!important;
+    border-radius:999px!important;
+    transform-origin:center!important;
+    will-change:transform!important;
+    transition:transform .42s cubic-bezier(.34,1.56,.64,1)!important;
+  }
+
+  .header #menu span:nth-child(1),
+  .header button.menu span:nth-child(1){
+    transform:translate(-50%,-5px)!important;
+  }
+
+  .header #menu span:nth-child(2),
+  .header button.menu span:nth-child(2){
+    width:24px!important;
+    transform:translate(-50%,5px)!important;
+  }
+
+  /* Smooth spring morph: two equal bars become the close X */
+  .header #menu.open span:nth-child(1),
+  .header button.menu.open span:nth-child(1){
+    transform:translate(-50%,0) rotate(45deg)!important;
+  }
+
+  .header #menu.open span:nth-child(2),
+  .header button.menu.open span:nth-child(2){
+    width:24px!important;
+    transform:translate(-50%,0) rotate(-45deg)!important;
+  }
+
+  .header #menu:active{
+    transform:scale(.9)!important;
+    transition:transform .12s ease!important;
+  }
+
+  .header #menu i{display:none!important;}
+}
