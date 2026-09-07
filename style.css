@@ -1851,3 +1851,14 @@ button,.btn,.hero-banner-cta,.filter-btn{
   .site-footer .footer-bottom .container,.site-footer .footer-bottom .shell{min-height:68px}
   .site-footer .footer-bottom p{font-size:.74rem}
 }
+
+
+/* FINAL FOOTER OVERRIDE — neutralize legacy navy .footer rules */
+.footer.site-footer{
+  background:linear-gradient(135deg,#FFFDF8 0%,#FFFAF1 48%,#F7EBE8 100%)!important;
+  color:#141942!important;
+  border-top:1px solid rgba(98,35,49,.13)!important;
+}
+.footer.site-footer *{border-color:rgba(98,35,49,.14)}
+.footer.site-footer .footer-col a,
+.footer.site-footer .footer-col span{color:rgba(20,25,66,.76)!important}
