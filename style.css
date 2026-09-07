@@ -51,7 +51,7 @@ h1,h2,h3,h4,h5,h6,.hero-banner-copy h1,.section-heading-group h2,.custom-copy h2
 .hero-banner-shade{position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(255,250,241,.98) 0%,rgba(255,250,241,.9) 35%,rgba(255,250,241,.35) 58%,rgba(255,250,241,0) 76%)}
 .hero-banner-content{display:flex;align-items:center;padding-block:clamp(54px,7vw,96px)}
 .hero-banner-copy{width:min(560px,50%);color:var(--ink)}
-.hero-banner-copy h1{margin:0;max-width:9ch;font-size:clamp(3rem,5.6vw,5.7rem);line-height:1.02;letter-spacing:-.028em;font-weight:500}
+.hero-banner-copy h1{margin:0;max-width:9ch;font-size:clamp(3rem,5.6vw,5.7rem);line-height:.98;letter-spacing:-.045em;font-weight:700}
 .hero-banner-copy h1 em{font-style:italic;font-weight:400}
 .hero-lead{margin:var(--s4) 0 0;max-width:47ch;font-size:clamp(1rem,1.25vw,1.18rem);line-height:1.55}
 .hero-banner-cta{display:inline-flex;align-items:center;gap:18px;margin-top:var(--s5);padding:0 0 8px;border-bottom:1px solid currentColor;font-weight:700}.hero-banner-cta span{font-size:1.2em;transition:transform .2s var(--ease)}.hero-banner-cta:hover span{transform:translateY(4px)}
@@ -65,7 +65,7 @@ h1,h2,h3,h4,h5,h6,.hero-banner-copy h1,.section-heading-group h2,.custom-copy h2
 /* 06. SECTION SKELETON */
 .section-inner,.section-layout{display:grid;gap:clamp(28px,4vw,52px)}
 .section-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(260px,.72fr);align-items:end;gap:40px}
-.section-heading-group h2,.custom-copy h2,.story-copy h2,.contact-box h2{margin:0;font-size:clamp(2.1rem,4vw,4.4rem);line-height:1.08;letter-spacing:-.022em}
+.section-heading-group h2,.custom-copy h2,.story-copy h2,.contact-box h2{margin:0;font-size:clamp(2.1rem,4vw,4.4rem);line-height:1.04;letter-spacing:-.035em}
 .section-support-group p{margin:0;max-width:43ch;color:var(--ink-soft)}
 
 /* 07. FILTERS + PRODUCTS */
