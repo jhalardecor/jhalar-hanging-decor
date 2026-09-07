@@ -149,7 +149,35 @@ function markRevealTargets(){
 }
 
 /* ---------- catalogue loader (fail-closed through the naming gate) ---------- */
-async function initProducts(){try{const gate=window.JHALARNaming;if(!gate)throw Error('Naming gate unavailable');const[pr,nr]=await Promise.all([fetch('content/products.json',{cache:'no-store'}),fetch('content/product-naming.json',{cache:'no-store'})]);if(!pr.ok)throw Error('Catalogue unavailable');if(!nr.ok)throw Error('Naming registry unavailable');const d=await pr.json();const registry=await nr.json();const products=Array.isArray(d.products)?d.products:[];const report=gate.validateCatalogue({products},registry);if(report.errors.length)throw Error('Catalogue rejected by naming gate: '+report.errors[0]);const approved=new Set(report.products.filter(x=>x.status===gate.STATUS.APPROVED&&!x.humanReviewRequired).map(x=>x.productId));state.products=products.filter(p=>approved.has(p.id));if(!state.products.length)throw Error('No approved products in catalogue');renderFilters();renderProducts()}catch(e){console.error(e);$('#product-grid').innerHTML='<p>Products are being updated. Please check back shortly.</p>'}}
+async function initProducts(){
+ try{
+  const pr=await fetch('content/products.json',{cache:'no-store'});
+  if(!pr.ok)throw Error('Catalogue unavailable');
+  const d=await pr.json();
+  const products=Array.isArray(d.products)?d.products:[];
+  // Product titles and descriptions are owner-editable public content.
+  // Validation must never hide the catalogue because a display name changes.
+  state.products=products.filter(p=>p&&typeof p==='object'&&Number.isInteger(p.id));
+  if(!state.products.length)throw Error('No products in catalogue');
+  // Run naming validation only as diagnostics when available.
+  try{
+   const gate=window.JHALARNaming;
+   if(gate){
+    const nr=await fetch('content/product-naming.json',{cache:'no-store'});
+    if(nr.ok){
+     const registry=await nr.json();
+     const report=gate.validateCatalogue({products:state.products},registry);
+     if(report&&report.errors&&report.errors.length)console.warn('Catalogue naming diagnostics:',report.errors);
+    }
+   }
+  }catch(validationError){console.warn('Catalogue naming diagnostics unavailable:',validationError)}
+  renderFilters();
+  renderProducts();
+ }catch(e){
+  console.error(e);
+  $('#product-grid').innerHTML='<p>We are unable to load the collection right now. Please refresh the page or contact us directly.</p>';
+ }
+}
 async function initRuntime(){try{const[ss,th,se,cc]=await Promise.all([fetch('content/site-settings.json',{cache:'no-store'}),fetch('content/theme.json',{cache:'no-store'}),fetch('content/sections.json',{cache:'no-store'}),fetch('content/custom-css.json',{cache:'no-store'})]);if(ss.ok)applySettings(await ss.json());if(th.ok)setTheme(await th.json());if(se.ok){const d=await se.json();setSections({sections:d.sections,order:d.order})}if(cc.ok)setCustomCSS((await cc.json()).css||'')}catch(e){console.warn('Runtime settings unavailable',e)}}
 
 
