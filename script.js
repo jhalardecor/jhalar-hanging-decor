@@ -339,8 +339,33 @@ initProducts();initRuntime();
    const r=stage.getBoundingClientRect(),ox=cx-(r.left+r.width/2),oy=cy-(r.top+r.height/2),ratio=next/old;
    x=ox-(ox-x)*ratio;y=oy-(oy-y)*ratio;z=next;if(z===1)x=y=0;paint();
  }
+ // Desktop / laptop: mouse wheel or trackpad scroll zooms the product image.
  stage.addEventListener('wheel',e=>{if(!modal.classList.contains('open')||stage.classList.contains('is-video'))return;e.preventDefault();zoom(z*Math.exp(-e.deltaY*.001),e.clientX,e.clientY)},{passive:false});
- stage.addEventListener('pointerdown',e=>{if(z<=1.001||stage.classList.contains('is-video'))return;drag={id:e.pointerId,cx:e.clientX,cy:e.clientY,x,y};stage.setPointerCapture(e.pointerId);stage.classList.add('is-panning');e.preventDefault()});
+
+ // Mobile: two-finger pinch zooms the product image itself, not the page.
+ let pinch=null;
+ const distance=t=>Math.hypot(t[1].clientX-t[0].clientX,t[1].clientY-t[0].clientY);
+ const center=t=>({x:(t[0].clientX+t[1].clientX)/2,y:(t[0].clientY+t[1].clientY)/2});
+ stage.addEventListener('touchstart',e=>{
+   if(!modal.classList.contains('open')||stage.classList.contains('is-video'))return;
+   if(e.touches.length===2){
+     const p=center(e.touches);
+     pinch={distance:distance(e.touches),zoom:z,x:p.x,y:p.y};
+     e.preventDefault();
+   }
+ },{passive:false});
+ stage.addEventListener('touchmove',e=>{
+   if(!pinch||e.touches.length!==2)return;
+   const p=center(e.touches);
+   const next=pinch.zoom*(distance(e.touches)/pinch.distance);
+   zoom(next,p.x,p.y);
+   e.preventDefault();
+ },{passive:false});
+ const endPinch=e=>{if(e.touches.length<2)pinch=null};
+ stage.addEventListener('touchend',endPinch,{passive:true});
+ stage.addEventListener('touchcancel',()=>{pinch=null},{passive:true});
+
+ stage.addEventListener('pointerdown',e=>{if(e.pointerType==='touch'||z<=1.001||stage.classList.contains('is-video'))return;drag={id:e.pointerId,cx:e.clientX,cy:e.clientY,x,y};stage.setPointerCapture(e.pointerId);stage.classList.add('is-panning');e.preventDefault()});
  stage.addEventListener('pointermove',e=>{if(!drag||drag.id!==e.pointerId)return;x=drag.x+e.clientX-drag.cx;y=drag.y+e.clientY-drag.cy;paint()});
  const stop=()=>{drag=null;stage.classList.remove('is-panning')};stage.addEventListener('pointerup',stop);stage.addEventListener('pointercancel',stop);
  stage.addEventListener('dblclick',e=>zoom(z>1.01?1:2,e.clientX,e.clientY));
