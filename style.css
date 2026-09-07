@@ -514,18 +514,6 @@ img,video,svg{max-width:100%}
 }
 
 
-/* 20. ALWAYS-AVAILABLE HEADER — no auto-hide while browsing */
-.header{
- position:sticky!important;
- top:0;
- transform:none!important;
- z-index:1000;
-}
-.header.header-hidden{transform:none!important}
-@media(max-width:760px){
- .header-row{height:68px}
- .header{background:rgba(255,250,241,.98)}
-}
 
 
 /* 21. FLUID ALIGNMENT SYSTEM — SAME DESIGN, EVERY SCREEN */
@@ -2517,8 +2505,9 @@ button:not(.filter-btn),
 
 /* FINAL MOBILE HEADER + PRODUCT MODAL FIX — remove conflicting viewport rules */
 @media(max-width:760px){
-  .header,.site-header{position:sticky!important;top:0!important;z-index:200!important;transform:translateY(0)!important;transition:transform 180ms var(--ease)!important}
+  .header{position:sticky!important;top:0!important;z-index:1000!important;transition:transform 180ms var(--ease)!important}
   .header.header-hidden{transform:translateY(-100%)!important}
+
   .modal{z-index:150!important;padding:calc(var(--header-h) + 8px) 8px 8px!important;box-sizing:border-box!important}
   .modal-card{height:calc(100dvh - var(--header-h) - 16px)!important;max-height:calc(100dvh - var(--header-h) - 16px)!important;overflow:hidden!important}
   .modal-media{height:44dvh!important;max-height:44dvh!important;min-height:0!important;flex:0 0 44dvh!important}
@@ -2537,3 +2526,13 @@ button:not(.filter-btn),
 /* Clear hierarchy: primary filled, secondary quiet, filters remain the only pills */
 .contact-cta,.modal-wa-btn{border-radius:2px!important}
 .more-btn{border-radius:2px!important}
+
+
+/* AUDIT CLEANUP — single source of truth for mobile product viewer */
+@media(max-width:760px){
+  #product-modal{z-index:900!important;padding:calc(var(--header-h) + 8px) 8px 8px!important}
+  #product-modal .modal-card{width:100%!important;height:calc(100dvh - var(--header-h) - 16px)!important;max-height:calc(100dvh - var(--header-h) - 16px)!important;display:flex!important;flex-direction:column!important;overflow:hidden!important}
+  #product-modal .modal-media{position:relative!important;width:100%!important;height:44dvh!important;min-height:0!important;max-height:44dvh!important;flex:0 0 44dvh!important;overflow:hidden!important}
+  #product-modal .modal-stage{width:100%!important;height:100%!important;min-height:0!important;padding:8px!important;display:flex!important;align-items:center!important;justify-content:center!important;overflow:hidden!important;background:#FFFDF8!important;touch-action:pinch-zoom!important}
+  #product-modal #modal-photo{display:block!important;width:auto!important;height:auto!important;max-width:100%!important;max-height:100%!important;object-fit:contain!important}
+}
