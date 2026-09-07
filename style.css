@@ -2703,3 +2703,8 @@ body{padding-top:var(--header-h)!important}
 #product-modal .modal-stage > video[hidden]{display:none!important;}
 #product-modal .modal-stage > img:not([hidden]),
 #product-modal .modal-stage > video:not([hidden]){display:block!important;}
+
+
+/* SINGLE MEDIA MODE — structural guard against image + video split panels */
+#product-modal .modal-stage:not(.is-video) > video{display:none!important;}
+#product-modal .modal-stage.is-video > #modal-photo{display:none!important;}
