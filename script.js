@@ -392,56 +392,57 @@ initProducts();initRuntime();
 /* build 20260907.16 */
 
 
-/* Header controller — hide only during active downward scrolling, always return when interaction stops */
+/* Premium header controller — reliable reveal on desktop and mobile */
 (function(){
   const header=document.querySelector('.header');
-  const mobileNav=document.getElementById('mobile-nav');
-  const menu=document.getElementById('menu');
-  if(header){
-    let lastY=Math.max(0,window.scrollY);
-    let idleTimer=0;
-    const reveal=()=>{
-      header.classList.remove('header-hidden');
-      clearTimeout(idleTimer);
-    };
-    const armIdleReveal=()=>{
-      clearTimeout(idleTimer);
-      idleTimer=window.setTimeout(reveal,160);
-    };
-    const onScroll=()=>{
-      const y=Math.max(0,window.scrollY);
-      const delta=y-lastY;
-      header.classList.toggle('scrolled',y>8);
+  if(!header)return;
 
-      if(y<=80 || delta<0){
-        reveal();
-      }else if(delta>3 && y>120 && !(mobileNav&&mobileNav.classList.contains('open'))){
-        header.classList.add('header-hidden');
-      }
+  let lastY=window.scrollY;
+  let revealTimer=0;
+  let raf=0;
 
-      lastY=y;
-      armIdleReveal();
-    };
+  const reveal=()=>{
+    header.classList.remove('header-hidden');
+    clearTimeout(revealTimer);
+  };
 
-    window.addEventListener('scroll',onScroll,{passive:true});
-    window.addEventListener('scrollend',reveal,{passive:true});
-    window.addEventListener('touchend',armIdleReveal,{passive:true});
-    window.addEventListener('pointerup',armIdleReveal,{passive:true});
-    window.addEventListener('focus',reveal);
-    document.addEventListener('visibilitychange',()=>{if(!document.hidden)reveal()});
-    onScroll();
-  }
+  const scheduleReveal=()=>{
+    clearTimeout(revealTimer);
+    revealTimer=window.setTimeout(reveal,260);
+  };
 
-  document.querySelectorAll('.brand[href="#top"],.footer-brand[href="#top"]').forEach(logo=>{
-    logo.addEventListener('click',e=>{
-      e.preventDefault();
-      header?.classList.remove('header-hidden');
-      if(mobileNav){mobileNav.classList.remove('open')}
-      if(menu){menu.setAttribute('aria-expanded','false')}
-      window.scrollTo({top:0,behavior:'smooth'});
-      history.replaceState(null,'',location.pathname+location.search);
-    });
-  });
+  const update=()=>{
+    raf=0;
+    const y=Math.max(0,window.scrollY);
+    const delta=y-lastY;
+
+    header.classList.toggle('scrolled',y>8);
+
+    // Premium navigation behavior: hide only on a meaningful downward movement.
+    if(y<=90 || delta<=-3){
+      reveal();
+    }else if(delta>=8 && y>140){
+      header.classList.add('header-hidden');
+      scheduleReveal();
+    }else{
+      scheduleReveal();
+    }
+
+    lastY=y;
+  };
+
+  const onScroll=()=>{
+    if(!raf)raf=requestAnimationFrame(update);
+  };
+
+  window.addEventListener('scroll',onScroll,{passive:true});
+  window.addEventListener('scrollend',reveal,{passive:true});
+  window.addEventListener('touchend',scheduleReveal,{passive:true});
+  window.addEventListener('pointerup',scheduleReveal,{passive:true});
+  window.addEventListener('pageshow',reveal);
+  document.addEventListener('visibilitychange',()=>{if(!document.hidden)reveal()});
+
+  reveal();
 })();
 
 /* build: 20260907.18 */
