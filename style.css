@@ -2573,3 +2573,8 @@ button:not(.filter-btn),
 #product-modal .modal-stage{position:relative!important}
 #product-modal .modal-stage>img,#product-modal .modal-stage>video{display:block!important}
 #product-modal .modal-stage>img[hidden],#product-modal .modal-stage>video[hidden]{display:none!important}
+
+
+/* HEADER SCROLL STATE — one consistent rule on desktop, tablet and mobile */
+.header{position:sticky!important;top:0!important;z-index:1000!important;will-change:transform;transition:transform 180ms var(--ease),box-shadow 180ms var(--ease)!important}
+.header.header-hidden{transform:translate3d(0,-100%,0)!important}
