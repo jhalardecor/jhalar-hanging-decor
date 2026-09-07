@@ -20,7 +20,26 @@ async function init(){
   applySiteSettings(); applyTheme(); applySectionVisibility(); applySectionOrder(); applyNavigation(); applySEO(); applyCustomCSS(); renderProducts(products); setupFilterButtons(); setupCollectionToggle(); applyCollapse();
 }
 async function loadProducts(){
-  try{const [r,nr]=await Promise.all([fetch('content/products.json',{cache:'no-store'}),fetch('content/product-naming.json',{cache:'no-store'})]); if(!r.ok||!nr.ok) throw new Error('Catalogue unavailable'); const [d,registry]=await Promise.all([r.json(),nr.json()]); const review=window.JHALARNaming.validateCatalogue(d,registry); if(review.errors.length||review.reviewCount||!d.products.length) throw new Error('Published catalogue failed validation'); if(!livePushed.products) products=d.products;}catch(e){console.error(e);if(!livePushed.products) products=[];}
+  try{
+    const r=await fetch('content/products.json',{cache:'no-store'});
+    if(!r.ok) throw new Error('Catalogue unavailable: HTTP '+r.status);
+    const d=await r.json();
+    if(!Array.isArray(d.products)||d.products.length===0) throw new Error('No products published');
+    if(!livePushed.products) products=d.products;
+    /* Internal naming QA must never block customers from seeing the catalogue. */
+    if(window.JHALARNaming){
+      fetch('content/product-naming.json',{cache:'no-store'})
+        .then(x=>x.ok?x.json():null)
+        .then(registry=>{
+          if(!registry) return;
+          const review=window.JHALARNaming.validateCatalogue(d,registry);
+          if(review.errors.length||review.reviewCount) console.warn('Catalogue naming QA:',review);
+        }).catch(()=>{});
+    }
+  }catch(e){
+    console.error('Product loading failed:',e);
+    if(!livePushed.products) products=[];
+  }
 }
 async function loadSettings(){try{const r=await fetch('content/site-settings.json');if(!r.ok)throw new Error('HTTP '+r.status);const d=await r.json();if(!livePushed.settings)settings=Object.assign({},settings,d);}catch(e){console.warn('Settings fallback',e);}}
 async function loadTheme(){try{const r=await fetch('content/theme.json');if(!r.ok)throw new Error('HTTP '+r.status);const d=await r.json();if(!livePushed.theme)theme=Object.assign({},theme,d);}catch(e){console.warn('Theme fallback',e);}}
