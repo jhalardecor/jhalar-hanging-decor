@@ -702,8 +702,9 @@ function selectProduct(id) {
   setVal('ed-prod-category', p.category||'');
   setVal('ed-prod-description', p.description||'');
   setVal('ed-prod-image', p.image||'assets/images/og-cover.jpg');
+  setVal('ed-prod-image-alt', p.imageAlt||'');
   renderProdGallery();
-  ['ed-prod-title','ed-prod-category','ed-prod-description','ed-prod-image'].forEach(fid => {
+  ['ed-prod-title','ed-prod-category','ed-prod-description','ed-prod-image','ed-prod-image-alt'].forEach(fid => {
     const el = document.getElementById(fid);
     if (el) { el.removeEventListener('input', onProductChange); el.removeEventListener('change', onProductChange); el.addEventListener('input', onProductChange); el.addEventListener('change', onProductChange); }
   });
@@ -712,6 +713,7 @@ function onProductChange() {
   const p = state.products.find(x => x.id === state.selectedProductId); if (!p) return;
   p.title = getVal('ed-prod-title'); p.category = getVal('ed-prod-category');
   p.description = getVal('ed-prod-description'); p.image = getVal('ed-prod-image');
+  const alt = getVal('ed-prod-image-alt').trim(); if (alt) p.imageAlt = alt; else delete p.imageAlt;
   renderProductList(); markChanged(); saveDrafts(); applyPreview();
 }
 function renderProdGallery() {

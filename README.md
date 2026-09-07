@@ -14,9 +14,10 @@ Edit **`content/products.json`**. Each product should contain:
   "id": 36,
   "title": "Approved display name",
   "category": "Floral Jhalars",
-  "description": "Only describe visible design characteristics unless specifications are owner-backed.",
+  "description": "40 to 80 words. Describe visible arrangement, colour, finish and use; no unverified materials, sizes or origin.",
   "sourceImage": "assets/images/products/your-original.jpg",
   "image": "assets/images/products/catalogue/your-display.webp",
+  "imageAlt": "Optional. Approved name first, then what the photo shows. Falls back to the title.",
   "naming": {
     "registryVersion": "CURRENT_REGISTRY_VERSION",
     "reviewMethod": "human",

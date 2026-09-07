@@ -830,7 +830,7 @@ hr.divider{margin:12px 0;border:none;border-top:1px solid rgba(128,128,128,0.1)}
               <option value="Custom Designs">Custom Designs</option>
             </select>
           </div>
-          <div class="form-group"><label>Description</label><textarea id="ed-prod-description" rows="2"></textarea></div>
+          <div class="form-group"><label>Description</label><textarea id="ed-prod-description" rows="5"></textarea></div>
           <div class="form-group section-image-editor">
             <label>Main Image</label>
             <select id="ed-prod-image"></select>
@@ -839,6 +839,7 @@ hr.divider{margin:12px 0;border:none;border-top:1px solid rgba(128,128,128,0.1)}
               <button type="button" class="btn-sm primary" onclick="uploadImageFor('product')"><i class="fas fa-upload"></i> Upload new</button>
             </div>
           </div>
+          <div class="form-group"><label>Image alt text</label><input type="text" id="ed-prod-image-alt" placeholder="Describe what the photo shows (leave blank to use the product name)"></div>
           <div class="form-group section-image-editor" style="margin-top:4px">
             <label>Gallery Images</label>
             <span class="help" style="display:block;margin:-2px 0 6px">Shown in the product popup like a listing: first image swaps in on card hover, the rest appear as photos in the popup. (Video support comes next.)</span>

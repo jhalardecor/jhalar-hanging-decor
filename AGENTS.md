@@ -39,7 +39,8 @@
   no banned words, patterns, structures or punctuation habits. Approved product
   descriptions and official names are records, not copy — never silently rewrite them.
 - Products retain original uploads in `sourceImage` and use WebP display copies
-  in `image`. Update the image manifest and approval binding when reviewing a new
+  in `image`. `imageAlt` is optional descriptive alt text (approved name first);
+  the site and editor fall back to the title when it is empty. Update the image manifest and approval binding when reviewing a new
   product image; preserve originals unless explicitly asked otherwise.
 - Keep static HTML and editor/JS fallbacks in sync with current copy. Never restore
   obsolete sample products if loading fails; show the catalogue error instead.
