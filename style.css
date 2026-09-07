@@ -1935,3 +1935,15 @@ p,.section-head>p,.hero-banner-copy>p:not(.kicker){letter-spacing:.006em}
   .hero-banner-content,.section-inner{padding-inline:var(--page-gutter,20px)}
   .section-head{gap:22px}
 }
+
+
+/* ===== HOMEPAGE FLOW: DISCOVERY SECTION ===== */
+.collection .section-layout{display:grid;gap:0}
+.collection .section-head{margin-bottom:clamp(32px,4vw,56px)}
+.section-heading-group,.section-support-group{min-width:0}
+.section-support-group{display:flex;justify-content:flex-end;align-items:flex-end}
+.section-support-group p{margin:0}
+@media(max-width:700px){
+ .collection .section-head{display:grid;grid-template-columns:1fr;gap:16px;margin-bottom:28px}
+ .section-support-group{justify-content:flex-start}
+}
