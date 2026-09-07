@@ -29,6 +29,22 @@ function renderFilters(){
       btn.setAttribute('aria-pressed',String(selected));
     });
 
+    /* Move only the horizontal filter rail. Never move the page. */
+    const railViewport=el.parentElement;
+    if(railViewport && el.scrollWidth>el.clientWidth){
+      const buttonLeft=b.offsetLeft;
+      const buttonCenter=buttonLeft+(b.offsetWidth/2);
+      const visibleCenter=el.scrollLeft+(el.clientWidth/2);
+      const nextIndex=[...el.children].indexOf(b)+1;
+      const next=el.children[nextIndex];
+      const revealAhead=next?Math.min(next.offsetWidth*.45,56):0;
+      const target=Math.max(0,Math.min(
+        buttonCenter-(el.clientWidth*.38)+revealAhead,
+        el.scrollWidth-el.clientWidth
+      ));
+      el.scrollTo({left:target,top:0,behavior:'smooth'});
+    }
+
     const grid=$('#product-grid');
     if(grid){
       grid.classList.remove('filter-changing');
