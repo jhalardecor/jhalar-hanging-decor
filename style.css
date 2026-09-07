@@ -730,3 +730,67 @@ button,a{min-height:44px}.nav a{min-height:auto}
   .brand img { width: 110px; }
   .menu { flex-basis: 40px; width: 40px; height: 40px; min-height: 40px; }
 }
+
+/* Mobile interaction correction: lock the document behind an open product. */
+body.modal-locked {
+  position: fixed;
+  left: 0;
+  right: 0;
+  width: 100%;
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+#product-modal { overscroll-behavior: contain; }
+#product-modal .modal-card { overscroll-behavior: contain; }
+#product-modal .modal-stage { touch-action: none; }
+
+/* Draw the menu icon independently of font/icon loading. */
+@media (max-width: 1024px) {
+  .menu i { display: none; }
+  .menu::before,
+  .menu::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    width: 19px;
+    height: 2px;
+    background: #38272b;
+    transform: translateX(-50%);
+  }
+  .menu::before { top: 15px; }
+  .menu::after { bottom: 15px; }
+  .brand img {
+    width: 122px !important;
+    height: 26px !important;
+    max-width: none !important;
+    object-fit: contain;
+    object-position: left center;
+  }
+}
+@media (max-width: 700px) {
+  .brand img { width: 110px !important; height: 24px !important; }
+}
+
+@media (max-width: 700px) {
+  #product-modal.open {
+    align-items: end;
+    padding: 0 !important;
+  }
+  #product-modal .modal-card {
+    width: 100% !important;
+    max-width: 100% !important;
+    max-height: 100dvh !important;
+    border-radius: 16px 16px 0 0;
+    overflow-y: auto;
+    overscroll-behavior-y: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+  #product-modal .modal-media,
+  #product-modal .modal-stage {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+  }
+  #product-modal .modal-copy {
+    padding-bottom: calc(26px + env(safe-area-inset-bottom));
+  }
+}

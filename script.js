@@ -13,7 +13,7 @@ function mediaType(src,type){if(type)return type;return /\\.(mp4|webm|ogg|mov)(?
 function normaliseMedia(item){if(typeof item==='string')return{src:item,type:mediaType(item)};if(item&&typeof item==='object'){const src=item.src||item.url||item.image||item.video||item.source;return src?{src,type:mediaType(src,item.type||item.mediaType)}:null}return null}
 function mediaList(p){const raw=[p.image||p.sourceImage,...(Array.isArray(p.gallery)?p.gallery:[])];const seen=new Set;return raw.map(normaliseMedia).filter(m=>m&&m.src&&!seen.has(m.src)&&(seen.add(m.src),true))}
 function renderProducts(){const all=visibleProducts(),limit=state.expanded?all.length:Math.min(all.length,8);const grid=$('#product-grid');grid.innerHTML=all.slice(0,limit).map((p,i)=>{const m=mediaList(p),main=m[0]?.src||'',alt=m[1]?.src||'';return '<article class="product-card reveal" style="transition-delay:'+Math.min(i*45,320)+'ms"><button class="product-image" data-id="'+p.id+'" aria-label="View '+esc(p.title)+'"><img src="'+esc(main)+'" alt="'+esc(p.title)+'" loading="lazy">'+(alt?'<img class="alt-img" src="'+esc(alt)+'" alt="" aria-hidden="true" loading="lazy">':'')+'</button><div class="product-info"><span class="product-category">'+esc(p.category)+'</span><h3 class="product-title">'+esc(p.title)+'</h3><button class="product-details-btn" data-id="'+p.id+'">View details <span class="arr">→</span></button></div></article>'}).join('');grid.onclick=e=>{const b=e.target.closest('[data-id]');if(b)openProduct(Number(b.dataset.id))};const more=$('#collection-toggle');if(all.length>8&&state.filter==='all'){more.hidden=false;more.textContent=state.expanded?'Show fewer':'View all '+all.length+' designs'}else more.hidden=true;observeReveals()}
-let lastFocus=null;
+let lastFocus=null,modalScrollY=0;
 function setModalZoom(next){
   state.modalZoom=Math.max(1,Math.min(3,Number(next)||1));
   const stage=$('#modal-stage');
@@ -41,8 +41,8 @@ function setModalZoomOrigin(e){
   if(activeMedia)activeMedia.style.transformOrigin=x+'% '+y+'%';
 }
 function showModalMedia(i){const m=state.modalMedia||[];if(!m.length)return;const n=m.length;state.modalIndex=((i%n)+n)%n;state.modalZoom=1;const item=m[state.modalIndex],stage=$('#modal-stage'),photo=$('#modal-photo'),video=$('#modal-video');stage.classList.remove('is-video');if(item.type==='video'){photo.hidden=true;video.hidden=false;video.src=item.src;video.load();stage.classList.add('is-video')}else{video.pause();video.removeAttribute('src');video.load();video.hidden=true;photo.hidden=false;photo.src=item.src;photo.alt=$('#modal-title')?.textContent||'Product media'}setModalZoom(1);const thumbs=$('#modal-thumbs');if(n>1){thumbs.innerHTML=m.map((item,j)=>'<button class="modal-thumb'+(j===state.modalIndex?' active':'')+'" data-thumb="'+j+'" aria-label="'+(item.type==='video'?'Video':'Photo')+' '+(j+1)+' of '+n+'">'+(item.type==='video'?'<span class="modal-thumb-video">Video</span>':'<img src="'+esc(item.src)+'" alt="">')+'</button>').join('');$('.modal-nav.prev').hidden=false;$('.modal-nav.next').hidden=false}else{thumbs.innerHTML='';$('.modal-nav.prev').hidden=true;$('.modal-nav.next').hidden=true}}
-function openProduct(id){const p=state.products.find(x=>Number(x.id)===id);if(!p)return;const m=mediaList(p);state.modalMedia=m;state.modalIndex=0;const photo=$('#modal-photo');photo.alt=p.title;showModalMedia(0);$('#modal-category').textContent=p.category;$('#modal-title').textContent=p.title;$('#modal-desc').textContent=p.description||'';const wa=$('#modal-wa-btn');wa.href='https://wa.me/'+state.whatsapp+'?text='+encodeURIComponent('Hello JHALAR, I am interested in '+p.title+'.');wa.innerHTML='Enquire about this design <span aria-hidden="true">→</span>';const modal=$('#product-modal');lastFocus=document.activeElement;modal.classList.add('open');modal.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';$('#modal-close').focus()}
-function closeModal(){const m=$('#product-modal');if(!m.classList.contains('open'))return;m.classList.remove('open');m.setAttribute('aria-hidden','true');document.body.style.overflow='';if(lastFocus&&typeof lastFocus.focus==='function')lastFocus.focus();lastFocus=null}
+function openProduct(id){const p=state.products.find(x=>Number(x.id)===id);if(!p)return;const m=mediaList(p);state.modalMedia=m;state.modalIndex=0;const photo=$('#modal-photo');photo.alt=p.title;showModalMedia(0);$('#modal-category').textContent=p.category;$('#modal-title').textContent=p.title;$('#modal-desc').textContent=p.description||'';const wa=$('#modal-wa-btn');wa.href='https://wa.me/'+state.whatsapp+'?text='+encodeURIComponent('Hello JHALAR, I am interested in '+p.title+'.');wa.innerHTML='Enquire about this design <span aria-hidden="true">→</span>';const modal=$('#product-modal');lastFocus=document.activeElement;modal.classList.add('open');modal.setAttribute('aria-hidden','false');modalScrollY=window.scrollY;document.body.classList.add('modal-locked');document.body.style.top='-'+modalScrollY+'px';$('#modal-close').focus()}
+function closeModal(){const m=$('#product-modal');if(!m.classList.contains('open'))return;m.classList.remove('open');m.setAttribute('aria-hidden','true');document.body.classList.remove('modal-locked');document.body.style.top='';window.scrollTo(0,modalScrollY);if(lastFocus&&typeof lastFocus.focus==='function')lastFocus.focus();lastFocus=null}
 
 /* ---------- runtime defaults: equal to the shipped HTML/settings ---------- */
 const DEFAULTS={
@@ -226,6 +226,15 @@ const handleModalWheel=e=>{
 };
 [modalStage,modalMedia].filter(Boolean).forEach(el=>el.addEventListener('wheel',handleModalWheel,{passive:false}));
 if(modalStage){
+  let pinchDistance=0,pinchZoom=1;
+  const touchDistance=touches=>Math.hypot(touches[0].clientX-touches[1].clientX,touches[0].clientY-touches[1].clientY);
+  modalStage.addEventListener('touchstart',e=>{
+    if(e.touches.length===2){e.preventDefault();pinchDistance=touchDistance(e.touches);pinchZoom=state.modalZoom}
+  },{passive:false});
+  modalStage.addEventListener('touchmove',e=>{
+    if(e.touches.length===2&&pinchDistance){e.preventDefault();setModalZoom(pinchZoom*touchDistance(e.touches)/pinchDistance)}
+  },{passive:false});
+  modalStage.addEventListener('touchend',()=>{pinchDistance=0},{passive:true});
   modalStage.addEventListener('pointermove',setModalZoomOrigin);
   modalStage.addEventListener('dblclick',e=>{setModalZoomOrigin(e);setModalZoom(state.modalZoom>1?1:2)});
   modalStage.addEventListener('click',e=>{
