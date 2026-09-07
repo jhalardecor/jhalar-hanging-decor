@@ -1556,29 +1556,58 @@ function escapeHtml(str) { const d = document.createElement('div'); d.textConten
 function installProStudio(){
   const panel=document.getElementById('panel-theme');
   if(!panel||document.getElementById('pro-studio'))return;
+
   const box=document.createElement('div');
   box.className='pro-studio';box.id='pro-studio';
-  box.innerHTML='<div class="pro-studio-head"><h4>✦ Gradient Studio</h4><span class="help">Live preview</span></div><div id="studio-gradient-preview" class="gradient-preview"></div><div class="studio-row"><div><label>Color A</label><input id="studio-a" type="color" value="#FFFDF8"></div><div><label>Color B</label><input id="studio-b" type="color" value="#FDF4F1"></div></div><div class="studio-row"><div><label>Accent glow</label><input id="studio-c" type="color" value="#C82039"></div><div><label>Angle <strong id="studio-angle-value">135°</strong></label><input id="studio-angle" type="range" min="0" max="360" value="90"></div></div><div class="studio-actions"><button class="btn-sm primary" id="studio-contact">Apply to Contact</button><button class="btn-sm primary" id="studio-hero">Apply Hero Overlay</button><button class="btn-sm" id="studio-reset">Reset</button></div>';
+  box.innerHTML=`
+    <div class="pro-studio-head"><h4>✦ Hero Gradient Editor</h4><span class="help">Desktop + mobile</span></div>
+    <p class="help">Control the hero overlay separately for each device. Changes appear immediately in the live preview.</p>
+    <div id="studio-gradient-preview" class="gradient-preview"></div>
+    <div class="studio-row">
+      <div><label>Ivory color</label><input id="studio-a" type="color" value="#FFFAF1"></div>
+      <div><label>Angle <strong id="studio-angle-value">0°</strong></label><input id="studio-angle" type="range" min="0" max="360" value="0"></div>
+    </div>
+    <div class="studio-row">
+      <div><label>Desktop solid zone <strong id="studio-desktop-value">28%</strong></label><input id="studio-desktop" type="range" min="0" max="70" value="28"></div>
+      <div><label>Desktop fade end <strong id="studio-desktop-end-value">100%</strong></label><input id="studio-desktop-end" type="range" min="45" max="100" value="100"></div>
+    </div>
+    <div class="studio-row">
+      <div><label>Mobile solid zone <strong id="studio-mobile-value">34%</strong></label><input id="studio-mobile" type="range" min="0" max="80" value="34"></div>
+      <div><label>Mobile fade end <strong id="studio-mobile-end-value">100%</strong></label><input id="studio-mobile-end" type="range" min="45" max="100" value="100"></div>
+    </div>
+    <div class="studio-actions"><button class="btn-sm primary" id="studio-hero">Apply & Save Hero Gradient</button><button class="btn-sm" id="studio-reset">Reset Hero</button></div>`;
   panel.appendChild(box);
+
   const q=id=>document.getElementById(id);
+  const removeHeroCSS=()=>{state.customCSS=(state.customCSS||'').replace(/\/\* PRO_STUDIO_HERO_START \*\/[\s\S]*?\/\* PRO_STUDIO_HERO_END \*\//,'');};
+  const buildHeroCSS=()=>{
+    const a=q('studio-a').value,ang=q('studio-angle').value;
+    const ds=+q('studio-desktop').value,de=+q('studio-desktop-end').value;
+    const ms=+q('studio-mobile').value,me=+q('studio-mobile-end').value;
+    // 0deg = bottom to top. The solid zone and fade endpoint are independently editable.
+    const dMid=Math.min(de-1,Math.max(ds+1,Math.round((ds+de)/2)));
+    const mMid=Math.min(me-1,Math.max(ms+1,Math.round((ms+me)/2)));
+    return `/* PRO_STUDIO_HERO_START */
+.hero.hero-banner .hero-banner-shade{display:block!important;position:absolute!important;inset:0!important;pointer-events:none!important;background:linear-gradient(${ang}deg,${a} 0%,${a} ${ds}%,rgba(255,250,241,.52) ${dMid}%,rgba(255,250,241,0) ${de}%)!important}
+@media(max-width:760px){.hero.hero-banner .hero-banner-shade{background:linear-gradient(${ang}deg,${a} 0%,${a} ${ms}%,rgba(255,250,241,.58) ${mMid}%,rgba(255,250,241,0) ${me}%)!important}}
+/* PRO_STUDIO_HERO_END */`;
+  };
   const paint=()=>{
-    const a=q('studio-a').value,b=q('studio-b').value,c=q('studio-c').value,ang=q('studio-angle').value;
-    q('studio-angle-value').textContent=ang+'°';q('studio-gradient-preview').style.background='radial-gradient(100% 130% at 100% 0%,'+c+'24 0%,transparent 58%),linear-gradient('+ang+'deg,'+a+','+b+')';
+    const a=q('studio-a').value,ang=q('studio-angle').value,ds=q('studio-desktop').value,de=q('studio-desktop-end').value,ms=q('studio-mobile').value,me=q('studio-mobile-end').value;
+    q('studio-angle-value').textContent=ang+'°';
+    q('studio-desktop-value').textContent=ds+'%';q('studio-desktop-end-value').textContent=de+'%';
+    q('studio-mobile-value').textContent=ms+'%';q('studio-mobile-end-value').textContent=me+'%';
+    q('studio-gradient-preview').style.background=`linear-gradient(${ang}deg,${a} 0%,${a} ${ds}%,rgba(255,250,241,.52) ${Math.round((+ds+++de)/2)}%,rgba(255,250,241,0) ${de}%)`;
+    removeHeroCSS();state.customCSS=(state.customCSS||'')+'\n'+buildHeroCSS();
+    state.changed=true;updateSaveIndicator();applyPreview();
   };
-  ['studio-a','studio-b','studio-c','studio-angle'].forEach(id=>q(id).addEventListener('input',paint));paint();
-  q('studio-contact').onclick=()=>{
-    const a=q('studio-a').value,b=q('studio-b').value,c=q('studio-c').value,ang=q('studio-angle').value;
-    const css='.shell.contact-box{background:radial-gradient(100% 130% at 100% 0%,'+c+'24 0%,transparent 58%),linear-gradient('+ang+'deg,'+a+' 0%,'+b+' 100%)!important}';
-    state.customCSS=(state.customCSS||'').replace(/\/\* PRO_STUDIO_CONTACT_START \*\/[\s\S]*?\/\* PRO_STUDIO_CONTACT_END \*\//,'')+'\\n/* PRO_STUDIO_CONTACT_START */\\n'+css+'\\n/* PRO_STUDIO_CONTACT_END */';
-    state.changed=true;updateSaveIndicator();applyPreview();showToast('Contact gradient applied live','success');
+  ['studio-a','studio-angle','studio-desktop','studio-desktop-end','studio-mobile','studio-mobile-end'].forEach(id=>q(id).addEventListener('input',paint));
+  q('studio-hero').onclick=()=>{paint();showToast('Hero gradient applied — save changes to publish','success');};
+  q('studio-reset').onclick=()=>{
+    q('studio-a').value='#FFFAF1';q('studio-angle').value=0;q('studio-desktop').value=28;q('studio-desktop-end').value=100;q('studio-mobile').value=34;q('studio-mobile-end').value=100;
+    paint();showToast('Hero gradient reset','success');
   };
-  q('studio-hero').onclick=()=>{
-    const a=q('studio-a').value,b=q('studio-b').value,c=q('studio-c').value,ang=q('studio-angle').value;
-    const css='.hero-banner-shade{display:block!important;position:absolute!important;inset:0!important;pointer-events:none!important;background:linear-gradient('+ang+'deg,'+a+' 0%,'+b+'00 72%,transparent 100%)!important}.hero-banner-content{position:relative!important;z-index:2!important}';
-    state.customCSS=(state.customCSS||'').replace(/\/\* PRO_STUDIO_HERO_START \*\/[\s\S]*?\/\* PRO_STUDIO_HERO_END \*\//,'')+'\\n/* PRO_STUDIO_HERO_START */\\n'+css+'\\n/* PRO_STUDIO_HERO_END */';
-    state.changed=true;updateSaveIndicator();applyPreview();showToast('Hero overlay applied live','success');
-  };
-  q('studio-reset').onclick=()=>{q('studio-a').value='#FFFAF1';q('studio-b').value='#FFFAF1';q('studio-c').value='#C82039';q('studio-angle').value=0;paint();};
+  paint();
 }
 document.addEventListener('DOMContentLoaded',()=>setTimeout(installProStudio,900));
 
