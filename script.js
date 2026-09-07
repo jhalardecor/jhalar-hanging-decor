@@ -291,3 +291,58 @@ initProducts();initRuntime();
     lastTap=now;
   },{passive:false});
 })();
+
+
+/* Real mobile pinch-to-zoom for product images. No double-tap zoom. */
+(function(){
+  const modal=document.getElementById('product-modal');
+  const stage=document.getElementById('modal-stage');
+  const image=document.getElementById('modal-photo');
+  if(!modal||!stage||!image)return;
+  let pointers=new Map(),startDistance=0,startZoom=1,dragging=false;
+
+  const distance=()=>{
+    const p=[...pointers.values()];
+    return p.length===2?Math.hypot(p[0].x-p[1].x,p[0].y-p[1].y):0;
+  };
+  const update=()=>{
+    image.style.transform='scale('+state.modalZoom+')';
+    stage.classList.toggle('is-zoomed',state.modalZoom>1);
+  };
+
+  stage.addEventListener('pointerdown',e=>{
+    if(matchMedia('(min-width:761px)').matches)return;
+    if(stage.classList.contains('is-video'))return;
+    pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});
+    stage.setPointerCapture?.(e.pointerId);
+    if(pointers.size===2){startDistance=distance();startZoom=state.modalZoom;dragging=true;}
+  });
+  stage.addEventListener('pointermove',e=>{
+    if(matchMedia('(min-width:761px)').matches||!pointers.has(e.pointerId))return;
+    pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});
+    if(pointers.size===2&&startDistance){
+      e.preventDefault();
+      state.modalZoom=Math.max(1,Math.min(3,startZoom*(distance()/startDistance)));
+      update();
+    }
+  },{passive:false});
+  const end=e=>{
+    pointers.delete(e.pointerId);
+    if(pointers.size<2){startDistance=0;dragging=false;}
+  };
+  stage.addEventListener('pointerup',end);
+  stage.addEventListener('pointercancel',end);
+
+  stage.addEventListener('dblclick',e=>{
+    if(matchMedia('(max-width:760px)').matches)e.preventDefault();
+  });
+
+  /* Suppress browser double-tap gesture without affecting normal pinch. */
+  let lastTap=0;
+  stage.addEventListener('pointerup',e=>{
+    if(matchMedia('(min-width:761px)').matches||dragging)return;
+    const now=Date.now();
+    if(now-lastTap<350)e.preventDefault();
+    lastTap=now;
+  });
+})();
