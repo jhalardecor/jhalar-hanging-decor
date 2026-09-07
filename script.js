@@ -69,9 +69,10 @@ function visibleProducts(){return state.filter==='all'?state.products:state.prod
 function mediaType(src,type){if(type)return type;return /\\.(mp4|webm|ogg|mov)(?:[?#]|$)/i.test(String(src))?'video':'image'}
 function normaliseMedia(item){if(typeof item==='string')return{src:item,type:mediaType(item)};if(item&&typeof item==='object'){const src=item.src||item.url||item.image||item.video||item.source;return src?{src,type:mediaType(src,item.type||item.mediaType)}:null}return null}
 // Descriptive alt text is optional owner-editable content; fall back to the product name.
+function displayTitle(p){return String(p?.title||'').replace(/,\s*/g, ',\u00A0')}
 function productAlt(p){const a=typeof p.imageAlt==='string'?p.imageAlt.trim():'';return a||p.title||''}
 function mediaList(p){const raw=[p.image||p.sourceImage,...(Array.isArray(p.gallery)?p.gallery:[])];const seen=new Set;return raw.map(normaliseMedia).filter(m=>m&&m.src&&!seen.has(m.src)&&(seen.add(m.src),true))}
-function renderProducts(){const all=visibleProducts(),limit=all.length;const grid=$('#product-grid');grid.innerHTML=all.slice(0,limit).map((p,i)=>{const m=mediaList(p),main=m[0]?.src||'',alt=m[1]?.src||'';return '<article class="product-card reveal" style="transition-delay:'+Math.min(i*45,320)+'ms"><button class="product-image" type="button" data-id="'+p.id+'" aria-label="View '+esc(p.title)+'"><img src="'+esc(main)+'" alt="'+esc(productAlt(p))+'" loading="lazy">'+(alt?'<img class="alt-img" src="'+esc(alt)+'" alt="" aria-hidden="true" loading="lazy">':'')+'</button><div class="product-info"><span class="product-category">'+esc(p.category)+'</span><h3 class="product-title">'+esc(p.title)+'</h3><button class="product-details-btn" type="button" data-id="'+p.id+'">View details <span class="arr">→</span></button></div></article>'}).join('');let touchMoved=false,multiTouch=false,startX=0,startY=0;
+function renderProducts(){const all=visibleProducts(),limit=all.length;const grid=$('#product-grid');grid.innerHTML=all.slice(0,limit).map((p,i)=>{const m=mediaList(p),main=m[0]?.src||'',alt=m[1]?.src||'';return '<article class="product-card reveal" style="transition-delay:'+Math.min(i*45,320)+'ms"><button class="product-image" type="button" data-id="'+p.id+'" aria-label="View '+esc(displayTitle(p))+'"><img src="'+esc(main)+'" alt="'+esc(productAlt(p))+'" loading="lazy">'+(alt?'<img class="alt-img" src="'+esc(alt)+'" alt="" aria-hidden="true" loading="lazy">':'')+'</button><div class="product-info"><span class="product-category">'+esc(p.category)+'</span><h3 class="product-title">'+esc(displayTitle(p))+'</h3><button class="product-details-btn" type="button" data-id="'+p.id+'">View details <span class="arr">→</span></button></div></article>'}).join('');let touchMoved=false,multiTouch=false,startX=0,startY=0;
 grid.addEventListener('touchstart',e=>{multiTouch=e.touches.length>1;touchMoved=false;if(e.touches[0]){startX=e.touches[0].clientX;startY=e.touches[0].clientY}},{passive:true});
 grid.addEventListener('touchmove',e=>{if(e.touches.length>1)multiTouch=true;if(e.touches[0]&&(Math.abs(e.touches[0].clientX-startX)>10||Math.abs(e.touches[0].clientY-startY)>10))touchMoved=true},{passive:true});
 grid.addEventListener('touchend',()=>{setTimeout(()=>{multiTouch=false;touchMoved=false},350)},{passive:true});
@@ -95,7 +96,7 @@ function showModalMedia(i){
 function openProduct(id){
  const p=state.products.find(x=>Number(x.id)===id);if(!p)return;
  state.modalProduct=p;state.modalMedia=mediaList(p);state.modalIndex=0;
- $('#modal-category').textContent=p.category;$('#modal-title').textContent=p.title;$('#modal-desc').textContent=p.description||'';
+ $('#modal-category').textContent=p.category;$('#modal-title').textContent=displayTitle(p);$('#modal-desc').textContent=p.description||'';
  const wa=$('#modal-wa-btn');wa.href='https://wa.me/'+state.whatsapp+'?text='+encodeURIComponent('Hello JHALAR, I am interested in '+p.title+'.');
  showModalMedia(0);
  const modal=$('#product-modal');lastFocus=document.activeElement;modal.classList.add('open');modal.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';$('#modal-close').focus();
