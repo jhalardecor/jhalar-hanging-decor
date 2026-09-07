@@ -800,3 +800,14 @@ h1,h2,h3,h4,h5,h6{font-family:var(--font-heading);color:var(--navy);font-synthes
 @media(prefers-reduced-motion:reduce){
  .modal-close,.modal-close:hover{transition:none;transform:none}
 }
+
+
+/* Mobile filters — intentional swipe discovery, no visible scrollbar */
+@media(max-width:760px){
+ .filters-wrap{position:relative;margin-inline:calc(var(--mobile-x) * -1)}
+ .filters-wrap::after{content:"";position:absolute;right:0;top:0;bottom:8px;width:42px;pointer-events:none;background:linear-gradient(to right,rgba(255,250,241,0),var(--paper) 88%)}
+ .filters{scrollbar-width:none;-ms-overflow-style:none;padding-right:46px!important;gap:8px}
+ .filters::-webkit-scrollbar{display:none;width:0;height:0}
+ .filter-btn{min-height:40px;padding:9px 14px;font-size:.82rem;border-radius:999px}
+ .filter-btn.active{box-shadow:none}
+}
