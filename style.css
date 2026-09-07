@@ -40,7 +40,7 @@ h1,h2,h3,h4,h5,h6,.hero-banner-copy h1,.section-heading-group h2,.custom-copy h2
 .header.header-hidden{transform:translateY(-100%)}
 .header-row{height:84px;display:flex;align-items:center;justify-content:space-between;gap:24px}
 .brand{display:block;width:158px;flex:0 0 auto}.brand img{width:100%;height:auto}
-.nav{display:flex;align-items:center;gap:28px;font-size:.9rem}.nav a{position:relative}.nav a::after{content:"";position:absolute;left:0;bottom:-5px;width:100%;height:1px;background:currentColor;transform:scaleX(0);transform-origin:right;transition:transform .25s var(--ease)}.nav a:hover::after{transform:scaleX(1);transform-origin:left}
+.nav{display:flex;align-items:center;gap:28px;font-size:.9rem}.nav a{position:relative}.nav a::after{display:none}.nav a:hover{color:var(--red)!important;opacity:.82}
 .menu{display:none;border:0;background:transparent;width:44px;height:44px;padding:10px}.menu i{display:block;height:1.5px;background:var(--ink);margin:6px 0}
 .mobile-nav{display:none}
 
@@ -1026,7 +1026,7 @@ img,video,svg{max-width:100%}
 }
 .nav{gap:34px!important}
 .nav a{color:#141942!important;padding:14px 0!important}
-.nav a::after{background:#C82039!important;bottom:7px!important}
+.nav a::after{display:none!important}
 
 /* Mobile navigation gets the same deliberate type hierarchy, not desktop-sized text. */
 @media(max-width:760px){
@@ -2237,3 +2237,14 @@ button:not(.filter-btn),
     border-radius:50%;
   }
 }
+
+
+/* JHALAR refinement: remove decorative arrows and underline effects. */
+.text-link span,
+.hero-banner-cta span,
+.contact-cta-arrow,
+.modal-wa-btn span{display:none!important}
+.text-link,.hero-banner-cta,.contact-cta,.modal-wa-btn{gap:0!important}
+.nav a::after{display:none!important}
+.nav a{transition:color .18s var(--ease),opacity .18s var(--ease)!important}
+.nav a:hover,.nav a:focus-visible{color:#C82039!important;opacity:1!important}
