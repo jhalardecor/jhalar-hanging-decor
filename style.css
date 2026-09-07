@@ -2618,3 +2618,10 @@ button:not(.filter-btn),
 .header{transform:translate3d(0,0,0)!important;backface-visibility:hidden!important}
 .header.header-hidden{transform:translate3d(0,-105%,0)!important;pointer-events:none!important}
 .header:not(.header-hidden){pointer-events:auto!important}
+
+
+/* MOBILE HEADER GUARANTEE */
+@media(max-width:760px){
+  .header{position:sticky!important;top:0!important;z-index:2147483000!important;transform:translate3d(0,0,0)!important;visibility:visible!important;opacity:1!important}
+  .header.header-hidden{transform:translate3d(0,-105%,0)!important}
+}
