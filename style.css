@@ -3044,3 +3044,26 @@ body{padding-top:var(--header-h)!important}
     )!important;
   }
 }
+
+
+/* HERO DESKTOP ALIGNMENT — lock copy to the same left editorial grid */
+@media(min-width:761px){
+  .hero.hero-banner .hero-banner-content{
+    justify-content:flex-start!important;
+    text-align:left!important;
+  }
+  .hero.hero-banner .hero-banner-copy{
+    margin-left:0!important;
+    margin-right:auto!important;
+    text-align:left!important;
+    align-self:flex-start!important;
+  }
+  .hero.hero-banner .hero-banner-copy .kicker,
+  .hero.hero-banner .hero-banner-copy h1,
+  .hero.hero-banner .hero-banner-copy .hero-lead,
+  .hero.hero-banner .hero-banner-copy .hero-banner-actions{
+    text-align:left!important;
+    justify-content:flex-start!important;
+    align-items:flex-start!important;
+  }
+}
