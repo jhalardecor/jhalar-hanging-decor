@@ -2607,3 +2607,8 @@ button:not(.filter-btn),
 .product-image::after{content:none!important;display:none!important}
 .product-card:hover .product-image::after{opacity:0!important;transform:none!important}
 /* Keep interaction hierarchy intentional: image/title stay clean; explicit details action remains the only cue. */
+
+
+/* PRODUCT IMAGE ZOOM INPUTS */
+#product-modal .modal-stage{touch-action:none!important}
+@media(pointer:fine){#product-modal .modal-stage{cursor:zoom-in}#product-modal .modal-stage.is-zoomed{cursor:grab}}
