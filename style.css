@@ -867,3 +867,28 @@ h1,h2,h3,h4,h5,h6,
  font-family:var(--font-heading)!important;
  font-synthesis:none;
 }
+
+
+/* COLOR SYSTEM RESET — strict six-color brand palette */
+:root{
+ --paper:#FFFAF1;
+ --surface:#FFFDF8;
+ --red:#C82039;
+ --red-deep:#A71931;
+ --navy:#141942;
+ --heritage:#622331;
+ --ink:var(--navy);
+ --ink-soft:var(--heritage);
+ --line:rgba(98,35,49,.14);
+ --wash:var(--surface);
+ --shadow:0 20px 55px rgba(98,35,49,.10);
+}
+body,.site-main{background:var(--paper);color:var(--navy)}
+.section:nth-of-type(even){background:var(--surface)}
+h1,h2,h3,h4,h5,h6{color:var(--heritage)}
+.eyebrow,.kicker,.product-category{color:var(--red)}
+p{color:var(--heritage)}
+.header,.mobile-nav,.modal-stage,.modal-copy{background:var(--surface)}
+.filter-btn{background:transparent;color:var(--heritage);border-color:rgba(98,35,49,.18)}
+.filter-btn.active,.filter-btn:hover{background:var(--heritage);color:var(--paper);border-color:var(--heritage)}
+.product-card,.contact-box{border-color:rgba(98,35,49,.14)}
