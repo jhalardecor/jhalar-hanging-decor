@@ -62,48 +62,41 @@
 </head>
 <body>
     <!-- HEADER -->
-    <header class="site-header site-header-art" id="header">
-        <div class="header-shell">
-            <a href="#hero" class="logo logo-art" aria-label="JHALAR Hanging Decor - home">
-                <img class="brand-mark" src="assets/logo-jhalar-02.svg" alt="JHALAR Hanging Decor" width="154" height="46" fetchpriority="high">
+    <header class="site-header clean-header" id="header">
+        <div class="clean-header-inner">
+            <a href="#hero" class="clean-logo" aria-label="JHALAR home">
+                <img src="assets/logo-jhalar-02.svg" alt="JHALAR Hanging Decor" width="154" height="46" fetchpriority="high">
             </a>
-            <nav class="desktop-nav desktop-nav-art" aria-label="Main navigation">
+            <nav class="clean-nav" aria-label="Main navigation">
                 <a href="#collection">Collection</a>
-                <a href="#custom-orders">Custom</a>
-                <a href="#about">Story</a>
+                <a href="#custom-orders">Custom Orders</a>
+                <a href="#about">About</a>
             </nav>
-            <button class="mobile-toggle mobile-toggle-art" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mobile-nav">
-                <span></span><span></span>
+            <button class="clean-menu mobile-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
+                <svg class="icon open-icon" aria-hidden="true" width="20" height="20"><use href="assets/icons.svg#icon-menu"/></svg>
+                <svg class="icon close-icon" aria-hidden="true" width="20" height="20"><use href="assets/icons.svg#icon-close"/></svg>
             </button>
         </div>
-        <nav class="mobile-nav mobile-nav-art" id="mobile-nav" aria-label="Mobile navigation">
+        <nav class="mobile-nav clean-mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
             <a href="#collection" class="mobile-link">Collection</a>
-            <a href="#custom-orders" class="mobile-link">Custom</a>
-            <a href="#about" class="mobile-link">Our Story</a>
+            <a href="#custom-orders" class="mobile-link">Custom Orders</a>
+            <a href="#about" class="mobile-link">About</a>
             <a href="#faq" class="mobile-link">FAQ</a>
             <a href="#contact" class="mobile-link">Contact</a>
         </nav>
     </header>
     <main>
         <!-- HERO -->
-        <section id="hero" class="hero hero-art" data-section="hero">
-            <div class="hero-art-grid" aria-hidden="true"></div>
-            <div class="hero-art-orb hero-art-orb-a" aria-hidden="true"></div>
-            <div class="hero-art-orb hero-art-orb-b" aria-hidden="true"></div>
-            <div class="hero-art-shell">
-                <div class="hero-art-copy">
-                    <p class="hero-art-index">01 / JHALAR</p>
-                    <h1>Decoration<br>with a<br><em>presence.</em></h1>
-                    <p class="hero-art-lead">Handcrafted hanging decor that changes the scale, rhythm and feeling of a celebration.</p>
-                    <a href="#collection" class="hero-art-cta">Explore collection <span>↗</span></a>
-                    <p class="hero-art-meta">HOWRAH, INDIA <i></i> HANDCRAFTED FOR CELEBRATIONS</p>
+        <section id="hero" class="hero clean-hero" data-section="hero">
+            <div class="clean-hero-shell">
+                <div class="clean-hero-copy">
+                    <p class="clean-kicker">Handcrafted hanging decor</p>
+                    <h1>Bring the celebration to life.</h1>
+                    <p>Discover floral jhalars and hanging decor made to add colour, texture and atmosphere to weddings, events and festive spaces.</p>
+                    <a href="#collection" class="clean-hero-cta">Explore Collection <span aria-hidden="true">→</span></a>
                 </div>
-                <div class="hero-art-visual">
-                    <div class="hero-art-image-shape">
-                        <img src="assets/images/hero-jhalar.jpg" alt="Handcrafted JHALAR hanging decor" width="1080" height="1080" fetchpriority="high" decoding="async">
-                    </div>
-                    <div class="hero-art-caption"><span>Featured</span><strong>Floral hanging</strong></div>
-                    <div class="hero-art-number" aria-hidden="true">J</div>
+                <div class="clean-hero-image">
+                    <img src="assets/images/hero-jhalar.jpg" alt="Handcrafted floral hanging decor by JHALAR" width="1080" height="1080" fetchpriority="high" decoding="async">
                 </div>
             </div>
         </section>
