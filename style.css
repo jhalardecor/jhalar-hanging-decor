@@ -735,3 +735,8 @@ h1,h2,h3,h4,h5,h6{font-family:var(--font-heading);color:var(--navy);font-synthes
  .contact-box p:not(.eyebrow){font-size:.98rem}
  .contact-cta{width:100%;min-width:0;min-height:56px}
 }
+
+
+/* Catalogue filter feedback */
+#product-grid.catalogue-pulse{animation:catalogueFocus .55s var(--ease-premium, ease) both}
+@keyframes catalogueFocus{0%{opacity:.72;transform:translateY(8px)}100%{opacity:1;transform:none}}
