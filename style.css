@@ -887,8 +887,7 @@ img,video,svg{max-width:100%}
  .header .menu span{width:24px!important;height:2px!important;margin:4px auto!important;transform-origin:center!important}
  .header .menu span:nth-child(1){transform:translateY(0) rotate(0)!important}
  .header .menu span:nth-child(2){transform:translateY(0) rotate(0)!important;width:16px!important;margin-left:auto!important;margin-right:0!important}
- .header .menu:hover span:nth-child(2){width:24px!important}
- .header .menu.open span:nth-child(1){transform:translateY(5px) rotate(45deg)!important}
+  .header .menu.open span:nth-child(1){transform:translateY(5px) rotate(45deg)!important}
  .header .menu.open span:nth-child(2){width:24px!important;transform:translateY(-5px) rotate(-45deg)!important}
  .header .menu span{transition:transform .32s cubic-bezier(.22,1,.36,1),width .28s cubic-bezier(.22,1,.36,1),opacity .2s ease!important}
  .header .menu:active{transform:scale(.92)!important}
