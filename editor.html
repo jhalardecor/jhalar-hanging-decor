@@ -274,7 +274,15 @@ hr.divider{margin:12px 0;border:none;border-top:1px solid rgba(128,128,128,0.1)}
 .ins-segmented button.active{background:var(--gold);color:#fff}
 
 </style>
-</head>
+
+<style>
+/* Pro Studio usability upgrade */
+@media(max-width:980px){
+ html,body{overflow:auto;height:auto}.editor-header{position:sticky}.editor-body{height:auto;min-height:100vh;flex-direction:column}.editor-sidebar{width:100%;min-width:0;height:auto;max-height:48vh;border-right:0;border-bottom:1px solid rgba(128,128,128,.15)}.sidebar-tabs{position:sticky;top:52px;z-index:20}.sidebar-tab{min-width:72px;flex:0 0 auto}.editor-preview{min-height:72vh}.preview-toolbar{position:sticky;top:52px;z-index:15}.zoom-stage{padding:14px;align-items:flex-start}.inspector-panel{width:min(360px,92vw)!important}}
+@media(max-width:560px){.editor-header{padding:0 8px}.logo-text span,.save-indicator{display:none}.editor-header-right .btn:not(.btn-primary){display:none}.editor-header-right .btn-primary{padding:7px 10px}.sidebar-content{padding:10px}.form-row,.form-row-3{grid-template-columns:1fr}.preview-toolbar{overflow-x:auto}.vp-btn{flex:0 0 auto}.editor-preview{min-height:680px}.zoom-stage{justify-content:flex-start}.preview-frame.mobile{transform-origin:top left!important}}
+.pro-studio{position:sticky;bottom:0;background:var(--bg);border-top:1px solid rgba(128,128,128,.14);padding:10px;margin:12px -14px -12px;box-shadow:0 -8px 28px rgba(0,0,0,.06)}
+.pro-studio-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}.pro-studio h4{margin:0;font-size:13px}.gradient-preview{height:56px;border-radius:10px;border:1px solid rgba(98,35,49,.16);margin:8px 0}.studio-row{display:grid;grid-template-columns:1fr 1fr;gap:8px}.studio-row label{font-size:11px;font-weight:700;color:var(--text2)}.studio-row input,.studio-row select{width:100%;margin-top:4px}.studio-actions{display:flex;gap:6px;margin-top:8px}
+</style></head>
 <body>
 <header class="editor-header">
   <div class="editor-header-left">
