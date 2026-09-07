@@ -668,3 +668,24 @@ h1,h2,h3,h4,h5,h6{font-family:var(--font-heading);color:var(--navy);font-synthes
  }
  .audience-items span:last-child{grid-column:auto}
 }
+
+
+/* Mobile hero — intentional 4:5 campaign ratio */
+@media(max-width:760px){
+ .hero-banner{
+   width:100%;
+   min-height:0;
+   height:auto;
+   aspect-ratio:4/5;
+   max-height:none;
+ }
+ .hero-banner-media img{
+   width:100%;
+   height:100%;
+   object-fit:cover;
+   object-position:center center;
+ }
+ .hero-banner-content{
+   padding:clamp(24px,7vw,38px) 0;
+ }
+}
