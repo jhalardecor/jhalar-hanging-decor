@@ -892,3 +892,17 @@ p{color:var(--heritage)}
 .filter-btn{background:transparent;color:var(--heritage);border-color:rgba(98,35,49,.18)}
 .filter-btn.active,.filter-btn:hover{background:var(--heritage);color:var(--paper);border-color:var(--heritage)}
 .product-card,.contact-box{border-color:rgba(98,35,49,.14)}
+
+
+/* SEMANTIC TYPE + COLOR HIERARCHY — one role for every text element */
+h1,h2,h3,h4{color:var(--heritage)!important}
+h5,h6{color:var(--navy)!important}
+body{color:var(--navy)!important}
+p,li{color:var(--heritage)!important}
+.product-title,.modal-copy h3{color:var(--heritage)!important}
+.caption,.product-category,.eyebrow,.kicker{
+ color:var(--red)!important;
+}
+button,.filter-btn,.product-details-btn,.nav a{color:var(--navy)}
+.filter-btn.active{color:var(--paper)!important}
+.hero-banner-copy h1{color:var(--heritage)!important}
