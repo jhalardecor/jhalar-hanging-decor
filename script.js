@@ -17,14 +17,17 @@ let lastFocus=null;
 function setModalZoom(next){
   state.modalZoom=Math.max(1,Math.min(3,Number(next)||1));
   const stage=$('#modal-stage');
-  const media=stage?.querySelector('#modal-photo:not([hidden]),#modal-video:not([hidden])');
-  if(!stage||!media)return;
+  const image=$('#modal-photo');
+  const video=$('#modal-video');
+  if(!stage)return;
+  const activeMedia=video&&!video.hidden?video:image;
+  if(!activeMedia)return;
   stage.classList.toggle('is-zoomed',state.modalZoom>1);
-  media.style.transform='scale('+state.modalZoom+')';
-  const out=$('#modal-zoom-out'),reset=$('#modal-zoom-reset'),label=$('#modal-zoom-level');
+  activeMedia.style.transform='scale('+state.modalZoom+')';
+  const out=$('#modal-zoom-out');
+  const reset=$('#modal-zoom-reset');
   if(out)out.disabled=state.modalZoom<=1;
   if(reset)reset.hidden=state.modalZoom<=1;
-  if(label)label.textContent=Math.round(state.modalZoom*100)+'%';
 }
 function showModalMedia(i){const m=state.modalMedia||[];if(!m.length)return;const n=m.length;state.modalIndex=((i%n)+n)%n;state.modalZoom=1;const item=m[state.modalIndex],stage=$('#modal-stage'),photo=$('#modal-photo'),video=$('#modal-video');stage.classList.remove('is-video');if(item.type==='video'){photo.hidden=true;video.hidden=false;video.src=item.src;video.load();stage.classList.add('is-video')}else{video.pause();video.removeAttribute('src');video.load();video.hidden=true;photo.hidden=false;photo.src=item.src;photo.alt=$('#modal-title')?.textContent||'Product media'}setModalZoom(1);const thumbs=$('#modal-thumbs');if(n>1){thumbs.innerHTML=m.map((item,j)=>'<button class="modal-thumb'+(j===state.modalIndex?' active':'')+'" data-thumb="'+j+'" aria-label="'+(item.type==='video'?'Video':'Photo')+' '+(j+1)+' of '+n+'">'+(item.type==='video'?'<span class="modal-thumb-video">Video</span>':'<img src="'+esc(item.src)+'" alt="">')+'</button>').join('');$('.modal-nav.prev').hidden=false;$('.modal-nav.next').hidden=false}else{thumbs.innerHTML='';$('.modal-nav.prev').hidden=true;$('.modal-nav.next').hidden=true}}
 function openProduct(id){const p=state.products.find(x=>Number(x.id)===id);if(!p)return;const m=mediaList(p);state.modalMedia=m;state.modalIndex=0;const photo=$('#modal-photo');photo.alt=p.title;showModalMedia(0);$('#modal-category').textContent=p.category;$('#modal-title').textContent=p.title;$('#modal-desc').textContent=p.description||'';const wa=$('#modal-wa-btn');wa.href='https://wa.me/'+state.whatsapp+'?text='+encodeURIComponent('Hello JHALAR, I am interested in '+p.title+'.');wa.innerHTML='Enquire about this design <span aria-hidden="true">→</span>';const modal=$('#product-modal');lastFocus=document.activeElement;modal.classList.add('open');modal.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';$('#modal-close').focus()}
@@ -202,13 +205,17 @@ document.addEventListener('click',e=>{if(e.target.closest('[data-close]'))closeM
 document.querySelectorAll('.modal-nav').forEach(b=>b.addEventListener('click',()=>showModalMedia(state.modalIndex+Number(b.dataset.nav))));
 document.querySelectorAll('[data-zoom]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();setModalZoom(b.dataset.zoom==='reset'?1:state.modalZoom+Number(b.dataset.zoom))}));
 const modalStage=$('#modal-stage');
+const modalMedia=$('#product-modal .modal-media');
+const handleModalWheel=e=>{
+  if(!$('#product-modal')?.classList.contains('open'))return;
+  if(Math.abs(e.deltaY)<1)return;
+  e.preventDefault();
+  e.stopPropagation();
+  setModalZoom(state.modalZoom+(e.deltaY<0?.2:-.2));
+};
+[modalStage,modalMedia].filter(Boolean).forEach(el=>el.addEventListener('wheel',handleModalWheel,{passive:false}));
 if(modalStage){
   modalStage.addEventListener('dblclick',()=>setModalZoom(state.modalZoom>1?1:2));
-  modalStage.addEventListener('wheel',e=>{
-    if(!$('#product-modal')?.classList.contains('open'))return;
-    e.preventDefault();
-    setModalZoom(state.modalZoom+(e.deltaY<0?.2:-.2));
-  },{passive:false});
 }
 $('#modal-thumbs').addEventListener('click',e=>{const b=e.target.closest('[data-thumb]');if(b)showModalMedia(Number(b.dataset.thumb))});
 window.addEventListener('scroll',()=>{$('.header').classList.toggle('scrolled',window.scrollY>8)},{passive:true});
