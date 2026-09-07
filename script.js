@@ -274,3 +274,20 @@ initProducts();initRuntime();
     if(modal.classList.contains('open'))setTimeout(addHint,180);
   }).observe(modal,{attributes:true,attributeFilter:['class']});
 })();
+
+
+/* Prevent browser double-tap page zoom only on interactive product media.
+   Pinch remains available for image zoom. */
+(function(){
+  const modal=document.getElementById('product-modal');
+  if(!modal)return;
+  let lastTap=0;
+  modal.addEventListener('touchend',function(e){
+    const stage=e.target.closest('.modal-stage');
+    const image=stage&&e.target.closest('img[data-zoomable="true"]');
+    if(!image)return;
+    const now=Date.now();
+    if(now-lastTap<320)e.preventDefault();
+    lastTap=now;
+  },{passive:false});
+})();
