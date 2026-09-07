@@ -41,6 +41,24 @@
  }
 }catch(e){}})();
 </script>
+<script>
+/* Fresh-build navigation: logo click and page revisit must not revive stale application state. */
+window.JHALAR_BUILD="1788789267379";
+(function(){
+  try {
+    if ('scrollRestoration' in history) history.scrollRestoration='manual';
+    const stale = sessionStorage.getItem('jhalar-runtime-build');
+    if (stale && stale !== window.JHALAR_BUILD) {
+      sessionStorage.clear();
+      localStorage.removeItem('jhalar-editor-preview');
+    }
+    sessionStorage.setItem('jhalar-runtime-build', window.JHALAR_BUILD);
+    window.addEventListener('pageshow', function(e){
+      if(e.persisted) location.reload();
+    });
+  } catch(e) {}
+})();
+</script>
 </head>
 <body>
 <header class="header" id="top">
