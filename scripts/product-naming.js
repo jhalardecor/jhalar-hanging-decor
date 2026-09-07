@@ -159,3 +159,5 @@ function run(args){
 const api=Object.freeze({STATUS,validateRegistry,evaluateNaming,validateCatalogue,productReference});
 if(typeof module!=='undefined'&&module.exports){module.exports=api;if(require.main===module)run(process.argv.slice(2));}else globalThis.JHALARNaming=api;
 })();
+
+/* build: 20260907.18 */
