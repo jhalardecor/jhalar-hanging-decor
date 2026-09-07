@@ -776,32 +776,32 @@ function setupReveal() {
 }
 
 function setupEnquiryForm() {
-  const form = document.getElementById('enquiry-form');
+  var form = document.getElementById('enquiry-form');
   if (!form) return;
-  form.querySelectorAll('input[required], select[required], textarea[required]').forEach(i => i.addEventListener('blur', () => { i.style.borderColor = i.validity.valid ? '#4caf50' : '#f44336'; }));
-  form.addEventListener('submit', e => {
+  form.querySelectorAll('input[required], select[required], textarea[required]').forEach(function(i){ i.addEventListener('blur', function(){ i.style.borderColor = i.validity.valid ? '#4caf50' : '#f44336'; }); });
+  form.addEventListener('submit', function(e) {
     e.preventDefault();
     if (!form.checkValidity()) { form.reportValidity(); return; }
-    const v = id => { const el = document.getElementById(id); return el ? el.value.trim() : ''; };
+    var v = function(id) { var el = document.getElementById(id); return el ? el.value.trim() : ''; };
 
-    var NL = '\n';
     var L = [];
-
-    L.push('*New Enquiry — JHALAR*');
-    L.push(NL);
-    L.push('Name : ' + v('name'));
-    if (v('company')) L.push('Company : ' + v('company'));
-    L.push('Buyer Type : ' + v('buyer-type'));
-    L.push('Phone : ' + v('phone'));
-    if (v('email')) L.push('Email : ' + v('email'));
-    L.push('City / State : ' + v('location'));
-    L.push('Category : ' + v('category'));
-    if (v('quantity')) L.push('Quantity : ' + v('quantity'));
+    L.push('*NEW ENQUIRY*');
+    L.push('------------------------------');
+    L.push('*Name:* ' + v('name'));
+    if (v('company')) L.push('*Company:* ' + v('company'));
+    L.push('*Buyer Type:* ' + v('buyer-type'));
+    L.push('*Phone:* ' + v('phone'));
+    if (v('email')) L.push('*Email:* ' + v('email'));
+    L.push('*City/State:* ' + v('location'));
+    L.push('*Category:* ' + v('category'));
+    if (v('quantity')) L.push('*Quantity:* ' + v('quantity'));
     if (v('date')) {
       var d = new Date(v('date'));
-      L.push('Date Required : ' + (!isNaN(d) ? d.toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' }) : v('date')));
+      L.push('*Date Required:* ' + (!isNaN(d) ? d.toLocaleDateString('en-IN', { day:'numeric', month:'long', year:'numeric' }) : v('date')));
     }
-    if (v('details')) L.push(NL + v('details'));
+    if (v('details')) L.push('');
+    if (v('details')) L.push(v('details'));
+    L.push('------------------------------');
 
     window.open('https://wa.me/' + settings.whatsapp + '?text=' + encodeURIComponent(L.join('\n')), '_blank', 'noopener');
     var st = document.getElementById('form-status');
