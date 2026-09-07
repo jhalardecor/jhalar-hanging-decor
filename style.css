@@ -1947,3 +1947,99 @@ p,.section-head>p,.hero-banner-copy>p:not(.kicker){letter-spacing:.006em}
  .collection .section-head{display:grid;grid-template-columns:1fr;gap:16px;margin-bottom:28px}
  .section-support-group{justify-content:flex-start}
 }
+
+
+/* =========================================================
+   UX STANDARD v1 — SYSTEM ENFORCEMENT
+   Structure, reflow, readable text and accessible interaction
+   ========================================================= */
+:root{
+  --content-measure:72ch;
+  --section-space:clamp(56px,8vw,120px);
+  --group-gap:clamp(20px,3vw,40px);
+}
+html{overflow-x:clip}
+body{min-width:320px}
+main{min-width:0}
+.section{padding-block:var(--section-space)}
+.shell,.section-inner,.section-layout,.section-head,
+.custom-grid,.story-grid,.contact-box,.product-card,.modal-card{min-width:0}
+p{max-width:var(--content-measure)}
+button,a,input,select,textarea{max-width:100%}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{
+  outline:3px solid rgba(122,30,44,.72);
+  outline-offset:3px;
+}
+button{touch-action:manipulation}
+@media(pointer:coarse){
+  .nav a,.mobile-nav a,.filter-btn,.product-details-btn,.hero-banner-cta,
+  .contact-cta,.text-link,.modal-close,.modal-nav,.modal-thumb{min-height:44px}
+}
+
+/* Content grouping: supporting copy stays close to its heading, sections stay distinct. */
+.section-head{margin-bottom:clamp(28px,4vw,52px)}
+.section-heading-group{display:grid;gap:10px}
+.section-support-group{min-width:0}
+.section-support-group p{max-width:42ch}
+.collection .filters{margin-bottom:clamp(20px,3vw,32px)}
+.collection .filters::-webkit-scrollbar{height:6px}
+.collection .filters{scrollbar-width:thin}
+
+/* Text-heavy flex layouts must reflow instead of forcing a single line. */
+.hero-audience-items,.contact-box,.footer-row{min-width:0}
+.hero-audience-items span{min-width:0;overflow-wrap:anywhere}
+.contact-box{flex-wrap:wrap}
+.contact-box>div{min-width:0}
+.contact-cta{white-space:normal;overflow-wrap:anywhere}
+.footer-row{flex-wrap:wrap}
+
+/* Product cards are content-driven: long names cannot clip or overflow. */
+.product-title,.product-category,.modal-copy h3,.modal-copy>p{overflow-wrap:anywhere}
+.product-details-btn{max-width:100%;white-space:normal;text-align:left}
+.product-info{min-width:0}
+
+/* Modal viewport is the hard interaction boundary. */
+#product-modal .modal-card{overflow:hidden}
+#product-modal .modal-media{min-width:0}
+#product-modal .modal-stage{
+  width:100%;
+  min-width:0;
+  min-height:clamp(300px,52vh,620px);
+  overscroll-behavior:contain;
+}
+#product-modal .modal-stage #modal-photo,
+#product-modal .modal-stage #modal-video{max-width:100%;max-height:100%}
+#product-modal .modal-close{min-width:44px;min-height:44px}
+#product-modal .modal-nav{min-width:44px;min-height:44px}
+#product-modal .modal-thumbs{max-width:100%}
+.modal-thumb{min-width:44px;min-height:44px}
+
+/* Mobile is a reflowed composition, not a compressed desktop. */
+@media(max-width:700px){
+  :root{--section-space:clamp(48px,13vw,72px);--group-gap:20px}
+  .section-head,.collection .section-head{gap:14px}
+  .section-support-group{display:block}
+  .section-support-group p{max-width:36ch}
+  .custom-grid,.story-grid{gap:32px}
+  .contact-box{gap:28px}
+  .footer-row{gap:14px}
+  .hero-audience{margin-top:22px}
+  .hero-audience-items{display:grid;grid-template-columns:1fr;gap:7px}
+  .hero-audience-items span{white-space:normal;padding-left:13px;position:relative}
+  .hero-audience-items span+span:before{display:none}
+  .hero-audience-items span:after{content:'';position:absolute;left:0;top:.55em;width:4px;height:4px;border-radius:50%;background:#efb85f}
+  .contact-cta{width:100%;min-height:48px;display:flex;align-items:center;justify-content:center}
+  #product-modal .modal-card{max-height:calc(100svh - 20px)}
+  #product-modal .modal-stage{min-height:clamp(260px,42svh,420px)}
+  #product-modal .modal-copy{overflow-wrap:anywhere}
+}
+@media(max-width:380px){
+  body{min-width:0}
+  .product-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .product-details-btn{min-width:0;width:100%}
+}
+
+/* Text enlargement safety: remove assumptions that require fixed text heights. */
+@media (min-width:1px){
+  .hero-banner-copy,.section-head,.custom-copy,.story-copy,.contact-box,.modal-copy{min-width:0}
+}
