@@ -1597,7 +1597,7 @@ function installProStudio(){
     q('studio-angle-value').textContent=ang+'°';
     q('studio-desktop-value').textContent=ds+'%';q('studio-desktop-end-value').textContent=de+'%';
     q('studio-mobile-value').textContent=ms+'%';q('studio-mobile-end-value').textContent=me+'%';
-    q('studio-gradient-preview').style.background=`linear-gradient(${ang}deg,${a} 0%,${a} ${ds}%,rgba(255,250,241,.52) ${Math.round((+ds+++de)/2)}%,rgba(255,250,241,0) ${de}%)`;
+    q('studio-gradient-preview').style.background=`linear-gradient(${ang}deg,${a} 0%,${a} ${ds}%,rgba(255,250,241,.52) ${Math.round((Number(ds)+Number(de))/2)}%,rgba(255,250,241,0) ${de}%)`;
     removeHeroCSS();state.customCSS=(state.customCSS||'')+'\n'+buildHeroCSS();
     state.changed=true;updateSaveIndicator();applyPreview();
   };
