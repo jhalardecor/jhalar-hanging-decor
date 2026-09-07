@@ -36,7 +36,7 @@ function candidateFixture() {
     requiresReview: false
   };
 }
-const namedProduct = () => ({ id: 1, title: 'Shobha Series — Royal Crimson', naming: candidateFixture() });
+const namedProduct = () => ({ id: 1, title: 'Shobha Series, Royal Crimson', naming: candidateFixture() });
 
 function assertReview(result, status) {
   assert.equal(result.status, status);
@@ -52,7 +52,7 @@ test('exact series-first canonical name and separate confidence scores', () => {
     registryVersion: 'test-revision-1',
     seriesId: 'shobha', series: 'Shobha Series',
     colourId: 'royal-crimson', colour: 'Royal Crimson',
-    finalProductName: 'Shobha Series — Royal Crimson',
+    finalProductName: 'Shobha Series, Royal Crimson',
     confidence: { series: 94, colour: 89 },
     status: 'Approved', humanReviewRequired: false, reasons: []
   });
@@ -62,7 +62,7 @@ test('empty approved lists are valid configuration, never approval', () => {
   const registry = { ...registryFixture(), series: [], colours: [], approvedVariants: [] };
   assert.deepEqual(validateRegistry(registry), []);
   const result = evaluateNaming(candidateFixture(), registry);
-  assertReview(result, 'SERIES NOT IDENTIFIED — HUMAN REVIEW REQUIRED');
+  assertReview(result, 'SERIES NOT IDENTIFIED: HUMAN REVIEW REQUIRED');
   assert.equal(result.series, null);
   assert.equal(result.colour, null);
   assert.deepEqual(result.confidence, { series: null, colour: null });
@@ -80,7 +80,7 @@ test('series comes first; an approved colour cannot rescue an unknown series', (
 test('unknown colours keep the known series but never produce a final name', () => {
   for (const colourId of [null, undefined, 'red', 'Royal Crimson', 'ROYAL-CRIMSON', 'royal-crimson ']) {
     const result = evaluateNaming({ ...candidateFixture(), colourId }, registryFixture());
-    assertReview(result, 'COLOUR NOT IDENTIFIED — HUMAN REVIEW REQUIRED');
+    assertReview(result, 'COLOUR NOT IDENTIFIED: HUMAN REVIEW REQUIRED');
     assert.equal(result.series, 'Shobha Series');
     assert.equal(result.confidence.series, 94);
     assert.equal(result.colour, null);
@@ -90,7 +90,7 @@ test('unknown colours keep the known series but never produce a final name', () 
 test('individually approved names do not imply an approved pairing', () => {
   for (const changes of [{ seriesId: 'fixture-second' }, { colourId: 'fixture-colour' }]) {
     assertReview(evaluateNaming({ ...candidateFixture(), ...changes }, registryFixture()),
-      'COMBINATION NOT APPROVED — HUMAN REVIEW REQUIRED');
+      'COMBINATION NOT APPROVED: HUMAN REVIEW REQUIRED');
   }
 });
 
@@ -146,13 +146,13 @@ test('missing confidence/evidence objects, stale revisions and ambiguous assessm
 
 test('supplied names or approval status cannot override the gate', () => {
   const candidate = { ...candidateFixture(), series: 'Invented', colour: 'Red', finalProductName: 'Invented Name', status: 'Approved' };
-  assert.equal(evaluateNaming(candidate, registryFixture()).finalProductName, 'Shobha Series — Royal Crimson');
+  assert.equal(evaluateNaming(candidate, registryFixture()).finalProductName, 'Shobha Series, Royal Crimson');
   candidate.seriesId = 'not-approved';
   assertReview(evaluateNaming(candidate, registryFixture()), STATUS.SERIES);
 });
 
 test('malformed/missing candidate data never crashes or guesses', () => {
-  for (const candidate of [null, undefined, 'Shobha Series — Royal Crimson', [], 42, true, {}]) {
+  for (const candidate of [null, undefined, 'Shobha Series, Royal Crimson', [], 42, true, {}]) {
     assertReview(evaluateNaming(candidate, registryFixture()), STATUS.SERIES);
   }
 });
@@ -236,11 +236,11 @@ test('only fully validated canonical catalogue records count as approved', () =>
 
 test('catalogue spelling, punctuation, order and suffix must match exactly', () => {
   const invalidTitles = [
-    'SHOBHA SERIES — Royal Crimson', 'Shobha Series - Royal Crimson',
-    'Shobha Series – Royal Crimson', 'Royal Crimson — Shobha Series',
-    'Shobha Series — Royal Red', 'Shobha Series Series — Royal Crimson',
-    'Shobha Series —  Royal Crimson', ' Shobha Series — Royal Crimson',
-    'Shobha Collection — Royal Crimson'
+    'SHOBHA SERIES, Royal Crimson', 'Shobha Series - Royal Crimson',
+    'Shobha Series – Royal Crimson', 'Royal Crimson, Shobha Series',
+    'Shobha Series, Royal Red', 'Shobha Series Series, Royal Crimson',
+    'Shobha Series,  Royal Crimson', ' Shobha Series, Royal Crimson',
+    'Shobha Collection, Royal Crimson'
   ];
   for (const title of invalidTitles) {
     const report = validateCatalogue({ products: [{ ...namedProduct(), title }] }, registryFixture());
@@ -252,7 +252,7 @@ test('catalogue spelling, punctuation, order and suffix must match exactly', () 
 
 test('unregistered series-style titles and unresolved naming metadata cannot pass migration checks', () => {
   for (const product of [
-    { id: 1, title: 'Shobha Series — Royal Crimson' },
+    { id: 1, title: 'Shobha Series, Royal Crimson' },
     { id: 1, title: 'Invented SERIES - Red' },
     { id: 1, title: 'Legacy title', naming: null },
     { ...namedProduct(), naming: { ...candidateFixture(), requiresReview: true } }

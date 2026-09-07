@@ -1,0 +1,752 @@
+diff --git a/assets/images/manifest.json b/assets/images/manifest.json
+index 53b90e7..6ba772c 100644
+--- a/assets/images/manifest.json
++++ b/assets/images/manifest.json
+@@ -40,15 +40,15 @@
+     "assets/images/products/catalogue/jh-027.webp",
+     "assets/images/products/catalogue/jh-030.webp",
+     "assets/images/products/catalogue/jh-035.webp",
+-    "assets/images/products/Kusum Series \u2013 Golden Marigold.jpg",
+-    "assets/images/products/Kusum Series \u2013 Pearl White.jpg",
+-    "assets/images/products/Kusum Series \u2013 Rani Pink.jpg",
+-    "assets/images/products/Kusum Series \u2013 Ruby Red.jpg",
+-    "assets/images/products/Kusum Series \u2013 dark pink.jpg",
+-    "assets/images/products/Madhavi Series \u2013 Blue Orange & White.jpg",
+-    "assets/images/products/Madhavi Series \u2013 Yellow Green & White.jpg",
+-    "assets/images/products/Madhavi Series \u2013 green red & White.jpg",
+-    "assets/images/products/Mandira Series \u2013 Saffron Green.jpg",
++    "assets/images/products/Kusum Series, Golden Marigold.jpg",
++    "assets/images/products/Kusum Series, Pearl White.jpg",
++    "assets/images/products/Kusum Series, Rani Pink.jpg",
++    "assets/images/products/Kusum Series, Ruby Red.jpg",
++    "assets/images/products/Kusum Series, Dark Pink.jpg",
++    "assets/images/products/Madhavi Series, Blue Orange & White.jpg",
++    "assets/images/products/Madhavi Series, Yellow Green & White.jpg",
++    "assets/images/products/Madhavi Series, Green, Red & White.jpg",
++    "assets/images/products/Mandira Series, Saffron Green.jpg",
+     "assets/images/products/Products_0015_782495e6-eee2-4eec-89d1-4e8dbacf0c1e.jpg",
+     "assets/images/products/Products_0016_a6e53143-4f3a-4d1d-bcaa-05d577b1fb27.jpg",
+     "assets/images/products/Products_0017_b70aaf0a-b46e-4581-88eb-051c5d7d1865.jpg",
+@@ -69,11 +69,11 @@
+     "assets/images/products/Products_0032_195c8b92-b628-4397-8af3-3feafd9c082e.jpg",
+     "assets/images/products/Products_0033_787510cd-2eec-4eb6-a8ce-3a5b020f601b.jpg",
+     "assets/images/products/Products_0034_10c5722d-cb19-4023-83d4-ede44dbf399d.jpg",
+-    "assets/images/products/Sangam Series \u2013 Kesari Bloom.jpg",
+-    "assets/images/products/Sangam Series \u2013 Rose Pink.jpg",
+-    "assets/images/products/Sangam Series \u2013 Royal Crimson.jpg",
+-    "assets/images/products/Shobha Series \u2013 Blue Yellow & White.jpg",
+-    "assets/images/products/Shobha Series \u2013 Red Green & White.jpg",
+-    "assets/images/products/Shobha Series \u2013 Red Yellow & White.jpg"
++    "assets/images/products/Sangam Series, Kesari Bloom.jpg",
++    "assets/images/products/Sangam Series, Rose Pink.jpg",
++    "assets/images/products/Sangam Series, Royal Crimson.jpg",
++    "assets/images/products/Shobha Series, Blue, Yellow & White.jpg",
++    "assets/images/products/Shobha Series, Red Green & White.jpg",
++    "assets/images/products/Shobha Series, Red Yellow & White.jpg"
+   ]
+-}
++}
+\ No newline at end of file
+diff --git "a/assets/images/products/Kusum Series \342\200\223 Golden Marigold.jpg" "b/assets/images/products/Kusum Series \342\200\223 Golden Marigold.jpg"
+deleted file mode 100644
+index 744f2d6..0000000
+Binary files "a/assets/images/products/Kusum Series \342\200\223 Golden Marigold.jpg" and /dev/null differ
+diff --git "a/assets/images/products/Kusum Series \342\200\223 Pearl White.jpg" "b/assets/images/products/Kusum Series \342\200\223 Pearl White.jpg"
+deleted file mode 100644
+index cc32bc3..0000000
+Binary files "a/assets/images/products/Kusum Series \342\200\223 Pearl White.jpg" and /dev/null differ
+diff --git "a/assets/images/products/Kusum Series \342\200\223 Rani Pink.jpg" "b/assets/images/products/Kusum Series \342\200\223 Rani Pink.jpg"
+deleted file mode 100644
+index 4e931aa..0000000
+Binary files "a/assets/images/products/Kusum Series \342\200\223 Rani Pink.jpg" and /dev/null differ
+diff --git "a/assets/images/products/Kusum Series \342\200\223 Ruby Red.jpg" "b/assets/images/products/Kusum Series \342\200\223 Ruby Red.jpg"
+deleted file mode 100644
+index 461a60f..0000000
+Binary files "a/assets/images/products/Kusum Series \342\200\223 Ruby Red.jpg" and /dev/null differ
+diff --git "a/assets/images/products/Kusum Series \342\200\223 dark pink.jpg" "b/assets/images/products/Kusum Series \342\200\223 dark pink.jpg"
+deleted file mode 100644
+index 8d73cb3..0000000
+Binary files "a/assets/images/products/Kusum Series \342\200\223 dark pink.jpg" and /dev/null differ
+diff --git "a/assets/images/products/Madhavi Series \342\200\223 Blue Orange & White.jpg" "b/assets/images/products/Madhavi Series \342\200\223 Blue Orange & White.jpg"
+deleted file mode 100644
+index 482e5ff..0000000
+Binary files "a/assets/images/products/Madhavi Series \342\200\223 Blue Orange & White.jpg" and /dev/null differ
+diff --git "a/assets/images/products/Madhavi Series \342\200\223 Yellow Green & White.jpg" "b/assets/images/products/Madhavi Series \342\200\223 Yellow Green & White.jpg"
+deleted file mode 100644
+index 7538f4a..0000000
+Binary files "a/assets/images/products/Madhavi Series \342\200\223 Yellow Green & White.jpg" and /dev/null differ
+diff --git "a/assets/images/products/Madhavi Series \342\200\223 green red & White.jpg" "b/assets/images/products/Madhavi Series \342\200\223 green red & White.jpg"
+deleted file mode 100644
+index 2ed7344..0000000
+Binary files "a/assets/images/products/Madhavi Series \342\200\223 green red & White.jpg" and /dev/null differ
+diff --git "a/assets/images/products/Mandira Series \342\200\223 Saffron Green.jpg" "b/assets/images/products/Mandira Series \342\200\223 Saffron Green.jpg"
+deleted file mode 100644
+index 46a0bdc..0000000
+Binary files "a/assets/images/products/Mandira Series \342\200\223 Saffron Green.jpg" and /dev/null differ
+diff --git "a/assets/images/products/Sangam Series \342\200\223 Kesari Bloom.jpg" "b/assets/images/products/Sangam Series \342\200\223 Kesari Bloom.jpg"
+deleted file mode 100644
+index b484df0..0000000
+Binary files "a/assets/images/products/Sangam Series \342\200\223 Kesari Bloom.jpg" and /dev/null differ
+diff --git "a/assets/images/products/Sangam Series \342\200\223 Rose Pink.jpg" "b/assets/images/products/Sangam Series \342\200\223 Rose Pink.jpg"
+deleted file mode 100644
+index 6e07ecf..0000000
+Binary files "a/assets/images/products/Sangam Series \342\200\223 Rose Pink.jpg" and /dev/null differ
+diff --git "a/assets/images/products/Sangam Series \342\200\223 Royal Crimson.jpg" "b/assets/images/products/Sangam Series \342\200\223 Royal Crimson.jpg"
+deleted file mode 100644
+index 8df7afa..0000000
+Binary files "a/assets/images/products/Sangam Series \342\200\223 Royal Crimson.jpg" and /dev/null differ
+diff --git "a/assets/images/products/Shobha Series \342\200\223 Blue Yellow & White.jpg" "b/assets/images/products/Shobha Series \342\200\223 Blue Yellow & White.jpg"
+deleted file mode 100644
+index 9bd1422..0000000
+Binary files "a/assets/images/products/Shobha Series \342\200\223 Blue Yellow & White.jpg" and /dev/null differ
+diff --git "a/assets/images/products/Shobha Series \342\200\223 Red Green & White.jpg" "b/assets/images/products/Shobha Series \342\200\223 Red Green & White.jpg"
+deleted file mode 100644
+index f7752b0..0000000
+Binary files "a/assets/images/products/Shobha Series \342\200\223 Red Green & White.jpg" and /dev/null differ
+diff --git "a/assets/images/products/Shobha Series \342\200\223 Red Yellow & White.jpg" "b/assets/images/products/Shobha Series \342\200\223 Red Yellow & White.jpg"
+deleted file mode 100644
+index ee53447..0000000
+Binary files "a/assets/images/products/Shobha Series \342\200\223 Red Yellow & White.jpg" and /dev/null differ
+diff --git a/content/product-naming.json b/content/product-naming.json
+index 3f8e8eb..37c39e2 100644
+--- a/content/product-naming.json
++++ b/content/product-naming.json
+@@ -104,11 +104,11 @@
+         "A dense continuous floral strand with small contrasting accent details and beaded floral drops."
+       ],
+       "referenceImages": [
+-        "assets/images/products/Kusum Series – Golden Marigold.jpg",
+-        "assets/images/products/Kusum Series – Pearl White.jpg",
+-        "assets/images/products/Kusum Series – Rani Pink.jpg",
+-        "assets/images/products/Kusum Series – Ruby Red.jpg",
+-        "assets/images/products/Kusum Series – dark pink.jpg"
++        "assets/images/products/Kusum Series, Golden Marigold.jpg",
++        "assets/images/products/Kusum Series, Pearl White.jpg",
++        "assets/images/products/Kusum Series, Rani Pink.jpg",
++        "assets/images/products/Kusum Series, Ruby Red.jpg",
++        "assets/images/products/Kusum Series, Dark Pink.jpg"
+       ],
+       "approval": {
+         "approvedBy": "JHALAR catalogue owner",
+@@ -139,9 +139,9 @@
+         "Alternating short floral sections with small accent details between the petals and terminal floral drops."
+       ],
+       "referenceImages": [
+-        "assets/images/products/Madhavi Series – Blue Orange & White.jpg",
+-        "assets/images/products/Madhavi Series – Yellow Green & White.jpg",
+-        "assets/images/products/Madhavi Series – green red & White.jpg"
++        "assets/images/products/Madhavi Series, Blue Orange & White.jpg",
++        "assets/images/products/Madhavi Series, Yellow Green & White.jpg",
++        "assets/images/products/Madhavi Series, Green, Red & White.jpg"
+       ],
+       "approval": {
+         "approvedBy": "JHALAR catalogue owner",
+@@ -171,7 +171,7 @@
+         "Long floral sections interspersed with leafy clusters and spherical ornaments, ending in beaded floral drops."
+       ],
+       "referenceImages": [
+-        "assets/images/products/Mandira Series – Saffron Green.jpg"
++        "assets/images/products/Mandira Series, Saffron Green.jpg"
+       ],
+       "approval": {
+         "approvedBy": "JHALAR catalogue owner",
+@@ -232,9 +232,9 @@
+         "Long floral blocks separated by shorter leafy sections, with contrasting sections and beaded floral end drops."
+       ],
+       "referenceImages": [
+-        "assets/images/products/Sangam Series – Kesari Bloom.jpg",
+-        "assets/images/products/Sangam Series – Rose Pink.jpg",
+-        "assets/images/products/Sangam Series – Royal Crimson.jpg"
++        "assets/images/products/Sangam Series, Kesari Bloom.jpg",
++        "assets/images/products/Sangam Series, Rose Pink.jpg",
++        "assets/images/products/Sangam Series, Royal Crimson.jpg"
+       ],
+       "approval": {
+         "approvedBy": "JHALAR catalogue owner",
+@@ -249,10 +249,10 @@
+         "Alternating floral sections dotted with contrasting star-shaped flowers, ending in bead strings with floral drops."
+       ],
+       "referenceImages": [
+-        "assets/images/products/Shobha Series – Blue Yellow & White.jpg",
+-        "assets/images/products/Shobha Series – Red Green & White.jpg",
++        "assets/images/products/Shobha Series, Blue, Yellow & White.jpg",
++        "assets/images/products/Shobha Series, Red Green & White.jpg",
+         "assets/images/products/Products_0027_39bd2a25-dec1-44ec-bd7e-736abd8bd039.jpg",
+-        "assets/images/products/Shobha Series – Red Yellow & White.jpg"
++        "assets/images/products/Shobha Series, Red Yellow & White.jpg"
+       ],
+       "approval": {
+         "approvedBy": "JHALAR catalogue owner",
+@@ -299,7 +299,7 @@
+         "Alternating blue and orange floral sections with small white accents."
+       ],
+       "referenceImages": [
+-        "assets/images/products/Madhavi Series – Blue Orange & White.jpg"
++        "assets/images/products/Madhavi Series, Blue Orange & White.jpg"
+       ],
+       "approval": {
+         "approvedBy": "JHALAR catalogue owner",
+@@ -309,12 +309,12 @@
+     },
+     {
+       "id": "blue-yellow-and-white",
+-      "name": "Blue Yellow & White",
++      "name": "Blue, Yellow & White",
+       "paletteCriteria": [
+         "Blue and yellow floral sections with small white star-shaped flowers."
+       ],
+       "referenceImages": [
+-        "assets/images/products/Shobha Series – Blue Yellow & White.jpg"
++        "assets/images/products/Shobha Series, Blue, Yellow & White.jpg"
+       ],
+       "approval": {
+         "approvedBy": "JHALAR catalogue owner",
+@@ -420,7 +420,7 @@
+         "Golden-yellow floral or pom-pom accents, with design-specific secondary details."
+       ],
+       "referenceImages": [
+-        "assets/images/products/Kusum Series – Golden Marigold.jpg",
++        "assets/images/products/Kusum Series, Golden Marigold.jpg",
+         "assets/images/products/Products_0017_b70aaf0a-b46e-4581-88eb-051c5d7d1865.jpg",
+         "assets/images/products/Products_0024_e84c5971-080e-45c2-9c8b-1662ee83f66f.jpg"
+       ],
+@@ -437,7 +437,7 @@
+         "Orange or saffron-coloured floral/pom-pom accents with design-specific secondary details."
+       ],
+       "referenceImages": [
+-        "assets/images/products/Sangam Series – Kesari Bloom.jpg",
++        "assets/images/products/Sangam Series, Kesari Bloom.jpg",
+         "assets/images/products/Products_0021_51eb2e52-6efa-4b69-b0c7-4406ff334627.jpg"
+       ],
+       "approval": {
+@@ -469,7 +469,7 @@
+         "White or cream as the main visual palette, with design-specific small accent details."
+       ],
+       "referenceImages": [
+-        "assets/images/products/Kusum Series – Pearl White.jpg",
++        "assets/images/products/Kusum Series, Pearl White.jpg",
+         "assets/images/products/Products_0019_c0a4458c-7943-48e9-a162-c52ed0323635.jpg",
+         "assets/images/products/Products_0020_a5da5c9e-9807-4bd1-aaa9-a60940699734.jpg"
+       ],
+@@ -516,7 +516,7 @@
+         "Vivid pink as the main accent colour, with secondary details determined by the design."
+       ],
+       "referenceImages": [
+-        "assets/images/products/Kusum Series – Rani Pink.jpg",
++        "assets/images/products/Kusum Series, Rani Pink.jpg",
+         "assets/images/products/Products_0015_782495e6-eee2-4eec-89d1-4e8dbacf0c1e.jpg",
+         "assets/images/products/Products_0028_b9a15b29-4d31-410c-b69b-18a2507ff142.jpg"
+       ],
+@@ -533,7 +533,7 @@
+         "Red and green floral sections with small white star-shaped flowers."
+       ],
+       "referenceImages": [
+-        "assets/images/products/Shobha Series – Red Green & White.jpg"
++        "assets/images/products/Shobha Series, Red Green & White.jpg"
+       ],
+       "approval": {
+         "approvedBy": "JHALAR catalogue owner",
+@@ -549,7 +549,7 @@
+       ],
+       "referenceImages": [
+         "assets/images/products/Products_0027_39bd2a25-dec1-44ec-bd7e-736abd8bd039.jpg",
+-        "assets/images/products/Shobha Series – Red Yellow & White.jpg"
++        "assets/images/products/Shobha Series, Red Yellow & White.jpg"
+       ],
+       "approval": {
+         "approvedBy": "JHALAR catalogue owner",
+@@ -564,7 +564,7 @@
+         "Bright pink floral blocks with white sections and green separators in the source reference."
+       ],
+       "referenceImages": [
+-        "assets/images/products/Sangam Series – Rose Pink.jpg"
++        "assets/images/products/Sangam Series, Rose Pink.jpg"
+       ],
+       "approval": {
+         "approvedBy": "JHALAR catalogue owner",
+@@ -579,7 +579,7 @@
+         "Red floral blocks with white sections and green separators in the source reference."
+       ],
+       "referenceImages": [
+-        "assets/images/products/Sangam Series – Royal Crimson.jpg"
++        "assets/images/products/Sangam Series, Royal Crimson.jpg"
+       ],
+       "approval": {
+         "approvedBy": "JHALAR catalogue owner",
+@@ -594,7 +594,7 @@
+         "Bright red floral clusters with small light-coloured accents."
+       ],
+       "referenceImages": [
+-        "assets/images/products/Kusum Series – Ruby Red.jpg"
++        "assets/images/products/Kusum Series, Ruby Red.jpg"
+       ],
+       "approval": {
+         "approvedBy": "JHALAR catalogue owner",
+@@ -609,7 +609,7 @@
+         "Orange and green accents, with design-specific white, red or gold-coloured secondary details."
+       ],
+       "referenceImages": [
+-        "assets/images/products/Mandira Series – Saffron Green.jpg",
++        "assets/images/products/Mandira Series, Saffron Green.jpg",
+         "assets/images/products/Products_0032_195c8b92-b628-4397-8af3-3feafd9c082e.jpg"
+       ],
+       "approval": {
+@@ -625,7 +625,7 @@
+         "Alternating yellow and green floral sections with small white accents."
+       ],
+       "referenceImages": [
+-        "assets/images/products/Madhavi Series – Yellow Green & White.jpg"
++        "assets/images/products/Madhavi Series, Yellow Green & White.jpg"
+       ],
+       "approval": {
+         "approvedBy": "JHALAR catalogue owner",
+@@ -635,12 +635,12 @@
+     },
+     {
+       "id": "dark-pink",
+-      "name": "dark pink",
++      "name": "Dark Pink",
+       "paletteCriteria": [
+         "Deep pink floral clusters with small white details; spelling retained from the owner-labelled source."
+       ],
+       "referenceImages": [
+-        "assets/images/products/Kusum Series – dark pink.jpg"
++        "assets/images/products/Kusum Series, Dark Pink.jpg"
+       ],
+       "approval": {
+         "approvedBy": "JHALAR catalogue owner",
+@@ -650,12 +650,12 @@
+     },
+     {
+       "id": "green-red-and-white",
+-      "name": "green red & White",
++      "name": "Green, Red & White",
+       "paletteCriteria": [
+         "Alternating red and green floral sections with white details; spelling retained from the owner-labelled source."
+       ],
+       "referenceImages": [
+-        "assets/images/products/Madhavi Series – green red & White.jpg"
++        "assets/images/products/Madhavi Series, Green, Red & White.jpg"
+       ],
+       "approval": {
+         "approvedBy": "JHALAR catalogue owner",
+@@ -977,7 +977,7 @@
+       "productId": 1,
+       "seriesId": "kusum",
+       "colourId": "golden-marigold",
+-      "sourceImage": "assets/images/products/Kusum Series – Golden Marigold.jpg",
++      "sourceImage": "assets/images/products/Kusum Series, Golden Marigold.jpg",
+       "image": "assets/images/products/catalogue/jh-001.webp",
+       "approval": {
+         "approvedBy": "JHALAR catalogue owner",
+@@ -989,7 +989,7 @@
+       "productId": 2,
+       "seriesId": "kusum",
+       "colourId": "pearl-white",
+-      "sourceImage": "assets/images/products/Kusum Series – Pearl White.jpg",
++      "sourceImage": "assets/images/products/Kusum Series, Pearl White.jpg",
+       "image": "assets/images/products/catalogue/jh-002.webp",
+       "approval": {
+         "approvedBy": "JHALAR catalogue owner",
+@@ -1001,7 +1001,7 @@
+       "productId": 3,
+       "seriesId": "kusum",
+       "colourId": "rani-pink",
+-      "sourceImage": "assets/images/products/Kusum Series – Rani Pink.jpg",
++      "sourceImage": "assets/images/products/Kusum Series, Rani Pink.jpg",
+       "image": "assets/images/products/catalogue/jh-003.webp",
+       "approval": {
+         "approvedBy": "JHALAR catalogue owner",
+@@ -1013,7 +1013,7 @@
+       "productId": 4,
+       "seriesId": "kusum",
+       "colourId": "ruby-red",
+-      "sourceImage": "assets/images/products/Kusum Series – Ruby Red.jpg",
++      "sourceImage": "assets/images/products/Kusum Series, Ruby Red.jpg",
+       "image": "assets/images/products/catalogue/jh-004.webp",
+       "approval": {
+         "approvedBy": "JHALAR catalogue owner",
+@@ -1025,7 +1025,7 @@
+       "productId": 5,
+       "seriesId": "kusum",
+       "colourId": "dark-pink",
+-      "sourceImage": "assets/images/products/Kusum Series – dark pink.jpg",
++      "sourceImage": "assets/images/products/Kusum Series, Dark Pink.jpg",
+       "image": "assets/images/products/catalogue/jh-005.webp",
+       "approval": {
+         "approvedBy": "JHALAR catalogue owner",
+@@ -1037,7 +1037,7 @@
+       "productId": 6,
+       "seriesId": "madhavi",
+       "colourId": "blue-orange-and-white",
+-      "sourceImage": "assets/images/products/Madhavi Series – Blue Orange & White.jpg",
++      "sourceImage": "assets/images/products/Madhavi Series, Blue Orange & White.jpg",
+       "image": "assets/images/products/catalogue/jh-006.webp",
+       "approval": {
+         "approvedBy": "JHALAR catalogue owner",
+@@ -1049,7 +1049,7 @@
+       "productId": 7,
+       "seriesId": "madhavi",
+       "colourId": "yellow-green-and-white",
+-      "sourceImage": "assets/images/products/Madhavi Series – Yellow Green & White.jpg",
++      "sourceImage": "assets/images/products/Madhavi Series, Yellow Green & White.jpg",
+       "image": "assets/images/products/catalogue/jh-007.webp",
+       "approval": {
+         "approvedBy": "JHALAR catalogue owner",
+@@ -1061,7 +1061,7 @@
+       "productId": 8,
+       "seriesId": "madhavi",
+       "colourId": "green-red-and-white",
+-      "sourceImage": "assets/images/products/Madhavi Series – green red & White.jpg",
++      "sourceImage": "assets/images/products/Madhavi Series, Green, Red & White.jpg",
+       "image": "assets/images/products/catalogue/jh-008.webp",
+       "approval": {
+         "approvedBy": "JHALAR catalogue owner",
+@@ -1073,7 +1073,7 @@
+       "productId": 9,
+       "seriesId": "mandira",
+       "colourId": "saffron-green",
+-      "sourceImage": "assets/images/products/Mandira Series – Saffron Green.jpg",
++      "sourceImage": "assets/images/products/Mandira Series, Saffron Green.jpg",
+       "image": "assets/images/products/catalogue/jh-009.webp",
+       "approval": {
+         "approvedBy": "JHALAR catalogue owner",
+@@ -1085,7 +1085,7 @@
+       "productId": 10,
+       "seriesId": "sangam",
+       "colourId": "kesari-bloom",
+-      "sourceImage": "assets/images/products/Sangam Series – Kesari Bloom.jpg",
++      "sourceImage": "assets/images/products/Sangam Series, Kesari Bloom.jpg",
+       "image": "assets/images/products/catalogue/jh-010.webp",
+       "approval": {
+         "approvedBy": "JHALAR catalogue owner",
+@@ -1097,7 +1097,7 @@
+       "productId": 11,
+       "seriesId": "sangam",
+       "colourId": "rose-pink",
+-      "sourceImage": "assets/images/products/Sangam Series – Rose Pink.jpg",
++      "sourceImage": "assets/images/products/Sangam Series, Rose Pink.jpg",
+       "image": "assets/images/products/catalogue/jh-011.webp",
+       "approval": {
+         "approvedBy": "JHALAR catalogue owner",
+@@ -1109,7 +1109,7 @@
+       "productId": 12,
+       "seriesId": "sangam",
+       "colourId": "royal-crimson",
+-      "sourceImage": "assets/images/products/Sangam Series – Royal Crimson.jpg",
++      "sourceImage": "assets/images/products/Sangam Series, Royal Crimson.jpg",
+       "image": "assets/images/products/catalogue/jh-012.webp",
+       "approval": {
+         "approvedBy": "JHALAR catalogue owner",
+@@ -1121,7 +1121,7 @@
+       "productId": 13,
+       "seriesId": "shobha",
+       "colourId": "blue-yellow-and-white",
+-      "sourceImage": "assets/images/products/Shobha Series – Blue Yellow & White.jpg",
++      "sourceImage": "assets/images/products/Shobha Series, Blue, Yellow & White.jpg",
+       "image": "assets/images/products/catalogue/jh-013.webp",
+       "approval": {
+         "approvedBy": "JHALAR catalogue owner",
+@@ -1133,7 +1133,7 @@
+       "productId": 14,
+       "seriesId": "shobha",
+       "colourId": "red-green-and-white",
+-      "sourceImage": "assets/images/products/Shobha Series – Red Green & White.jpg",
++      "sourceImage": "assets/images/products/Shobha Series, Red Green & White.jpg",
+       "image": "assets/images/products/catalogue/jh-014.webp",
+       "approval": {
+         "approvedBy": "JHALAR catalogue owner",
+@@ -1385,7 +1385,7 @@
+       "productId": 35,
+       "seriesId": "shobha",
+       "colourId": "red-yellow-and-white",
+-      "sourceImage": "assets/images/products/Shobha Series – Red Yellow & White.jpg",
++      "sourceImage": "assets/images/products/Shobha Series, Red Yellow & White.jpg",
+       "image": "assets/images/products/catalogue/jh-035.webp",
+       "approval": {
+         "approvedBy": "JHALAR catalogue owner",
+@@ -1394,4 +1394,4 @@
+       }
+     }
+   ]
+-}
++}
+\ No newline at end of file
+diff --git a/content/products.json b/content/products.json
+index 53d9c4b..74b45ed 100644
+--- a/content/products.json
++++ b/content/products.json
+@@ -143,7 +143,7 @@
+       "title": "Kusum Series, Golden Marigold",
+       "category": "Floral Jhalars",
+       "description": "Golden marigold-style floral clusters with white accents and bead drops.",
+-      "sourceImage": "assets/images/products/Kusum Series – Golden Marigold.jpg",
++      "sourceImage": "assets/images/products/Kusum Series, Golden Marigold.jpg",
+       "image": "assets/images/products/catalogue/jh-001.webp",
+       "naming": {
+         "registryVersion": "2026-09-07.1",
+@@ -166,7 +166,7 @@
+       "title": "Sangam Series, Royal Crimson",
+       "category": "Floral Jhalars",
+       "description": "White floral sections with red clusters and green separators.",
+-      "sourceImage": "assets/images/products/Sangam Series – Royal Crimson.jpg",
++      "sourceImage": "assets/images/products/Sangam Series, Royal Crimson.jpg",
+       "image": "assets/images/products/catalogue/jh-012.webp",
+       "naming": {
+         "registryVersion": "2026-09-07.1",
+@@ -258,7 +258,7 @@
+       "title": "Madhavi Series, Green, Red & White",
+       "category": "Floral Jhalars",
+       "description": "Green, red and white floral sections arranged in a vertical hanging.",
+-      "sourceImage": "assets/images/products/Madhavi Series – green red & White.jpg",
++      "sourceImage": "assets/images/products/Madhavi Series, Green, Red & White.jpg",
+       "image": "assets/images/products/catalogue/jh-008.webp",
+       "naming": {
+         "registryVersion": "2026-09-07.1",
+@@ -349,8 +349,8 @@
+       "id": 13,
+       "title": "Shobha Series, Blue, Yellow & White",
+       "category": "Floral Jhalars",
+-      "description": "Blue and yellow floral sections with small white flower details.",
+-      "sourceImage": "assets/images/products/Shobha Series – Blue Yellow & White.jpg",
++      "description": "Blue, yellow and white floral sections with small flower details.",
++      "sourceImage": "assets/images/products/Shobha Series, Blue, Yellow & White.jpg",
+       "image": "assets/images/products/catalogue/jh-013.webp",
+       "naming": {
+         "registryVersion": "2026-09-07.1",
+@@ -373,7 +373,7 @@
+       "title": "Kusum Series, Pearl White",
+       "category": "Floral Jhalars",
+       "description": "White and cream floral clusters with light-green accents and matching bead drops.",
+-      "sourceImage": "assets/images/products/Kusum Series – Pearl White.jpg",
++      "sourceImage": "assets/images/products/Kusum Series, Pearl White.jpg",
+       "image": "assets/images/products/catalogue/jh-002.webp",
+       "naming": {
+         "registryVersion": "2026-09-07.1",
+@@ -396,7 +396,7 @@
+       "title": "Kusum Series, Rani Pink",
+       "category": "Floral Jhalars",
+       "description": "Rani pink floral clusters with small white accents and matching bead drops.",
+-      "sourceImage": "assets/images/products/Kusum Series – Rani Pink.jpg",
++      "sourceImage": "assets/images/products/Kusum Series, Rani Pink.jpg",
+       "image": "assets/images/products/catalogue/jh-003.webp",
+       "naming": {
+         "registryVersion": "2026-09-07.1",
+@@ -419,7 +419,7 @@
+       "title": "Kusum Series, Ruby Red",
+       "category": "Floral Jhalars",
+       "description": "Ruby red floral clusters with contrasting accents and bead drops.",
+-      "sourceImage": "assets/images/products/Kusum Series – Ruby Red.jpg",
++      "sourceImage": "assets/images/products/Kusum Series, Ruby Red.jpg",
+       "image": "assets/images/products/catalogue/jh-004.webp",
+       "naming": {
+         "registryVersion": "2026-09-07.1",
+@@ -439,10 +439,10 @@
+     },
+     {
+       "id": 5,
+-      "title": "Kusum Series, dark pink",
++      "title": "Kusum Series, Dark Pink",
+       "category": "Floral Jhalars",
+       "description": "Dark pink floral clusters arranged in a full hanging strand.",
+-      "sourceImage": "assets/images/products/Kusum Series – dark pink.jpg",
++      "sourceImage": "assets/images/products/Kusum Series, Dark Pink.jpg",
+       "image": "assets/images/products/catalogue/jh-005.webp",
+       "naming": {
+         "registryVersion": "2026-09-07.1",
+@@ -465,7 +465,7 @@
+       "title": "Madhavi Series, Blue Orange & White",
+       "category": "Floral Jhalars",
+       "description": "Blue, orange and white floral sections arranged in a vertical hanging.",
+-      "sourceImage": "assets/images/products/Madhavi Series – Blue Orange & White.jpg",
++      "sourceImage": "assets/images/products/Madhavi Series, Blue Orange & White.jpg",
+       "image": "assets/images/products/catalogue/jh-006.webp",
+       "naming": {
+         "registryVersion": "2026-09-07.1",
+@@ -488,7 +488,7 @@
+       "title": "Madhavi Series, Yellow Green & White",
+       "category": "Floral Jhalars",
+       "description": "Yellow, green and white floral sections with a matching floral finish.",
+-      "sourceImage": "assets/images/products/Madhavi Series – Yellow Green & White.jpg",
++      "sourceImage": "assets/images/products/Madhavi Series, Yellow Green & White.jpg",
+       "image": "assets/images/products/catalogue/jh-007.webp",
+       "naming": {
+         "registryVersion": "2026-09-07.1",
+@@ -511,7 +511,7 @@
+       "title": "Mandira Series, Saffron Green",
+       "category": "Floral Jhalars",
+       "description": "Saffron and green floral sections with decorative details along the strand.",
+-      "sourceImage": "assets/images/products/Mandira Series – Saffron Green.jpg",
++      "sourceImage": "assets/images/products/Mandira Series, Saffron Green.jpg",
+       "image": "assets/images/products/catalogue/jh-009.webp",
+       "naming": {
+         "registryVersion": "2026-09-07.1",
+@@ -534,7 +534,7 @@
+       "title": "Sangam Series, Kesari Bloom",
+       "category": "Floral Jhalars",
+       "description": "Kesari-toned floral sections arranged in a traditional hanging design.",
+-      "sourceImage": "assets/images/products/Sangam Series – Kesari Bloom.jpg",
++      "sourceImage": "assets/images/products/Sangam Series, Kesari Bloom.jpg",
+       "image": "assets/images/products/catalogue/jh-010.webp",
+       "naming": {
+         "registryVersion": "2026-09-07.1",
+@@ -557,7 +557,7 @@
+       "title": "Sangam Series, Rose Pink",
+       "category": "Floral Jhalars",
+       "description": "Rose pink floral sections with contrasting details and bead drops.",
+-      "sourceImage": "assets/images/products/Sangam Series – Rose Pink.jpg",
++      "sourceImage": "assets/images/products/Sangam Series, Rose Pink.jpg",
+       "image": "assets/images/products/catalogue/jh-011.webp",
+       "naming": {
+         "registryVersion": "2026-09-07.1",
+@@ -580,7 +580,7 @@
+       "title": "Shobha Series, Red Green & White",
+       "category": "Floral Jhalars",
+       "description": "Red and green floral sections with white accents and floral drops.",
+-      "sourceImage": "assets/images/products/Shobha Series – Red Green & White.jpg",
++      "sourceImage": "assets/images/products/Shobha Series, Red Green & White.jpg",
+       "image": "assets/images/products/catalogue/jh-014.webp",
+       "naming": {
+         "registryVersion": "2026-09-07.1",
+@@ -787,7 +787,7 @@
+       "title": "Shobha Series, Red Yellow & White",
+       "category": "Floral Jhalars",
+       "description": "Red, yellow and white floral sections arranged in a traditional hanging.",
+-      "sourceImage": "assets/images/products/Shobha Series – Red Yellow & White.jpg",
++      "sourceImage": "assets/images/products/Shobha Series, Red Yellow & White.jpg",
+       "image": "assets/images/products/catalogue/jh-035.webp",
+       "naming": {
+         "registryVersion": "2026-09-07.1",
+@@ -806,4 +806,4 @@
+       }
+     }
+   ]
+-}
++}
+\ No newline at end of file
+diff --git a/tests/catalogue.test.js b/tests/catalogue.test.js
+index ef8556d..969bb86 100644
+--- a/tests/catalogue.test.js
++++ b/tests/catalogue.test.js
+@@ -51,7 +51,7 @@ test('the two owner-requested separate Shobha entries retain distinct references
+   const a = catalogue.products.find(product => product.id === 27);
+   const b = catalogue.products.find(product => product.id === 35);
+   assert.ok(a && b);
+-  assert.equal(a.title, 'Shobha Series — Red Yellow & White');
++  assert.equal(a.title, 'Shobha Series, Red Yellow & White');
+   assert.equal(b.title, a.title);
+   assert.notEqual(a.image, b.image);
+   assert.notEqual(a.sourceImage, b.sourceImage);
+diff --git a/tests/human-approval.test.js b/tests/human-approval.test.js
+index ad6345d..dd32ebe 100644
+--- a/tests/human-approval.test.js
++++ b/tests/human-approval.test.js
+@@ -35,7 +35,7 @@ test('registered human approval resolves review without inventing confidence per
+   assert.deepEqual(validateRegistry(registry), []);
+   const result = evaluateNaming(candidate, registry);
+   assert.equal(result.status, STATUS.APPROVED);
+-  assert.equal(result.finalProductName, 'Test Series — Test Colour');
++  assert.equal(result.finalProductName, 'Test Series, Test Colour');
+   assert.equal(result.approvalMethod, 'human');
+   assert.deepEqual(result.confidence, { series: null, colour: null });
+   assert.equal(result.humanReviewRequired, false);
+@@ -96,7 +96,7 @@ test('malformed or duplicate human registry bindings fail closed', () => {
+ 
+ test('catalogue checks bind outer identity fields instead of imported metadata claims', () => {
+   const { registry, candidate } = fixture();
+-  const product = { id: 42, title: 'Test Series — Test Colour', image: candidate.image, sourceImage: candidate.sourceImage, naming: candidate };
++  const product = { id: 42, title: 'Test Series, Test Colour', image: candidate.image, sourceImage: candidate.sourceImage, naming: candidate };
+   assert.equal(validateCatalogue({ products: [product] }, registry).approvedCount, 1);
+   for (const change of [{ id: 43 }, { image: 'assets/images/other.webp' }, { sourceImage: 'assets/images/other.jpg' }, { title: 'Test Series - Test Colour' }]) {
+     const report = validateCatalogue({ products: [{ ...product, ...change }] }, registry);
+diff --git a/tests/product-naming.test.js b/tests/product-naming.test.js
+index 1b40445..83da39a 100644
+--- a/tests/product-naming.test.js
++++ b/tests/product-naming.test.js
+@@ -36,7 +36,7 @@ function candidateFixture() {
+     requiresReview: false
+   };
+ }
+-const namedProduct = () => ({ id: 1, title: 'Shobha Series — Royal Crimson', naming: candidateFixture() });
++const namedProduct = () => ({ id: 1, title: 'Shobha Series, Royal Crimson', naming: candidateFixture() });
+ 
+ function assertReview(result, status) {
+   assert.equal(result.status, status);
+@@ -52,7 +52,7 @@ test('exact series-first canonical name and separate confidence scores', () => {
+     registryVersion: 'test-revision-1',
+     seriesId: 'shobha', series: 'Shobha Series',
+     colourId: 'royal-crimson', colour: 'Royal Crimson',
+-    finalProductName: 'Shobha Series — Royal Crimson',
++    finalProductName: 'Shobha Series, Royal Crimson',
+     confidence: { series: 94, colour: 89 },
+     status: 'Approved', humanReviewRequired: false, reasons: []
+   });
+@@ -62,7 +62,7 @@ test('empty approved lists are valid configuration, never approval', () => {
+   const registry = { ...registryFixture(), series: [], colours: [], approvedVariants: [] };
+   assert.deepEqual(validateRegistry(registry), []);
+   const result = evaluateNaming(candidateFixture(), registry);
+-  assertReview(result, 'SERIES NOT IDENTIFIED — HUMAN REVIEW REQUIRED');
++  assertReview(result, 'SERIES NOT IDENTIFIED: HUMAN REVIEW REQUIRED');
+   assert.equal(result.series, null);
+   assert.equal(result.colour, null);
+   assert.deepEqual(result.confidence, { series: null, colour: null });
+@@ -80,7 +80,7 @@ test('series comes first; an approved colour cannot rescue an unknown series', (
+ test('unknown colours keep the known series but never produce a final name', () => {
+   for (const colourId of [null, undefined, 'red', 'Royal Crimson', 'ROYAL-CRIMSON', 'royal-crimson ']) {
+     const result = evaluateNaming({ ...candidateFixture(), colourId }, registryFixture());
+-    assertReview(result, 'COLOUR NOT IDENTIFIED — HUMAN REVIEW REQUIRED');
++    assertReview(result, 'COLOUR NOT IDENTIFIED: HUMAN REVIEW REQUIRED');
+     assert.equal(result.series, 'Shobha Series');
+     assert.equal(result.confidence.series, 94);
+     assert.equal(result.colour, null);
+@@ -90,7 +90,7 @@ test('unknown colours keep the known series but never produce a final name', ()
+ test('individually approved names do not imply an approved pairing', () => {
+   for (const changes of [{ seriesId: 'fixture-second' }, { colourId: 'fixture-colour' }]) {
+     assertReview(evaluateNaming({ ...candidateFixture(), ...changes }, registryFixture()),
+-      'COMBINATION NOT APPROVED — HUMAN REVIEW REQUIRED');
++      'COMBINATION NOT APPROVED: HUMAN REVIEW REQUIRED');
+   }
+ });
+ 
+@@ -146,13 +146,13 @@ test('missing confidence/evidence objects, stale revisions and ambiguous assessm
+ 
+ test('supplied names or approval status cannot override the gate', () => {
+   const candidate = { ...candidateFixture(), series: 'Invented', colour: 'Red', finalProductName: 'Invented Name', status: 'Approved' };
+-  assert.equal(evaluateNaming(candidate, registryFixture()).finalProductName, 'Shobha Series — Royal Crimson');
++  assert.equal(evaluateNaming(candidate, registryFixture()).finalProductName, 'Shobha Series, Royal Crimson');
+   candidate.seriesId = 'not-approved';
+   assertReview(evaluateNaming(candidate, registryFixture()), STATUS.SERIES);
+ });
+ 
+ test('malformed/missing candidate data never crashes or guesses', () => {
+-  for (const candidate of [null, undefined, 'Shobha Series — Royal Crimson', [], 42, true, {}]) {
++  for (const candidate of [null, undefined, 'Shobha Series, Royal Crimson', [], 42, true, {}]) {
+     assertReview(evaluateNaming(candidate, registryFixture()), STATUS.SERIES);
+   }
+ });
+@@ -236,11 +236,11 @@ test('only fully validated canonical catalogue records count as approved', () =>
+ 
+ test('catalogue spelling, punctuation, order and suffix must match exactly', () => {
+   const invalidTitles = [
+-    'SHOBHA SERIES — Royal Crimson', 'Shobha Series - Royal Crimson',
+-    'Shobha Series – Royal Crimson', 'Royal Crimson — Shobha Series',
+-    'Shobha Series — Royal Red', 'Shobha Series Series — Royal Crimson',
+-    'Shobha Series —  Royal Crimson', ' Shobha Series — Royal Crimson',
+-    'Shobha Collection — Royal Crimson'
++    'SHOBHA SERIES, Royal Crimson', 'Shobha Series - Royal Crimson',
++    'Shobha Series – Royal Crimson', 'Royal Crimson, Shobha Series',
++    'Shobha Series, Royal Red', 'Shobha Series Series, Royal Crimson',
++    'Shobha Series,  Royal Crimson', ' Shobha Series, Royal Crimson',
++    'Shobha Collection, Royal Crimson'
+   ];
+   for (const title of invalidTitles) {
+     const report = validateCatalogue({ products: [{ ...namedProduct(), title }] }, registryFixture());
+@@ -252,7 +252,7 @@ test('catalogue spelling, punctuation, order and suffix must match exactly', ()
+ 
+ test('unregistered series-style titles and unresolved naming metadata cannot pass migration checks', () => {
+   for (const product of [
+-    { id: 1, title: 'Shobha Series — Royal Crimson' },
++    { id: 1, title: 'Shobha Series, Royal Crimson' },
+     { id: 1, title: 'Invented SERIES - Red' },
+     { id: 1, title: 'Legacy title', naming: null },
+     { ...namedProduct(), naming: { ...candidateFixture(), requiresReview: true } }

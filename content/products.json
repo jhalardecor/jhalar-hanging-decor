@@ -143,7 +143,7 @@
       "title": "Kusum Series, Golden Marigold",
       "category": "Floral Jhalars",
       "description": "Golden marigold-style floral clusters with white accents and bead drops.",
-      "sourceImage": "assets/images/products/Kusum Series – Golden Marigold.jpg",
+      "sourceImage": "assets/images/products/Kusum Series, Golden Marigold.jpg",
       "image": "assets/images/products/catalogue/jh-001.webp",
       "naming": {
         "registryVersion": "2026-09-07.1",
@@ -166,7 +166,7 @@
       "title": "Sangam Series, Royal Crimson",
       "category": "Floral Jhalars",
       "description": "White floral sections with red clusters and green separators.",
-      "sourceImage": "assets/images/products/Sangam Series – Royal Crimson.jpg",
+      "sourceImage": "assets/images/products/Sangam Series, Royal Crimson.jpg",
       "image": "assets/images/products/catalogue/jh-012.webp",
       "naming": {
         "registryVersion": "2026-09-07.1",
@@ -258,7 +258,7 @@
       "title": "Madhavi Series, Green, Red & White",
       "category": "Floral Jhalars",
       "description": "Green, red and white floral sections arranged in a vertical hanging.",
-      "sourceImage": "assets/images/products/Madhavi Series – green red & White.jpg",
+      "sourceImage": "assets/images/products/Madhavi Series, Green, Red & White.jpg",
       "image": "assets/images/products/catalogue/jh-008.webp",
       "naming": {
         "registryVersion": "2026-09-07.1",
@@ -349,8 +349,8 @@
       "id": 13,
       "title": "Shobha Series, Blue, Yellow & White",
       "category": "Floral Jhalars",
-      "description": "Blue and yellow floral sections with small white flower details.",
-      "sourceImage": "assets/images/products/Shobha Series – Blue Yellow & White.jpg",
+      "description": "Blue, yellow and white floral sections with small flower details.",
+      "sourceImage": "assets/images/products/Shobha Series, Blue, Yellow & White.jpg",
       "image": "assets/images/products/catalogue/jh-013.webp",
       "naming": {
         "registryVersion": "2026-09-07.1",
@@ -373,7 +373,7 @@
       "title": "Kusum Series, Pearl White",
       "category": "Floral Jhalars",
       "description": "White and cream floral clusters with light-green accents and matching bead drops.",
-      "sourceImage": "assets/images/products/Kusum Series – Pearl White.jpg",
+      "sourceImage": "assets/images/products/Kusum Series, Pearl White.jpg",
       "image": "assets/images/products/catalogue/jh-002.webp",
       "naming": {
         "registryVersion": "2026-09-07.1",
@@ -396,7 +396,7 @@
       "title": "Kusum Series, Rani Pink",
       "category": "Floral Jhalars",
       "description": "Rani pink floral clusters with small white accents and matching bead drops.",
-      "sourceImage": "assets/images/products/Kusum Series – Rani Pink.jpg",
+      "sourceImage": "assets/images/products/Kusum Series, Rani Pink.jpg",
       "image": "assets/images/products/catalogue/jh-003.webp",
       "naming": {
         "registryVersion": "2026-09-07.1",
@@ -419,7 +419,7 @@
       "title": "Kusum Series, Ruby Red",
       "category": "Floral Jhalars",
       "description": "Ruby red floral clusters with contrasting accents and bead drops.",
-      "sourceImage": "assets/images/products/Kusum Series – Ruby Red.jpg",
+      "sourceImage": "assets/images/products/Kusum Series, Ruby Red.jpg",
       "image": "assets/images/products/catalogue/jh-004.webp",
       "naming": {
         "registryVersion": "2026-09-07.1",
@@ -439,10 +439,10 @@
     },
     {
       "id": 5,
-      "title": "Kusum Series, dark pink",
+      "title": "Kusum Series, Dark Pink",
       "category": "Floral Jhalars",
       "description": "Dark pink floral clusters arranged in a full hanging strand.",
-      "sourceImage": "assets/images/products/Kusum Series – dark pink.jpg",
+      "sourceImage": "assets/images/products/Kusum Series, Dark Pink.jpg",
       "image": "assets/images/products/catalogue/jh-005.webp",
       "naming": {
         "registryVersion": "2026-09-07.1",
@@ -465,7 +465,7 @@
       "title": "Madhavi Series, Blue Orange & White",
       "category": "Floral Jhalars",
       "description": "Blue, orange and white floral sections arranged in a vertical hanging.",
-      "sourceImage": "assets/images/products/Madhavi Series – Blue Orange & White.jpg",
+      "sourceImage": "assets/images/products/Madhavi Series, Blue Orange & White.jpg",
       "image": "assets/images/products/catalogue/jh-006.webp",
       "naming": {
         "registryVersion": "2026-09-07.1",
@@ -488,7 +488,7 @@
       "title": "Madhavi Series, Yellow Green & White",
       "category": "Floral Jhalars",
       "description": "Yellow, green and white floral sections with a matching floral finish.",
-      "sourceImage": "assets/images/products/Madhavi Series – Yellow Green & White.jpg",
+      "sourceImage": "assets/images/products/Madhavi Series, Yellow Green & White.jpg",
       "image": "assets/images/products/catalogue/jh-007.webp",
       "naming": {
         "registryVersion": "2026-09-07.1",
@@ -511,7 +511,7 @@
       "title": "Mandira Series, Saffron Green",
       "category": "Floral Jhalars",
       "description": "Saffron and green floral sections with decorative details along the strand.",
-      "sourceImage": "assets/images/products/Mandira Series – Saffron Green.jpg",
+      "sourceImage": "assets/images/products/Mandira Series, Saffron Green.jpg",
       "image": "assets/images/products/catalogue/jh-009.webp",
       "naming": {
         "registryVersion": "2026-09-07.1",
@@ -534,7 +534,7 @@
       "title": "Sangam Series, Kesari Bloom",
       "category": "Floral Jhalars",
       "description": "Kesari-toned floral sections arranged in a traditional hanging design.",
-      "sourceImage": "assets/images/products/Sangam Series – Kesari Bloom.jpg",
+      "sourceImage": "assets/images/products/Sangam Series, Kesari Bloom.jpg",
       "image": "assets/images/products/catalogue/jh-010.webp",
       "naming": {
         "registryVersion": "2026-09-07.1",
@@ -557,7 +557,7 @@
       "title": "Sangam Series, Rose Pink",
       "category": "Floral Jhalars",
       "description": "Rose pink floral sections with contrasting details and bead drops.",
-      "sourceImage": "assets/images/products/Sangam Series – Rose Pink.jpg",
+      "sourceImage": "assets/images/products/Sangam Series, Rose Pink.jpg",
       "image": "assets/images/products/catalogue/jh-011.webp",
       "naming": {
         "registryVersion": "2026-09-07.1",
@@ -580,7 +580,7 @@
       "title": "Shobha Series, Red Green & White",
       "category": "Floral Jhalars",
       "description": "Red and green floral sections with white accents and floral drops.",
-      "sourceImage": "assets/images/products/Shobha Series – Red Green & White.jpg",
+      "sourceImage": "assets/images/products/Shobha Series, Red Green & White.jpg",
       "image": "assets/images/products/catalogue/jh-014.webp",
       "naming": {
         "registryVersion": "2026-09-07.1",
@@ -787,7 +787,7 @@
       "title": "Shobha Series, Red Yellow & White",
       "category": "Floral Jhalars",
       "description": "Red, yellow and white floral sections arranged in a traditional hanging.",
-      "sourceImage": "assets/images/products/Shobha Series – Red Yellow & White.jpg",
+      "sourceImage": "assets/images/products/Shobha Series, Red Yellow & White.jpg",
       "image": "assets/images/products/catalogue/jh-035.webp",
       "naming": {
         "registryVersion": "2026-09-07.1",

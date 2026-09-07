@@ -51,7 +51,7 @@ test('the two owner-requested separate Shobha entries retain distinct references
   const a = catalogue.products.find(product => product.id === 27);
   const b = catalogue.products.find(product => product.id === 35);
   assert.ok(a && b);
-  assert.equal(a.title, 'Shobha Series — Red Yellow & White');
+  assert.equal(a.title, 'Shobha Series, Red Yellow & White');
   assert.equal(b.title, a.title);
   assert.notEqual(a.image, b.image);
   assert.notEqual(a.sourceImage, b.sourceImage);
