@@ -1353,3 +1353,35 @@ p,.section-head>p,.hero-banner-copy>p:not(.kicker){letter-spacing:.006em}
         rgba(248,222,211,.12) 100%)!important;
   }
 }
+
+
+/* MOBILE HERO — reverse-direction contrast field */
+@media(max-width:760px){
+  .hero-banner-shade{
+    background:linear-gradient(0deg,
+      rgba(255,250,245,.985) 0%,
+      rgba(255,247,241,.95) 30%,
+      rgba(252,232,222,.72) 55%,
+      rgba(248,222,211,.25) 76%,
+      rgba(248,222,211,0) 100%)!important;
+  }
+}
+
+/* POPUP MEDIA SAFE GUTTER — viewport frame is never consumed by zoom */
+#product-modal .modal-stage{
+  padding:28px!important;
+  box-sizing:border-box!important;
+  overflow:hidden!important;
+}
+#product-modal .modal-stage::before{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  pointer-events:none!important;
+  z-index:5!important;
+  box-shadow:inset 0 0 0 28px var(--cream)!important;
+}
+@media(max-width:760px){
+  #product-modal .modal-stage{padding:18px!important}
+  #product-modal .modal-stage::before{box-shadow:inset 0 0 0 18px var(--cream)!important}
+}
