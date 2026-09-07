@@ -1171,3 +1171,63 @@ p,.section-head>p,.hero-banner-copy>p:not(.kicker){letter-spacing:.006em}
   .hero-banner h1{font-size:2.45rem!important;max-width:12ch!important}
   .hero-lead{max-width:31ch!important}
 }
+
+
+/* MOBILE HEADER COMPOSITION — one stable alignment system */
+@media(max-width:760px){
+  .header{
+    height:64px!important;
+    min-height:64px!important;
+    background:rgba(255,250,247,.96)!important;
+    backdrop-filter:blur(14px)!important;
+  }
+  .header .header-row{
+    height:64px!important;
+    min-height:64px!important;
+    margin:0!important;
+    padding:0 20px!important;
+    width:100%!important;
+    box-sizing:border-box!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:space-between!important;
+  }
+  .header .brand{
+    width:116px!important;
+    height:32px!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:flex-start!important;
+    margin:0!important;
+  }
+  .header .brand img{
+    width:100px!important;
+    max-width:100px!important;
+    height:auto!important;
+    max-height:28px!important;
+    object-fit:contain!important;
+    object-position:left center!important;
+  }
+  .header .menu{
+    width:40px!important;
+    height:40px!important;
+    min-width:40px!important;
+    padding:0!important;
+    margin:0!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    gap:6px!important;
+    border-radius:50%!important;
+  }
+  .header .menu i{
+    width:17px!important;
+    height:1.5px!important;
+    margin:0!important;
+  }
+}
+@media(max-width:380px){
+  .header .header-row{padding-inline:16px!important}
+  .header .brand{width:108px!important}
+  .header .brand img{width:94px!important;max-width:94px!important}
+}
