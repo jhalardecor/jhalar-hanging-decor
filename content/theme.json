@@ -1,19 +1,19 @@
 {
   "colors": {
-    "--brand-primary": "#6B2136",
-    "--brand-primary-dark": "#42101F",
-    "--brand-primary-light": "#C8909A",
-    "--brand-accent": "#B48A52",
-    "--brand-cream": "#F4EEE4",
-    "--brand-background": "#FCFAF5",
-    "--brand-alt-background": "#ECE1D1",
-    "--brand-text": "#2F1E25",
-    "--brand-muted": "#7D6C72",
-    "--brand-heading": "#2F1E25",
-    "--brand-border": "#E6DACB",
-    "--brand-header-background": "#FCFAF5",
-    "--brand-footer-background": "#2C1220",
-    "--brand-footer-text": "#FCFAF5"
+    "--brand-primary": "#C82039",
+    "--brand-primary-dark": "#901728",
+    "--brand-primary-light": "#F1B4BD",
+    "--brand-accent": "#C82039",
+    "--brand-cream": "#FFFAF1",
+    "--brand-background": "#FFFAF1",
+    "--brand-alt-background": "#FCF4E9",
+    "--brand-text": "#141942",
+    "--brand-muted": "#424564",
+    "--brand-heading": "#141942",
+    "--brand-border": "#E9DCCD",
+    "--brand-header-background": "#FFFAF1",
+    "--brand-footer-background": "#0E1232",
+    "--brand-footer-text": "#FFFAF1"
   },
   "fonts": {
     "heading": "Mogranx, Arial, sans-serif",
