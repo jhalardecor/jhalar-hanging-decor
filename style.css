@@ -1107,3 +1107,22 @@ p,.section-head>p,.hero-banner-copy>p:not(.kicker){letter-spacing:.006em}
   max-width:100%!important;
   max-height:100%!important;
 }
+
+
+/* EXPERT MEDIA VIEWER RESET
+   Keep the product composition stable. Zoom is progressive disclosure, not a layout change. */
+#product-modal .modal-stage{
+  overflow:hidden!important;
+  isolation:isolate!important;
+}
+#product-modal .modal-stage #modal-photo{
+  width:auto!important;
+  height:auto!important;
+  max-width:100%!important;
+  max-height:100%!important;
+  object-fit:contain!important;
+  transform-origin:center center!important;
+}
+#product-modal .modal-stage.is-zoomed #modal-photo{
+  cursor:grab!important;
+}
