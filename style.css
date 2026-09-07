@@ -1126,3 +1126,48 @@ p,.section-head>p,.hero-banner-copy>p:not(.kicker){letter-spacing:.006em}
 #product-modal .modal-stage.is-zoomed #modal-photo{
   cursor:grab!important;
 }
+
+
+/* MOBILE HERO TYPOGRAPHY — balanced line breaks, no artificial empty column */
+@media(max-width:760px){
+  .hero-banner-content{
+    min-height:min(680px,100svh)!important;
+    padding-top:96px!important;
+    padding-bottom:32px!important;
+    display:flex!important;
+    flex-direction:column!important;
+    justify-content:flex-end!important;
+  }
+  .hero-banner-copy{
+    width:100%!important;
+    max-width:none!important;
+  }
+  .hero-banner-copy .kicker{
+    max-width:34ch!important;
+    margin-bottom:14px!important;
+    line-height:1.35!important;
+  }
+  .hero-banner h1{
+    max-width:11ch!important;
+    font-size:clamp(2.5rem,11vw,4rem)!important;
+    line-height:.98!important;
+    text-wrap:balance!important;
+    margin-bottom:16px!important;
+  }
+  .hero-banner h1 em{white-space:normal!important}
+  .hero-lead{
+    max-width:34ch!important;
+    font-size:clamp(.98rem,4vw,1.08rem)!important;
+    line-height:1.55!important;
+    text-wrap:pretty!important;
+    margin-bottom:22px!important;
+  }
+  .hero-banner-cta{
+    align-self:flex-start!important;
+    white-space:nowrap!important;
+  }
+}
+@media(max-width:380px){
+  .hero-banner h1{font-size:2.45rem!important;max-width:12ch!important}
+  .hero-lead{max-width:31ch!important}
+}
