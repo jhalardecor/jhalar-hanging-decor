@@ -835,7 +835,8 @@ img,video,svg{max-width:100%}
 .hero-banner-media img{width:100%!important;height:100%!important;display:block!important;object-fit:cover!important;object-position:center!important}
 .hero-banner-shade{
   position:absolute!important;inset:0!important;z-index:-1!important;
-  background:linear-gradient(0deg,#FFFAF1 0%,rgba(255,250,241,.94) 28%,rgba(255,250,241,.58) 48%,rgba(255,250,241,.14) 70%,rgba(255,250,241,0) 100%)!important;
+  /* 90deg vertical hero readability overlay: cream solid at bottom, transparent at top */
+  background:linear-gradient(to top,#FFFAF1 0%,#FFFAF1 24%,rgba(255,250,241,.88) 42%,rgba(255,250,241,.45) 62%,rgba(255,250,241,0) 100%)!important;
 }
 .hero-banner-content.shell{
   position:relative!important;inset:auto!important;grid-area:1/1!important;z-index:2!important;
