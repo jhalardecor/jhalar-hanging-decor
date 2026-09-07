@@ -1992,3 +1992,38 @@ button,.btn,.hero-banner-cta,.filter-btn{
   }
   .footer.site-footer .footer-bottom p{font-size:.56rem!important}
 }
+
+
+/* CONTACT CTA — PREMIUM RED ACTION */
+.contact.section .contact-cta{
+  position:relative!important;
+  min-width:270px!important;
+  min-height:60px!important;
+  padding:0 24px 0 28px!important;
+  border:1px solid rgba(255,250,241,.28)!important;
+  background:linear-gradient(135deg,#C82039 0%,#A71931 58%,#622331 100%)!important;
+  color:#FFFAF1!important;
+  box-shadow:0 16px 34px rgba(98,35,49,.22), inset 0 1px 0 rgba(255,250,241,.22)!important;
+  letter-spacing:.01em!important;
+}
+.contact.section .contact-cta::before{
+  content:"";
+  position:absolute;
+  inset:1px;
+  pointer-events:none;
+  background:linear-gradient(110deg,rgba(255,255,255,.14),transparent 42%);
+}
+.contact.section .contact-cta-label,.contact.section .contact-cta-arrow{position:relative;z-index:1}
+.contact.section .contact-cta-arrow{
+  width:30px;height:30px;
+  display:grid;place-items:center;
+  border:1px solid rgba(255,250,241,.38);
+  border-radius:50%;
+}
+.contact.section .contact-cta:hover{
+  background:linear-gradient(135deg,#A71931 0%,#622331 100%)!important;
+  box-shadow:0 20px 42px rgba(98,35,49,.30), inset 0 1px 0 rgba(255,250,241,.18)!important;
+}
+@media(max-width:760px){
+ .contact.section .contact-cta{width:100%!important;min-width:0!important;min-height:58px!important}
+}
