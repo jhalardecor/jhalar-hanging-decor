@@ -1231,3 +1231,23 @@ p,.section-head>p,.hero-banner-copy>p:not(.kicker){letter-spacing:.006em}
   .header .brand{width:108px!important}
   .header .brand img{width:94px!important;max-width:94px!important}
 }
+
+
+/* MOBILE HERO PROPORTION — dedicated portrait composition */
+@media(max-width:760px){
+  .hero-banner{
+    aspect-ratio:4 / 5!important;
+    min-height:560px!important;
+    max-height:720px!important;
+  }
+  .hero-banner-content{
+    min-height:100%!important;
+    height:100%!important;
+  }
+}
+@media(max-width:380px){
+  .hero-banner{
+    aspect-ratio:3 / 4!important;
+    min-height:520px!important;
+  }
+}
