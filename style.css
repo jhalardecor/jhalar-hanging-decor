@@ -663,3 +663,18 @@ body{overflow-x:hidden}
   .hero-banner h1{font-size:2.65rem}
   .hero-banner-bottom{font-size:.72rem}
 }
+
+
+/* Final modal media behavior: images stay images, no visible zoom UI. */
+.modal-zoom-controls{display:none!important}
+#product-modal .modal-stage>img[hidden],
+#product-modal .modal-stage>video[hidden]{display:none!important}
+#product-modal .modal-stage:not(.is-video)>img{display:block!important}
+#product-modal .modal-stage:not(.is-video)>video{display:none!important}
+#product-modal .modal-stage.is-video>img{display:none!important}
+#product-modal .modal-stage.is-video>video{display:block!important}
+@media(hover:hover) and (pointer:fine){
+ #product-modal .modal-stage:not(.is-video){cursor:zoom-in}
+ #product-modal .modal-stage.is-zoomed:not(.is-video){cursor:zoom-out}
+ #product-modal .modal-stage:not(.is-video)>img{cursor:inherit}
+}
