@@ -1406,3 +1406,24 @@ p,.section-head>p,.hero-banner-copy>p:not(.kicker){letter-spacing:.006em}
   -webkit-user-drag:none!important;
   user-select:none!important;
 }
+
+
+/* HEADER PROPORTION REFINEMENT — reduce mobile header height */
+@media(max-width:760px){
+  .header,
+  .header .header-row{
+    height:64px!important;
+    min-height:64px!important;
+  }
+  .header .brand{height:34px!important}
+  .header .brand img{
+    width:104px!important;
+    max-width:104px!important;
+    max-height:29px!important;
+  }
+  .header .menu{
+    width:42px!important;
+    height:42px!important;
+    min-width:42px!important;
+  }
+}
