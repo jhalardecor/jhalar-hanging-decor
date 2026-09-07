@@ -6,10 +6,10 @@
 // derived only for validation and tooling so same-name entries such as JH-027
 // and JH-035 can be told apart; they are never rendered on the public site.
 const STATUS = Object.freeze({
-  DATABASE: 'NAMING DATABASE UNAVAILABLE — HUMAN REVIEW REQUIRED',
-  SERIES: 'SERIES NOT IDENTIFIED — HUMAN REVIEW REQUIRED',
-  COLOUR: 'COLOUR NOT IDENTIFIED — HUMAN REVIEW REQUIRED',
-  VARIANT: 'COMBINATION NOT APPROVED — HUMAN REVIEW REQUIRED',
+  DATABASE: 'NAMING DATABASE UNAVAILABLE: HUMAN REVIEW REQUIRED',
+  SERIES: 'SERIES NOT IDENTIFIED: HUMAN REVIEW REQUIRED',
+  COLOUR: 'COLOUR NOT IDENTIFIED: HUMAN REVIEW REQUIRED',
+  VARIANT: 'COMBINATION NOT APPROVED: HUMAN REVIEW REQUIRED',
   REVIEW: 'HUMAN REVIEW REQUIRED',
   APPROVED: 'Approved'
 });
@@ -118,7 +118,7 @@ function evaluateNaming(candidate, registry) {
   }
   if(input.requiresReview!==false) result.reasons.push(input.requiresReview===true?'The supplied assessment requires human review.':'Explicit review clearance is missing.');
   if(result.reasons.length){result.status=STATUS.REVIEW;return result;}
-  result.finalProductName=`${series.name} — ${colour.name}`;result.status=STATUS.APPROVED;result.humanReviewRequired=false;return result;
+  result.finalProductName=`${series.name}, ${colour.name}`;result.status=STATUS.APPROVED;result.humanReviewRequired=false;return result;
 }
 
 function validateCatalogue(catalogue, registry) {
@@ -153,7 +153,7 @@ function run(args){
   if(args.includes('--help')){console.log('Usage: node scripts/product-naming.js [--strict] [--json]');return;}
   let report; try{const root=path.resolve(__dirname,'..');const registry=JSON.parse(fs.readFileSync(path.join(root,'content/product-naming.json'),'utf8'));const catalogue=JSON.parse(fs.readFileSync(path.join(root,'content/products.json'),'utf8'));report=validateCatalogue(catalogue,registry);}catch(error){report={registryVersion:null,confidenceThreshold:null,approvedCount:0,reviewCount:0,errors:[error.message],products:[]};}
   const failed=report.errors.length>0||(args.includes('--strict')&&report.reviewCount>0);
-  if(args.includes('--json')) console.log(JSON.stringify(report,null,2)); else {for(const error of report.errors) console.error(`FAIL: ${error}`);console.log(`NAMING CHECK ${failed?'FAIL':'PASS'} — ${report.approvedCount} approved; ${report.reviewCount} require human review.`);if(!args.includes('--strict')&&report.reviewCount>0) console.log(`Pending records are incomplete naming migrations, not naming approval — each needs owner review before it can be published.`);}
+  if(args.includes('--json')) console.log(JSON.stringify(report,null,2)); else {for(const error of report.errors) console.error(`FAIL: ${error}`);console.log(`NAMING CHECK ${failed?'FAIL':'PASS'}: ${report.approvedCount} approved; ${report.reviewCount} require human review.`);if(!args.includes('--strict')&&report.reviewCount>0) console.log(`Pending records are incomplete naming migrations, not naming approval: each needs owner review before it can be published.`);}
   process.exitCode=failed?1:0;
 }
 const api=Object.freeze({STATUS,validateRegistry,evaluateNaming,validateCatalogue,productReference});
