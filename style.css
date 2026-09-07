@@ -1000,3 +1000,23 @@ p,.section-head>p,.hero-banner-copy>p:not(.kicker){letter-spacing:.006em}
     -webkit-touch-callout:none!important;
   }
 }
+
+
+/* MOBILE HERO GRADIENT — restore dedicated portrait composition */
+@media(max-width:760px){
+  .hero-banner{position:relative!important;overflow:hidden!important}
+  .hero-banner-shade{
+    display:block!important;
+    position:absolute!important;
+    inset:0!important;
+    z-index:1!important;
+    background:
+      linear-gradient(180deg,
+        rgba(255,250,241,.97) 0%,
+        rgba(255,250,241,.91) 28%,
+        rgba(255,244,237,.72) 52%,
+        rgba(255,238,229,.38) 72%,
+        rgba(255,250,241,.08) 100%)!important;
+  }
+  .hero-banner-copy{position:relative!important;z-index:2!important}
+}
