@@ -856,3 +856,14 @@ body{font-size:var(--text-base);line-height:var(--leading-copy)}
 .product-title{
  letter-spacing:0!important;
 }
+
+
+/* FINAL FONT AUTHORITY — remove legacy family overrides and keep one source of truth */
+:root{--font-body:Arial,Helvetica,sans-serif;--font-heading:Mogranx,Arial,sans-serif}
+html,body,button,input,textarea,select{font-family:var(--font-body)!important;font-synthesis:none}
+h1,h2,h3,h4,h5,h6,
+.hero-banner-copy h1,.section-heading-group h2,.custom-copy h2,.story-copy h2,
+.contact-box h2,.modal-copy h3{
+ font-family:var(--font-heading)!important;
+ font-synthesis:none;
+}
