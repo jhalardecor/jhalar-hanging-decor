@@ -2308,3 +2308,61 @@ button:not(.filter-btn),
     box-sizing:border-box!important;
   }
 }
+
+
+/* FINAL BUTTON CORRECTION — restore real CTAs, no arrows, no underlines */
+.hero-banner-cta,
+.contact-cta,
+.modal-wa-btn,
+.more-btn{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  text-decoration:none!important;
+  border-bottom:0!important;
+  border-radius:2px!important;
+  min-height:46px!important;
+  padding:0 22px!important;
+  font-family:var(--font-body)!important;
+  font-weight:600!important;
+  letter-spacing:.01em!important;
+  white-space:normal!important;
+}
+.hero-banner-cta{
+  background:var(--red)!important;
+  color:var(--surface)!important;
+  border:1px solid var(--red)!important;
+}
+.hero-banner-cta:hover{
+  background:var(--red-deep)!important;
+  color:var(--surface)!important;
+  border-color:var(--red-deep)!important;
+}
+.contact-cta,.modal-wa-btn{
+  background:var(--brand-gradient)!important;
+  color:var(--surface)!important;
+  border:1px solid transparent!important;
+}
+.more-btn{
+  background:var(--surface)!important;
+  color:var(--heritage)!important;
+  border:1px solid rgba(98,35,49,.35)!important;
+}
+.more-btn:hover{
+  background:var(--heritage)!important;
+  color:var(--surface)!important;
+  border-color:var(--heritage)!important;
+}
+.hero-banner-cta::before,.hero-banner-cta::after,
+.contact-cta::before,.contact-cta::after,
+.modal-wa-btn::before,.modal-wa-btn::after,
+.more-btn::before,.more-btn::after{
+  content:none!important;
+}
+@media(max-width:760px){
+  .hero-banner-cta,.contact-cta,.modal-wa-btn,.more-btn{
+    width:100%!important;
+    max-width:100%!important;
+    box-sizing:border-box!important;
+  }
+}
