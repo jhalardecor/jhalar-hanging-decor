@@ -1016,3 +1016,20 @@ p,.section-head>p,.hero-banner-copy>p:not(.kicker){letter-spacing:.006em}
     will-change:transform;
   }
 }
+
+
+/* ZOOM UX RESET — one coherent gesture model */
+@media(max-width:760px){
+  #product-modal .modal-stage{
+    touch-action:pan-y pinch-zoom!important;
+    overscroll-behavior:contain!important;
+  }
+  #product-modal .modal-stage>img{
+    cursor:default!important;
+    transition:transform .16s ease-out;
+  }
+}
+@media(min-width:761px){
+  #product-modal .modal-stage:not(.is-video){cursor:zoom-in!important}
+  #product-modal .modal-stage.is-zoomed:not(.is-video){cursor:grab!important}
+}
