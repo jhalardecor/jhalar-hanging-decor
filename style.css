@@ -2050,3 +2050,28 @@ button:not(.filter-btn),
 @media(max-width:760px){
  .contact.section .contact-cta{width:100%!important;min-width:0!important}
 }
+
+
+/* FILTER RAIL — canonical horizontal auto-advance on touch devices */
+@media (max-width:760px){
+  .filters-wrap{
+    margin-inline:calc(var(--gutter) * -1)!important;
+    overflow:hidden!important;
+  }
+  #product-filters.filters{
+    display:flex!important;
+    flex-wrap:nowrap!important;
+    overflow-x:auto!important;
+    overflow-y:hidden!important;
+    -webkit-overflow-scrolling:touch!important;
+    scroll-behavior:smooth!important;
+    scroll-snap-type:x proximity!important;
+    overscroll-behavior-inline:contain!important;
+    padding:0 var(--gutter) 10px!important;
+    gap:8px!important;
+  }
+  #product-filters .filter-btn{
+    flex:0 0 auto!important;
+    scroll-snap-align:center!important;
+  }
+}
