@@ -92,7 +92,36 @@ h1,h2,h3,h4,h5,h6,.hero-banner-copy h1,.section-heading-group h2,.custom-copy h2
 .story{background:var(--paper)}.story-copy{order:-1}
 
 /* 09. CONTACT + FOOTER */
-.contact{padding-block:0;background:var(--navy);color:var(--paper)}.contact-box{min-height:360px;padding-block:clamp(64px,9vw,110px);display:flex;align-items:end;justify-content:space-between;gap:40px}.light-eyebrow{color:#e7c9b8}.contact-box p:not(.eyebrow){max-width:48ch;margin-bottom:0;color:rgba(255,250,241,.78)}.contact-cta{display:inline-flex;align-items:center;gap:18px;flex:0 0 auto;border-bottom:1px solid currentColor;padding-bottom:8px;font-weight:700}.contact-cta span{font-size:1.2em}
+.contact{padding-block:0;background:transparent;color:var(--ink)}
+.contact-box{
+ width:var(--shell);margin-inline:auto;min-height:360px;
+ display:flex;align-items:end;justify-content:space-between;
+ padding-block:clamp(64px,9vw,110px);gap:40px;
+ position:relative;isolation:isolate;overflow:hidden;
+ background:
+  radial-gradient(120% 160% at 0% 0%,rgba(200,32,57,.12) 0%,rgba(200,32,57,0) 52%),
+  radial-gradient(90% 140% at 100% 100%,rgba(98,35,49,.14) 0%,rgba(98,35,49,0) 58%),
+  linear-gradient(135deg,#FFFDF8 0%,#FFFAF1 42%,#FDF4F1 100%);
+ border:1px solid rgba(98,35,49,.13);
+ box-shadow:0 24px 70px rgba(20,25,66,.09)
+}
+.light-eyebrow{color:var(--red)}
+.contact-box h2{color:var(--heritage);max-width:11ch}
+.contact-box p:not(.eyebrow){max-width:48ch;margin-bottom:0;color:var(--ink-soft)}
+.contact-cta{
+ display:inline-flex;align-items:center;justify-content:center;gap:18px;flex:0 0 auto;
+ min-height:52px;padding:0 0 8px;border-bottom:1px solid var(--heritage);
+ color:var(--heritage);font-weight:700;transition:color var(--motion-fast) var(--ease),gap var(--motion-fast) var(--ease)
+}
+.contact-cta:hover{color:var(--red-deep);gap:24px}
+.contact-cta span{font-size:1.2em;transition:transform var(--motion-fast) var(--ease)}
+.contact-cta:hover span{transform:translate(2px,-2px)}
+@media (max-width:767px){
+ .contact{padding-inline:0}
+ .contact-box{width:min(calc(100% - 32px),1200px);min-height:0;padding-block:56px;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:28px}
+ .contact-box h2{max-width:12ch}
+ .contact-cta{width:100%;justify-content:space-between;padding-bottom:12px}
+}
 .footer{background:var(--navy);color:rgba(255,250,241,.72);border-top:1px solid rgba(255,250,241,.15)}.footer-row{min-height:110px;display:flex;align-items:center;justify-content:space-between;gap:24px;font-size:.82rem}.footer-brand{display:block;width:120px}.footer-brand img{width:100%}
 
 /* 10. MODAL */
