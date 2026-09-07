@@ -81,10 +81,24 @@ function showModalMedia(i){
  const item=m[state.modalIndex],stage=$('#modal-stage'),photo=$('#modal-photo'),video=$('#modal-video');
  stage.classList.toggle('is-video',item.type==='video');
  if(item.type==='video'){
-   photo.hidden=true;video.hidden=false;video.src=item.src;video.load();
+   // Force a single active media element. Do not rely on the hidden attribute alone.
+   photo.hidden=true;
+   photo.style.display='none';
+   video.hidden=false;
+   video.style.display='block';
+   video.src=item.src;
+   video.load();
  }else{
-   video.pause();video.removeAttribute('src');video.load();video.hidden=true;
-   photo.hidden=false;photo.src=item.src;photo.alt=$('#modal-title')?.textContent||'Product media';
+   // Image product: physically remove the video from the rendered layout.
+   video.pause();
+   video.removeAttribute('src');
+   video.load();
+   video.hidden=true;
+   video.style.display='none';
+   photo.hidden=false;
+   photo.style.display='block';
+   photo.src=item.src;
+   photo.alt=$('#modal-title')?.textContent||'Product media';
  }
  const thumbs=$('#modal-thumbs');
  thumbs.innerHTML=m.length>1?m.map((x,j)=>'<button class="modal-thumb'+(j===state.modalIndex?' active':'')+'" data-thumb="'+j+'">'+(x.type==='video'?'<span>Video</span>':'<img src="'+esc(x.src)+'" alt="">')+'</button>').join(''):'';
