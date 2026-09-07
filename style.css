@@ -251,3 +251,99 @@ h1,h2,h3,h4,h5,h6,.hero-banner-copy h1,.section-heading-group h2,.custom-copy h2
  .hero-banner-shade{background:var(--hero-gradient-mobile)}
  .contact-cta{width:auto;min-width:220px;justify-content:center}
 }
+
+
+/* 16. PRODUCT IMAGE PRESERVATION + PREMIUM MICRO-INTERACTIONS */
+.product-image{
+  aspect-ratio:1 / 1;
+  display:grid;
+  place-items:center;
+  background:var(--surface);
+}
+.product-image img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  object-position:center;
+}
+.product-card:hover .product-image>img:first-child{transform:scale(1.018)}
+.product-image .alt-img{object-fit:contain}
+
+/* Keep every 1:1 catalogue image fully visible inside the product popup. */
+.modal-media{background:var(--surface)}
+.modal-stage{
+  background:var(--surface);
+  padding:clamp(14px,2vw,28px);
+}
+.modal-stage img,.modal-stage video{
+  object-fit:contain;
+  object-position:center;
+  max-width:100%;
+  max-height:100%;
+}
+
+/* Animated close control: tactile X with a Lottie-like micro-motion feel. */
+.modal-close{
+  display:grid;
+  place-items:center;
+  overflow:hidden;
+  transition:background var(--motion-fast) var(--ease),
+             color var(--motion-fast) var(--ease),
+             transform var(--motion-base) var(--ease),
+             box-shadow var(--motion-base) var(--ease);
+}
+.modal-close::before{
+  content:"";
+  position:absolute;
+  inset:5px;
+  border-radius:50%;
+  border:1px solid currentColor;
+  opacity:0;
+  transform:scale(.55) rotate(-35deg);
+  transition:opacity var(--motion-fast) ease,
+             transform var(--motion-base) var(--ease);
+}
+.modal-close:hover{
+  background:var(--heritage);
+  color:var(--surface);
+  transform:rotate(90deg) scale(1.06);
+  box-shadow:0 8px 22px rgba(20,25,66,.18);
+}
+.modal-close:hover::before{
+  opacity:.38;
+  transform:scale(1) rotate(35deg);
+}
+.modal-close:active{transform:rotate(90deg) scale(.9)}
+.modal-close:focus-visible{outline-color:var(--red);outline-offset:3px}
+
+/* Media navigation gets clear tactile feedback. */
+.modal-nav{
+  transition:background var(--motion-fast) var(--ease),
+             color var(--motion-fast) var(--ease),
+             transform var(--motion-base) var(--ease),
+             box-shadow var(--motion-base) var(--ease);
+}
+.modal-nav:hover{transform:translateY(-50%) scale(1.08)}
+.modal-nav:active{transform:translateY(-50%) scale(.92)}
+
+/* Thumbnail selection animates like a compact state transition. */
+.modal-thumb{
+  transition:transform var(--motion-fast) var(--ease),
+             border-color var(--motion-fast) ease,
+             box-shadow var(--motion-fast) ease;
+}
+.modal-thumb:hover{transform:translateY(-3px)}
+.modal-thumb.active{box-shadow:0 5px 16px rgba(20,25,66,.16)}
+
+/* Mobile keeps the full square product visible without crop. */
+@media(max-width:760px){
+  .product-image{aspect-ratio:1 / 1}
+  .product-image img,.product-image .alt-img{object-fit:contain}
+  .modal-stage{padding:14px}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .modal-close:hover,.modal-close:active,
+  .modal-nav:hover,.modal-nav:active,
+  .modal-thumb:hover{transform:none}
+}
