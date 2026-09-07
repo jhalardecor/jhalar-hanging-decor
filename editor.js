@@ -9,7 +9,7 @@ let state = {
   customCSS: '', navItems: [], footerNavItems: [], socialLinks: {},
   imageManifest: [], fontManifest: [], selectedProductId: null, viewport: 'desktop',
   changed: false, githubToken: null, darkMode: false,
-  heroHighlights: [], trustItems: [], faqItems: [], sectionCopy: {}
+  heroHighlights: [], trustItems: [], faqItems: [], sectionCopy: {}, imagePickTarget: null
 };
 
 function defaultSectionCopy() {
@@ -293,6 +293,7 @@ function populateAllForms() {
   setVal('ed-hero-headline', state.settings.heroHeadline||'');
   setVal('ed-hero-intro', state.settings.heroIntro||'');
   setVal('ed-hero-image', state.settings.heroImage||'assets/images/hero-jhalar.jpg');
+  updateHeroImagePreview(state.settings.heroImage||'assets/images/hero-jhalar.jpg');
   const sc = state.sectionCopy || defaultSectionCopy();
   state.sectionCopy = deepMerge(defaultSectionCopy(), sc);
   setVal('ed-hero-primary-label', state.sectionCopy?.heroPrimary?.label||'');
@@ -739,6 +740,31 @@ function importProducts(e) {
 }
 
 // ===== MEDIA =====
+function updateHeroImagePreview(path) {
+  const wrap=document.getElementById('hero-image-preview'), img=document.getElementById('hero-image-preview-img');
+  if(!wrap||!img)return;
+  if(path){img.src=path;wrap.classList.remove('is-empty');}else{img.removeAttribute('src');wrap.classList.add('is-empty');}
+}
+function setHeroImage(path) {
+  if(!path)return;
+  state.settings.heroImage=path;
+  setVal('ed-hero-image',path);
+  updateHeroImagePreview(path);
+  state.imagePickTarget=null;
+  markChanged();saveDrafts();applyPreview();
+  showToast('Hero image selected','success');
+}
+function chooseHeroImage() {
+  state.imagePickTarget='hero';
+  const tab=document.querySelector('.sidebar-tab[data-tab="media"]');
+  if(tab)tab.click();
+  showToast('Choose an image below to use as the hero banner','success');
+}
+function uploadHeroImage() {
+  state.imagePickTarget='hero';
+  const input=document.getElementById('file-input');
+  if(input)input.click();
+}
 function renderMediaGrid() {
   const c = document.getElementById('media-grid'); if (!c) return;
   c.innerHTML = state.imageManifest.map(p => {
@@ -752,6 +778,7 @@ function renderMediaGrid() {
 }
 function selectMedia(path) {
   document.querySelectorAll('.media-item').forEach(el => el.classList.toggle('active', el.querySelector('img')?.src?.includes(path)));
+  if(state.imagePickTarget==='hero'){ setHeroImage(path); const tab=document.querySelector('.sidebar-tab[data-tab="content"]'); if(tab)tab.click(); }
 }
 function triggerUpload() { document.getElementById('file-input').click(); }
 function setupUploadZone() {
@@ -848,6 +875,7 @@ async function handleFiles(files) {
           await createCommitWithRetry(token, [{ path:'assets/images/manifest.json', content: JSON.stringify({images:next},null,2) }], `Update image manifest via editor`);
           state.imageManifest = next;
         }
+        if(state.imagePickTarget==='hero') setHeroImage(path);
         renderMediaGrid();
         populateImageDropdowns();
         showToast(`Uploaded ${file.name}`, 'success');
