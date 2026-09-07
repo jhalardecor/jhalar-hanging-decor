@@ -373,27 +373,29 @@ initProducts();initRuntime();
   const mobileNav=document.getElementById('mobile-nav');
   const menu=document.getElementById('menu');
   if(header){
-    let lastY=window.scrollY, ticking=false, stopTimer=null;
+    let lastY=window.scrollY;
+    let stopTimer=null;
     const showHeader=()=>header.classList.remove('header-hidden');
-    const update=()=>{
+    const onScroll=()=>{
       const y=Math.max(0,window.scrollY);
       const delta=y-lastY;
       header.classList.toggle('scrolled',y>8);
-      if(y<80 || delta<-4) showHeader();
-      else if(delta>6 && y>120 && !(mobileNav&&mobileNav.classList.contains('open'))) header.classList.add('header-hidden');
-      lastY=y;ticking=false;
+      if(y<80 || delta<-2){
+        showHeader();
+      }else if(delta>4 && y>120 && !(mobileNav&&mobileNav.classList.contains('open'))){
+        header.classList.add('header-hidden');
+      }
+      lastY=y;
       clearTimeout(stopTimer);
-      stopTimer=setTimeout(showHeader,180);
+      stopTimer=setTimeout(showHeader,140);
     };
-    // Show the header immediately when scrolling becomes idle.
-    // The debounce is outside requestAnimationFrame so the final scroll event always resets it.
-    window.addEventListener('scroll',()=>{
+    window.addEventListener('scroll',onScroll,{passive:true});
+    window.addEventListener('scrollend',showHeader,{passive:true});
+    window.addEventListener('touchend',()=>{
       clearTimeout(stopTimer);
-      if(!ticking){ticking=true;requestAnimationFrame(update)}
-      stopTimer=setTimeout(showHeader,120);
+      stopTimer=setTimeout(showHeader,60);
     },{passive:true});
-    window.addEventListener('touchend',()=>setTimeout(showHeader,80),{passive:true});
-    update();
+    onScroll();
   }
 
   document.querySelectorAll('.brand[href="#top"],.footer-brand[href="#top"]').forEach(logo=>{
