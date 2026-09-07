@@ -1580,3 +1580,19 @@ function installProStudio(){
   q('studio-reset').onclick=()=>{q('studio-a').value='#FFFDF8';q('studio-b').value='#FDF4F1';q('studio-c').value='#C82039';q('studio-angle').value=135;paint();};
 }
 document.addEventListener('DOMContentLoaded',()=>setTimeout(installProStudio,900));
+
+
+// ===== SHOPIFY-STYLE HERO CONTROLS =====
+function installShopifyHeroControls(){
+ const panel=document.getElementById('panel-sections')||document.getElementById('panel-theme');
+ if(!panel||document.getElementById('shopify-hero-controls'))return;
+ const box=document.createElement('div');box.className='panel-section shopify-controls';box.id='shopify-hero-controls';
+ box.innerHTML='<h4>Hero banner</h4><p>Control the hero independently, similar to a storefront theme editor.</p><div><label>Desktop height</label><div class="choice-grid" id="hero-desktop"><button class="choice-btn" data-v="520">Compact</button><button class="choice-btn active" data-v="640">Standard</button><button class="choice-btn" data-v="760">Tall</button></div></div><div><label>Mobile ratio</label><div class="choice-grid" id="hero-mobile"><button class="choice-btn" data-v="1.00">Square</button><button class="choice-btn active" data-v="1.25">Portrait</button><button class="choice-btn" data-v="1.50">Tall</button></div></div><div><label>Text size</label><div class="range-line"><input id="hero-font-size" type="range" min="32" max="96" value="64"><output id="hero-font-output">64px</output></div></div><div class="studio-actions"><button class="btn-sm primary" id="hero-apply">Apply live</button><button class="btn-sm" id="hero-clear">Reset</button></div>';
+ panel.prepend(box);
+ const bind=(id,key)=>box.querySelectorAll('#'+id+' button').forEach(b=>b.onclick=()=>{box.querySelectorAll('#'+id+' button').forEach(x=>x.classList.remove('active'));b.classList.add('active');box.dataset[key]=b.dataset.v;});
+ bind('hero-desktop','desktop');bind('hero-mobile','mobile');
+ const slider=document.getElementById('hero-font-size'),out=document.getElementById('hero-font-output');slider.oninput=()=>out.textContent=slider.value+'px';
+ document.getElementById('hero-apply').onclick=()=>{const d=box.dataset.desktop||640,m=box.dataset.mobile||1.25,s=slider.value;const css='/* SHOPIFY_HERO */ .hero-banner{min-height:'+d+'px}.hero-banner-copy h1{font-size:clamp(32px,6vw,'+s+'px)}@media(max-width:760px){.hero-banner{min-height:calc(100vw * '+m+');height:calc(100vw * '+m+')}.hero-banner-copy h1{font-size:clamp(32px,11vw,'+Math.min(s,64)+'px)}}';state.customCSS=(state.customCSS||'').replace(/\/\* SHOPIFY_HERO \*[\s\S]*?(?=\/\*|$)/,'')+css;state.changed=true;updateSaveIndicator();applyPreview();showToast('Hero settings applied','success');};
+ document.getElementById('hero-clear').onclick=()=>{state.customCSS=(state.customCSS||'').replace(/\/\* SHOPIFY_HERO \*[\s\S]*?(?=\/\*|$)/,'');state.changed=true;updateSaveIndicator();applyPreview();showToast('Hero reset','success');};
+}
+document.addEventListener('DOMContentLoaded',()=>setTimeout(installShopifyHeroControls,1100));
