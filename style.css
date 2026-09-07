@@ -1315,3 +1315,27 @@ p,.section-head>p,.hero-banner-copy>p:not(.kicker){letter-spacing:.006em}
     line-height:1.62!important;
   }
 }
+
+
+/* DESKTOP PRODUCT VIEWER — stable framed canvas with internal zoom/pan */
+@media(min-width:761px){
+  #product-modal .modal-stage{
+    position:relative!important;
+    overflow:hidden!important;
+    padding:clamp(20px,2vw,32px)!important;
+    box-sizing:border-box!important;
+    background:var(--cream)!important;
+  }
+  #product-modal .modal-stage #modal-photo{
+    width:100%!important;
+    height:100%!important;
+    max-width:100%!important;
+    max-height:100%!important;
+    object-fit:contain!important;
+    transform-origin:center center!important;
+    will-change:transform!important;
+  }
+  #product-modal .modal-stage:not(.is-video){cursor:zoom-in!important}
+  #product-modal .modal-stage.is-zoomed:not(.is-video){cursor:grab!important}
+  #product-modal .modal-stage.is-panning:not(.is-video){cursor:grabbing!important}
+}
