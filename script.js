@@ -641,3 +641,65 @@ initProducts();initRuntime();
   img.addEventListener('load',reset);
   window.addEventListener('resize',()=>{if(z>1)draw()});
 })();
+
+
+/* Desktop media interaction: wheel zoom + direct mouse pan inside a padded canvas. */
+(function(){
+  const stage=document.getElementById('modal-stage');
+  const img=document.getElementById('modal-photo');
+  if(!stage||!img)return;
+
+  let zoom=1, x=0, y=0, dragging=false, sx=0, sy=0, bx=0, by=0;
+
+  function limits(){
+    const r=stage.getBoundingClientRect();
+    const cs=getComputedStyle(stage);
+    const px=parseFloat(cs.paddingLeft)||0, py=parseFloat(cs.paddingTop)||0;
+    const vw=r.width-px*2, vh=r.height-py*2;
+    const nw=img.naturalWidth||vw, nh=img.naturalHeight||vh;
+    const fit=Math.min(vw/nw,vh/nh);
+    const w=nw*fit*zoom,h=nh*fit*zoom;
+    return {mx:Math.max(0,(w-vw)/2),my:Math.max(0,(h-vh)/2)};
+  }
+  function paint(){
+    const l=limits();
+    x=Math.max(-l.mx,Math.min(l.mx,x));
+    y=Math.max(-l.my,Math.min(l.my,y));
+    img.style.transform='translate3d('+x+'px,'+y+'px,0) scale('+zoom+')';
+    stage.classList.toggle('is-zoomed',zoom>1.01);
+  }
+
+  stage.addEventListener('wheel',e=>{
+    if(matchMedia('(max-width:760px)').matches||stage.classList.contains('is-video'))return;
+    e.preventDefault();
+    const old=zoom;
+    zoom=Math.max(1,Math.min(3,zoom*(e.deltaY<0?1.12:1/1.12)));
+    if(zoom===1){x=0;y=0}
+    else{
+      const r=stage.getBoundingClientRect();
+      const fx=e.clientX-(r.left+r.width/2),fy=e.clientY-(r.top+r.height/2);
+      const ratio=zoom/old;
+      x=x*ratio+fx*(1-ratio);
+      y=y*ratio+fy*(1-ratio);
+    }
+    paint();
+  },{passive:false});
+
+  stage.addEventListener('pointerdown',e=>{
+    if(matchMedia('(max-width:760px)').matches||zoom<=1.01||stage.classList.contains('is-video'))return;
+    dragging=true;sx=e.clientX;sy=e.clientY;bx=x;by=y;
+    stage.classList.add('is-panning');
+    stage.setPointerCapture?.(e.pointerId);
+    e.preventDefault();
+  });
+  stage.addEventListener('pointermove',e=>{
+    if(!dragging)return;
+    x=bx+(e.clientX-sx);
+    y=by+(e.clientY-sy);
+    paint();
+  });
+  const stop=e=>{dragging=false;stage.classList.remove('is-panning');};
+  stage.addEventListener('pointerup',stop);
+  stage.addEventListener('pointercancel',stop);
+  stage.addEventListener('lostpointercapture',stop);
+})();
