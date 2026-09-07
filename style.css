@@ -10,8 +10,8 @@
  --font:Mogranx,Arial,sans-serif;
  --font-heading:Mogranx,Arial,sans-serif;
  --font-body:Mogranx,Arial,sans-serif;
- --paper:#FFFAF1;--surface:#FFFDF8;--red:#C82039;--red-deep:#A71931;--navy:#141942;--heritage:#622331;
- --ink:var(--navy);--ink-soft:var(--heritage);--dark:var(--navy);
+ --canvas:#FFFAF1;--paper:var(--canvas);--surface:#FFFDF8;--red:#C82039;--red-deep:#A71931;--navy:#141942;--heritage:#622331;
+ --heading:var(--heritage);--ink:var(--navy);--accent:var(--red);--ink-soft:var(--navy);--dark:var(--navy);
  --line:rgba(20,25,66,.14);--wash:#FFFDF8;
  --shadow:0 20px 55px rgba(20,25,66,.12);
  --shell:min(1200px,calc(100% - 48px));
@@ -205,3 +205,49 @@ h1,h2,h3,h4,h5,h6,.hero-banner-copy h1,.section-heading-group h2,.custom-copy h2
 .modal-status{min-height:1.4em;margin-top:14px;color:var(--heritage);font-size:.82rem}.modal-status.is-success{display:flex;align-items:center;gap:8px}.modal-status.is-success::before{content:"✓";display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--navy);color:var(--paper);font-weight:700;animation:status-pop 420ms var(--ease) both}@keyframes status-pop{0%{transform:scale(.55);opacity:0}70%{transform:scale(1.08)}100%{transform:scale(1);opacity:1}}
 .toast{position:fixed;left:50%;bottom:24px;z-index:200;max-width:min(440px,calc(100% - 40px));padding:12px 16px;background:var(--navy);color:var(--paper);box-shadow:0 16px 40px rgba(20,25,66,.22);transform:translate(-50%,18px);opacity:0;pointer-events:none;transition:opacity var(--motion-fast) ease,transform var(--motion-base) var(--ease)}.toast.show{opacity:1;transform:translate(-50%,0)}
 @media(max-width:760px){.intent-strip-inner{align-items:flex-start;flex-direction:column;padding:14px 0;gap:2px}.intent-strip-action{padding:6px 0}.product-card.is-recent .product-info::before{margin-bottom:7px}}
+
+
+/* 15. COMPLETE JHALAR COLOR SYSTEM — canonical 2026 palette */
+:root{
+ --brand-gradient:linear-gradient(135deg,#C82039 0%,#A71931 55%,#622331 100%);
+ --heritage-gradient:linear-gradient(135deg,#FFFAF1 0%,#FFFDF8 55%,rgba(98,35,49,.06) 100%);
+ --hero-gradient-desktop:linear-gradient(90deg,rgba(255,250,241,.95) 0%,rgba(255,250,241,.75) 35%,rgba(255,250,241,.25) 60%,rgba(255,250,241,0) 85%);
+ --hero-gradient-mobile:linear-gradient(180deg,rgba(255,250,241,0) 0%,rgba(255,250,241,.04) 35%,rgba(255,250,241,.18) 55%,rgba(255,250,241,.55) 72%,#FFFAF1 100%);
+ --line:rgba(98,35,49,.18);
+ --shadow:0 20px 55px rgba(20,25,66,.10);
+}
+body{background:var(--canvas);color:var(--ink)}
+h1,h2,h3,h4,h5,h6,.hero-banner-copy h1,.section-heading-group h2,.custom-copy h2,.story-copy h2,.contact-box h2,.modal-copy h3{color:var(--heading)}
+.eyebrow,.kicker,.product-category{color:var(--accent)}
+.section-support-group p,.custom-copy p:not(.eyebrow),.story-copy p:not(.eyebrow){color:var(--ink)}
+.hero-banner-shade{background:var(--hero-gradient-desktop)}
+.hero-banner-copy{color:var(--ink)}
+.filter-btn{border-color:rgba(98,35,49,.18);color:var(--ink)}
+.filter-btn:hover{background:rgba(200,32,57,.08);border-color:rgba(98,35,49,.28);color:var(--heritage)}
+.filter-btn.active{background:var(--heritage);color:var(--surface);border-color:var(--heritage)}
+.product-card{border-color:rgba(98,35,49,.12)}
+.product-image{background:var(--surface)}
+.product-category{color:var(--accent)}
+.product-title{color:var(--heritage)}
+.product-details-btn{color:var(--navy)}
+.product-details-btn:hover{color:var(--red-deep)}
+.custom{background:var(--surface)}
+.story{background:var(--canvas)}
+.contact{background:var(--heritage-gradient);color:var(--ink)}
+.contact-box p:not(.eyebrow){color:rgba(20,25,66,.78)}
+.contact-cta{background:var(--brand-gradient);color:var(--surface);border:0;padding:14px 20px;transition:transform var(--motion-fast) var(--ease),filter var(--motion-fast) ease}
+.contact-cta:hover{filter:brightness(.97);transform:translateY(-2px)}
+.contact-cta:active{background:var(--heritage);transform:translateY(0)}
+.footer{background:var(--navy);color:rgba(255,253,248,.76)}
+.modal-copy h3{color:var(--heritage)}
+.modal-copy p:not(.eyebrow){color:var(--ink)}
+.modal-wa-btn{background:var(--brand-gradient);color:var(--surface)}
+.modal-wa-btn:hover{background:var(--red-deep)}
+.modal-wa-btn:active{background:var(--heritage)}
+.modal-thumb.active{border-color:var(--heritage)}
+.intent-strip-label{color:var(--heritage)}
+.modal-status{color:var(--heritage)}
+@media(max-width:760px){
+ .hero-banner-shade{background:var(--hero-gradient-mobile)}
+ .contact-cta{width:auto;min-width:220px;justify-content:center}
+}
