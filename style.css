@@ -155,7 +155,7 @@ img{max-width:100%;height:auto;display:block}ul{list-style:none}button{font-fami
 .hero-highlights{display:flex;flex-wrap:wrap;gap:var(--space-2) var(--space-5);margin-bottom:var(--space-5)}
 .hero-highlights li{display:flex;align-items:center;gap:10px;font-size:var(--fs-md);font-weight:500;color:var(--brand-text)}
 .hero-highlights li .icon{color:var(--brand-primary);--icon-size:20px}
-.hero-actions{display:flex;flex-direction:column;flex-wrap:wrap;gap:var(--space-3)}
+.hero-actions{display:flex;flex-direction:column;flex-wrap:wrap;gap:var(--space-3);padding-left:0;}
 .hero-image{position:relative}
 .hero-img{width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center 30%;border-radius:var(--radius-lg);box-shadow:0 24px 60px rgba(20,25,66,.12);transition:transform .5s var(--ease-out)}
 .hero:hover .hero-img{transform:scale(1.02)}
@@ -563,13 +563,17 @@ h1,h2,h3,.hero-title,.section-title,.modal-title,.product-title{
   background:#fff;border-color:#fff;color:#c82039;
 }
 .hero-actions .btn-primary:hover{
-  background:#fff;border-color:#fff;color:#c82039;transform:translateY(-1px);
+  background:#fff;border-color:#fff;color:#c82039;transform:translateY(-1px);box-shadow:0 10px 24px rgba(200,32,57,.28);
 }
 .hero-actions .btn-outline{
   background:transparent;color:#fff;border-color:#fff;
 }
 .hero-actions .btn-outline:hover{
-  background:#fff;color:#c82039;border-color:#fff;transform:translateY(-1px);
+  background:#fff;color:#c82039;border-color:#fff;transform:translateY(-1px);box-shadow:0 10px 24px rgba(200,32,57,.28);
+}
+/* Fix 7: White focus ring for hero CTAs on maroon background */
+.hero-actions .btn:focus-visible{
+  outline:2px solid #fff;outline-offset:2px;border-radius:4px;
 }
 .hero-image{
   position:relative;
@@ -578,13 +582,26 @@ h1,h2,h3,.hero-title,.section-title,.modal-title,.product-title{
 }
 .hero-img{
   width:100%;
-  aspect-ratio:4/5;
+  aspect-ratio:1/1;
   object-fit:cover;
+  object-position:center top;
   border-radius:0;
   border:0;
   padding:0;
   box-shadow:none;
   transform:none !important;
+}
+/* Fix 5: Maroon blend overlay on photo's left edge */
+.hero-image::before{
+  content:'';
+  position:absolute;
+  left:0;
+  top:0;
+  bottom:0;
+  width:40px;
+  background:linear-gradient(90deg,#C82039,#C82039 20%,transparent 100%);
+  pointer-events:none;
+  z-index:1;
 }
 .hero:hover .hero-img{transform:none}
 
@@ -662,18 +679,29 @@ h1,h2,h3,.hero-title,.section-title,.modal-title,.product-title{
 @media(min-width:768px){
   /* Hero photo runs flush to the right viewport edge while the text column
      stays on the same left axis as every other section. */
+  /* Fix 4: Changed 100vw to 100% to avoid scrollbar width issue */
   .hero-grid{
     align-items:center;
     max-width:none;
     padding-right:0;
-    padding-left:max(var(--space-6), calc((100vw - var(--container)) / 2 + var(--space-6)));
+    padding-left:max(var(--space-6), calc((100% - var(--container)) / 2 + var(--space-6)));
   }
   .hero-image{margin-left:0;margin-right:0}
-  .hero-img{aspect-ratio:1/1;max-height:78vh}
+  /* Fix 1: Photo fills entire right column, flush to top, right, and bottom */
+  .hero-img{aspect-ratio:1/1;max-height:78vh;object-position:center top;}
+  /* Fix 3: CTAs in one row on tablet/desktop */
+  .hero-actions{flex-direction:row}
 }
 
 /* Very small phones: keep the hero on the site axis and the photo full-bleed. */
 @media(max-width:359.98px){
   .hero-grid{padding-left:var(--space-3);padding-right:var(--space-3)}
   .hero-image{margin-left:calc(-1 * var(--space-3));margin-right:calc(-1 * var(--space-3))}
+}
+
+/* Fix 8: WhatsApp float smaller and tucked on small phones */
+@media(max-width:480px){
+  .wa-float{
+    width:48px;height:48px;font-size:1.3rem;right:12px;bottom:12px;
+  }
 }
