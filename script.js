@@ -392,23 +392,25 @@ initProducts();initRuntime();
 /* build 20260907.16 */
 
 
-/* Premium header controller — reliable reveal on desktop and mobile */
+/* Premium sticky header — hide only during active downward scrolling, reveal on idle or any interaction */
 (function(){
   const header=document.querySelector('.header');
   if(!header)return;
 
   let lastY=window.scrollY;
-  let revealTimer=0;
+  let scrolling=false;
+  let idleTimer=0;
   let raf=0;
 
   const reveal=()=>{
     header.classList.remove('header-hidden');
-    clearTimeout(revealTimer);
+    clearTimeout(idleTimer);
+    scrolling=false;
   };
 
-  const scheduleReveal=()=>{
-    clearTimeout(revealTimer);
-    revealTimer=window.setTimeout(reveal,260);
+  const armIdleReveal=()=>{
+    clearTimeout(idleTimer);
+    idleTimer=window.setTimeout(reveal,180);
   };
 
   const update=()=>{
@@ -418,28 +420,29 @@ initProducts();initRuntime();
 
     header.classList.toggle('scrolled',y>8);
 
-    // Premium navigation behavior: hide only on a meaningful downward movement.
-    if(y<=90 || delta<=-3){
-      reveal();
-    }else if(delta>=8 && y>140){
+    // Only hide while there is active, meaningful downward movement.
+    if(y>140 && delta>5){
+      scrolling=true;
       header.classList.add('header-hidden');
-      scheduleReveal();
-    }else{
-      scheduleReveal();
+    }else if(delta<0 || y<=90){
+      reveal();
     }
 
     lastY=y;
+    armIdleReveal();
   };
 
-  const onScroll=()=>{
+  window.addEventListener('scroll',()=>{
     if(!raf)raf=requestAnimationFrame(update);
-  };
+  },{passive:true});
 
-  window.addEventListener('scroll',onScroll,{passive:true});
+  // Any interaction immediately restores the navigation.
+  ['pointerdown','touchstart','click','keydown','focusin'].forEach(type=>{
+    document.addEventListener(type,reveal,{passive:true});
+  });
+
   window.addEventListener('scrollend',reveal,{passive:true});
-  window.addEventListener('touchend',scheduleReveal,{passive:true});
-  window.addEventListener('pointerup',scheduleReveal,{passive:true});
-  window.addEventListener('pageshow',reveal);
+  window.addEventListener('blur',reveal);
   document.addEventListener('visibilitychange',()=>{if(!document.hidden)reveal()});
 
   reveal();
