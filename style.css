@@ -2578,3 +2578,26 @@ button:not(.filter-btn),
 /* HEADER SCROLL STATE — one consistent rule on desktop, tablet and mobile */
 .header{position:sticky!important;top:0!important;z-index:1000!important;will-change:transform;transition:transform 180ms var(--ease),box-shadow 180ms var(--ease)!important}
 .header.header-hidden{transform:translate3d(0,-100%,0)!important}
+
+
+/* PRODUCT VIEWER CTA HIERARCHY — compact zoom guidance + true JHALAR red */
+#product-modal .modal-zoom-hint{
+  margin:14px 0 8px!important;
+  padding:0!important;
+  color:#C82039!important;
+  font-size:.72rem!important;
+  line-height:1.25!important;
+  font-weight:700!important;
+  letter-spacing:.045em!important;
+  text-transform:uppercase!important;
+}
+#product-modal .zoom-hint{display:none!important}
+#product-modal .modal-wa-btn{
+  margin-top:0!important;
+  background:#C82039!important;
+  border-color:#C82039!important;
+  color:#FFFDF8!important;
+}
+#product-modal .modal-wa-btn:hover,
+#product-modal .modal-wa-btn:focus-visible{background:#A71931!important;border-color:#A71931!important;color:#FFFDF8!important}
+#product-modal .modal-wa-btn:active{background:#C82039!important;border-color:#C82039!important}
