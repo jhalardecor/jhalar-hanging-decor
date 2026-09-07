@@ -963,3 +963,63 @@ img,video,svg{max-width:100%}
   .header .menu.open span:nth-child(2){transform:translateY(0) rotate(-45deg)!important}
   .header .menu:active{transform:scale(.90)!important}
 }
+
+
+/* 34. HERO READABILITY + NAV TYPOGRAPHY — FINAL PRODUCTION OVERRIDES */
+/* Extend the warm #FFFAF1 overlay so dark brand typography always sits on a calm surface. */
+.hero-banner-shade{
+  background:linear-gradient(
+    90deg,
+    #FFFAF1 0%,
+    rgba(255,250,241,.99) 30%,
+    rgba(255,250,241,.94) 48%,
+    rgba(255,250,241,.78) 64%,
+    rgba(255,250,241,.42) 80%,
+    rgba(255,250,241,.10) 94%,
+    rgba(255,250,241,0) 100%
+  )!important;
+}
+.hero-banner-copy,
+.hero-banner-copy h1,
+.hero-banner-copy h1 em{
+  color:#622331!important;
+  text-shadow:none!important;
+}
+.hero-banner-copy .hero-lead{color:#141942!important}
+
+.nav,
+.nav a{
+  font-family:Mogranx,Arial,sans-serif!important;
+  font-size:16px!important;
+  font-weight:500!important;
+  line-height:1.2!important;
+  letter-spacing:-.01em!important;
+}
+.nav{gap:34px!important}
+.nav a{color:#141942!important;padding:14px 0!important}
+.nav a::after{background:#C82039!important;bottom:7px!important}
+
+/* Mobile navigation gets the same deliberate type hierarchy, not desktop-sized text. */
+@media(max-width:760px){
+  .hero-banner-shade{
+    background:linear-gradient(
+      180deg,
+      rgba(255,250,241,0) 0%,
+      rgba(255,250,241,.02) 36%,
+      rgba(255,250,241,.12) 50%,
+      rgba(255,250,241,.38) 62%,
+      rgba(255,250,241,.72) 76%,
+      #FFFAF1 100%
+    )!important;
+  }
+  .mobile-nav a{
+    font-family:Mogranx,Arial,sans-serif!important;
+    font-size:18px!important;
+    font-weight:500!important;
+    line-height:1.25!important;
+    letter-spacing:-.01em!important;
+    color:#141942!important;
+    padding:15px 0!important;
+  }
+  .mobile-nav a:first-child{padding-top:18px!important}
+}
