@@ -845,3 +845,14 @@ body{font-size:var(--text-base);line-height:var(--leading-copy)}
  .hero-banner-copy h1{font-size:clamp(2.45rem,11.5vw,3.65rem)!important}
  .section-heading-group h2,.custom-copy h2,.story-copy h2,.contact-box h2{font-size:var(--text-2xl)!important}
 }
+
+
+/* Typography tracking reset — neutral optical spacing */
+.hero-banner-copy h1,
+.section-heading-group h2,
+.custom-copy h2,
+.story-copy h2,
+.contact-box h2,
+.product-title{
+ letter-spacing:0!important;
+}
