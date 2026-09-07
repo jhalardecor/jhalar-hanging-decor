@@ -1505,3 +1505,51 @@ p,.section-head>p,.hero-banner-copy>p:not(.kicker){letter-spacing:.006em}
 }
 .contact-cta span{color:#f8dfe1!important}
 .contact-cta:focus-visible{outline-color:rgba(154,53,72,.35)!important}
+
+
+/* HERO CONTENT TYPOGRAPHY — rebalance hierarchy and text measure */
+.hero-banner-copy{
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:flex-start!important;
+}
+.hero-banner .kicker{
+  margin-bottom:14px!important;
+  font-size:clamp(.64rem,.72vw,.74rem)!important;
+  line-height:1.45!important;
+}
+.hero-banner h1{
+  max-width:12.5ch!important;
+  margin-bottom:18px!important;
+  font-size:clamp(3rem,4.35vw,5.25rem)!important;
+  line-height:1.06!important;
+  letter-spacing:-.022em!important;
+  text-wrap:balance!important;
+}
+.hero-banner-copy>p:not(.kicker){
+  max-width:43ch!important;
+  margin-bottom:26px!important;
+  font-size:clamp(1rem,1.05vw,1.12rem)!important;
+  line-height:1.62!important;
+  text-wrap:pretty!important;
+}
+@media(max-width:760px){
+  .hero-banner-content{
+    padding-inline:22px!important;
+  }
+  .hero-banner h1{
+    max-width:12ch!important;
+    font-size:clamp(2.5rem,10vw,3.5rem)!important;
+    line-height:1.04!important;
+    margin-bottom:16px!important;
+  }
+  .hero-banner-copy>p:not(.kicker){
+    max-width:35ch!important;
+    font-size:clamp(.98rem,4vw,1.06rem)!important;
+    line-height:1.58!important;
+    margin-bottom:22px!important;
+  }
+  .hero-banner .kicker{
+    margin-bottom:12px!important;
+  }
+}
