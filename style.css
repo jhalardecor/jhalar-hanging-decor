@@ -797,3 +797,33 @@ h3{letter-spacing:-.008em}
 @media (prefers-color-scheme:dark) and (prefers-contrast:more){
   :root{--ink:#ffffff;--muted:#f0e3e0;--line:#8d777c}
 }
+
+
+/* ==========================================================================
+   TYPE TRACKING REFINEMENT
+   Optical spacing is role-based, not one value applied across the interface.
+   ========================================================================== */
+body{letter-spacing:0}
+h1{letter-spacing:-.022em}
+h2{letter-spacing:-.018em}
+h3{letter-spacing:-.012em}
+p,.section-head>p,.hero-banner-copy>p:not(.kicker){letter-spacing:.006em}
+.product-title{letter-spacing:-.008em}
+.product-category,.eyebrow,.kicker{
+  letter-spacing:.095em;
+  font-weight:600;
+}
+.nav a{letter-spacing:.012em}
+.filter-btn{letter-spacing:.006em}
+.product-details-btn,.contact-cta,.modal-wa-btn{letter-spacing:.012em}
+.modal-copy h3{letter-spacing:-.018em}
+.hero-banner h1{letter-spacing:-.024em}
+@media(max-width:760px){
+  h1,.hero-banner h1{letter-spacing:-.018em}
+  h2{letter-spacing:-.014em}
+  h3{letter-spacing:-.008em}
+  p,.section-head>p,.hero-banner-copy>p:not(.kicker){letter-spacing:.003em}
+  .product-title{letter-spacing:-.004em}
+  .product-category,.eyebrow,.kicker{letter-spacing:.075em}
+  .nav a,.filter-btn,.product-details-btn,.contact-cta,.modal-wa-btn{letter-spacing:.008em}
+}
