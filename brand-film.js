@@ -346,20 +346,21 @@
   BACK.forEach(s => buildGarland(s,true));
 
   /* ---------- timeline (seconds) ----------
-     0.00        empty warm space; the beam eases in
-     0.85–2.90   garlands lowered in, staggered, swinging, settling
+     The film never pauses: the beam is a permanent fixture of the room, the
+     dust keeps drifting, and the reset between cycles is a short breath.
+     0.00        the warm room — bare beam, drifting dust
+     0.60–3.35   garlands lowered in, staggered, swinging, settling
      3.55        the composition parts to make way for the brand
-     3.98        the JHALAR logo resolves, then holds perfectly still
-     6.20–7.17   soft dissolve: decor, then logo, then beam return to the empty space
-     7.17–7.60   the empty space breathes
-     7.60        LOOP point — the frame is identical to frame 0, so the
-                 film cycles without a visible seam                      */
+     3.98        the JHALAR logo resolves and holds still (the edge garlands
+                 keep an extremely gentle sway so the frame stays alive)
+     6.20–7.15   soft dissolve: decor first, then the logo, in place
+     7.25        LOOP point — identical to frame 0, no visible seam       */
+  const ENTER_T = .60;
   const PART_T = 3.55, PART_DUR = .68;
   const LOGO_T = 3.98, LOGO_DUR = .62;
   const OUT_T = 6.20,  DECOR_OUT = .65;   // hold ends; remaining decor dissolves
   const LOGO_OUT_T = 6.40, LOGO_OUT = .70; // the brand is the last thing to go
-  const BEAM_OUT_T = 6.72, BEAM_OUT = .45; // the beam lifts away, mirroring its entry
-  const LOOP = 7.60;
+  const LOOP = 7.25;
   const HOLD_FRAME = 5.40;                 // still frame used for reduced motion
   const TAU = Math.PI*2;
 
@@ -396,24 +397,17 @@
   // 1 → 0 dissolve envelope starting at t0 lasting d
   const fadeOut = (t,t0,d) => 1 - easeInOut(clamp((t-t0)/d,0,1));
 
-  function frame(t){
-    // beam: eases down + fades in at the start, lifts away + fades at the end
-    let beamIn = easeOut(clamp(t/.55,0,1));
-    let beamOp = clamp((t-.05)/.4,0,1);
-    if (t > BEAM_OUT_T){
-      const q = fadeOut(t,BEAM_OUT_T,BEAM_OUT);
-      beamIn = q; beamOp = Math.min(beamOp,q);
-    }
-    beam.setAttribute('opacity', beamOp.toFixed(3));
-    beam.setAttribute('transform','translate(0 '+(-14*(1-beamIn)).toFixed(2)+')');
+  // the room itself is constant: beam and floor warmth are always there
+  beam.setAttribute('opacity','1');
+  beam.removeAttribute('transform');
+  floorGlow.setAttribute('opacity','0.5');
 
-    // floor warmth
-    floorGlow.setAttribute('opacity', (0.5*clamp((t-.3)/1.1,0,1)*fadeOut(t,OUT_T+.1,.8)).toFixed(3));
+  function frame(t){
 
     // garlands
     const all = FRONT.concat(BACK);
     for (const s of all){
-      const dropStart = .85 + s.enter;
+      const dropStart = ENTER_T + s.enter;
       let y = -(s.len + 70), rot = 0, op = 0;
       if (t >= dropStart){
         const dp = clamp((t-dropStart)/s.dur, 0, 1);
@@ -426,8 +420,8 @@
         if (ts >= 0){
           const decay = Math.exp(-ts/s._damp);
           const sway = Math.sin(ts*2*Math.PI/s._period + s.ph*1.7) * s._amp0 * decay;
-          // extremely subtle ambient sway on the survivors — settles, never bounces
-          const micro = Math.sin(t*.9 + s.ph) * .16 * (1 - decay*.75);
+          // gentle ambient sway that remains on the survivors — slow, never bouncing
+          const micro = Math.sin(t*1.1 + s.ph) * .42 * (1 - decay*.75);
           rot += sway + micro;
         }
         op = s._back ? .5 : 1;
@@ -454,7 +448,7 @@
     // motes — loop-periodic: identical at t=0 and t=LOOP
     const u = t/LOOP;
     // dust quietens while the brand holds, then breathes back before the loop point
-    const moteDim = 1 - .9*easeInOut(clamp((t-4.05)/.7,0,1))*fadeOut(t, OUT_T+.2, LOOP-OUT_T-.35);
+    const moteDim = 1 - .5*easeInOut(clamp((t-4.05)/.7,0,1))*fadeOut(t, OUT_T+.2, LOOP-OUT_T-.35);
     for (const m of motes){
       const p = (u + m.u0) % 1;                    // progress along this mote's rise
       const cy = m.y - (p - .5)*m.rise;
@@ -477,7 +471,7 @@
       const ty = 16*(1-e), sc = .965 + .035*e;
       logoAnim.setAttribute('transform','translate(600 '+(344+ty).toFixed(2)+') scale('+sc.toFixed(4)+')');
       const glowIn = .6*easeInOut(clamp((t-(LOGO_T-.1))/.7,0,1));
-      logoGlow.setAttribute('opacity', (glowIn*fadeOut(t, LOGO_OUT_T-.05, LOGO_OUT+.2)).toFixed(3));
+      logoGlow.setAttribute('opacity', (glowIn*fadeOut(t, LOGO_OUT_T-.05, LOGO_OUT+.1)).toFixed(3));
     }
   }
 
