@@ -3427,3 +3427,61 @@ body{padding-top:var(--header-h)!important}
   .footer.site-footer .footer-col span{text-align:center!important}
   .footer.site-footer .footer-col:last-child{justify-self:center!important;width:100%!important}
 }
+
+
+/* Mobile footer composition — deliberate hierarchy instead of centered text blocks */
+@media(max-width:620px){
+  .footer.site-footer{padding-top:30px!important}
+  .footer.site-footer .footer-grid{
+    width:calc(100% - 40px)!important;
+    grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr)!important;
+    gap:28px 24px!important;
+    text-align:left!important;
+    padding-bottom:30px!important;
+  }
+  .footer.site-footer .footer-brand{
+    grid-column:1/-1!important;
+    justify-content:center!important;
+    text-align:center!important;
+    padding-bottom:10px!important;
+  }
+  .footer.site-footer .footer-brand>a.logo{margin:0 auto!important}
+  .footer.site-footer .footer-logo{width:156px!important;max-width:none!important}
+  .footer.site-footer .footer-col{justify-self:stretch!important;text-align:left!important}
+  .footer.site-footer .footer-col:last-child{
+    grid-column:1/-1!important;
+    justify-self:center!important;
+    width:auto!important;
+    text-align:center!important;
+    padding-top:4px!important;
+  }
+  .footer.site-footer .footer-col h4{
+    margin-bottom:12px!important;
+    font-size:.7rem!important;
+    letter-spacing:.09em!important;
+    text-align:inherit!important;
+  }
+  .footer.site-footer .footer-col ul{justify-items:start!important;gap:10px!important}
+  .footer.site-footer .footer-col a,
+  .footer.site-footer .footer-col span{
+    font-size:.78rem!important;
+    line-height:1.45!important;
+    text-align:left!important;
+  }
+  .footer.site-footer .footer-contact a,
+  .footer.site-footer .footer-contact span{overflow-wrap:anywhere!important}
+  .footer.site-footer .footer-connect ul{justify-items:center!important}
+  .footer.site-footer .footer-connect a{
+    display:inline-flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    min-height:40px!important;
+    padding:0 18px!important;
+    border:1px solid rgba(255,250,241,.42)!important;
+    border-radius:999px!important;
+    text-align:center!important;
+  }
+  .footer.site-footer .footer-bottom .container,
+  .footer.site-footer .footer-bottom .shell{width:calc(100% - 40px)!important;min-height:58px!important}
+  .footer.site-footer .footer-bottom p{font-size:.68rem!important;text-align:center!important;width:100%!important}
+}
