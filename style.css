@@ -3459,6 +3459,8 @@ body{padding-top:var(--header-h)!important}
   border-bottom:1px solid rgba(98,35,49,.08);
 }
 .custom-grid{
+  display:grid;
+  width:100%;
   grid-template-columns:minmax(0,1fr) minmax(0,.92fr);
   gap:clamp(48px,7vw,112px);
   align-items:center;
@@ -3570,7 +3572,10 @@ body{padding-top:var(--header-h)!important}
   }
   .custom-image{
     width:100%;
+    aspect-ratio:auto;
+    height:auto;
     border-radius:0;
+    overflow:hidden;
   }
   .custom-image img{
     display:block;
