@@ -2773,3 +2773,41 @@ button:not(.filter-btn),
     margin:14px 0 0!important;
   }
 }
+
+
+/* PRODUCT MODAL TYPOGRAPHY — deliberate hierarchy and spacing */
+#product-modal .modal-copy{
+  font-family:Arial,sans-serif!important;
+}
+#product-modal #modal-title{
+  color:var(--navy)!important;
+  font-family:Mogranx,Arial,sans-serif!important;
+  font-size:clamp(1.5rem,2.4vw,2.2rem)!important;
+  font-weight:500!important;
+  line-height:1.12!important;
+  letter-spacing:0!important;
+  text-wrap:balance!important;
+}
+#product-modal #modal-desc{
+  color:rgba(20,25,66,.82)!important;
+  font-family:Arial,sans-serif!important;
+  font-weight:400!important;
+}
+@media(max-width:760px){
+  #product-modal .modal-copy{
+    padding:14px 16px 16px!important;
+  }
+  #product-modal #modal-category{
+    margin:0 0 7px!important;
+  }
+  #product-modal #modal-title{
+    margin:0 0 14px!important;
+    font-size:1.45rem!important;
+    line-height:1.15!important;
+  }
+  #product-modal #modal-desc{
+    margin:0!important;
+    font-size:.98rem!important;
+    line-height:1.6!important;
+  }
+}
