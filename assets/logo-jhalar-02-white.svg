@@ -13,28 +13,27 @@
       .st1 {
         fill: #ffffff;
       }
-      /* JHALAR — "evening breeze through festival lights". Every motion earns
-         its place: the sign SWAYS (it is hanging decor, hung from the top),
-         the charms TINKLE in a breeze wave, diya GLOW breathes, and fairy
-         LIGHT travels the strand. No punches, flashes, or fireworks. */
-      .footer-motion-logo{transform-box:fill-box;transform-origin:center;animation:lockupIn 1s cubic-bezier(.19,1,.22,1) backwards}
-      @keyframes lockupIn{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:none}}
-      .lockup{transform-box:fill-box;transform-origin:50% 0;animation:sway 7s ease-in-out infinite,diyaGlow 6s ease-in-out infinite}
-      @keyframes sway{0%,100%{transform:translateX(-1.4px) rotate(-.5deg)}50%{transform:translateX(1.4px) rotate(.5deg)}}
-      @keyframes diyaGlow{0%,100%{filter:drop-shadow(0 0 2px rgba(255,175,70,.25))}50%{filter:drop-shadow(0 0 7px rgba(255,175,70,.6))}}
-      .lyr{opacity:1;animation:lyrIn .45s cubic-bezier(.19,1,.22,1) backwards}
-      .lyr-j{animation-delay:.05s}.lyr-h{animation-delay:.12s}.lyr-a1-hole,.lyr-a1{animation-delay:.19s}.lyr-l{animation-delay:.3s}.lyr-a2-hole,.lyr-a2{animation-delay:.37s}.lyr-r{animation-delay:.44s}
-      @keyframes lyrIn{from{opacity:0;transform:translateY(6px);filter:blur(3px)}60%{opacity:1}to{opacity:1;transform:none;filter:blur(0)}}
-      .orn{transform-box:fill-box;transform-origin:50% 0;opacity:1;animation:tinkle 3.5s ease-in-out infinite,ornSet .5s cubic-bezier(.34,1.45,.44,1) backwards}
-      .orn-l2{animation-delay:0s,.62s}.orn-l3{animation-delay:.15s,.69s}.orn-l1{animation-delay:.3s,.55s}.orn-r1{animation-delay:.45s,.55s}.orn-r3{animation-delay:.6s,.69s}.orn-r2{animation-delay:.75s,.62s}
-      @keyframes ornSet{from{opacity:0;transform:scale(.2)}to{opacity:1;transform:scale(1)}}
-      @keyframes tinkle{0%,100%{transform:rotate(-8deg)}50%{transform:rotate(8deg)}}
-      .logo-caption{opacity:1;animation:captionGlow 6s ease-in-out infinite,captionReveal .7s cubic-bezier(.19,1,.22,1) .7s backwards}
-      @keyframes captionReveal{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
-      @keyframes captionGlow{0%,100%{opacity:.8}37%{opacity:1}}
-      .sheen{animation:sheenSweep 6s cubic-bezier(.45,0,.15,1) infinite}
-      @keyframes sheenSweep{0%,5%{transform:translateX(-36px)}70%,100%{transform:translateX(138px)}}
-      @media(prefers-reduced-motion:reduce){.footer-motion-logo,.lockup,.lyr,.orn,.logo-caption,.sheen{animation:none;opacity:1;transform:none;filter:none}.sheen{opacity:0}}}
+      /* JHALAR — Cinematic footer. A 7-second mini-film on loop:
+         darkness, assembly, ignition, glory hold. Fades hide inside the dark. */
+      .footer-motion-logo{animation:filmFade 7s ease-in-out infinite}
+      @keyframes filmFade{0%,7%{opacity:0}14%,90%{opacity:1}97%,100%{opacity:0}}
+      .lockup{transform-box:fill-box;transform-origin:center;animation:pushIn 7s linear infinite,diyaGlow 7s ease-in-out infinite}
+      @keyframes pushIn{0%,30%{transform:scale(1)}100%{transform:scale(1.02)}}
+      @keyframes diyaGlow{0%,26%{filter:drop-shadow(0 0 0 rgba(255,190,80,0))}30%{filter:drop-shadow(0 0 10px rgba(255,190,80,.95))}38%,100%{filter:drop-shadow(0 0 3px rgba(255,175,70,.35))}}
+      .lyr{opacity:1;animation:lyrIn7 7s cubic-bezier(.19,1,.22,1) infinite}
+      .lyr-j{animation-delay:.35s}.lyr-h{animation-delay:.5s}.lyr-a1-hole,.lyr-a1{animation-delay:.65s}.lyr-l{animation-delay:.9s}.lyr-a2-hole,.lyr-a2{animation-delay:1.05s}.lyr-r{animation-delay:1.2s}
+      @keyframes lyrIn7{0%{opacity:0;transform:translateY(8px);filter:blur(4px)}7%,92%{opacity:1;transform:none;filter:blur(0)}100%{opacity:0;transform:translateY(-4px);filter:blur(4px)}}
+      .orn{transform-box:fill-box;transform-origin:center;opacity:1;animation:ornIn7 7s cubic-bezier(.34,1.3,.44,1) infinite}
+      .orn-l1,.orn-r1{animation-delay:.9s}.orn-l2,.orn-r2{animation-delay:1s}.orn-l3,.orn-r3{animation-delay:1.1s}
+      @keyframes ornIn7{0%{opacity:0;transform:scale(.2)}7%,92%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(.6)}}
+      .logo-caption{opacity:1;animation:capIn7 7s ease infinite}
+      .logo-caption{animation-delay:1.2s}
+      @keyframes capIn7{0%{opacity:0;transform:translateY(4px)}7%,92%{opacity:1;transform:none}100%{opacity:0;transform:none}}
+      .sheen{animation:sheenSweep 7s cubic-bezier(.45,0,.15,1) infinite}
+      @keyframes sheenSweep{0%,12%{transform:translateX(-36px)}48%,100%{transform:translateX(138px)}}
+      .glint{transform-box:fill-box;transform-origin:center;opacity:0;fill:#fff6e3;animation:glintFire 7s ease-in-out infinite}
+      @keyframes glintFire{0%,27%{opacity:0;transform:scale(.4)}30%{opacity:1;transform:scale(1.3)}34%,100%{opacity:0;transform:scale(.6)}}
+      @media(prefers-reduced-motion:reduce){.footer-motion-logo,.lockup,.lyr,.orn,.logo-caption,.sheen,.glint{animation:none;opacity:1;transform:none;filter:none}.sheen,.glint{opacity:0}}}
 
 
 
@@ -84,5 +83,6 @@
   <path class="st1 orn orn-r3" d="M86.4,28.2v-2l3.2,3.2.5.5h0c0,.2,0,.3-.1.5,0,.2,0,.4.1.5h0c0,0-.5.5-.5.5l-3.2,3.2v-2l2.2-2.2-2.2-2.2Z"/>
   <text class="st0 logo-caption" transform="translate(26 33.1) scale(1 1)" textLength="50" lengthAdjust="spacingAndGlyphs"><tspan textLength="50" lengthAdjust="spacingAndGlyphs">hanging decor</tspan></text>
   <g clip-path="url(#jhalarSheenClip)"><g class="sheen"><rect x="-17" y="-4" width="34" height="44" fill="url(#sheenGrad)" transform="translate(0 18) skewX(-12) translate(0 -18)"/></g></g>
+  <path class="glint" d="M51,3C51.78,6.44 52.41,7.06 56,8C52.41,8.94 51.78,9.56 51,13C50.22,9.56 49.59,8.94 46,8C49.59,7.06 50.22,6.44 51,3Z"/>
   </g>
 </svg>
