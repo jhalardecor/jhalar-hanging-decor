@@ -72,17 +72,34 @@ h1,h2,h3,h4,h5,h6,.hero-banner-copy h1,.section-heading-group h2,.custom-copy h2
 .filters{display:flex;gap:10px;flex-wrap:wrap}
 .filter-btn{border:1px solid var(--line);background:transparent;color:var(--ink);padding:10px 15px;min-height:44px;border-radius:999px;font-size:.88rem;transition:.2s var(--ease)}
 .filter-btn:hover{border-color:var(--heritage);color:var(--heritage)}.filter-btn.active{background:var(--navy);color:var(--paper);border-color:var(--navy)}
-.product-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(18px,2.5vw,32px)}
-.product-card{min-width:0;background:var(--surface);border:1px solid rgba(20,25,66,.08);transition:transform .28s var(--ease),box-shadow .28s var(--ease);overflow:hidden}
-.product-card:hover{transform:translateY(-5px);box-shadow:0 18px 42px rgba(20,25,66,.10)}
-.product-image{position:relative;width:100%;aspect-ratio:4/5;padding:0;border:0;background:#f3eee8;overflow:hidden;cursor:pointer}
-.product-image::after{content:"View details";position:absolute;left:14px;bottom:14px;padding:8px 12px;background:rgba(255,253,248,.94);color:var(--navy);font-size:.72rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;opacity:0;transform:translateY(8px);transition:.25s var(--ease)}
-.product-image img{width:100%;height:100%;object-fit:cover;transition:transform .55s var(--ease),opacity .35s ease}.product-image .alt-img{position:absolute;inset:0;opacity:0}
-.product-card:hover .product-image>img:first-child{transform:scale(1.045)}.product-card:hover .product-image .alt-img{opacity:1}.product-card:hover .product-image::after{opacity:1;transform:none}
-.product-info{padding:16px 16px 18px}.product-category{display:block;margin-bottom:7px;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--heritage);font-weight:700}
-.product-title{margin:0;color:var(--navy);font-size:1.02rem;line-height:1.35;font-weight:600}
+/* PRODUCT CARDS — CANONICAL DESKTOP SYSTEM */
+.product-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(22px,2.5vw,32px);align-items:start}
+.product-card{min-width:0;display:flex;flex-direction:column;background:transparent;border:0;box-shadow:none;overflow:visible;transition:transform .28s var(--ease),box-shadow .28s var(--ease)}
+.product-image{position:relative;width:100%;aspect-ratio:1/1;padding:0;display:block;overflow:hidden;isolation:isolate;background:var(--surface);border:1px solid rgba(20,25,66,.08);cursor:pointer}
+.product-image::after{content:none}
+.product-image img,.product-image .alt-img{width:100%;height:100%;object-fit:contain;object-position:center;transition:transform .28s var(--ease),opacity .2s ease}
+.product-image .alt-img{position:absolute;inset:0;opacity:0}
+.product-info{width:100%;min-width:0;padding:14px 0 0}
+.product-category{display:block;margin:0 0 7px;color:var(--accent);font-size:.68rem;font-weight:700;line-height:1.25;letter-spacing:.11em;text-transform:uppercase}
+.product-title{width:100%;margin:0;color:var(--heritage);font-family:Arial,Helvetica,sans-serif;font-size:clamp(1rem,1.35vw,1.18rem);font-weight:600;line-height:1.35;letter-spacing:-.015em;text-align:left;text-wrap:pretty;overflow-wrap:normal;word-break:normal}
+@media(hover:hover) and (pointer:fine){.product-card:hover{transform:translateY(-4px)}.product-card:hover .product-image img{transform:scale(1.018)}}
+@media(hover:none){.product-card:active{transform:scale(.99)}}
 .product-details-btn{display:inline-flex;gap:8px;align-items:center;margin-top:13px;padding:0;border:0;background:none;color:var(--heritage);font-size:.82rem;font-weight:700}.arr{transition:transform .2s}.product-details-btn:hover{color:var(--red-deep)}.product-details-btn:hover .arr{transform:translateX(4px)}
 .collection-more{text-align:center}.more-btn{border:1px solid var(--navy);background:transparent;color:var(--navy);padding:13px 22px;min-height:46px}.more-btn:hover{background:var(--navy);border-color:var(--navy);color:var(--paper)}
+
+
+/* PRODUCT CARDS — CANONICAL MOBILE SYSTEM
+   Two columns, square media, natural title wrapping.
+   No line clamp and no artificial title-height reservation. */
+@media(max-width:760px){
+  .product-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 14px;align-items:start}
+  .product-card{min-width:0;height:auto;overflow:visible}
+  .product-image{aspect-ratio:1/1}
+  .product-info{padding:12px 0 0}
+  .product-category{margin:0 0 7px;font-size:.62rem;line-height:1.3;letter-spacing:.105em;white-space:normal;overflow:visible}
+  .product-title{margin:0;font-size:clamp(.94rem,3.7vw,1.06rem);line-height:1.4;letter-spacing:-.018em;text-wrap:balance;overflow-wrap:normal;word-break:normal;hyphens:none}
+}
+@media(max-width:390px){.product-grid{gap:24px 10px}.product-title{font-size:.92rem}}
 
 /* 08. CUSTOM + STORY */
 .custom{background:var(--surface)}.custom-grid,.story-grid{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:clamp(36px,8vw,120px)}
@@ -305,103 +322,7 @@ h1,h2,h3,h4,h5,h6,.hero-banner-copy h1,.section-heading-group h2,.custom-copy h2
 }
 
 
-/* 16. PRODUCT IMAGE PRESERVATION + PREMIUM MICRO-INTERACTIONS */
-.product-image{
-  aspect-ratio:1 / 1;
-  display:grid;
-  place-items:center;
-  background:var(--surface);
-}
-.product-image img{
-  width:100%;
-  height:100%;
-  object-fit:contain;
-  object-position:center;
-}
-.product-card:hover .product-image>img:first-child{transform:scale(1.018)}
-.product-image .alt-img{object-fit:contain}
 
-/* Keep every 1:1 catalogue image fully visible inside the product popup. */
-.modal-media{background:var(--surface)}
-.modal-stage{
-  background:var(--surface);
-  padding:clamp(14px,2vw,28px);
-}
-.modal-stage img,.modal-stage video{
-  object-fit:contain;
-  object-position:center;
-  max-width:100%;
-  max-height:100%;
-}
-
-/* Animated close control: tactile X with a Lottie-like micro-motion feel. */
-.modal-close{
-  display:grid;
-  place-items:center;
-  overflow:hidden;
-  transition:background var(--motion-fast) var(--ease),
-             color var(--motion-fast) var(--ease),
-             transform var(--motion-base) var(--ease),
-             box-shadow var(--motion-base) var(--ease);
-}
-.modal-close::before{
-  content:"";
-  position:absolute;
-  inset:5px;
-  border-radius:50%;
-  border:1px solid currentColor;
-  opacity:0;
-  transform:scale(.55) rotate(-35deg);
-  transition:opacity var(--motion-fast) ease,
-             transform var(--motion-base) var(--ease);
-}
-.modal-close:hover{
-  background:var(--heritage);
-  color:var(--surface);
-  transform:rotate(90deg) scale(1.06);
-  box-shadow:0 8px 22px rgba(20,25,66,.18);
-}
-.modal-close:hover::before{
-  opacity:.38;
-  transform:scale(1) rotate(35deg);
-}
-.modal-close:active{transform:rotate(90deg) scale(.9)}
-.modal-close:focus-visible{outline-color:var(--red);outline-offset:3px}
-
-/* Media navigation gets clear tactile feedback. */
-.modal-nav{
-  transition:background var(--motion-fast) var(--ease),
-             color var(--motion-fast) var(--ease),
-             transform var(--motion-base) var(--ease),
-             box-shadow var(--motion-base) var(--ease);
-}
-.modal-nav:hover{transform:translateY(-50%) scale(1.08)}
-.modal-nav:active{transform:translateY(-50%) scale(.92)}
-
-/* Thumbnail selection animates like a compact state transition. */
-.modal-thumb{
-  transition:transform var(--motion-fast) var(--ease),
-             border-color var(--motion-fast) ease,
-             box-shadow var(--motion-fast) ease;
-}
-.modal-thumb:hover{transform:translateY(-3px)}
-.modal-thumb.active{box-shadow:0 5px 16px rgba(20,25,66,.16)}
-
-/* Mobile keeps the full square product visible without crop. */
-@media(max-width:760px){
-  .product-image{aspect-ratio:1 / 1}
-  .product-image img,.product-image .alt-img{object-fit:contain}
-  .modal-stage{padding:14px}
-}
-
-@media(prefers-reduced-motion:reduce){
-  .modal-close:hover,.modal-close:active,
-  .modal-nav:hover,.modal-nav:active,
-  .modal-thumb:hover{transform:none}
-}
-
-
-/* 17. MOBILE RESPONSIVE STABILITY — PHONE-FIRST REPAIR */
 html,body{max-width:100%;overflow-x:hidden}
 img,video,svg{max-width:100%}
 @media(max-width:760px){
@@ -546,9 +467,6 @@ img,video,svg{max-width:100%}
 .section-head,.section-layout,.custom-grid,.story-grid,.contact-box{width:100%;min-width:0}
 .hero-banner-content{width:min(calc(100% - clamp(24px,5vw,80px)),1200px);margin-inline:auto}
 .section-heading-group,.section-support-group,.custom-copy,.story-copy,.contact-copy{min-width:0}
-.product-grid{align-items:stretch}
-.product-card{display:flex;flex-direction:column;height:100%}
-.product-info{display:flex;flex-direction:column;flex:1}
 .product-details-btn{margin-top:auto}
 .filters-wrap{position:relative;overscroll-behavior-inline:contain;scroll-snap-type:x proximity}
 .filter-btn{scroll-snap-align:start}
@@ -1134,21 +1052,7 @@ p{font-size:1rem;line-height:1.6}
 .section-head{margin-bottom:clamp(24px,3vw,40px)!important}
 .section-heading-group h2{margin-bottom:10px!important}
 .section-support-group p{font-size:1rem!important;line-height:1.6!important}
-.product-grid{gap:20px!important}
 
-/* Product and interface typography */
-.product-card h3,.product-title{
-  font-family:Mogranx,Arial,sans-serif!important;
-  font-size:1.2rem!important;
-  line-height:1.3!important;
-  font-weight:500!important;
-  color:#622331!important;
-}
-.product-card p,.product-meta,.product-category{
-  font-family:Arial,Helvetica,sans-serif!important;
-  line-height:1.5!important;
-}
-button,.btn,.hero-banner-cta,.filter-btn{
   font-family:Arial,Helvetica,sans-serif!important;
   font-weight:600!important;
   letter-spacing:0!important;
@@ -2933,53 +2837,6 @@ body{padding-top:var(--header-h)!important}
 /* The SVG itself contains staggered path motion; the logo box never moves. */
 @media(prefers-reduced-motion:reduce){.footer.site-footer .footer-logo{animation:none!important}}
 
-/* UX POLISH — purposeful micro-interactions */
-.product-card{transition:transform .28s ease,box-shadow .28s ease}
-.product-image{position:relative;overflow:hidden;isolation:isolate;background:rgba(255,250,241,.65)}
-.product-image::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,rgba(255,255,255,0),rgba(255,255,255,.38),rgba(255,255,255,0));transform:translateX(-110%);transition:transform .55s ease;pointer-events:none}
-.product-image img{opacity:0;transition:opacity .35s ease,transform .45s ease}
-.product-image.media-ready img,.product-image img[src]{opacity:1}
-@media(hover:hover) and (pointer:fine){.product-card:hover{transform:translateY(-4px);box-shadow:0 14px 34px rgba(20,25,66,.08)}.product-card:hover .product-image img{transform:scale(1.025)}.product-card:hover .product-image::after{transform:translateX(110%)}}
-@media(hover:none){.product-card:active{transform:scale(.985)}}
-.filter-btn{transition:background .22s ease,color .22s ease,transform .22s ease,box-shadow .22s ease}
-.filter-btn.active{transform:translateY(-1px);box-shadow:0 5px 14px rgba(20,25,66,.10)}
-.product-grid.filter-changing .product-card{animation:catalogueRefresh .24s ease both}
-@keyframes catalogueRefresh{from{opacity:.5;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
-.audience-item,.planning-option{appearance:none;border:0;background:transparent;font:inherit;cursor:pointer;transition:color .2s ease,opacity .2s ease,transform .2s ease}
-.audience-item{padding:0;margin:0;color:inherit;opacity:.55}
-.audience-item.active{opacity:1;color:#C82039;font-weight:600}
-.audience-note{margin:.8rem 0 0;min-height:1.5em;max-width:48ch}
-.interaction-swap{animation:copySwap .28s ease}
-@keyframes copySwap{from{opacity:.25;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
-.planning-picker{margin:1.25rem 0}
-.planning-label{display:block;margin-bottom:.7rem;font-size:.82rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase}
-.planning-options{display:flex;flex-wrap:wrap;gap:.45rem}
-.planning-option{padding:.5rem .7rem;border-radius:999px;background:rgba(20,25,66,.06);color:#141942}
-.planning-option.active{background:#C82039;color:#fff;box-shadow:0 5px 14px rgba(200,32,57,.18)}
-.header .nav a{transition:color .2s ease,font-weight .2s ease,opacity .2s ease}
-.header .nav a.nav-current{color:#C82039;font-weight:600}
-.header a[href*="wa.me"],.contact-cta,#modal-wa-btn{transition:transform .16s ease,filter .16s ease}
-.header a[href*="wa.me"]:active,.contact-cta:active,#modal-wa-btn:active{transform:scale(.97)}
-@media(max-width:760px){.audience-items{display:flex;flex-wrap:wrap;gap:.55rem}.audience-item{padding:.48rem .65rem;background:rgba(20,25,66,.05);border-radius:999px}.audience-item.active{background:rgba(200,32,57,.10)}}
-@media(prefers-reduced-motion:reduce){.product-card,.product-image::after,.product-image img,.filter-btn,.interaction-swap{transition:none!important;animation:none!important}}
-
-
-/* PRODUCT CARD TAP STATE — prevent mobile browser highlight from lingering after modal opens */
-.product-card,
-.product-card *,
-.product-card a,
-.product-card button{
-  -webkit-tap-highlight-color:transparent!important;
-}
-.product-card:focus,
-.product-card:focus-within{outline:none!important}
-@media(hover:none){
-  .product-card:active{
-    transform:scale(.99)!important;
-    transition-duration:.08s!important;
-  }
-}
-
 
 
 /* MOBILE HEADER — comfortable edge inset */
@@ -2991,51 +2848,6 @@ body{padding-top:var(--header-h)!important}
 }
 @media(max-width:390px){
   .header-row{width:calc(100% - 32px)!important}
-}
-
-/* =========================================================
-   PRODUCT DISCOVERY — FUNCTION-FIRST CATALOG SYSTEM
-   ========================================================= */
-#product-grid{gap:clamp(18px,2vw,28px)!important}
-#product-grid .product-card{
-  min-width:0;height:100%;display:flex;flex-direction:column;
-  background:transparent;border:0;box-shadow:none;overflow:hidden;
-  transition:none;
-}
-#product-grid .product-image{
-  width:100%;aspect-ratio:1/1;display:block;overflow:hidden;
-  background:#fffaf1;border:1px solid rgba(20,25,66,.08);
-  cursor:pointer;
-}
-#product-grid .product-image img{
-  width:100%;height:100%;display:block;
-  object-fit:contain;object-position:center;
-  transition:opacity .16s ease;
-}
-#product-grid .product-card:active .product-image img{opacity:.84}
-#product-grid .product-info{
-  min-width:0;flex:1;padding:12px 0 0!important;
-  display:flex;flex-direction:column;align-items:flex-start;
-}
-#product-grid .product-category{
-  margin:0 0 6px!important;color:#c82039;
-  font-size:.64rem;font-weight:700;line-height:1.25;letter-spacing:.1em;
-}
-#product-grid .product-title{
-  width:100%;margin:0!important;color:#141942;
-  font-family:Arial,Helvetica,sans-serif;font-size:1rem;font-weight:600;
-  line-height:1.38;text-align:left;text-wrap:pretty;
-}
-#product-grid .product-details-btn{display:none!important}
-@media(hover:hover) and (pointer:fine){
-  #product-grid .product-image{cursor:zoom-in}
-  #product-grid .product-card:hover .product-image img{opacity:.92}
-}
-@media(max-width:760px){
-  #product-grid{gap:22px 12px!important}
-  #product-grid .product-info{padding-top:10px!important}
-  #product-grid .product-category{font-size:.58rem;margin-bottom:5px!important}
-  #product-grid .product-title{font-size:.92rem;line-height:1.35}
 }
 
 /* WHO WE WORK WITH — clean audience selector */
@@ -3059,89 +2871,7 @@ body{padding-top:var(--header-h)!important}
 }
 
 
-/* =========================================================
-
-/* =========================================================
-   PRODUCT SYSTEM — SINGLE SOURCE OF TRUTH
-   Cards and viewer intentionally rebuilt after removing the
-   accumulated product override stack.
-   ========================================================= */
-
-/* Catalog cards */
-#product-grid{
-  align-items:start;
-}
-#product-grid .product-card{
-  display:flex;
-  flex-direction:column;
-  min-width:0;
-  background:transparent;
-  border:0;
-  box-shadow:none;
-  transform:none;
-}
-#product-grid .product-image{
-  display:block;
-  width:100%;
-  aspect-ratio:1/1;
-  padding:0;
-  overflow:hidden;
-  border:1px solid rgba(20,25,66,.08);
-  background:#fffdf8;
-  cursor:pointer;
-}
-#product-grid .product-image img,
-#product-grid .product-image .alt-img{
-  width:100%;
-  height:100%;
-  object-fit:contain;
-  object-position:center;
-}
-#product-grid .product-info{
-  padding:12px 0 0;
-  min-height:96px;
-  display:flex;
-  flex-direction:column;
-  align-items:flex-start;
-}
-#product-grid .product-category{
-  margin:0 0 7px;
-  min-height:1.25em;
-  color:#a71931;
-  font-size:.68rem;
-  font-weight:700;
-  line-height:1.25;
-  letter-spacing:.11em;
-  text-transform:uppercase;
-}
-#product-grid .product-title{
-  margin:0;
-  min-height:2.7em;
-  color:#141942;
-  font-size:clamp(1rem,1.35vw,1.28rem);
-  font-weight:500;
-  line-height:1.35;
-  text-align:left;
-  text-wrap:balance;
-}
-#product-grid .product-details-btn{
-  display:none;
-}
-@media(hover:hover){
-  #product-grid .product-image img{
-    transition:transform .28s ease;
-  }
-  #product-grid .product-card:hover .product-image img{
-    transform:scale(1.018);
-  }
-}
-@media(max-width:760px){
-  #product-grid .product-info{min-height:82px;padding-top:10px}
-  #product-grid .product-category{font-size:.58rem;margin-bottom:5px}
-  #product-grid .product-title{font-size:.94rem;line-height:1.35;min-height:2.7em}
-}
-
-/* Product viewer — compact on desktop, natural on mobile */
+ — compact on desktop, natural on mobile */
 #product-modal{
   position:fixed;inset:0;z-index:1200;
   display:grid;place-items:center;padding:20px;
@@ -3484,88 +3214,6 @@ body{padding-top:var(--header-h)!important}
   .footer.site-footer .footer-bottom .container,
   .footer.site-footer .footer-bottom .shell{width:calc(100% - 40px)!important;min-height:58px!important}
   .footer.site-footer .footer-bottom p{font-size:.68rem!important;text-align:center!important;width:100%!important}
-}
-
-
-/* Product card typography system — stable rhythm across the catalogue */
-.product-grid{align-items:stretch!important}
-.product-card{min-width:0!important;height:100%!important}
-.product-info{
-  width:100%!important;
-  min-width:0!important;
-  box-sizing:border-box!important;
-}
-.product-category{
-  min-height:1.2em!important;
-  margin:0 0 7px!important;
-  white-space:nowrap!important;
-  overflow:hidden!important;
-  text-overflow:ellipsis!important;
-}
-.product-title{
-  width:100%!important;
-  margin:0!important;
-  min-height:2.7em!important;
-  max-height:2.7em!important;
-  overflow:hidden!important;
-  display:-webkit-box!important;
-  -webkit-box-orient:vertical!important;
-  -webkit-line-clamp:2!important;
-  line-clamp:2!important;
-  overflow-wrap:normal!important;
-  word-break:normal!important;
-  text-wrap:pretty!important;
-  text-align:left!important;
-}
-@media(max-width:620px){
-  .product-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:22px 14px!important}
-  .product-info{padding:12px 2px 0!important;min-height:0!important}
-  .product-category{font-size:.64rem!important;letter-spacing:.12em!important;margin-bottom:7px!important}
-  .product-title{
-    font-size:clamp(.98rem,4vw,1.08rem)!important;
-    line-height:1.35!important;
-    min-height:2.7em!important;
-    max-height:2.7em!important;
-  }
-}
-
-
-/* Mobile catalogue: fix the actual composition, not just clamp text */
-@media(max-width:620px){
-  .product-grid{
-    grid-template-columns:repeat(2,minmax(0,1fr))!important;
-    gap:30px 14px!important;
-    align-items:start!important;
-  }
-  .product-card{height:auto!important;overflow:visible!important}
-  .product-image{aspect-ratio:1/1!important}
-  .product-info{
-    padding:13px 0 0!important;
-    display:block!important;
-    min-height:0!important;
-  }
-  .product-category{
-    margin:0 0 8px!important;
-    white-space:normal!important;
-    overflow:visible!important;
-    text-overflow:clip!important;
-  }
-  .product-title{
-    display:block!important;
-    width:100%!important;
-    min-height:0!important;
-    max-height:none!important;
-    overflow:visible!important;
-    -webkit-line-clamp:unset!important;
-    line-clamp:unset!important;
-    font-size:clamp(.96rem,3.65vw,1.08rem)!important;
-    line-height:1.42!important;
-    letter-spacing:-.025em!important;
-    text-wrap:balance!important;
-    overflow-wrap:break-word!important;
-    word-break:normal!important;
-    hyphens:none!important;
-  }
 }
 
 
