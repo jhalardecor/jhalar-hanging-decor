@@ -29,20 +29,21 @@ function renderFilters(){
       btn.setAttribute('aria-pressed',String(selected));
     });
 
-    /* Move only the horizontal filter rail. Never move the page. */
-    const railViewport=el.parentElement;
-    if(railViewport && el.scrollWidth>el.clientWidth){
-      const buttonLeft=b.offsetLeft;
-      const buttonCenter=buttonLeft+(b.offsetWidth/2);
-      const visibleCenter=el.scrollLeft+(el.clientWidth/2);
-      const nextIndex=[...el.children].indexOf(b)+1;
-      const next=el.children[nextIndex];
-      const revealAhead=next?Math.min(next.offsetWidth*.45,56):0;
-      const target=Math.max(0,Math.min(
-        buttonCenter-(el.clientWidth*.38)+revealAhead,
-        el.scrollWidth-el.clientWidth
-      ));
-      el.scrollTo({left:target,top:0,behavior:'smooth'});
+    /* Mobile filter rail: selecting an option advances the rail so the NEXT option is exposed.
+       This is intentional progressive disclosure — no manual swipe is required after each click. */
+    if(window.matchMedia('(max-width:760px)').matches){
+      const buttons=[...el.querySelectorAll('[data-filter]')];
+      const index=buttons.indexOf(b);
+      const next=buttons[index+1];
+      requestAnimationFrame(()=>{
+        if(!next)return;
+        const railRect=el.getBoundingClientRect();
+        const nextRect=next.getBoundingClientRect();
+        // Keep the selected filter comfortably visible and reveal the next choice at the right edge.
+        const desiredLeft=next.offsetLeft+next.offsetWidth-el.clientWidth+28;
+        const max=Math.max(0,el.scrollWidth-el.clientWidth);
+        el.scrollTo({left:Math.max(0,Math.min(desiredLeft,max)),top:0,behavior:'smooth'});
+      });
     }
 
     const grid=$('#product-grid');
