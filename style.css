@@ -852,3 +852,38 @@ h1,h2,h3{
     background:rgba(255,250,241,.78)!important;
   }
 }
+
+
+/* Popup copy wrapping + guaranteed mobile CTA */
+.modal-copy #modal-desc{
+  width:100%;
+  max-width:none;
+  text-wrap:pretty;
+  overflow-wrap:normal;
+  word-break:normal;
+  hyphens:none;
+}
+
+@media(max-width:760px){
+  .modal-copy{
+    display:flex!important;
+    flex-direction:column!important;
+  }
+  .modal-copy #modal-desc{
+    width:100%;
+    max-width:none;
+    margin-bottom:24px;
+    line-height:1.6;
+  }
+  .modal-wa-btn{
+    display:flex!important;
+    visibility:visible!important;
+    opacity:1!important;
+    flex:0 0 54px!important;
+    min-height:54px!important;
+    margin-top:0!important;
+    width:100%!important;
+    position:relative!important;
+    z-index:5!important;
+  }
+}
