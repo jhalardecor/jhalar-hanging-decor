@@ -4007,3 +4007,25 @@ body{padding-top:var(--header-h)!important}
     font-size:.72rem!important;
   }
 }
+
+/* MOBILE PRODUCT VIEWER — single authoritative resting geometry.
+   The image must never inherit a persisted zoom transform at 1×. */
+@media(max-width:760px){
+  #product-modal.modal .modal-stage{
+    padding:12px!important;
+    box-sizing:border-box!important;
+    touch-action:manipulation!important;
+  }
+  #product-modal.modal #modal-photo{
+    display:block!important;
+    width:100%!important;
+    height:100%!important;
+    max-width:100%!important;
+    max-height:100%!important;
+    margin:auto!important;
+    object-fit:contain!important;
+    object-position:center center!important;
+    transform:none!important;
+  }
+  #product-modal.modal .zoom-hint.mobile{display:none!important}
+}
