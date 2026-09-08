@@ -525,7 +525,7 @@ initProducts();initRuntime();
  // Pointer Events are used here so mobile dragging is not blocked by the desktop-only handler.
  stage.addEventListener('pointerdown',e=>{
    if(!modal.classList.contains('open')||z<=1.001||stage.classList.contains('is-video'))return;
-   if(e.pointerType==='touch'&&pinch)return;
+   if(pinch||e.isPrimary===false)return;
    drag={id:e.pointerId,cx:e.clientX,cy:e.clientY,x,y};
    try{stage.setPointerCapture(e.pointerId)}catch(err){}
    stage.classList.add('is-panning');
