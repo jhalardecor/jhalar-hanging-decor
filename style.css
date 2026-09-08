@@ -57,7 +57,6 @@ h1,h2,h3{overflow-wrap:normal;word-break:normal;text-wrap:balance}
 p{overflow-wrap:break-word;word-break:normal;text-wrap:pretty}
 .header{background:rgb(255 248 243/.94);border-bottom:1px solid var(--line)}
 .hero{background:var(--gradient-warm)}
-.hero h1,.collection-intro h2,.spaces h2,.about h2,.contact h2{max-width:none}
 .hero-copy>p,.collection-intro>p{max-width:42ch}
 .label,.product-category{color:var(--accent)}
 .nav-enquire{color:var(--accent);border-color:var(--accent)}
@@ -99,7 +98,6 @@ p{overflow-wrap:break-word;word-break:normal;text-wrap:pretty}
   .mobile-nav{position:absolute;top:82px;left:0;right:0;box-shadow:0 18px 40px rgb(45 32 35/.10)}
   .mobile-nav a{padding:18px max(16px,calc((100% - var(--shell))/2));font-size:16px}
   .hero{min-height:calc(100svh - 82px)}
-  .hero h1{font-size:clamp(42px,12vw,62px);line-height:.96;max-width:12ch}
   .collection-intro h2,.spaces h2,.about h2,.contact h2{max-width:14ch;line-height:1.02}
   .hero-copy>p,.collection-intro>p{max-width:36ch}
   .filters{display:flex;flex-wrap:nowrap;overflow-x:auto;overflow-y:hidden;width:100%;gap:18px;padding:0 0 10px;scrollbar-width:none}
