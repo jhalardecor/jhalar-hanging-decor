@@ -2,7 +2,7 @@
    - catalogue loader (fail-closed through the shared naming gate)
    - runtime settings/theme/sections/custom-css application (published state)
    - window.JHALAR API consumed by the Pro Editor live preview */
-const state={products:[],filter:'all',expanded:false,whatsapp:'918100656258',theme:null,modalMedia:[],modalIndex:0,modalZoom:1};
+const state={products:[],filter:'all',expanded:false,whatsapp:'918100656258',theme:null,modalProduct:null,modalMedia:[],modalIndex:0,modalZoom:1};
 const $=s=>document.querySelector(s);
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function categories(){return [...new Set(state.products.map(p=>p.category).filter(Boolean))]}
@@ -106,12 +106,14 @@ function initPremiumInteractions(){
 function visibleProducts(){return state.filter==='all'?state.products:state.products.filter(p=>p.category===state.filter)}
 function mediaType(src,type){if(type)return type;return /\\.(mp4|webm|ogg|mov)(?:[?#]|$)/i.test(String(src))?'video':'image'}
 function normaliseMedia(item){if(typeof item==='string')return{src:item,type:mediaType(item)};if(item&&typeof item==='object'){const src=item.src||item.url||item.image||item.video||item.source;return src?{src,type:mediaType(src,item.type||item.mediaType)}:null}return null}
+// Descriptive alt text is optional owner-editable content; fall back to the product name.
+function productAlt(p){const a=typeof p.imageAlt==='string'?p.imageAlt.trim():'';return a||p.title||''}
 function mediaList(p){const raw=[p.image||p.sourceImage,...(Array.isArray(p.gallery)?p.gallery:[])];const seen=new Set;return raw.map(normaliseMedia).filter(m=>m&&m.src&&!seen.has(m.src)&&(seen.add(m.src),true))}
-function renderProducts(){const all=visibleProducts(),limit=all.length;const grid=$('#product-grid');grid.innerHTML=all.slice(0,limit).map((p,i)=>{const m=mediaList(p),main=m[0]?.src||'',alt=m[1]?.src||'';return '<article class="product-card reveal" style="transition-delay:'+Math.min(i*45,320)+'ms"><button class="product-image" type="button" data-id="'+p.id+'" aria-label="View '+esc(p.title)+'"><img src="'+esc(main)+'" alt="'+esc(p.title)+'" loading="lazy">'+(alt?'<img class="alt-img" src="'+esc(alt)+'" alt="" aria-hidden="true" loading="lazy">':'')+'</button><div class="product-info"><span class="product-category">'+esc(p.category)+'</span><h3 class="product-title">'+esc(p.title)+'</h3><button class="product-details-btn" type="button" data-id="'+p.id+'">View details <span class="arr">→</span></button></div></article>'}).join('');let touchMoved=false,multiTouch=false,startX=0,startY=0;
+function renderProducts(){const all=visibleProducts(),limit=all.length;const grid=$('#product-grid');grid.innerHTML=all.slice(0,limit).map((p,i)=>{const m=mediaList(p),main=m[0]?.src||'',alt=m[1]?.src||'';return '<article class="product-card reveal" style="transition-delay:'+Math.min(i*45,320)+'ms"><button class="product-image" type="button" data-id="'+p.id+'" aria-label="View '+esc(p.title)+'"><img src="'+esc(main)+'" alt="'+esc(productAlt(p))+'" loading="lazy">'+(alt?'<img class="alt-img" src="'+esc(alt)+'" alt="" aria-hidden="true" loading="lazy">':'')+'</button><div class="product-info"><span class="product-category">'+esc(p.category)+'</span><h3 class="product-title">'+esc(p.title)+'</h3><button class="product-details-btn" type="button" data-id="'+p.id+'">View details <span class="arr">→</span></button></div></article>'}).join('');let touchMoved=false,multiTouch=false,startX=0,startY=0;
 grid.addEventListener('touchstart',e=>{multiTouch=e.touches.length>1;touchMoved=false;if(e.touches[0]){startX=e.touches[0].clientX;startY=e.touches[0].clientY}},{passive:true});
 grid.addEventListener('touchmove',e=>{if(e.touches.length>1)multiTouch=true;if(e.touches[0]&&(Math.abs(e.touches[0].clientX-startX)>10||Math.abs(e.touches[0].clientY-startY)>10))touchMoved=true},{passive:true});
 grid.addEventListener('touchend',()=>{setTimeout(()=>{multiTouch=false;touchMoved=false},350)},{passive:true});
-grid.onclick=e=>{if(multiTouch||touchMoved)return;const b=e.target.closest('[data-id]');if(b)openProduct(Number(b.dataset.id))};const more=$('#collection-toggle');if(more)more.hidden=true;observeReveals()}
+grid.onclick=e=>{if(multiTouch||touchMoved)return;const b=e.target.closest('[data-id]');if(b)openProduct(Number(b.dataset.id))};observeReveals()}
 let lastFocus=null;
 function showModalMedia(i){
  const m=state.modalMedia||[];if(!m.length)return;
@@ -136,7 +138,7 @@ function showModalMedia(i){
    photo.hidden=false;
    photo.style.display='block';
    photo.src=item.src;
-   photo.alt=$('#modal-title')?.textContent||'Product media';
+   photo.alt=(state.modalIndex===0&&state.modalProduct?productAlt(state.modalProduct):$('#modal-title')?.textContent)||'Product media';
  }
  const thumbs=$('#modal-thumbs');
  thumbs.innerHTML=m.length>1?m.map((x,j)=>'<button class="modal-thumb'+(j===state.modalIndex?' active':'')+'" data-thumb="'+j+'">'+(x.type==='video'?'<span>Video</span>':'<img src="'+esc(x.src)+'" alt="">')+'</button>').join(''):'';
@@ -144,7 +146,7 @@ function showModalMedia(i){
 }
 function openProduct(id){
  const p=state.products.find(x=>Number(x.id)===id);if(!p)return;
- state.modalMedia=mediaList(p);state.modalIndex=0;
+ state.modalProduct=p;state.modalMedia=mediaList(p);state.modalIndex=0;
  $('#modal-category').textContent=p.category;$('#modal-title').textContent=p.title;$('#modal-desc').textContent=p.description||'';
  const wa=$('#modal-wa-btn');wa.href='https://wa.me/'+state.whatsapp+'?text='+encodeURIComponent('Hello JHALAR, I am interested in '+p.title+'.');
  showModalMedia(0);
@@ -327,10 +329,14 @@ async function initRuntime(){
 }
 
 
-const __collectionToggle=$('#collection-toggle'); if(__collectionToggle) __collectionToggle.onclick=()=>{state.expanded=!state.expanded;renderProducts();if(!state.expanded)$('#collection').scrollIntoView({behavior:'smooth'})};
 const __menu=$('#menu'); if(__menu) __menu.onclick=()=>{const b=$('#menu'),n=$('#mobile-nav'),open=!n.classList.contains('open');n.classList.toggle('open',open);b.classList.toggle('open',open);b.setAttribute('aria-expanded',String(open));b.setAttribute('aria-label',open?'Close navigation menu':'Open navigation menu')};
 const __mobileNav=$('#mobile-nav'); if(__mobileNav) __mobileNav.onclick=e=>{if(e.target.matches('a')){$('#mobile-nav').classList.remove('open');$('#menu').classList.remove('open');$('#menu').setAttribute('aria-expanded','false')}};
-document.addEventListener('click',e=>{if(e.target.closest('[data-close]'))closeModal()});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+document.addEventListener('click',e=>{
+  if(e.target.closest('[data-close]')){closeModal();return}
+  if(!$('#product-modal')?.classList.contains('open'))return;
+  if(e.target.closest('.header a[href],#mobile-nav a[href],a.logo,a.brand'))closeModal();
+});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
 document.querySelectorAll('.modal-nav').forEach(b=>b.addEventListener('click',()=>showModalMedia(state.modalIndex+Number(b.dataset.nav))));
 const __syncHeader=()=>{$('.header')?.classList.toggle('scrolled',window.scrollY>8)};window.addEventListener('scroll',__syncHeader,{passive:true});__syncHeader();
 const __year=$('#year'); if(__year)__year.textContent=new Date().getFullYear();
