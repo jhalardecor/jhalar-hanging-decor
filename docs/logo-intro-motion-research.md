@@ -45,7 +45,7 @@
 | **Mask/wipe unveil** | Logo revealed by a travelling edge (curtain, petal sweep, light bar) | ★★★★★ Second choice — toran/petal unveil |
 | **Assembly** | Parts fly/slide in and lock (letters, charms click into place) | ★★★★ — charms tinkling into place, letters slotting home |
 | **Brand particles** | Marigold petals / diya embers / bokeh drifting through | ★★★★ — only if brand-specific, never generic dust |
-| **Light sweep + ignition** | Wave crosses, triggers glow peak + glint at center | ★★★★ — already proven in our footer; carry into video |
+| **Light sweep + ignition** | Wave crosses, triggers glow peak + glint at center | ★★★★ — cut from the footer; video-only if ever |
 | **Push-in / parallax** | Slow camera move + layered depth during the hold | ★★★★ — the "cinematic" in Cinematic |
 | **Morphing** | One shape becomes the logo (diya flame → J dot? petal → charm?) | ★★★ — high craft cost, high payoff if we find the right morph |
 | **Kinetic type lockup** | Wordmark performs, then freezes legible | ★★★ — keep subtle; legibility is the law |
@@ -87,7 +87,7 @@ Recommended pipeline for JHALAR: concept + timing design first (done in our SVG 
 
 ## 7. Recommendations — JHALAR's video intro directions
 
-All three extend the already-approved Concept 3 footer grammar (kinetic assembly → travelling light → living hold) into true video:
+All three extend the already-approved Concept 3 footer grammar (monumental assembly → camera depth → held light) into true video:
 
 **A. "First Light" (recommended)** — 5s cinematic. Black → six diya-charms light one by one L→R → letters resolve → the wave ignites center with the chime hit → glory hold with slow push-in and drifting embers. Purest brand truth: *the festival lights coming on.*
 
