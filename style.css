@@ -3106,7 +3106,7 @@ body{padding-top:var(--header-h)!important}
 .footer.site-footer .footer-brand>a.logo{margin:0 auto!important;display:inline-flex!important;justify-content:center!important;align-items:center!important}
 .footer.site-footer .footer-logo{display:block!important;margin:0!important;animation:none!important}
 .footer.site-footer .footer-brand>a.logo:hover .footer-logo{transform:none!important}
-/* The SVG itself contains staggered path motion (one-shot reveal + infinite loop); the logo box never moves. */
+/* The SVG itself holds the eternal loop (sway + bob + breeze); the logo box never moves. */
 @media(prefers-reduced-motion:reduce){.footer.site-footer .footer-logo{animation:none!important}}
 
 /* UX POLISH — purposeful micro-interactions */
