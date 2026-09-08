@@ -3,33 +3,31 @@
   <!-- Generator: Adobe Illustrator 30.7.0, SVG Export Plug-In . SVG Version: 2.1.4 Build 114)  -->
   <defs>
     <style>
-      /* JHALAR sting: every layer ungrouped and played like a jingle —
-         rhythmic phrasing (triplet, breath, accent, resolve), ornaments set
-         like jewels in mirrored pairs, tracking caption, then an ignition
-         gleam + resolve tick settling into one calm 9s ambient system. */
-      .footer-motion-logo{transform-box:fill-box;transform-origin:center;animation:lockupIn 2s cubic-bezier(.19,1,.22,1) backwards}
+      /* JHALAR motion: fast commercial snap-in, then an engaging 4s loop —
+         golden light wave (never dead air), ornaments on a heartbeat grid,
+         one signature sparkle stacked on the accent. All hits quantized. */
+      .footer-motion-logo{transform-box:fill-box;transform-origin:center;animation:lockupIn 1s cubic-bezier(.19,1,.22,1) backwards}
       @keyframes lockupIn{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:none}}
-      .lockup{transform-box:fill-box;transform-origin:center;animation:stingButton .55s cubic-bezier(.3,0,.2,1) 2.45s backwards,lockupBreath 9s ease-in-out infinite}
-      @keyframes stingButton{0%{transform:scale(1)}35%{transform:scale(1.018)}100%{transform:scale(1)}}
-      @keyframes lockupBreath{0%,100%{opacity:1}29%{opacity:.95}}
-      .lyr{opacity:1;animation:lyrIn .7s cubic-bezier(.19,1,.22,1) backwards}
-      .lyr-j{animation-delay:.05s}.lyr-h{animation-delay:.14s}.lyr-a1-hole,.lyr-a1{animation-delay:.23s}.lyr-l{animation-delay:.42s}.lyr-a2-hole,.lyr-a2{animation-delay:.52s}.lyr-r{animation-delay:.61s}
-      @keyframes lyrIn{from{opacity:0;transform:translateY(8px);filter:blur(4px)}60%{opacity:1}to{opacity:1;transform:none;filter:blur(0)}}
-      .orn{transform-box:fill-box;transform-origin:center;opacity:1;animation:ornSet .55s cubic-bezier(.34,1.45,.44,1) backwards}
-      .orn-l1,.orn-r1{animation-delay:.74s}.orn-l2,.orn-r2{animation-delay:.81s}.orn-l3,.orn-r3{animation-delay:.88s}
+      .lockup{animation:lockupBreath 4s ease-in-out infinite}
+      @keyframes lockupBreath{0%,100%{opacity:1}34%{opacity:.96}}
+      .lyr{opacity:1;animation:lyrIn .45s cubic-bezier(.19,1,.22,1) backwards}
+      .lyr-j{animation-delay:.05s}.lyr-h{animation-delay:.12s}.lyr-a1-hole,.lyr-a1{animation-delay:.19s}.lyr-l{animation-delay:.3s}.lyr-a2-hole,.lyr-a2{animation-delay:.37s}.lyr-r{animation-delay:.44s}
+      @keyframes lyrIn{from{opacity:0;transform:translateY(6px);filter:blur(3px)}60%{opacity:1}to{opacity:1;transform:none;filter:blur(0)}}
+      .orn{transform-box:fill-box;transform-origin:center;opacity:1;animation:ornHitR 4s ease-in-out infinite,ornSet .5s cubic-bezier(.34,1.45,.44,1) backwards}
+      .orn-r1,.orn-r2,.orn-r3{animation-name:ornHitR,ornSet}
+      .orn-l1,.orn-l2,.orn-l3{animation-name:ornHitL,ornSet}
+      .orn-l1,.orn-r1{animation-delay:0s,.55s}.orn-l2,.orn-r2{animation-delay:0s,.62s}.orn-l3,.orn-r3{animation-delay:0s,.69s}
       @keyframes ornSet{from{opacity:0;transform:scale(.2)}to{opacity:1;transform:scale(1)}}
-      .logo-caption{opacity:1;animation:captionReveal 1.3s cubic-bezier(.19,1,.22,1) 1s backwards}
+      @keyframes ornHitR{0%,30%{transform:scale(1)}34%{transform:scale(1.3)}38%,100%{transform:scale(1)}}
+      @keyframes ornHitL{0%,80%{transform:scale(1)}84%{transform:scale(1.3)}88%,100%{transform:scale(1)}}
+      .logo-caption{opacity:1;animation:captionGlow 4s ease-in-out infinite,captionReveal .9s cubic-bezier(.19,1,.22,1) .7s backwards}
       @keyframes captionReveal{from{opacity:0;letter-spacing:.22em;transform:translateY(4px)}to{opacity:1;letter-spacing:0;transform:none}}
-      .halo{opacity:.12;animation:haloBreath 9s ease-in-out infinite}
-      @keyframes haloBreath{0%,100%{opacity:.12}29%{opacity:.5}}
-      .sheen{animation:sheenSweep 9s cubic-bezier(.45,0,.15,1) infinite}
-      @keyframes sheenSweep{0%,8%{transform:translateX(-36px)}50%,100%{transform:translateX(138px)}}
-      .glint{transform-box:fill-box;transform-origin:center;opacity:0;fill:#fff6e3}
-      .glint-a{animation:glintA 9s ease-in-out infinite}
-      @keyframes glintA{0%,17.5%{opacity:0;transform:scale(.5)}20.1%{opacity:1;transform:scale(1.15)}23%,100%{opacity:0;transform:scale(.6)}}
-      .glint-b{animation:glintB 9s ease-in-out infinite}
-      @keyframes glintB{0%,35.3%{opacity:0;transform:scale(.5)}37.9%{opacity:1;transform:scale(1.15)}40.5%,100%{opacity:0;transform:scale(.6)}}
-      @media(prefers-reduced-motion:reduce){.footer-motion-logo,.lockup,.lyr,.orn,.logo-caption,.halo,.sheen,.glint{animation:none;opacity:1}.halo,.sheen,.glint{opacity:0}}}
+      @keyframes captionGlow{0%,100%{opacity:.88}34%{opacity:1}}
+      .sheen{animation:sheenSweep 4s cubic-bezier(.45,0,.15,1) infinite}
+      @keyframes sheenSweep{0%,6%{transform:translateX(-36px)}62%,100%{transform:translateX(138px)}}
+      .glint{transform-box:fill-box;transform-origin:center;opacity:0;fill:#fff6e3;animation:glintHit 4s ease-in-out infinite}
+      @keyframes glintHit{0%,30%{opacity:0;transform:scale(.5)}34%{opacity:1;transform:scale(1.2)}38%,100%{opacity:0;transform:scale(.6)}}
+      @media(prefers-reduced-motion:reduce){.footer-motion-logo,.lockup,.lyr,.orn,.logo-caption,.sheen,.glint{animation:none;opacity:1;transform:none}.sheen,.glint{opacity:0}}}
 
       .st0 {
         fill: #ffffff;
@@ -43,19 +41,14 @@
       }
     </style>
     <linearGradient id="sheenGrad" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="#f4dcae" stop-opacity="0"/>
-      <stop offset=".3" stop-color="#f4dcae" stop-opacity="0"/>
-      <stop offset=".42" stop-color="#f4dcae" stop-opacity=".5"/>
-      <stop offset=".5" stop-color="#f7e3b8" stop-opacity=".9"/>
-      <stop offset=".58" stop-color="#f4dcae" stop-opacity=".5"/>
-      <stop offset=".7" stop-color="#f4dcae" stop-opacity="0"/>
-      <stop offset="1" stop-color="#f4dcae" stop-opacity="0"/>
+      <stop offset="0" stop-color="#d99a2b" stop-opacity="0"/>
+      <stop offset=".3" stop-color="#d99a2b" stop-opacity="0"/>
+      <stop offset=".45" stop-color="#d99a2b" stop-opacity=".55"/>
+      <stop offset=".55" stop-color="#ffedb8" stop-opacity=".95"/>
+      <stop offset=".62" stop-color="#d99a2b" stop-opacity=".85"/>
+      <stop offset=".75" stop-color="#d99a2b" stop-opacity=".25"/>
+      <stop offset="1" stop-color="#d99a2b" stop-opacity="0"/>
     </linearGradient>
-    <radialGradient id="haloGrad" cx=".5" cy=".5" r=".5">
-      <stop offset="0" stop-color="#f4dcb4" stop-opacity=".5"/>
-      <stop offset=".55" stop-color="#f4dcb4" stop-opacity=".16"/>
-      <stop offset="1" stop-color="#f4dcb4" stop-opacity="0"/>
-    </radialGradient>
     <clipPath id="jhalarSheenClip">
       <path d="M11.1,0h-4.1c-.8,0-1.5.6-1.6,1.4s.6,1.7,1.5,1.7h2.5v8c0,3.5-2.5,6.1-4.7,4.8-.5-.3-.8-1.4-1.2-1.8-.8-.8-2.3-.4-2.7,0-2.5,2.7.3,4.7.9,5.2,2.1,1.6,11.9,3.2,10.9-7.5V1.8C12.8.8,12.1,0,11.1,0Z"/>
       <path d="M29.2.3c-.5,0-.9.2-1.2.5-.3.3-.5.8-.5,1.2v6.8h-10.1V2c0-.9-.8-1.7-1.7-1.7s-1.7.8-1.7,1.7v16.7c0,.9.7,1.7,1.7,1.7s1.7-.8,1.7-1.7v-6.8h10.1v6.8c0,.5.2.9.5,1.2.3.3.7.5,1.2.5s.9-.2,1.2-.5c.3-.3.5-.8.5-1.2V2c0-.4-.2-.9-.5-1.2-.3-.3-.7-.5-1.2-.5Z"/>
@@ -74,7 +67,6 @@
       <text class="st0" transform="translate(24.9 33.1) scale(1 1)"><tspan x="0" y="0">hanging decor</tspan></text>
     </clipPath>
   </defs>
-  <ellipse class="halo" cx="51" cy="15" rx="60" ry="24" fill="url(#haloGrad)"/>
   <g class="lockup">
   <path class="st1 lyr lyr-j" d="M11.1,0h-4.1c-.8,0-1.5.6-1.6,1.4s.6,1.7,1.5,1.7h2.5v8c0,3.5-2.5,6.1-4.7,4.8-.5-.3-.8-1.4-1.2-1.8-.8-.8-2.3-.4-2.7,0-2.5,2.7.3,4.7.9,5.2,2.1,1.6,11.9,3.2,10.9-7.5V1.8C12.8.8,12.1,0,11.1,0Z"/>
   <path class="st1 lyr lyr-h" d="M29.2.3c-.5,0-.9.2-1.2.5-.3.3-.5.8-.5,1.2v6.8h-10.1V2c0-.9-.8-1.7-1.7-1.7s-1.7.8-1.7,1.7v16.7c0,.9.7,1.7,1.7,1.7s1.7-.8,1.7-1.7v-6.8h10.1v6.8c0,.5.2.9.5,1.2.3.3.7.5,1.2.5s.9-.2,1.2-.5c.3-.3.5-.8.5-1.2V2c0-.4-.2-.9-.5-1.2-.3-.3-.7-.5-1.2-.5Z"/>
@@ -92,7 +84,6 @@
   <path class="st1 orn orn-r3" d="M86.4,28.2v-2l3.2,3.2.5.5h0c0,.2,0,.3-.1.5,0,.2,0,.4.1.5h0c0,0-.5.5-.5.5l-3.2,3.2v-2l2.2-2.2-2.2-2.2Z"/>
   <text class="st0 logo-caption" transform="translate(24.9 33.1) scale(1 1)"><tspan x="0" y="0">hanging decor</tspan></text>
   <g clip-path="url(#jhalarSheenClip)"><g class="sheen"><rect x="-17" y="-4" width="34" height="44" fill="url(#sheenGrad)" transform="translate(0 18) skewX(-12) translate(0 -18)"/></g></g>
-  <path class="glint glint-a" d="M13,1.3C13.5,3.5 13.9,3.9 16.2,4.5C13.9,5.1 13.5,5.5 13,7.7C12.5,5.5 12.1,5.1 9.8,4.5C12.1,3.9 12.5,3.5 13,1.3Z"/>
-  <path class="glint glint-b" d="M89,2.3C89.5,4.5 89.9,4.9 92.2,5.5C89.9,6.1 89.5,6.5 89,8.7C88.5,6.5 88.1,6.1 85.8,5.5C88.1,4.9 88.5,4.5 89,2.3Z"/>
+  <path class="glint" d="M89,2.3C89.5,4.5 89.9,4.9 92.2,5.5C89.9,6.1 89.5,6.5 89,8.7C88.5,6.5 88.1,6.1 85.8,5.5C88.1,4.9 88.5,4.5 89,2.3Z"/>
   </g>
 </svg>
