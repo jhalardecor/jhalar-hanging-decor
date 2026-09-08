@@ -26,3 +26,4 @@ build/
 
 # local scratch (never published)
 .cache/
+media/
