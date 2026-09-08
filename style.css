@@ -738,3 +738,68 @@ h1,h2,h3{
 .modal-wa-btn{flex:0 0 54px!important;min-height:54px!important;margin-top:auto!important;position:static!important;visibility:visible!important;opacity:1!important}
 .modal-close{top:max(10px,env(safe-area-inset-top));right:10px;background:rgba(255,250,241,.92)!important}
 }
+
+
+/* ===== FOOTER — BALANCED PREMIUM COMPOSITION ===== */
+.site-footer{
+  margin-top:0;
+  background:linear-gradient(135deg,#fffaf1 0%,#f7dfe0 34%,#c82039 100%);
+  color:#2f2527;
+  padding-top:0;
+}
+.footer-top{
+  min-height:300px;
+  display:grid;
+  grid-template-columns:minmax(0,1.25fr) minmax(180px,.75fr);
+  grid-template-areas:
+    "brand links"
+    "tagline links";
+  column-gap:clamp(48px,9vw,140px);
+  row-gap:18px;
+  align-items:center;
+  padding:clamp(54px,7vw,88px) 0;
+}
+.footer-logo{grid-area:brand;width:clamp(150px,15vw,210px);max-width:100%;align-self:end}
+.footer-top>p{grid-area:tagline;margin:0;max-width:26ch;color:rgba(47,37,39,.72);font-size:15px;line-height:1.55;align-self:start}
+.footer-links{
+  grid-area:links;
+  display:grid;
+  grid-template-columns:repeat(2,minmax(120px,1fr));
+  gap:16px 38px;
+  align-content:center;
+  justify-self:end;
+  min-width:min(100%,320px);
+  font-size:14px;
+}
+.footer-links a{color:#2f2527;text-decoration:none;padding:6px 0}
+.footer-links a:hover,.footer-links a:focus-visible{color:#7b1d34}
+.footer-bottom{
+  display:flex;
+  align-items:center;
+  min-height:58px;
+  border-top:1px solid rgba(47,37,39,.18);
+  padding:14px 0;
+  color:rgba(47,37,39,.66);
+  font-size:12px;
+}
+.footer-bottom p{margin:0}
+@media(max-width:760px){
+  .footer-top{
+    min-height:0;
+    grid-template-columns:1fr;
+    grid-template-areas:"brand" "tagline" "links";
+    gap:22px;
+    padding:52px 0 44px;
+  }
+  .footer-logo{width:160px;align-self:auto}
+  .footer-top>p{max-width:30ch}
+  .footer-links{
+    width:100%;
+    min-width:0;
+    justify-self:stretch;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:12px 28px;
+    padding-top:8px;
+  }
+  .footer-bottom{min-height:0;padding:16px 0 calc(18px + env(safe-area-inset-bottom))}
+}
