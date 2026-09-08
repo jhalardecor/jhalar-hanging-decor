@@ -2730,3 +2730,46 @@ button:not(.filter-btn),
     box-sizing:border-box!important;
   }
 }
+
+
+/* PRODUCT MODAL COPY RESET — one clean layout, no stacked legacy spacing */
+#product-modal .modal-copy,
+#product-modal .modal-copy #modal-category,
+#product-modal .modal-copy #modal-title,
+#product-modal .modal-copy #modal-desc,
+#product-modal .modal-copy .modal-zoom-hint{
+  box-sizing:border-box!important;
+}
+@media(max-width:760px){
+  #product-modal .modal-copy{
+    width:100%!important;
+    margin:0!important;
+    padding:10px 12px 12px!important;
+    gap:0!important;
+  }
+  #product-modal .modal-copy #modal-category{
+    margin:0 0 4px!important;
+    padding:0!important;
+  }
+  #product-modal .modal-copy #modal-title{
+    margin:0 0 8px!important;
+    padding:0!important;
+    max-width:none!important;
+  }
+  #product-modal .modal-copy #modal-desc{
+    width:100%!important;
+    max-width:none!important;
+    margin:0!important;
+    padding:0!important;
+    text-wrap:wrap!important;
+    line-height:1.55!important;
+    hyphens:none!important;
+  }
+  #product-modal .modal-copy .modal-zoom-hint{
+    margin:10px 0 0!important;
+    padding:0!important;
+  }
+  #product-modal .modal-copy .modal-wa-btn{
+    margin:14px 0 0!important;
+  }
+}
