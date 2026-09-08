@@ -3,42 +3,46 @@
   <!-- Generator: Adobe Illustrator 30.7.0, SVG Export Plug-In . SVG Version: 2.1.4 Build 114)  -->
   <defs>
     <style>
-      /* JHALAR motion: fast commercial snap-in, then an engaging 4s loop —
-         golden light wave (never dead air), ornaments on a heartbeat grid,
-         one signature sparkle stacked on the accent. All hits quantized. */
-      .footer-motion-logo{transform-box:fill-box;transform-origin:center;animation:lockupIn 1s cubic-bezier(.19,1,.22,1) backwards}
-      @keyframes lockupIn{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:none}}
-      .lockup{animation:lockupBreath 4s ease-in-out infinite}
-      @keyframes lockupBreath{0%,100%{opacity:1}34%{opacity:.96}}
-      .lyr{opacity:1;animation:lyrIn .45s cubic-bezier(.19,1,.22,1) backwards}
-      .lyr-j{animation-delay:.05s}.lyr-h{animation-delay:.12s}.lyr-a1-hole,.lyr-a1{animation-delay:.19s}.lyr-l{animation-delay:.3s}.lyr-a2-hole,.lyr-a2{animation-delay:.37s}.lyr-r{animation-delay:.44s}
-      @keyframes lyrIn{from{opacity:0;transform:translateY(6px);filter:blur(3px)}60%{opacity:1}to{opacity:1;transform:none;filter:blur(0)}}
-      .orn{transform-box:fill-box;transform-origin:center;opacity:1;animation:ornHitR 4s ease-in-out infinite,ornSet .5s cubic-bezier(.34,1.45,.44,1) backwards}
-      .orn-r1,.orn-r2,.orn-r3{animation-name:ornHitR,ornSet}
-      .orn-l1,.orn-l2,.orn-l3{animation-name:ornHitL,ornSet}
-      .orn-l1,.orn-r1{animation-delay:0s,.55s}.orn-l2,.orn-r2{animation-delay:0s,.62s}.orn-l3,.orn-r3{animation-delay:0s,.69s}
-      @keyframes ornSet{from{opacity:0;transform:scale(.2)}to{opacity:1;transform:scale(1)}}
-      @keyframes ornHitR{0%,30%{transform:scale(1)}34%{transform:scale(1.3)}38%,100%{transform:scale(1)}}
-      @keyframes ornHitL{0%,80%{transform:scale(1)}84%{transform:scale(1.3)}88%,100%{transform:scale(1)}}
-      .logo-caption{opacity:1;animation:captionGlow 4s ease-in-out infinite,captionReveal .9s cubic-bezier(.19,1,.22,1) .7s backwards}
-      @keyframes captionReveal{from{opacity:0;letter-spacing:.22em;transform:translateY(4px)}to{opacity:1;letter-spacing:0;transform:none}}
-      @keyframes captionGlow{0%,100%{opacity:.88}34%{opacity:1}}
-      .sheen{animation:sheenSweep 4s cubic-bezier(.45,0,.15,1) infinite}
-      @keyframes sheenSweep{0%,6%{transform:translateX(-36px)}62%,100%{transform:translateX(138px)}}
-      .glint{transform-box:fill-box;transform-origin:center;opacity:0;fill:#fff6e3;animation:glintHit 4s ease-in-out infinite}
-      @keyframes glintHit{0%,30%{opacity:0;transform:scale(.5)}34%{opacity:1;transform:scale(1.2)}38%,100%{opacity:0;transform:scale(.6)}}
-      @media(prefers-reduced-motion:reduce){.footer-motion-logo,.lockup,.lyr,.orn,.logo-caption,.sheen,.glint{animation:none;opacity:1;transform:none}.sheen,.glint{opacity:0}}}
-
       .st0 {
         fill: #ffffff;
-        font-family: Mogranx-MediumSlantUltraCond, Mogranx;
-        font-size: 8.8px;
+        font-family: Mogranx-MediumSlantUltraCond, Mogranx, 'Arial Narrow', 'Helvetica Neue', Arial, sans-serif;
+        font-size: 6.7px;
         font-weight: 500;
       }
 
       .st1 {
         fill: #ffffff;
       }
+      /* JHALAR power loop: fast snap-in, then an unmissable 3.6s cycle.
+         Golden wave + spark line, glow flash + lockup punch stacked on the
+         37% hit, ornaments rippling L-to-R, glints tracking the light. */
+      .footer-motion-logo{transform-box:fill-box;transform-origin:center;animation:lockupIn 1s cubic-bezier(.19,1,.22,1) backwards}
+      @keyframes lockupIn{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:none}}
+      .lockup{transform-box:fill-box;transform-origin:center;animation:lockupPunch 3.6s ease-in-out infinite,lockupGlow 3.6s ease-in-out infinite}
+      @keyframes lockupPunch{0%,34%{transform:scale(1)}37%{transform:scale(1.03)}41%,100%{transform:scale(1)}}
+      @keyframes lockupGlow{0%,34%{filter:drop-shadow(0 0 0 rgba(255,190,80,0))}37%{filter:drop-shadow(0 0 9px rgba(255,190,80,.95))}46%,100%{filter:drop-shadow(0 0 0 rgba(255,190,80,0))}}
+      .lyr{opacity:1;animation:lyrIn .45s cubic-bezier(.19,1,.22,1) backwards}
+      .lyr-j{animation-delay:.05s}.lyr-h{animation-delay:.12s}.lyr-a1-hole,.lyr-a1{animation-delay:.19s}.lyr-l{animation-delay:.3s}.lyr-a2-hole,.lyr-a2{animation-delay:.37s}.lyr-r{animation-delay:.44s}
+      @keyframes lyrIn{from{opacity:0;transform:translateY(6px);filter:blur(3px)}60%{opacity:1}to{opacity:1;transform:none;filter:blur(0)}}
+      .orn{transform-box:fill-box;transform-origin:center;opacity:1;animation:ornPop 3.6s ease-in-out infinite,ornSet .5s cubic-bezier(.34,1.45,.44,1) backwards}
+      .orn-l1{animation-delay:0s,.55s}.orn-l2{animation-delay:.03s,.62s}.orn-l3{animation-delay:.06s,.69s}.orn-r1{animation-delay:.09s,.55s}.orn-r2{animation-delay:.12s,.62s}.orn-r3{animation-delay:.15s,.69s}
+      @keyframes ornSet{from{opacity:0;transform:scale(.2)}to{opacity:1;transform:scale(1)}}
+      @keyframes ornPop{0%,35%{transform:scale(1)}37%{transform:scale(1.5)}40%,100%{transform:scale(1)}}
+      .logo-caption{opacity:1;animation:captionGlow 3.6s ease-in-out infinite,captionReveal .7s cubic-bezier(.19,1,.22,1) .7s backwards}
+      @keyframes captionReveal{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+      @keyframes captionGlow{0%,100%{opacity:.75}37%{opacity:1}}
+      .sheen{animation:sheenSweep 3.6s cubic-bezier(.45,0,.15,1) infinite}
+      @keyframes sheenSweep{0%,5%{transform:translateX(-36px)}70%,100%{transform:translateX(138px)}}
+      .glint{transform-box:fill-box;transform-origin:center;opacity:0;fill:#fff6e3}
+      .glintJ{animation:glintJ 3.6s ease-in-out infinite}
+      @keyframes glintJ{0%,20%{opacity:0;transform:scale(.5)}23%{opacity:1;transform:scale(1.25)}26%,100%{opacity:0;transform:scale(.6)}}
+      .glintR{animation:glintR 3.6s ease-in-out infinite}
+      @keyframes glintR{0%,49%{opacity:0;transform:scale(.5)}52%{opacity:1;transform:scale(1.25)}55%,100%{opacity:0;transform:scale(.6)}}
+      @media(prefers-reduced-motion:reduce){.footer-motion-logo,.lockup,.lyr,.orn,.logo-caption,.sheen,.glint{animation:none;opacity:1;transform:none;filter:none}.sheen,.glint{opacity:0}}}
+
+
+
+
     </style>
     <linearGradient id="sheenGrad" x1="0" y1="0" x2="1" y2="0">
       <stop offset="0" stop-color="#d99a2b" stop-opacity="0"/>
@@ -48,6 +52,12 @@
       <stop offset=".62" stop-color="#d99a2b" stop-opacity=".85"/>
       <stop offset=".75" stop-color="#d99a2b" stop-opacity=".25"/>
       <stop offset="1" stop-color="#d99a2b" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="sparkGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ffe9b0" stop-opacity="0"/>
+      <stop offset=".5" stop-color="#fff3cf" stop-opacity=".7"/>
+      <stop offset=".8" stop-color="#fffdf4" stop-opacity="1"/>
+      <stop offset="1" stop-color="#fffdf4" stop-opacity="0"/>
     </linearGradient>
     <clipPath id="jhalarSheenClip">
       <path d="M11.1,0h-4.1c-.8,0-1.5.6-1.6,1.4s.6,1.7,1.5,1.7h2.5v8c0,3.5-2.5,6.1-4.7,4.8-.5-.3-.8-1.4-1.2-1.8-.8-.8-2.3-.4-2.7,0-2.5,2.7.3,4.7.9,5.2,2.1,1.6,11.9,3.2,10.9-7.5V1.8C12.8.8,12.1,0,11.1,0Z"/>
@@ -64,7 +74,7 @@
       <path d="M80.9,30c0,0,.2-.2.4-.2h3.7v-3.1l1.4,1.4v4.5l-1.4,1.4v-3.1h-3.7c-.2,0-.3-.1-.4-.2,0,0-.1-.2-.1-.4,0-.2,0-.3.1-.4Z"/>
       <path d="M90.1,29.9s0,0,0,0c.6-.5,1.1-.8,1.6-.8,0,0,.1,0,.2,0,.7.2,1.3.8,1.7,1.3-.4.5-1,1.1-1.7,1.3,0,0-.1,0-.2,0-.5,0-1-.2-1.6-.8,0,0,0,0,0,0l.5-.5-.5-.5Z"/>
       <path d="M86.4,28.2v-2l3.2,3.2.5.5h0c0,.2,0,.3-.1.5,0,.2,0,.4.1.5h0c0,0-.5.5-.5.5l-3.2,3.2v-2l2.2-2.2-2.2-2.2Z"/>
-      <text class="st0" transform="translate(24.9 33.1) scale(1 1)"><tspan x="0" y="0">hanging decor</tspan></text>
+      <text class="st0" transform="translate(26 33.1) scale(1 1)" textLength="50" lengthAdjust="spacingAndGlyphs"><tspan textLength="50" lengthAdjust="spacingAndGlyphs">hanging decor</tspan></text>
     </clipPath>
   </defs>
   <g class="lockup">
@@ -82,8 +92,9 @@
   <path class="st1 orn orn-r1" d="M80.9,30c0,0,.2-.2.4-.2h3.7v-3.1l1.4,1.4v4.5l-1.4,1.4v-3.1h-3.7c-.2,0-.3-.1-.4-.2,0,0-.1-.2-.1-.4,0-.2,0-.3.1-.4Z"/>
   <path class="st1 orn orn-r2" d="M90.1,29.9s0,0,0,0c.6-.5,1.1-.8,1.6-.8,0,0,.1,0,.2,0,.7.2,1.3.8,1.7,1.3-.4.5-1,1.1-1.7,1.3,0,0-.1,0-.2,0-.5,0-1-.2-1.6-.8,0,0,0,0,0,0l.5-.5-.5-.5Z"/>
   <path class="st1 orn orn-r3" d="M86.4,28.2v-2l3.2,3.2.5.5h0c0,.2,0,.3-.1.5,0,.2,0,.4.1.5h0c0,0-.5.5-.5.5l-3.2,3.2v-2l2.2-2.2-2.2-2.2Z"/>
-  <text class="st0 logo-caption" transform="translate(24.9 33.1) scale(1 1)"><tspan x="0" y="0">hanging decor</tspan></text>
-  <g clip-path="url(#jhalarSheenClip)"><g class="sheen"><rect x="-17" y="-4" width="34" height="44" fill="url(#sheenGrad)" transform="translate(0 18) skewX(-12) translate(0 -18)"/></g></g>
-  <path class="glint" d="M89,2.3C89.5,4.5 89.9,4.9 92.2,5.5C89.9,6.1 89.5,6.5 89,8.7C88.5,6.5 88.1,6.1 85.8,5.5C88.1,4.9 88.5,4.5 89,2.3Z"/>
+  <text class="st0 logo-caption" transform="translate(26 33.1) scale(1 1)" textLength="50" lengthAdjust="spacingAndGlyphs"><tspan textLength="50" lengthAdjust="spacingAndGlyphs">hanging decor</tspan></text>
+  <g clip-path="url(#jhalarSheenClip)"><g class="sheen"><rect x="-17" y="-4" width="34" height="44" fill="url(#sheenGrad)" transform="translate(0 18) skewX(-12) translate(0 -18)"/><rect x="14" y="-4" width="7" height="44" fill="url(#sparkGrad)" transform="translate(0 18) skewX(-12) translate(0 -18)"/></g></g>
+  <path class="glint glintJ" d="M13,0.5C13.62,3.25 14.12,3.75 17,4.5C14.12,5.25 13.62,5.75 13,8.5C12.38,5.75 11.88,5.25 9,4.5C11.88,3.75 12.38,3.25 13,0.5Z"/>
+  <path class="glint glintR" d="M89,1.5C89.62,4.25 90.12,4.75 93,5.5C90.12,6.25 89.62,6.75 89,9.5C88.38,6.75 87.88,6.25 85,5.5C87.88,4.75 88.38,4.25 89,1.5Z"/>
   </g>
 </svg>
