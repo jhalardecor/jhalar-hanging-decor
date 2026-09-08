@@ -294,3 +294,150 @@ body{background:var(--canvas);color:var(--ink)}
   .spaces{background:var(--surface-2)}
   .modal{background:#faf7f0}
 }
+
+
+/* ===== QUIET GRADIENT SYSTEM — 20260909.77 =====
+   Gradients create depth in the page itself; controls stay flat and quiet. */
+:root{
+  --canvas:#fbfaf7;
+  --surface:#ffffff;
+  --surface-2:#f5f2ec;
+  --section-warm:#f1eee7;
+  --ink:#2f292b;
+  --muted:#5b5354;
+  --line:#d9d3ca;
+}
+
+/* A very light neutral gradient keeps the page from feeling flat or pink. */
+body{
+  background:
+    linear-gradient(180deg,#fbfaf7 0%,#f7f5f0 52%,#fbfaf7 100%);
+  color:var(--ink);
+}
+
+/* Hero: image-led gradient overlay for readable copy, without a coloured wash. */
+.hero{
+  background:#ebe8e1;
+}
+.hero-image::after{
+  background:
+    linear-gradient(90deg,
+      rgba(251,250,247,.98) 0%,
+      rgba(251,250,247,.90) 30%,
+      rgba(251,250,247,.46) 52%,
+      rgba(251,250,247,.08) 76%,
+      rgba(251,250,247,0) 100%);
+}
+
+/* Section gradients are deliberately low-contrast and neutral. */
+.collection{
+  background:
+    linear-gradient(135deg,#fbfaf7 0%,#f5f2ec 100%);
+}
+
+.spaces{
+  position:relative;
+  isolation:isolate;
+  background:
+    linear-gradient(135deg,#f7f5f0 0%,#ece8e0 52%,#f4f1eb 100%);
+  color:var(--ink);
+}
+
+.spaces::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  z-index:-1;
+  background:
+    linear-gradient(110deg,
+      rgba(255,255,255,.58) 0%,
+      rgba(255,255,255,.12) 48%,
+      rgba(255,255,255,0) 100%);
+}
+
+.about{
+  background:
+    linear-gradient(180deg,#fbfaf7 0%,#f6f3ed 100%);
+}
+
+.contact{
+  background:
+    linear-gradient(135deg,#f6f3ed 0%,#fbfaf7 62%,#f1eee7 100%);
+}
+
+.contact-card{
+  background:rgba(255,255,255,.62);
+  border-color:var(--line);
+}
+
+/* Flat controls: colour hierarchy without glow, shine or decorative shadows. */
+.nav-enquire,
+.hero-copy a,
+.button-light,
+.contact-cta,
+.modal-wa-btn{
+  box-shadow:none!important;
+  background:var(--brand-gradient);
+}
+
+.modal-close,
+.modal-nav{
+  box-shadow:none!important;
+}
+
+.modal-wa-btn::before{
+  display:none!important;
+}
+
+.nav-enquire:hover,
+.hero-copy a:hover,
+.button-light:hover,
+.contact-cta:hover,
+.modal-wa-btn:hover{
+  box-shadow:none!important;
+}
+
+/* Keep red as an accent surface/indicator only, never as running text. */
+.label,
+.product-category,
+.modal-copy .label,
+.nav a:hover,
+.nav-current{
+  color:var(--ink)!important;
+}
+
+@media(max-width:760px){
+  .hero-image::after{
+    background:
+      linear-gradient(180deg,
+        rgba(47,41,43,0) 16%,
+        rgba(47,41,43,.12) 45%,
+        rgba(47,41,43,.86) 100%);
+  }
+
+  .collection{
+    background:linear-gradient(180deg,#fbfaf7 0%,#f5f2ec 100%);
+  }
+
+  .spaces{
+    background:linear-gradient(145deg,#f8f6f2 0%,#ece8e0 100%);
+  }
+
+  .about{
+    background:linear-gradient(180deg,#fbfaf7 0%,#f5f2ec 100%);
+  }
+
+  .contact{
+    background:linear-gradient(145deg,#f5f2ec 0%,#fbfaf7 100%);
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  .hero-copy a,
+  .button-light,
+  .contact-cta,
+  .modal-wa-btn,
+  .modal-close,
+  .modal-nav{transition:none!important}
+}
