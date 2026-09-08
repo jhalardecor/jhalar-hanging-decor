@@ -662,3 +662,35 @@ p{font-size:var(--fs-body);line-height:1.6}
   .product-variant{font-size:11px}
   .filter-btn{font-size:13px}
 }
+
+
+/* Typography layout reset — remove per-section heading compression */
+h1,h2,h3{
+  text-wrap:wrap;
+  overflow-wrap:normal;
+  word-break:normal;
+}
+.hero h1,
+.collection-intro h2,
+.about-intro h2,
+.spaces h2,
+.contact-copy h2{
+  max-width:none;
+  line-height:1.02;
+  letter-spacing:-.035em;
+}
+.hero h1{max-width:11ch;}
+.collection-intro h2,.about-intro h2,.spaces h2,.contact-copy h2{max-width:14ch;}
+
+@media (max-width:768px){
+  .hero h1,
+  .collection-intro h2,
+  .about-intro h2,
+  .spaces h2,
+  .contact-copy h2{
+    max-width:12ch;
+    line-height:1.04;
+    letter-spacing:-.03em;
+  }
+  .spaces h2{max-width:13ch;}
+}
