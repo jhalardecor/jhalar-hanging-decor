@@ -3118,213 +3118,115 @@ body{padding-top:var(--header-h)!important}
   #product-grid .product-title{font-size:.94rem;line-height:1.35;min-height:2.7em}
 }
 
-/* Product viewer shell */
+/* Product viewer — compact on desktop, natural on mobile */
 #product-modal{
-  position:fixed;
-  inset:0;
-  z-index:1200;
-  display:grid;
-  place-items:center;
-  padding:24px;
-  opacity:0;
-  visibility:hidden;
-  pointer-events:none;
+  position:fixed;inset:0;z-index:1200;
+  display:grid;place-items:center;padding:20px;
+  opacity:0;visibility:hidden;pointer-events:none;
   transition:opacity .18s ease,visibility .18s ease;
 }
-#product-modal.open{
-  opacity:1;
-  visibility:visible;
-  pointer-events:auto;
-}
+#product-modal.open{opacity:1;visibility:visible;pointer-events:auto}
 #product-modal .modal-backdrop{
-  position:absolute;
-  inset:0;
-  display:block;
-  background:rgba(20,25,66,.46);
-  backdrop-filter:blur(3px);
+  position:absolute;inset:0;background:rgba(15,18,42,.48);
+  backdrop-filter:blur(4px);
 }
 #product-modal .modal-card{
-  position:relative;
-  z-index:1;
-  width:min(880px,calc(100vw - 48px));
-  height:min(610px,calc(100dvh - 48px));
-  min-height:0;
-  max-height:none;
-  display:grid;
-  grid-template-columns:minmax(0,1.08fr) minmax(310px,.92fr);
-  overflow:hidden;
-  background:#fffaf1;
-  border:1px solid rgba(20,25,66,.09);
-  box-shadow:0 24px 72px rgba(10,14,40,.28);
+  position:relative;z-index:1;
+  width:min(920px,calc(100vw - 40px));
+  height:min(580px,calc(100dvh - 40px));
+  display:grid;grid-template-columns:minmax(0,54%) minmax(320px,46%);
+  overflow:hidden;background:#fffaf1;
+  border:1px solid rgba(20,25,66,.10);
+  box-shadow:0 28px 90px rgba(10,14,40,.30);
 }
 #product-modal .modal-media{
-  position:relative;
-  min-width:0;
-  min-height:0;
-  height:100%;
-  aspect-ratio:auto;
-  background:#f6f1e9;
+  position:relative;min-width:0;min-height:0;height:100%;
+  background:#f4eee4;
 }
 #product-modal .modal-stage{
-  width:100%;
-  height:100%;
-  padding:18px;
-  box-sizing:border-box;
-  display:grid;
-  place-items:center;
-  overflow:hidden;
-  touch-action:none;
+  width:100%;height:100%;padding:14px;box-sizing:border-box;
+  display:grid;place-items:center;overflow:hidden;touch-action:none;
 }
-#product-modal .modal-stage img,
-#product-modal .modal-stage video{
-  display:block;
-  width:100%;
-  height:100%;
-  object-fit:contain;
-  object-position:center;
+#product-modal .modal-stage img,#product-modal .modal-stage video{
+  width:100%;height:100%;display:block;object-fit:contain;object-position:center;
 }
 #product-modal .modal-stage > img[hidden],
 #product-modal .modal-stage > video[hidden]{display:none}
-#product-modal .modal-stage.is-video > #modal-photo{display:none}
-#product-modal .modal-stage:not(.is-video) > video{display:none}
+#product-modal .modal-stage.is-video>#modal-photo{display:none}
+#product-modal .modal-stage:not(.is-video)>video{display:none}
 
 #product-modal .modal-copy{
-  min-width:0;
-  min-height:0;
-  height:100%;
-  padding:48px 34px 32px;
-  box-sizing:border-box;
-  overflow-y:auto;
-  overflow-x:hidden;
-  scrollbar-width:none;
-  background:#fffaf1;
+  min-width:0;min-height:0;height:100%;box-sizing:border-box;
+  padding:42px 38px 34px;
+  overflow-y:auto;overflow-x:hidden;
+  scrollbar-width:none;background:#fffaf1;
 }
 #product-modal .modal-copy::-webkit-scrollbar{display:none}
 #product-modal #modal-category{
-  margin:0 0 9px;
-  color:#a71931;
-  font-size:.67rem;
-  font-weight:700;
-  line-height:1.25;
-  letter-spacing:.12em;
-  text-transform:uppercase;
+  margin:0 0 10px;color:#a71931;font-size:.66rem;font-weight:700;
+  line-height:1.25;letter-spacing:.12em;text-transform:uppercase;
 }
 #product-modal #modal-title{
-  margin:0 0 16px;
-  color:#141942;
-  font-family:Mogranx,Arial,sans-serif;
-  font-size:clamp(1.45rem,2.2vw,2rem);
-  font-weight:500;
-  line-height:1.14;
-  letter-spacing:0;
-  text-align:left;
+  margin:0 0 15px;color:#141942;font-family:Mogranx,Arial,sans-serif;
+  font-size:clamp(1.4rem,2vw,1.9rem);font-weight:500;line-height:1.16;
+  letter-spacing:0;text-align:left;text-wrap:balance;
 }
 #product-modal #modal-desc{
-  margin:0;
-  max-width:36ch;
-  color:rgba(20,25,66,.76);
-  font-family:Arial,Helvetica,sans-serif;
-  font-size:.96rem;
-  line-height:1.62;
-  text-align:left;
-  overflow-wrap:normal;
-  word-break:normal;
+  margin:0;max-width:38ch;color:rgba(20,25,66,.76);
+  font-family:Arial,Helvetica,sans-serif;font-size:.95rem;line-height:1.62;
+  text-align:left;overflow-wrap:normal;word-break:normal;
 }
 #product-modal .modal-zoom-hint{
-  margin:18px 0 0;
-  color:#a71931;
-  font-size:.67rem;
-  font-weight:700;
-  letter-spacing:.07em;
+  margin:18px 0 0;color:#a71931;font-size:.66rem;font-weight:700;letter-spacing:.07em;
 }
 #product-modal .modal-wa-btn{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  min-height:46px;
-  margin-top:26px;
-  padding:0 18px;
-  border:1px solid #c82039;
-  background:#c82039;
-  color:#fffdf8;
-  font-size:.9rem;
-  font-weight:700;
-  line-height:1;
-  text-decoration:none;
+  display:inline-flex;align-items:center;justify-content:center;
+  min-height:44px;margin-top:24px;padding:0 18px;
+  border:1px solid #c82039;background:#c82039;color:#fffdf8;
+  font-size:.88rem;font-weight:700;line-height:1;text-decoration:none;
+  transition:background .18s ease,border-color .18s ease,transform .18s ease;
 }
-#product-modal .modal-wa-btn:hover{
-  background:#a71931;
-  border-color:#a71931;
-  color:#fffdf8;
-}
+#product-modal .modal-wa-btn:hover{background:#a71931;border-color:#a71931;color:#fffdf8}
+#product-modal .modal-wa-btn:active{transform:scale(.985)}
 #product-modal .modal-close{
-  position:absolute;
-  z-index:5;
-  top:12px;
-  right:12px;
-  width:40px;
-  height:40px;
-  border:0;
-  border-radius:0;
-  background:#fffaf1;
-  color:#141942;
-  font-size:1.5rem;
-  cursor:pointer;
+  position:absolute;z-index:5;top:12px;right:12px;
+  width:40px;height:40px;border:0;background:#fffaf1;color:#141942;
+  font-size:1.5rem;cursor:pointer;
 }
-#product-modal .modal-nav{z-index:4}
-#product-modal .modal-thumbs{z-index:4}
+#product-modal .modal-nav,#product-modal .modal-thumbs{z-index:4}
 
-/* Mobile: one clear scroll surface, no nested panel */
+/* Phone: image gets presence without consuming the whole viewport.
+   The modal itself is the only scroll surface. */
 @media(max-width:760px){
   #product-modal{
-    display:block;
-    padding:0;
-    overflow-y:auto;
-    background:#fffaf1;
+    display:block;padding:0;overflow-y:auto;background:#fffaf1;
+    overscroll-behavior:contain;
   }
   #product-modal .modal-backdrop{display:none}
   #product-modal .modal-card{
-    width:100%;
-    height:auto;
-    min-height:100dvh;
-    display:block;
-    overflow:visible;
-    border:0;
-    box-shadow:none;
+    width:100%;height:auto;min-height:100dvh;
+    display:flex;flex-direction:column;overflow:visible;
+    border:0;box-shadow:none;
   }
   #product-modal .modal-media{
-    width:100%;
-    height:auto;
-    aspect-ratio:1/1;
+    width:100%;height:clamp(300px,44dvh,430px);flex:0 0 auto;
+    background:#f4eee4;
   }
-  #product-modal .modal-stage{
-    height:100%;
-    padding:10px;
-  }
+  #product-modal .modal-stage{padding:12px}
   #product-modal .modal-copy{
-    height:auto;
-    min-height:0;
-    padding:28px 20px calc(42px + env(safe-area-inset-bottom));
-    overflow:visible;
+    height:auto;min-height:0;overflow:visible;
+    padding:26px 20px calc(38px + env(safe-area-inset-bottom));
   }
   #product-modal #modal-title{
-    font-size:1.45rem;
-    line-height:1.18;
-    margin-bottom:14px;
+    font-size:1.42rem;line-height:1.18;margin-bottom:13px;
   }
   #product-modal #modal-desc{
-    max-width:none;
-    font-size:.98rem;
-    line-height:1.62;
+    max-width:none;font-size:.97rem;line-height:1.62;
   }
+  #product-modal .modal-zoom-hint{margin-top:16px}
   #product-modal .modal-wa-btn{
-    width:100%;
-    margin-top:24px;
+    width:100%;margin-top:22px;min-height:48px;
   }
-  #product-modal .modal-nav,
-  #product-modal .modal-thumbs{display:none}
-  #product-modal .modal-close{
-    top:12px;
-    right:12px;
-  }
+  #product-modal .modal-nav,#product-modal .modal-thumbs{display:none}
+  #product-modal .modal-close{top:10px;right:10px}
 }
