@@ -152,7 +152,23 @@ function openProduct(id){
  showModalMedia(0);
  const modal=$('#product-modal');lastFocus=document.activeElement;modal.classList.add('open');modal.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';$('#modal-close').focus();
 }
-function closeModal(){const m=$('#product-modal');if(!m.classList.contains('open'))return;m.classList.remove('open');m.setAttribute('aria-hidden','true');document.body.style.overflow='';if(lastFocus?.focus)lastFocus.focus();lastFocus=null}
+function closeModal(){
+ const m=$('#product-modal');if(!m.classList.contains('open'))return;
+ const close=$('#modal-close');
+ if(close){
+   close.classList.remove('is-closing');
+   void close.offsetWidth;
+   close.classList.add('is-closing');
+ }
+ m.classList.add('is-closing');
+ setTimeout(()=>{
+   m.classList.remove('open','is-closing');
+   m.setAttribute('aria-hidden','true');
+   document.body.style.overflow='';
+   if(lastFocus?.focus)lastFocus.focus();
+   lastFocus=null;
+ },220);
+}
 
 /* ---------- runtime defaults: equal to the shipped HTML/settings ---------- */
 const DEFAULTS={
