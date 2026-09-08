@@ -220,142 +220,162 @@ body{background:#FFF4EF}
 }
 
 
-/* Mobile navigation interaction layer */
-.nav-backdrop{display:none}
+
+/* =========================================================
+   HEADER — single geometry system
+   Content + vertical padding determines visual weight.
+   Desktop: comfortable editorial presence.
+   Mobile: compact, with a 44px minimum menu target.
+   ========================================================= */
+:root{
+  --header-h:clamp(68px,4.8vw,78px);
+  --header-x:clamp(24px,4vw,56px);
+}
+
+.header{
+  min-height:var(--header-h);
+  height:auto;
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:rgba(255,248,243,.96);
+  border-bottom:1px solid var(--line);
+  backdrop-filter:blur(14px);
+}
+
+.header-row{
+  min-height:var(--header-h);
+  height:auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding-block:10px;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  flex:0 0 auto;
+}
+
+.brand img{
+  width:clamp(122px,10vw,150px);
+  height:auto;
+}
+
+.nav{
+  margin-left:auto;
+  display:flex;
+  align-items:center;
+  gap:clamp(20px,3vw,42px);
+  font-size:14px;
+}
+
+.menu,.mobile-nav,.nav-backdrop{display:none}
+
 @media (max-width:760px){
+  :root{
+    --header-h:60px;
+    --header-x:clamp(18px,5vw,24px);
+  }
+
+  .header{min-height:var(--header-h)}
+
+  .header-row{
+    min-height:var(--header-h);
+    padding:8px var(--header-x);
+  }
+
+  .brand img{
+    width:clamp(112px,34vw,136px);
+    max-height:30px;
+  }
+
+  .nav{display:none}
+
   .menu{
-    width:44px;height:44px;margin-left:auto;padding:0;
-    display:grid;place-content:center;gap:7px;
-    border:0;background:transparent;color:var(--ink);
+    display:grid;
+    place-content:center;
+    gap:7px;
+    width:44px;
+    height:44px;
+    margin:0;
+    padding:0;
+    flex:0 0 44px;
+    border:0;
+    background:transparent;
+    color:var(--ink);
     cursor:pointer;
   }
+
   .menu span{
-    display:block;width:24px;height:1.5px;margin:0;
-    background:currentColor;transform-origin:center;
-    transition:transform 220ms cubic-bezier(.2,.8,.2,1),width 180ms ease;
+    display:block;
+    width:24px;
+    height:1.5px;
+    margin:0;
+    background:currentColor;
+    transform-origin:center;
+    transition:transform 220ms cubic-bezier(.2,.8,.2,1);
   }
+
   .menu.open span:first-child{transform:translateY(4.25px) rotate(45deg)}
   .menu.open span:last-child{transform:translateY(-4.25px) rotate(-45deg)}
-  .menu:active span{width:20px}
 
   .nav-backdrop{
-    position:fixed;inset:74px 0 0;z-index:98;
-    display:block;opacity:0;visibility:hidden;
-    background:rgba(58,31,42,.22);
+    position:fixed;
+    inset:var(--header-h) 0 0;
+    z-index:98;
+    display:block;
+    opacity:0;
+    visibility:hidden;
+    background:rgba(116,18,39,.16);
     transition:opacity 220ms ease,visibility 220ms step-end;
   }
+
   .nav-backdrop.open{
-    opacity:1;visibility:visible;
+    opacity:1;
+    visibility:visible;
     transition:opacity 220ms ease,visibility 0s;
   }
 
   .mobile-nav{
-    position:fixed;top:74px;left:0;right:0;z-index:99;
+    position:fixed;
+    top:var(--header-h);
+    left:0;
+    right:0;
+    z-index:99;
     display:grid!important;
     grid-template-rows:0fr;
     overflow:hidden;
-    opacity:0;visibility:hidden;
+    opacity:0;
+    visibility:hidden;
     background:var(--paper);
-    box-shadow:none;
     border-top:1px solid var(--line);
     transition:grid-template-rows 260ms cubic-bezier(.2,.8,.2,1),opacity 180ms ease,visibility 260ms step-end;
   }
+
   .mobile-nav::before{content:"";min-height:0}
+
   .mobile-nav.open{
     grid-template-rows:1fr;
-    opacity:1;visibility:visible;
+    opacity:1;
+    visibility:visible;
     transition:grid-template-rows 260ms cubic-bezier(.2,.8,.2,1),opacity 180ms ease,visibility 0s;
   }
+
   .mobile-nav a{
-    min-height:58px;
-    display:flex;align-items:center;
-    position:relative;
-    border-bottom:1px solid var(--line);
-    transition:background 160ms ease,padding-left 180ms ease,color 160ms ease;
-  }
-  .mobile-nav a:active{padding-left:calc(max(16px,calc((100% - var(--shell))/2)) + 8px);background:rgba(200,31,56,.07);color:var(--accent)}
-  .mobile-nav a:last-child{border-bottom:0}
-}
-
-
-/* Header geometry correction: larger presence and safe horizontal breathing room. */
-@media (max-width:760px){
-  .header{height:88px}
-  .header-row{
-    width:100%;
-    padding-inline:clamp(20px,5vw,28px);
-  }
-  .brand{display:flex;align-items:center;padding-left:2px}
-  .brand img{width:clamp(132px,38vw,158px)}
-  .menu{width:48px;height:48px;margin-right:-4px}
-  .nav-backdrop{inset:88px 0 0}
-  .mobile-nav{top:88px}
-}
-
-
-/* Final mobile header composition — balanced brand mark + navigation control. */
-@media (max-width:760px){
-  .header{
-    height:84px;
-    background:rgba(255,244,239,.96);
-    backdrop-filter:blur(14px);
-  }
-  .header-row{
-    width:100%;
-    height:84px!important;
-    padding:0 clamp(20px,5.5vw,28px)!important;
-    display:grid!important;
-    grid-template-columns:1fr auto 1fr;
-    align-items:center;
-  }
-  .brand{
-    grid-column:2;
-    justify-self:center;
+    min-height:56px;
     display:flex;
     align-items:center;
+    padding-inline:var(--header-x);
+    border-bottom:1px solid var(--line);
+    transition:background 160ms ease,color 160ms ease;
   }
-  .brand img{
-    width:clamp(128px,35vw,148px)!important;
-    max-height:34px;
-  }
-  .menu{
-    grid-column:3;
-    justify-self:end;
-    width:44px;
-    height:44px;
-    margin:0!important;
-  }
-  /* Empty first column intentionally counterbalances the menu for a truly centered logo. */
-  .nav-backdrop{inset:84px 0 0!important}
-  .mobile-nav{top:84px!important}
-}
 
+  .mobile-nav a:active{
+    background:rgba(200,31,56,.07);
+    color:var(--accent);
+  }
 
-/* Mobile header: editorial left/right composition. */
-@media (max-width:760px){
-  .header,
-  .header-row{height:84px!important}
-  .header-row{
-    display:flex!important;
-    align-items:center!important;
-    justify-content:space-between!important;
-    padding-inline:clamp(20px,5.5vw,28px)!important;
-  }
-  .brand{
-    display:flex!important;
-    align-items:center!important;
-    justify-content:flex-start!important;
-    margin:0!important;
-  }
-  .brand img{
-    width:clamp(128px,35vw,148px)!important;
-    max-height:34px;
-  }
-  .menu{
-    margin:0!important;
-    flex:0 0 44px;
-    width:44px!important;
-    height:44px!important;
-    justify-self:auto!important;
-  }
+  .mobile-nav a:last-child{border-bottom:0}
 }
