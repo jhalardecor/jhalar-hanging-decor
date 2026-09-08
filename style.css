@@ -3350,3 +3350,49 @@ body{padding-top:var(--header-h)!important}
 @keyframes modalCardOut{to{opacity:0;transform:translateY(8px) scale(.985)}}
 @keyframes modalBackdropOut{to{opacity:0}}
 @media(prefers-reduced-motion:reduce){.modal.open .modal-card,.modal.is-closing .modal-card,.modal.is-closing .modal-backdrop{animation:none!important}.modal-card .modal-close,.modal-card .modal-close svg{transition:none!important}}
+
+
+/* Mobile footer — readable hierarchy, no compressed four-column layout */
+@media(max-width:620px){
+  .footer.site-footer{padding-top:28px!important;overflow:visible!important}
+  .footer.site-footer .footer-grid{
+    width:calc(100% - 32px)!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:28px 22px!important;
+    padding-bottom:28px!important;
+  }
+  .footer.site-footer .footer-brand{
+    grid-column:1/-1!important;
+    width:100%!important;
+    justify-content:flex-start!important;
+    align-items:flex-start!important;
+    text-align:left!important;
+  }
+  .footer.site-footer .footer-brand>a.logo{margin:0!important;justify-content:flex-start!important}
+  .footer.site-footer .footer-logo{width:118px!important}
+  .footer.site-footer .footer-tagline{
+    max-width:30ch!important;
+    margin-top:10px!important;
+    font-size:.78rem!important;
+    line-height:1.45!important;
+  }
+  .footer.site-footer .footer-col{min-width:0!important}
+  .footer.site-footer .footer-col:last-child{grid-column:1/-1!important}
+  .footer.site-footer .footer-col h4{margin-bottom:10px!important;font-size:.66rem!important}
+  .footer.site-footer .footer-col ul{gap:9px!important}
+  .footer.site-footer .footer-col a,
+  .footer.site-footer .footer-col span{
+    display:block!important;
+    font-size:.76rem!important;
+    line-height:1.42!important;
+    overflow-wrap:anywhere!important;
+    word-break:normal!important;
+  }
+  .footer.site-footer .footer-bottom .container,
+  .footer.site-footer .footer-bottom .shell{
+    width:calc(100% - 32px)!important;
+    min-height:56px!important;
+    align-items:center!important;
+  }
+  .footer.site-footer .footer-bottom p{font-size:.68rem!important;line-height:1.4!important}
+}
