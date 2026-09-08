@@ -58,3 +58,20 @@ h1,h2,h3,h4,.h1,.h2,.h3,.h4,.display-title,.section-title{margin:0;font-family:v
 @media (max-width:760px){.spaces-grid{grid-template-columns:1fr;gap:36px;align-items:start}.spaces-copy{max-width:none}.spaces-copy h2{max-width:16ch}.spaces-services{grid-template-columns:1fr}.spaces-service{min-height:58px;padding:15px 16px}.spaces-action{align-items:stretch;flex-direction:column;gap:16px}.spaces-action .button-light{width:100%}.spaces-note{max-width:42ch}.spaces-image-wrap{aspect-ratio:4/5}}
 
 @media(max-width:760px){.about-layout{gap:28px}.about-story{grid-template-columns:1fr;gap:24px}.about-content{padding-top:0}.about-intro h2{max-width:16ch}.about-visual img{aspect-ratio:4/5}.about-link{margin-top:18px}}
+
+
+/* Fluid product-grid rhythm: tighter columns, more breathing room between rows */
+:root{
+  --grid-gap-x: clamp(14px, 2vw, 24px);
+  --grid-gap-y: clamp(30px, 3.8vw, 56px);
+}
+.product-grid,.products-grid{
+  column-gap:var(--grid-gap-x);
+  row-gap:var(--grid-gap-y);
+}
+@media (max-width:760px){
+  :root{
+    --grid-gap-x:clamp(10px,3.2vw,16px);
+    --grid-gap-y:clamp(24px,6vw,38px);
+  }
+}
