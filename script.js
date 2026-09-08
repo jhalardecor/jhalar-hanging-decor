@@ -219,6 +219,7 @@ function openProduct(id){
  const name=productNameParts(p);$('#modal-category').textContent=p.category;$('#modal-title').textContent=name.name;$('#modal-variant').textContent=name.variant;$('#modal-variant').hidden=!name.variant;$('#modal-desc').textContent=p.description||'';
  const wa=$('#modal-wa-btn');wa.href='https://wa.me/'+state.whatsapp+'?text='+encodeURIComponent('Hello JHALAR, I am interested in '+p.title+'.');
  showModalMedia(0);
+ const copy=$('.modal-copy');if(copy)copy.scrollTop=0;
  const modal=$('#product-modal');lastFocus=document.activeElement;modal.classList.add('open');modal.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';$('#modal-close').focus();
 }
 function closeModal(){
