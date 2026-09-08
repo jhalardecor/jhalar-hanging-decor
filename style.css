@@ -3230,3 +3230,55 @@ body{padding-top:var(--header-h)!important}
   #product-modal .modal-nav,#product-modal .modal-thumbs{display:none}
   #product-modal .modal-close{top:10px;right:10px}
 }
+
+
+/* =========================================================
+   MODAL + HEADER INTERACTION FIX
+   A modal is a separate interaction layer: it must sit above
+   navigation, not underneath it.
+   ========================================================= */
+#product-modal.modal{
+  z-index:6000!important;
+  padding:clamp(18px,3vw,32px)!important;
+  box-sizing:border-box!important;
+}
+#product-modal.modal .modal-backdrop{
+  position:absolute!important;
+  inset:0!important;
+  display:block!important;
+  background:rgba(16,20,47,.54)!important;
+  backdrop-filter:blur(7px)!important;
+}
+#product-modal.modal .modal-card{
+  position:relative!important;
+  z-index:1!important;
+  width:min(980px,calc(100vw - 64px))!important;
+  height:min(640px,calc(100dvh - 64px))!important;
+  max-height:calc(100dvh - 64px)!important;
+  margin:0!important;
+}
+#product-modal.modal.open{
+  display:grid!important;
+  place-items:center!important;
+}
+
+/* On mobile the modal owns the entire viewport, including the header layer. */
+@media(max-width:760px){
+  #product-modal.modal{
+    z-index:6000!important;
+    padding:0!important;
+    display:block!important;
+    overflow-y:auto!important;
+    overscroll-behavior:contain!important;
+  }
+  #product-modal.modal .modal-card{
+    width:100%!important;
+    height:auto!important;
+    min-height:100dvh!important;
+    max-height:none!important;
+    margin:0!important;
+  }
+  #product-modal.modal .modal-copy{
+    padding:24px 20px calc(36px + env(safe-area-inset-bottom))!important;
+  }
+}
