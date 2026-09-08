@@ -1,5 +1,5 @@
 {
-  "version": "20260908.60",
-  "updated": "2026-09-08T22:55:00Z",
-  "note": "removed viewport breakpoints; intrinsic fluid layouts only"
+  "version": "20260908.61",
+  "updated": "2026-09-08T23:08:00Z",
+  "note": "prevent visible fallback-to-custom font swap; custom Mogranx typography is treated as critical"
 }
