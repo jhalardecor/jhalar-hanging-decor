@@ -1,5 +1,5 @@
 {
-  "version": "20260908.64",
-  "updated": "2026-09-08T23:58:00Z",
-  "note": "fixed modal close path: X, backdrop and Escape now close synchronously without waiting for a missing animation event"
+  "version": "20260908.65",
+  "updated": "2026-09-09T00:12:00Z",
+  "note": "applied canonical design-system foundation: modern gallery palette, fluid type, spacing tokens, stable product media, interaction and accessibility states"
 }
