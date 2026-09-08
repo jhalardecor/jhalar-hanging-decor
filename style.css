@@ -443,18 +443,29 @@ body{
 }
 
 
-/* ===== PREMIUM FOOTER — 20260909.78 =====
-   Deep neutral gradient, deliberately avoiding maroon/pink. */
+/* ===== VELVET FOOTER — 20260909.79 =====
+   Premium fabric-like depth using the JHALAR cream + crimson palette. */
 .site-footer{
   position:relative;
   overflow:hidden;
   isolation:isolate;
   background:
-    radial-gradient(110% 90% at 0% 0%, rgba(116,105,88,.32) 0%, rgba(116,105,88,0) 52%),
-    linear-gradient(120deg,#1f2020 0%,#2b2c2a 46%,#171918 100%)!important;
-  color:#f7f5ef!important;
+    radial-gradient(115% 140% at 8% -35%,
+      rgba(255,250,241,.32) 0%,
+      rgba(255,250,241,.08) 28%,
+      rgba(255,250,241,0) 56%),
+    radial-gradient(80% 115% at 105% 115%,
+      rgba(255,250,241,.14) 0%,
+      rgba(255,250,241,0) 52%),
+    linear-gradient(118deg,
+      #8f1028 0%,
+      #c82039 42%,
+      #a9152e 72%,
+      #720d22 100%)!important;
+  color:#fffaf1!important;
 }
 
+/* Soft tonal folds — depth, not glow or shine. */
 .site-footer::before{
   content:"";
   position:absolute;
@@ -462,26 +473,45 @@ body{
   z-index:-1;
   pointer-events:none;
   background:
-    linear-gradient(100deg,rgba(255,255,255,.035) 0%,transparent 34%,rgba(255,255,255,.02) 100%);
+    linear-gradient(105deg,
+      rgba(255,250,241,.10) 0%,
+      rgba(255,250,241,.025) 26%,
+      transparent 48%,
+      rgba(70,0,14,.16) 74%,
+      rgba(70,0,14,.30) 100%);
+}
+
+.site-footer::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:-1;
+  pointer-events:none;
+  background:
+    repeating-linear-gradient(96deg,
+      transparent 0 92px,
+      rgba(255,250,241,.025) 93px 96px,
+      transparent 97px 190px);
+  opacity:.55;
 }
 
 .footer-top>p,
 .footer-bottom{
-  color:rgba(247,245,239,.72)!important;
+  color:rgba(255,250,241,.78)!important;
 }
 
 .footer-links a{
-  color:rgba(247,245,239,.9);
+  color:rgba(255,250,241,.92)!important;
 }
 
 .footer-links a:hover{
-  color:#fff!important;
+  color:#fffaf1!important;
 }
 
 .footer-bottom{
-  border-color:rgba(247,245,239,.16)!important;
+  border-color:rgba(255,250,241,.22)!important;
 }
 
 .site-footer .label{
-  color:rgba(247,245,239,.58)!important;
+  color:rgba(255,250,241,.72)!important;
 }
