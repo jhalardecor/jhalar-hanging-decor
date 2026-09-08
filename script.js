@@ -96,7 +96,7 @@ function showModalMedia(i){
 function openProduct(id){
  const p=state.products.find(x=>Number(x.id)===id);if(!p)return;
  state.modalProduct=p;state.modalMedia=mediaList(p);state.modalIndex=0;
- $('#modal-category').textContent=p.category;$('#modal-title').textContent=displayTitle(p);$('#modal-desc').textContent=p.description||'';
+ $('#modal-category').textContent=p.category;$('#modal-title').textContent=displayTitle(p);$('#modal-desc').textContent=p.description||'';const copy=$('#product-modal .modal-copy');if(copy)copy.scrollTop=0;
  const wa=$('#modal-wa-btn');wa.href='https://wa.me/'+state.whatsapp+'?text='+encodeURIComponent('Hello JHALAR, I am interested in '+p.title+'.');
  showModalMedia(0);
  const modal=$('#product-modal');lastFocus=document.activeElement;modal.classList.add('open');modal.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';$('#modal-close').focus();
