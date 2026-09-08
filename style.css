@@ -694,3 +694,34 @@ h1,h2,h3{
   }
   .spaces h2{max-width:13ch;}
 }
+
+
+/* Unified button system */
+:root{--control-h:52px;--control-h-sm:44px;--control-px:22px}
+.button-light,.contact-cta,.modal-wa-btn,.filter-btn{
+  box-sizing:border-box;
+  font-family:inherit;
+  letter-spacing:.01em;
+}
+.button-light,.contact-cta,.modal-wa-btn{
+  min-height:var(--control-h);
+  padding:0 var(--control-px);
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:0;
+  text-decoration:none;
+  border-radius:0;
+  white-space:nowrap;
+}
+.button-light,.contact-cta{width:max-content}
+.modal-wa-btn{width:100%;justify-content:center}
+.modal-wa-btn::after,.modal-wa-btn::before{content:none!important;display:none!important}
+.button-light span{display:none}
+.filter-btn{min-height:var(--control-h-sm);padding:0 2px;border-radius:0}
+.modal-close{box-shadow:none!important}
+@media(max-width:760px){
+  :root{--control-h:54px;--control-h-sm:44px;--control-px:18px}
+  .button-light,.contact-cta{width:100%}
+  .modal-wa-btn{min-height:56px}
+}
