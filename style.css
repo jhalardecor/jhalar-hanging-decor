@@ -3393,3 +3393,104 @@ body{padding-top:var(--header-h)!important}
   }
   #product-modal .modal-copy > *{flex-shrink:0}
 }
+
+
+/* =========================================================
+   PRODUCT FOCUS VIEW — immersive, single-scroll architecture
+   Replaces the floating-card/nested-scroll experience.
+   ========================================================= */
+#product-modal{
+  padding:0!important;
+  display:block!important;
+  overflow-y:auto!important;
+  overscroll-behavior:contain;
+  background:#fffaf1;
+}
+#product-modal .modal-backdrop{display:none!important}
+#product-modal.open{visibility:visible!important}
+#product-modal .modal-card{
+  position:relative!important;
+  width:100%!important;
+  min-height:100dvh!important;
+  height:auto!important;
+  max-height:none!important;
+  display:grid!important;
+  grid-template-columns:minmax(0,1.35fr) minmax(340px,.65fr)!important;
+  overflow:visible!important;
+  background:#fffaf1!important;
+  border:0!important;
+  box-shadow:none!important;
+}
+#product-modal .modal-media{
+  position:sticky!important;
+  top:0!important;
+  height:100dvh!important;
+  aspect-ratio:auto!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  background:#f7f1e7!important;
+}
+#product-modal .modal-stage{
+  width:min(78%,760px)!important;
+  height:auto!important;
+  aspect-ratio:1/1!important;
+  padding:0!important;
+  overflow:hidden!important;
+  background:#fffaf1!important;
+}
+#product-modal .modal-copy{
+  min-height:100dvh!important;
+  height:auto!important;
+  max-height:none!important;
+  overflow:visible!important;
+  padding:clamp(90px,11vh,150px) clamp(32px,6vw,90px) 64px!important;
+  box-sizing:border-box!important;
+  background:#fffaf1!important;
+  display:block!important;
+}
+#product-modal .modal-close{
+  position:fixed!important;
+  top:20px!important;
+  right:24px!important;
+  z-index:1250!important;
+  width:44px!important;height:44px!important;
+  background:#fffaf1!important;
+}
+#product-modal .modal-nav{position:absolute!important;z-index:5}
+#product-modal .modal-thumbs{z-index:5}
+#product-modal .modal-zoom-hint{display:none!important}
+#product-modal #modal-title{margin-top:0!important}
+#product-modal #modal-desc{margin-bottom:0!important}
+#product-modal .modal-wa-btn{margin-top:28px!important}
+
+@media(max-width:760px){
+  #product-modal{overflow-y:auto!important}
+  #product-modal .modal-card{
+    display:block!important;
+    min-height:100dvh!important;
+  }
+  #product-modal .modal-media{
+    position:relative!important;
+    top:auto!important;
+    width:100%!important;
+    height:auto!important;
+    min-height:0!important;
+    aspect-ratio:1/1!important;
+  }
+  #product-modal .modal-stage{
+    width:100%!important;
+    height:100%!important;
+    aspect-ratio:1/1!important;
+  }
+  #product-modal .modal-copy{
+    min-height:0!important;
+    padding:28px 20px calc(44px + env(safe-area-inset-bottom))!important;
+    overflow:visible!important;
+  }
+  #product-modal .modal-close{
+    position:absolute!important;
+    top:12px!important;
+    right:12px!important;
+  }
+}
