@@ -50,7 +50,7 @@ body{overflow-x:hidden}
   --bg:#FFF0E8;--paper:#FFF4EF;--ink:#3A1F2A;--soft:#756567;--line:#ead9d5;
   --accent:#e31b3f;--accent-deep:#c91435;--accent-bright:#ff3155;--accent-soft:#ffe1e7;
   --gradient-brand:linear-gradient(135deg,#ff3155 0%,#e31b3f 48%,#c91435 100%);
-  --gradient-warm:radial-gradient(circle at 82% 8%,rgb(255 49 85/.16),transparent 32%),radial-gradient(circle at 12% 92%,rgb(227 27 63/.08),transparent 38%),#fff8f3;
+  --gradient-warm:radial-gradient(circle at 88% 0%,rgb(255 49 85/.07),transparent 30%),radial-gradient(circle at 8% 100%,rgb(227 27 63/.035),transparent 34%),#FFF4EF;
 }
 body{background:var(--bg);color:var(--ink)}
 h1,h2,h3{overflow-wrap:normal;word-break:normal;text-wrap:balance}
@@ -68,7 +68,7 @@ p{overflow-wrap:break-word;word-break:normal;text-wrap:pretty}
 .hero-copy a:hover,.modal-wa-btn:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgb(227 27 63/.28)}
 .spaces{background:#3A1F2A;color:#FFF0E8}
 .site-footer{background:#3A1F2A;color:#FFF0E8}
-.contact{background:linear-gradient(135deg,#fff8f3,#ffecef)}
+.contact{background:linear-gradient(135deg,#FFF4EF 0%,#F8E6DF 100%)}
 .filter-btn.active{color:var(--accent);border-color:var(--accent)}
 .product-card{display:block;min-width:0;background:transparent;border:0;text-align:left;padding:0;cursor:pointer;color:inherit}
 .product-card:focus-visible{outline:2px solid var(--accent);outline-offset:6px}
@@ -193,3 +193,8 @@ p{overflow-wrap:break-word;word-break:normal;text-wrap:pretty}
   .modal-wa-btn{margin-top:18px}
   .modal-close{top:12px;right:12px;width:42px;height:42px;border-radius:50%}
 }
+
+
+/* Final canvas correction: calm premium warm background, not a pink wash. */
+body{background:#FFF4EF}
+.section{background:transparent}
