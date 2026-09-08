@@ -1,5 +1,5 @@
 {
-  "version": "20260908.58",
-  "updated": "2026-09-08T22:05:00Z",
-  "note": "canonical spacing and vertical rhythm normalization across responsive layouts"
+  "version": "20260908.59",
+  "updated": "2026-09-08T22:40:00Z",
+  "note": "full CSS architecture rebuild: canonical component system replaces layered historical overrides"
 }
