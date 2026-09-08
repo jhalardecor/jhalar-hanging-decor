@@ -550,7 +550,7 @@ initProducts();initRuntime();
  ensureLatest(false);
  // Logo/footer are deliberate home actions: verify latest deployment before returning to top.
  document.addEventListener('click',function(e){
-   const home=e.target.closest('.brand[href="#top"],.footer-brand[href="#top"],.brand-film[href="#top"]');
+   const home=e.target.closest('.brand[href="#top"],.footer-brand[href="#top"]');
    if(!home)return;
    e.preventDefault();e.stopImmediatePropagation();
    ensureLatest(true).then(reloading=>{if(!reloading){window.scrollTo({top:0,behavior:'smooth'});history.replaceState(null,'',location.pathname+location.search)}});

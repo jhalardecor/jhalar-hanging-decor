@@ -509,11 +509,14 @@
   // opening frame until the footer arrives
   frame(reduced.matches ? HOLD_FRAME : 0);
 
+  // Trigger: the site footer itself. As soon as a slice of the footer is on
+  // screen the film starts from the empty room; when the footer leaves, it rests.
+  const trigger = host.closest('footer') || host;
   if ('IntersectionObserver' in window){
     new IntersectionObserver(entries => {
       inView = entries.some(e => e.isIntersecting);
       sync();
-    }, { threshold: .35 }).observe(host);
+    }, { threshold: .1 }).observe(trigger);
   } else {
     inView = true; sync();
   }
