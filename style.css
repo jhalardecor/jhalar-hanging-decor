@@ -44,121 +44,80 @@ body{overflow-x:hidden}
 }
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
 
-/* Typography stability: headings and body wrap by editorial measure, never arbitrary narrow columns */
+
+/* ===== JHALAR FINAL DESIGN LAYER — consolidated after audit ===== */
+:root{
+  --bg:#fff8f3;--paper:#fffdfb;--ink:#2d2023;--soft:#756567;--line:#ead9d5;
+  --accent:#e31b3f;--accent-deep:#c91435;--accent-bright:#ff3155;--accent-soft:#ffe1e7;
+  --gradient-brand:linear-gradient(135deg,#ff3155 0%,#e31b3f 48%,#c91435 100%);
+  --gradient-warm:radial-gradient(circle at 82% 8%,rgb(255 49 85/.16),transparent 32%),radial-gradient(circle at 12% 92%,rgb(227 27 63/.08),transparent 38%),#fff8f3;
+}
+body{background:var(--bg);color:var(--ink)}
 h1,h2,h3{overflow-wrap:normal;word-break:normal;text-wrap:balance}
 p{overflow-wrap:break-word;word-break:normal;text-wrap:pretty}
-.hero h1{max-width:none;text-wrap:balance}
-.collection-intro h2{max-width:none;text-wrap:balance}
-.spaces h2,.about h2,.contact h2{max-width:none;text-wrap:balance}
+.header{background:rgb(255 248 243/.94);border-bottom:1px solid var(--line)}
+.hero{background:var(--gradient-warm)}
+.hero h1,.collection-intro h2,.spaces h2,.about h2,.contact h2{max-width:none}
 .hero-copy>p,.collection-intro>p{max-width:42ch}
-.product-title{overflow-wrap:normal;word-break:normal;text-wrap:pretty}
-@media(max-width:760px){
-.hero h1{font-size:clamp(42px,12vw,62px);line-height:.96;max-width:12ch}
-.collection-intro h2,.spaces h2,.about h2,.contact h2{max-width:14ch;line-height:1.02}
-.hero-copy>p,.collection-intro>p{max-width:36ch}
-}
-
-/* Mobile collection filters: one fixed row, active option stays visible without manual scrolling */
-@media(max-width:760px){
-  .filters{
-    display:flex;
-    flex-wrap:nowrap;
-    overflow-x:auto;
-    overflow-y:hidden;
-    width:100%;
-    gap:18px;
-    padding:0 0 10px;
-    scroll-snap-type:x proximity;
-    -webkit-overflow-scrolling:touch;
-    scrollbar-width:none;
-  }
-  .filters::-webkit-scrollbar{display:none}
-  .filter-btn{
-    flex:0 0 auto;
-    white-space:nowrap;
-    scroll-snap-align:start;
-  }
-}
-
-/* Brand correction: JHALAR is warm, craft-led and red-led — remove fintech/corporate blue character */
-:root{
-  --bg:#fff8f3;
-  --paper:#fffdfb;
-  --ink:#321f22;
-  --soft:#756567;
-  --line:#ead9d5;
-  --accent:#c81f38;
-  --accent-deep:#9f1830;
-  --accent-soft:#f4d8dc;
-}
-.header{background:rgb(255 248 243/.94)}
-.nav-enquire{color:var(--accent);border-color:var(--accent)}
 .label,.product-category{color:var(--accent)}
-.spaces{background:#321f22;color:#fff8f3}
-.site-footer{background:#321f22;color:#fff8f3}
-.contact{background:#f9ece8}
-.hero-copy a{border-color:var(--accent);color:var(--accent)}
+.nav-enquire{color:var(--accent);border-color:var(--accent)}
+.hero-copy a,.modal-wa-btn{
+  display:inline-flex;align-items:center;gap:14px;color:#fff;border:0!important;
+  background:var(--gradient-brand);padding:14px 20px;border-radius:999px;
+  box-shadow:0 10px 28px rgb(227 27 63/.20);transition:transform .2s ease,box-shadow .2s ease
+}
+.hero-copy a:hover,.modal-wa-btn:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgb(227 27 63/.28)}
+.spaces{background:#2d2023;color:#fff8f3}
+.site-footer{background:#2d2023;color:#fff8f3}
+.contact{background:linear-gradient(135deg,#fff8f3,#ffecef)}
 .filter-btn.active{color:var(--accent);border-color:var(--accent)}
-.modal{background:rgb(50 31 34/.48)}
-.modal-media{background:#fff8f3}
-
-/* Product system: quiet gallery cards + functional product sheet */
 .product-card{display:block;min-width:0;background:transparent;border:0;text-align:left;padding:0;cursor:pointer;color:inherit}
 .product-card:focus-visible{outline:2px solid var(--accent);outline-offset:6px}
 .product-image{border:1px solid transparent;transition:border-color .2s ease,background .2s ease}
 .product-card:hover .product-image{border-color:var(--line);background:#fffaf6}
 .product-info{display:grid;gap:4px;padding-top:12px}
 .product-category{font-size:9px;letter-spacing:.12em;line-height:1.2}
-.product-title{font-size:16px;line-height:1.25;font-weight:650;margin:0;text-wrap:pretty}
+.product-title{font-size:16px;line-height:1.25;font-weight:650;margin:0;text-wrap:pretty;overflow-wrap:normal}
 .product-variant{font-size:12px;line-height:1.35;margin:0;color:var(--soft)}
-.modal-card{border-radius:18px;box-shadow:0 24px 80px rgb(50 31 34/.2)}
+.modal{background:rgb(45 32 35/.52)}
+.modal-card{border-radius:18px;box-shadow:0 24px 80px rgb(45 32 35/.20)}
 .modal-media{background:#faf6f0;border-right:1px solid var(--line)}
-.modal-stage{padding:clamp(20px,3vw,42px)}
 .modal-copy{display:flex;flex-direction:column;justify-content:center;gap:0}
 .modal-copy h3{font-size:clamp(34px,3.6vw,58px);max-width:13ch}
 .modal-variant{font-size:14px;font-weight:600}
-.modal-wa-btn{width:fit-content;color:var(--accent);border-color:var(--accent)}
 .modal-close{color:var(--ink)}
-@media(max-width:760px){
-.product-grid{gap:32px 12px}
-.product-image{aspect-ratio:1/1;border-radius:8px}
-.product-info{padding-top:10px;gap:3px}
-.product-category{font-size:8px;letter-spacing:.1em}
-.product-title{font-size:14px;line-height:1.28}
-.product-variant{font-size:11px}
-.modal{padding:0;align-items:end}
-.modal-card{height:min(90svh,780px);grid-template-rows:minmax(0,55%) minmax(0,45%);border-radius:20px 20px 0 0;box-shadow:0 -12px 50px rgb(50 31 34/.18)}
-.modal-media{border-right:0;border-bottom:1px solid var(--line)}
-.modal-stage{padding:18px 18px 24px}
-.modal-copy{padding:20px 20px max(24px,env(safe-area-inset-bottom));justify-content:flex-start}
-.modal-copy h3{font-size:clamp(28px,8vw,40px);line-height:1.02;max-width:15ch}
-.modal-copy #modal-desc{margin-top:12px;font-size:13px;line-height:1.5}
-.modal-wa-btn{margin-top:18px;padding-bottom:6px}
-.modal-close{top:12px;right:12px;width:42px;height:42px;border-radius:50%}
-}
 
-/* Festive brand correction: bright JHALAR red, never maroon/wine */
-:root{
-  --accent:#e31b3f;
-  --accent-deep:#c91435;
-  --accent-bright:#ff3155;
-  --accent-soft:#ffe1e7;
-  --ink:#2d2023;
-}
-.nav-enquire,.hero-copy a,.modal-wa-btn{color:var(--accent);border-color:var(--accent)}
-.filter-btn.active{color:var(--accent);border-color:var(--accent)}
-.product-card:focus-visible{outline-color:var(--accent)}
-.label,.product-category{color:var(--accent)}
-
-/* Mobile header: deliberate brand bar, not a shrunken desktop header */
 @media(max-width:760px){
+  :root{--shell:calc(100% - 32px);--g:20px;--s:72px}
+  body{overflow-x:hidden}
   .header,.header-row{height:82px}
-  .header{background:rgb(255 248 243/.97);border-bottom:1px solid var(--line)}
-  .header-row{display:flex;align-items:center}
+  .header{background:rgb(255 248 243/.97)}
   .brand img{width:154px;height:auto}
-  .menu{width:48px;height:48px;border:1px solid var(--line);border-radius:50%;background:var(--paper)}
-  .menu span{width:21px;background:var(--ink)}
+  .nav{display:none}
+  .menu{display:grid;place-items:center;margin-left:auto;width:48px;height:48px;border:1px solid var(--line);border-radius:50%;background:var(--paper);padding:0}
+  .menu span{width:21px;height:1px;margin:4px 0;background:var(--ink)}
   .mobile-nav{position:absolute;top:82px;left:0;right:0;box-shadow:0 18px 40px rgb(45 32 35/.10)}
   .mobile-nav a{padding:18px max(16px,calc((100% - var(--shell))/2));font-size:16px}
   .hero{min-height:calc(100svh - 82px)}
+  .hero h1{font-size:clamp(42px,12vw,62px);line-height:.96;max-width:12ch}
+  .collection-intro h2,.spaces h2,.about h2,.contact h2{max-width:14ch;line-height:1.02}
+  .hero-copy>p,.collection-intro>p{max-width:36ch}
+  .filters{display:flex;flex-wrap:nowrap;overflow-x:auto;overflow-y:hidden;width:100%;gap:18px;padding:0 0 10px;scrollbar-width:none}
+  .filters::-webkit-scrollbar{display:none}
+  .filter-btn{flex:0 0 auto;white-space:nowrap}
+  .product-grid{gap:32px 12px}
+  .product-image{aspect-ratio:1/1;border-radius:8px}
+  .product-info{padding-top:10px;gap:3px}
+  .product-category{font-size:8px;letter-spacing:.1em}
+  .product-title{font-size:14px;line-height:1.28}
+  .product-variant{font-size:11px}
+  .modal{padding:0;align-items:end}
+  .modal-card{height:min(90svh,780px);grid-template-rows:minmax(0,55%) minmax(0,45%);border-radius:20px 20px 0 0;box-shadow:0 -12px 50px rgb(45 32 35/.18)}
+  .modal-media{border-right:0;border-bottom:1px solid var(--line)}
+  .modal-stage{padding:18px 18px 24px}
+  .modal-copy{padding:20px 20px max(24px,env(safe-area-inset-bottom));justify-content:flex-start}
+  .modal-copy h3{font-size:clamp(28px,8vw,40px);line-height:1.02;max-width:15ch}
+  .modal-copy #modal-desc{margin-top:12px;font-size:13px;line-height:1.5}
+  .modal-wa-btn{margin-top:18px}
+  .modal-close{top:12px;right:12px;width:42px;height:42px;border-radius:50%}
 }
