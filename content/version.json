@@ -1,5 +1,5 @@
 {
-  "version": "20260908.67",
-  "updated": "2026-09-09T00:30:00Z",
-  "note": "CSS reset and simplification: reduced font rules, removed decorative system complexity, rebuilt canonical editorial layout"
+  "version": "20260908.68",
+  "updated": "2026-09-09T00:45:00Z",
+  "note": "Hybrid human-centred editorial redesign: simplified type pairing, systematic components, mobile-first interactions and restrained visual hierarchy"
 }
