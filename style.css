@@ -1,4 +1,4 @@
-/* JHALAR — CLEAN PRODUCTION DESIGN SYSTEM | build 20260907.19 */
+/* JHALAR — CLEAN PRODUCTION DESIGN SYSTEM | build 20260908.28 */
 
 /* 01. FONTS */
 @font-face{font-family:Mogranx;src:url('assets/fonts/Mogranx-Regular.woff2') format('woff2');font-weight:400;font-style:normal;font-display:block}
@@ -3327,4 +3327,39 @@ body{padding-top:var(--header-h)!important}
     top:12px;
     right:12px;
   }
+}
+
+/* FOOTER BRAND FILM — the logo reveal loops on its own while the footer is on screen.
+   No controls. It starts from the empty room each time the footer comes into view
+   and rests when the footer is off-screen or the tab is hidden. */
+@font-face{font-family:Mogranx-MediumSlantUltraCond;src:url('assets/fonts/Mogranx-MediumSlantUltraCond.woff2') format('woff2');font-weight:500;font-style:normal;font-display:block}
+.footer.site-footer .footer-film-wrap{
+  width:var(--shell)!important;
+  margin-inline:auto!important;
+  padding:0 0 clamp(26px,3.6vw,44px)!important;
+}
+.footer.site-footer .brand-film{
+  display:grid;
+  place-items:center;
+  width:min(100%,920px);
+  margin-inline:auto;
+  aspect-ratio:16/9;
+  border-radius:2px;
+  overflow:hidden;
+  background:#FBF3E4;
+  border:1px solid rgba(255,250,241,.22)!important;
+  box-shadow:0 26px 64px rgba(20,25,66,.24);
+}
+.footer.site-footer .brand-film-poster{grid-area:1/1;width:min(38%,300px);height:auto}
+.footer.site-footer .brand-film.is-live .brand-film-poster{display:none}
+.footer.site-footer .brand-film-svg{grid-area:1/1;display:block;width:100%;height:100%}
+/* The logo inside the film is the original asset; these are its own class names. */
+.brand-film-svg .st1{fill:#C82039}
+.brand-film-svg .st0{fill:#141942;font-family:Mogranx-MediumSlantUltraCond,Mogranx,Arial,sans-serif;font-size:8.8px;font-weight:500}
+/* The film is the footer's brand mark; the link row below it keeps three columns. */
+.footer.site-footer .footer-grid{grid-template-columns:1fr 1.4fr .8fr!important}
+@media(max-width:620px){
+  .footer.site-footer .footer-film-wrap{width:calc(100% - 24px)!important;padding-bottom:20px!important}
+  .footer.site-footer .brand-film{border-radius:2px;box-shadow:0 16px 40px rgba(20,25,66,.22)}
+  .footer.site-footer .footer-grid{grid-template-columns:.9fr 1.3fr .6fr!important}
 }
