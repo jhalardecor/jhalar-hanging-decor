@@ -15,7 +15,7 @@ function renderFilters(){
     if(!b)return;
     e.preventDefault();
     const selectedFilter=b.dataset.filter;
-    if(selectedFilter===state.filter)return;
+    // Even an already-active filter should re-align the rail when tapped.
 
     const scrollX=window.scrollX;
     const scrollY=window.scrollY;
@@ -34,8 +34,12 @@ function renderFilters(){
     if(window.matchMedia('(max-width:760px)').matches){
       requestAnimationFrame(()=>{
         const max=Math.max(0,el.scrollWidth-el.clientWidth);
-        const desiredLeft=Math.max(0,Math.min(b.offsetLeft,max));
-        el.scrollTo({left:desiredLeft,top:0,behavior:'smooth'});
+        // Use the button's actual position inside the scroll rail.
+        // This works after manual swiping in either direction too.
+        const desiredLeft=Math.max(0,Math.min(b.offsetLeft-el.offsetLeft,max));
+        if(Math.abs(el.scrollLeft-desiredLeft)>1){
+          el.scrollTo({left:desiredLeft,top:0,behavior:'smooth'});
+        }
       });
     }
 
