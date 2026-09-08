@@ -906,7 +906,7 @@ async function createCommitWithRetry(token, entries, message, onLog) {
     const saved = await fetch(url, {method:'PUT', headers, body:JSON.stringify(body)});
     if (!saved.ok) {
       if (saved.status === 403) {
-        throw new Error('GitHub permission denied (403). Your token needs Contents: Read and Write access to this repository.');
+        throw new Error('GitHub rejected this save (403). This is an account/token permission issue, not a publishing-data error. For a fine-grained token: Repository access → jhalardecor/jhalar-hanging-decor, Repository permissions → Contents: Read and write. For a classic token: enable repo scope. Also ensure your GitHub account has write access and main is not blocking direct pushes.');
       }
       throw new Error(`Save error for ${e.path}: ${saved.status}`);
     }
@@ -1470,17 +1470,31 @@ function restoreGitHubToken() {
   try { const s = localStorage.getItem('jhalar_github_token'); if (s) { state.githubToken = atob(s); setVal('ed-github-token', state.githubToken); updateTokenStatus('Token restored','ok'); } } catch(e) {}
 }
 function saveGitHubToken() { if (state.githubToken) { try { localStorage.setItem('jhalar_github_token', btoa(state.githubToken)); } catch(e) {} } }
-async function testGitHubToken() {
+async async function testGitHubToken() {
   const t = getVal('ed-github-token').trim(); if (!t) { updateTokenStatus('Enter a token','bad'); return; }
   state.githubToken = t; saveGitHubToken();
-  updateTokenStatus('Testing...','');
+  updateTokenStatus('Checking repository write access...','');
+  const headers = { 'Authorization': `Bearer ${t}`, 'Accept': 'application/vnd.github+json' };
   try {
-    const r = await fetch(`https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}`, { headers: { 'Authorization': `Bearer ${t}`, 'Accept': 'application/vnd.github.v3+json' } });
-    if (r.ok) { const d = await r.json(); updateTokenStatus(`Connected to ${d.full_name}`,'ok'); showToast('GitHub connected!','success'); }
-    else if (r.status === 401) updateTokenStatus('Invalid token','bad');
-    else if (r.status === 403) updateTokenStatus('Token needs "repo" scope','bad');
-    else updateTokenStatus(`Error ${r.status}`,'bad');
-  } catch(e) { updateTokenStatus('Network error','bad'); }
+    const repoUrl = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}`;
+    const r = await fetch(repoUrl, { headers });
+    if (r.status === 401) { updateTokenStatus('Invalid or expired token','bad'); return; }
+    if (!r.ok) { updateTokenStatus(`Cannot access repository (${r.status})`,'bad'); return; }
+    const d = await r.json();
+    if (d.permissions && !d.permissions.push) {
+      updateTokenStatus('Connected, but this token/account cannot write to the repository. Grant repository write access and Contents: Read and write.','bad');
+      return;
+    }
+    const probe = await fetch(`https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/content/site-settings.json?ref=${encodeURIComponent(GITHUB_BRANCH)}`, {headers});
+    if (probe.status === 401) { updateTokenStatus('Invalid or expired token','bad'); return; }
+    if (probe.status === 403) {
+      updateTokenStatus('Repository is visible but Contents access is blocked. Fine-grained token: select this repository and set Contents to Read and write.','bad');
+      return;
+    }
+    if (!probe.ok && probe.status !== 404) { updateTokenStatus(`Contents check failed (${probe.status})`,'bad'); return; }
+    updateTokenStatus(`Connected to ${d.full_name} — repository access verified`,'ok');
+    showToast('GitHub repository access verified!','success');
+  } catch(e) { updateTokenStatus('Network error while checking GitHub','bad'); }
 }
 function updateTokenStatus(msg, type) { const el = document.getElementById('token-status'); if (el) { el.textContent = msg; el.className = 'token-status' + (type ? ' '+type : ''); } }
 
