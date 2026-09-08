@@ -198,3 +198,23 @@ p{overflow-wrap:break-word;word-break:normal;text-wrap:pretty}
 /* Final canvas correction: calm premium warm background, not a pink wash. */
 body{background:#FFF4EF}
 .section{background:transparent}
+
+
+/* Mobile hero readability: image remains visible, copy sits on a controlled dark-red atmospheric scrim. */
+@media (max-width:760px){
+  .hero-image:after{
+    background:
+      linear-gradient(
+        180deg,
+        rgba(58,31,42,0) 0%,
+        rgba(58,31,42,.08) 36%,
+        rgba(58,31,42,.78) 72%,
+        rgba(58,31,42,.94) 100%
+      );
+  }
+  .hero-copy{
+    color:#FFF0E8;
+    text-shadow:0 2px 18px rgba(58,31,42,.32);
+  }
+  .hero-copy>p{color:rgba(255,240,232,.86)}
+}
