@@ -1,5 +1,5 @@
 {
-  "version": "20260908.69",
-  "updated": "2026-09-09T01:10:00Z",
-  "note": "Full visual reset: spatial product-led showroom direction replacing editorial/template component styling"
+  "version": "20260908.70",
+  "updated": "2026-09-09T02:00:00Z",
+  "note": "Canonical responsive layout and contained product media system; mobile modal and close-control rules consolidated"
 }
