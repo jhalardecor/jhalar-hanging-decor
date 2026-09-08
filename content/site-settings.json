@@ -126,7 +126,25 @@
       "label": "ABOUT JHALAR",
       "title": "A decor supplier based near Kolkata.",
       "intro": "We work with wholesalers, retailers and event decorators who source decorative products for their customers and projects.",
-      "image": "assets/images/about-collage.jpg"
+      "image": "assets/images/about-collage.jpg",
+      "values": [
+        {
+          "icon": "icon-check",
+          "text": "Finished by hand, piece by piece"
+        },
+        {
+          "icon": "icon-check",
+          "text": "One contact from enquiry to dispatch"
+        },
+        {
+          "icon": "icon-check",
+          "text": "Dispatched across India"
+        }
+      ]
+    },
+    "faq": {
+      "label": "FAQ",
+      "title": "Frequently Asked Questions"
     },
     "contact": {
       "label": "SEND AN ENQUIRY",
