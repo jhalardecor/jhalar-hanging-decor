@@ -3321,3 +3321,34 @@ body{padding-top:var(--header-h)!important}
   #product-modal .modal-zoom-hint{margin-top:14px}
   #product-modal .modal-wa-btn{margin-top:20px}
 }
+
+
+/* PRODUCT POPUP SCROLL OWNERSHIP — content must always remain reachable */
+#product-modal .modal-card{
+  overscroll-behavior:contain;
+}
+#product-modal .modal-copy{
+  min-height:0!important;
+  overflow-y:auto!important;
+  overflow-x:hidden!important;
+  -webkit-overflow-scrolling:touch;
+  overscroll-behavior-y:contain;
+  touch-action:pan-y;
+}
+#product-modal .modal-copy > *{
+  flex-shrink:0;
+}
+@media(max-width:760px){
+  #product-modal .modal-card{
+    min-height:0!important;
+    overflow:hidden!important;
+  }
+  #product-modal .modal-copy{
+    min-height:0!important;
+    flex:1 1 auto!important;
+    height:auto!important;
+    max-height:none!important;
+    overflow-y:auto!important;
+    touch-action:pan-y!important;
+  }
+}
