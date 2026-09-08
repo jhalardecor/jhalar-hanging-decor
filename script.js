@@ -29,13 +29,13 @@ function renderFilters(){
       btn.setAttribute('aria-pressed',String(selected));
     });
 
-    /* Mobile filter rail: the selected filter becomes the first visible option.
-       This makes the next categories immediately available to the right. */
+    /* Mobile filter rail works in BOTH directions:
+       whichever option is tapped becomes the first visible option. */
     if(window.matchMedia('(max-width:760px)').matches){
       requestAnimationFrame(()=>{
-        const desiredLeft=b.offsetLeft;
         const max=Math.max(0,el.scrollWidth-el.clientWidth);
-        el.scrollTo({left:Math.min(desiredLeft,max),top:0,behavior:'smooth'});
+        const desiredLeft=Math.max(0,Math.min(b.offsetLeft,max));
+        el.scrollTo({left:desiredLeft,top:0,behavior:'smooth'});
       });
     }
 
