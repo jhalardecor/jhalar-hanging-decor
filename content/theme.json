@@ -1,12 +1,14 @@
 {
   "colors": {
-    "primary": "#C82039",
-    "primaryDeep": "#A71931",
     "ivory": "#FFFAF1",
-    "ivorySoft": "#FFFDF8",
-    "ivoryDeep": "#F6EFE4",
+    "ivorySoft": "#FFF6E8",
+    "crimson": "#C82039",
+    "crimsonDeep": "#A91931",
+    "wine": "#622331",
+    "wineDeep": "#471820",
     "ink": "#141942",
-    "oxblood": "#622331"
+    "muted": "#6E6670",
+    "line": "#E7D7CF"
   },
   "fonts": {
     "heading": "Mogranx, Arial, sans-serif",
