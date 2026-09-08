@@ -2475,3 +2475,219 @@ img,video{max-width:100%;height:auto}
   .product-grid{grid-template-columns:1fr!important}
   .footer-grid{grid-template-columns:1fr!important}
 }
+
+
+/* ==========================================================
+   CANONICAL SPACING + RHYTHM SYSTEM
+   One spacing scale shared by every major section.
+   ========================================================== */
+:root{
+  --space-1:clamp(6px,.6vw,10px);
+  --space-2:clamp(10px,1vw,16px);
+  --space-3:clamp(16px,1.5vw,24px);
+  --space-4:clamp(24px,2.5vw,40px);
+  --space-5:clamp(40px,5vw,80px);
+  --space-6:clamp(56px,8vw,120px);
+  --content-gap:clamp(24px,4vw,56px);
+}
+
+/* Page rhythm */
+.section,
+.page-section{padding-block:var(--space-6)!important}
+.section-inner,
+.section-layout{gap:var(--content-gap)!important}
+.section-head{
+  gap:var(--space-4)!important;
+  margin:0!important;
+  align-items:end!important;
+}
+.section-heading-group,
+.section-support-group,
+.custom-copy,
+.story-copy,
+.contact-copy{margin:0!important}
+.eyebrow,.kicker{margin:0 0 var(--space-2)!important}
+.section-heading-group h2,
+.custom-copy h2,
+.story-copy h2,
+.contact-box h2{margin:0!important}
+.section-support-group p,
+.custom-copy p,
+.story-copy p,
+.contact-copy p{margin:var(--space-3) 0 0!important}
+
+/* Hero: content-driven vertical composition, never viewport-padding driven. */
+.hero-banner{min-height:clamp(480px,62svh,720px)!important}
+.hero-banner-content{
+  width:var(--shell)!important;
+  margin-inline:auto!important;
+  padding-block:var(--space-5)!important;
+  display:flex!important;
+  align-items:center!important;
+}
+.hero-banner-copy{width:min(100%,620px)!important;margin:0!important}
+.hero-banner-copy h1{margin:0!important}
+.hero-lead{margin-top:var(--space-3)!important}
+.hero-banner-cta{margin-top:var(--space-4)!important}
+
+/* Audience is one balanced composition: heading / choices / response. */
+.audience-strip{padding-block:0!important}
+.audience-strip .audience-strip-inner{
+  width:var(--shell)!important;
+  margin-inline:auto!important;
+  min-height:0!important;
+  padding-block:var(--space-6)!important;
+  display:grid!important;
+  grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr)!important;
+  grid-template-areas:
+    "heading choices"
+    "heading response"!important;
+  column-gap:var(--space-5)!important;
+  row-gap:var(--space-3)!important;
+  align-items:start!important;
+}
+.audience-heading{grid-area:heading!important}
+.audience-items{
+  grid-area:choices!important;
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  gap:var(--space-2)!important;
+  width:100%!important;
+}
+.audience-item{
+  min-width:0!important;
+  min-height:132px!important;
+  padding:var(--space-3)!important;
+  text-align:left!important;
+}
+.audience-response{grid-area:response!important;min-width:0!important}
+.audience-note{margin:0!important;padding:0!important}
+
+/* Collection */
+.filters-wrap{margin:0!important}
+.product-grid{gap:var(--space-4)!important}
+.product-card{
+  display:flex!important;
+  flex-direction:column!important;
+  gap:0!important;
+}
+.product-card img{display:block!important}
+.product-card-content{padding-top:var(--space-3)!important}
+.product-card .eyebrow{margin-bottom:var(--space-1)!important}
+.product-card h3,
+.product-card-title{
+  margin:0!important;
+  line-height:1.15!important;
+  overflow-wrap:anywhere!important;
+  text-wrap:balance!important;
+}
+
+/* Equal rhythm for editorial sections */
+.custom-grid,
+.story-grid{
+  gap:clamp(32px,6vw,88px)!important;
+  align-items:center!important;
+}
+.custom-image img,
+.story-image img{display:block!important;width:100%!important;height:auto!important}
+.planning-picker{margin-top:var(--space-4)!important}
+.planning-label{display:block!important;margin-bottom:var(--space-2)!important}
+.planning-options{gap:var(--space-2)!important}
+.planning-option{
+  min-height:112px!important;
+  padding:var(--space-3)!important;
+  justify-content:flex-start!important;
+  text-align:left!important;
+}
+#custom-plan-copy{margin-top:var(--space-3)!important}
+.text-link{margin-top:var(--space-3)!important}
+
+/* Contact */
+.contact.section{padding-block:0!important}
+.contact-box{
+  min-height:0!important;
+  padding:var(--space-6) var(--page-pad)!important;
+  gap:var(--space-4)!important;
+  align-items:center!important;
+}
+.contact-action{margin:0!important}
+.contact-note{margin:var(--space-2) 0 0!important}
+
+/* Footer uses the same outer gutter and vertical rhythm. */
+.footer-grid{
+  width:var(--shell)!important;
+  padding-block:var(--space-5)!important;
+  gap:var(--space-4)!important;
+  align-items:start!important;
+}
+.footer-col h4{margin:0 0 var(--space-2)!important}
+.footer-col ul{margin:0!important;padding:0!important;display:grid!important;gap:var(--space-2)!important}
+.footer-bottom .shell{padding-block:var(--space-3)!important}
+.footer-bottom p{margin:0!important}
+
+/* Modal rhythm */
+#product-modal.modal .modal-copy{gap:0!important}
+#product-modal.modal .modal-copy .eyebrow{margin-bottom:var(--space-2)!important}
+#product-modal.modal .modal-copy h3{margin:0!important}
+#product-modal.modal .modal-copy p:not(.eyebrow){margin:var(--space-3) 0 0!important}
+#product-modal.modal .modal-wa-btn{margin-top:var(--space-4)!important}
+
+@media (max-width:48rem){
+  :root{
+    --space-4:clamp(22px,6vw,32px);
+    --space-5:clamp(36px,10vw,56px);
+    --space-6:clamp(48px,12vw,72px);
+  }
+
+  .section-head{grid-template-columns:1fr!important;align-items:start!important}
+  .section-support-group{max-width:52ch!important}
+
+  .hero-banner{
+    min-height:clamp(520px,78svh,680px)!important;
+  }
+  .hero-banner-content{
+    padding-block:var(--space-5)!important;
+    align-items:flex-end!important;
+  }
+  .hero-banner-copy{width:100%!important}
+  .hero-banner-copy h1{max-width:11ch!important}
+  .hero-banner-cta{width:max-content!important}
+
+  .audience-strip .audience-strip-inner{
+    grid-template-columns:1fr!important;
+    grid-template-areas:
+      "heading"
+      "choices"
+      "response"!important;
+    gap:var(--space-3)!important;
+  }
+  .audience-items{
+    grid-template-columns:1fr!important;
+    gap:var(--space-2)!important;
+  }
+  .audience-item{min-height:0!important;padding:18px!important}
+
+  .product-grid{gap:var(--space-3)!important}
+  .product-card-content{padding-top:var(--space-2)!important}
+  .product-card h3,
+  .product-card-title{font-size:clamp(1rem,4.5vw,1.22rem)!important}
+
+  .custom-grid,
+  .story-grid{grid-template-columns:1fr!important;gap:var(--space-4)!important}
+  .custom-copy,.story-copy{order:0!important}
+
+  .planning-options{grid-template-columns:1fr!important}
+  .planning-option{min-height:0!important}
+
+  .contact-box{grid-template-columns:1fr!important;padding:var(--space-5) var(--page-pad)!important}
+  .contact-action{width:100%!important}
+  .contact-cta{width:100%!important}
+
+  .footer-grid{
+    grid-template-columns:1fr!important;
+    gap:var(--space-4)!important;
+    text-align:center!important;
+  }
+  .footer-brand{grid-column:auto!important}
+  .footer-col ul{justify-items:center!important}
+}
