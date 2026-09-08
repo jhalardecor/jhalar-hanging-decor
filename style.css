@@ -3485,3 +3485,46 @@ body{padding-top:var(--header-h)!important}
   .footer.site-footer .footer-bottom .shell{width:calc(100% - 40px)!important;min-height:58px!important}
   .footer.site-footer .footer-bottom p{font-size:.68rem!important;text-align:center!important;width:100%!important}
 }
+
+
+/* Product card typography system — stable rhythm across the catalogue */
+.product-grid{align-items:stretch!important}
+.product-card{min-width:0!important;height:100%!important}
+.product-info{
+  width:100%!important;
+  min-width:0!important;
+  box-sizing:border-box!important;
+}
+.product-category{
+  min-height:1.2em!important;
+  margin:0 0 7px!important;
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+}
+.product-title{
+  width:100%!important;
+  margin:0!important;
+  min-height:2.7em!important;
+  max-height:2.7em!important;
+  overflow:hidden!important;
+  display:-webkit-box!important;
+  -webkit-box-orient:vertical!important;
+  -webkit-line-clamp:2!important;
+  line-clamp:2!important;
+  overflow-wrap:normal!important;
+  word-break:normal!important;
+  text-wrap:pretty!important;
+  text-align:left!important;
+}
+@media(max-width:620px){
+  .product-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:22px 14px!important}
+  .product-info{padding:12px 2px 0!important;min-height:0!important}
+  .product-category{font-size:.64rem!important;letter-spacing:.12em!important;margin-bottom:7px!important}
+  .product-title{
+    font-size:clamp(.98rem,4vw,1.08rem)!important;
+    line-height:1.35!important;
+    min-height:2.7em!important;
+    max-height:2.7em!important;
+  }
+}
