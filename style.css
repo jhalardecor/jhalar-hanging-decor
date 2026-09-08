@@ -3920,3 +3920,42 @@ body{padding-top:var(--header-h)!important}
   .audience-response{width:100%!important}
   .audience-note{max-width:none!important}
 }
+
+
+/* PRODUCT NAMING — canonical data stays "Series, Colour"; UI presents a clean hierarchy. */
+#product-grid .product-title{
+  margin-bottom:4px!important;
+}
+#product-grid .product-variant{
+  display:block;
+  width:100%;
+  color:rgba(98,35,49,.72);
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:.78rem;
+  font-weight:600;
+  line-height:1.35;
+  letter-spacing:.035em;
+}
+#product-modal .modal-variant{
+  margin:4px 0 16px!important;
+  color:#C82039;
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:.84rem;
+  font-weight:700;
+  line-height:1.35;
+  letter-spacing:.09em;
+  text-transform:uppercase;
+}
+#product-modal .modal-variant[hidden]{display:none!important}
+@media(max-width:760px){
+  #product-grid .product-title{margin-bottom:3px!important}
+  #product-grid .product-variant{
+    font-size:.72rem!important;
+    line-height:1.3!important;
+    letter-spacing:.03em!important;
+  }
+  #product-modal .modal-variant{
+    margin:3px 0 12px!important;
+    font-size:.72rem!important;
+  }
+}
