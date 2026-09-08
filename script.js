@@ -153,21 +153,18 @@ function openProduct(id){
  const modal=$('#product-modal');lastFocus=document.activeElement;modal.classList.add('open');modal.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';$('#modal-close').focus();
 }
 function closeModal(){
- const m=$('#product-modal');if(!m.classList.contains('open'))return;
- const close=$('#modal-close');
- if(close){
-   close.classList.remove('is-closing');
-   void close.offsetWidth;
-   close.classList.add('is-closing');
- }
+ const m=$('#product-modal');
+ if(!m.classList.contains('open')||m.classList.contains('is-closing'))return;
  m.classList.add('is-closing');
- setTimeout(()=>{
+ const finish=()=>{
    m.classList.remove('open','is-closing');
    m.setAttribute('aria-hidden','true');
    document.body.style.overflow='';
    if(lastFocus?.focus)lastFocus.focus();
    lastFocus=null;
- },220);
+ };
+ const card=m.querySelector('.modal-card');
+ card.addEventListener('animationend',finish,{once:true});
 }
 
 /* ---------- runtime defaults: equal to the shipped HTML/settings ---------- */
