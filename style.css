@@ -4092,3 +4092,19 @@ body{padding-top:var(--header-h)!important}
     font-size:.62rem!important;
   }
 }
+
+
+/* MOBILE MODAL OPEN STATE — device-independent visibility contract */
+@media(max-width:760px){
+  #product-modal.modal.open{
+    display:flex!important;
+    visibility:visible!important;
+    opacity:1!important;
+    pointer-events:auto!important;
+    z-index:2147483000!important;
+  }
+  #product-modal.modal[aria-hidden="false"]{
+    visibility:visible!important;
+    pointer-events:auto!important;
+  }
+}
