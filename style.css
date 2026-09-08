@@ -97,7 +97,10 @@ p{overflow-wrap:break-word;word-break:normal;text-wrap:pretty}
   .menu span{width:21px;height:1px;margin:4px 0;background:var(--ink)}
   .mobile-nav{position:absolute;top:82px;left:0;right:0;box-shadow:0 18px 40px rgb(45 32 35/.10)}
   .mobile-nav a{padding:18px max(16px,calc((100% - var(--shell))/2));font-size:16px}
-  .hero{min-height:calc(100svh - 82px)}
+  /* Phone hero uses a deliberate 4:5 visual ratio, not viewport-height stretching. */
+  .hero{min-height:0;display:block}
+  .hero-image{aspect-ratio:4 / 5;min-height:0}
+  .hero-image img{width:100%;height:100%;object-fit:cover}
   .collection-intro h2,.spaces h2,.about h2,.contact h2{max-width:14ch;line-height:1.02}
   .hero-copy>p,.collection-intro>p{max-width:36ch}
   .filters{display:flex;flex-wrap:nowrap;overflow-x:auto;overflow-y:hidden;width:100%;gap:18px;padding:0 0 10px;scrollbar-width:none}
