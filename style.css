@@ -397,3 +397,103 @@ body{background:#FFF4EF}
 .contact-copy h2{font-size:clamp(40px,5.4vw,82px);line-height:.94;margin-bottom:22px}.contact-copy>p:last-child{max-width:52ch;color:var(--soft);font-size:16px}
 .contact-cta{display:flex;align-items:center;justify-content:space-between;gap:32px;min-width:250px;padding:18px 20px;background:var(--gradient-brand);color:#fff7f0;font-weight:700}.contact-cta strong{font-size:24px;font-weight:400}
 @media(max-width:760px){.spaces{padding:64px 0}.spaces-grid{grid-template-columns:1fr;gap:36px}.spaces h2{font-size:clamp(42px,12vw,58px);max-width:10ch}.spaces-lead{margin-top:22px;font-size:16px}.spaces-visual{min-height:auto;aspect-ratio:4/5;order:-1}.spaces-types{margin:24px 0 28px}.about{padding:72px 0}.about-layout{grid-template-columns:1fr;gap:34px}.about-intro h2{font-size:clamp(38px,11vw,52px)}.about-story{gap:20px}.about-story img{aspect-ratio:4/3}.contact{padding:16px 0 72px}.contact-card{grid-template-columns:1fr;gap:30px;padding:32px 24px}.contact-copy h2{font-size:clamp(40px,12vw,54px)}.contact-cta{width:100%;min-width:0}}
+
+/* =========================================================
+   PRODUCT SHEET — mobile-first scrolling, fixed actions
+   ========================================================= */
+@media (max-width:760px){
+  .modal{
+    padding:0;
+    align-items:flex-end;
+    overscroll-behavior:contain;
+  }
+
+  .modal-card{
+    width:100%;
+    height:min(92svh,820px)!important;
+    max-height:92svh;
+    display:grid;
+    grid-template-rows:minmax(220px,42svh) minmax(0,1fr)!important;
+    border-radius:22px 22px 0 0;
+    overflow:hidden;
+    background:var(--paper);
+  }
+
+  .modal-media{
+    position:relative;
+    min-height:0;
+    border-bottom:1px solid var(--line);
+  }
+
+  .modal-stage{
+    padding:16px 18px 20px;
+  }
+
+  .modal-stage img,.modal-stage video{
+    object-fit:contain!important;
+  }
+
+  /* The information area is the scroll surface, not the whole sheet. */
+  .modal-copy{
+    min-height:0;
+    overflow-y:auto!important;
+    -webkit-overflow-scrolling:touch;
+    overscroll-behavior:contain;
+    padding:24px 20px 0!important;
+    display:flex;
+    flex-direction:column;
+    gap:0;
+    scrollbar-width:none;
+  }
+  .modal-copy::-webkit-scrollbar{display:none}
+
+  .modal-copy .label{margin:0 0 10px}
+  .modal-copy h3{
+    font-size:clamp(30px,9vw,42px)!important;
+    line-height:1!important;
+    max-width:13ch;
+    margin:0;
+    overflow-wrap:anywhere;
+  }
+
+  .modal-variant{
+    margin:12px 0 0;
+    font-size:13px;
+  }
+
+  .modal-copy #modal-desc{
+    margin:14px 0 24px!important;
+    font-size:15px!important;
+    line-height:1.55;
+    padding-bottom:8px;
+  }
+
+  /* CTA remains available after long descriptions without covering content. */
+  .modal-wa-btn{
+    position:sticky;
+    bottom:0;
+    width:calc(100% + 40px);
+    margin:0 -20px!important;
+    min-height:64px;
+    padding:14px 20px max(14px,env(safe-area-inset-bottom));
+    display:flex!important;
+    align-items:center;
+    justify-content:space-between;
+    border-radius:0!important;
+    background:var(--gradient-brand)!important;
+    box-shadow:0 -10px 24px rgba(89,21,32,.12);
+    flex-shrink:0;
+  }
+
+  .modal-close{
+    position:absolute;
+    top:10px!important;
+    right:10px!important;
+    width:44px!important;
+    height:44px!important;
+    border-radius:0!important;
+    z-index:30;
+    display:grid;
+    place-items:center;
+  }
+}
