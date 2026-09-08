@@ -1,5 +1,5 @@
 {
-  "version": "20260908.59",
-  "updated": "2026-09-08T22:40:00Z",
-  "note": "full CSS architecture rebuild: canonical component system replaces layered historical overrides"
+  "version": "20260908.60",
+  "updated": "2026-09-08T22:55:00Z",
+  "note": "removed viewport breakpoints; intrinsic fluid layouts only"
 }
