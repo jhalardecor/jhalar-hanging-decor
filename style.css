@@ -3640,4 +3640,91 @@ body{padding-top:var(--header-h)!important}
 /* Modal visibility safety — closed dialogs must never cover the mobile page. */
 #product-modal.modal:not(.open){display:none!important;opacity:0!important;visibility:hidden!important;pointer-events:none!important}
 #product-modal.modal.open{display:grid!important;opacity:1!important;visibility:visible!important;pointer-events:auto!important}
-@media(max-width:760px){#product-modal.modal.open{display:block!important}}
+
+
+/* =========================================================
+   PRODUCT MODAL — FINAL MOBILE COMPOSITION
+   A centered overlay card, not a full-page takeover.
+   ========================================================= */
+@media(max-width:760px){
+  #product-modal.modal{
+    display:none!important;
+    place-items:center!important;
+    padding:16px!important;
+    overflow:hidden!important;
+    background:transparent!important;
+  }
+  #product-modal.modal.open{
+    display:grid!important;
+  }
+  #product-modal.modal .modal-backdrop{
+    display:block!important;
+    background:rgba(16,20,47,.52)!important;
+    backdrop-filter:blur(5px)!important;
+  }
+  #product-modal.modal .modal-card{
+    width:min(100%,560px)!important;
+    height:auto!important;
+    min-height:0!important;
+    max-height:calc(100svh - 32px)!important;
+    display:grid!important;
+    grid-template-columns:1fr!important;
+    grid-template-rows:minmax(220px,42svh) minmax(0,1fr)!important;
+    margin:0!important;
+    overflow:hidden!important;
+    border:1px solid rgba(20,25,66,.10)!important;
+    border-radius:20px!important;
+    background:#fffaf1!important;
+    box-shadow:0 24px 70px rgba(10,14,40,.28)!important;
+  }
+  #product-modal.modal .modal-media{
+    width:100%!important;
+    height:auto!important;
+    min-height:0!important;
+    max-height:none!important;
+    background:#f4eee4!important;
+  }
+  #product-modal.modal .modal-stage{
+    width:100%!important;
+    height:100%!important;
+    min-height:0!important;
+    padding:14px!important;
+    overflow:hidden!important;
+    display:grid!important;
+    place-items:center!important;
+    touch-action:pan-y pinch-zoom!important;
+  }
+  #product-modal.modal .modal-stage img,
+  #product-modal.modal .modal-stage video{
+    width:100%!important;
+    height:100%!important;
+    max-width:100%!important;
+    max-height:100%!important;
+    object-fit:contain!important;
+    object-position:center!important;
+  }
+  #product-modal.modal .modal-copy{
+    height:auto!important;
+    min-height:0!important;
+    max-height:none!important;
+    overflow-y:auto!important;
+    padding:22px 20px calc(24px + env(safe-area-inset-bottom))!important;
+    -webkit-overflow-scrolling:touch;
+  }
+  #product-modal.modal .modal-close{
+    top:10px!important;
+    right:10px!important;
+  }
+  #product-modal.modal .modal-nav,
+  #product-modal.modal .modal-thumbs{
+    display:none!important;
+  }
+}
+@media(max-width:390px){
+  #product-modal.modal{padding:12px!important}
+  #product-modal.modal .modal-card{
+    max-height:calc(100svh - 24px)!important;
+    grid-template-rows:minmax(200px,38svh) minmax(0,1fr)!important;
+    border-radius:18px!important;
+  }
+}
