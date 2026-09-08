@@ -143,6 +143,7 @@ function showModalMedia(i){
  const thumbs=$('#modal-thumbs');
  thumbs.innerHTML=m.length>1?m.map((x,j)=>'<button class="modal-thumb'+(j===state.modalIndex?' active':'')+'" data-thumb="'+j+'">'+(x.type==='video'?'<span>Video</span>':'<img src="'+esc(x.src)+'" alt="">')+'</button>').join(''):'';
  $('.modal-nav.prev').hidden=m.length<=1;$('.modal-nav.next').hidden=m.length<=1;
+ stage.dispatchEvent(new CustomEvent('product-media-change'));
 }
 function openProduct(id){
  const p=state.products.find(x=>Number(x.id)===id);if(!p)return;
@@ -464,6 +465,8 @@ initProducts();initRuntime();
  stage.addEventListener('pointercancel',stop);
  stage.addEventListener('dblclick',e=>zoom(z>1.01?1:2,e.clientX,e.clientY));
  img.addEventListener('load',reset);
+ // Every product/media swap starts from the true 1× contained view.
+ stage.addEventListener('product-media-change',()=>requestAnimationFrame(reset));
  new MutationObserver(()=>{if(!modal.classList.contains('open'))reset()}).observe(modal,{attributes:true,attributeFilter:['class']});
 })();
 
