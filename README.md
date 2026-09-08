@@ -42,9 +42,11 @@ Use **`content/product-template.json`** as the starting point. The numeric `id` 
 Edit **`content/site-settings.json`** for hero copy, navigation, contact details, FAQ, section copy and footer copy. Keep this file as the human-editable content source rather than changing duplicated strings in HTML or JS.
 
 ### Visual system
-Edit **`content/theme.json`** for the high-level design tokens: colours, typography family, section spacing, container width, card radius, grid gaps and responsive layout defaults. `style.css` is the implementation layer.
+Edit **`content/theme.json`** for the high-level design tokens. `style.css` is the implementation layer.
 
-The current website uses a single self-hosted **DM Sans** family for a clean geometric system. Avoid mixing in decorative display fonts without a deliberate brand redesign.
+Typography uses two families: self-hosted **Mogranx** (Regular/Medium/Bold in `assets/fonts/`) for headings and product titles, and the **Arial/Helvetica** system stack for body copy, navigation and interface text. Avoid mixing in other display fonts without a deliberate brand redesign.
+
+Wired theme tokens (consumed by `style.css` via CSS variables): `headingWeight`, `headingTracking`, `headingLeading`, `bodyWeight`, `bodyTracking`, `bodyLeading`, `containerWidth` and `productColumns`. The remaining layout tokens (sizes, gaps, padding) are not yet wired and are controlled directly in `style.css`.
 
 ## Product UX rules
 

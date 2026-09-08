@@ -5,10 +5,10 @@
   "location": "Kolkata, West Bengal, India",
   "gst": "Available on request",
   "heroHeadline": "Colour sets the mood.",
-  "heroIntro": "For wholesalers, retailers and event decorators looking for decorative products for their business and projects.",
+  "heroIntro": "Handcrafted hanging decor for weddings, events and festive spaces.",
   "heroImage": "assets/images/hero-jhalar.webp",
-  "siteTitle": "JHALAR | Decorative Hanging Products",
-  "siteDescription": "Decorative hanging products for wholesalers, retailers and event decorators.",
+  "siteTitle": "JHALAR · Hanging Decor for Celebrations",
+  "siteDescription": "Handmade hanging decor for wholesalers, retailers and decorators.",
   "ogImage": "assets/images/og-cover.jpg",
   "navItems": [
     {
@@ -83,14 +83,14 @@
     },
     "collection": {
       "label": "PRODUCTS",
-      "title": "Explore the range",
-      "intro": "View the available styles and open any product for details.",
+      "title": "Explore the collection",
+      "intro": "Browse the designs and find what suits your project.",
       "note": ""
     },
     "customOrders": {
       "label": "YOUR REQUIREMENT",
-      "title": "Need something for a specific order?",
-      "intro": "Send us the design reference, colours, size and quantity you need. We can check the available options with you.",
+      "title": "Looking for something specific?",
+      "intro": "Share your reference, colours, size and quantity. We’ll help you check what works for your requirement.",
       "image": "assets/images/custom-orders.jpg",
       "chips": [
         {
@@ -124,14 +124,14 @@
     },
     "about": {
       "label": "ABOUT JHALAR",
-      "title": "A decor supplier based near Kolkata.",
-      "intro": "We work with wholesalers, retailers and event decorators who source decorative products for their customers and projects.",
+      "title": "A decor partner for people who need dependable options.",
+      "intro": "We create and source hanging decor with a focus on colour, craft and visual impact. Each collection is built for real displays, celebrations and spaces.",
       "image": "assets/images/about-collage.jpg"
     },
     "contact": {
-      "label": "SEND AN ENQUIRY",
-      "title": "Tell us what you need.",
-      "intro": "Send the product or design, quantity and any important details. We will take it from there.",
+      "label": "START A CONVERSATION",
+      "title": "Tell us what you’re planning.",
+      "intro": "Share the product or design you like, your quantity, and any important details. We’ll help you find the right option and take the next step together.",
       "submitLabel": "Prepare enquiry"
     },
     "footerTagline": "Decorative hanging products from near Kolkata, India"

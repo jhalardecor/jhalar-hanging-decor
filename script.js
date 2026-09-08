@@ -74,10 +74,30 @@ function initPremiumInteractions(){
     event:'Flexible decorative options for weddings, functions and event spaces.'
   };
   const audienceItems=[...document.querySelectorAll('.audience-item')],audienceNote=$('#audience-note');
-  audienceItems.forEach(btn=>btn.addEventListener('click',()=>{
-    audienceItems.forEach(x=>{x.classList.toggle('active',x===btn);x.setAttribute('aria-selected',String(x===btn))});
+  // Roving tabindex: only the active tab is in the page tab order.
+  audienceItems.forEach(x=>x.tabIndex=x.classList.contains('active')?0:-1);
+  const setAudience=btn=>{
+    audienceItems.forEach(x=>{
+      const selected=x===btn;
+      x.classList.toggle('active',selected);
+      x.setAttribute('aria-selected',String(selected));
+      x.tabIndex=selected?0:-1;
+    });
     if(audienceNote){audienceNote.classList.remove('interaction-swap');void audienceNote.offsetWidth;audienceNote.textContent=audienceCopy[btn.dataset.audience]||'';audienceNote.classList.add('interaction-swap')}
-  }));
+  };
+  audienceItems.forEach(btn=>btn.addEventListener('click',()=>setAudience(btn)));
+  // WAI-ARIA tabs pattern: arrow keys move between audience tabs.
+  const tablist=audienceItems[0]?.closest('[role="tablist"]');
+  if(tablist)tablist.addEventListener('keydown',e=>{
+    if(e.key!=='ArrowRight'&&e.key!=='ArrowLeft')return;
+    const idx=audienceItems.indexOf(document.activeElement);
+    if(idx<0)return;
+    e.preventDefault();
+    const dir=e.key==='ArrowRight'?1:-1;
+    const next=audienceItems[(idx+dir+audienceItems.length)%audienceItems.length];
+    next.focus();
+    setAudience(next);
+  });
   const plans={
     wedding:'Planning wedding decor? Share your colours, venue style and quantity and we’ll help you find what works.',
     retail:'Looking for your store? Share your preferred styles, quantity and customer profile.',
@@ -85,8 +105,13 @@ function initPremiumInteractions(){
     custom:'Have a specific idea? Send your reference, colours, size and quantity and we’ll discuss what can be made.'
   };
   const planButtons=[...document.querySelectorAll('.planning-option')],planCopy=$('#custom-plan-copy');
+  planButtons.forEach(x=>x.setAttribute('aria-pressed',String(x.classList.contains('active'))));
   planButtons.forEach(btn=>btn.addEventListener('click',()=>{
-    planButtons.forEach(x=>x.classList.toggle('active',x===btn));
+    planButtons.forEach(x=>{
+      const selected=x===btn;
+      x.classList.toggle('active',selected);
+      x.setAttribute('aria-pressed',String(selected));
+    });
     if(planCopy){planCopy.classList.remove('interaction-swap');void planCopy.offsetWidth;planCopy.textContent=plans[btn.dataset.plan];planCopy.classList.add('interaction-swap')}
   }));
   // Product image reveal without layout shift.
@@ -157,22 +182,25 @@ function closeModal(){const m=$('#product-modal');if(!m.classList.contains('open
 /* ---------- runtime defaults: equal to the shipped HTML/settings ---------- */
 const DEFAULTS={
  heroImage:'assets/images/hero-jhalar.webp',
- heroHeadline:'Hanging decor for celebrations and events.',
- heroIntro:'Explore handmade designs for weddings, functions, festive spaces and larger orders.',
+ heroHeadline:'Colour sets the mood.',
+ heroIntro:'Handcrafted hanging decor for weddings, events and festive spaces.',
  heroCta:'View the collection',
- collectionLabel:'BROWSE DESIGNS',collectionTitle:'Browse our collection',collectionIntro:'Explore our hanging designs and find options for your event, celebration or store.',
- customLabel:'CUSTOM WORK',customTitle:'Looking for something specific?',customIntro:'Share your colour preference, size, quantity or reference image. We will be happy to discuss your requirement.',
+ collectionLabel:'PRODUCTS',collectionTitle:'Explore the collection',collectionIntro:'Browse the designs and find what suits your project.',
+ customLabel:'YOUR REQUIREMENT',customTitle:'Looking for something specific?',customIntro:'Share your reference, colours, size and quantity. We’ll help you check what works for your requirement.',
  customImage:'assets/images/custom-orders.jpg',
- aboutLabel:'JHALAR',aboutTitle:'Made by hand in Howrah',aboutIntro:'We make hanging decor for event decorators, planners, retailers, wholesalers and families.',
+ aboutLabel:'ABOUT JHALAR',aboutTitle:'A decor partner for people who need dependable options.',aboutIntro:'We create and source hanging decor with a focus on colour, craft and visual impact. Each collection is built for real displays, celebrations and spaces.',
  aboutImage:'assets/images/about-collage.jpg',
- contactLabel:'GET IN TOUCH',contactTitle:"Let's discuss your requirement",contactIntro:'Tell us about your event or order. If available, share the quantity, location and date as well.',
- footerTagline:'Handmade hanging decor from Howrah, India',
- siteTitle:'JHALAR | Hanging Decor',
- siteDescription:'Handmade hanging decor for events, celebrations, decorators, retailers and wholesale buyers.',
+ contactLabel:'START A CONVERSATION',contactTitle:'Tell us what you’re planning.',contactIntro:'Share the product or design you like, your quantity, and any important details. We’ll help you find the right option and take the next step together.',
+ footerTagline:'Decorative hanging products from near Kolkata, India',
+ whatsapp:'918100656258',
+ siteTitle:'JHALAR · Hanging Decor for Celebrations',
+ siteDescription:'Handmade hanging decor for wholesalers, retailers and decorators.',
  ogImage:'assets/images/og-cover.jpg',
  nav:[['Collection','#collection'],['Custom work','#custom'],['Our story','#story']]
 };
-const setTxt=(sel,val,def)=>{if(!val||val===def)return;const el=typeof sel==='string'?$(sel):sel;if(el)el.textContent=val};
+/* Write text only when it genuinely differs, so shipped HTML (and markup like
+   the hero <em> accent) is never clobbered by an identical runtime value. */
+const setTxt=(sel,val,def)=>{if(!val||val===def)return;const el=typeof sel==='string'?$(sel):sel;if(!el)return;if(el.textContent===val)return;el.textContent=val};
 const setImg=(sel,val,def)=>{if(!val||val===def)return;const el=$(sel);if(el)el.src=val};
 const absUrl=p=>{try{return new URL(p,window.location.href).href}catch(e){return p}};
 function applyNav(items){
@@ -209,7 +237,7 @@ function applySettings(s){
  setTxt('.contact .eyebrow',sc.contact&&sc.contact.label,DEFAULTS.contactLabel);
  setTxt('.contact h2',sc.contact&&sc.contact.title,DEFAULTS.contactTitle);
  const co=$('.contact p:not(.eyebrow)');setTxt(co,sc.contact&&sc.contact.intro,DEFAULTS.contactIntro);
- setTxt('.footer-row span:nth-child(2)',sc.footerTagline,DEFAULTS.footerTagline);
+ setTxt('.footer-tagline',sc.footerTagline,DEFAULTS.footerTagline);
  applyNav(s.navItems);
  if(s.whatsapp&&s.whatsapp!==DEFAULTS.whatsapp){state.whatsapp=s.whatsapp;const a=$('.contact-cta');if(a)a.href='https://wa.me/'+s.whatsapp}
  if(s.siteTitle&&s.siteTitle!==DEFAULTS.siteTitle)document.title=s.siteTitle;
@@ -230,8 +258,8 @@ function setTheme(t){
  const l=t.layout||{};
  const put=(v,val,unit)=>{const p=px(val);if(p)r.setProperty(v,unit==='num'?val:p);else r.removeProperty(v)};
  put('--h1-size',l.heroTitleSize);put('--h2-size',l.titleSize);put('--card-title-size',l.cardTitleSize);
- put('--space-6',l.sectionY);put('--shell-max',l.containerWidth);put('--header-h',l.headerHeight);
- put('--radius-btn',l.buttonRadius);put('--radius-card',l.cardRadius);
+  put('--space-6',l.sectionY);put('--shell-max',l.containerWidth);
+  put('--radius-btn',l.buttonRadius);put('--radius-card',l.cardRadius);
  put('--grid-gap',l.gridGap||l.productGap);put('--section-head-gap',l.sectionHeaderGap);put('--split-gap',l.splitGap);
  if(l.cardPad){const v=px(l.cardPad);if(v)r.setProperty('--card-pad',v+' 0 '+(Math.round(parseInt(v,10)*2))+'px')}
  if(l.productColumns)r.setProperty('--product-cols',String(l.productColumns));
@@ -341,6 +369,7 @@ document.querySelectorAll('.modal-nav').forEach(b=>b.addEventListener('click',()
 const __syncHeader=()=>{$('.header')?.classList.toggle('scrolled',window.scrollY>8)};window.addEventListener('scroll',__syncHeader,{passive:true});__syncHeader();
 const __year=$('#year'); if(__year)__year.textContent=new Date().getFullYear();
 markRevealTargets();observeReveals();
+initPremiumInteractions();
 initProducts();initRuntime();
 
 

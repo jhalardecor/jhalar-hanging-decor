@@ -144,3 +144,66 @@ All critical/moderate issues from this audit were addressed:
   (all 35 entries otherwise byte-identical).
 - All 35 catalogue entries, approved names, descriptions, images and JH-###
   references are unchanged, including separate JH-027 / JH-035.
+
+## Fix Log - 2026-09-08 (typography and functionality audit fixes)
+
+All critical and moderate findings from `typography-audit-2026-09-08.md` were fixed:
+
+- **Dead interactions restored:** `initPremiumInteractions()` is now invoked at
+  startup. The "Who we work with" audience tabs and the Wedding / Retail /
+  Event / Custom planning picker respond to clicks again. Audience tabs follow
+  the WAI-ARIA tabs pattern (roving tabindex, ArrowLeft / ArrowRight key
+  support, `aria-controls`, live region note); planning options expose
+  `aria-pressed`.
+- **Contrast (WCAG AA):** footer text raised from `rgba(255,250,241,.78)` to
+  `.95` (3.8:1 → 5.0:1 on the lightest gradient stop); inactive audience tabs
+  raised from opacity `.58` to `.72` (4.2:1 → 6.7:1).
+- **Micro-type floors:** the phone footer reflows to two columns with the
+  brand full width instead of shrinking four columns to 8.3–9px; footer links
+  are `.9rem` on phones with `.82rem`+ floors on desktop; product category
+  labels are `.68rem` everywhere (was `.58rem` on phones); modal category and
+  zoom hint are `.75rem`; eyebrows / kickers are `.75rem`.
+- **Heading hierarchy:** the contact H2 no longer out-sizes the hero H1. All
+  section H2s share `clamp(2rem,3.3vw,3.5rem)` (mobile
+  `clamp(1.75rem,8vw,2.4rem)`); the stray `-.025em` tracking on the contact
+  H2 was removed.
+- **Hero em accent:** "sets the mood." now carries the brand red `#C82039`.
+  Mogranx has no italic cut and font-synthesis is disabled, so the previous
+  italic rendered upright. The runtime also no longer strips the `<em>`
+  (`setTxt` skips when the text is unchanged).
+- **Content drift fixed:** `content/site-settings.json` and the `script.js`
+  defaults now match the shipped HTML copy (hero, section titles and intros,
+  page title, description, footer tagline), so there is no copy flash and
+  crawlers read what visitors read. `scripts/validate.sh` step 4 passes
+  again; og / twitter descriptions aligned.
+- **Footer tagline restored:** the `.footer-tagline` element (lost when the
+  footer was rebuilt) renders again, driven by `sectionCopy.footerTagline`
+  and the editor field.
+- **Theme tokens made real:** `headingWeight`, `headingTracking`,
+  `headingLeading`, `bodyWeight`, `bodyTracking`, `bodyLeading`,
+  `containerWidth` (`--shell-max`) and `productColumns` are now consumed by
+  `style.css` through CSS variables, with the shipped values as fallbacks.
+  `theme.json` was corrected to the shipped values (500 / 0 / 1.12, 1.6,
+  1200px, 88px header). The header-height control no longer writes a runtime
+  var that fought the responsive header; `--header-h` now matches the real
+  88px / 72px header at each breakpoint.
+- **Font loading:** `font-display: swap` (was `block`, FOIT); only the used
+  Mogranx Medium weight is preloaded; 142 unused font files (~2.8 MB) were
+  removed. Regular / Medium / Bold remain for the three declared weights.
+- **Tests:** the two stale catalogue tests were fixed (filters are built
+  dynamically at runtime; the gate-order check now parses actual
+  `<script src>` tags instead of raw substrings), and three regression tests
+  were added: interaction wiring, HTML / settings / defaults parity, and em
+  survival. 74 / 74 pass.
+- **Hygiene:** filter pills meet the 44px touch target; the global
+  `overflow-x: hidden` masks were reduced to the scoped phone-first guard;
+  README corrected (Mogranx + Arial families, live URL, wired-token list).
+- Audit erratum: the modal zoom hint's final computed style was already red
+  `#C82039` at `.72rem` (the grey `.67rem` rule further down the cascade is
+  overridden by an earlier `!important` rule), so it passed contrast before
+  this change; it is now `.75rem`.
+
+Deliberate non-changes: card / modal title families stay as shipped (the
+overridden "PRODUCT DISCOVERY" Arial intent remains dead pending an owner
+decision), and the version manager's one-reload-per-deploy behaviour is
+unchanged.

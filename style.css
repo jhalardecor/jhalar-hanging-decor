@@ -1,9 +1,9 @@
-/* JHALAR — CLEAN PRODUCTION DESIGN SYSTEM | build 20260907.19 */
+/* JHALAR — CLEAN PRODUCTION DESIGN SYSTEM | build 20260908.23 */
 
 /* 01. FONTS */
-@font-face{font-family:Mogranx;src:url('assets/fonts/Mogranx-Regular.woff2') format('woff2');font-weight:400;font-style:normal;font-display:block}
-@font-face{font-family:Mogranx;src:url('assets/fonts/Mogranx-Medium.woff2') format('woff2');font-weight:500;font-style:normal;font-display:block}
-@font-face{font-family:Mogranx;src:url('assets/fonts/Mogranx-Bold.woff2') format('woff2');font-weight:700;font-style:normal;font-display:block}
+@font-face{font-family:Mogranx;src:url('assets/fonts/Mogranx-Regular.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:Mogranx;src:url('assets/fonts/Mogranx-Medium.woff2') format('woff2');font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:Mogranx;src:url('assets/fonts/Mogranx-Bold.woff2') format('woff2');font-weight:700;font-style:normal;font-display:swap}
 
 /* 02. TOKENS */
 :root{
@@ -21,12 +21,12 @@
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:90px}
-body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--font-body);font-size:16px;line-height:1.55;overflow-x:hidden}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--font-body);font-size:16px;line-height:1.55}
 img,video{display:block;max-width:100%}button,a{font:inherit}button{cursor:pointer}a{color:inherit;text-decoration:none}
 button:focus-visible,a:focus-visible{outline:2px solid var(--ink);outline-offset:4px}
 .shell{width:var(--shell);margin-inline:auto}
 .section{padding-block:clamp(64px,9vw,120px)}
-.eyebrow,.kicker{margin:0 0 var(--s3);font-size:.72rem;line-height:1.2;font-weight:700;letter-spacing:.13em;text-transform:uppercase}
+.eyebrow,.kicker{margin:0 0 var(--s3);font-size:.75rem;line-height:1.2;font-weight:700;letter-spacing:.13em;text-transform:uppercase}
 
 /* Lock all headings to the canonical Mogranx family so runtime theme loading cannot change them. */
 /* Runtime theme settings load after CSS; headings/body must keep the bundled Mogranx family. */
@@ -194,7 +194,7 @@ h1,h2,h3,h4,h5,h6,.hero-banner-copy h1,.section-heading-group h2,.custom-copy h2
  .product-image::after{display:none}
  .product-card:hover .product-image>img:first-child{transform:none}
  .product-info{padding:11px 2px 0}
- .product-category{font-size:.62rem;margin-bottom:5px}
+ .product-category{font-size:.68rem;margin-bottom:5px}
  .product-title{font-size:.98rem;line-height:1.32;font-weight:500}
  .product-details-btn{min-height:40px;margin-top:5px;font-size:.76rem}
  .custom-grid,.story-grid{gap:24px}
@@ -379,9 +379,9 @@ h1,h2,h3,h4,h5,h6,.hero-banner-copy h1,.section-heading-group h2,.custom-copy h2
 
 
 /* 17. MOBILE RESPONSIVE STABILITY — PHONE-FIRST REPAIR */
-html,body{max-width:100%;overflow-x:hidden}
 img,video,svg{max-width:100%}
 @media(max-width:760px){
+ html,body{max-width:100%;overflow-x:hidden}
  .shell{width:min(100% - 28px,1200px);margin-inline:auto}
  .header-row{min-height:64px;gap:12px}
  .nav{display:none}
@@ -1051,8 +1051,9 @@ html{font-size:16px}
 body{
   font-family:Arial,Helvetica,sans-serif!important;
   font-size:16px!important;
-  line-height:1.6!important;
-  letter-spacing:0!important;
+  font-weight:var(--body-weight,400)!important;
+  line-height:var(--body-leading,1.6)!important;
+  letter-spacing:var(--body-tracking,0)!important;
   color:#141942!important;
 }
 h1,h2,h3,h4,h5,h6,
@@ -1063,20 +1064,21 @@ h1,h2,h3,h4,h5,h6,
 .contact-box h2,
 .modal-copy h3{
   font-family:Mogranx,Arial,sans-serif!important;
-  font-weight:500!important;
+  font-weight:var(--heading-weight,500)!important;
+  letter-spacing:var(--heading-tracking,0)!important;
   color:#622331!important;
   text-wrap:balance;
 }
 h1{font-size:clamp(2.5rem,4.5vw,4.75rem)!important;line-height:1.05!important}
 h2,.section-heading-group h2,.custom-copy h2,.story-copy h2,.contact-box h2{
   font-size:clamp(2rem,3.3vw,3.5rem)!important;
-  line-height:1.12!important;
+  line-height:var(--heading-leading,1.12)!important;
 }
 h3,.modal-copy h3{font-size:clamp(1.35rem,2vw,2rem)!important;line-height:1.2!important}
 p{font-size:1rem;line-height:1.6}
 .eyebrow,.kicker,.section-kicker{
   font-family:Arial,Helvetica,sans-serif!important;
-  font-size:.72rem!important;
+  font-size:.75rem!important;
   line-height:1.3!important;
   font-weight:700!important;
   letter-spacing:.16em!important;
@@ -1105,7 +1107,7 @@ p{font-size:1rem;line-height:1.6}
 /* Standard page rhythm */
 .section{padding-block:clamp(48px,6vw,72px)!important}
 .shell{
-  width:min(calc(100% - 48px),1200px)!important;
+  width:min(calc(100% - 48px),var(--shell-max,1200px))!important;
   margin-inline:auto!important;
 }
 .section-head{margin-bottom:clamp(24px,3vw,40px)!important}
@@ -1118,7 +1120,7 @@ p{font-size:1rem;line-height:1.6}
   font-family:Mogranx,Arial,sans-serif!important;
   font-size:1.2rem!important;
   line-height:1.3!important;
-  font-weight:500!important;
+  font-weight:var(--heading-weight,500)!important;
   color:#622331!important;
 }
 .product-card p,.product-meta,.product-category{
@@ -1564,7 +1566,7 @@ button,.btn,.hero-banner-cta,.filter-btn{
   padding-block:clamp(48px,7vw,96px)!important;
 }
 .shell.contact-box{
-  width:min(calc(100% - 48px),1200px)!important;
+  width:min(calc(100% - 48px),var(--shell-max,1200px))!important;
   min-height:clamp(340px,32vw,430px)!important;
   margin-inline:auto!important;
   padding:clamp(44px,6vw,84px)!important;
@@ -1602,8 +1604,8 @@ button,.btn,.hero-banner-cta,.filter-btn{
   max-width:13ch!important;
   margin:0!important;
   color:#622331!important;
-  font-size:clamp(2.25rem,4.2vw,4.5rem)!important;
-  line-height:1.06!important;
+  font-size:clamp(2rem,3.3vw,3.5rem)!important;
+  line-height:var(--heading-leading,1.12)!important;
   text-wrap:balance;
 }
 .contact-box p:not(.eyebrow){
@@ -1668,8 +1670,8 @@ button,.btn,.hero-banner-cta,.filter-btn{
   .contact-box .eyebrow{margin-bottom:12px!important}
   .contact-box h2{
     max-width:12ch!important;
-    font-size:clamp(2rem,9vw,2.75rem)!important;
-    line-height:1.08!important;
+    font-size:clamp(1.75rem,8vw,2.4rem)!important;
+    line-height:1.12!important;
   }
   .contact-box p:not(.eyebrow){
     max-width:34ch!important;
@@ -1694,7 +1696,7 @@ button,.btn,.hero-banner-cta,.filter-btn{
   background:transparent!important;
 }
 .contact.section .shell.contact-box{
-  width:min(calc(100% - 48px),1200px)!important;
+  width:min(calc(100% - 48px),var(--shell-max,1200px))!important;
   min-height:clamp(380px,34vw,500px)!important;
   margin-inline:auto!important;
   padding:clamp(44px,6vw,88px)!important;
@@ -1724,7 +1726,7 @@ button,.btn,.hero-banner-cta,.filter-btn{
 .contact-box .eyebrow{
   margin:0 0 16px!important;
   color:var(--red)!important;
-  font-size:.72rem!important;
+  font-size:.75rem!important;
   font-weight:700!important;
   letter-spacing:.14em!important;
 }
@@ -1732,9 +1734,8 @@ button,.btn,.hero-banner-cta,.filter-btn{
   max-width:12ch!important;
   margin:0!important;
   color:var(--heritage)!important;
-  font-size:clamp(2.4rem,5vw,5rem)!important;
-  line-height:1.02!important;
-  letter-spacing:-.025em!important;
+  font-size:clamp(2rem,3.3vw,3.5rem)!important;
+  line-height:var(--heading-leading,1.12)!important;
   text-wrap:balance;
 }
 .contact-box p:not(.eyebrow){
@@ -1790,7 +1791,7 @@ button,.btn,.hero-banner-cta,.filter-btn{
     align-items:stretch!important;
     gap:34px!important;
   }
-  .contact-box h2{max-width:11ch!important;font-size:clamp(2.15rem,10vw,3rem)!important}
+  .contact-box h2{max-width:11ch!important;font-size:clamp(1.75rem,8vw,2.4rem)!important}
   .contact-box p:not(.eyebrow){margin-top:16px!important;max-width:36ch!important;font-size:1rem!important}
   .contact-action{width:100%;align-items:stretch}
   .contact-cta{width:100%!important;min-width:0!important}
@@ -1899,8 +1900,10 @@ button,.btn,.hero-banner-cta,.filter-btn{
   }
 }
 
-/* SINGLE-ROW FOOTER SYSTEM — final authoritative override */
-/* One horizontal footer row at every viewport. No stacking, no mobile reordering. */
+/* SINGLE-ROW FOOTER SYSTEM — desktop */
+/* Brand + three columns on one row. Text floors keep every link readable;
+   the phone breakpoint below reflows to two columns instead of shrinking
+   type below 12px (UX_STANDARD: reflow, not shrinking). */
 .footer.site-footer{
   padding:32px 0 0!important;
 }
@@ -1922,19 +1925,19 @@ button,.btn,.hero-banner-cta,.filter-btn{
 .footer.site-footer .footer-tagline{
   max-width:32ch!important;
   margin:12px 0 0!important;
-  font-size:clamp(.72rem,1.7vw,.92rem)!important;
+  font-size:clamp(.8rem,1.5vw,.95rem)!important;
   line-height:1.45!important;
 }
 .footer.site-footer .footer-col h4{
   margin:0 0 10px!important;
-  font-size:clamp(.56rem,1.45vw,.75rem)!important;
+  font-size:clamp(.72rem,1.1vw,.78rem)!important;
   line-height:1.2!important;
   letter-spacing:.08em!important;
 }
 .footer.site-footer .footer-col ul{gap:6px!important}
 .footer.site-footer .footer-col a,
 .footer.site-footer .footer-col span{
-  font-size:clamp(.62rem,1.65vw,.88rem)!important;
+  font-size:clamp(.82rem,1.35vw,.92rem)!important;
   line-height:1.35!important;
   overflow-wrap:anywhere!important;
 }
@@ -1944,42 +1947,48 @@ button,.btn,.hero-banner-cta,.filter-btn{
   min-height:46px!important;
 }
 .footer.site-footer .footer-bottom p{
-  font-size:clamp(.62rem,1.55vw,.76rem)!important;
+  font-size:clamp(.75rem,1vw,.8rem)!important;
   line-height:1.3!important;
 }
 
-/* Phone: still one row, compressed proportionally instead of becoming a long stacked footer. */
+/* Phone: two readable columns with the brand full width. */
 @media(max-width:620px){
-  .footer.site-footer{padding-top:24px!important}
+  .footer.site-footer{padding-top:28px!important}
   .footer.site-footer .footer-grid{
-    width:calc(100% - 24px)!important;
-    grid-template-columns:1.35fr .85fr 1.25fr .55fr!important;
-    gap:12px!important;
-    padding-bottom:24px!important;
+    width:calc(100% - 32px)!important;
+    grid-template-columns:1fr 1fr!important;
+    gap:26px 20px!important;
+    padding-bottom:28px!important;
   }
-  .footer.site-footer .footer-logo{width:82px!important}
+  .footer.site-footer .footer-brand{grid-column:1/-1!important}
+  .footer.site-footer .footer-logo{width:118px!important}
   .footer.site-footer .footer-tagline{
-    margin-top:8px!important;
-    font-size:.62rem!important;
-    line-height:1.35!important;
+    max-width:46ch!important;
+    margin-top:10px!important;
+    font-size:.88rem!important;
+    line-height:1.5!important;
   }
   .footer.site-footer .footer-col h4{
-    margin-bottom:7px!important;
-    font-size:.52rem!important;
-    letter-spacing:.06em!important;
+    margin-bottom:10px!important;
+    font-size:.75rem!important;
+    letter-spacing:.08em!important;
   }
-  .footer.site-footer .footer-col ul{gap:5px!important}
+  .footer.site-footer .footer-col ul{gap:8px!important}
   .footer.site-footer .footer-col a,
   .footer.site-footer .footer-col span{
-    font-size:.56rem!important;
-    line-height:1.25!important;
+    font-size:.9rem!important;
+    line-height:1.45!important;
+    overflow-wrap:anywhere!important;
   }
   .footer.site-footer .footer-bottom .container,
   .footer.site-footer .footer-bottom .shell{
-    width:calc(100% - 24px)!important;
-    min-height:40px!important;
+    width:calc(100% - 32px)!important;
+    min-height:52px!important;
   }
-  .footer.site-footer .footer-bottom p{font-size:.56rem!important}
+  .footer.site-footer .footer-bottom p{
+    font-size:.78rem!important;
+    line-height:1.4!important;
+  }
 }
 
 
@@ -2013,10 +2022,12 @@ button:not(.filter-btn),
   border-top:1px solid rgba(255,250,241,.18)!important;
 }
 .footer.site-footer *{border-color:rgba(255,250,241,.18)!important}
+/* Footer text stays at .95 ivory: the gradient's lightest stop (#C82039) still
+   passes WCAG AA at 5.0:1 with normal-size text; .78 dipped to 3.8:1. */
 .footer.site-footer .footer-tagline,
 .footer.site-footer .footer-col a,
 .footer.site-footer .footer-col span,
-.footer.site-footer .footer-bottom p{color:rgba(255,250,241,.78)!important}
+.footer.site-footer .footer-bottom p{color:rgba(255,250,241,.95)!important}
 .footer.site-footer .footer-col h4{color:#FFFAF1!important}
 .footer.site-footer .footer-col a:hover{color:#FFFAF1!important}
 .footer.site-footer .footer-bottom{border-top:1px solid rgba(255,250,241,.18)!important}
@@ -2120,7 +2131,7 @@ button:not(.filter-btn),
   background:transparent!important;
   color:var(--ink)!important;
   border:1px solid rgba(98,35,49,.20)!important;
-  min-height:42px!important;
+  min-height:44px!important;
   padding:0 16px!important;
 }
 #product-filters .filter-btn.active{
@@ -2469,7 +2480,7 @@ button:not(.filter-btn),
 /* PRODUCT GRID — balanced even columns and native 1:1 media */
 .product-grid{
   display:grid!important;
-  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  grid-template-columns:repeat(var(--product-cols,4),minmax(0,1fr))!important;
   align-items:stretch!important;
   gap:20px!important;
 }
@@ -2603,7 +2614,7 @@ button:not(.filter-btn),
 #product-modal .modal-zoom-hint{
   margin:12px 0 8px!important;
   color:#C82039!important;
-  font-size:.72rem!important;
+  font-size:.75rem!important;
   font-weight:700!important;
   letter-spacing:.045em!important;
   text-transform:uppercase!important;
@@ -2677,7 +2688,9 @@ button:not(.filter-btn),
 
 
 /* PREMIUM FIXED HEADER — authoritative navigation layer */
-:root{--header-h:82px}
+/* --header-h must match the real .header-row height at each breakpoint
+   (88px desktop, 72px up to 900px) so the fixed header never covers content. */
+:root{--header-h:88px}
 .header{
   position:fixed!important;
   inset:0 0 auto 0!important;
@@ -2691,8 +2704,8 @@ button:not(.filter-btn),
 body{padding-top:var(--header-h)!important}
 .header:not(.header-hidden){pointer-events:auto!important}
 .header.header-hidden{pointer-events:none!important}
-@media(max-width:760px){
-  :root{--header-h:64px}
+@media(max-width:900px){
+  :root{--header-h:72px}
   .header{height:var(--header-h)!important;min-height:var(--header-h)!important}
   body{padding-top:var(--header-h)!important}
 }
@@ -2760,9 +2773,16 @@ body{padding-top:var(--header-h)!important}
   z-index:2!important;
 }
 .hero.hero-banner .hero-banner-copy,
-.hero.hero-banner .hero-banner-copy h1,
-.hero.hero-banner .hero-banner-copy h1 em{
+.hero.hero-banner .hero-banner-copy h1{
   color:#622331!important;
+  text-shadow:none!important;
+}
+/* The em accent is a colour lever: Mogranx has no italic cut and
+   font-synthesis is disabled, so italic would silently render upright. */
+.hero.hero-banner .hero-banner-copy h1 em{
+  font-style:normal!important;
+  font-weight:inherit!important;
+  color:#C82039!important;
   text-shadow:none!important;
 }
 .hero.hero-banner .hero-banner-copy .kicker{color:#C82039!important;}
@@ -3102,7 +3122,7 @@ body{padding-top:var(--header-h)!important}
 
 
 /* FOOTER SVG LOGO — centered; real motion-graphics reveal */
-.footer.site-footer .footer-brand{width:100%!important;display:flex!important;justify-content:center!important;align-items:center!important;text-align:center!important}
+.footer.site-footer .footer-brand{width:100%!important;display:flex!important;flex-direction:column!important;justify-content:center!important;align-items:center!important;text-align:center!important}
 .footer.site-footer .footer-brand>a.logo{margin:0 auto!important;display:inline-flex!important;justify-content:center!important;align-items:center!important}
 .footer.site-footer .footer-logo{display:block!important;margin:0!important;animation:none!important}
 .footer.site-footer .footer-brand>a.logo:hover .footer-logo{transform:none!important}
@@ -3122,7 +3142,7 @@ body{padding-top:var(--header-h)!important}
 .product-grid.filter-changing .product-card{animation:catalogueRefresh .24s ease both}
 @keyframes catalogueRefresh{from{opacity:.5;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
 .audience-item,.planning-option{appearance:none;border:0;background:transparent;font:inherit;cursor:pointer;transition:color .2s ease,opacity .2s ease,transform .2s ease}
-.audience-item{padding:0;margin:0;color:inherit;opacity:.55}
+.audience-item{padding:0;margin:0;color:inherit;opacity:.72}
 .audience-item.active{opacity:1;color:#C82039;font-weight:600}
 .audience-note{margin:.8rem 0 0;min-height:1.5em;max-width:48ch}
 .interaction-swap{animation:copySwap .28s ease}
@@ -3170,10 +3190,10 @@ body{padding-top:var(--header-h)!important}
 #product-modal .modal-stage{width:100%;height:100%;padding:12px;box-sizing:border-box;display:grid;place-items:center;overflow:hidden;touch-action:none}
 #product-modal .modal-stage img,#product-modal .modal-stage video{display:block;width:100%;height:100%;object-fit:contain;object-position:center}
 #product-modal .modal-copy{min-width:0;min-height:0;overflow:auto;padding:32px;box-sizing:border-box;background:#fffaf1;display:flex;flex-direction:column;align-items:stretch}
-#product-modal #modal-category{margin:0 0 8px;color:#c82039;font-size:.7rem;line-height:1.35;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+#product-modal #modal-category{margin:0 0 8px;color:#c82039;font-size:.75rem;line-height:1.35;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
 #product-modal #modal-title{margin:0 0 16px;color:#141942;font-family:Mogranx,Arial,sans-serif;font-size:clamp(1.55rem,2.4vw,2.2rem);font-weight:500;line-height:1.14;letter-spacing:0;text-wrap:balance}
 #product-modal #modal-desc{width:100%;margin:0;padding:0;color:rgba(20,25,66,.78);font-family:Arial,Helvetica,sans-serif;font-size:.98rem;line-height:1.62;text-align:left;text-wrap:pretty;overflow-wrap:break-word}
-#product-modal .modal-zoom-hint{margin:16px 0 0;color:#c82039;font-size:.7rem;font-weight:700;letter-spacing:.05em}
+#product-modal .modal-zoom-hint{margin:16px 0 0;color:#c82039;font-size:.75rem;font-weight:700;letter-spacing:.05em}
 #product-modal .modal-wa-btn{width:auto;align-self:flex-start;margin-top:22px;padding:0;border:0;background:transparent;color:#c82039;font:700 .92rem/1.2 Arial,Helvetica,sans-serif;text-decoration:none}
 #product-modal .modal-wa-btn:hover{color:#a71931;background:transparent}
 #product-modal .modal-wa-btn::before,#product-modal .modal-wa-btn::after{content:none}
@@ -3229,7 +3249,7 @@ body{padding-top:var(--header-h)!important}
 }
 #product-grid .product-category{
   margin:0 0 6px!important;color:#c82039;
-  font-size:.64rem;font-weight:700;line-height:1.25;letter-spacing:.1em;
+  font-size:.68rem;font-weight:700;line-height:1.25;letter-spacing:.1em;
 }
 #product-grid .product-title{
   width:100%;margin:0!important;color:#141942;
@@ -3244,7 +3264,7 @@ body{padding-top:var(--header-h)!important}
 @media(max-width:760px){
   #product-grid{gap:22px 12px!important}
   #product-grid .product-info{padding-top:10px!important}
-  #product-grid .product-category{font-size:.58rem;margin-bottom:5px!important}
+  #product-grid .product-category{font-size:.68rem;margin-bottom:5px!important}
   #product-grid .product-title{font-size:.92rem;line-height:1.35}
 }
 
@@ -3267,7 +3287,7 @@ body{padding-top:var(--header-h)!important}
 }
 #product-modal #modal-category{
   margin:0 0 8px;color:#c82039;
-  font-size:.68rem;font-weight:700;line-height:1.3;letter-spacing:.1em;
+  font-size:.75rem;font-weight:700;line-height:1.3;letter-spacing:.1em;
 }
 #product-modal #modal-title{
   margin:0 0 16px;max-width:none;color:#141942;
@@ -3359,7 +3379,7 @@ body{padding-top:var(--header-h)!important}
 .audience-label{margin:0 0 18px!important;color:#141942!important;font-size:.78rem!important;font-weight:700!important;letter-spacing:.1em!important;text-transform:uppercase!important}
 .audience-items{display:flex!important;align-items:center!important;gap:clamp(20px,3vw,42px)!important;overflow-x:auto!important;overflow-y:hidden!important;padding:0 0 2px!important;scrollbar-width:none!important;-webkit-overflow-scrolling:touch}
 .audience-items::-webkit-scrollbar{display:none}
-.audience-item{position:relative!important;flex:0 0 auto!important;padding:0 0 10px!important;background:transparent!important;border:0!important;border-radius:0!important;color:#141942!important;opacity:.58!important;font-size:clamp(.95rem,1.4vw,1.08rem)!important;font-weight:500!important;line-height:1.35!important;white-space:nowrap!important}
+.audience-item{position:relative!important;flex:0 0 auto!important;padding:0 0 10px!important;background:transparent!important;border:0!important;border-radius:0!important;color:#141942!important;opacity:.72!important;font-size:clamp(.95rem,1.4vw,1.08rem)!important;font-weight:500!important;line-height:1.35!important;white-space:nowrap!important}
 .audience-item::after{content:""!important;position:absolute!important;left:0!important;bottom:0!important;width:0!important;height:1px!important;background:#C82039!important;transition:width .2s ease!important}
 .audience-item.active{color:#C82039!important;opacity:1!important;font-weight:650!important;background:transparent!important}
 .audience-item.active::after{width:100%!important}
