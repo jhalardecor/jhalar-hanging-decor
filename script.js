@@ -364,8 +364,9 @@ initProducts();initRuntime();
     const stage=modal.querySelector('.modal-stage');
     if(!stage||stage.querySelector('.zoom-hint'))return;
     const hint=document.createElement('div');
-    hint.className='zoom-hint '+(matchMedia('(max-width:760px)').matches?'mobile':'desktop');
-    hint.textContent=matchMedia('(max-width:760px)').matches?'Pinch to zoom':'Scroll to zoom';
+    const mouseUI=matchMedia('(hover:hover) and (pointer:fine)').matches;
+    hint.className='zoom-hint '+(mouseUI?'desktop':'mobile');
+    hint.textContent=mouseUI?'Scroll to zoom':'Pinch to zoom';
     stage.appendChild(hint);
     requestAnimationFrame(()=>hint.classList.add('is-visible'));
     setTimeout(()=>{hint.classList.remove('is-visible');setTimeout(()=>hint.remove(),400)},2800);
@@ -397,8 +398,10 @@ initProducts();initRuntime();
    const r=stage.getBoundingClientRect(),ox=cx-(r.left+r.width/2),oy=cy-(r.top+r.height/2),ratio=next/old;
    x=ox-(ox-x)*ratio;y=oy-(oy-y)*ratio;z=next;if(z===1)x=y=0;paint();
  }
- // Desktop / laptop: mouse wheel or trackpad scroll zooms the product image.
- stage.addEventListener('wheel',e=>{if(!modal.classList.contains('open')||stage.classList.contains('is-video'))return;e.preventDefault();zoom(z*Math.exp(-e.deltaY*.001),e.clientX,e.clientY)},{passive:false});
+ // Mouse / fine-pointer devices only: wheel or trackpad scroll zooms the product image.
+ // Touch screens must keep normal page scrolling; zoom there is pinch-only.
+ const finePointer=()=>matchMedia('(hover:hover) and (pointer:fine)').matches;
+ stage.addEventListener('wheel',e=>{if(!finePointer()||!modal.classList.contains('open')||stage.classList.contains('is-video'))return;e.preventDefault();zoom(z*Math.exp(-e.deltaY*.001),e.clientX,e.clientY)},{passive:false});
 
  // Mobile: two-finger pinch zooms the product image itself, not the page.
  let pinch=null;
