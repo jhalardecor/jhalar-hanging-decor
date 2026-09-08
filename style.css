@@ -153,9 +153,30 @@ p{overflow-wrap:break-word;word-break:normal;text-wrap:pretty}
   }
   .collection-intro h2,.spaces h2,.about h2,.contact h2{max-width:14ch;line-height:1.02}
   .hero-copy>p,.collection-intro>p{max-width:36ch}
-  .filters{display:flex;flex-wrap:nowrap;overflow-x:auto;overflow-y:hidden;width:100%;gap:18px;padding:0 0 10px;scrollbar-width:none}
+  /* Mobile filter rail: one stable horizontal row with snap alignment. */
+  .filters-wrap{overflow:hidden;margin-inline:calc(var(--shell) * -1)}
+  .filters{
+    display:flex;
+    flex-wrap:nowrap;
+    overflow-x:auto;
+    overflow-y:hidden;
+    width:100%;
+    gap:10px;
+    padding:0 var(--shell) 12px;
+    margin:0;
+    scrollbar-width:none;
+    scroll-snap-type:x proximity;
+    overscroll-behavior-x:contain;
+    -webkit-overflow-scrolling:touch;
+  }
   .filters::-webkit-scrollbar{display:none}
-  .filter-btn{flex:0 0 auto;white-space:nowrap}
+  .filter-btn{
+    flex:0 0 auto;
+    white-space:nowrap;
+    min-height:44px;
+    padding:0 2px;
+    scroll-snap-align:start;
+  }
   .product-grid{gap:32px 12px}
   .product-image{aspect-ratio:1/1;border-radius:8px}
   .product-info{padding-top:10px;gap:3px}
