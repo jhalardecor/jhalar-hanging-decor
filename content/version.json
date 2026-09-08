@@ -1,5 +1,5 @@
 {
-  "version": "20260908.70",
-  "updated": "2026-09-09T02:00:00Z",
-  "note": "Canonical responsive layout and contained product media system; mobile modal and close-control rules consolidated"
+  "version": "20260908.71",
+  "updated": "2026-09-08T18:00:00Z",
+  "note": "Removed failed visual override layer; restored the prior spatial product-led showroom direction"
 }
