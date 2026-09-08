@@ -87,7 +87,7 @@ Recommended pipeline for JHALAR: concept + timing design first (done in our SVG 
 
 ## 7. Recommendations — JHALAR's video intro directions
 
-All three extend the already-approved Concept 3 footer grammar (monumental assembly → camera depth → held light) into true video:
+All three extend the already-approved Concept 3 footer grammar (perpetual sway → breeze physics → living loop) into true video:
 
 **A. "First Light" (recommended)** — 5s cinematic. Black → six diya-charms light one by one L→R → letters resolve → the wave ignites center with the chime hit → glory hold with slow push-in and drifting embers. Purest brand truth: *the festival lights coming on.*
 
