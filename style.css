@@ -80,24 +80,9 @@ h1,h2,h3,h4,h5,h6,.hero-banner-copy h1,.section-heading-group h2,.custom-copy h2
 
 
 
-@media(hover:hover) and (pointer:fine){.product-card:hover{transform:translateY(-4px)}}
-@media(hover:none){.product-card:active{transform:scale(.99)}}
 .product-details-btn{display:inline-flex;gap:8px;align-items:center;margin-top:13px;padding:0;border:0;background:none;color:var(--heritage);font-size:.82rem;font-weight:700}.arr{transition:transform .2s}.product-details-btn:hover{color:var(--red-deep)}.product-details-btn:hover .arr{transform:translateX(4px)}
 .collection-more{text-align:center}.more-btn{border:1px solid var(--navy);background:transparent;color:var(--navy);padding:13px 22px;min-height:46px}.more-btn:hover{background:var(--navy);border-color:var(--navy);color:var(--paper)}
 
-
-/* PRODUCT CARDS — CANONICAL MOBILE SYSTEM
-   Two columns, square media, natural title wrapping.
-   No line clamp and no artificial title-height reservation. */
-@media(max-width:760px){
-
-
-
-
-
-
-}
-@media(max-width:390px){.product-grid{gap:24px 10px}}
 
 /* 08. CUSTOM + STORY */
 .custom{background:var(--surface)}.custom-grid,.story-grid{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:clamp(36px,8vw,120px)}
