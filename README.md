@@ -2,7 +2,12 @@
 
 A product-first catalogue for handcrafted jhalars and hanging decor. Plain HTML + CSS + vanilla JS; no framework or build step.
 
-Live site: https://lokeshdugar040.github.io/jhalar-hanging-decor/
+Live site: https://jhalardecor.github.io/jhalar-hanging-decor/
+
+Brand intro film: open [`logo-intro.html`](logo-intro.html) — a self-contained logo
+motion graphic (thread drop, letter hang-in, garland build, tagline). It is skippable
+(click, Enter, Space or Esc), replayable, and shows the finished frame under
+reduced motion.
 
 ## Editing model
 
