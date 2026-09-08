@@ -213,3 +213,85 @@ body{background:var(--canvas)}
     transition:none !important;
   }
 }
+
+
+/* ===== CONTRAST & CANVAS REBUILD 20260909.75 =====
+   Neutral warm base. Red remains an accent, never reading text. */
+:root{
+  --canvas:#f2eee6;
+  --surface:#faf7f0;
+  --surface-2:#e6dfd3;
+  --ink:#35252a;
+  --muted:#5f4d51;
+  --red:#ef2448;
+  --red-hot:#ff4a66;
+  --red-deep:#c91638;
+  --red-soft:#f5d8dc;
+  --line:#c9bfb2;
+  --brand-gradient:linear-gradient(135deg,#ff4a66 0%,#ef2448 55%,#d91f42 100%);
+}
+
+body{background:var(--canvas);color:var(--ink)}
+.header{background:rgba(242,238,230,.97)}
+.hero{background:var(--surface)}
+.hero-image:after{background:linear-gradient(90deg,rgba(242,238,230,.98) 0%,rgba(242,238,230,.78) 40%,rgba(242,238,230,.10) 74%)}
+
+/* Red is reserved for surfaces, controls and indicators — never typography. */
+.label,
+.nav a:hover,
+.nav-current,
+.product-category,
+.modal-copy .label{color:var(--ink)!important}
+
+.nav-enquire,
+.hero-copy a,
+.modal-wa-btn,
+.contact-cta{color:#fff7f0!important}
+
+/* Remove the pink-heavy custom section and rebuild its hierarchy. */
+.spaces{
+  background:var(--surface-2);
+  color:var(--ink);
+}
+.spaces .label{color:var(--ink)!important}
+.spaces h2{color:var(--ink)}
+.spaces-lead{color:var(--muted)}
+.spaces-types span{
+  color:var(--ink);
+  border-color:var(--line);
+  background:rgba(250,247,240,.58);
+}
+.button-light{
+  background:var(--brand-gradient);
+  color:#fff7f0!important;
+  box-shadow:0 12px 28px rgba(201,22,56,.16);
+}
+.button-light span{color:inherit}
+
+/* Keep red visually scarce so it retains hierarchy and CTA power. */
+.filter-btn.active{
+  color:var(--ink);
+  border-color:var(--red);
+}
+.product-card:hover .product-image{border-color:var(--line)}
+
+.about-story p,
+.collection-intro>p,
+.contact-copy>p:last-child,
+.modal-copy #modal-desc,
+.modal-variant,
+.product-variant{color:var(--muted)}
+
+.site-footer{background:#542632;color:#f7efe6}
+.footer-top>p,.footer-bottom{color:rgba(247,239,230,.82)}
+.footer-bottom{border-color:rgba(247,239,230,.28)}
+
+@media(max-width:760px){
+  .hero-image:after{
+    background:linear-gradient(180deg,rgba(53,37,42,0) 22%,rgba(53,37,42,.16) 52%,rgba(53,37,42,.92) 100%);
+  }
+  .hero-copy{color:#fff7f0}
+  .hero-copy>p{color:rgba(255,247,240,.94)}
+  .spaces{background:var(--surface-2)}
+  .modal{background:#f2eee6}
+}
