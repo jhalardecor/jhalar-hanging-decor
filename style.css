@@ -329,3 +329,33 @@ body{background:#FFF4EF}
   .nav-backdrop{inset:84px 0 0!important}
   .mobile-nav{top:84px!important}
 }
+
+
+/* Mobile header: editorial left/right composition. */
+@media (max-width:760px){
+  .header,
+  .header-row{height:84px!important}
+  .header-row{
+    display:flex!important;
+    align-items:center!important;
+    justify-content:space-between!important;
+    padding-inline:clamp(20px,5.5vw,28px)!important;
+  }
+  .brand{
+    display:flex!important;
+    align-items:center!important;
+    justify-content:flex-start!important;
+    margin:0!important;
+  }
+  .brand img{
+    width:clamp(128px,35vw,148px)!important;
+    max-height:34px;
+  }
+  .menu{
+    margin:0!important;
+    flex:0 0 44px;
+    width:44px!important;
+    height:44px!important;
+    justify-self:auto!important;
+  }
+}
