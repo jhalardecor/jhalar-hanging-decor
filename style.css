@@ -218,3 +218,61 @@ body{background:#FFF4EF}
   }
   .hero-copy>p{color:rgba(255,240,232,.86)}
 }
+
+
+/* Mobile navigation interaction layer */
+.nav-backdrop{display:none}
+@media (max-width:760px){
+  .menu{
+    width:44px;height:44px;margin-left:auto;padding:0;
+    display:grid;place-content:center;gap:7px;
+    border:0;background:transparent;color:var(--ink);
+    cursor:pointer;
+  }
+  .menu span{
+    display:block;width:24px;height:1.5px;margin:0;
+    background:currentColor;transform-origin:center;
+    transition:transform 220ms cubic-bezier(.2,.8,.2,1),width 180ms ease;
+  }
+  .menu.open span:first-child{transform:translateY(4.25px) rotate(45deg)}
+  .menu.open span:last-child{transform:translateY(-4.25px) rotate(-45deg)}
+  .menu:active span{width:20px}
+
+  .nav-backdrop{
+    position:fixed;inset:74px 0 0;z-index:98;
+    display:block;opacity:0;visibility:hidden;
+    background:rgba(58,31,42,.22);
+    transition:opacity 220ms ease,visibility 220ms step-end;
+  }
+  .nav-backdrop.open{
+    opacity:1;visibility:visible;
+    transition:opacity 220ms ease,visibility 0s;
+  }
+
+  .mobile-nav{
+    position:fixed;top:74px;left:0;right:0;z-index:99;
+    display:grid!important;
+    grid-template-rows:0fr;
+    overflow:hidden;
+    opacity:0;visibility:hidden;
+    background:var(--paper);
+    box-shadow:none;
+    border-top:1px solid var(--line);
+    transition:grid-template-rows 260ms cubic-bezier(.2,.8,.2,1),opacity 180ms ease,visibility 260ms step-end;
+  }
+  .mobile-nav::before{content:"";min-height:0}
+  .mobile-nav.open{
+    grid-template-rows:1fr;
+    opacity:1;visibility:visible;
+    transition:grid-template-rows 260ms cubic-bezier(.2,.8,.2,1),opacity 180ms ease,visibility 0s;
+  }
+  .mobile-nav a{
+    min-height:58px;
+    display:flex;align-items:center;
+    position:relative;
+    border-bottom:1px solid var(--line);
+    transition:background 160ms ease,padding-left 180ms ease,color 160ms ease;
+  }
+  .mobile-nav a:active{padding-left:calc(max(16px,calc((100% - var(--shell))/2)) + 8px);background:rgba(200,31,56,.07);color:var(--accent)}
+  .mobile-nav a:last-child{border-bottom:0}
+}
