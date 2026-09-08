@@ -39,7 +39,7 @@ body{overflow-x:hidden}
 .modal-stage img,.modal-stage video{display:block;max-width:100%;max-height:100%;width:100%;height:100%;object-fit:contain!important;object-position:center!important}
 .modal-copy{padding:22px 20px 28px;max-height:none;overflow:auto;background:var(--paper)}.modal-copy h3{font-size:clamp(30px,9vw,46px);line-height:.98}
 .modal-copy #modal-desc{margin-top:14px;font-size:14px}.modal-wa-btn{margin-top:20px}
-.modal-close{top:12px;right:12px;width:44px;height:44px;z-index:20;background:var(--paper);box-shadow:0 2px 12px rgb(0 0 0/.08)}
+.modal-close{top:12px;right:12px;width:44px;height:44px;z-index:20;background:var(--paper);box-shadow:0 2px 12px rgb(58 31 42/.08)}
 .modal-nav,.modal-thumbs{display:none}
 }
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
@@ -47,7 +47,7 @@ body{overflow-x:hidden}
 
 /* ===== JHALAR FINAL DESIGN LAYER — consolidated after audit ===== */
 :root{
-  --bg:#fff8f3;--paper:#fffdfb;--ink:#2d2023;--soft:#756567;--line:#ead9d5;
+  --bg:#FFF0E8;--paper:#FFF4EF;--ink:#3A1F2A;--soft:#756567;--line:#ead9d5;
   --accent:#e31b3f;--accent-deep:#c91435;--accent-bright:#ff3155;--accent-soft:#ffe1e7;
   --gradient-brand:linear-gradient(135deg,#ff3155 0%,#e31b3f 48%,#c91435 100%);
   --gradient-warm:radial-gradient(circle at 82% 8%,rgb(255 49 85/.16),transparent 32%),radial-gradient(circle at 12% 92%,rgb(227 27 63/.08),transparent 38%),#fff8f3;
@@ -61,19 +61,19 @@ p{overflow-wrap:break-word;word-break:normal;text-wrap:pretty}
 .label,.product-category{color:var(--accent)}
 .nav-enquire{color:var(--accent);border-color:var(--accent)}
 .hero-copy a,.modal-wa-btn{
-  display:inline-flex;align-items:center;gap:14px;color:#fff;border:0!important;
+  display:inline-flex;align-items:center;gap:14px;color:#FFF0E8;border:0!important;
   background:var(--gradient-brand);padding:14px 20px;border-radius:999px;
   box-shadow:0 10px 28px rgb(227 27 63/.20);transition:transform .2s ease,box-shadow .2s ease
 }
 .hero-copy a:hover,.modal-wa-btn:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgb(227 27 63/.28)}
-.spaces{background:#2d2023;color:#fff8f3}
-.site-footer{background:#2d2023;color:#fff8f3}
+.spaces{background:#3A1F2A;color:#FFF0E8}
+.site-footer{background:#3A1F2A;color:#FFF0E8}
 .contact{background:linear-gradient(135deg,#fff8f3,#ffecef)}
 .filter-btn.active{color:var(--accent);border-color:var(--accent)}
 .product-card{display:block;min-width:0;background:transparent;border:0;text-align:left;padding:0;cursor:pointer;color:inherit}
 .product-card:focus-visible{outline:2px solid var(--accent);outline-offset:6px}
 .product-image{border:1px solid transparent;transition:border-color .2s ease,background .2s ease}
-.product-card:hover .product-image{border-color:var(--line);background:#fffaf6}
+.product-card:hover .product-image{border-color:var(--line);background:#FFF7F2}
 .product-info{display:grid;gap:4px;padding-top:12px}
 .product-category{font-size:9px;letter-spacing:.12em;line-height:1.2}
 .product-title{font-size:16px;line-height:1.25;font-weight:650;margin:0;text-wrap:pretty;overflow-wrap:normal}
