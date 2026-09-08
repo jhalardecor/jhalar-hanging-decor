@@ -43,3 +43,17 @@ body{overflow-x:hidden}
 .modal-nav,.modal-thumbs{display:none}
 }
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+
+/* Typography stability: headings and body wrap by editorial measure, never arbitrary narrow columns */
+h1,h2,h3{overflow-wrap:normal;word-break:normal;text-wrap:balance}
+p{overflow-wrap:break-word;word-break:normal;text-wrap:pretty}
+.hero h1{max-width:none;text-wrap:balance}
+.collection-intro h2{max-width:none;text-wrap:balance}
+.spaces h2,.about h2,.contact h2{max-width:none;text-wrap:balance}
+.hero-copy>p,.collection-intro>p{max-width:42ch}
+.product-title{overflow-wrap:normal;word-break:normal;text-wrap:pretty}
+@media(max-width:760px){
+.hero h1{font-size:clamp(42px,12vw,62px);line-height:.96;max-width:12ch}
+.collection-intro h2,.spaces h2,.about h2,.contact h2{max-width:14ch;line-height:1.02}
+.hero-copy>p,.collection-intro>p{max-width:36ch}
+}
