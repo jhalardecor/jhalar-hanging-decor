@@ -264,7 +264,6 @@ body{background:var(--canvas);color:var(--ink)}
 .button-light{
   background:var(--brand-gradient);
   color:#fff7f0!important;
-  box-shadow:0 12px 28px rgba(201,22,56,.16);
 }
 .button-light span{color:inherit}
 
