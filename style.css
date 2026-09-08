@@ -3352,3 +3352,24 @@ body{padding-top:var(--header-h)!important}
     touch-action:pan-y!important;
   }
 }
+
+
+/* WHO WE WORK WITH — clean audience selector */
+.audience-strip .audience-strip-inner{display:block!important}
+.audience-label{margin:0 0 18px!important;color:#141942!important;font-size:.78rem!important;font-weight:700!important;letter-spacing:.1em!important;text-transform:uppercase!important}
+.audience-items{display:flex!important;align-items:center!important;gap:clamp(20px,3vw,42px)!important;overflow-x:auto!important;overflow-y:hidden!important;padding:0 0 2px!important;scrollbar-width:none!important;-webkit-overflow-scrolling:touch}
+.audience-items::-webkit-scrollbar{display:none}
+.audience-item{position:relative!important;flex:0 0 auto!important;padding:0 0 10px!important;background:transparent!important;border:0!important;border-radius:0!important;color:#141942!important;opacity:.58!important;font-size:clamp(.95rem,1.4vw,1.08rem)!important;font-weight:500!important;line-height:1.35!important;white-space:nowrap!important}
+.audience-item::after{content:""!important;position:absolute!important;left:0!important;bottom:0!important;width:0!important;height:1px!important;background:#C82039!important;transition:width .2s ease!important}
+.audience-item.active{color:#C82039!important;opacity:1!important;font-weight:650!important;background:transparent!important}
+.audience-item.active::after{width:100%!important}
+.audience-note{margin:20px 0 0!important;max-width:52ch!important;min-height:1.5em!important;color:rgba(20,25,66,.72)!important;font-size:1rem!important;line-height:1.65!important}
+.audience-note.interaction-swap{animation:audienceSwap .18s ease both}
+@keyframes audienceSwap{from{opacity:.35;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:760px){
+ .audience-strip .audience-strip-inner{padding-left:20px!important;padding-right:0!important}
+ .audience-label{margin-bottom:14px!important}
+ .audience-items{gap:24px!important;padding-right:20px!important;scroll-snap-type:x proximity!important}
+ .audience-item{font-size:.96rem!important;padding:.35rem 0 11px!important;scroll-snap-align:start!important}
+ .audience-note{margin-top:18px!important;padding-right:20px!important;font-size:.96rem!important}
+}
