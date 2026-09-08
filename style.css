@@ -3528,3 +3528,42 @@ body{padding-top:var(--header-h)!important}
     max-height:2.7em!important;
   }
 }
+
+
+/* Mobile catalogue: fix the actual composition, not just clamp text */
+@media(max-width:620px){
+  .product-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:30px 14px!important;
+    align-items:start!important;
+  }
+  .product-card{height:auto!important;overflow:visible!important}
+  .product-image{aspect-ratio:1/1!important}
+  .product-info{
+    padding:13px 0 0!important;
+    display:block!important;
+    min-height:0!important;
+  }
+  .product-category{
+    margin:0 0 8px!important;
+    white-space:normal!important;
+    overflow:visible!important;
+    text-overflow:clip!important;
+  }
+  .product-title{
+    display:block!important;
+    width:100%!important;
+    min-height:0!important;
+    max-height:none!important;
+    overflow:visible!important;
+    -webkit-line-clamp:unset!important;
+    line-clamp:unset!important;
+    font-size:clamp(.96rem,3.65vw,1.08rem)!important;
+    line-height:1.42!important;
+    letter-spacing:-.025em!important;
+    text-wrap:balance!important;
+    overflow-wrap:break-word!important;
+    word-break:normal!important;
+    hyphens:none!important;
+  }
+}
