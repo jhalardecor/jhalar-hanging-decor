@@ -1,5 +1,5 @@
 {
-  "version": "20260908.61",
-  "updated": "2026-09-08T23:08:00Z",
-  "note": "prevent visible fallback-to-custom font swap; custom Mogranx typography is treated as critical"
+  "version": "20260908.62",
+  "updated": "2026-09-08T23:25:00Z",
+  "note": "replaced fake business-type selector with purposeful buyer pathways and real destinations"
 }
