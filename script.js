@@ -143,6 +143,44 @@ function renderProducts(){
  }
  observeReveals();
 }
+
+// UNIVERSAL PRODUCT ACTIVATION — capture phase so no device-specific overlay,
+// nested handler, or later bubbling handler can block opening a product.
+(function installUniversalProductActivation(){
+  let down=null,lastOpen=0;
+  const cardFrom=e=>{
+    const node=e.target;
+    return node&&node.nodeType===1?node.closest('.product-card[data-id]'):node?.parentElement?.closest?.('.product-card[data-id]');
+  };
+  const activate=(card,e)=>{
+    if(!card)return;
+    const id=Number(card.dataset.id);
+    if(!Number.isFinite(id))return;
+    lastOpen=Date.now();
+    openProduct(id);
+  };
+  document.addEventListener('pointerdown',e=>{
+    const card=cardFrom(e);
+    if(card)down={card,x:e.clientX,y:e.clientY,id:e.pointerId};
+  },true);
+  document.addEventListener('pointerup',e=>{
+    if(!down||down.id!==e.pointerId)return;
+    const d=down;down=null;
+    const moved=Math.hypot(e.clientX-d.x,e.clientY-d.y);
+    if(moved<14)activate(d.card,e);
+  },true);
+  document.addEventListener('touchend',e=>{
+    if(Date.now()-lastOpen<450)return;
+    const t=e.changedTouches&&e.changedTouches[0],card=cardFrom(e);
+    if(card&&(!t||!down||Math.hypot(t.clientX-down.x,t.clientY-down.y)<14))activate(card,e);
+    down=null;
+  },true);
+  document.addEventListener('click',e=>{
+    if(Date.now()-lastOpen<450)return;
+    activate(cardFrom(e),e);
+  },true);
+})();
+
 let lastFocus=null;
 function showModalMedia(i){
  const m=state.modalMedia||[];if(!m.length)return;
