@@ -16,7 +16,7 @@
 |---|---|---|---|
 | Pixar | Luxo Jr. hops in, squashes the "i", looks at camera | The mascot *performs* the brand (playful animation itself) | Our charms could "perform" — tinkle, settle, look alive |
 | Netflix | Red N ribbons unfold, resolve into the N, then N becomes a screen of shows | Light-ribbon spectacle + the logo literally *becomes the product* | Light resolving into the lockup; the "ignition" grammar we already use |
-| HBO | TV static resolves into chrome HBO letters | Static *is* the medium; resolves from chaos to premium order | Darkness → order is a universal premium arc (our Concept 3 does this) |
+| HBO | TV static resolves into chrome HBO letters | Static *is* the medium; resolves from chaos to premium order | Darkness → order is a universal premium arc (our footer keeps the glow, not the blink) |
 | Marvel | Comic pages flip past, forming the logo | The product (comics) builds the brand, fan-service as structure | Product-as-structure: torans/diyas/charms building the lockup |
 | THX | Thin tone thickens into the "Deep Note" crescendo + logo | Sound *is* the logo; visuals serve the audio | Proof a 5s sting + strong sound beats 10s of visuals |
 | Disney / DreamWorks / Paramount | Castle / moon-boy / mountain establishing shots | Miniature world-building; nostalgia + scale | "Festival night" world-building: a tiny glowing celebration |
@@ -87,7 +87,7 @@ Recommended pipeline for JHALAR: concept + timing design first (done in our SVG 
 
 ## 7. Recommendations — JHALAR's video intro directions
 
-All three extend the already-approved Concept 3 footer grammar (darkness → assembly → ignition → hold) into true video:
+All three extend the already-approved Concept 3 footer grammar (kinetic assembly → travelling light → living hold) into true video:
 
 **A. "First Light" (recommended)** — 5s cinematic. Black → six diya-charms light one by one L→R → letters resolve → the wave ignites center with the chime hit → glory hold with slow push-in and drifting embers. Purest brand truth: *the festival lights coming on.*
 
