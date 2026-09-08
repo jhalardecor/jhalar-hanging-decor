@@ -3567,3 +3567,150 @@ body{padding-top:var(--header-h)!important}
     hyphens:none!important;
   }
 }
+
+
+/* =========================================================
+   FOOTER RESET — CANONICAL INFORMATION ARCHITECTURE
+   Brand + navigation + contact. No duplicated "Connect" column.
+   ========================================================= */
+#site-footer,
+.footer.site-footer{
+  margin:0!important;
+  padding:0!important;
+  overflow:hidden!important;
+  background:#141942!important;
+  color:#fffaf1!important;
+  border:0!important;
+}
+.footer.site-footer *{box-sizing:border-box!important}
+.footer.site-footer .footer-grid{
+  width:min(1200px,calc(100% - 48px))!important;
+  margin:0 auto!important;
+  padding:56px 0 48px!important;
+  display:grid!important;
+  grid-template-columns:minmax(180px,1.25fr) minmax(140px,.7fr) minmax(240px,1.15fr)!important;
+  gap:clamp(32px,6vw,88px)!important;
+  align-items:start!important;
+  text-align:left!important;
+}
+.footer.site-footer .footer-brand{
+  grid-column:auto!important;
+  width:auto!important;
+  min-width:0!important;
+  padding:0!important;
+  justify-self:start!important;
+  text-align:left!important;
+}
+.footer.site-footer .footer-brand>a.logo{
+  display:inline-block!important;
+  margin:0!important;
+}
+.footer.site-footer .footer-logo{
+  width:154px!important;
+  max-width:none!important;
+  height:auto!important;
+  display:block!important;
+}
+.footer.site-footer .footer-tagline{display:none!important}
+.footer.site-footer .footer-col{
+  grid-column:auto!important;
+  width:auto!important;
+  min-width:0!important;
+  padding:0!important;
+  text-align:left!important;
+}
+.footer.site-footer .footer-col h4{
+  margin:2px 0 16px!important;
+  color:rgba(255,250,241,.58)!important;
+  font-size:.68rem!important;
+  font-weight:700!important;
+  line-height:1.2!important;
+  letter-spacing:.13em!important;
+  text-transform:uppercase!important;
+}
+.footer.site-footer .footer-col ul{
+  display:grid!important;
+  justify-items:start!important;
+  gap:10px!important;
+  margin:0!important;
+  padding:0!important;
+  list-style:none!important;
+}
+.footer.site-footer .footer-col a,
+.footer.site-footer .footer-col span{
+  display:block!important;
+  color:rgba(255,250,241,.88)!important;
+  font-size:.9rem!important;
+  line-height:1.45!important;
+  text-decoration:none!important;
+  text-align:left!important;
+  overflow-wrap:normal!important;
+  word-break:normal!important;
+}
+.footer.site-footer .footer-col a:hover{color:#fffaf1!important}
+.footer.site-footer .footer-bottom{
+  border-top:1px solid rgba(255,250,241,.12)!important;
+}
+.footer.site-footer .footer-bottom .shell,
+.footer.site-footer .footer-bottom .container{
+  width:min(1200px,calc(100% - 48px))!important;
+  min-height:64px!important;
+  margin:0 auto!important;
+  display:flex!important;
+  align-items:center!important;
+}
+.footer.site-footer .footer-bottom p{
+  width:auto!important;
+  margin:0!important;
+  color:rgba(255,250,241,.52)!important;
+  font-size:.72rem!important;
+  line-height:1.4!important;
+  text-align:left!important;
+}
+
+/* Phone: deliberate hierarchy, not a squeezed desktop footer */
+@media(max-width:620px){
+  .footer.site-footer .footer-grid{
+    width:calc(100% - 40px)!important;
+    padding:40px 0 34px!important;
+    grid-template-columns:minmax(0,1fr) minmax(0,1.28fr)!important;
+    grid-template-areas:
+      "brand brand"
+      "nav contact"!important;
+    gap:34px 28px!important;
+  }
+  .footer.site-footer .footer-brand{
+    grid-area:brand!important;
+    justify-self:center!important;
+    text-align:center!important;
+  }
+  .footer.site-footer .footer-brand>a.logo{margin:0 auto!important}
+  .footer.site-footer .footer-logo{width:142px!important}
+  .footer.site-footer .footer-links{grid-area:nav!important}
+  .footer.site-footer .footer-contact{grid-area:contact!important}
+  .footer.site-footer .footer-col h4{
+    margin:0 0 13px!important;
+    font-size:.64rem!important;
+  }
+  .footer.site-footer .footer-col ul{gap:11px!important}
+  .footer.site-footer .footer-col a,
+  .footer.site-footer .footer-col span{
+    font-size:.76rem!important;
+    line-height:1.45!important;
+  }
+  .footer.site-footer .footer-contact a,
+  .footer.site-footer .footer-contact span{
+    overflow-wrap:anywhere!important;
+  }
+  .footer.site-footer .footer-bottom .shell,
+  .footer.site-footer .footer-bottom .container{
+    width:calc(100% - 40px)!important;
+    min-height:58px!important;
+    justify-content:center!important;
+  }
+  .footer.site-footer .footer-bottom p{
+    width:100%!important;
+    font-size:.66rem!important;
+    text-align:center!important;
+  }
+}
