@@ -378,3 +378,94 @@ h1,h2,h3,p{margin:0}h1,h2,h3{font-family:JhalarDisplay,Georgia,serif;font-weight
 @media(prefers-reduced-motion:reduce){
   .modal,.modal-card,.modal-stage img,.modal-close,.modal-wa-btn{transition:none !important;animation:none !important}
 }
+
+
+/* ===== VISUAL CORRECTION — 20260909.73 =====
+   Reduce pink cast. Keep red as an accent, not the page background. */
+:root{
+  --canvas:#f7f2e9;
+  --surface:#fffaf3;
+  --surface-2:#eee6da;
+  --ink:#4b3035;
+  --muted:#76666a;
+  --red:#ef2448;
+  --red-hot:#ff3b5b;
+  --red-deep:#d9143b;
+  --red-soft:#f7dfe0;
+  --line:#dfd4c7;
+}
+body{background:var(--canvas)}
+.header{background:rgba(247,242,233,.96)}
+.hero-image:after{
+  background:linear-gradient(90deg,rgba(247,242,233,.98) 0%,rgba(247,242,233,.76) 38%,rgba(247,242,233,.08) 72%);
+}
+
+/* Product viewer: neutral canvas so the product colour remains the hero. */
+.modal{background:rgba(75,48,53,.38)}
+.modal-card{background:var(--surface)}
+.modal-media{
+  background:#f0e9df;
+}
+.modal-stage{
+  overflow:hidden;
+}
+.modal-stage img,
+.modal-stage video{
+  display:block;
+  max-width:100%;
+  max-height:100%;
+  object-fit:contain;
+}
+
+/* Close control should be a small utility, not a dominant visual object. */
+.modal-close{
+  width:38px !important;
+  height:38px !important;
+  top:16px;
+  right:16px;
+  box-shadow:0 8px 18px rgba(217,20,59,.18);
+}
+.modal-close span{width:15px;height:1.75px}
+.modal-close:hover{transform:scale(1.05)}
+.modal-close:active{transform:scale(.92)}
+
+@media(max-width:760px){
+  .modal-card,
+  .modal.open .modal-card{
+    grid-template-rows:minmax(0,125vw) minmax(0,1fr) !important;
+    overflow:hidden;
+  }
+  .modal-media{
+    width:100%;
+    height:100%;
+    min-width:0;
+    min-height:0 !important;
+    max-width:100%;
+    max-height:125vw;
+    aspect-ratio:4/5;
+    overflow:hidden;
+  }
+  .modal-stage{
+    width:100%;
+    height:100%;
+    min-width:0;
+    min-height:0;
+    padding:14px;
+    overflow:hidden;
+  }
+  .modal-stage img,
+  .modal-stage video{
+    width:100% !important;
+    height:100% !important;
+    max-width:100% !important;
+    max-height:100% !important;
+    object-fit:contain !important;
+  }
+  .modal-close{
+    width:36px !important;
+    height:36px !important;
+    top:max(12px,env(safe-area-inset-top));
+    right:14px;
+  }
+  .modal-close span{width:14px}
+}
