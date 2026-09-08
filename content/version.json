@@ -1,5 +1,5 @@
 {
-  "version": "20260908.63",
-  "updated": "2026-09-08T23:45:00Z",
-  "note": "brand palette rebuilt around maroon, terracotta, antique gold and warm neutrals with restrained premium gradients"
+  "version": "20260908.64",
+  "updated": "2026-09-08T23:58:00Z",
+  "note": "fixed modal close path: X, backdrop and Escape now close synchronously without waiting for a missing animation event"
 }
