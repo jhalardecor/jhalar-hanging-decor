@@ -119,7 +119,7 @@ function renderProducts(){const all=visibleProducts(),limit=all.length;const gri
 grid.addEventListener('touchstart',e=>{multiTouch=e.touches.length>1;touchMoved=false;if(e.touches[0]){startX=e.touches[0].clientX;startY=e.touches[0].clientY}},{passive:true});
 grid.addEventListener('touchmove',e=>{if(e.touches.length>1)multiTouch=true;if(e.touches[0]&&(Math.abs(e.touches[0].clientX-startX)>10||Math.abs(e.touches[0].clientY-startY)>10))touchMoved=true},{passive:true});
 grid.addEventListener('touchend',()=>{setTimeout(()=>{multiTouch=false;touchMoved=false},350)},{passive:true});
-grid.onclick=e=>{if(multiTouch||touchMoved)return;const b=e.target.closest('[data-id]');if(b)openProduct(Number(b.dataset.id))};observeReveals()}
+grid.onclick=e=>{const b=e.target.closest('[data-id]');if(b)openProduct(Number(b.dataset.id))};observeReveals()}
 let lastFocus=null;
 function showModalMedia(i){
  const m=state.modalMedia||[];if(!m.length)return;
