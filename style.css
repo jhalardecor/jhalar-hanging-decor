@@ -60,3 +60,6 @@
 .contact-box>*,
 .footer-grid>*,
 .modal-card>*{min-width:0}
+
+/* Purposeful buyer pathways: navigation, not fake selection. */
+.audience-strip-inner{grid-template-columns:minmax(260px,.72fr) minmax(0,1.28fr);grid-template-areas:"heading choices";align-items:center}.audience-items{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr));gap:var(--s1)}.audience-item{display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;min-height:190px;text-decoration:none}.audience-item strong{font-size:1.08rem}.audience-item span{line-height:1.45}.audience-item b{margin-top:auto;font-size:.82rem;font-weight:700}.audience-item i{font-style:normal;margin-left:4px;transition:transform .25s var(--ease)}.audience-item:hover i,.audience-item:focus-visible i{transform:translateX(4px)}.audience-item:focus-visible{outline:2px solid var(--paper);outline-offset:3px}.audience-item.active{background:transparent;color:var(--paper)}.audience-item.active span{color:rgba(255,250,241,.62)}
