@@ -394,20 +394,17 @@ async function initProducts(){
  }
 }
 async function initRuntime(){
- try{
-  const [ss,th,se,cc]=await Promise.all([
-   fetch('content/site-settings.json',{cache:'no-store'}),
-   fetch('content/theme.json',{cache:'no-store'}),
-   fetch('content/sections.json',{cache:'no-store'}),
-   fetch('content/custom-css.json',{cache:'no-store'})
-  ]);
-  if(ss.ok) applySettings(await ss.json());
-  if(th.ok) setTheme(await th.json());
-  if(se.ok){const d=await se.json();setSections({sections:d.sections,order:d.order})}
-  if(cc.ok) setCustomCSS((await cc.json()).css||'');
- }catch(e){console.warn('Runtime settings unavailable',e)}
+  try{
+    const [ss,se]=await Promise.all([
+      fetch('content/site-settings.json',{cache:'no-store'}),
+      fetch('content/sections.json',{cache:'no-store'})
+    ]);
+    if(ss.ok) applySettings(await ss.json());
+    if(se.ok){const d=await se.json();setSections({sections:d.sections,order:d.order})}
+  }catch(e){console.warn('Runtime settings unavailable',e)}
 }
 
+/* Production UI owns theme and CSS. Editor runtime overrides are intentionally disabled. */
 
 const __menu=$('#menu');
 const __mobileNav=$('#mobile-nav');
@@ -572,63 +569,7 @@ initProducts();initRuntime();
 /* build 20260908.53 */
 
 
-/* Premium sticky header — hide only during active downward scrolling, reveal on idle or any interaction */
-(function(){
-  const header=document.querySelector('.header');
-  if(!header)return;
-
-  let lastY=window.scrollY;
-  let scrolling=false;
-  let idleTimer=0;
-  let raf=0;
-
-  const reveal=()=>{
-    header.classList.remove('header-hidden');
-    clearTimeout(idleTimer);
-    scrolling=false;
-  };
-
-  const armIdleReveal=()=>{
-    clearTimeout(idleTimer);
-    idleTimer=window.setTimeout(reveal,180);
-  };
-
-  const update=()=>{
-    raf=0;
-    const y=Math.max(0,window.scrollY);
-    const delta=y-lastY;
-
-    header.classList.toggle('scrolled',y>8);
-
-    // Only hide while there is active, meaningful downward movement.
-    if(y>140 && delta>5){
-      scrolling=true;
-      header.classList.add('header-hidden');
-    }else if(delta<0 || y<=90){
-      reveal();
-    }
-
-    lastY=y;
-    armIdleReveal();
-  };
-
-  window.addEventListener('scroll',()=>{
-    if(!raf)raf=requestAnimationFrame(update);
-  },{passive:true});
-
-  // Any interaction immediately restores the navigation.
-  ['pointerdown','touchstart','click','keydown','focusin'].forEach(type=>{
-    document.addEventListener(type,reveal,{passive:true});
-  });
-
-  window.addEventListener('scrollend',reveal,{passive:true});
-  window.addEventListener('blur',reveal);
-  document.addEventListener('visibilitychange',()=>{if(!document.hidden)reveal()});
-
-  reveal();
-})();
-
-/* build: 20260908.53 */
+/* Header remains permanently available; no scroll-hide behavior. */
 
 
 
