@@ -3366,11 +3366,15 @@ body{padding-top:var(--header-h)!important}
 #product-grid .product-info{
   width:100%;
   min-width:0;
-  padding:14px 0 0;
+  padding:16px 0 0;
+  display:grid;
+  grid-template-rows:auto minmax(2.7em,auto);
+  align-content:start;
 }
 #product-grid .product-category{
   display:block;
-  margin:0 0 7px;
+  min-height:1.25em;
+  margin:0 0 8px;
   color:var(--accent);
   font-size:.68rem;
   font-weight:700;
@@ -3417,8 +3421,12 @@ body{padding-top:var(--header-h)!important}
     overflow:visible;
   }
   #product-grid .product-image{aspect-ratio:1/1}
-  #product-grid .product-info{padding:12px 0 0}
+  #product-grid .product-info{
+    padding:12px 0 0;
+    grid-template-rows:auto minmax(4.2em,auto);
+  }
   #product-grid .product-category{
+    min-height:1.3em;
     margin:0 0 7px;
     font-size:.62rem;
     line-height:1.3;
