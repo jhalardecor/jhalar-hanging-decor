@@ -276,3 +276,18 @@ body{background:#FFF4EF}
   .mobile-nav a:active{padding-left:calc(max(16px,calc((100% - var(--shell))/2)) + 8px);background:rgba(200,31,56,.07);color:var(--accent)}
   .mobile-nav a:last-child{border-bottom:0}
 }
+
+
+/* Header geometry correction: larger presence and safe horizontal breathing room. */
+@media (max-width:760px){
+  .header{height:88px}
+  .header-row{
+    width:100%;
+    padding-inline:clamp(20px,5vw,28px);
+  }
+  .brand{display:flex;align-items:center;padding-left:2px}
+  .brand img{width:clamp(132px,38vw,158px)}
+  .menu{width:48px;height:48px;margin-right:-4px}
+  .nav-backdrop{inset:88px 0 0}
+  .mobile-nav{top:88px}
+}
