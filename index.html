@@ -4,7 +4,7 @@
 <title>JHALAR — Hanging Decor</title><meta name="description" content="Handcrafted hanging decor for celebrations, spaces and displays.">
 <link rel="canonical" href="https://jhalardecor.github.io/jhalar-hanging-decor/"><meta name="theme-color" content="#f4f0e8">
 <link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="preload" href="assets/fonts/Mogranx-Regular.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="style.css?v=20260909.93"><script>window.JHALAR_BUILD="20260909.93";</script></head>
+<link rel="stylesheet" href="style.css?v=20260909.94"><script>window.JHALAR_BUILD="20260909.94";</script></head>
 <body>
 <header class="header" id="top"><div class="shell header-row">
 <a class="brand" href="./" aria-label="JHALAR home"><img src="assets/logo-jhalar-02.svg" alt="JHALAR"></a>
@@ -12,13 +12,13 @@
 <button class="menu" id="menu" type="button" aria-label="Open navigation menu" aria-expanded="false"><span></span><span></span></button>
 </div><div class="nav-backdrop" id="nav-backdrop" aria-hidden="true"></div><div class="mobile-nav" id="mobile-nav"><a href="#collection">Collection</a><a href="#spaces">For spaces</a><a href="#about">About</a><a href="#contact">Enquire</a></div></header>
 <main>
-<section class="hero" id="home"><div class="hero-image"><img src="assets/images/hero-jhalar.webp" alt="Colourful handcrafted hanging decor by JHALAR" fetchpriority="high"></div><div class="shell hero-copy"><p>Hanging decor, made in colour.</p><h1>Objects that<br>change a space.</h1><a href="#collection">See the collection <span>↓</span></a></div></section>
-<section class="collection section" id="collection"><div class="shell">
-<div class="collection-intro"><div><p class="label">THE COLLECTION</p><h2>Explore the range.</h2></div><p>Browse the current collection. Tap any design to see it in full and enquire directly.</p></div>
+<section class="hero" id="home" data-section="hero"><div class="hero-image"><img src="assets/images/hero-jhalar.webp" alt="Colourful handcrafted hanging decor by JHALAR" fetchpriority="high"></div><div class="shell hero-copy"><p>Hanging decor, made in colour.</p><h1>Objects that<br>change a space.</h1><a href="#collection">See the collection <span>↓</span></a></div></section>
+<section class="collection section" id="collection" data-section="collection"><div class="shell">
+<div class="collection-intro"><div><p class="label">THE COLLECTION</p><h2>View the collection.</h2></div><p>Browse the current collection. Tap any design to see it in full and enquire directly.</p></div>
 <div class="filters-wrap"><div class="filters" id="product-filters" aria-label="Filter collection"></div></div>
 <div class="product-grid" id="product-grid" aria-live="polite"></div>
 </div></section>
-<section class="spaces" id="spaces">
+<section class="spaces" id="spaces" data-section="customOrders">
   <div class="shell spaces-grid">
     <div class="spaces-copy">
       <p class="label">CUSTOM & BULK</p>
@@ -27,10 +27,10 @@
       <div class="spaces-types"><span>Retail</span><span>Celebrations</span><span>Entrances</span><span>Installations</span></div>
       <a class="button-light" href="#contact">Discuss a project</a>
     </div>
-    <figure class="spaces-visual"><img src="assets/images/about-collage.jpg" alt="JHALAR hanging decor used in a space" loading="lazy"></figure>
+    <figure class="spaces-visual"><img src="assets/images/custom-orders.jpg" alt="JHALAR hanging decor used in a space" loading="lazy"></figure>
   </div>
 </section>
-<section class="about" id="about">
+<section class="about" id="about" data-section="about">
   <div class="shell about-layout">
     <div class="about-intro"><p class="label">ABOUT JHALAR</p><h2>Colour, texture and movement are already in the product.</h2></div>
     <div class="about-story">
@@ -39,7 +39,7 @@
     </div>
   </div>
 </section>
-<section class="contact" id="contact">
+<section class="contact" id="contact" data-section="contact">
   <div class="shell contact-card">
     <div class="contact-copy"><p class="label">ENQUIRE</p><h2>Have something in mind?</h2><p>Send us the product or design reference, quantity and the details that matter. We will take it from there.</p></div>
     <a class="contact-cta" href="https://wa.me/918100656258" target="_blank" rel="noopener noreferrer"><span>Start on WhatsApp</span></a>
