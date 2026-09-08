@@ -165,7 +165,7 @@ p{overflow-wrap:break-word;word-break:normal;text-wrap:pretty}
     padding:0 var(--shell) 12px;
     margin:0;
     scrollbar-width:none;
-    scroll-snap-type:x proximity;
+    scroll-snap-type:none;
     overscroll-behavior-x:contain;
     -webkit-overflow-scrolling:touch;
   }
