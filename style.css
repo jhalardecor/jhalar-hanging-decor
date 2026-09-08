@@ -126,3 +126,20 @@ h1,h2,h3{color:#141942}
 .product-card img,.modal-media{background:#FFF6E8}
 .planning-option.active{border-color:#C82039;box-shadow:inset 0 0 0 1px #C82039}
 .site-footer{background:#622331}
+
+
+/* ===== JHALAR CANONICAL DESIGN SYSTEM v1 ===== */
+:root{--obsidian:#111111;--bone:#F6F4F0;--stone:#DED9D0;--rose:#C98F88;--plum:#39232F;--lime:#C7F36B;--text:var(--obsidian);--surface:var(--bone);--surface-alt:var(--stone);--accent:var(--plum);--signal:var(--lime);--text-sm:clamp(.875rem,.8rem + .3vw,1rem);--text-base:1rem;--text-h3:clamp(1.125rem,1rem + .7vw,1.5rem);--text-h2:clamp(1.75rem,1.3rem + 1.8vw,3rem);--text-h1:clamp(2.5rem,1.8rem + 3.2vw,5rem);--text-display:clamp(3rem,2rem + 5vw,7rem);--space-1:clamp(.5rem,.4rem + .35vw,.75rem);--space-2:clamp(.75rem,.6rem + .6vw,1.25rem);--space-3:clamp(1.25rem,1rem + 1vw,2rem);--space-4:clamp(2rem,1.5rem + 2vw,4rem);--space-5:clamp(3rem,2.2rem + 4vw,7rem);--radius-sm:.75rem;--radius-md:1.125rem;--radius-lg:1.5rem}
+html{background:var(--bone)}body{background:var(--bone);color:var(--obsidian);font-size:var(--text-base);line-height:1.6}h1,h2,h3,p{max-inline-size:none}h1{font-size:var(--text-h1);line-height:1.04;letter-spacing:-.035em}h2{font-size:var(--text-h2);line-height:1.12;letter-spacing:-.025em}h3{font-size:var(--text-h3);line-height:1.2}.eyebrow,.kicker{color:var(--plum);font-size:var(--text-sm);letter-spacing:.08em}
+/* Quiet gallery surfaces: colour belongs to the products. */
+section{background:transparent}.shell{width:min(1200px,calc(100% - clamp(2rem,6vw,6rem)))}.section-copy{max-width:65ch}.section-copy p{max-width:58ch}.hero,.hero-section{background:radial-gradient(at 14% 18%,rgba(201,143,136,.16),transparent 42%),radial-gradient(at 84% 12%,rgba(199,243,107,.09),transparent 36%),var(--bone)}
+/* Canonical interaction language */
+a,button{touch-action:manipulation}button:focus-visible,a:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--lime);outline-offset:3px}.btn-primary,.contact-cta,.modal-wa-btn{background:var(--obsidian);color:var(--bone);box-shadow:none}.btn-primary:hover,.contact-cta:hover,.modal-wa-btn:hover{background:var(--plum);transform:none}.filter-btn.active{background:var(--obsidian);border-color:var(--obsidian);color:var(--bone);box-shadow:none}
+/* Product card contract: one calm surface, one destination, stable content geometry. */
+.product-card{background:transparent;border:1px solid transparent;border-radius:var(--radius-md);overflow:hidden;box-shadow:none;transition:border-color .22s ease,background .22s ease}.product-card:hover{border-color:var(--stone);background:rgba(255,255,255,.32);transform:none}.product-card img,.product-media img{object-fit:contain!important;background:var(--bone)}.product-card h3,.product-name{font-size:var(--text-h3);line-height:1.2;text-wrap:balance}.product-card p{font-size:var(--text-sm);color:color-mix(in srgb,var(--obsidian) 68%,transparent)}
+/* Modal contract: inspect product without losing catalogue context. */
+.modal-backdrop{background:rgba(17,17,17,.56);backdrop-filter:blur(10px)}.product-modal,.modal-content{background:var(--bone);border-radius:var(--radius-lg);box-shadow:0 28px 80px rgba(17,17,17,.22)}.modal-media,.modal-media img,.modal-product-media,.modal-product-media img{object-fit:contain!important;background:var(--bone)}.modal-close{width:44px;height:44px;border-radius:50%;background:var(--bone);color:var(--obsidian);border:1px solid var(--stone);box-shadow:none}.modal-close:hover{background:var(--obsidian);color:var(--bone)}
+/* Buyer pathways are navigation, never fake selectors. */
+.audience-strip{background:var(--plum)}.audience-item{border-color:rgba(246,244,240,.2);border-radius:var(--radius-md);box-shadow:none}.audience-item:hover{border-color:var(--lime);box-shadow:none;transform:none}
+/* Motion is restrained and must never be required for functionality. */
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
