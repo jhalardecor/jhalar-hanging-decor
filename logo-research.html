@@ -1,169 +1,200 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en-IN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Logo intro research · JHALAR (internal review)</title>
 <meta name="robots" content="noindex, nofollow">
-<title>JHALAR — Logo Intro Research (internal review)</title>
+<meta name="theme-color" content="#FFFAF1">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
 <style>
-  *{margin:0;padding:0;box-sizing:border-box}
-  body{background:#0d1023;color:#fff7ea;font-family:Arial,Helvetica,sans-serif;padding:48px 24px 80px;line-height:1.6}
-  .wrap{max-width:1060px;margin:0 auto}
-  header{text-align:center;margin-bottom:40px}
-  .kicker{letter-spacing:.35em;text-transform:uppercase;font-size:.72rem;color:#d9a441;margin-bottom:14px}
-  h1{font-family:Georgia,'Times New Roman',serif;font-size:2rem;font-weight:500;margin-bottom:12px}
-  header p.sub{color:rgba(255,247,234,.65);font-size:.95rem;max-width:660px;margin:0 auto}
-  section.panel{border:1px solid rgba(217,164,65,.28);border-radius:14px;margin-bottom:28px;overflow:hidden;background:#141942}
-  .panel .body{padding:26px 30px 30px}
-  .panel h2{font-family:Georgia,'Times New Roman',serif;font-size:1.4rem;font-weight:500;margin-bottom:6px}
-  .panel p.lead{color:rgba(255,247,234,.6);font-size:.88rem;margin-bottom:18px}
-  ol.takeaways{list-style:none;counter-reset:t}
-  ol.takeaways li{counter-increment:t;position:relative;padding:12px 12px 12px 56px;margin-bottom:10px;background:rgba(217,164,65,.07);border:1px solid rgba(217,164,65,.18);border-radius:10px;font-size:.92rem;color:rgba(255,247,234,.9)}
-  ol.takeaways li::before{content:counter(t);position:absolute;left:14px;top:10px;width:28px;height:28px;border-radius:50%;background:#d9a441;color:#141942;font-weight:bold;font-size:.85rem;display:flex;align-items:center;justify-content:center}
-  ol.takeaways li strong{color:#ffd98a}
-  table{width:100%;border-collapse:collapse;font-size:.85rem}
-  th{text-align:left;text-transform:uppercase;letter-spacing:.12em;font-size:.66rem;color:#d9a441;padding:10px 12px;border-bottom:1px solid rgba(217,164,65,.35)}
-  td{padding:10px 12px;border-bottom:1px solid rgba(255,247,234,.08);color:rgba(255,247,234,.85);vertical-align:top}
-  tr:last-child td{border-bottom:none}
-  td.brand{color:#ffd98a;font-weight:bold;white-space:nowrap}
-  td.stars{color:#d9a441;white-space:nowrap;letter-spacing:.1em}
-  ul.tight{margin:0 0 0 18px;font-size:.9rem;color:rgba(255,247,234,.85)}
-  ul.tight li{margin-bottom:8px}
-  ul.tight strong{color:#ffd98a}
-  .recs{display:grid;grid-template-columns:1fr;gap:14px}
-  .rec{border:1px solid rgba(217,164,65,.25);border-radius:10px;padding:18px 20px;background:rgba(217,164,65,.05)}
-  .rec.pick{border-color:#d9a441;background:rgba(217,164,65,.1)}
-  .rec h3{font-family:Georgia,'Times New Roman',serif;font-size:1.1rem;font-weight:500;margin-bottom:6px}
-  .rec h3 .tag{font-family:Arial,Helvetica,sans-serif;font-size:.66rem;letter-spacing:.15em;text-transform:uppercase;background:#d9a441;color:#141942;border-radius:20px;padding:3px 10px;margin-left:8px;vertical-align:middle}
-  .rec p{font-size:.88rem;color:rgba(255,247,234,.82)}
-  .rec p.spec{margin-top:8px;font-size:.78rem;color:rgba(255,247,234,.55)}
-  .donts{margin-top:16px;font-size:.83rem;color:rgba(255,180,180,.85);background:rgba(180,60,60,.08);border:1px solid rgba(180,80,80,.25);border-radius:10px;padding:12px 16px}
-  footer{text-align:center;color:rgba(255,247,234,.45);font-size:.8rem}
-  footer .sources{margin-bottom:16px;font-size:.76rem}
-  footer .sources a{color:#d9a441;text-decoration:none;margin:0 6px}
-  footer .sources a:hover{text-decoration:underline}
-  footer a.back{color:#d9a441}
-  @media(min-width:760px){.recs{grid-template-columns:1fr 1fr 1fr}}
+  /* Review-page components only. Tokens, header, footer and type come from style.css. */
+  .review-nav a[aria-current="page"]{color:var(--accent);font-weight:700;text-decoration:underline;text-underline-offset:4px}
+  .panel{border:1px solid var(--line);background:var(--surface);padding:var(--s5);margin-top:var(--s5)}
+  .panel h2{margin:0 0 var(--s2);font-size:clamp(1.5rem,3.4vw,2.2rem);line-height:1.1;color:var(--navy)}
+  .panel .lead{margin:0;color:var(--heritage);max-width:60ch}
+  .takeaways{list-style:none;margin:var(--s5) 0 0;padding:0;display:grid;gap:var(--s3);counter-reset:t}
+  .takeaways li{counter-increment:t;position:relative;border:1px solid var(--line);padding:var(--s4) var(--s4) var(--s4) calc(var(--s4) + 46px);font-size:.95rem}
+  .takeaways li::before{content:counter(t);position:absolute;left:var(--s4);top:var(--s4);width:30px;height:30px;background:var(--navy);color:var(--paper);font-weight:700;font-size:.85rem;display:flex;align-items:center;justify-content:center}
+  .data-table{width:100%;border-collapse:collapse;margin-top:var(--s4);font-size:.9rem}
+  .data-table th{text-align:left;font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);padding:var(--s2) var(--s3);border-bottom:2px solid var(--line)}
+  .data-table td{padding:var(--s3);border-bottom:1px solid var(--line);vertical-align:top}
+  .data-table tr:last-child td{border-bottom:0}
+  .data-table td.cell-brand{color:var(--heritage);font-weight:700}
+  .data-table td.cell-stars{color:var(--heritage);white-space:nowrap;letter-spacing:.08em}
+  .plain-list{margin:var(--s4) 0 0;padding-left:1.4rem;display:grid;gap:var(--s2);font-size:.93rem;max-width:64ch}
+  .recs{display:grid;gap:var(--s4);grid-template-columns:repeat(3,minmax(0,1fr));margin-top:var(--s4)}
+  .rec{border:1px solid var(--line);border-top:3px solid var(--heritage);padding:var(--s4)}
+  .rec.pick{border-top-color:var(--accent)}
+  .rec h3{margin:0 0 var(--s2);font-size:1.15rem;line-height:1.2;color:var(--navy)}
+  .rec .flag{display:inline-block;background:var(--accent);color:#fff;font-size:.64rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:4px 10px;margin-bottom:var(--s2)}
+  .rec p{margin:0;font-size:.88rem}
+  .rec p.spec{margin-top:var(--s2);font-size:.76rem;color:var(--heritage)}
+  .donts{margin-top:var(--s4);border:1px solid var(--line);border-left:3px solid var(--accent);padding:var(--s3) var(--s4);font-size:.86rem}
+  .sources{margin-top:var(--s5);font-size:.78rem;color:var(--heritage)}
+  .footer-row nav{display:flex;gap:var(--s4);font-size:.85rem}
+  .footer-row nav a{border-bottom:1px solid transparent;padding-bottom:2px}
+  .footer-row nav a:hover{border-color:currentColor}
+  @media(max-width:1000px){.recs{grid-template-columns:1fr}}
+  @media(max-width:760px){
+    .review-nav{display:flex;gap:var(--s3);font-size:.85rem}
+    .header-row{gap:var(--s3)}
+    .data-table thead{border:0;clip:rect(0 0 0 0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px}
+    .data-table,.data-table tbody,.data-table tr,.data-table td{display:block;width:100%}
+    .data-table tr{border:1px solid var(--line);margin-bottom:var(--s3)}
+    .data-table td{border-bottom:1px solid var(--line);padding:var(--s2) var(--s3)}
+    .data-table tr td:last-child{border-bottom:0}
+    .data-table td::before{content:attr(data-label);display:block;font-size:.64rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:2px}
+    .takeaways li{padding:var(--s3) var(--s3) var(--s3) calc(var(--s3) + 42px)}
+    .takeaways li::before{left:var(--s3);top:var(--s3)}
+    .footer-row{flex-wrap:wrap}
+  }
 </style>
 </head>
 <body>
-<div class="wrap">
-  <header>
-    <p class="kicker">Research brief · Sept 2026</p>
-    <h1>Logo Intro Motion Graphics — What the Best Do</h1>
-    <p class="sub">Distilled from 2026 trend reports, iconic-ident breakdowns, technique guides, and sonic-branding research. Full brief with all sources: <em>docs/logo-intro-motion-research.md</em></p>
-  </header>
-
-  <section class="panel"><div class="body">
-    <h2>5 things the best taught us</h2>
-    <p class="lead">The executive summary — everything else on this page is evidence.</p>
-    <ol class="takeaways">
-      <li><strong>One meaningful gesture beats ten effects.</strong> 2026's premium consensus: quiet, intentional, crafted motion wins; generic particles and random glitch read as cheap instantly.</li>
-      <li><strong>The greats animate a brand truth, never an effect.</strong> Pixar's lamp <em>is</em> animation; Netflix's N <em>becomes</em> the screen. JHALAR's truths: hanging things sway, diyas light, torans unveil.</li>
-      <li><strong>Brand-specific particles &gt;&gt; generic dust.</strong> Templates run on floating dust — the premium move is particles only <em>your</em> brand would have: marigold petals, diya embers, fairy-light bokeh.</li>
-      <li><strong>Sound is half the logo.</strong> A 2–3 second sonic logo with its hit synced to the visual ignition <em>on the same frame</em> is what brains remember.</li>
-      <li><strong>One animation ≠ every platform.</strong> The 2026 standard is a family: 5s master + 2s sting + vertical/square reframes, designed separately.</li>
-    </ol>
-  </div></section>
-
-  <section class="panel"><div class="body">
-    <h2>Hall of fame</h2>
-    <p class="lead">What the iconic idents do — and the stealable lesson in each.</p>
-    <table>
-      <tr><th>Brand</th><th>The intro</th><th>Lesson for JHALAR</th></tr>
-      <tr><td class="brand">Pixar</td><td>Luxo Jr. hops in, squashes the “i”, looks at the camera</td><td>Our charms could <em>perform</em> — tinkle, settle, feel alive</td></tr>
-      <tr><td class="brand">Netflix</td><td>Light ribbons unfold, resolve into the N — then the N becomes a screen of shows</td><td>Light resolving into the lockup — the “ignition” grammar we already use</td></tr>
-      <tr><td class="brand">HBO</td><td>TV static resolves into chrome letters</td><td>Darkness → order is a universal premium arc (our Concept 3 does this)</td></tr>
-      <tr><td class="brand">Marvel</td><td>Comic pages flip past, forming the logo</td><td>Product-as-structure: torans, diyas and charms building the lockup</td></tr>
-      <tr><td class="brand">THX</td><td>A thin tone thickens into the “Deep Note” crescendo</td><td>Proof a short sting + strong sound beats 10 seconds of visuals</td></tr>
-      <tr><td class="brand">Disney · DreamWorks</td><td>Castle / moon-boy miniature worlds</td><td>“Festival night” world-building: a tiny glowing celebration</td></tr>
-      <tr><td class="brand">Intel</td><td>Four-note “bong” + simple resolve</td><td>The argument for a 2s sting cutdown — restraint as power</td></tr>
-    </table>
-  </div></section>
-
-  <section class="panel"><div class="body">
-    <h2>2026 trend map</h2>
-    <p class="lead">Ranked by fit for a premium festive decor brand.</p>
-    <table>
-      <tr><th>Trend</th><th>What it is</th><th>Fit</th></tr>
-      <tr><td class="brand">Hiding &amp; revealing</td><td>Logo unveiled from behind/within something — masks, wipes, parting elements</td><td class="stars">★★★★★</td></tr>
-      <tr><td class="brand">Quiet micro-motion</td><td>One small meaningful gesture, premium restraint</td><td class="stars">★★★★★</td></tr>
-      <tr><td class="brand">Sound-synced stingers</td><td>2–5s sting built around one audio hit</td><td class="stars">★★★★★</td></tr>
-      <tr><td class="brand">Organic / sensory motion</td><td>Fabric, sway, warmth, human rhythm over mechanical moves</td><td class="stars">★★★★</td></tr>
-      <tr><td class="brand">Soft 3D depth</td><td>Gentle depth as polish (light, parallax), not chrome spectacle</td><td class="stars">★★★★</td></tr>
-      <tr><td class="brand">Kinetic typography</td><td>Letters assemble, then lock to instant legibility</td><td class="stars">★★★★</td></tr>
-      <tr><td class="brand">Platform-native variants</td><td>Separate 16:9 / 9:16 / 1:1 designs, not crops</td><td class="stars">★★★★</td></tr>
-      <tr><td class="brand">Crafted texture</td><td>Visible human touch vs. AI-polish fatigue (grain, irregular lines)</td><td class="stars">★★★</td></tr>
-      <tr><td class="brand">Metal / glitch / generic particles</td><td>Template and tech-brand defaults</td><td class="stars">★ avoid</td></tr>
-    </table>
-  </div></section>
-
-  <section class="panel"><div class="body">
-    <h2>Reveal techniques, ranked for JHALAR</h2>
-    <p class="lead">The mechanics a video intro could be built from.</p>
-    <table>
-      <tr><th>Technique</th><th>How it works</th><th>Verdict</th></tr>
-      <tr><td class="brand">Sequential illumination</td><td>Darkness → elements light one by one → full glow + finale flash</td><td class="stars">★★★★★ first choice</td></tr>
-      <tr><td class="brand">Mask / wipe unveil</td><td>Travelling edge reveals the logo — curtain, petal sweep, light bar</td><td class="stars">★★★★★ second choice</td></tr>
-      <tr><td class="brand">Assembly</td><td>Parts slide in and lock — charms tinkle into place, letters slot home</td><td class="stars">★★★★</td></tr>
-      <tr><td class="brand">Brand particles</td><td>Marigold petals / diya embers / bokeh drifting through</td><td class="stars">★★★★ if brand-specific</td></tr>
-      <tr><td class="brand">Light sweep + ignition</td><td>Wave crosses, triggers glow peak + glint at center</td><td class="stars">★★★★ proven in footer</td></tr>
-      <tr><td class="brand">Push-in / parallax</td><td>Slow camera move + layered depth during the hold</td><td class="stars">★★★★ the “cinematic”</td></tr>
-      <tr><td class="brand">Morphing</td><td>One shape becomes the logo (flame → letter? petal → charm?)</td><td class="stars">★★★ high cost, high payoff</td></tr>
-    </table>
-  </div></section>
-
-  <section class="panel"><div class="body">
-    <h2>Sound — the sonic logo</h2>
-    <p class="lead">Half the logo. The science is unusually settled:</p>
-    <ul class="tight">
-      <li><strong>Duration: 2–3 seconds.</strong> Under 3s = identification (Netflix “Tudum”, Intel bong); over 5s = jingle territory.</li>
-      <li><strong>Sonic logo ≠ jingle.</strong> No words, no message — pure recognition that works across languages and markets.</li>
-      <li><strong>Sync law:</strong> the audio hit and the visual ignition land on the <strong>same frame</strong>. That single sync point is what memory keeps.</li>
-      <li><strong>JHALAR direction:</strong> soft chime (temple bell / kartal tick) + warm shimmer swell; hit exactly on the ignition frame; tail decays under the hold. Festive, premium, unmistakably Indian — without cliché.</li>
-    </ul>
-  </div></section>
-
-  <section class="panel"><div class="body">
-    <h2>Formats to plan from day one</h2>
-    <p class="lead">One master, cut with intent — never auto-cropped.</p>
-    <table>
-      <tr><th>Deliverable</th><th>Spec</th><th>Use</th></tr>
-      <tr><td class="brand">Master ident</td><td>5s · 1920×1080 · with + without sound</td><td>YouTube, presentations, displays</td></tr>
-      <tr><td class="brand">Vertical</td><td>4–5s · 1080×1920 · stacked lockup</td><td>Reels / Shorts / Stories</td></tr>
-      <tr><td class="brand">Square</td><td>4–5s · 1080×1080</td><td>Feed posts</td></tr>
-      <tr><td class="brand">Sting</td><td>2s · 16:9 (+1:1) · with sound</td><td>End cards, ads, quick recall</td></tr>
-      <tr><td class="brand">Transparent loop</td><td>WebM/MOV alpha · seamless</td><td>Overlay on footage</td></tr>
-    </table>
-  </div></section>
-
-  <section class="panel"><div class="body">
-    <h2>Recommended directions for JHALAR</h2>
-    <p class="lead">All three extend the approved Concept 3 footer grammar (darkness → assembly → ignition → hold) into true video.</p>
-    <div class="recs">
-      <div class="rec pick">
-        <h3>A. “First Light” <span class="tag">Recommended</span></h3>
-        <p>Black → six diya-charms light one by one → letters resolve → the wave ignites center with the chime hit → glory hold with push-in and drifting embers. Purest brand truth: <em>the festival lights coming on.</em></p>
-        <p class="spec">5s · cinematic · extends Concept 3 directly</p>
+<header class="header">
+  <div class="shell header-row">
+    <a class="brand" href="./" aria-label="JHALAR home"><img src="assets/logo-jhalar-02.svg" alt="JHALAR"></a>
+    <nav class="nav review-nav" aria-label="Review pages"><a href="logo-concepts-review.html">Concepts</a><a href="logo-research.html" aria-current="page">Research</a><a href="./">Back to site</a></nav>
+  </div>
+</header>
+<main>
+<section class="section">
+  <div class="shell">
+    <div class="section-head">
+      <div class="section-heading-group">
+        <p class="eyebrow">Internal review · Research brief</p>
+        <h2>Logo intros: what works and why</h2>
       </div>
-      <div class="rec">
-        <h3>B. “The Hanging”</h3>
-        <p>The toran is hung: strand drops in, charms tinkle into place one by one, camera settles, warm light blooms with a soft chime. Most distinctive; most production work.</p>
-        <p class="spec">5–6s · craft story · highest craft cost</p>
-      </div>
-      <div class="rec">
-        <h3>C. “Petal Reveal”</h3>
-        <p>Marigold petals sweep and part like a curtain, unveiling the glowing lockup; chime hits as the last petal clears. Fastest and most social-native.</p>
-        <p class="spec">4–5s · festive · best for Reels/Shorts</p>
+      <div class="section-support-group">
+        <p>Notes from 2026 trend reports and ident breakdowns, with sonic-branding research. The full brief with sources sits in docs/logo-intro-motion-research.md.</p>
       </div>
     </div>
-    <div class="donts"><strong>Do not:</strong> generic particle dust · glitch / RGB-split · chrome 3D · logo appearing only at the end · intros over 6s for social · sound that isn't synced to the ignition frame.</div>
-  </div></section>
 
-  <footer>
-    <p class="sources">Sources: Renderforest · Lummi · Videobolt · DesignerPeople · Advertaline · Creative Bloq · MusicGrid · Inkbot · Sixième Son (full URLs in the brief)</p>
-    <p><a class="back" href="./">← Back to the site</a> &nbsp;·&nbsp; <a class="back" href="logo-concepts-review.html">Motion concepts review</a></p>
-  </footer>
-</div>
+    <section class="panel" aria-labelledby="t-takeaways">
+      <h2 id="t-takeaways">Five findings</h2>
+      <p class="lead">The short version. The rest of the page is the evidence.</p>
+      <ol class="takeaways">
+        <li>One meaningful gesture beats ten effects. The 2026 reports agree: quiet, intentional motion reads as quality. Generic particles and random glitch do the opposite.</li>
+        <li>The greats animate a brand truth, never an effect. Pixar's lamp is animation, and Netflix's N becomes the screen. JHALAR's truths: hanging pieces sway, diyas light, torans unveil.</li>
+        <li>Brand particles beat generic dust. Templates run on floating dust. The stronger move is particles only your brand would use, such as marigold petals or diya embers.</li>
+        <li>Sound is half the logo. A 2 to 3 second sonic logo, with its hit on the same frame as the visual ignition, is what memory keeps.</li>
+        <li>One animation does not fit every platform. The 2026 standard is a small family: a 5s master with a 2s sting, plus vertical and square reframes built separately.</li>
+      </ol>
+    </section>
+
+    <section class="panel" aria-labelledby="t-fame">
+      <h2 id="t-fame">Hall of fame</h2>
+      <p class="lead">What the long-running idents do, and the usable lesson in each.</p>
+      <table class="data-table">
+        <thead><tr><th scope="col">Brand</th><th scope="col">The intro</th><th scope="col">Lesson for JHALAR</th></tr></thead>
+        <tbody>
+          <tr><td class="cell-brand" data-label="Brand">Pixar</td><td data-label="The intro">Luxo Jr. hops in, flattens the “i”, looks at the camera.</td><td data-label="Lesson for JHALAR">Our charms could perform: tinkle, settle, feel alive.</td></tr>
+          <tr><td class="cell-brand" data-label="Brand">Netflix</td><td data-label="The intro">Light ribbons unfold and resolve into the N, which becomes a screen of shows.</td><td data-label="Lesson for JHALAR">Light resolving into the lockup. The ignition grammar we already use.</td></tr>
+          <tr><td class="cell-brand" data-label="Brand">HBO</td><td data-label="The intro">Static resolves into chrome letters.</td><td data-label="Lesson for JHALAR">Darkness into order. Our Concept 3 follows this arc.</td></tr>
+          <tr><td class="cell-brand" data-label="Brand">Marvel</td><td data-label="The intro">Comic pages flip past and form the logo.</td><td data-label="Lesson for JHALAR">Product as structure: the toran building the lockup.</td></tr>
+          <tr><td class="cell-brand" data-label="Brand">THX</td><td data-label="The intro">A thin tone thickens into the Deep Note crescendo.</td><td data-label="Lesson for JHALAR">A short sting with strong sound beats ten seconds of visuals.</td></tr>
+          <tr><td class="cell-brand" data-label="Brand">Disney, DreamWorks</td><td data-label="The intro">Castle and moon-boy miniature worlds.</td><td data-label="Lesson for JHALAR">Festival-night world-building: a small glowing celebration.</td></tr>
+          <tr><td class="cell-brand" data-label="Brand">Intel</td><td data-label="The intro">Four-note bong with a simple resolve.</td><td data-label="Lesson for JHALAR">The case for a 2s sting cutdown, carried by restraint.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="panel" aria-labelledby="t-trends">
+      <h2 id="t-trends">2026 trend map</h2>
+      <p class="lead">Ranked by fit for JHALAR.</p>
+      <table class="data-table">
+        <thead><tr><th scope="col">Trend</th><th scope="col">What it is</th><th scope="col">Fit</th></tr></thead>
+        <tbody>
+          <tr><td class="cell-brand" data-label="Trend">Hiding and revealing</td><td data-label="What it is">The logo is unveiled from behind or within something: masks, wipes, parting elements.</td><td class="cell-stars" data-label="Fit" aria-label="Fit: 5 out of 5">★★★★★</td></tr>
+          <tr><td class="cell-brand" data-label="Trend">Quiet micro-motion</td><td data-label="What it is">One small meaningful gesture. Full restraint.</td><td class="cell-stars" data-label="Fit" aria-label="Fit: 5 out of 5">★★★★★</td></tr>
+          <tr><td class="cell-brand" data-label="Trend">Sound-synced stingers</td><td data-label="What it is">A 2 to 5 second sting built around one audio hit.</td><td class="cell-stars" data-label="Fit" aria-label="Fit: 5 out of 5">★★★★★</td></tr>
+          <tr><td class="cell-brand" data-label="Trend">Organic and sensory motion</td><td data-label="What it is">Fabric and sway with a human rhythm.</td><td class="cell-stars" data-label="Fit" aria-label="Fit: 4 out of 5">★★★★</td></tr>
+          <tr><td class="cell-brand" data-label="Trend">Soft 3D depth</td><td data-label="What it is">Gentle depth as polish: light and parallax, not chrome.</td><td class="cell-stars" data-label="Fit" aria-label="Fit: 4 out of 5">★★★★</td></tr>
+          <tr><td class="cell-brand" data-label="Trend">Kinetic typography</td><td data-label="What it is">Letters assemble, then lock to instant legibility.</td><td class="cell-stars" data-label="Fit" aria-label="Fit: 4 out of 5">★★★★</td></tr>
+          <tr><td class="cell-brand" data-label="Trend">Platform-native variants</td><td data-label="What it is">Separate 16:9, 9:16 and 1:1 designs, not crops.</td><td class="cell-stars" data-label="Fit" aria-label="Fit: 4 out of 5">★★★★</td></tr>
+          <tr><td class="cell-brand" data-label="Trend">Crafted texture</td><td data-label="What it is">A visible human touch against AI polish: grain, irregular lines.</td><td class="cell-stars" data-label="Fit" aria-label="Fit: 3 out of 5">★★★</td></tr>
+          <tr><td class="cell-brand" data-label="Trend">Metal, glitch, generic particles</td><td data-label="What it is">Template and tech-brand defaults.</td><td class="cell-stars" data-label="Fit" aria-label="Fit: 1 out of 5, avoid">★ avoid</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="panel" aria-labelledby="t-tech">
+      <h2 id="t-tech">Reveal techniques, ranked for JHALAR</h2>
+      <p class="lead">The mechanics a video intro could be built from.</p>
+      <table class="data-table">
+        <thead><tr><th scope="col">Technique</th><th scope="col">How it works</th><th scope="col">Verdict</th></tr></thead>
+        <tbody>
+          <tr><td class="cell-brand" data-label="Technique">Sequential illumination</td><td data-label="How it works">Darkness, then elements light one by one to full glow and a finale flash.</td><td class="cell-stars" data-label="Verdict" aria-label="Verdict: first choice">★★★★★ first choice</td></tr>
+          <tr><td class="cell-brand" data-label="Technique">Mask and wipe unveil</td><td data-label="How it works">A travelling edge reveals the logo, such as a petal sweep.</td><td class="cell-stars" data-label="Verdict" aria-label="Verdict: second choice">★★★★★ second choice</td></tr>
+          <tr><td class="cell-brand" data-label="Technique">Assembly</td><td data-label="How it works">Parts slide in and lock. Charms settle into place, letters slot home.</td><td class="cell-stars" data-label="Verdict" aria-label="Verdict: 4 out of 5">★★★★</td></tr>
+          <tr><td class="cell-brand" data-label="Technique">Brand particles</td><td data-label="How it works">Diya embers or marigold petals drifting through.</td><td class="cell-stars" data-label="Verdict" aria-label="Verdict: 4 out of 5, only if brand-specific">★★★★ if brand-specific</td></tr>
+          <tr><td class="cell-brand" data-label="Technique">Light sweep and ignition</td><td data-label="How it works">A wave crosses and fires a glow peak with a glint at the centre.</td><td class="cell-stars" data-label="Verdict" aria-label="Verdict: 4 out of 5, proven in the footer">★★★★ proven in footer</td></tr>
+          <tr><td class="cell-brand" data-label="Technique">Push-in and parallax</td><td data-label="How it works">A slow camera move with layered depth through the hold.</td><td class="cell-stars" data-label="Verdict" aria-label="Verdict: 4 out of 5">★★★★</td></tr>
+          <tr><td class="cell-brand" data-label="Technique">Morphing</td><td data-label="How it works">One shape becomes the logo. A flame into a letter, a petal into a charm.</td><td class="cell-stars" data-label="Verdict" aria-label="Verdict: 3 out of 5">★★★</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="panel" aria-labelledby="t-sound">
+      <h2 id="t-sound">Sound: the sonic logo</h2>
+      <p class="lead">Half the logo. The guidance here is settled.</p>
+      <ul class="plain-list">
+        <li>Duration: 2 to 3 seconds. Below 3s reads as identification, past 5s reads as a jingle.</li>
+        <li>A sonic logo carries no words and no message, only recognition that works across languages.</li>
+        <li>Sync law: the audio hit and the visual ignition land on the same frame. That single sync point is what memory keeps.</li>
+        <li>JHALAR direction: a soft chime with a warm shimmer swell. The hit lands on the ignition frame, and the tail decays under the hold. Festive and unmistakably Indian, with no cliché in it.</li>
+      </ul>
+    </section>
+
+    <section class="panel" aria-labelledby="t-formats">
+      <h2 id="t-formats">Formats to plan from day one</h2>
+      <p class="lead">One master, cut with intent. Never auto-cropped.</p>
+      <table class="data-table">
+        <thead><tr><th scope="col">Deliverable</th><th scope="col">Spec</th><th scope="col">Use</th></tr></thead>
+        <tbody>
+          <tr><td class="cell-brand" data-label="Deliverable">Master ident</td><td data-label="Spec">5s · 1920×1080 · with and without sound</td><td data-label="Use">YouTube, presentations, displays</td></tr>
+          <tr><td class="cell-brand" data-label="Deliverable">Vertical</td><td data-label="Spec">4 to 5s · 1080×1920 · stacked lockup</td><td data-label="Use">Reels, Shorts, Stories</td></tr>
+          <tr><td class="cell-brand" data-label="Deliverable">Square</td><td data-label="Spec">4 to 5s · 1080×1080</td><td data-label="Use">Feed posts</td></tr>
+          <tr><td class="cell-brand" data-label="Deliverable">Sting</td><td data-label="Spec">2s · 16:9 and 1:1 · with sound</td><td data-label="Use">End cards, ads, quick recall</td></tr>
+          <tr><td class="cell-brand" data-label="Deliverable">Transparent loop</td><td data-label="Spec">WebM and MOV with alpha · looping</td><td data-label="Use">Overlay on footage</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="panel" aria-labelledby="t-directions">
+      <h2 id="t-directions">Recommended directions for JHALAR</h2>
+      <p class="lead">All three continue the approved Concept 3 grammar: darkness, assembly, ignition, hold.</p>
+      <div class="recs">
+        <div class="rec pick">
+          <p class="flag">Recommended</p>
+          <h3>A. First Light</h3>
+          <p>The film opens on black. The diya-charms light one by one while letters resolve. The wave ignites the centre on the chime hit, and the hold carries a slow push-in with drifting embers.</p>
+          <p class="spec">5s · cinematic · extends Concept 3</p>
+        </div>
+        <div class="rec">
+          <h3>B. The Hanging</h3>
+          <p>The toran is hung: the strand drops in and charms settle one by one. The camera rests as warm light blooms with a soft chime.</p>
+          <p class="spec">5 to 6s · craft story · highest craft cost</p>
+        </div>
+        <div class="rec">
+          <h3>C. Petal Reveal</h3>
+          <p>Marigold petals sweep across and part like a curtain. The glowing lockup is unveiled. The chime hits as the last petal clears.</p>
+          <p class="spec">4 to 5s · festive · strongest for Reels and Shorts</p>
+        </div>
+      </div>
+      <p class="donts">Do not: generic particle dust. Glitch or RGB split. Chrome 3D. A logo that appears only at the end. Intros over 6s for social. Sound that misses the ignition frame.</p>
+      <p class="sources">Sources: Renderforest, Lummi, Videobolt, DesignerPeople, Advertaline, Creative Bloq, MusicGrid, Inkbot, Sixième Son. Full URLs sit in the brief.</p>
+    </section>
+  </div>
+</section>
+</main>
+<footer class="footer">
+  <div class="shell footer-row">
+    <a class="footer-brand" href="./" aria-label="JHALAR home"><img src="assets/logo-jhalar-02-white.svg" alt="JHALAR"></a>
+    <nav aria-label="Review pages"><a href="logo-concepts-review.html">Concepts</a><a href="logo-research.html" aria-current="page">Research</a><a href="./">Back to site</a></nav>
+  </div>
+</footer>
 </body>
 </html>

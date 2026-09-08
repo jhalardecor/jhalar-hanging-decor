@@ -1,85 +1,107 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en-IN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Logo motion concepts · JHALAR (internal review)</title>
 <meta name="robots" content="noindex, nofollow">
-<title>JHALAR — Logo Motion Concepts (internal review)</title>
+<meta name="theme-color" content="#FFFAF1">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
 <style>
-  *{margin:0;padding:0;box-sizing:border-box}
-  body{background:#0d1023;color:#fff7ea;font-family:Georgia,'Times New Roman',serif;padding:48px 24px 80px}
-  .wrap{max-width:1060px;margin:0 auto}
-  header{text-align:center;margin-bottom:44px}
-  header p.kicker{letter-spacing:.35em;text-transform:uppercase;font-size:.72rem;color:#d9a441;margin-bottom:14px;font-family:Arial,Helvetica,sans-serif}
-  header h1{font-size:2rem;font-weight:500;margin-bottom:12px}
-  header p.sub{color:rgba(255,247,234,.65);font-size:.95rem;max-width:640px;margin:0 auto;line-height:1.6;font-family:Arial,Helvetica,sans-serif}
-  .card{border:1px solid rgba(217,164,65,.28);border-radius:14px;margin-bottom:28px;overflow:hidden;background:#141942}
-  .card .stage{padding:56px 24px;display:flex;justify-content:center;background:radial-gradient(ellipse at 50% 55%,#1b2150 0%,#141942 70%)}
-  .card .stage img{width:min(420px,80%);height:auto;display:block}
-  .card .body{padding:26px 30px 30px;border-top:1px solid rgba(217,164,65,.18)}
-  .card .num{font-family:Arial,Helvetica,sans-serif;font-size:.72rem;letter-spacing:.3em;color:#d9a441;text-transform:uppercase;margin-bottom:8px}
-  .card h2{font-size:1.45rem;font-weight:500;margin-bottom:10px}
-  .card p.story{color:rgba(255,247,234,.78);line-height:1.65;font-size:.95rem;margin-bottom:14px;font-family:Arial,Helvetica,sans-serif}
-  .card dl{display:grid;grid-template-columns:130px 1fr;gap:6px 14px;font-family:Arial,Helvetica,sans-serif;font-size:.82rem}
-  .card dt{color:rgba(255,247,234,.5);text-transform:uppercase;letter-spacing:.12em;font-size:.68rem;padding-top:2px}
-  .card dd{color:rgba(255,247,234,.88);line-height:1.5}
-  footer{text-align:center;color:rgba(255,247,234,.45);font-size:.82rem;font-family:Arial,Helvetica,sans-serif;line-height:1.7}
-  footer a{color:#d9a441}
+  /* Review-page components only. Tokens, header, footer and type come from style.css. */
+  .review-nav a[aria-current="page"]{color:var(--accent);font-weight:700;text-decoration:underline;text-underline-offset:4px}
+  .concept-list{display:grid;gap:var(--s5);margin-top:var(--s6)}
+  .concept{border:1px solid var(--line);background:var(--surface)}
+  .concept.winner{border-color:var(--heritage);box-shadow:var(--shadow)}
+  .concept-stage{background:var(--navy);padding:clamp(2rem,6vw,3.5rem) var(--s4);display:flex;justify-content:center}
+  .concept-stage img{width:min(420px,82%);height:auto}
+  .concept-body{padding:var(--s5);border-top:1px solid var(--line)}
+  .concept-flag{display:inline-block;background:var(--heritage);color:var(--surface);font-size:.66rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:5px 10px;margin-bottom:var(--s3)}
+  .concept h3{margin:0 0 var(--s2);font-size:clamp(1.4rem,3vw,1.9rem);line-height:1.1;color:var(--navy)}
+  .concept .story{margin:0 0 var(--s4);max-width:62ch}
+  .concept dl{display:grid;grid-template-columns:96px minmax(0,1fr);gap:var(--s1) var(--s3);margin:0;font-size:.88rem}
+  .concept dt{font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--heritage);padding-top:3px}
+  .concept dd{margin:0}
+  .footer-row nav{display:flex;gap:var(--s4);font-size:.85rem}
+  .footer-row nav a{border-bottom:1px solid transparent;padding-bottom:2px}
+  .footer-row nav a:hover{border-color:currentColor}
+  @media(max-width:760px){
+    .review-nav{display:flex;gap:var(--s3);font-size:.85rem}
+    .header-row{gap:var(--s3)}
+    .concept dl{grid-template-columns:1fr;gap:2px}
+    .concept dd{margin-bottom:var(--s2)}
+    .concept dd:last-child{margin-bottom:0}
+    .footer-row{flex-wrap:wrap}
+  }
 </style>
 </head>
 <body>
-<div class="wrap">
-  <header>
-    <p class="kicker">Internal review — winner: Concept 3</p>
-    <h1>JHALAR Logo Motion Concepts</h1>
-    <p class="sub">Three distinct directions for the footer logo, all brand-true (festive, premium, elegant — never random). Watch each loop at least once, then pick a winner — or mix elements. The winner becomes the site footer. All three freeze to a clean static logo under reduced-motion settings.</p>
-  </header>
-
-  <section class="card">
-    <div class="stage"><img src="assets/logo-concept-minimal.svg" alt="Concept 1 — Minimal Premium"></div>
-    <div class="body">
-      <p class="num">Concept 1</p>
-      <h2>Minimal Premium</h2>
-      <p class="story">The sign hangs; only light breathes. One slow champagne wave crosses every 8 seconds with a whisper of a glow — expensive silence. Nothing ever jumps, pops, or flashes.</p>
-      <dl>
-        <dt>Cycle</dt><dd>8s — slowest, calmest</dd>
-        <dt>Layers</dt><dd>Light wave · whisper breath · caption glow</dd>
-        <dt>Best for</dt><dd>Maximum luxury restraint; pairs with a quiet premium page</dd>
-      </dl>
+<header class="header">
+  <div class="shell header-row">
+    <a class="brand" href="./" aria-label="JHALAR home"><img src="assets/logo-jhalar-02.svg" alt="JHALAR"></a>
+    <nav class="nav review-nav" aria-label="Review pages"><a href="logo-concepts-review.html" aria-current="page">Concepts</a><a href="logo-research.html">Research</a><a href="./">Back to site</a></nav>
+  </div>
+</header>
+<main>
+<section class="section">
+  <div class="shell">
+    <div class="section-head">
+      <div class="section-heading-group">
+        <p class="eyebrow">Internal review · Winner: Concept 3</p>
+        <h2>Logo motion concepts</h2>
+      </div>
+      <div class="section-support-group">
+        <p>Three directions for the footer logo. Each plays live below. Concept 3 now runs in the footer.</p>
+      </div>
     </div>
-  </section>
-
-  <section class="card">
-    <div class="stage"><img src="assets/logo-concept-dynamic.svg" alt="Concept 2 — Dynamic Modern"></div>
-    <div class="body">
-      <p class="num">Concept 2</p>
-      <h2>Dynamic Modern</h2>
-      <p class="story">Festival night: a fast golden wave with a spark leader races through every 3 seconds, ornaments pop left-right like dancing flames, one sparkler glint fires per cycle. Highest energy of the three — impossible to miss.</p>
-      <dl>
-        <dt>Cycle</dt><dd>3s — fastest, liveliest</dd>
-        <dt>Layers</dt><dd>Wave + spark · flame pops · sparkler glint · diya breath</dd>
-        <dt>Best for</dt><dd>Maximum engagement and festive energy</dd>
-      </dl>
+    <div class="concept-list">
+      <article class="concept">
+        <div class="concept-stage"><img src="assets/logo-concept-minimal.svg" alt="Concept 1, Minimal Premium: animated logo"></div>
+        <div class="concept-body">
+          <h3>Concept 1 · Minimal Premium</h3>
+          <p class="story">The sign hangs and the light moves. One champagne wave crosses every 8 seconds with a soft glow. Nothing jumps, pops or flashes.</p>
+          <dl>
+            <dt>Cycle</dt><dd>8 seconds, the slowest loop</dd>
+            <dt>Layers</dt><dd>Light wave, soft breath, caption glow</dd>
+            <dt>Fits</dt><dd>Pages that need the logo to stay quiet</dd>
+          </dl>
+        </div>
+      </article>
+      <article class="concept">
+        <div class="concept-stage"><img src="assets/logo-concept-dynamic.svg" alt="Concept 2, Dynamic Modern: animated logo"></div>
+        <div class="concept-body">
+          <h3>Concept 2 · Dynamic Modern</h3>
+          <p class="story">Festival night. A gold wave with a spark leader crosses every 3 seconds. Ornaments answer left to right in sequence. One glint fires per cycle.</p>
+          <dl>
+            <dt>Cycle</dt><dd>3 seconds, the fastest loop</dd>
+            <dt>Layers</dt><dd>Wave and spark, flame pops, glint, diya breath</dd>
+            <dt>Fits</dt><dd>The highest-energy read of the three</dd>
+          </dl>
+        </div>
+      </article>
+      <article class="concept winner">
+        <div class="concept-stage"><img src="assets/logo-concept-cinematic.svg" alt="Concept 3, Cinematic: animated logo"></div>
+        <div class="concept-body">
+          <p class="concept-flag">Selected · Now in the footer</p>
+          <h3>Concept 3 · Cinematic</h3>
+          <p class="story">A 7-second film on repeat. Darkness, letters rising out of blur, a light ignition with a slow push-in, then a long hold in warm light.</p>
+          <dl>
+            <dt>Cycle</dt><dd>7 seconds: darkness, assembly, ignition, hold</dd>
+            <dt>Layers</dt><dd>Repeating assembly, ignition wave and flash, push-in, hold</dd>
+            <dt>Fits</dt><dd>The closest to a broadcast ident</dd>
+          </dl>
+        </div>
+      </article>
     </div>
-  </section>
-
-  <section class="card">
-    <div class="stage"><img src="assets/logo-concept-cinematic.svg" alt="Concept 3 — Cinematic"></div>
-    <div class="body">
-      <p class="num">Concept 3 · ✓ selected — now live in the footer</p>
-      <h2>Cinematic</h2>
-      <p class="story">A 7-second mini-film on loop: darkness, letters assembling from blur, a light ignition with a slow push-in, then a long glory hold. The closest to a true video-logo bumper.</p>
-      <dl>
-        <dt>Cycle</dt><dd>7s repeating film: darkness → assembly → ignition → hold</dd>
-        <dt>Layers</dt><dd>Repeating assembly · ignition wave + flash + glint · push-in · hold</dd>
-        <dt>Best for</dt><dd>Drama and memorability; most like a brand ident</dd>
-      </dl>
-    </div>
-  </section>
-
-  <footer>
-    <p>Winner: <strong>Concept 3 — Cinematic</strong>, now live in the site footer.</p>
-  </footer>
-</div>
+  </div>
+</section>
+</main>
+<footer class="footer">
+  <div class="shell footer-row">
+    <a class="footer-brand" href="./" aria-label="JHALAR home"><img src="assets/logo-jhalar-02-white.svg" alt="JHALAR"></a>
+    <nav aria-label="Review pages"><a href="logo-concepts-review.html" aria-current="page">Concepts</a><a href="logo-research.html">Research</a><a href="./">Back to site</a></nav>
+  </div>
+</footer>
 </body>
 </html>
