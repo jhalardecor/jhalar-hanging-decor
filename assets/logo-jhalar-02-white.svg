@@ -3,28 +3,31 @@
   <!-- Generator: Adobe Illustrator 30.7.0, SVG Export Plug-In . SVG Version: 2.1.4 Build 114)  -->
   <defs>
     <style>
-      /* Seamless footer logo motion: the logo box stays fixed; artwork breathes continuously. */
+      /* Seamless footer logo choreography: fixed logo box, visible internal motion. */
       .logo-stroke{
         transform-box:fill-box;
         transform-origin:center;
-        opacity:1;
-        animation:logoBreath 5.2s cubic-bezier(.45,0,.55,1) infinite;
+        animation:logoBreath 4.8s cubic-bezier(.45,0,.55,1) infinite;
         will-change:transform,opacity;
       }
       .logo-stroke:nth-of-type(1){animation-delay:0s}
-      .logo-stroke:nth-of-type(2){animation-delay:-.32s}
-      .logo-stroke:nth-of-type(3){animation-delay:-.64s}
-      .logo-stroke:nth-of-type(4){animation-delay:-.96s}
-      .logo-stroke:nth-of-type(5){animation-delay:-1.28s}
-      .logo-stroke:nth-of-type(6){animation-delay:-1.60s}
-      .logo-stroke:nth-of-type(7){animation-delay:-1.92s}
-      .logo-stroke:nth-of-type(8){animation-delay:-2.24s}
-      .logo-stroke:nth-of-type(9){animation-delay:-2.56s}
-      .logo-stroke:nth-of-type(10){animation-delay:-2.88s}
+      .logo-stroke:nth-of-type(2){animation-delay:-.18s}
+      .logo-stroke:nth-of-type(3){animation-delay:-.36s}
+      .logo-stroke:nth-of-type(4){animation-delay:-.54s}
+      .logo-stroke:nth-of-type(5){animation-delay:-.72s}
+      .logo-stroke:nth-of-type(6){animation-delay:-.90s}
+      .logo-stroke:nth-of-type(7){animation-delay:-1.08s}
+      .logo-stroke:nth-of-type(8){animation-delay:-1.26s}
+      .logo-stroke:nth-of-type(9){animation-delay:-1.44s}
+      .logo-stroke:nth-of-type(10){animation-delay:-1.62s}
+      .logo-stroke:nth-of-type(11){animation-delay:-1.80s}
+      .logo-stroke:nth-of-type(12){animation-delay:-1.98s}
       @keyframes logoBreath{
         0%,100%{opacity:1;transform:translateY(0) scale(1)}
-        38%{opacity:.98;transform:translateY(-.65px) scale(1.008)}
-        58%{opacity:1;transform:translateY(.35px) scale(.997)}
+        18%{opacity:.72;transform:translateY(1.4px) scale(.982)}
+        42%{opacity:1;transform:translateY(-1.2px) scale(1.018)}
+        68%{opacity:.88;transform:translateY(.65px) scale(.992)}
+        84%{opacity:1;transform:translateY(-.35px) scale(1.006)}
       }
       @media(prefers-reduced-motion:reduce){.logo-stroke{animation:none}}
       
