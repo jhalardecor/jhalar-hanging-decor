@@ -3305,3 +3305,29 @@ body{padding-top:var(--header-h)!important}
     padding:24px 20px calc(36px + env(safe-area-inset-bottom))!important;
   }
 }
+
+
+/* Canonical modal close control — keep circular across all responsive layers */
+.modal-card .modal-close{
+  position:absolute !important;
+  top:12px !important;
+  right:12px !important;
+  z-index:40 !important;
+  width:42px !important;
+  height:42px !important;
+  padding:0 !important;
+  display:grid !important;
+  place-items:center !important;
+  border:0 !important;
+  border-radius:50% !important;
+  overflow:hidden !important;
+  background:rgba(255,250,241,.96) !important;
+  color:var(--navy) !important;
+  font-size:0 !important;
+  line-height:1 !important;
+  cursor:pointer;
+}
+.modal-card .modal-close svg{display:block;width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round}
+.modal-card .modal-close::before{display:none !important}
+.modal-card .modal-close:hover{background:var(--navy) !important;color:var(--paper) !important;transform:scale(1.04) !important}
+.modal-card .modal-close:active{transform:scale(.96) !important}
