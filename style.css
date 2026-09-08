@@ -3447,3 +3447,149 @@ body{padding-top:var(--header-h)!important}
   #product-grid{gap:24px 10px}
   #product-grid .product-title{font-size:.92rem}
 }
+
+
+/* =========================================================
+   CUSTOM REQUIREMENT — CANONICAL COMPOSED SECTION
+   Restores the planning control removed during the CSS cleanup.
+   ========================================================= */
+.custom{
+  background:var(--surface);
+  border-top:1px solid rgba(98,35,49,.08);
+  border-bottom:1px solid rgba(98,35,49,.08);
+}
+.custom-grid{
+  grid-template-columns:minmax(0,1fr) minmax(0,.92fr);
+  gap:clamp(48px,7vw,112px);
+  align-items:center;
+}
+.custom-image{
+  background:#f4eee7;
+  overflow:hidden;
+}
+.custom-image img{
+  width:100%;
+  aspect-ratio:4/5;
+  object-fit:cover;
+  object-position:center;
+}
+.custom-copy{
+  max-width:560px;
+  padding-block:12px;
+}
+.custom-copy .eyebrow{
+  color:var(--red);
+  margin-bottom:14px;
+}
+.custom-copy h2{
+  max-width:10ch;
+  margin:0 0 28px;
+  font-size:clamp(2.7rem,4.2vw,4.5rem);
+  line-height:1.04;
+  letter-spacing:-.025em;
+}
+.planning-picker{
+  margin:0 0 26px;
+}
+.planning-label{
+  display:block;
+  margin:0 0 10px;
+  color:var(--heritage);
+  font-size:.78rem;
+  font-weight:700;
+  letter-spacing:.09em;
+  text-transform:uppercase;
+}
+.planning-options{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+.planning-option{
+  appearance:none;
+  min-height:42px;
+  padding:0 15px;
+  border:1px solid rgba(98,35,49,.22);
+  border-radius:999px;
+  background:transparent;
+  color:var(--heritage);
+  font:inherit;
+  font-size:.9rem;
+  font-weight:600;
+  line-height:1;
+  transition:background .2s var(--ease),color .2s var(--ease),border-color .2s var(--ease),transform .2s var(--ease);
+}
+.planning-option:hover{
+  border-color:var(--heritage);
+  background:rgba(98,35,49,.05);
+}
+.planning-option.active{
+  background:var(--heritage);
+  border-color:var(--heritage);
+  color:var(--surface);
+}
+.planning-option:active{transform:scale(.97)}
+.custom-copy #custom-plan-copy{
+  max-width:48ch;
+  margin:0;
+  color:rgba(20,25,66,.78);
+  font-size:1.02rem;
+  line-height:1.65;
+}
+.custom-copy .text-link{
+  margin-top:28px;
+  min-height:48px;
+  display:inline-flex;
+  align-items:center;
+  gap:12px;
+  padding:0;
+  border:0;
+  color:var(--heritage);
+  font-weight:700;
+}
+.custom-copy .text-link span{
+  display:grid;
+  place-items:center;
+  width:34px;
+  height:34px;
+  border:1px solid rgba(98,35,49,.28);
+  border-radius:50%;
+  transition:transform .22s var(--ease),background .22s var(--ease),color .22s var(--ease);
+}
+.custom-copy .text-link:hover span{
+  transform:translateX(4px);
+  background:var(--heritage);
+  color:var(--surface);
+}
+@media(max-width:760px){
+  .custom.section{padding-block:48px 56px}
+  .custom-grid{
+    grid-template-columns:1fr;
+    gap:30px;
+  }
+  .custom-image img{
+    aspect-ratio:4/3;
+    object-position:center;
+  }
+  .custom-copy{
+    max-width:none;
+    padding:0;
+  }
+  .custom-copy h2{
+    max-width:12ch;
+    margin-bottom:22px;
+    font-size:clamp(2.25rem,9vw,3.1rem);
+  }
+  .planning-picker{margin-bottom:22px}
+  .planning-options{gap:8px}
+  .planning-option{
+    flex:0 0 auto;
+    min-height:40px;
+    padding:0 13px;
+    font-size:.82rem;
+  }
+  .custom-copy #custom-plan-copy{
+    font-size:.98rem;
+    line-height:1.6;
+  }
+}
