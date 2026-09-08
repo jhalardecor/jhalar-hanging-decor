@@ -1,5 +1,5 @@
 {
-  "version": "20260908.66",
-  "updated": "2026-09-09T00:20:00Z",
-  "note": "deep editorial website rebuild with fluid layout, modern gallery palette, coherent product and modal systems"
+  "version": "20260908.67",
+  "updated": "2026-09-09T00:30:00Z",
+  "note": "CSS reset and simplification: reduced font rules, removed decorative system complexity, rebuilt canonical editorial layout"
 }
