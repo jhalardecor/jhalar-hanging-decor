@@ -42,3 +42,99 @@ h1,h2,h3,p{margin:0}h1,h2,h3{font-family:JhalarDisplay,Georgia,serif;font-weight
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
 @keyframes modal-sheet-in{from{transform:translateY(32px);opacity:0}to{transform:translateY(0);opacity:1}}
 @media(max-width:760px){.modal-media{transition:filter .25s ease}.modal.open .modal-media{animation:modal-media-in .38s .06s both cubic-bezier(.22,.8,.24,1)}.modal-copy>*{animation:modal-copy-in .32s both cubic-bezier(.22,.8,.24,1)}.modal-copy .label{animation-delay:.08s}.modal-copy h3{animation-delay:.12s}.modal-copy .modal-variant{animation-delay:.16s}.modal-copy #modal-desc{animation-delay:.2s}.modal-copy .modal-wa-btn{animation-delay:.24s}.modal-wa-btn{min-height:58px;box-shadow:0 -8px 24px rgba(239,36,72,.16),0 14px 30px rgba(239,36,72,.24)}.modal-copy{scroll-padding-bottom:82px}.modal-close{box-shadow:0 8px 20px rgba(239,36,72,.32)}.modal-close:active{transform:rotate(90deg) scale(.9)}@keyframes modal-media-in{from{transform:scale(.97);opacity:.65}to{transform:scale(1);opacity:1}}@keyframes modal-copy-in{from{transform:translateY(10px);opacity:0}to{transform:translateY(0);opacity:1}}}
+
+
+/* ===== MODAL UX FINAL OVERRIDE ===== */
+.modal-close{
+  border:0 !important;
+  outline:0;
+  border-radius:999px !important;
+  background:var(--brand-gradient) !important;
+  color:#fff7f4 !important;
+  display:grid;
+  place-items:center;
+  isolation:isolate;
+}
+.modal-close::before,
+.modal-close::after{
+  content:"";
+  position:absolute;
+  width:17px;
+  height:2px;
+  background:currentColor;
+  border-radius:999px;
+}
+.modal-close::before{transform:rotate(45deg)}
+.modal-close::after{transform:rotate(-45deg)}
+.modal-close{font-size:0 !important}
+.modal-close:hover{transform:rotate(90deg) scale(1.06)}
+.modal-close:active{transform:rotate(90deg) scale(.92)}
+
+.modal.open{animation:modal-fade-in .22s ease both}
+.modal.open .modal-card{
+  animation:modal-card-in .34s cubic-bezier(.22,.8,.24,1) both;
+}
+.modal-copy{
+  overscroll-behavior:contain;
+  -webkit-overflow-scrolling:touch;
+}
+.modal-wa-btn{
+  position:relative;
+  isolation:isolate;
+  overflow:hidden;
+}
+.modal-wa-btn::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(120deg,rgba(255,255,255,.16),transparent 38%);
+  transform:translateX(-105%);
+  transition:transform .35s ease;
+  z-index:-1;
+}
+.modal-wa-btn:hover::before{transform:translateX(0)}
+.modal-wa-btn:active{transform:scale(.985)}
+
+@keyframes modal-fade-in{from{opacity:0}to{opacity:1}}
+@keyframes modal-card-in{from{opacity:0;transform:translateY(26px) scale(.985)}to{opacity:1;transform:translateY(0) scale(1)}}
+
+@media(max-width:760px){
+  .modal{
+    align-items:flex-end;
+    padding:0;
+  }
+  .modal-card{
+    width:100%;
+    height:min(90svh,820px) !important;
+    max-height:90svh !important;
+    border-radius:24px 24px 0 0 !important;
+    overflow:hidden;
+    grid-template-rows:minmax(210px,38svh) minmax(0,1fr) !important;
+  }
+  .modal-copy{
+    min-height:0;
+    overflow-y:auto !important;
+    padding:24px 20px calc(24px + env(safe-area-inset-bottom)) !important;
+    scroll-padding-bottom:92px;
+  }
+  .modal-wa-btn{
+    position:sticky;
+    bottom:0;
+    z-index:3;
+    width:100%;
+    min-height:56px;
+    margin:24px 0 0 !important;
+  }
+  .modal-close{
+    top:14px !important;
+    right:14px !important;
+    width:46px !important;
+    height:46px !important;
+  }
+  .modal.open .modal-card{animation:mobile-sheet-in .36s cubic-bezier(.22,.8,.24,1) both}
+}
+@keyframes mobile-sheet-in{from{opacity:0;transform:translateY(44px)}to{opacity:1;transform:translateY(0)}}
+
+@media(prefers-reduced-motion:reduce){
+  .modal,.modal.open .modal-card,.modal-close,.modal-wa-btn{animation:none !important;transition:none !important}
+}
