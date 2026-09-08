@@ -542,40 +542,21 @@ initProducts();initRuntime();
   reveal();
 })();
 
-/* build: 20260907.18 */
+/* build: 20260908.40 */
 
 
 
-/* JHALAR DEPLOYMENT UPDATE MANAGER — canonical cache recovery */
+/* JHALAR DEPLOYMENT VERSION MARKER — no runtime asset swapping or forced reloads */
 (function(){
- const VERSION_URL='content/version.json';
- async function latestVersion(){
-   const u=VERSION_URL+'?t='+Date.now();
-   const r=await fetch(u,{cache:'no-store',headers:{'Cache-Control':'no-cache'}});
-   if(!r.ok) throw new Error('version unavailable');
-   return (await r.json()).version;
- }
- async function ensureLatest(force){
-   try{
-     const v=await latestVersion(); if(!v)return;
-     const seen=localStorage.getItem('jhalar-live-version');
-     if(force || seen!==v){
-       localStorage.setItem('jhalar-live-version',v);
-       const u=new URL(location.href);
-       if(u.searchParams.get('_jv')!==v){u.searchParams.set('_jv',v);location.replace(u.pathname+u.search+u.hash);return true;}
-     }
-   }catch(e){console.warn('JHALAR update check unavailable',e)}
-   return false;
- }
- window.JHALAR_CHECK_FOR_UPDATE=()=>ensureLatest(false);
- // Check every new visit; no visitor action required.
- ensureLatest(false);
- // Logo/footer are deliberate home actions: verify latest deployment before returning to top.
- document.addEventListener('click',function(e){
-   const home=e.target.closest('.brand[href="#top"],.footer-brand[href="#top"]');
-   if(!home)return;
-   e.preventDefault();e.stopImmediatePropagation();
-   ensureLatest(true).then(reloading=>{if(!reloading){window.scrollTo({top:0,behavior:'smooth'});history.replaceState(null,'',location.pathname+location.search)}});
- },true);
+  const VERSION_URL='content/version.json';
+  async function checkVersion(){
+    try{
+      const r=await fetch(VERSION_URL+'?t='+Date.now(),{cache:'no-store'});
+      if(!r.ok)return;
+      const v=(await r.json()).version;
+      if(v)localStorage.setItem('jhalar-live-version',v);
+    }catch(e){}
+  }
+  window.JHALAR_CHECK_FOR_UPDATE=checkVersion;
+  checkVersion();
 })();
-/* Filters remain fully user-controlled: no ticker, marquee, train or auto-running behavior. */
