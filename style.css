@@ -3333,31 +3333,20 @@ body{padding-top:var(--header-h)!important}
 .modal-card .modal-close:active{transform:scale(.96) !important}
 
 
-/* Modal close — motion-triggered, Lottie-like micro interaction */
-.modal-card .modal-close{
-  transform:translateZ(0);
-  isolation:isolate;
 }
-.modal-card .modal-close svg{
-  transition:transform 320ms cubic-bezier(.34,1.56,.64,1),opacity 180ms ease;
-}
-.modal-card .modal-close::after{
-  content:"";position:absolute;inset:3px;border-radius:50%;
-  border:1.5px solid currentColor;opacity:0;transform:scale(.35);
-}
-.modal-card .modal-close:hover svg{transform:rotate(90deg) scale(.9)}
-.modal-card .modal-close.is-closing{
-  animation:modalClosePulse 220ms cubic-bezier(.2,.8,.2,1) both;
-}
-.modal-card .modal-close.is-closing svg{
-  animation:modalCloseMark 220ms cubic-bezier(.34,1.56,.64,1) both;
-}
-.modal-card .modal-close.is-closing::after{
-  animation:modalCloseRing 220ms ease-out both;
-}
-.modal.is-closing .modal-card{animation:modalCardExit 220ms cubic-bezier(.4,0,.2,1) both}
-@keyframes modalClosePulse{0%{transform:scale(1)}35%{transform:scale(.82)}70%{transform:scale(1.08)}100%{transform:scale(1)}}
-@keyframes modalCloseMark{0%{transform:rotate(0) scale(1);opacity:1}45%{transform:rotate(135deg) scale(.7);opacity:.9}100%{transform:rotate(180deg) scale(.55);opacity:0}}
-@keyframes modalCloseRing{0%{opacity:.55;transform:scale(.35)}100%{opacity:0;transform:scale(1.25)}}
-@keyframes modalCardExit{to{opacity:0;transform:translateY(10px) scale(.985)}}
-@media(prefers-reduced-motion:reduce){.modal-card .modal-close,.modal-card .modal-close svg,.modal-card .modal-close::after,.modal.is-closing .modal-card{animation:none!important;transition:none!important}}
+
+
+/* Coordinated modal dismissal — one interaction timeline */
+.modal.open .modal-card{animation:modalCardIn 260ms cubic-bezier(.22,.8,.25,1) both}
+.modal.is-closing .modal-backdrop{animation:modalBackdropOut 240ms ease both}
+.modal.is-closing .modal-card{animation:modalCardOut 240ms cubic-bezier(.4,0,.2,1) both}
+.modal-card .modal-close{transition:transform 140ms ease,background 140ms ease,color 140ms ease}
+.modal-card .modal-close:hover{transform:scale(1.04)!important}
+.modal-card .modal-close:active{transform:scale(.92)!important}
+.modal-card .modal-close svg{transition:transform 180ms cubic-bezier(.22,.8,.25,1),opacity 120ms ease}
+.modal.is-closing .modal-close{transform:scale(.88)!important}
+.modal.is-closing .modal-close svg{transform:scale(.72) rotate(18deg);opacity:0}
+@keyframes modalCardIn{from{opacity:0;transform:translateY(14px) scale(.985)}to{opacity:1;transform:none}}
+@keyframes modalCardOut{to{opacity:0;transform:translateY(8px) scale(.985)}}
+@keyframes modalBackdropOut{to{opacity:0}}
+@media(prefers-reduced-motion:reduce){.modal.open .modal-card,.modal.is-closing .modal-card,.modal.is-closing .modal-backdrop{animation:none!important}.modal-card .modal-close,.modal-card .modal-close svg{transition:none!important}}
