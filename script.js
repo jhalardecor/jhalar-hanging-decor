@@ -29,20 +29,13 @@ function renderFilters(){
       btn.setAttribute('aria-pressed',String(selected));
     });
 
-    /* Mobile filter rail: selecting an option advances the rail so the NEXT option is exposed.
-       This is intentional progressive disclosure — no manual swipe is required after each click. */
+    /* Mobile filter rail: the selected filter becomes the first visible option.
+       This makes the next categories immediately available to the right. */
     if(window.matchMedia('(max-width:760px)').matches){
-      const buttons=[...el.querySelectorAll('[data-filter]')];
-      const index=buttons.indexOf(b);
-      const next=buttons[index+1];
       requestAnimationFrame(()=>{
-        if(!next)return;
-        const railRect=el.getBoundingClientRect();
-        const nextRect=next.getBoundingClientRect();
-        // Keep the selected filter comfortably visible and reveal the next choice at the right edge.
-        const desiredLeft=next.offsetLeft+next.offsetWidth-el.clientWidth+28;
+        const desiredLeft=b.offsetLeft;
         const max=Math.max(0,el.scrollWidth-el.clientWidth);
-        el.scrollTo({left:Math.max(0,Math.min(desiredLeft,max)),top:0,behavior:'smooth'});
+        el.scrollTo({left:Math.min(desiredLeft,max),top:0,behavior:'smooth'});
       });
     }
 
