@@ -34,12 +34,11 @@ function renderFilters(){
     if(window.matchMedia('(max-width:760px)').matches){
       requestAnimationFrame(()=>{
         const max=Math.max(0,el.scrollWidth-el.clientWidth);
-        // Use the button's actual position inside the scroll rail.
-        // This works after manual swiping in either direction too.
-        const desiredLeft=Math.max(0,Math.min(b.offsetLeft-el.offsetLeft,max));
-        if(Math.abs(el.scrollLeft-desiredLeft)>1){
-          el.scrollTo({left:desiredLeft,top:0,behavior:'smooth'});
-        }
+        const rail=el.getBoundingClientRect();
+        const button=b.getBoundingClientRect();
+        // Convert the button's current visual position into the rail's scroll coordinate.
+        const desiredLeft=Math.max(0,Math.min(el.scrollLeft+(button.left-rail.left),max));
+        el.scrollTo({left:desiredLeft,top:0,behavior:'smooth'});
       });
     }
 
