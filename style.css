@@ -3441,10 +3441,11 @@ body{padding-top:var(--header-h)!important}
     max-height:none;
     overflow:visible;
     display:block;
-    font-size:clamp(.94rem,3.7vw,1.06rem);
-    line-height:1.4;
-    letter-spacing:-.018em;
-    text-wrap:balance;
+    /* Two-column catalogue typography: size from the card system, not the viewport. */
+    font-size:clamp(.92rem,3.05vw,1rem);
+    line-height:1.38;
+    letter-spacing:-.016em;
+    text-wrap:pretty;
     overflow-wrap:normal;
     word-break:normal;
     hyphens:none;
