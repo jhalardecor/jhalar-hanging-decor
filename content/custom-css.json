@@ -1,3 +1,3 @@
 {
-  "css": ""
+  "css": "\n/* PRO_STUDIO_HERO_START */\n.hero.hero-banner .hero-banner-shade{display:block!important;position:absolute!important;inset:0!important;pointer-events:none!important;background:linear-gradient(0deg,#fffaf1 0%,#fffaf1 28%,rgba(255,250,241,.52) 64%,rgba(255,250,241,0) 100%)!important}\n@media(max-width:760px){.hero.hero-banner .hero-banner-shade{background:linear-gradient(0deg,#fffaf1 0%,#fffaf1 34%,rgba(255,250,241,.58) 67%,rgba(255,250,241,0) 100%)!important}}\n/* PRO_STUDIO_HERO_END */"
 }
