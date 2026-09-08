@@ -3190,3 +3190,15 @@ body{padding-top:var(--header-h)!important}
  #product-modal .modal-wa-btn{margin-top:20px}
  #product-modal .modal-nav,#product-modal .modal-thumbs{display:none}
 }
+
+
+/* MOBILE HEADER — comfortable edge inset */
+@media(max-width:900px){
+  .header-row{
+    width:calc(100% - 40px)!important;
+    margin-inline:auto!important;
+  }
+}
+@media(max-width:390px){
+  .header-row{width:calc(100% - 32px)!important}
+}
