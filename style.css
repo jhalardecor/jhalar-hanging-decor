@@ -887,3 +887,29 @@ h1,h2,h3{
     z-index:5!important;
   }
 }
+
+
+/* FINAL MOBILE POPUP SCROLL MODEL */
+@media(max-width:760px){
+  .modal{display:none!important;position:fixed!important;inset:0!important;overflow:hidden!important}
+  .modal.open{display:block!important}
+  .modal-card,.modal.open .modal-card{
+    position:absolute!important;inset:0!important;
+    width:100%!important;height:100dvh!important;max-height:100dvh!important;
+    display:flex!important;flex-direction:column!important;overflow:hidden!important;
+  }
+  .modal-media{flex:0 0 42dvh!important;height:42dvh!important}
+  .modal-copy{
+    flex:1 1 auto!important;min-height:0!important;
+    display:flex!important;flex-direction:column!important;
+    overflow-y:auto!important;-webkit-overflow-scrolling:touch!important;
+    padding:24px 20px 20px!important;
+  }
+  .modal-copy #modal-desc{max-width:none!important;width:100%!important;overflow-wrap:normal!important}
+  .modal-wa-btn{
+    display:flex!important;visibility:visible!important;opacity:1!important;
+    position:sticky!important;bottom:0!important;flex:none!important;
+    width:100%!important;min-height:54px!important;margin:24px 0 0!important;
+    z-index:20!important;
+  }
+}
