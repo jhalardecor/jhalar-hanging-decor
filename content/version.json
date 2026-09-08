@@ -1,5 +1,5 @@
 {
-  "version": "20260908.65",
-  "updated": "2026-09-09T00:12:00Z",
-  "note": "applied canonical design-system foundation: modern gallery palette, fluid type, spacing tokens, stable product media, interaction and accessibility states"
+  "version": "20260908.66",
+  "updated": "2026-09-09T00:20:00Z",
+  "note": "deep editorial website rebuild with fluid layout, modern gallery palette, coherent product and modal systems"
 }
