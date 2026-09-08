@@ -4146,3 +4146,82 @@ body{padding-top:var(--header-h)!important}
     transform:none!important;
   }
 }
+
+
+/* =========================================================
+   MOBILE PRODUCT MODAL — CANONICAL MEDIA GEOMETRY
+   One frame. One image. No aspect-ratio patch stacking.
+   ========================================================= */
+@media (max-width:760px){
+  #product-modal.modal{
+    display:none!important;
+    place-items:center!important;
+    padding:16px!important;
+    overflow:hidden!important;
+  }
+  #product-modal.modal.open{display:grid!important;}
+
+  #product-modal.modal .modal-card{
+    width:min(100%,560px)!important;
+    height:calc(100svh - 32px)!important;
+    max-height:calc(100svh - 32px)!important;
+    min-height:0!important;
+    display:grid!important;
+    grid-template-columns:1fr!important;
+    grid-template-rows:clamp(250px,43svh,390px) minmax(0,1fr)!important;
+    overflow:hidden!important;
+  }
+
+  #product-modal.modal .modal-media{
+    grid-row:1!important;
+    width:100%!important;
+    height:100%!important;
+    min-height:0!important;
+    max-height:none!important;
+    aspect-ratio:auto!important;
+    display:block!important;
+    overflow:hidden!important;
+    background:#f4eee4!important;
+  }
+
+  #product-modal.modal .modal-stage{
+    width:100%!important;
+    height:100%!important;
+    min-height:0!important;
+    padding:14px!important;
+    box-sizing:border-box!important;
+    display:grid!important;
+    place-items:center!important;
+    overflow:hidden!important;
+    background:#f4eee4!important;
+    touch-action:manipulation!important;
+  }
+
+  #product-modal.modal #modal-photo{
+    display:block!important;
+    width:100%!important;
+    height:100%!important;
+    max-width:100%!important;
+    max-height:100%!important;
+    margin:0!important;
+    object-fit:contain!important;
+    object-position:center center!important;
+    transform:none!important;
+  }
+
+  /* Hidden media must never reserve space or create a second dark panel. */
+  #product-modal.modal #modal-video[hidden],
+  #product-modal.modal .modal-stage > video[hidden]{
+    display:none!important;
+    width:0!important;
+    height:0!important;
+  }
+
+  #product-modal.modal .modal-copy{
+    grid-row:2!important;
+    min-height:0!important;
+    height:auto!important;
+    overflow-y:auto!important;
+    padding:18px 20px calc(20px + env(safe-area-inset-bottom))!important;
+  }
+}
