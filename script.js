@@ -222,17 +222,15 @@ function openProduct(id){
 }
 function closeModal(){
  const m=$('#product-modal');
- if(!m.classList.contains('open')||m.classList.contains('is-closing'))return;
- m.classList.add('is-closing');
- const finish=()=>{
-   m.classList.remove('open','is-closing');
-   m.setAttribute('aria-hidden','true');
-   document.body.style.overflow='';
-   if(lastFocus?.focus)lastFocus.focus();
-   lastFocus=null;
- };
- const card=m.querySelector('.modal-card');
- card.addEventListener('animationend',finish,{once:true});
+ if(!m||!m.classList.contains('open'))return;
+ const activeVideo=m.querySelector('video');
+ if(activeVideo){activeVideo.pause();activeVideo.currentTime=0;}
+ m.classList.remove('is-closing');
+ m.classList.remove('open');
+ m.setAttribute('aria-hidden','true');
+ document.body.style.overflow='';
+ if(lastFocus?.focus)requestAnimationFrame(()=>lastFocus.focus());
+ lastFocus=null;
 }
 
 /* ---------- runtime defaults: equal to the shipped HTML/settings ---------- */
