@@ -3373,3 +3373,23 @@ body{padding-top:var(--header-h)!important}
  .audience-item{font-size:.96rem!important;padding:.35rem 0 11px!important;scroll-snap-align:start!important}
  .audience-note{margin-top:18px!important;padding-right:20px!important;font-size:.96rem!important}
 }
+
+
+/* DESKTOP PRODUCT VIEWER — explicit detail-panel scrolling */
+@media(min-width:761px){
+  #product-modal .modal-card{
+    height:min(720px,calc(100dvh - 40px))!important;
+    min-height:0!important;
+    overflow:hidden!important;
+  }
+  #product-modal .modal-copy{
+    height:100%!important;
+    min-height:0!important;
+    max-height:100%!important;
+    overflow-y:auto!important;
+    overflow-x:hidden!important;
+    overscroll-behavior:contain;
+    -webkit-overflow-scrolling:touch;
+  }
+  #product-modal .modal-copy > *{flex-shrink:0}
+}
