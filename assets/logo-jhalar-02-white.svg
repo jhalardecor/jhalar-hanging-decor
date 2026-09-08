@@ -3,11 +3,18 @@
   <!-- Generator: Adobe Illustrator 30.7.0, SVG Export Plug-In . SVG Version: 2.1.4 Build 114)  -->
   <defs>
     <style>
-      /* Motion graphics: staggered logo build + gentle decorative pulse */
-      .logo-stroke{transform-box:fill-box;transform-origin:center;opacity:0;animation:logoReveal .58s cubic-bezier(.22,1,.36,1) forwards}
-      .logo-stroke:nth-of-type(1){animation-delay:.05s}.logo-stroke:nth-of-type(2){animation-delay:.11s}.logo-stroke:nth-of-type(3){animation-delay:.17s}.logo-stroke:nth-of-type(4){animation-delay:.23s}.logo-stroke:nth-of-type(5){animation-delay:.29s}.logo-stroke:nth-of-type(6){animation-delay:.35s}.logo-stroke:nth-of-type(7){animation-delay:.41s}.logo-stroke:nth-of-type(8){animation-delay:.47s}.logo-stroke:nth-of-type(9){animation-delay:.53s}.logo-stroke:nth-of-type(10){animation-delay:.59s}
+      /* Motion graphics: staggered logo build (plays once) + nonstop gentle loop.
+         Animation 1 = logoReveal (one-shot entrance). Animation 2 = logoLoop
+         (infinite). The two comma-separated animation-delay values map to them in order. */
+      .logo-stroke{transform-box:fill-box;transform-origin:center;opacity:1;animation:logoReveal .58s cubic-bezier(.22,1,.36,1) backwards,logoLoop 3.8s ease-in-out infinite;animation-delay:.05s,1.35s}
+      .logo-stroke:nth-of-type(1){animation-delay:.05s,1.35s}.logo-stroke:nth-of-type(2){animation-delay:.11s,1.44s}.logo-stroke:nth-of-type(3){animation-delay:.17s,1.53s}.logo-stroke:nth-of-type(4){animation-delay:.23s,1.62s}.logo-stroke:nth-of-type(5){animation-delay:.29s,1.71s}.logo-stroke:nth-of-type(6){animation-delay:.35s,1.8s}.logo-stroke:nth-of-type(7){animation-delay:.41s,1.89s}.logo-stroke:nth-of-type(8){animation-delay:.47s,1.98s}.logo-stroke:nth-of-type(9){animation-delay:.53s,2.07s}.logo-stroke:nth-of-type(10){animation-delay:.59s,2.16s}.logo-stroke:nth-of-type(11){animation-delay:.65s,2.25s}.logo-stroke:nth-of-type(12){animation-delay:.71s,2.34s}.logo-stroke:nth-of-type(13){animation-delay:.77s,2.43s}.logo-stroke:nth-of-type(14){animation-delay:.83s,2.52s}
       @keyframes logoReveal{0%{opacity:0;transform:translateY(4px) scale(.94)}65%{opacity:1;transform:translateY(-.7px) scale(1.015)}100%{opacity:1;transform:none}}
-      @media(prefers-reduced-motion:reduce){.logo-stroke{animation:none;opacity:1}}
+      /* Nonstop loop: soft travelling wave. The logo stays fully visible the whole time. */
+      @keyframes logoLoop{0%,100%{opacity:1;transform:translateY(0) scale(1)}50%{opacity:.86;transform:translateY(-1.8px) scale(1.01)}}
+      .logo-caption{opacity:1;animation:captionReveal .6s ease .95s backwards,captionGlow 3.8s ease-in-out 1.7s infinite}
+      @keyframes captionReveal{from{opacity:0}to{opacity:1}}
+      @keyframes captionGlow{0%,100%{opacity:1}50%{opacity:.7}}
+      @media(prefers-reduced-motion:reduce){.logo-stroke,.logo-caption{animation:none;opacity:1}}
 
       .st0 {
         fill: #ffffff;
