@@ -2811,3 +2811,20 @@ button:not(.filter-btn),
     line-height:1.6!important;
   }
 }
+
+
+/* MOBILE PRODUCT DESCRIPTION — use the full line width cleanly */
+@media(max-width:760px){
+  #product-modal .modal-copy #modal-desc{
+    display:block!important;
+    width:100%!important;
+    max-width:none!important;
+    margin:0!important;
+    padding:0!important;
+    text-align:justify!important;
+    text-align-last:left!important;
+    text-wrap:normal!important;
+    overflow-wrap:normal!important;
+    word-spacing:normal!important;
+  }
+}
