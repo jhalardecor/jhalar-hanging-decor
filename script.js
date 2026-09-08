@@ -29,17 +29,16 @@ function renderFilters(){
       btn.setAttribute('aria-pressed',String(selected));
     });
 
-    /* Mobile filter rail works in BOTH directions:
-       whichever option is tapped becomes the first visible option. */
+    /* Exact rule: the tapped option always becomes the first option in view. */
     if(window.matchMedia('(max-width:760px)').matches){
-      requestAnimationFrame(()=>{
-        const max=Math.max(0,el.scrollWidth-el.clientWidth);
-        const rail=el.getBoundingClientRect();
-        const button=b.getBoundingClientRect();
-        // Convert the button's current visual position into the rail's scroll coordinate.
-        const desiredLeft=Math.max(0,Math.min(el.scrollLeft+(button.left-rail.left),max));
-        el.scrollTo({left:desiredLeft,top:0,behavior:'smooth'});
-      });
+      const alignSelected=()=>{
+        const firstItem=el.querySelector('.filter-btn');
+        if(!firstItem)return;
+        // Offset from the rail's content origin; independent of prior manual swiping.
+        const target=Math.max(0,Math.min(b.offsetLeft-firstItem.offsetLeft,el.scrollWidth-el.clientWidth));
+        el.scrollTo({left:target,top:0,behavior:'smooth'});
+      };
+      requestAnimationFrame(alignSelected);
     }
 
     const grid=$('#product-grid');
