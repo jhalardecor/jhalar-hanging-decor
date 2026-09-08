@@ -1,10 +1,25 @@
 {
   "sections": {
-    "hero": { "visible": true, "label": "Hero" },
-    "collection": { "visible": true, "label": "Catalogue (Products)" },
-    "customOrders": { "visible": true, "label": "Custom Work" },
-    "about": { "visible": true, "label": "Our Story" },
-    "contact": { "visible": true, "label": "Contact" }
+    "hero": {
+      "visible": true,
+      "label": "Hero"
+    },
+    "collection": {
+      "visible": true,
+      "label": "Catalogue (Products)"
+    },
+    "customOrders": {
+      "visible": true,
+      "label": "Custom Work"
+    },
+    "about": {
+      "visible": true,
+      "label": "Our Story"
+    },
+    "contact": {
+      "visible": true,
+      "label": "Contact"
+    }
   },
   "order": [
     "hero",
