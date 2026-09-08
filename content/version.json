@@ -1,5 +1,5 @@
 {
-  "version": "20260908.57",
-  "updated": "2026-09-08T21:35:00Z",
-  "note": "responsive architecture cleanup: removed historical width-media patch stack"
+  "version": "20260908.58",
+  "updated": "2026-09-08T22:05:00Z",
+  "note": "canonical spacing and vertical rhythm normalization across responsive layouts"
 }
