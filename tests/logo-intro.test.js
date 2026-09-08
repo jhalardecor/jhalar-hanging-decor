@@ -30,7 +30,8 @@ test('logo intro film ships with its choreography and safeguards intact', () => 
   assert.match(html, /id="replay"/);
   assert.match(html, /aria-label="Colour sets the mood\."/);
 
-  // House rules: no internal catalogue references leak into the film.
+  // The film declares the fonts it uses — a preload alone does not register a face.
+  assert.match(html, /@font-face\{[^}]*font-family:\s*Mogranx/, 'Mogranx @font-face missing');
   assert.doesNotMatch(html, /JH-\d{3}/);
   assert.doesNotMatch(html, /Catalogue ref:/);
 });
