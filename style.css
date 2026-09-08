@@ -218,7 +218,7 @@ body{background:var(--canvas)}
 /* ===== CONTRAST & CANVAS REBUILD 20260909.75 =====
    Neutral warm base. Red remains an accent, never reading text. */
 :root{
-  --canvas:#f2eee6;
+  --canvas:#faf7f0;
   --surface:#faf7f0;
   --surface-2:#e6dfd3;
   --ink:#35252a;
@@ -232,9 +232,9 @@ body{background:var(--canvas)}
 }
 
 body{background:var(--canvas);color:var(--ink)}
-.header{background:rgba(242,238,230,.97)}
+.header{background:rgba(250,247,240,.97)}
 .hero{background:var(--surface)}
-.hero-image:after{background:linear-gradient(90deg,rgba(242,238,230,.98) 0%,rgba(242,238,230,.78) 40%,rgba(242,238,230,.10) 74%)}
+.hero-image:after{background:linear-gradient(90deg,rgba(250,247,240,.98) 0%,rgba(250,247,240,.78) 40%,rgba(242,238,230,.10) 74%)}
 
 /* Red is reserved for surfaces, controls and indicators — never typography. */
 .label,
@@ -293,5 +293,5 @@ body{background:var(--canvas);color:var(--ink)}
   .hero-copy{color:#fff7f0}
   .hero-copy>p{color:rgba(255,247,240,.94)}
   .spaces{background:var(--surface-2)}
-  .modal{background:#f2eee6}
+  .modal{background:#faf7f0}
 }
