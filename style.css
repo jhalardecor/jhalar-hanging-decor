@@ -281,7 +281,7 @@ h1,h2,h3,p{margin:0}h1,h2,h3{font-family:JhalarDisplay,Georgia,serif;font-weight
     max-height:100dvh !important;
     display:grid;
     grid-template-columns:1fr;
-    grid-template-rows:4fr minmax(0,1fr);
+    grid-template-rows:125vw minmax(0,1fr);
     border-radius:0 !important;
     box-shadow:none;
     transform:none;
@@ -305,6 +305,8 @@ h1,h2,h3,p{margin:0}h1,h2,h3{font-family:JhalarDisplay,Georgia,serif;font-weight
   }
   .modal-copy{
     position:relative;
+    display:flex;
+    flex-direction:column;
     min-height:0;
     padding:26px 20px calc(88px + env(safe-area-inset-bottom)) !important;
     overflow-y:auto !important;
@@ -343,10 +345,10 @@ h1,h2,h3,p{margin:0}h1,h2,h3{font-family:JhalarDisplay,Georgia,serif;font-weight
   }
   .modal-wa-btn{
     position:sticky;
-    bottom:calc(-1 * (64px + env(safe-area-inset-bottom)));
-    width:calc(100% + 40px);
+    bottom:0;
+    width:100%;
     min-height:62px;
-    margin:26px -20px calc(-1 * (64px + env(safe-area-inset-bottom))) !important;
+    margin-top:auto !important;
     padding:0 20px;
     border-top:10px solid var(--surface);
     background-clip:padding-box;
