@@ -2831,7 +2831,7 @@ body{padding-top:var(--header-h)!important}
 }
 
 
- — compact on desktop, natural on mobile */
+/* Product modal — compact on desktop, natural on mobile */
 #product-modal{
   position:fixed;inset:0;z-index:1200;
   display:grid;place-items:center;padding:20px;
@@ -2980,7 +2980,6 @@ body{padding-top:var(--header-h)!important}
   #product-modal.modal{
     z-index:6000!important;
     padding:0!important;
-    display:block!important;
     overflow-y:auto!important;
     overscroll-behavior:contain!important;
   }
@@ -3628,3 +3627,9 @@ body{padding-top:var(--header-h)!important}
     min-height:44px;
   }
 }
+
+
+/* Modal visibility safety — closed dialogs must never cover the mobile page. */
+#product-modal.modal:not(.open){display:none!important;opacity:0!important;visibility:hidden!important;pointer-events:none!important}
+#product-modal.modal.open{display:grid!important;opacity:1!important;visibility:visible!important;pointer-events:auto!important}
+@media(max-width:760px){#product-modal.modal.open{display:block!important}}
