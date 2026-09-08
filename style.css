@@ -79,3 +79,25 @@ p{overflow-wrap:break-word;word-break:normal;text-wrap:pretty}
     scroll-snap-align:start;
   }
 }
+
+/* Brand correction: JHALAR is warm, craft-led and red-led — remove fintech/corporate blue character */
+:root{
+  --bg:#fff8f3;
+  --paper:#fffdfb;
+  --ink:#321f22;
+  --soft:#756567;
+  --line:#ead9d5;
+  --accent:#c81f38;
+  --accent-deep:#9f1830;
+  --accent-soft:#f4d8dc;
+}
+.header{background:rgb(255 248 243/.94)}
+.nav-enquire{color:var(--accent);border-color:var(--accent)}
+.label,.product-category{color:var(--accent)}
+.spaces{background:#321f22;color:#fff8f3}
+.site-footer{background:#321f22;color:#fff8f3}
+.contact{background:#f9ece8}
+.hero-copy a{border-color:var(--accent);color:var(--accent)}
+.filter-btn.active{color:var(--accent);border-color:var(--accent)}
+.modal{background:rgb(50 31 34/.48)}
+.modal-media{background:#fff8f3}
