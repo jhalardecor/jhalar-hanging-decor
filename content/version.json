@@ -1,5 +1,5 @@
 {
-  "version": "20260910.01",
+  "version": "20260910.02",
   "updated": "2026-09-10T00:00:00Z",
-  "note": "Deployment cache invalidation and automatic live update detection"
+  "note": "Deployment-wide frontend cache invalidation"
 }
