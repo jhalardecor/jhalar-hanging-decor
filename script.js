@@ -817,46 +817,96 @@ initProducts();initRuntime();
   modal.querySelectorAll('[data-project-close]').forEach(el=>el.addEventListener('click',close));
   document.addEventListener('keydown',e=>{if(e.key==='Escape'&&modal.classList.contains('open'))close()});
 
-  /* Address autocomplete: debounced, keyboard-friendly location search.
-     Uses OpenStreetMap Nominatim so this static site does not expose a paid API key. */
-  const locationInput=document.getElementById('project-location');
-  const suggestions=document.getElementById('location-suggestions');
-  const locationField=locationInput&&locationInput.closest('.location-field');
+  /* Role-first progressive questions */
+  const roleInputs=form.querySelectorAll('input[name="role"]');
+  const dynamicQuestions=document.getElementById('inquiry-dynamic-questions');
+  const questionSets={
+    'Retailer':[
+      ['Business / store name','business','text','Your shop or business name'],
+      ['Where is your store?','location','location','Start typing your address or city'],
+      ['What quantity are you looking for?','quantity','text','For example: 50 pieces'],
+      ['What kind of collection interests you?','interest','text','Festival, floral, hanging decor…']
+    ],
+    'Wholesaler':[
+      ['Business name','business','text','Your wholesale business'],
+      ['Where is your business located?','location','location','Start typing your address or city'],
+      ['Approximate order quantity','quantity','text','For example: 500+ pieces'],
+      ['Which markets or cities do you supply?','markets','text','Your distribution area']
+    ],
+    'Event decorator':[
+      ['Where is the event?','location','location','Start typing venue, city or address'],
+      ['What type of event is it?','eventType','text','Wedding, festival, corporate…'],
+      ['When is the event?','timeline','text','Approximate date'],
+      ['What do you need us to create?','details','textarea','Colours, style, quantity and concept']
+    ],
+    'Personal / self decorator':[
+      ['Where are you decorating?','location','location','Start typing your city or address'],
+      ['What space are you decorating?','space','text','Home, balcony, puja space…'],
+      ['How many pieces do you need?','quantity','text','Approximate quantity'],
+      ['Tell us your idea','details','textarea','Colours, style or occasion']
+    ],
+    'Bulk buyer':[
+      ['Where should we deliver?','location','location','Start typing your city or address'],
+      ['How many pieces are you considering?','quantity','text','Approximate quantity'],
+      ['What are you buying for?','purpose','text','Resale, event, gifting…'],
+      ['Any specific requirements?','details','textarea','Colours, styles or timeline']
+    ]
+  };
+  const renderQuestions=role=>{
+    const questions=questionSets[role]||[];
+    dynamicQuestions.innerHTML='';
+    questions.forEach(([label,name,type,placeholder])=>{
+      const field=document.createElement('label');
+      field.textContent=label;
+      let input;
+      if(type==='textarea'){
+        input=document.createElement('textarea');input.rows=4;
+      }else{
+        input=document.createElement('input');input.type=type==='location'?'text':type;
+      }
+      input.name=name;input.placeholder=placeholder;input.required=name==='location'||name==='quantity';
+      if(type==='location'){input.id='project-location';input.autocomplete='street-address'}
+      field.appendChild(input);
+      if(type==='location'){
+        const wrap=document.createElement('span');wrap.className='location-field';
+        field.removeChild(input);wrap.appendChild(input);
+        const spinner=document.createElement('span');spinner.className='location-spinner';spinner.setAttribute('aria-hidden','true');wrap.appendChild(spinner);
+        const list=document.createElement('div');list.id='location-suggestions';list.className='location-suggestions';list.setAttribute('role','listbox');wrap.appendChild(list);
+        field.appendChild(wrap);
+      }
+      dynamicQuestions.appendChild(field);
+    });
+    bindLocationAutocomplete();
+  };
+  roleInputs.forEach(input=>input.addEventListener('change',()=>renderQuestions(input.value)));
+
   let locationTimer=null,locationAbort=null;
-
-  const clearSuggestions=()=>{if(suggestions){suggestions.innerHTML='';suggestions.classList.remove('show')}};
-  const selectLocation=label=>{locationInput.value=label;clearSuggestions()};
-
-  locationInput&&locationInput.addEventListener('input',()=>{
-    const query=locationInput.value.trim();
-    clearTimeout(locationTimer);
-    clearSuggestions();
-    if(query.length<3)return;
-    locationTimer=setTimeout(async()=>{
-      if(locationAbort)locationAbort.abort();
-      locationAbort=new AbortController();
-      locationField&&locationField.classList.add('loading');
-      try{
-        const url='https://nominatim.openstreetmap.org/search?format=jsonv2&addressdetails=1&limit=5&q='+encodeURIComponent(query);
-        const response=await fetch(url,{signal:locationAbort.signal,headers:{Accept:'application/json'}});
-        const results=await response.json();
-        if(!Array.isArray(results)||!results.length)return;
-        results.forEach(item=>{
-          const button=document.createElement('button');
-          button.type='button';button.className='location-suggestion';button.setAttribute('role','option');
-          const parts=item.display_name.split(',');
-          button.innerHTML='<strong>'+parts.slice(0,2).map(x=>x.trim()).join(', ')+'</strong><span>'+parts.slice(2).map(x=>x.trim()).join(', ')+'</span>';
-          button.addEventListener('click',()=>selectLocation(item.display_name));
-          suggestions.appendChild(button);
-        });
-        suggestions.classList.add('show');
-      }catch(err){
-        if(err.name!=='AbortError')clearSuggestions();
-      }finally{locationField&&locationField.classList.remove('loading')}
-    },350);
-  });
-  locationInput&&locationInput.addEventListener('blur',()=>setTimeout(clearSuggestions,180));
-  locationInput&&locationInput.addEventListener('focus',()=>{if(suggestions&&suggestions.children.length)suggestions.classList.add('show')});
+  const bindLocationAutocomplete=()=>{
+    const locationInput=document.getElementById('project-location');
+    const suggestions=document.getElementById('location-suggestions');
+    const locationField=locationInput&&locationInput.closest('.location-field');
+    if(!locationInput)return;
+    const clearSuggestions=()=>{suggestions.innerHTML='';suggestions.classList.remove('show')};
+    locationInput.addEventListener('input',()=>{
+      const query=locationInput.value.trim();clearTimeout(locationTimer);clearSuggestions();if(query.length<3)return;
+      locationTimer=setTimeout(async()=>{
+        if(locationAbort)locationAbort.abort();locationAbort=new AbortController();locationField.classList.add('loading');
+        try{
+          const response=await fetch('https://nominatim.openstreetmap.org/search?format=jsonv2&addressdetails=1&limit=5&q='+encodeURIComponent(query),{signal:locationAbort.signal,headers:{Accept:'application/json'}});
+          const results=await response.json();
+          results.forEach(item=>{
+            const button=document.createElement('button');button.type='button';button.className='location-suggestion';
+            const parts=item.display_name.split(',');
+            button.innerHTML='<strong>'+parts.slice(0,2).map(x=>x.trim()).join(', ')+'</strong><span>'+parts.slice(2).map(x=>x.trim()).join(', ')+'</span>';
+            button.addEventListener('click',()=>{locationInput.value=item.display_name;clearSuggestions()});
+            suggestions.appendChild(button);
+          });
+          if(results.length)suggestions.classList.add('show');
+        }catch(err){}finally{locationField.classList.remove('loading')}
+      },350);
+    });
+    locationInput.addEventListener('blur',()=>setTimeout(clearSuggestions,180));
+  };
 
   form.addEventListener('submit',e=>{
     e.preventDefault();
