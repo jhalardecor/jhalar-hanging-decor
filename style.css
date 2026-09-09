@@ -1912,3 +1912,104 @@ body.project-inquiry-open{overflow:hidden}
   border-color:var(--ink)!important;
   color:var(--cream)!important;
 }
+
+
+/* SECTION SYSTEM — one rhythm, one surface hierarchy, one editorial grid */
+.section,.collection,.about,.spaces,.contact{
+  position:relative;
+  isolation:isolate;
+}
+.collection,.about,.spaces,.contact{
+  padding-block:var(--section);
+}
+.collection{background:var(--surface)}
+#custom-orders.spaces{background:var(--canvas)}
+.about{background:var(--surface)}
+.contact{background:var(--canvas)}
+
+/* Shared editorial entry rhythm */
+.collection-intro,
+#custom-orders .spaces-copy,
+.about-copy,
+.contact-copy{
+  position:relative;
+}
+.label{
+  margin-bottom:var(--space-4);
+  color:var(--red);
+  font-size:var(--type-xs);
+  font-weight:700;
+  letter-spacing:.12em;
+}
+.collection-intro h2,
+#custom-orders .spaces-copy h2,
+.about-copy h2,
+.contact-copy h2{
+  margin:0;
+  color:var(--heading);
+  letter-spacing:-.035em;
+}
+.collection-intro>p,
+#custom-orders .spaces-lead,
+.about-lead,
+.contact-copy>p:last-child{
+  margin-bottom:0;
+  color:var(--muted);
+  line-height:1.58;
+}
+
+/* Quiet separation: surfaces change by hierarchy, never decoration. */
+.collection::before,
+.about::before,
+#custom-orders::before,
+.contact::before{
+  content:"";
+  position:absolute;
+  top:0;left:var(--gutter);right:var(--gutter);
+  height:1px;
+  background:var(--line);
+  opacity:.65;
+}
+.collection::before{display:none}
+
+/* Image modules use one treatment */
+.product-image,
+.about-visual,
+#custom-orders .spaces-visual{
+  border:1px solid var(--line);
+  border-radius:0;
+  box-shadow:none;
+}
+.about-visual,
+#custom-orders .spaces-visual{overflow:hidden}
+
+/* Contact is a section, not a floating unrelated card */
+.contact-card{
+  padding:0;
+  border:0;
+  border-radius:0;
+  background:transparent;
+}
+.contact-card::after{
+  content:"";
+  grid-column:1/-1;
+  height:1px;
+  background:var(--line);
+  order:-1;
+}
+.contact-cta{min-width:auto}
+
+/* Remove decorative section-specific gradients */
+.spaces,
+.contact-card{background:transparent}
+#custom-orders.spaces{background:var(--canvas)}
+
+@media(max-width:760px){
+ .collection,.about,#custom-orders.spaces,.contact{padding-block:var(--section)}
+ .collection::before,.about::before,#custom-orders::before,.contact::before{
+   left:var(--gutter);right:var(--gutter);
+ }
+ .collection-intro{gap:var(--space-5);margin-bottom:var(--space-6)}
+ .about-layout,#custom-orders .spaces-layout{gap:var(--content-gap)}
+ .contact-card{gap:var(--space-6)}
+}
