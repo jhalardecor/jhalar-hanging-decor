@@ -1586,3 +1586,17 @@ body.project-inquiry-open{overflow:hidden}
 .location-suggestion:hover,.location-suggestion:focus{background:#f0ece4;outline:none}
 .location-suggestion strong{display:block;font-size:.9rem}.location-suggestion span{display:block;margin-top:3px;font-size:.78rem;color:#777}
 #project-inquiry-form small{margin-top:-3px;color:#777;font-size:.72rem;font-weight:500;letter-spacing:0;text-transform:none}
+
+
+/* Role-first adaptive inquiry */
+.inquiry-role{border:0;padding:0;margin:0}
+.inquiry-role legend{font-size:.8rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;margin-bottom:10px}
+.inquiry-role-options{display:flex;flex-wrap:wrap;gap:8px}
+.inquiry-role-options label{position:relative;display:block!important}
+.inquiry-role-options input{position:absolute;opacity:0;pointer-events:none}
+.inquiry-role-options span{display:flex;align-items:center;min-height:42px;padding:0 14px;border:1px solid rgba(20,25,66,.14);border-radius:999px;background:#fffdf8;font-size:.85rem;font-weight:600;letter-spacing:0;text-transform:none;cursor:pointer;transition:.2s ease}
+.inquiry-role-options input:checked+span{background:#141942;color:#fffaf1;border-color:#141942;box-shadow:0 8px 18px rgba(20,25,66,.14)}
+.inquiry-dynamic-questions{display:grid;gap:16px;min-height:42px}
+.inquiry-guidance{margin:0;padding:12px 14px;border-radius:12px;background:#f0ece4;color:#666;font-size:.82rem;line-height:1.45}
+.inquiry-dynamic-questions label{animation:question-in .25s cubic-bezier(.2,.8,.2,1)}
+@keyframes question-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
