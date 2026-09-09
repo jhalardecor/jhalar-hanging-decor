@@ -1192,3 +1192,16 @@ a:focus-visible,
 #modal-video{
   transform-origin:center center;
 }
+
+
+/* Footer brand scale — keep the animated mark elegant, not dominant. */
+.site-footer .footer-logo{
+  width:clamp(132px,9vw,160px);
+  height:auto;
+}
+
+@media(max-width:760px){
+  .site-footer .footer-logo{
+    width:128px;
+  }
+}
