@@ -1762,3 +1762,28 @@ body.project-inquiry-open{overflow:hidden}
 .modal-wa-btn,
 .project-inquiry-submit,
 .contact-cta{box-shadow:none!important}
+
+
+/* Palette correction — primary interactive controls follow the locked JHALAR ink/red hierarchy. */
+:root{
+  --action-primary:var(--ink);
+  --action-primary-hover:var(--red-deep);
+  --action-primary-ink:var(--cream);
+  --action-accent:var(--red);
+}
+.hero-copy a,
+.button-light,
+.contact-cta,
+.modal-wa-btn,
+.project-inquiry-submit{
+  background:var(--ink)!important;
+  color:var(--cream)!important;
+}
+.hero-copy a:hover,
+.button-light:hover,
+.contact-cta:hover,
+.modal-wa-btn:hover,
+.project-inquiry-submit:hover{
+  background:var(--red-deep)!important;
+  color:var(--cream)!important;
+}
