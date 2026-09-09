@@ -685,16 +685,28 @@ initProducts();initRuntime();
 /* build 20260909.74 */
 
 
-/* Contextual sticky header behavior. */
+/* Contextual sticky header behavior — stable and intentional. */
 (function(){
   const header=document.querySelector('.header');
   if(!header)return;
-  let lastY=window.scrollY,ticking=false;
+  let lastY=window.scrollY,ticking=false,downDistance=0;
   function update(){
     const y=Math.max(0,window.scrollY),delta=y-lastY;
-    header.classList.toggle('is-scrolled',y>8);
-    if(y<96)header.classList.remove('is-hidden');
-    else if(Math.abs(delta)>6)header.classList.toggle('is-hidden',delta>0);
+    header.classList.toggle('is-scrolled',y>10);
+
+    /* Mobile stays available; desktop hides only after meaningful downward travel. */
+    if(matchMedia('(max-width:760px)').matches){
+      header.classList.remove('is-hidden');
+    }else if(y<120){
+      downDistance=0;
+      header.classList.remove('is-hidden');
+    }else if(delta>0){
+      downDistance+=delta;
+      if(downDistance>56)header.classList.add('is-hidden');
+    }else if(delta<0){
+      downDistance=0;
+      header.classList.remove('is-hidden');
+    }
     lastY=y;ticking=false;
   }
   window.addEventListener('scroll',()=>{if(!ticking){ticking=true;requestAnimationFrame(update)}},{passive:true});
