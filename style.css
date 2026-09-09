@@ -1681,3 +1681,26 @@ body.project-inquiry-open{overflow:hidden}
   content:"Select an option above to continue.";
   color:#8a8379;font-size:.82rem;
 }
+
+
+/* Progressive disclosure — close the role drawer after selection */
+.inquiry-role-options{
+  max-height:360px;
+  opacity:1;
+  overflow:hidden;
+  transition:max-height .34s cubic-bezier(.2,.8,.2,1),opacity .2s ease,margin .3s ease;
+}
+.inquiry-role-options.is-collapsed{
+  max-height:0;
+  opacity:0;
+  margin-top:-8px;
+  pointer-events:none;
+}
+.inquiry-role.is-selected legend{
+  color:var(--heading);
+  margin-bottom:0;
+  text-transform:none;
+  letter-spacing:0;
+  font-size:var(--type-sm);
+  font-weight:600;
+}
