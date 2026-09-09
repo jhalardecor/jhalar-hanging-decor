@@ -2264,7 +2264,9 @@ body.project-inquiry-open{overflow:hidden}
   letter-spacing:0;
   line-height:var(--heading-leading);
   text-wrap:balance;
-  font-size:clamp(2.8rem,7.2vw,7.6rem);
+  overflow-wrap:break-word;
+  max-inline-size:100%;
+  font-size:clamp(2.7rem,6.4vw,7rem);
 }
 .collection-intro h2{
   font-family:var(--font-display);
@@ -2328,8 +2330,10 @@ body.project-inquiry-open{overflow:hidden}
 
 /* Hero is intentionally full-bleed; copy aligns to the same content rail. */
 .hero-copy{
-  width:min(calc(100% - (2 * var(--content-pad))),var(--content-max));
-  margin-inline:auto;
+  width:auto;
+  max-width:var(--content-max);
+  margin-left:var(--safe-left);
+  margin-right:var(--safe-right);
   min-height:inherit;
   display:flex;
   flex-direction:column;
