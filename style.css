@@ -2282,3 +2282,43 @@ body.project-inquiry-open{overflow:hidden}
     font-size:clamp(2.35rem,9.5vw,3.5rem)!important;
   }
 }
+
+
+/* =========================================================
+   PREMIUM JHALAR FOOTER
+   Deep layered reds — aligned with the brand CTA palette.
+   ========================================================= */
+.site-footer{
+  position:relative;
+  overflow:hidden;
+  isolation:isolate;
+  background:
+    radial-gradient(85% 110% at 0% 0%, rgba(255,104,78,.22) 0%, transparent 52%),
+    radial-gradient(75% 95% at 100% 100%, rgba(124,12,30,.42) 0%, transparent 58%),
+    linear-gradient(135deg,#8f1427 0%,#c32632 42%,#8e1028 100%);
+  color:#fffaf1;
+}
+.site-footer::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:-1;
+  background:linear-gradient(110deg,rgba(255,255,255,.055),transparent 32%,rgba(60,0,10,.12));
+  pointer-events:none;
+}
+.footer-brand p{color:rgba(255,250,241,.78)}
+.footer-column h3{color:rgba(255,250,241,.62)}
+.footer-column a{color:rgba(255,250,241,.96)}
+.footer-column a:hover{color:#fff}
+.footer-bottom{border-color:rgba(255,250,241,.20)}
+.footer-bottom p{color:rgba(255,250,241,.68)}
+.footer-logo{
+  width:clamp(92px,7vw,124px)!important;
+  filter:brightness(0) invert(1);
+}
+@media(max-width:760px){
+  .site-footer{background:
+    radial-gradient(100% 65% at 10% 0%,rgba(255,112,82,.20),transparent 58%),
+    linear-gradient(155deg,#9b1829 0%,#c62934 48%,#861025 100%)}
+  .footer-logo{width:96px!important}
+}
