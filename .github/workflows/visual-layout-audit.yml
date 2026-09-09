@@ -5,6 +5,9 @@ on:
   pull_request:
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   visual-layout:
     runs-on: ubuntu-latest
@@ -20,7 +23,17 @@ jobs:
       - run: |
           for i in {1..20}; do curl -fsS http://127.0.0.1:4173/index.html && exit 0; sleep 1; done
           exit 1
-      - run: npm run visual:audit
+      - name: Run visual audit
+        id: audit
+        run: npm run visual:audit
+        continue-on-error: true
+      - name: Publish machine-readable report
+        if: always()
+        run: |
+          echo "## Visual Layout Audit" >> "$GITHUB_STEP_SUMMARY"
+          if [ -f test-results/layout-report.json ]; then
+            node -e "const r=require('./test-results/layout-report.json'); console.log('Viewports:',r.viewports.length,'Failures:',r.failures.length); console.log(JSON.stringify(r.failures,null,2))" >> "$GITHUB_STEP_SUMMARY"
+          fi
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -30,3 +43,6 @@ jobs:
             playwright-report/
             /tmp/site.log
           if-no-files-found: ignore
+      - name: Fail when layout audit finds defects
+        if: steps.audit.outcome == 'failure'
+        run: exit 1
