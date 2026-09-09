@@ -53,3 +53,21 @@
   modal and WhatsApp enquiry, especially same-name entries.
 - A preview or local commit is not a live deployment. Verify GitHub Pages after
   the release, and report deployment blockers rather than claiming publication.
+
+
+## Visual repair loop
+
+For every responsive UI change:
+
+1. Run `npm run visual:audit`.
+2. Read `test-results/layout-report.json`.
+3. Inspect the matching `test-results/layout-*.png` screenshots.
+4. Fix one root cause at a time.
+5. Re-run the audit.
+6. Do not stop while the report contains geometry failures.
+
+The CI artifact named `visual-layout-report` is the handoff package for other agents: it contains the JSON report, screenshots, Playwright report and server log.
+
+Priority order: horizontal overflow → section overlap → modal viewport escape → collapsed/clipped content → breakpoint failures → screenshot balance.
+
+Avoid compensating hacks such as arbitrary negative margins, unnecessary absolute positioning or cascade fights.
