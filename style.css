@@ -1177,3 +1177,18 @@ a:focus-visible,
 #modal-stage #modal-photo{
   transition:filter .35s ease;
 }
+
+
+/* Zoom/pan viewport boundary.
+   At rest the full product uses object-fit:contain.
+   During zoom, the enlarged image is clipped exactly to the media viewport. */
+#modal-stage,
+.modal-stage{
+  overflow:hidden !important;
+  isolation:isolate;
+}
+
+#modal-photo,
+#modal-video{
+  transform-origin:center center;
+}
