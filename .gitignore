@@ -20,6 +20,11 @@ Thumbs.db
 dist/
 build/
 
+# Node + audit artifacts
+node_modules/
+test-results/
+playwright-report/
+
 # Temporary files
 *.tmp
 *.temp

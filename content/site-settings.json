@@ -5,7 +5,7 @@
   "location": "Kolkata, West Bengal, India",
   "gst": "Available on request",
   "heroHeadline": "Objects that change a space.",
-  "heroIntro": "For wholesalers, retailers and event decorators looking for decorative products for their business and projects.",
+  "heroIntro": "Hanging decor, made in colour.",
   "heroImage": "assets/images/hero-jhalar.webp",
   "siteTitle": "JHALAR | Decorative Hanging Products",
   "siteDescription": "Decorative hanging products for wholesalers, retailers and event decorators.",
@@ -83,7 +83,7 @@
     },
     "collection": {
       "label": "PRODUCTS",
-      "title": "Explore the range",
+      "title": "View the collection.",
       "intro": "View the available styles and open any product for details.",
       "note": ""
     },
@@ -124,7 +124,7 @@
     },
     "about": {
       "label": "ABOUT JHALAR",
-      "title": "A decor supplier based near Kolkata.",
+      "title": "Colour, texture and movement — designed to change a space.",
       "intro": "We work with wholesalers, retailers and event decorators who source decorative products for their customers and projects.",
       "image": "assets/images/about-collage.jpg",
       "values": [
@@ -148,7 +148,7 @@
     },
     "contact": {
       "label": "SEND AN ENQUIRY",
-      "title": "Tell us what you need.",
+      "title": "Have something in mind?",
       "intro": "Send the product or design, quantity and any important details. We will take it from there.",
       "submitLabel": "Prepare enquiry"
     },

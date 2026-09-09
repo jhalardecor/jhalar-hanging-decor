@@ -1470,7 +1470,7 @@ function restoreGitHubToken() {
   try { const s = localStorage.getItem('jhalar_github_token'); if (s) { state.githubToken = atob(s); setVal('ed-github-token', state.githubToken); updateTokenStatus('Token restored','ok'); } } catch(e) {}
 }
 function saveGitHubToken() { if (state.githubToken) { try { localStorage.setItem('jhalar_github_token', btoa(state.githubToken)); } catch(e) {} } }
-async async function testGitHubToken() {
+async function testGitHubToken() {
   const t = getVal('ed-github-token').trim(); if (!t) { updateTokenStatus('Enter a token','bad'); return; }
   state.githubToken = t; saveGitHubToken();
   updateTokenStatus('Checking repository write access...','');
