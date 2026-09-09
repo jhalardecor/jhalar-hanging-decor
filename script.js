@@ -608,3 +608,17 @@ initProducts();initRuntime();
   window.JHALAR_CHECK_FOR_UPDATE=checkVersion;
   checkVersion();
 })();
+
+
+/* Global browser pinch-zoom guard.
+   The popup product media is excluded because it has its own custom zoom engine. */
+(function(){
+  const viewer=e=>e.target.closest&&e.target.closest('#modal-stage');
+  document.addEventListener('gesturestart',e=>{if(!viewer(e))e.preventDefault()},{passive:false});
+  document.addEventListener('gesturechange',e=>{if(!viewer(e))e.preventDefault()},{passive:false});
+  document.addEventListener('gestureend',e=>{if(!viewer(e))e.preventDefault()},{passive:false});
+
+  document.addEventListener('touchmove',e=>{
+    if(e.touches.length>1&&!viewer(e))e.preventDefault();
+  },{passive:false});
+})();
