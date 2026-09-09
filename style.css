@@ -1600,3 +1600,70 @@ body.project-inquiry-open{overflow:hidden}
 .inquiry-guidance{margin:0;padding:12px 14px;border-radius:12px;background:#f0ece4;color:#666;font-size:.82rem;line-height:1.45}
 .inquiry-dynamic-questions label{animation:question-in .25s cubic-bezier(.2,.8,.2,1)}
 @keyframes question-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+
+/* Project inquiry — system-level visual reset */
+.project-inquiry{padding:clamp(18px,4vw,56px);background:transparent}
+.project-inquiry-backdrop{background:rgba(20,25,66,.42);backdrop-filter:blur(18px) saturate(115%)}
+.project-inquiry-card{
+  width:min(620px,100%);
+  max-height:calc(100dvh - clamp(36px,8vh,112px));
+  padding:clamp(28px,4vw,52px);
+  border-radius:32px;
+  background:rgba(255,250,241,.96);
+  border:1px solid rgba(255,255,255,.72);
+  box-shadow:0 32px 100px rgba(20,25,66,.20),0 2px 8px rgba(20,25,66,.06);
+  scrollbar-width:none;
+}
+.project-inquiry-card::-webkit-scrollbar{display:none}
+.project-inquiry-close{
+  top:18px;right:18px;width:38px;height:38px;
+  background:transparent;color:#141942;font-size:24px;font-weight:300;
+  opacity:.58;transition:opacity .2s ease,background .2s ease,transform .2s ease;
+}
+.project-inquiry-close:hover{opacity:1;background:rgba(20,25,66,.06);transform:rotate(90deg)}
+.project-inquiry-head{padding-right:48px;margin-bottom:30px}
+.project-inquiry-head .eyebrow{font-size:.68rem;letter-spacing:.14em;color:#7a746c}
+.project-inquiry-head h2{font-size:clamp(2rem,4.2vw,3.15rem);line-height:1.04;font-weight:500;letter-spacing:-.055em}
+.project-inquiry-head p{max-width:43ch;font-size:.94rem;color:#777067}
+#project-inquiry-form{gap:24px}
+#project-inquiry-form>label,.inquiry-dynamic-questions>label{gap:9px;font-size:.68rem;letter-spacing:.11em;color:#6d675f}
+#project-inquiry-form input,#project-inquiry-form textarea{
+  border:0;border-bottom:1px solid rgba(20,25,66,.16);border-radius:0;
+  background:transparent;padding:13px 0 11px;color:#141942;
+}
+#project-inquiry-form textarea{min-height:92px}
+#project-inquiry-form input:focus,#project-inquiry-form textarea:focus{
+  border-color:#141942;box-shadow:none;
+}
+.inquiry-role{padding-top:2px}
+.inquiry-role legend{font-size:.68rem;letter-spacing:.11em;color:#6d675f;margin-bottom:14px}
+.inquiry-role-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.inquiry-role-options label:last-child:nth-child(5){grid-column:1/-1}
+.inquiry-role-options span{
+  justify-content:center;min-height:54px;padding:0 12px;border-radius:16px;
+  border:1px solid rgba(20,25,66,.10);background:rgba(20,25,66,.025);
+  font-size:.84rem;font-weight:500;color:#4d4a47;
+}
+.inquiry-role-options input:checked+span{
+  background:#141942;color:#fffaf1;border-color:#141942;box-shadow:0 10px 24px rgba(20,25,66,.16);
+}
+.inquiry-guidance{padding:0;background:transparent;color:#8a8379;font-size:.82rem}
+.inquiry-dynamic-questions{gap:20px}
+.project-inquiry-submit{
+  min-height:58px;border-radius:18px;padding:0 24px;
+  background:#141942;font-weight:500;letter-spacing:.01em;
+  box-shadow:0 12px 28px rgba(20,25,66,.16);
+}
+.project-inquiry-submit:hover{transform:translateY(-1px);box-shadow:0 16px 34px rgba(20,25,66,.22)}
+.location-suggestions{border-radius:18px;border:1px solid rgba(20,25,66,.10);box-shadow:0 20px 48px rgba(20,25,66,.14)}
+@media(max-width:560px){
+ .project-inquiry{padding:0;align-items:end}
+ .project-inquiry-card{max-height:92dvh;padding:30px 22px calc(28px + env(safe-area-inset-bottom));border-radius:28px 28px 0 0}
+ .project-inquiry-head{margin-bottom:26px}
+ .project-inquiry-head h2{font-size:2.25rem}
+ #project-inquiry-form{gap:22px}
+ .inquiry-role-options{grid-template-columns:1fr}
+ .inquiry-role-options label:last-child:nth-child(5){grid-column:auto}
+ .inquiry-role-options span{min-height:50px;justify-content:flex-start;padding-inline:16px}
+}
