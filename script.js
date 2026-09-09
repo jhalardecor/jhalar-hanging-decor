@@ -916,8 +916,8 @@ initProducts();initRuntime();
       'Hello JHALAR, I would like to discuss a custom project.',
       '',
       'Name: '+val('name'),
+      'I am: '+val('role'),
       val('phone')?'Phone: '+val('phone'):null,
-      'Project / Space: '+val('project'),
       val('quantity')?'Quantity: '+val('quantity'):null,
       val('location')?'Location: '+val('location'):null,
       val('details')?'Requirements: '+val('details'):null
