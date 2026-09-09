@@ -2306,3 +2306,46 @@ body.project-inquiry-open{overflow:hidden}
   text-wrap:balance;
   font-size:clamp(2.3rem,3.4vw,4rem);
 }
+
+
+/* =========================================================
+   CANONICAL FLUID LAYOUT WRAPPERS
+   Shared geometry only — no duplicate fixed-width containers.
+   ========================================================= */
+.shell,
+.hero-copy,
+.custom-projects-shell,
+.about-layout,
+.contact-card,
+.updates-inner,
+.footer-main,
+.trust-strip-inner{
+  width:min(100% - (2 * var(--gutter)), var(--shell-max));
+  margin-inline:auto;
+}
+.hero-copy{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  justify-content:center;
+  min-height:inherit;
+}
+.collection-intro,
+.custom-projects-shell,
+.about-layout,
+.contact-card,
+.updates-inner{
+  min-width:0;
+}
+@media(max-width:760px){
+  .shell,
+  .hero-copy,
+  .custom-projects-shell,
+  .about-layout,
+  .contact-card,
+  .updates-inner,
+  .footer-main,
+  .trust-strip-inner{
+    width:min(100% - (2 * var(--gutter)), var(--shell-max));
+  }
+}
