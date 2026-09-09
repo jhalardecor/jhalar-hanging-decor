@@ -260,3 +260,135 @@ h1,h2,h3,h4,h5,h6{margin:0;font-family:var(--font-display);font-weight:400;color
 @media(max-width:390px){
   .modal-stage{width:min(100%,86vw)}
 }
+
+
+/* ─────────────────────────────────────────
+   PRODUCT VIEWER — COMPOSITION BALANCE
+   One outer inset + one relationship gap.
+   The product media remains 1:1 at every size.
+───────────────────────────────────────── */
+
+.modal-card{
+  --modal-pad:clamp(20px,2.8vw,40px);
+  --modal-gap:clamp(28px,4vw,64px);
+
+  width:min(1080px,100%);
+  padding:var(--modal-pad);
+  gap:var(--modal-gap);
+  align-items:center;
+  overflow:auto;
+}
+
+/* The media area is structural only — no second card around the product. */
+.modal-media{
+  flex:1.08 1 460px;
+  padding:0;
+  margin:0;
+  background:transparent;
+  border:0;
+  overflow:visible;
+}
+
+/* Permanent 1:1 media rule. Size is fluid; the ratio is not. */
+.modal-stage{
+  width:min(100%,68dvh);
+  aspect-ratio:1 / 1;
+  height:auto;
+  margin:0;
+  padding:0;
+  background:transparent;
+  border:0;
+  overflow:hidden;
+}
+
+.modal-stage img,
+.modal-stage video{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  object-position:center;
+}
+
+/* Copy is vertically coherent instead of stretched across modal height. */
+.modal-copy{
+  flex:.92 1 360px;
+  align-self:center;
+  justify-content:center;
+  padding:0;
+  margin:0;
+  background:transparent;
+  overflow:visible;
+}
+
+.modal-copy .label{
+  margin:0 0 12px;
+}
+
+.modal-copy h3#modal-title{
+  margin:0 0 8px;
+}
+
+.modal-variant{
+  margin:0 0 24px;
+}
+
+.modal-copy #modal-desc{
+  margin:0 0 28px;
+  max-width:46ch;
+}
+
+/* The action follows the content hierarchy; it is not a banner. */
+.modal-wa-btn{
+  width:auto;
+  margin:0;
+  align-self:flex-start;
+  padding-inline:22px;
+}
+
+/* Separation comes from space, not a hard vertical divider. */
+.modal-media,
+.modal-copy{
+  border:0;
+}
+
+.modal-close{
+  top:var(--modal-pad);
+  right:var(--modal-pad);
+}
+
+@media(max-width:760px){
+  .modal-card{
+    --modal-pad:20px;
+    --modal-gap:24px;
+
+    width:100%;
+    min-height:100%;
+    padding:var(--modal-pad);
+    gap:var(--modal-gap);
+    align-items:flex-start;
+  }
+
+  .modal-media{
+    flex:1 1 100%;
+  }
+
+  .modal-stage{
+    width:min(100%,86vw);
+  }
+
+  .modal-copy{
+    flex:1 1 100%;
+    padding:0 0 max(8px,env(safe-area-inset-bottom));
+    justify-content:flex-start;
+  }
+
+  .modal-copy #modal-desc{
+    max-width:100%;
+  }
+
+  .modal-close{
+    position:absolute;
+    top:12px;
+    right:12px;
+  }
+}
