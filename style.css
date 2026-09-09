@@ -60,3 +60,12 @@ p{margin:0;color:var(--ink);font-size:var(--type-body);line-height:1.62;letter-s
 }
 @media (max-width:390px){:root{--gutter:16px;--shell:calc(100% - 32px)}.hero h1{font-size:2.5rem}.product-grid{column-gap:10px;row-gap:24px}.collection-intro h2{font-size:2.1rem}.contact-card{padding:26px 20px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}
+
+
+/* MODAL STACKING — preserve global header while product popup is open */
+.modal{top:var(--header-h);z-index:90}
+body.modal-open .header{z-index:100}
+@media(max-width:760px){
+ .modal{top:var(--header-h);inset-inline:0;bottom:0;padding:0}
+ .modal-card{height:calc(100dvh - var(--header-h));max-height:calc(100dvh - var(--header-h))}
+}
