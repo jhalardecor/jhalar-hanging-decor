@@ -550,7 +550,14 @@ initProducts();initRuntime();
  };
  stage.addEventListener('pointerup',stop);
  stage.addEventListener('pointercancel',stop);
- stage.addEventListener('dblclick',e=>zoom(z>1.01?1:2,e.clientX,e.clientY));
+ stage.addEventListener('dblclick',e=>{
+   /* Double activation is always a return to the true contained state. */
+   if(stage.classList.contains('is-fullview')){
+     stage.classList.remove('is-fullview');
+     modal.classList.remove('media-focus');
+   }
+   reset();
+ });
 
  // Tap/click on media toggles a focused full-view state.
  const toggleFullMedia=()=>{
@@ -566,8 +573,15 @@ initProducts();initRuntime();
  stage.addEventListener('touchend',e=>{
    if(e.touches.length||pinch||drag)return;
    const now=Date.now();
-   if(now-lastTap<350){toggleFullMedia();lastTap=0}
-   else lastTap=now;
+   if(now-lastTap<350){
+     /* Double tap restores the original card composition and 1× scale. */
+     if(stage.classList.contains('is-fullview')){
+       stage.classList.remove('is-fullview');
+       modal.classList.remove('media-focus');
+     }
+     reset();
+     lastTap=0;
+   } else lastTap=now;
  },{passive:true});
  document.addEventListener('keydown',e=>{
    if(e.key==='Escape'&&stage.classList.contains('is-fullview')){
