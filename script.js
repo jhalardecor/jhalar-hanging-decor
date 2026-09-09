@@ -90,9 +90,9 @@ window.addEventListener('popstate',()=>{
 });
 
 function initProductDeepLink(){
- const wanted=new URLSearchParams(location.search).get('product');
+ const wanted=location.pathname.match(/products\/([^/]+)-(\\d+)\/?$/);
  if(!wanted)return;
- const id=Number(String(wanted).match(/-(\d+)$/)?.[1]);
+ const id=Number(wanted[2]);
  if(id&&state.products?.some(p=>Number(p.id)===id))openProduct(id,false);
 }
 
@@ -136,14 +136,19 @@ function slugify(value){
  return String(value||'product').toLowerCase().trim()
   .replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'')||'product';
 }
-function productSlug(p){return slugify(p.title)+'-'+p.id}
+function productSlug(p){return slugify(p.title)}
+function productUrl(p){
+ const base=new URL(window.location.href);
+ base.search='';
+ base.hash='';
+ return base.pathname.replace(/\/?$/,'/')+'products/'+productSlug(p)+'-'+p.id+'/';
+}
 function syncProductUrl(p,replace=false){
- const url=new URL(window.location.href);
- url.searchParams.set('product',productSlug(p));
- history[replace?'replaceState':'pushState']({product:p.id},'',url);
+ const path=productUrl(p);
+ history[replace?'replaceState':'pushState']({product:p.id},'',path);
 }
 function clearProductUrl(){
- const url=new URL(window.location.href);url.searchParams.delete('product');history.replaceState({},'',url);
+ history.replaceState({},'',location.pathname.replace(/products\/[^/]+\/?$/,''));
 }
 function visibleProducts(){return state.filter==='all'?state.products:state.products.filter(p=>p.category===state.filter)}
 function mediaType(src,type){if(type)return type;return /\\.(mp4|webm|ogg|mov)(?:[?#]|$)/i.test(String(src))?'video':'image'}
@@ -164,7 +169,7 @@ function renderProducts(){
    const m=mediaList(p),main=m[0]?.src||'',alt=m[1]?.src||'',name=productNameParts(p);
    const slug=slugify(p.title)+'-'+p.id;
    return '<article class="product-card reveal" data-id="'+p.id+'" style="transition-delay:'+Math.min(i*45,320)+'ms">'+
-     '<a class="product-link" href="?product='+encodeURIComponent(slug)+'" data-product-link="'+p.id+'" aria-label="View '+esc(p.title)+'">'+
+     '<a class="product-link" href="'+esc(productUrl(p))+'" data-product-link="'+p.id+'" aria-label="View '+esc(p.title)+'">'+
      '<div class="product-image"><img src="'+esc(main)+'" alt="'+esc(productAlt(p))+'" loading="lazy">'+
      (alt?'<img class="alt-img" src="'+esc(alt)+'" alt="" loading="lazy">':'')+
      '</div><div class="product-info"><span class="product-category">'+esc(p.category)+'</span><h3 class="product-title">'+esc(name.name)+'</h3>'+
