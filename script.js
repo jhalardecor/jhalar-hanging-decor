@@ -551,6 +551,31 @@ initProducts();initRuntime();
  stage.addEventListener('pointerup',stop);
  stage.addEventListener('pointercancel',stop);
  stage.addEventListener('dblclick',e=>zoom(z>1.01?1:2,e.clientX,e.clientY));
+
+ // Tap/click on media toggles a focused full-view state.
+ const toggleFullMedia=()=>{
+   if(stage.classList.contains('is-video'))return;
+   const open=stage.classList.toggle('is-fullview');
+   modal.classList.toggle('media-focus',open);
+   if(!open)reset();
+ };
+ stage.addEventListener('click',e=>{
+   if(e.detail===1&&!drag&&finePointer())toggleFullMedia();
+ });
+ let lastTap=0;
+ stage.addEventListener('touchend',e=>{
+   if(e.touches.length||pinch||drag)return;
+   const now=Date.now();
+   if(now-lastTap<350){toggleFullMedia();lastTap=0}
+   else lastTap=now;
+ },{passive:true});
+ document.addEventListener('keydown',e=>{
+   if(e.key==='Escape'&&stage.classList.contains('is-fullview')){
+     stage.classList.remove('is-fullview');
+     modal.classList.remove('media-focus');
+     reset();
+   }
+ });
  img.addEventListener('load',()=>{img.style.transformOrigin='center center';reset()});
  // Every product/media swap starts from the true 1× contained view.
  stage.addEventListener('product-media-change',()=>requestAnimationFrame(reset));
