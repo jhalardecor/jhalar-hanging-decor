@@ -496,7 +496,13 @@ initProducts();initRuntime();
  }
  // Mouse / fine-pointer devices only: wheel or trackpad scroll zooms the product image.
  // Touch screens must keep normal page scrolling; zoom there is pinch-only.
- stage.addEventListener('wheel',e=>{if(!finePointer()||!modal.classList.contains('open')||stage.classList.contains('is-video'))return;e.preventDefault();zoom(z*Math.exp(-e.deltaY*.001),e.clientX,e.clientY)},{passive:false});
+ stage.addEventListener('wheel',e=>{
+   if(!finePointer()||!modal.classList.contains('open')||stage.classList.contains('is-video'))return;
+   /* Ctrl/⌘ + wheel belongs to the browser's page zoom, never the product viewer. */
+   if(e.ctrlKey||e.metaKey)return;
+   e.preventDefault();
+   zoom(z*Math.exp(-e.deltaY*.001),e.clientX,e.clientY)
+ },{passive:false});
 
  // Mobile: two-finger pinch zooms the product image itself, not the page.
  let pinch=null;
