@@ -1707,3 +1707,58 @@ body.project-inquiry-open{overflow:hidden}
 
 /* Product cards: the card itself is the interaction — no forced secondary CTA. */
 .product-open{display:none!important}
+
+
+/* =========================================================
+   JHALAR ACTION SYSTEM — one colour hierarchy, one language
+   ========================================================= */
+:root{
+  --action-primary:var(--heading);
+  --action-primary-hover:#4f1c27;
+  --action-primary-ink:var(--cream);
+  --action-accent:var(--red);
+  --action-quiet:var(--ink);
+}
+
+/* Primary actions: one solid brand action, never gradients. */
+.hero-copy a,
+.button-light,
+.contact-cta,
+.modal-wa-btn,
+.project-inquiry-submit{
+  background:var(--action-primary)!important;
+  color:var(--action-primary-ink)!important;
+  box-shadow:none!important;
+}
+
+/* Accent is reserved for state and emphasis, not random button fills. */
+.hero-copy a:hover,
+.button-light:hover,
+.contact-cta:hover,
+.modal-wa-btn:hover,
+.project-inquiry-submit:hover{
+  background:var(--action-primary-hover)!important;
+  color:var(--action-primary-ink)!important;
+  box-shadow:none!important;
+}
+
+/* Text actions remain quiet and use the same ink hierarchy. */
+.spaces-link,
+.nav-enquire{
+  color:var(--action-quiet)!important;
+}
+.filter-btn:hover{color:var(--heading)!important}
+.filter-btn.active{color:var(--heading)!important;border-color:var(--action-accent)!important}
+
+/* Selected controls use the brand heading, not an unrelated navy system. */
+.inquiry-role-options input:checked+span{
+  background:var(--action-primary)!important;
+  border-color:var(--action-primary)!important;
+  color:var(--action-primary-ink)!important;
+  box-shadow:none!important;
+}
+
+/* Remove inconsistent red shadow recipes from all action components. */
+.modal-wa-btn,
+.project-inquiry-submit,
+.contact-cta{box-shadow:none!important}
