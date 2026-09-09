@@ -54,15 +54,15 @@
       <p>Share a few details. We’ll prepare your message and continue the conversation on WhatsApp.</p>
     </div>
     <form id="project-inquiry-form">
-      <label>Your name<input name="name" type="text" autocomplete="name" required></label>
-      <label>Phone number<input name="phone" type="tel" autocomplete="tel"></label>
-      <label>Project / space<input name="project" type="text" placeholder="Home, event, hotel, shop…" required></label>
+      <label>Your name<input name="name" type="text" autocomplete="name" placeholder="How should we address you?" required></label>
+      <label>What are you decorating?<select name="project" required><option value="" selected disabled>Select your project type</option><option>Home / residence</option><option>Wedding or celebration</option><option>Hotel / hospitality</option><option>Retail / commercial space</option><option>Festival / event</option><option>Other custom project</option></select></label>
+      <label>Where is the project?<span class="location-field"><input id="project-location" name="location" type="text" autocomplete="street-address" placeholder="Start typing your address or city" required><span class="location-spinner" aria-hidden="true"></span><div id="location-suggestions" class="location-suggestions" role="listbox" aria-label="Address suggestions"></div></span><small>Choose a suggestion for the best delivery/project context.</small></label>
       <div class="project-inquiry-grid">
-        <label>Quantity<input name="quantity" type="text" placeholder="Approx. quantity"></label>
-        <label>Location<input name="location" type="text" placeholder="City"></label>
+        <label>How many pieces do you need?<input name="quantity" type="text" placeholder="For example: 20–30"></label>
+        <label>Best WhatsApp number<input name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+91 …"></label>
       </div>
-      <label>Tell us what you need<textarea name="details" rows="4" placeholder="Colours, size, timeline or any special requirements"></textarea></label>
-      <button class="project-inquiry-submit" type="submit">Continue on WhatsApp <span aria-hidden="true">↗</span></button>
+      <label>What would you like us to create?<textarea name="details" rows="4" placeholder="Tell us about colours, style, dimensions, deadline or anything important"></textarea></label>
+      <button class="project-inquiry-submit" type="submit">Continue to WhatsApp <span aria-hidden="true">↗</span></button>
     </form>
   </div>
 </div>
