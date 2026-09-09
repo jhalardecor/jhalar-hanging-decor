@@ -793,3 +793,45 @@ initProducts();initRuntime();
     if(e.touches.length>1&&!viewer(e))e.preventDefault();
   },{passive:false});
 })();
+
+
+/* Custom project inquiry → structured WhatsApp handoff */
+(function(){
+  const modal=document.getElementById('project-inquiry-modal');
+  const form=document.getElementById('project-inquiry-form');
+  const triggers=document.querySelectorAll('.discuss-project-trigger');
+  if(!modal||!form)return;
+
+  const open=()=>{
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden','false');
+    document.body.classList.add('project-inquiry-open');
+    setTimeout(()=>form.elements.name&&form.elements.name.focus(),220);
+  };
+  const close=()=>{
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden','true');
+    document.body.classList.remove('project-inquiry-open');
+  };
+  triggers.forEach(t=>t.addEventListener('click',open));
+  modal.querySelectorAll('[data-project-close]').forEach(el=>el.addEventListener('click',close));
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&modal.classList.contains('open'))close()});
+
+  form.addEventListener('submit',e=>{
+    e.preventDefault();
+    const data=new FormData(form);
+    const val=k=>(data.get(k)||'').toString().trim();
+    const message=[
+      'Hello JHALAR, I would like to discuss a custom project.',
+      '',
+      'Name: '+val('name'),
+      val('phone')?'Phone: '+val('phone'):null,
+      'Project / Space: '+val('project'),
+      val('quantity')?'Quantity: '+val('quantity'):null,
+      val('location')?'Location: '+val('location'):null,
+      val('details')?'Requirements: '+val('details'):null
+    ].filter(Boolean).join('\n');
+    window.open('https://wa.me/918100656258?text='+encodeURIComponent(message),'_blank','noopener');
+    close();
+  });
+})();
