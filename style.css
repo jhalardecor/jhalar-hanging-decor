@@ -24,7 +24,7 @@ h1,h2,h3,h4,h5,h6{margin:0;font-family:var(--font-display);font-weight:400;color
 .nav-enquire:focus-visible{outline:2px solid var(--red);outline-offset:5px}
 
 
-/* PRODUCT VIEWER — single geometry override */
+/* PRODUCT VIEWER — PROFESSIONAL MEDIA PRESENTATION */
 .header{z-index:1100}
 
 .modal{
@@ -36,61 +36,156 @@ h1,h2,h3,h4,h5,h6{margin:0;font-family:var(--font-display);font-weight:400;color
   z-index:1000;
   padding:clamp(18px,3vw,36px);
   place-items:center;
+  background:rgba(20,25,66,.48);
 }
 
 .modal-card{
-  width:min(1080px,calc(100vw - 48px));
-  height:min(700px,calc(100dvh - var(--header-h) - 48px));
+  width:min(1120px,calc(100vw - 48px));
+  height:min(720px,calc(100dvh - var(--header-h) - 48px));
   max-width:100%;
   max-height:calc(100dvh - var(--header-h) - 36px);
-  grid-template-columns:minmax(0,1.08fr) minmax(340px,.92fr);
+  grid-template-columns:minmax(0,1.1fr) minmax(340px,.9fr);
+  background:var(--surface);
 }
 
+/* Media panel: this is a presentation area, not a stretched image box */
 .modal-media{
   position:relative;
   min-width:0;
   min-height:0;
   height:100%;
+  padding:clamp(16px,2vw,24px);
   overflow:hidden;
   display:grid;
   place-items:center;
+  background:
+    radial-gradient(circle at 50% 38%,rgba(255,255,255,.92) 0%,rgba(255,255,255,.38) 36%,transparent 70%),
+    var(--surface-2);
+  border-right:1px solid var(--line);
 }
 
+/* Inner canvas gives every product a consistent visual stage */
 .modal-stage{
+  position:relative;
+  isolation:isolate;
   width:100%;
   height:100%;
   min-width:0;
   min-height:0;
-  padding:clamp(36px,5vw,72px);
+  padding:clamp(32px,5vw,68px);
   overflow:hidden;
   display:grid;
   place-items:center;
   touch-action:none;
+  background:rgba(255,253,249,.78);
+  border:1px solid rgba(217,211,202,.82);
+  box-shadow:0 10px 28px rgba(47,41,43,.045);
 }
 
+/* Quiet inner depth — keeps the canvas intentional without decorating the product */
+.modal-stage::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:-1;
+  pointer-events:none;
+  background:linear-gradient(135deg,rgba(255,255,255,.52),transparent 42%,rgba(47,41,43,.025));
+}
+
+/* Product always fits inside a safe visual zone */
 .modal-stage img,
 .modal-stage video{
+  position:relative;
+  z-index:1;
   display:block;
   width:auto;
   height:auto;
-  max-width:90%;
-  max-height:90%;
+  max-width:84%;
+  max-height:84%;
   margin:auto;
   object-fit:contain;
   object-position:center;
   transform-origin:center center;
 }
 
+/* Navigation belongs to the media shell, not on top of the product */
+.modal-nav{
+  position:absolute;
+  top:50%;
+  z-index:4;
+  width:40px;
+  height:40px;
+  border:1px solid var(--line);
+  border-radius:50%;
+  background:rgba(255,253,249,.96);
+  color:var(--heading);
+  transform:translateY(-50%);
+  box-shadow:0 4px 14px rgba(47,41,43,.08);
+}
+
+.modal-nav:hover{
+  background:var(--surface);
+  border-color:var(--ink);
+}
+
+.prev{left:clamp(24px,3vw,34px)}
+.next{right:clamp(24px,3vw,34px)}
+
+/* Thumbnail dock: compact and clearly separate from the main product */
+.modal-thumbs{
+  position:absolute;
+  z-index:5;
+  left:50%;
+  bottom:clamp(26px,3vw,38px);
+  transform:translateX(-50%);
+  display:flex;
+  align-items:center;
+  gap:8px;
+  max-width:calc(100% - 110px);
+  padding:7px;
+  background:rgba(255,253,249,.92);
+  border:1px solid var(--line);
+  box-shadow:0 6px 20px rgba(47,41,43,.07);
+}
+
+.modal-thumb{
+  width:42px;
+  height:42px;
+  flex:0 0 auto;
+  border:1px solid transparent;
+  padding:3px;
+  background:var(--surface);
+}
+
+.modal-thumb[aria-current="true"],
+.modal-thumb.is-active{
+  border-color:var(--red);
+}
+
+.modal-thumb img{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+}
+
+/* Copy remains a separate reading zone */
 .modal-copy{
   min-width:0;
   min-height:0;
   max-height:100%;
-  padding:clamp(30px,3.5vw,46px);
+  padding:clamp(30px,3.5vw,48px);
   overflow:auto;
+  background:var(--surface);
 }
 
-.modal-close{z-index:30}
+.modal-close{
+  z-index:30;
+  top:18px;
+  right:18px;
+}
 
+/* Mobile: media gets a compact catalogue stage, never a giant image */
 @media (max-width:760px){
   .header{z-index:1100}
 
@@ -111,19 +206,22 @@ h1,h2,h3,h4,h5,h6{margin:0;font-family:var(--font-display);font-weight:400;color
     max-height:none;
     display:grid;
     grid-template-columns:1fr;
-    grid-template-rows:minmax(190px,30dvh) minmax(0,1fr);
+    grid-template-rows:minmax(210px,32dvh) minmax(0,1fr);
     overflow:hidden;
   }
 
   .modal-media{
     width:100%;
     height:100%;
+    padding:10px 14px 12px;
     border-right:0;
     border-bottom:1px solid var(--line);
   }
 
   .modal-stage{
-    padding:18px 20px;
+    padding:22px 28px;
+    border-color:rgba(217,211,202,.7);
+    box-shadow:none;
     touch-action:pan-y;
   }
 
@@ -131,9 +229,14 @@ h1,h2,h3,h4,h5,h6{margin:0;font-family:var(--font-display);font-weight:400;color
   .modal-stage video{
     width:auto!important;
     height:auto!important;
-    max-width:82%!important;
-    max-height:82%!important;
+    max-width:76%!important;
+    max-height:76%!important;
     object-fit:contain!important;
+  }
+
+  .modal-nav,
+  .modal-thumbs{
+    display:none;
   }
 
   .modal-copy{
@@ -154,7 +257,11 @@ h1,h2,h3,h4,h5,h6{margin:0;font-family:var(--font-display);font-weight:400;color
 }
 
 @media (max-width:390px){
-  .modal-card{grid-template-rows:minmax(175px,28dvh) minmax(0,1fr)}
-  .modal-stage{padding:14px 16px}
+  .modal-card{
+    grid-template-rows:minmax(190px,30dvh) minmax(0,1fr);
+  }
+
+  .modal-media{padding:8px 12px 10px}
+  .modal-stage{padding:18px 24px}
 }
 
