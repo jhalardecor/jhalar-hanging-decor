@@ -883,6 +883,20 @@ initProducts();initRuntime();
     if(!role)return;
     roleInputs.forEach(input=>{input.checked=input.value===role});
     renderQuestions(role);
+
+    /* Progressive disclosure: once the choice is made, collapse the chooser
+       so the next questions become the only active focus. */
+    const roleChooser=form.querySelector('.inquiry-role-options');
+    const roleFieldset=form.querySelector('.inquiry-role');
+    if(roleChooser){
+      roleChooser.classList.add('is-collapsed');
+      roleChooser.setAttribute('aria-hidden','true');
+    }
+    if(roleFieldset){
+      roleFieldset.classList.add('is-selected');
+      roleFieldset.querySelector('legend').textContent='You are a '+role;
+    }
+
     requestAnimationFrame(()=>dynamicQuestions.scrollIntoView({block:'nearest',behavior:'smooth'}));
   };
   roleInputs.forEach(input=>{
