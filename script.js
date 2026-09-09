@@ -219,7 +219,7 @@ function openProduct(id){
  const name=productNameParts(p);$('#modal-category').textContent=p.category;$('#modal-title').textContent=name.name;$('#modal-variant').textContent=name.variant;$('#modal-variant').hidden=!name.variant;$('#modal-desc').textContent=p.description||'';
  const wa=$('#modal-wa-btn');wa.href='https://wa.me/'+state.whatsapp+'?text='+encodeURIComponent('Hello JHALAR, I am interested in '+p.title+'.');
  showModalMedia(0);
- const copy=$('.modal-copy');if(copy)copy.scrollTop=0;
+ const copy=$('.modal-copy-scroll')||$('.modal-copy');if(copy)copy.scrollTop=0;
  const modal=$('#product-modal');lastFocus=document.activeElement;modal.classList.add('open');modal.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';$('#modal-close').focus();
 }
 function closeModal(){
@@ -289,7 +289,9 @@ function applySettings(s){
  setImg('.story-image img',sc.about&&sc.about.image,DEFAULTS.aboutImage);
  setTxt('.contact .eyebrow',sc.contact&&sc.contact.label,DEFAULTS.contactLabel);
  setTxt('.contact h2',sc.contact&&sc.contact.title,DEFAULTS.contactTitle);
- const co=$('.contact p:not(.eyebrow)');setTxt(co,sc.contact&&sc.contact.intro,DEFAULTS.contactIntro);
+ /* The intro is the body paragraph inside the contact copy block; the label
+    paragraph (.label) must never receive intro copy. */
+ const co=$('.contact p:not(.eyebrow):not(.label)');setTxt(co,sc.contact&&sc.contact.intro,DEFAULTS.contactIntro);
  setTxt('.footer-row span:nth-child(2)',sc.footerTagline,DEFAULTS.footerTagline);
  applyNav(s.navItems);
  if(s.whatsapp&&s.whatsapp!==DEFAULTS.whatsapp){state.whatsapp=s.whatsapp;const a=$('.contact-cta');if(a)a.href='https://wa.me/'+s.whatsapp}
@@ -567,7 +569,7 @@ initProducts();initRuntime();
  },true);
 })();
 
-/* build 20260909.74 */
+/* build 20260909.77 */
 
 
 /* Header remains permanently available; no scroll-hide behavior. */
