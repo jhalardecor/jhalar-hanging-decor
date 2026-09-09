@@ -68,6 +68,13 @@ function renderFilters(){
 }
 
 // Premium interaction layer
+window.addEventListener('popstate',()=>{
+ const wanted=new URLSearchParams(location.search).get('product');
+ if(!wanted){closeModal(false);return}
+ const id=Number(String(wanted).match(/-(\\d+)$/)?.[1]);
+ if(id)openProduct(id,false);
+});
+
 function initPremiumInteractions(){
   const audienceCopy={
     wholesale:'Decorative products suitable for bulk business requirements.',
@@ -104,6 +111,15 @@ function initPremiumInteractions(){
   }
 }
 
+function productSlug(p){return slugify(p.title)+'-'+p.id}
+function syncProductUrl(p,replace=false){
+ const url=new URL(window.location.href);
+ url.searchParams.set('product',productSlug(p));
+ history[replace?'replaceState':'pushState']({product:p.id},'',url);
+}
+function clearProductUrl(){
+ const url=new URL(window.location.href);url.searchParams.delete('product');history.replaceState({},'',url);
+}
 function visibleProducts(){return state.filter==='all'?state.products:state.products.filter(p=>p.category===state.filter)}
 function mediaType(src,type){if(type)return type;return /\\.(mp4|webm|ogg|mov)(?:[?#]|$)/i.test(String(src))?'video':'image'}
 function normaliseMedia(item){if(typeof item==='string')return{src:item,type:mediaType(item)};if(item&&typeof item==='object'){const src=item.src||item.url||item.image||item.video||item.source;return src?{src,type:mediaType(src,item.type||item.mediaType)}:null}return null}
@@ -121,12 +137,14 @@ function renderProducts(){
  if(!grid)return;
  grid.innerHTML=all.map((p,i)=>{
    const m=mediaList(p),main=m[0]?.src||'',alt=m[1]?.src||'',name=productNameParts(p);
-   return '<article class="product-card reveal" data-id="'+p.id+'" role="button" tabindex="0" aria-label="View '+esc(p.title)+'" style="transition-delay:'+Math.min(i*45,320)+'ms">'+
-     '<div class="product-image" aria-hidden="true"><img src="'+esc(main)+'" alt="'+esc(productAlt(p))+'" loading="lazy">'+
+   const slug=slugify(p.title)+'-'+p.id;
+   return '<article class="product-card reveal" data-id="'+p.id+'" style="transition-delay:'+Math.min(i*45,320)+'ms">'+
+     '<a class="product-link" href="?product='+encodeURIComponent(slug)+'" data-product-link="'+p.id+'" aria-label="View '+esc(p.title)+'">'+
+     '<div class="product-image"><img src="'+esc(main)+'" alt="'+esc(productAlt(p))+'" loading="lazy">'+
      (alt?'<img class="alt-img" src="'+esc(alt)+'" alt="" loading="lazy">':'')+
      '</div><div class="product-info"><span class="product-category">'+esc(p.category)+'</span><h3 class="product-title">'+esc(name.name)+'</h3>'+
      (name.variant?'<span class="product-variant">'+esc(name.variant)+'</span>':'')+
-     '</div></article>';
+     '</div></a></article>';
  }).join('');
  if(!grid.dataset.productActivation){
    const activate=e=>{
@@ -213,8 +231,9 @@ function showModalMedia(i){
  $('.modal-nav.prev').hidden=m.length<=1;$('.modal-nav.next').hidden=m.length<=1;
  stage.dispatchEvent(new CustomEvent('product-media-change'));
 }
-function openProduct(id){
+function openProduct(id,updateUrl=true){
  const p=state.products.find(x=>Number(x.id)===id);if(!p)return;
+ if(updateUrl)syncProductUrl(p);
  state.modalProduct=p;state.modalMedia=mediaList(p);state.modalIndex=0;
  const name=productNameParts(p);$('#modal-category').textContent=p.category;$('#modal-title').textContent=name.name;$('#modal-variant').textContent=name.variant;$('#modal-variant').hidden=!name.variant;$('#modal-desc').textContent=p.description||'';
  const wa=$('#modal-wa-btn');wa.href='https://wa.me/'+state.whatsapp+'?text='+encodeURIComponent('Hello JHALAR, I am interested in '+p.title+'.');
@@ -222,7 +241,7 @@ function openProduct(id){
  const copy=$('.modal-copy');if(copy)copy.scrollTop=0;
  const modal=$('#product-modal');lastFocus=document.activeElement;modal.classList.add('open');modal.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';$('#modal-close').focus();
 }
-function closeModal(){
+function closeModal(updateUrl=true){
  const m=$('#product-modal');
  if(!m||!m.classList.contains('open'))return;
  const activeVideo=m.querySelector('video');
@@ -230,6 +249,7 @@ function closeModal(){
  m.classList.remove('is-closing');
  m.classList.remove('open');
  m.setAttribute('aria-hidden','true');
+ if(updateUrl)clearProductUrl();
  document.body.style.overflow='';
  if(lastFocus?.focus)requestAnimationFrame(()=>lastFocus.focus());
  lastFocus=null;
