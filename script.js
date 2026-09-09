@@ -8,12 +8,16 @@ const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&
 /* Canonical application root. Dynamic /products/... routes must never change where data or media are fetched from. */
 function appRoot(){
  /*
-  The script URL is the authoritative deployment root. This works on the
-  homepage, GitHub Pages project sites and restored /products/... routes.
+  script.js lives at the application root. Do not use ./ here: new URL('./',
+  script.js) resolves one directory too high when the deployment is a
+  GitHub Pages project site.
  */
  const runtime=[...document.scripts].map(x=>x.src).find(src=>/\/script\.js(?:\?|$)/.test(src));
- if(runtime)return new URL('./',runtime).href;
- return new URL('./',document.baseURI).href;
+ if(runtime){
+   const u=new URL(runtime);
+   return u.origin+u.pathname.replace(/\/script\.js$/,'/');
+ }
+ return location.origin+location.pathname.replace(/\/products\/.*$/,'').replace(/[^/]*$/,'');
 }
 function appUrl(path){
  const clean=String(path).replace(/^\.\//,'').replace(/^\/+/, '');
