@@ -69,3 +69,10 @@ body.modal-open .header{z-index:100}
  .modal{top:var(--header-h);inset-inline:0;bottom:0;padding:0}
  .modal-card{height:calc(100dvh - var(--header-h));max-height:calc(100dvh - var(--header-h))}
 }
+
+
+/* MENU STATE — preserve compact two-line icon and morph it into a close X */
+.menu span{transform-origin:center;transition:transform 240ms var(--ease),opacity 160ms ease}
+.menu.open span:first-child{transform:translateY(2.75px) rotate(45deg)}
+.menu.open span:last-child{transform:translateY(-2.75px) rotate(-45deg)}
+.menu:active{transform:scale(.96);transition:transform 100ms ease}
