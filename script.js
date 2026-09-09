@@ -152,7 +152,14 @@ function clearProductUrl(){
 }
 function visibleProducts(){return state.filter==='all'?state.products:state.products.filter(p=>p.category===state.filter)}
 function mediaType(src,type){if(type)return type;return /\\.(mp4|webm|ogg|mov)(?:[?#]|$)/i.test(String(src))?'video':'image'}
-function normaliseMedia(item){if(typeof item==='string')return{src:item,type:mediaType(item)};if(item&&typeof item==='object'){const src=item.src||item.url||item.image||item.video||item.source;return src?{src,type:mediaType(src,item.type||item.mediaType)}:null}return null}
+function normaliseMedia(item){
+ const raw=typeof item==='string'?item:(item&&typeof item==='object'?(item.src||item.url||item.image||item.video||item.source):'');
+ if(!raw)return null;
+ /* Product URLs can now be /products/.../; resolve relative catalogue media against site root. */
+ let src=String(raw).trim();
+ if(src&&!/^(https?:|data:|blob:|\/)/i.test(src))src=new URL(src,new URL(document.baseURI).origin+'/').href;
+ return {src,type:mediaType(src,typeof item==='object'?(item.type||item.mediaType):undefined)};
+}
 // Descriptive alt text is optional owner-editable content; fall back to the product name.
 function productNameParts(p){
  const full=String(p?.title||'').trim();
@@ -257,6 +264,7 @@ function showModalMedia(i){
    video.style.display='none';
    photo.hidden=false;
    photo.style.display='block';
+   photo.removeAttribute('srcset');
    photo.src=item.src;
    photo.alt=(state.modalIndex===0&&state.modalProduct?productAlt(state.modalProduct):$('#modal-title')?.textContent)||'Product media';
  }
