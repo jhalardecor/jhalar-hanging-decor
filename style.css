@@ -1400,3 +1400,14 @@ body.modal-open{
     width:118px;
   }
 }
+
+
+/* Footer logo — reduced to a supporting brand signature. */
+.site-footer .footer-logo{
+  width:clamp(88px,6vw,108px) !important;
+}
+@media(max-width:760px){
+  .site-footer .footer-logo{
+    width:92px !important;
+  }
+}
