@@ -1339,3 +1339,53 @@ body.modal-open{
 .media-lightbox.open img:active{
   cursor:grabbing;
 }
+
+
+/* =========================================================
+   HEADER — CALM, ADAPTIVE, CONTENT-FIRST
+   ========================================================= */
+.header{
+  height:clamp(60px,5.2vw,76px);
+  background:rgba(255,250,241,.88);
+}
+.header-row{
+  gap:clamp(18px,3vw,48px);
+}
+.brand img{
+  width:clamp(118px,8.4vw,148px);
+}
+.nav{
+  gap:clamp(20px,2.8vw,38px);
+}
+
+/* Hide only with clear downward intent; never leave the page feeling unstable. */
+.header.is-hidden{
+  transform:translateY(calc(-100% - 1px));
+}
+.header:focus-within{
+  transform:none !important;
+}
+
+/* Mobile navigation behaves as a deliberate sheet, not a cramped dropdown. */
+@media(max-width:760px){
+  .header{
+    height:var(--header-h);
+    background:rgba(255,250,241,.96);
+  }
+  .header.is-hidden{transform:none;pointer-events:auto}
+  .header-row{padding-inline:0}
+  .menu{
+    width:48px;
+    height:48px;
+    margin-right:-4px;
+  }
+  .mobile-nav{
+    top:var(--header-h);
+    padding:8px 0 14px;
+    box-shadow:0 18px 38px rgba(20,25,66,.10);
+  }
+  .mobile-nav a{
+    min-height:58px;
+    font-size:1rem;
+  }
+}
