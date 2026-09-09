@@ -19,11 +19,22 @@
     </style>
 </head>
 <body>
-    <div class="notfound">
-        <p class="nf-eyebrow">404 · Page Not Found</p>
-        <h1>Gone with the wind.</h1>
-        <p>The page you were looking for does not exist. The collection, however, is very much here.</p>
-        <a href="index.html#collection">Back to the collection</a>
-    </div>
+<script>
+(function(){
+  var route=location.pathname+location.search+location.hash;
+  if(/\/products\/[^/]+-\d+\/?$/i.test(location.pathname)){
+    sessionStorage.setItem('jhalar_product_route',route);
+    var base=location.pathname.split('/products/')[0].replace(/\/$/,'');
+    location.replace(base+'/' );
+    return;
+  }
+})();
+</script>
+<div class="notfound">
+  <p class="nf-eyebrow">404 · Page Not Found</p>
+  <h1>Gone with the wind.</h1>
+  <p>The page you were looking for does not exist. The collection, however, is very much here.</p>
+  <a href="index.html#collection">Back to the collection</a>
+</div>
 </body>
 </html>
