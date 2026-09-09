@@ -733,16 +733,43 @@ initProducts();initRuntime();
 /* JHALAR DEPLOYMENT VERSION MARKER — no runtime asset swapping or forced reloads */
 (function(){
   const VERSION_URL='content/version.json';
+  const VERSION_KEY='jhalar-live-version';
+  const RELOAD_KEY='jhalar-reload-version';
+
   async function checkVersion(){
     try{
-      const r=await fetch(VERSION_URL+'?t='+Date.now(),{cache:'no-store'});
-      if(!r.ok)return;
-      const v=(await r.json()).version;
-      if(v)localStorage.setItem('jhalar-live-version',v);
-    }catch(e){}
+      const r=await fetch(VERSION_URL+'?t='+Date.now(),{
+        cache:'no-store',
+        headers:{'Cache-Control':'no-cache','Pragma':'no-cache'}
+      });
+      if(!r.ok)return false;
+      const data=await r.json();
+      const next=data&&data.version;
+      if(!next)return false;
+
+      const previous=localStorage.getItem(VERSION_KEY);
+      localStorage.setItem(VERSION_KEY,next);
+
+      /* A new deployment should never require the customer to know about
+         hard refresh. Reload once when a genuinely newer version is detected. */
+      if(previous&&previous!==next&&sessionStorage.getItem(RELOAD_KEY)!==next){
+        sessionStorage.setItem(RELOAD_KEY,next);
+        location.reload();
+        return true;
+      }
+      return false;
+    }catch(e){return false}
   }
+
   window.JHALAR_CHECK_FOR_UPDATE=checkVersion;
   checkVersion();
+
+  /* Catch long-open tabs after a new catalogue/deploy goes live. */
+  window.addEventListener('focus',checkVersion,{passive:true});
+  document.addEventListener('visibilitychange',()=>{
+    if(document.visibilityState==='visible')checkVersion();
+  });
+  setInterval(checkVersion,60000);
 })();
 
 
