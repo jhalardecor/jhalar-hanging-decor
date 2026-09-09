@@ -55,13 +55,23 @@
     </div>
     <form id="project-inquiry-form">
       <label>Your name<input name="name" type="text" autocomplete="name" placeholder="How should we address you?" required></label>
-      <label>What are you decorating?<select name="project" required><option value="" selected disabled>Select your project type</option><option>Home / residence</option><option>Wedding or celebration</option><option>Hotel / hospitality</option><option>Retail / commercial space</option><option>Festival / event</option><option>Other custom project</option></select></label>
-      <label>Where is the project?<span class="location-field"><input id="project-location" name="location" type="text" autocomplete="street-address" placeholder="Start typing your address or city" required><span class="location-spinner" aria-hidden="true"></span><div id="location-suggestions" class="location-suggestions" role="listbox" aria-label="Address suggestions"></div></span><small>Choose a suggestion for the best delivery/project context.</small></label>
-      <div class="project-inquiry-grid">
-        <label>How many pieces do you need?<input name="quantity" type="text" placeholder="For example: 20–30"></label>
-        <label>Best WhatsApp number<input name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+91 …"></label>
+
+      <fieldset class="inquiry-role">
+        <legend>Who are you?</legend>
+        <div class="inquiry-role-options">
+          <label><input type="radio" name="role" value="Retailer" required><span>Retailer</span></label>
+          <label><input type="radio" name="role" value="Wholesaler"><span>Wholesaler</span></label>
+          <label><input type="radio" name="role" value="Event decorator"><span>Event decorator</span></label>
+          <label><input type="radio" name="role" value="Personal / self decorator"><span>Personal</span></label>
+          <label><input type="radio" name="role" value="Bulk buyer"><span>Bulk buyer</span></label>
+        </div>
+      </fieldset>
+
+      <div id="inquiry-dynamic-questions" class="inquiry-dynamic-questions" aria-live="polite">
+        <p class="inquiry-guidance">Choose what best describes you and we’ll ask only the relevant questions.</p>
       </div>
-      <label>What would you like us to create?<textarea name="details" rows="4" placeholder="Tell us about colours, style, dimensions, deadline or anything important"></textarea></label>
+
+      <label>Best WhatsApp number<input name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+91 …" required></label>
       <button class="project-inquiry-submit" type="submit">Continue to WhatsApp <span aria-hidden="true">↗</span></button>
     </form>
   </div>
