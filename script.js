@@ -917,7 +917,6 @@ initProducts();initRuntime();
       '',
       'Name: '+val('name'),
       'I am: '+val('role'),
-      val('phone')?'Phone: '+val('phone'):null,
       val('quantity')?'Quantity: '+val('quantity'):null,
       val('location')?'Location: '+val('location'):null,
       val('details')?'Requirements: '+val('details'):null
