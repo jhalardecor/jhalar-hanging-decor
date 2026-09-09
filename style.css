@@ -366,8 +366,74 @@ h1,h2,h3,h4,h5,h6{margin:0;font-family:var(--font-display);font-weight:400;color
     background:rgba(255,253,248,.96);
     box-shadow:0 5px 16px rgba(20,25,66,.14);
   }
+
+  /* Mobile micro-interactions: restrained motion and tactile feedback. */
+  .modal-card{
+    animation:mobileViewerIn .42s cubic-bezier(.22,1,.36,1) both;
+  }
+
+  .modal-stage{
+    animation:mobileMediaIn .5s .06s cubic-bezier(.22,1,.36,1) both;
+  }
+
+  .modal-copy{
+    animation:mobileCopyIn .5s .12s cubic-bezier(.22,1,.36,1) both;
+  }
+
+  .modal-close{
+    animation:mobileCloseIn .36s .18s cubic-bezier(.22,1,.36,1) both;
+  }
+
+  .modal-thumb{
+    transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease;
+  }
+
+  .modal-thumb:active{
+    transform:scale(.92);
+  }
+
+  .modal-wa-btn{
+    transition:transform .22s ease,box-shadow .22s ease,filter .22s ease;
+  }
+
+  .modal-wa-btn:active{
+    transform:translateY(1px) scale(.985);
+    filter:brightness(.98);
+  }
+
+  @keyframes mobileViewerIn{
+    from{opacity:0;transform:translateY(14px) scale(.985)}
+    to{opacity:1;transform:translateY(0) scale(1)}
+  }
+
+  @keyframes mobileMediaIn{
+    from{opacity:0;transform:translateY(10px) scale(.97)}
+    to{opacity:1;transform:translateY(0) scale(1)}
+  }
+
+  @keyframes mobileCopyIn{
+    from{opacity:0;transform:translateY(12px)}
+    to{opacity:1;transform:translateY(0)}
+  }
+
+  @keyframes mobileCloseIn{
+    from{opacity:0;transform:scale(.72) rotate(-12deg)}
+    to{opacity:1;transform:scale(1) rotate(0)}
+  }
 }
 
 @media(max-width:390px){
   .modal-stage{width:min(78vw,280px)}
+}
+
+
+@media(prefers-reduced-motion:reduce){
+  *,
+  *::before,
+  *::after{
+    animation-duration:.01ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.01ms !important;
+    scroll-behavior:auto !important;
+  }
 }
