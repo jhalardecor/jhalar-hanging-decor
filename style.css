@@ -2239,3 +2239,46 @@ body.project-inquiry-open{overflow:hidden}
  .footer-brand{grid-column:1/-1}
  .footer-bottom{flex-direction:column;gap:4px}
 }
+
+
+/* =========================================================
+   HEADING PROFILE
+   One display typography language across the public site.
+   Hero establishes the profile; section headlines use the same
+   family, weight, optical tracking and line-height at their scale.
+   ========================================================= */
+:root{
+  --display-weight:400;
+  --display-leading:.98;
+  --display-tracking:-.055em;
+}
+.hero h1,
+.collection-intro h2,
+.custom-projects h2,
+.about-copy h2,
+.contact-copy h2,
+.updates h2{
+  font-family:var(--font-display)!important;
+  font-weight:var(--display-weight)!important;
+  line-height:var(--display-leading)!important;
+  letter-spacing:var(--display-tracking)!important;
+  font-kerning:normal;
+  text-wrap:balance;
+}
+/* Section hierarchy changes scale, never the typographic personality. */
+.collection-intro h2,
+.about-copy h2,
+.contact-copy h2{
+  font-size:clamp(2.35rem,3.4vw,4.15rem)!important;
+}
+.updates h2{
+  font-size:clamp(2.15rem,3vw,3.55rem)!important;
+}
+@media(max-width:760px){
+  .collection-intro h2,
+  .about-copy h2,
+  .contact-copy h2,
+  .updates h2{
+    font-size:clamp(2.35rem,9.5vw,3.5rem)!important;
+  }
+}
