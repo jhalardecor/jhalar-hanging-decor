@@ -1032,3 +1032,18 @@ a:focus-visible,
     transform:scale(.99) !important;
   }
 }
+
+
+/* Footer legal line — intentionally subdued, but never low-contrast. */
+.site-footer .footer-bottom{
+  color:rgba(255,250,241,.88);
+  border-top-color:rgba(255,250,241,.24);
+}
+
+.site-footer .footer-bottom p{
+  margin:0;
+  color:inherit;
+  opacity:1;
+  font-weight:500;
+  letter-spacing:.01em;
+}
