@@ -817,6 +817,47 @@ initProducts();initRuntime();
   modal.querySelectorAll('[data-project-close]').forEach(el=>el.addEventListener('click',close));
   document.addEventListener('keydown',e=>{if(e.key==='Escape'&&modal.classList.contains('open'))close()});
 
+  /* Address autocomplete: debounced, keyboard-friendly location search.
+     Uses OpenStreetMap Nominatim so this static site does not expose a paid API key. */
+  const locationInput=document.getElementById('project-location');
+  const suggestions=document.getElementById('location-suggestions');
+  const locationField=locationInput&&locationInput.closest('.location-field');
+  let locationTimer=null,locationAbort=null;
+
+  const clearSuggestions=()=>{if(suggestions){suggestions.innerHTML='';suggestions.classList.remove('show')}};
+  const selectLocation=label=>{locationInput.value=label;clearSuggestions()};
+
+  locationInput&&locationInput.addEventListener('input',()=>{
+    const query=locationInput.value.trim();
+    clearTimeout(locationTimer);
+    clearSuggestions();
+    if(query.length<3)return;
+    locationTimer=setTimeout(async()=>{
+      if(locationAbort)locationAbort.abort();
+      locationAbort=new AbortController();
+      locationField&&locationField.classList.add('loading');
+      try{
+        const url='https://nominatim.openstreetmap.org/search?format=jsonv2&addressdetails=1&limit=5&q='+encodeURIComponent(query);
+        const response=await fetch(url,{signal:locationAbort.signal,headers:{Accept:'application/json'}});
+        const results=await response.json();
+        if(!Array.isArray(results)||!results.length)return;
+        results.forEach(item=>{
+          const button=document.createElement('button');
+          button.type='button';button.className='location-suggestion';button.setAttribute('role','option');
+          const parts=item.display_name.split(',');
+          button.innerHTML='<strong>'+parts.slice(0,2).map(x=>x.trim()).join(', ')+'</strong><span>'+parts.slice(2).map(x=>x.trim()).join(', ')+'</span>';
+          button.addEventListener('click',()=>selectLocation(item.display_name));
+          suggestions.appendChild(button);
+        });
+        suggestions.classList.add('show');
+      }catch(err){
+        if(err.name!=='AbortError')clearSuggestions();
+      }finally{locationField&&locationField.classList.remove('loading')}
+    },350);
+  });
+  locationInput&&locationInput.addEventListener('blur',()=>setTimeout(clearSuggestions,180));
+  locationInput&&locationInput.addEventListener('focus',()=>{if(suggestions&&suggestions.children.length)suggestions.classList.add('show')});
+
   form.addEventListener('submit',e=>{
     e.preventDefault();
     const data=new FormData(form);
