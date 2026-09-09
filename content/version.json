@@ -1,5 +1,5 @@
 {
-  "version": "20260908.71",
-  "updated": "2026-09-08T18:00:00Z",
-  "note": "Removed failed visual override layer; restored the prior spatial product-led showroom direction"
+  "version": "20260910.01",
+  "updated": "2026-09-10T00:00:00Z",
+  "note": "Deployment cache invalidation and automatic live update detection"
 }
