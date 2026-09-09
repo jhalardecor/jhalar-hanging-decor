@@ -5,6 +5,14 @@
 const state={products:[],filter:'all',expanded:false,whatsapp:'918100656258',theme:null,modalProduct:null,modalMedia:[],modalIndex:0,modalZoom:1};
 const $=s=>document.querySelector(s);
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+/* Canonical application root. Dynamic /products/... routes must never change where data or media are fetched from. */
+function appRoot(){
+ const path=location.pathname;
+ const i=path.indexOf('/products/');
+ const base=i>=0?path.slice(0,i):path;
+ return location.origin+(base.endsWith('/')?base:base+'/');
+}
+function appUrl(path){return new URL(String(path).replace(/^\\/+/,''),appRoot()).href;}
 function categories(){return [...new Set(state.products.map(p=>p.category).filter(Boolean))]}
 
 function renderFilters(){
@@ -157,17 +165,11 @@ function mediaType(src,type){if(type)return type;return /\\.(mp4|webm|ogg|mov)(?
 function normaliseMedia(item){
  const raw=typeof item==='string'?item:(item&&typeof item==='object'?(item.src||item.url||item.image||item.video||item.source):'');
  if(!raw)return null;
- let src=String(raw).trim().replace(/^\.\//,'');
- /*
-  Product catalogue paths are repository-relative. Resolve them from the
-  application root (the part before /products/), never from the current route.
- */
- if(src&&!/^(https?:|data:|blob:)/i.test(src)){
-   const routeBase=location.pathname.split('/products/')[0].replace(/\/$/,'');
-   const appRoot=location.origin+(routeBase?routeBase+'/':'/');
-   src=new URL(src.replace(/^\//,''),appRoot).href;
- }
- return {src,type:mediaType(src,typeof item==='object'?(item.type||item.mediaType):undefined)};
+ const src=String(raw).trim().replace(/^\.\//,'');
+ return {
+   src:/^(https?:|data:|blob:)/i.test(src)?src:appUrl(src),
+   type:mediaType(src,typeof item==='object'?(item.type||item.mediaType):undefined)
+ };
 }
 // Descriptive alt text is optional owner-editable content; fall back to the product name.
 function productNameParts(p){
@@ -280,6 +282,8 @@ function showModalMedia(i){
    photo.hidden=false;
    photo.style.display='block';
    photo.removeAttribute('srcset');
+   photo.onerror=()=>{console.error('JHALAR product media failed:',item.src);photo.removeAttribute('src');photo.alt='Product media could not be loaded';};
+   photo.onload=()=>{photo.onerror=null;};
    photo.src=item.src;
    photo.alt=(state.modalIndex===0&&state.modalProduct?productAlt(state.modalProduct):$('#modal-title')?.textContent)||'Product media';
  }
@@ -453,7 +457,7 @@ function markRevealTargets(){
 /* ---------- catalogue loader (fail-closed through the naming gate) ---------- */
 async function initProducts(){
  try{
-  const pr=await fetch('content/products.json?ts='+Date.now(),{cache:'no-store',headers:{'Cache-Control':'no-cache'}});
+  const pr=await fetch(appUrl('content/products.json?ts='+Date.now()),{cache:'no-store',headers:{'Cache-Control':'no-cache'}});
   if(!pr.ok)throw Error('Catalogue unavailable');
   const d=await pr.json();
   const products=Array.isArray(d.products)?d.products:[];
@@ -465,7 +469,7 @@ async function initProducts(){
   try{
    const gate=window.JHALARNaming;
    if(gate){
-    const nr=await fetch('content/product-naming.json',{cache:'no-store'});
+    const nr=await fetch(appUrl('content/product-naming.json'),{cache:'no-store'});
     if(nr.ok){
      const registry=await nr.json();
      const report=gate.validateCatalogue({products:state.products},registry);
@@ -483,8 +487,8 @@ async function initProducts(){
 async function initRuntime(){
   try{
     const [ss,se]=await Promise.all([
-      fetch('content/site-settings.json',{cache:'no-store'}),
-      fetch('content/sections.json',{cache:'no-store'})
+      fetch(appUrl('content/site-settings.json'),{cache:'no-store'}),
+      fetch(appUrl('content/sections.json'),{cache:'no-store'})
     ]);
     if(ss.ok) applySettings(await ss.json());
     if(se.ok){const d=await se.json();setSections({sections:d.sections,order:d.order})}
@@ -832,7 +836,7 @@ initProducts();initRuntime();
 
   async function checkVersion(){
     try{
-      const r=await fetch(VERSION_URL+'?t='+Date.now(),{
+      const r=await fetch(appUrl(VERSION_URL+'?t='+Date.now()),{
         cache:'no-store',
         headers:{'Cache-Control':'no-cache','Pragma':'no-cache'}
       });
