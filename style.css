@@ -1324,3 +1324,18 @@ body.modal-open{
   .media-lightbox{padding:18px}
   .media-lightbox-close{top:14px;right:14px}
 }
+
+
+/* Full-screen viewer gesture surface */
+.media-lightbox,
+.media-lightbox img{
+  touch-action:none;
+}
+.media-lightbox.open img{
+  cursor:grab;
+  will-change:transform;
+  transition:transform .08s linear;
+}
+.media-lightbox.open img:active{
+  cursor:grabbing;
+}
