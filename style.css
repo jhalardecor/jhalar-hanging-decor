@@ -12,7 +12,7 @@ h1,h2,h3,h4,h5,h6{margin:0;font-family:var(--font-display);font-weight:400;color
   border:0;
   background:transparent;
   position:relative;
-  transition:transform .24s cubic-bezier(.22,1,.36,1);
+  transition:transform .24s var(--ease-standard);
 }
 .menu span{
   position:absolute;
@@ -23,7 +23,7 @@ h1,h2,h3,h4,h5,h6{margin:0;font-family:var(--font-display);font-weight:400;color
   border-radius:999px;
   transform:translateX(-50%);
   transform-origin:center;
-  transition:transform .42s cubic-bezier(.22,1,.36,1),width .28s ease;
+  transition:transform .42s var(--ease-standard),width .28s ease;
 }
 .menu span:nth-child(1){top:17px}
 .menu span:nth-child(2){top:25px}
@@ -106,6 +106,35 @@ h1,h2,h3,h4,h5,h6{margin:0;font-family:var(--font-display);font-weight:400;color
 }
 
 /* ─────────────────────────────────────────
+   DESIGN SYSTEM — spatial, depth and motion primitives
+───────────────────────────────────────── */
+:root{
+  --space-1:4px;
+  --space-2:8px;
+  --space-3:12px;
+  --space-4:16px;
+  --space-5:24px;
+  --space-6:32px;
+  --space-7:48px;
+  --space-8:64px;
+
+  --radius-sm:10px;
+  --radius-md:16px;
+  --radius-lg:24px;
+  --radius-xl:32px;
+
+  --ease-standard:var(--ease-standard);
+  --ease-press:cubic-bezier(.2,.8,.2,1);
+  --duration-fast:160ms;
+  --duration-control:240ms;
+  --duration-component:420ms;
+
+  --elevation-1:0 6px 18px rgba(20,25,66,.08);
+  --elevation-2:0 16px 42px rgba(20,25,66,.12);
+  --elevation-3:0 30px 90px rgba(20,25,66,.20);
+}
+
+/* ─────────────────────────────────────────
    PRODUCT VIEWER — SINGLE COMPOSITION SYSTEM
    The media is always 1:1. Spacing is relational,
    not layered through competing padding overrides.
@@ -146,12 +175,12 @@ h1,h2,h3,h4,h5,h6{margin:0;font-family:var(--font-display);font-weight:400;color
   overflow:hidden;
   background:rgba(255,253,248,.985);
   border:1px solid rgba(98,35,49,.10);
-  border-radius:26px;
-  box-shadow:0 30px 90px rgba(20,25,66,.20);
+  border-radius:var(--radius-lg);
+  box-shadow:var(--elevation-3);
   opacity:0;
   transform:perspective(1400px) translateY(18px) rotateX(2.5deg) scale(.985);
   transform-origin:center bottom;
-  transition:opacity .38s ease,transform .5s cubic-bezier(.22,1,.36,1),box-shadow .35s ease;
+  transition:opacity .38s ease,transform .5s var(--ease-standard),box-shadow .35s ease;
   will-change:transform,opacity;
 }
 
@@ -193,7 +222,7 @@ h1,h2,h3,h4,h5,h6{margin:0;font-family:var(--font-display);font-weight:400;color
   border-radius:18px;
   box-shadow:0 18px 38px rgba(20,25,66,.10),inset 0 1px 0 rgba(255,255,255,.8);
   transform:translateZ(0);
-  transition:transform .5s cubic-bezier(.22,1,.36,1),box-shadow .5s cubic-bezier(.22,1,.36,1);
+  transition:transform .5s var(--ease-standard),box-shadow .5s var(--ease-standard);
   will-change:transform;
 }
 
@@ -214,7 +243,7 @@ h1,h2,h3,h4,h5,h6{margin:0;font-family:var(--font-display);font-weight:400;color
   object-fit:contain;
   object-position:center;
   transform-origin:center center;
-  transition:transform .65s cubic-bezier(.22,1,.36,1),filter .45s ease;
+  transition:transform .65s var(--ease-standard),filter .45s ease;
 }
 
 @media(hover:hover) and (min-width:761px){
@@ -431,19 +460,19 @@ h1,h2,h3,h4,h5,h6{margin:0;font-family:var(--font-display);font-weight:400;color
 
   /* Mobile micro-interactions: restrained motion and tactile feedback. */
   .modal-card{
-    animation:mobileViewerIn .42s cubic-bezier(.22,1,.36,1) both;
+    animation:mobileViewerIn .42s var(--ease-standard) both;
   }
 
   .modal-stage{
-    animation:mobileMediaIn .5s .06s cubic-bezier(.22,1,.36,1) both;
+    animation:mobileMediaIn .5s .06s var(--ease-standard) both;
   }
 
   .modal-copy{
-    animation:mobileCopyIn .5s .12s cubic-bezier(.22,1,.36,1) both;
+    animation:mobileCopyIn .5s .12s var(--ease-standard) both;
   }
 
   .modal-close{
-    animation:mobileCloseIn .36s .18s cubic-bezier(.22,1,.36,1) both;
+    animation:mobileCloseIn .36s .18s var(--ease-standard) both;
   }
 
   .modal-thumb{
@@ -504,14 +533,14 @@ h1,h2,h3,h4,h5,h6{margin:0;font-family:var(--font-display);font-weight:400;color
 /******** Premium micro-interactions ********/
 @media(hover:hover){
   .product-card{
-    transition:transform .42s cubic-bezier(.22,1,.36,1),box-shadow .42s cubic-bezier(.22,1,.36,1);
+    transition:transform .42s var(--ease-standard),box-shadow .42s var(--ease-standard);
   }
   .product-card:hover{
     transform:translateY(-5px);
     box-shadow:0 18px 42px rgba(20,25,66,.10);
   }
   .product-card img{
-    transition:transform .65s cubic-bezier(.22,1,.36,1);
+    transition:transform .65s var(--ease-standard);
   }
   .product-card:hover img{transform:scale(1.025)}
   .nav a{transition:color .25s ease,transform .25s ease}
@@ -533,10 +562,68 @@ h1,h2,h3,h4,h5,h6{margin:0;font-family:var(--font-display);font-weight:400;color
 }
 
 .modal-close{
-  transition:transform .28s cubic-bezier(.22,1,.36,1),background .25s ease,box-shadow .28s ease;
+  transition:transform .28s var(--ease-standard),background .25s ease,box-shadow .28s ease;
 }
 .modal-close:hover{
   transform:rotate(90deg) scale(1.06);
   box-shadow:0 10px 24px rgba(20,25,66,.14);
 }
 
+
+
+/* ─────────────────────────────────────────
+   COMPONENT CONTRACTS
+   Each layer owns one responsibility.
+───────────────────────────────────────── */
+
+/* Modal owns presentation context, never product scrolling. */
+.modal{
+  overscroll-behavior:contain;
+}
+
+/* Card owns composition and clipping of its surface only. */
+.modal-card{
+  isolation:isolate;
+}
+
+/* Media is an intrinsic presentation region. */
+.modal-media{
+  flex:1 1 auto;
+  min-inline-size:0;
+}
+
+/* Product stage is a stable visual object, not a layout spacer. */
+.modal-stage{
+  flex:0 1 auto;
+}
+
+/* Information owns reading overflow only. */
+.modal-copy{
+  overscroll-behavior:contain;
+  scrollbar-width:thin;
+}
+
+/* Universal tactile interaction contract. */
+button,
+a,
+.product-card,
+.modal-thumb{
+  touch-action:manipulation;
+}
+
+button:focus-visible,
+a:focus-visible,
+.product-card:focus-visible{
+  outline:2px solid currentColor;
+  outline-offset:3px;
+}
+
+@media(prefers-reduced-motion:no-preference){
+  button,
+  a,
+  .product-card,
+  .modal-thumb{
+    transition-duration:var(--duration-control);
+    transition-timing-function:var(--ease-standard);
+  }
+}
