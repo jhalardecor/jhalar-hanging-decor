@@ -1548,3 +1548,26 @@ body.lightbox-open{
   touch-action:manipulation;
   -webkit-tap-highlight-color:transparent;
 }
+
+
+/* Project inquiry — focused conversation handoff */
+.project-inquiry{position:fixed;inset:0;z-index:10020;display:grid;place-items:center;padding:20px;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .28s ease,visibility 0s linear .28s}
+.project-inquiry.open{opacity:1;visibility:visible;pointer-events:auto;transition:opacity .28s ease}
+.project-inquiry-backdrop{position:absolute;inset:0;background:rgba(12,16,27,.62);backdrop-filter:blur(10px)}
+.project-inquiry-card{position:relative;z-index:1;width:min(560px,100%);max-height:min(760px,calc(100dvh - 32px));overflow:auto;padding:clamp(24px,4vw,42px);border-radius:28px;background:#fffaf1;box-shadow:0 30px 90px rgba(0,0,0,.28);transform:translateY(18px) scale(.98);transition:transform .32s cubic-bezier(.2,.8,.2,1)}
+.project-inquiry.open .project-inquiry-card{transform:translateY(0) scale(1)}
+.project-inquiry-close{position:absolute;top:16px;right:16px;width:42px;height:42px;border:0;border-radius:50%;background:#f0ece4;font-size:28px;cursor:pointer}
+.project-inquiry-head{padding-right:42px;margin-bottom:24px}
+.project-inquiry-head .eyebrow{margin:0 0 8px}
+.project-inquiry-head h2{margin:0 0 10px;font-size:clamp(1.8rem,4vw,2.7rem);letter-spacing:-.04em}
+.project-inquiry-head p{margin:0;line-height:1.55;color:#666}
+#project-inquiry-form{display:grid;gap:16px}
+#project-inquiry-form label{display:grid;gap:7px;font-size:.8rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+#project-inquiry-form input,#project-inquiry-form textarea{width:100%;box-sizing:border-box;border:1px solid rgba(20,25,66,.16);border-radius:14px;background:#fffdf8;padding:13px 14px;color:#141942;font:inherit;letter-spacing:normal;text-transform:none;outline:none;transition:border-color .2s ease,box-shadow .2s ease}
+#project-inquiry-form textarea{resize:vertical;min-height:110px}
+#project-inquiry-form input:focus,#project-inquiry-form textarea:focus{border-color:#141942;box-shadow:0 0 0 4px rgba(20,25,66,.08)}
+.project-inquiry-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.project-inquiry-submit{min-height:54px;border:0;border-radius:999px;background:#141942;color:#fffaf1;padding:0 22px;font:inherit;font-weight:700;cursor:pointer;transition:transform .2s ease,box-shadow .2s ease}
+.project-inquiry-submit:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(20,25,66,.18)}
+body.project-inquiry-open{overflow:hidden}
+@media(max-width:560px){.project-inquiry{padding:0;align-items:end}.project-inquiry-card{width:100%;max-height:88dvh;border-radius:26px 26px 0 0;padding:26px 20px calc(24px + env(safe-area-inset-bottom))}.project-inquiry-grid{grid-template-columns:1fr}.project-inquiry-close{top:12px;right:12px}}
