@@ -7,12 +7,18 @@ const $=s=>document.querySelector(s);
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 /* Canonical application root. Dynamic /products/... routes must never change where data or media are fetched from. */
 function appRoot(){
- const path=location.pathname;
- const i=path.indexOf('/products/');
- const base=i>=0?path.slice(0,i):path;
- return location.origin+(base.endsWith('/')?base:base+'/');
+ /*
+  The script URL is the authoritative deployment root. This works on the
+  homepage, GitHub Pages project sites and restored /products/... routes.
+ */
+ const runtime=[...document.scripts].map(x=>x.src).find(src=>/\/script\.js(?:\?|$)/.test(src));
+ if(runtime)return new URL('./',runtime).href;
+ return new URL('./',document.baseURI).href;
 }
-function appUrl(path){return new URL(String(path).replace(/^\\/+/,''),appRoot()).href;}
+function appUrl(path){
+ const clean=String(path).replace(/^\.\//,'').replace(/^\/+/, '');
+ return new URL(clean,appRoot()).href;
+}
 function categories(){return [...new Set(state.products.map(p=>p.category).filter(Boolean))]}
 
 function renderFilters(){
