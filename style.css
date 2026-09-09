@@ -93,8 +93,9 @@ h1,h2,h3,h4,h5,h6{margin:0;font-family:var(--font-display);font-weight:400;color
   --viewer-gap:clamp(18px,2.2vw,32px);
 
   position:relative;
-  width:min(1080px,calc(100% - 8px));
-  max-height:calc(100dvh - var(--header-h) - 48px);
+  width:min(1080px,100%);
+  height:auto;
+  max-height:100%;
   padding:var(--viewer-pad);
   display:grid;
   grid-template-columns:minmax(0,1fr) minmax(300px,.78fr);
