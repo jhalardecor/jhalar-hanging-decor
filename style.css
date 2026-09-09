@@ -1941,9 +1941,7 @@ body.project-inquiry-open{overflow:hidden}
   font-weight:700;
   letter-spacing:.12em;
 }
-.collection-intro h2,
 #custom-orders .spaces-copy h2,
-.about-copy h2,
 .collection-intro>p,
 #custom-orders .spaces-lead,
 .about-lead,
@@ -2215,16 +2213,6 @@ body.project-inquiry-open{overflow:hidden}
 }
 
 
-/* Section hierarchy changes scale, never the typographic personality. */
-.collection-intro h2,
-.about-copy h2,
-@media(max-width:760px){
-  .collection-intro h2,
-  .about-copy h2,
-  .contact-copy h2,
-}
-
-
 /* =========================================================
    PREMIUM JHALAR FOOTER
    Deep layered reds — aligned with the brand CTA palette.
@@ -2262,16 +2250,6 @@ body.project-inquiry-open{overflow:hidden}
     radial-gradient(100% 65% at 10% 0%,rgba(255,112,82,.20),transparent 58%),
     linear-gradient(155deg,#9b1829 0%,#c62934 48%,#861025 100%)}
   .footer-logo{width:96px!important}
-}
-
-/* Scale hierarchy is explicit and defined once. */
-.collection-intro h2,
-.about-copy h2,
-
-@media(max-width:760px){
-  .collection-intro h2,
-  .about-copy h2,
-  .contact-copy h2,
 }
 
 /* =========================================================
