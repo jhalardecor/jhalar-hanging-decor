@@ -2308,44 +2308,60 @@ body.project-inquiry-open{overflow:hidden}
 }
 
 
+
+
 /* =========================================================
-   CANONICAL FLUID LAYOUT WRAPPERS
-   Shared geometry only — no duplicate fixed-width containers.
+   JHALAR LAYOUT SYSTEM
+   Deliberate full-bleed surfaces + one content shell.
    ========================================================= */
-.shell,
-.hero-copy,
+:root{
+  --content-max:1440px;
+  --content-wide:1680px;
+  --content-pad:clamp(20px,4vw,72px);
+}
+
+/* Default content rail. Full-bleed sections keep their own backgrounds/media. */
+.shell{
+  width:min(calc(100% - (2 * var(--content-pad))),var(--content-max));
+  margin-inline:auto;
+}
+
+/* Hero is intentionally full-bleed; copy aligns to the same content rail. */
+.hero-copy{
+  width:min(calc(100% - (2 * var(--content-pad))),var(--content-max));
+  margin-inline:auto;
+  min-height:inherit;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  justify-content:center;
+}
+
+/* Section internals are fluid grids, never nested max-width containers. */
+.collection-intro,
 .custom-projects-shell,
 .about-layout,
 .contact-card,
 .updates-inner,
 .footer-main,
 .trust-strip-inner{
-  width:min(100% - (2 * var(--gutter)), var(--shell-max));
-  margin-inline:auto;
-}
-.hero-copy{
-  display:flex;
-  flex-direction:column;
-  align-items:flex-start;
-  justify-content:center;
-  min-height:inherit;
-}
-.collection-intro,
-.custom-projects-shell,
-.about-layout,
-.contact-card,
-.updates-inner{
+  width:100%;
   min-width:0;
 }
+
+/* Wide editorial/media moments can exceed the normal reading rail deliberately. */
+.custom-projects-shell,
+.about-layout{
+  width:min(calc(100% - (2 * var(--content-pad))),var(--content-wide));
+  margin-inline:auto;
+}
+
 @media(max-width:760px){
+  :root{--content-pad:20px}
   .shell,
   .hero-copy,
   .custom-projects-shell,
-  .about-layout,
-  .contact-card,
-  .updates-inner,
-  .footer-main,
-  .trust-strip-inner{
-    width:min(100% - (2 * var(--gutter)), var(--shell-max));
+  .about-layout{
+    width:calc(100% - (2 * var(--content-pad)));
   }
 }
