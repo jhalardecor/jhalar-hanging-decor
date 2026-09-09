@@ -90,24 +90,34 @@ h1,h2,h3,h4,h5,h6{margin:0;font-family:var(--font-display);font-weight:400;color
 }
 
 .modal-card{
-  --viewer-pad:clamp(20px,2vw,28px);
-  --viewer-gap:clamp(28px,3.2vw,44px);
+  --viewer-pad:clamp(22px,2.2vw,30px);
+  --viewer-gap:clamp(30px,3.4vw,48px);
 
   position:relative;
-  width:min(1040px,100%);
-  height:min(720px,100%);
+  width:min(1080px,100%);
+  height:min(680px,calc(100dvh - var(--header-h) - 64px));
   max-height:100%;
   padding:var(--viewer-pad);
   display:grid;
-  grid-template-columns:minmax(0,1.08fr) minmax(320px,.82fr);
+  grid-template-columns:minmax(0,1.06fr) minmax(340px,.94fr);
   gap:var(--viewer-gap);
   align-items:stretch;
 
   overflow:hidden;
-  background:rgba(255,253,248,.98);
+  background:rgba(255,253,248,.985);
   border:1px solid rgba(98,35,49,.10);
-  border-radius:24px;
-  box-shadow:0 28px 80px rgba(20,25,66,.18);
+  border-radius:26px;
+  box-shadow:0 30px 90px rgba(20,25,66,.20);
+  opacity:0;
+  transform:perspective(1400px) translateY(18px) rotateX(2.5deg) scale(.985);
+  transform-origin:center bottom;
+  transition:opacity .38s ease,transform .5s cubic-bezier(.22,1,.36,1),box-shadow .35s ease;
+  will-change:transform,opacity;
+}
+
+.modal.open .modal-card{
+  opacity:1;
+  transform:perspective(1400px) translateY(0) rotateX(0) scale(1);
 }
 
 /* One intentional square canvas. No nested padding/card layers. */
@@ -125,7 +135,7 @@ h1,h2,h3,h4,h5,h6{margin:0;font-family:var(--font-display);font-weight:400;color
 }
 
 .modal-stage{
-  width:min(84%,500px);
+  width:min(82%,480px);
   aspect-ratio:1 / 1;
   max-height:100%;
   height:auto;
@@ -136,8 +146,20 @@ h1,h2,h3,h4,h5,h6{margin:0;font-family:var(--font-display);font-weight:400;color
   overflow:hidden;
   touch-action:none;
 
-  background:var(--surface-2);
-  border:1px solid var(--line);
+  background:linear-gradient(145deg,#fffdf8 0%,var(--surface-2) 100%);
+  border:1px solid rgba(98,35,49,.12);
+  border-radius:18px;
+  box-shadow:0 18px 38px rgba(20,25,66,.10),inset 0 1px 0 rgba(255,255,255,.8);
+  transform:translateZ(0);
+  transition:transform .5s cubic-bezier(.22,1,.36,1),box-shadow .5s cubic-bezier(.22,1,.36,1);
+  will-change:transform;
+}
+
+@media(hover:hover) and (min-width:761px){
+  .modal-stage:hover{
+    transform:perspective(1000px) rotateY(-1.5deg) rotateX(1deg) translateY(-4px) scale(1.008);
+    box-shadow:0 28px 54px rgba(20,25,66,.16),inset 0 1px 0 rgba(255,255,255,.9);
+  }
 }
 
 .modal-stage img,
@@ -150,13 +172,22 @@ h1,h2,h3,h4,h5,h6{margin:0;font-family:var(--font-display);font-weight:400;color
   object-fit:contain;
   object-position:center;
   transform-origin:center center;
+  transition:transform .65s cubic-bezier(.22,1,.36,1),filter .45s ease;
+}
+
+@media(hover:hover) and (min-width:761px){
+  .modal-stage:hover img,
+  .modal-stage:hover video{
+    transform:scale(1.018);
+    filter:drop-shadow(0 12px 16px rgba(20,25,66,.10));
+  }
 }
 
 /* Copy is a compact reading column, vertically centred against the square. */
 .modal-copy{
   min-width:0;
   min-height:0;
-  padding:clamp(4px,.6vw,8px) 0;
+  padding:clamp(18px,2vw,30px) clamp(4px,1vw,12px) clamp(18px,2vw,30px) 0;
   margin:0;
   align-self:stretch;
   display:flex;
@@ -196,7 +227,14 @@ h1,h2,h3,h4,h5,h6{margin:0;font-family:var(--font-display);font-weight:400;color
   min-width:min(100%,250px);
   margin:0;
   align-self:flex-start;
-  padding-inline:18px;
+  padding-inline:20px;
+  border-radius:10px;
+  box-shadow:0 8px 18px rgba(200,32,57,.16);
+  transition:transform .22s ease,box-shadow .22s ease;
+}
+.modal-wa-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 14px 26px rgba(200,32,57,.24);
 }
 
 .modal-close{
