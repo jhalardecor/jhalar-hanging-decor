@@ -2017,103 +2017,110 @@ body.project-inquiry-open{overflow:hidden}
 
 
 
+
+
 /* =========================================================
-   CUSTOM PROJECTS
-   Purpose-built conversion section. Uses global JHALAR tokens
-   and spacing primitives; does not inherit legacy .spaces rules.
+   CUSTOM & BULK ORDERS
+   A conversion section built from the site's core primitives:
+   eyebrow → proposition → explanation → action → proof.
    ========================================================= */
 .custom-projects{
+  --custom-max:1240px;
   background:var(--canvas);
-  padding-top:clamp(96px,12vw,180px);
+  padding-block:clamp(104px,12vw,184px);
 }
 .custom-projects-shell{
+  max-width:var(--custom-max);
   display:grid;
-  grid-template-columns:minmax(0,1.25fr) minmax(280px,.75fr);
-  gap:clamp(40px,8vw,144px);
-  align-items:end;
-  padding-bottom:clamp(56px,7vw,104px);
-}
-.custom-projects-intro{max-width:760px}
-.custom-projects-intro .label{margin:0 0 20px}
-.custom-projects-intro h2{
-  margin:0;
-  max-width:13ch;
-  color:var(--heading);
-  font-size:clamp(3rem,6.4vw,6.8rem);
-  line-height:.94;
-  letter-spacing:-.065em;
+  grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);
+  align-items:center;
+  gap:clamp(56px,9vw,148px);
 }
 .custom-projects-copy{
-  max-width:43ch;
-  margin:30px 0 0;
+  max-width:520px;
+  padding-block:clamp(12px,2vw,28px);
+}
+.custom-projects .label{
+  margin:0 0 20px;
+  color:var(--red);
+}
+.custom-projects h2{
+  margin:0;
+  max-width:9.5ch;
+  color:var(--heading);
+  font-size:clamp(3.25rem,5.7vw,6.4rem);
+  line-height:.98;
+  letter-spacing:-.06em;
+  text-wrap:balance;
+}
+.custom-projects-lead{
+  max-width:39ch;
+  margin:28px 0 0;
   color:var(--muted);
-  font-size:clamp(1rem,1.3vw,1.2rem);
+  font-size:clamp(1.05rem,1.28vw,1.22rem);
   line-height:1.55;
 }
 .custom-projects-cta{
-  display:inline-flex;align-items:center;gap:14px;
-  min-height:52px;margin-top:34px;padding:0 24px;
-  border:0;border-radius:999px;
-  background:var(--red);color:#fff;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  min-height:52px;
+  margin-top:34px;
+  padding:0 24px;
+  border:0;
+  border-radius:6px;
+  background:var(--red);
+  color:#fff;
   font:700 var(--type-sm)/1 var(--font-ui);
   letter-spacing:.01em;
-  box-shadow:none;
   transition:background-color .2s ease,transform .2s ease;
 }
-.custom-projects-cta:hover{background:var(--red-deep);transform:translateY(-1px)}
+.custom-projects-cta:hover{background:var(--red-deep);color:#fff;transform:translateY(-1px)}
 .custom-projects-cta:active{transform:translateY(0)}
-.custom-projects-context{
-  display:grid;
-  gap:0;
-  border-top:1px solid var(--line);
-}
-.custom-projects-context-head{
-  display:grid;
-  grid-template-columns:48px 1fr;
-  gap:14px;
-  align-items:center;
-  min-height:72px;
-  border-bottom:1px solid var(--line);
-}
-.custom-projects-context-head span{
-  color:var(--red);
-  font:700 var(--type-xs)/1 var(--font-ui);
-  letter-spacing:.08em;
-}
-.custom-projects-context-head p{
-  margin:0;color:var(--ink);
-  font-size:var(--type-sm);
-  font-weight:600;
-}
+.custom-projects-cta span{font-size:1.08em;transition:transform .2s ease}
+.custom-projects-cta:hover span{transform:translateX(3px)}
+
 .custom-projects-media{
-  width:100%;margin:0;
-  background:var(--surface-2);
-  overflow:hidden;
+  margin:0;
+  min-width:0;
 }
 .custom-projects-media img{
-  display:block;width:100%;
-  height:min(58vw,760px);
-  min-height:420px;
+  display:block;
+  width:100%;
+  aspect-ratio:1/1.06;
   object-fit:cover;
   object-position:center;
+  background:var(--surface-2);
 }
+.custom-projects-media figcaption{
+  max-width:34ch;
+  margin-top:14px;
+  color:var(--muted);
+  font-size:var(--type-xs);
+  line-height:1.45;
+}
+
 @media(max-width:760px){
-  .custom-projects{padding-top:72px}
+  .custom-projects{padding-block:76px}
   .custom-projects-shell{
     grid-template-columns:1fr;
-    gap:48px;
-    padding-bottom:48px;
+    gap:36px;
   }
-  .custom-projects-intro h2{
-    font-size:clamp(2.8rem,12vw,4.5rem);
-    max-width:11ch;
+  .custom-projects-copy{max-width:none;padding:0}
+  .custom-projects h2{
+    max-width:10ch;
+    font-size:clamp(2.85rem,12vw,4.35rem);
   }
-  .custom-projects-copy{margin-top:22px}
-  .custom-projects-cta{margin-top:28px}
-  .custom-projects-context-head{min-height:64px}
-  .custom-projects-media img{
-    height:auto;
-    min-height:0;
-    aspect-ratio:4/5;
+  .custom-projects-lead{
+    max-width:35ch;
+    margin-top:20px;
   }
+  .custom-projects-cta{
+    width:100%;
+    margin-top:28px;
+  }
+  .custom-projects-media{order:-1}
+  .custom-projects-media img{aspect-ratio:4/5}
+  .custom-projects-media figcaption{margin-top:12px}
 }
