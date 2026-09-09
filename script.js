@@ -75,6 +75,13 @@ window.addEventListener('popstate',()=>{
  if(id)openProduct(id,false);
 });
 
+function initProductDeepLink(){
+ const wanted=new URLSearchParams(location.search).get('product');
+ if(!wanted)return;
+ const id=Number(String(wanted).match(/-(\d+)$/)?.[1]);
+ if(id&&state.products?.some(p=>Number(p.id)===id))openProduct(id,false);
+}
+
 function initPremiumInteractions(){
   const audienceCopy={
     wholesale:'Decorative products suitable for bulk business requirements.',
