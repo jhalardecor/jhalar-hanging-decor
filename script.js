@@ -559,18 +559,19 @@ initProducts();initRuntime();
  const lightbox=document.getElementById('media-lightbox');
  const lightboxImage=document.getElementById('media-lightbox-image');
  const lightboxClose=lightbox&&lightbox.querySelector('.media-lightbox-close');
+ const openFullMedia=()=>{
+   if(stage.classList.contains('is-video')||!lightbox||!img.src)return;
+   resetLightbox();
+   lightboxImage.src=img.currentSrc||img.src;
+   lightboxImage.alt=img.alt||'Product image';
+   lightbox.classList.add('open');
+   lightbox.setAttribute('aria-hidden','false');
+   document.body.classList.add('lightbox-open');
+   lightboxClose&&lightboxClose.focus({preventScroll:true});
+ };
  const toggleFullMedia=()=>{
-   if(stage.classList.contains('is-video')||!lightbox)return;
-   const opening=!lightbox.classList.contains('open');
-   if(opening){
-     lightboxImage.src=img.currentSrc||img.src;
-     lightboxImage.alt=img.alt||'Product image';
-     lightbox.classList.add('open');
-     lightbox.setAttribute('aria-hidden','false');
-   }else{
-     lightbox.classList.remove('open');
-     lightbox.setAttribute('aria-hidden','true');
-   }
+   if(lightbox&&lightbox.classList.contains('open'))closeFullMedia();
+   else openFullMedia();
  };
  let lbScale=1,lbX=0,lbY=0,lbPointers=new Map(),lbStartDist=0,lbStartScale=1,lbDrag=null;
  const renderLightbox=()=>{
@@ -579,9 +580,13 @@ initProducts();initRuntime();
  };
  const resetLightbox=()=>{lbScale=1;lbX=0;lbY=0;renderLightbox();};
  const closeFullMedia=()=>{
-   if(!lightbox)return;
+   if(!lightbox||!lightbox.classList.contains('open'))return;
    lightbox.classList.remove('open');
    lightbox.setAttribute('aria-hidden','true');
+   document.body.classList.remove('lightbox-open');
+   lbPointers.clear();
+   lbDrag=null;
+   lbDismissStart=null;
    resetLightbox();
  };
 
@@ -647,7 +652,10 @@ initProducts();initRuntime();
  lightbox&&lightbox.addEventListener('pointercancel',()=>{lbDismissStart=null});
 
  lightboxClose&&lightboxClose.addEventListener('click',closeFullMedia);
- lightbox&&lightbox.addEventListener('click',e=>{if(e.target===lightbox)closeFullMedia()});
+ lightbox&&lightbox.addEventListener('click',e=>{
+   if(e.target===lightbox)closeFullMedia();
+ });
+ lightboxImage&&lightboxImage.addEventListener('click',e=>e.stopPropagation());
  stage.addEventListener('click',e=>{
    if(e.detail===1&&!drag&&finePointer())toggleFullMedia();
  });
