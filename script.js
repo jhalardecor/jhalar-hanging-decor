@@ -552,20 +552,33 @@ initProducts();initRuntime();
  stage.addEventListener('pointercancel',stop);
  stage.addEventListener('dblclick',e=>{
    /* Double activation is always a return to the true contained state. */
-   if(stage.classList.contains('is-fullview')){
-     stage.classList.remove('is-fullview');
-     modal.classList.remove('media-focus');
-   }
-   reset();
+   closeFullMedia();reset();
  });
 
- // Tap/click on media toggles a focused full-view state.
+ // Dedicated full-screen viewer — separate from the popup layout.
+ const lightbox=document.getElementById('media-lightbox');
+ const lightboxImage=document.getElementById('media-lightbox-image');
+ const lightboxClose=lightbox&&lightbox.querySelector('.media-lightbox-close');
  const toggleFullMedia=()=>{
-   if(stage.classList.contains('is-video'))return;
-   const open=stage.classList.toggle('is-fullview');
-   modal.classList.toggle('media-focus',open);
-   if(!open)reset();
+   if(stage.classList.contains('is-video')||!lightbox)return;
+   const opening=!lightbox.classList.contains('open');
+   if(opening){
+     lightboxImage.src=img.currentSrc||img.src;
+     lightboxImage.alt=img.alt||'Product image';
+     lightbox.classList.add('open');
+     lightbox.setAttribute('aria-hidden','false');
+   }else{
+     lightbox.classList.remove('open');
+     lightbox.setAttribute('aria-hidden','true');
+   }
  };
+ const closeFullMedia=()=>{
+   if(!lightbox)return;
+   lightbox.classList.remove('open');
+   lightbox.setAttribute('aria-hidden','true');
+ };
+ lightboxClose&&lightboxClose.addEventListener('click',closeFullMedia);
+ lightbox&&lightbox.addEventListener('click',e=>{if(e.target===lightbox)closeFullMedia()});
  stage.addEventListener('click',e=>{
    if(e.detail===1&&!drag&&finePointer())toggleFullMedia();
  });
@@ -575,20 +588,12 @@ initProducts();initRuntime();
    const now=Date.now();
    if(now-lastTap<350){
      /* Double tap restores the original card composition and 1× scale. */
-     if(stage.classList.contains('is-fullview')){
-       stage.classList.remove('is-fullview');
-       modal.classList.remove('media-focus');
-     }
-     reset();
+     closeFullMedia();reset();
      lastTap=0;
    } else lastTap=now;
  },{passive:true});
  document.addEventListener('keydown',e=>{
-   if(e.key==='Escape'&&stage.classList.contains('is-fullview')){
-     stage.classList.remove('is-fullview');
-     modal.classList.remove('media-focus');
-     reset();
-   }
+   if(e.key==='Escape'&&lightbox&&lightbox.classList.contains('open'))closeFullMedia();
  });
  img.addEventListener('load',()=>{img.style.transformOrigin='center center';reset()});
  // Every product/media swap starts from the true 1× contained view.
