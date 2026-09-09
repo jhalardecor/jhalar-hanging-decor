@@ -884,21 +884,21 @@ a:focus-visible,
     border:0 !important;
     border-radius:0 !important;
     box-shadow:none !important;
-    overflow:hidden !important;
+    overflow:visible !important;
     display:grid !important;
     place-items:center;
   }
 
-  /* Compensate for whitespace baked into catalog images without enlarging the sheet. */
+  /* Preserve the complete product silhouette. Never crop catalog media. */
   .modal-stage img,
   .modal-stage video{
     width:100% !important;
     height:100% !important;
-    max-width:none !important;
-    max-height:none !important;
+    max-width:100% !important;
+    max-height:100% !important;
     object-fit:contain !important;
     object-position:center !important;
-    transform:scale(1.28) !important;
+    transform:none !important;
     filter:drop-shadow(0 16px 22px rgba(20,25,66,.10));
   }
 
@@ -952,6 +952,6 @@ a:focus-visible,
   }
   .modal-media{width:560px !important}
   .modal-stage{width:min(560px,100%) !important;height:min(540px,100%) !important}
-  .modal-stage img,.modal-stage video{transform:scale(1.22) !important}
+  .modal-stage img,.modal-stage video{transform:none !important}
   .modal-copy{width:360px !important}
 }
