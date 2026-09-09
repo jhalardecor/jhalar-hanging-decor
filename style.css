@@ -392,39 +392,43 @@ h1,h2,h3,h4,h5,h6{margin:0;font-family:var(--font-display);font-weight:400;color
 
 /* Responsive composition is driven by available width and height, not device presets. */
 @media(min-width:761px){
-  /* Desktop: the product is the hero. Give media the dominant spatial role. */
-  .modal{
-    padding:clamp(24px,3vh,48px) clamp(28px,4vw,64px);
-  }
+  /* Desktop viewer: editorial object-first composition. */
+  .modal{padding:clamp(20px,3vh,40px) clamp(24px,4vw,56px)}
 
   .modal-card{
-    --viewer-pad:clamp(22px,2vw,30px);
-    --viewer-gap:clamp(24px,2.8vw,40px);
-    width:min(92vw,1180px);
-    grid-template-columns:minmax(0,1.12fr) minmax(360px,.88fr);
+    --viewer-pad:clamp(20px,2vw,28px);
+    --viewer-gap:clamp(18px,2vw,30px);
+    width:min(94vw,1240px);
+    grid-template-columns:minmax(0,1.18fr) minmax(380px,.82fr);
     align-items:center;
+    border-radius:28px;
   }
 
-  .modal-media{
-    min-height:0;
-    justify-content:center;
-  }
+  .modal-media{justify-content:center;align-self:center}
 
+  /* Large presentation field — no card-inside-card treatment. */
   .modal-stage{
-    width:min(100%,56dvh);
-    max-width:560px;
-    aspect-ratio:1;
+    width:min(100%,min(62dvh,600px));
+    max-width:600px;
+    border:0;
+    border-radius:0;
+    box-shadow:none;
+    background:transparent;
+    overflow:visible;
   }
 
   .modal-copy{
     width:100%;
-    max-width:500px;
-    padding-block:0;
+    max-width:470px;
+    padding:0;
+    align-self:center;
   }
 
-  .modal-copy #modal-desc{
-    max-width:44ch;
-  }
+  .modal-copy .label{margin-bottom:12px}
+  .modal-copy h3#modal-title{margin-bottom:10px}
+  .modal-variant{margin-bottom:18px}
+  .modal-copy #modal-desc{margin-bottom:22px;max-width:42ch}
+  .modal-wa-btn{min-width:280px}
 }
 
 @media(max-height:760px) and (min-width:761px){
