@@ -60,11 +60,11 @@ h1,h2,h3,h4,h5,h6{margin:0;font-family:var(--font-display);font-weight:400;color
 .footer-top > :first-child{flex:1 1 440px;min-width:0}
 .footer-top > :last-child{flex:.7 1 280px;min-width:0}
 
-/* The catalogue chooses its own column count from available width. */
+/* Desktop catalogue uses a deliberate three-column rhythm. */
 .product-grid{
-  grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));
-  column-gap:clamp(14px,2.2vw,30px);
-  row-gap:clamp(30px,4vw,58px);
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  column-gap:clamp(20px,2.4vw,34px);
+  row-gap:clamp(32px,4vw,58px);
 }
 
 /* ─────────────────────────────────────────
@@ -82,29 +82,32 @@ h1,h2,h3,h4,h5,h6{margin:0;font-family:var(--font-display);font-weight:400;color
   bottom:0;
   left:0;
   z-index:1100;
-  padding:clamp(16px,3vw,40px);
+  padding:clamp(28px,3vw,48px);
   display:grid;
   place-items:center;
-  background:rgba(20,25,66,.48);
+  background:rgba(20,25,66,.42);
+  backdrop-filter:blur(10px);
 }
 
 .modal-card{
-  --viewer-pad:clamp(14px,1.6vw,24px);
-  --viewer-gap:clamp(18px,2.2vw,32px);
+  --viewer-pad:clamp(20px,2vw,28px);
+  --viewer-gap:clamp(28px,3.2vw,44px);
 
   position:relative;
-  width:min(1080px,100%);
+  width:min(1040px,100%);
   height:auto;
   max-height:100%;
   padding:var(--viewer-pad);
   display:grid;
-  grid-template-columns:minmax(0,1fr) minmax(300px,.78fr);
+  grid-template-columns:minmax(0,1.08fr) minmax(320px,.82fr);
   gap:var(--viewer-gap);
   align-items:center;
 
   overflow:auto;
-  background:var(--surface);
-  box-shadow:0 24px 70px rgba(20,25,66,.20);
+  background:rgba(255,253,248,.98);
+  border:1px solid rgba(98,35,49,.10);
+  border-radius:24px;
+  box-shadow:0 28px 80px rgba(20,25,66,.18);
 }
 
 /* One intentional square canvas. No nested padding/card layers. */
@@ -120,7 +123,7 @@ h1,h2,h3,h4,h5,h6{margin:0;font-family:var(--font-display);font-weight:400;color
 }
 
 .modal-stage{
-  width:min(88%,520px);
+  width:min(84%,500px);
   aspect-ratio:1 / 1;
   height:auto;
   margin:0;
@@ -249,6 +252,12 @@ h1,h2,h3,h4,h5,h6{margin:0;font-family:var(--font-display);font-weight:400;color
 
 /* The modal changes composition only when the two columns genuinely stop fitting. */
 @media(max-width:760px){
+  .product-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    column-gap:12px;
+    row-gap:28px;
+  }
+
   .modal{
     padding:0;
     place-items:stretch;
