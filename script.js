@@ -570,7 +570,21 @@ initProducts();initRuntime();
 /* build 20260909.74 */
 
 
-/* Header remains permanently available; no scroll-hide behavior. */
+/* Contextual sticky header behavior. */
+(function(){
+  const header=document.querySelector('.header');
+  if(!header)return;
+  let lastY=window.scrollY,ticking=false;
+  function update(){
+    const y=Math.max(0,window.scrollY),delta=y-lastY;
+    header.classList.toggle('is-scrolled',y>8);
+    if(y<96)header.classList.remove('is-hidden');
+    else if(Math.abs(delta)>6)header.classList.toggle('is-hidden',delta>0);
+    lastY=y;ticking=false;
+  }
+  window.addEventListener('scroll',()=>{if(!ticking){ticking=true;requestAnimationFrame(update)}},{passive:true});
+  update();
+})();
 
 
 
