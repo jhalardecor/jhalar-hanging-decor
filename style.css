@@ -1047,3 +1047,23 @@ a:focus-visible,
   font-weight:500;
   letter-spacing:.01em;
 }
+
+
+/* Footer mark animation must never be clipped by its layout cell. */
+.site-footer .footer-top{
+  overflow:visible;
+}
+
+.site-footer .footer-logo{
+  display:block;
+  overflow:visible;
+  transform-box:fill-box;
+  transform-origin:center;
+  will-change:transform;
+}
+
+/* Give the animated mark a safe optical envelope inside the footer. */
+.site-footer .footer-top > :first-child{
+  padding-block:12px;
+  overflow:visible;
+}
