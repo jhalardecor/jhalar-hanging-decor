@@ -24,10 +24,54 @@ h1,h2,h3,h4,h5,h6{margin:0;font-family:var(--font-display);font-weight:400;color
 .nav-enquire:focus-visible{outline:2px solid var(--red);outline-offset:5px}
 
 
-/* PRODUCT VIEWER — 1:1 PRODUCT MEDIA SYSTEM
-   Every JHALAR product asset is square. The viewer therefore presents a
-   square media stage first, instead of forcing a square asset into a
-   rectangular image area. */
+/* ─────────────────────────────────────────
+   FLUID LAYOUT SYSTEM
+   Components respond to available space first.
+   Breakpoints are reserved for interaction changes.
+───────────────────────────────────────── */
+
+.collection-intro,
+.spaces-layout,
+.about-layout,
+.contact-card,
+.footer-top{
+  display:flex;
+  flex-wrap:wrap;
+  gap:var(--content-gap);
+}
+
+.collection-intro{align-items:end}
+.collection-intro > :first-child{flex:1 1 460px}
+.collection-intro > p{flex:1 1 300px}
+
+.spaces-layout{align-items:center}
+.spaces-copy{flex:1 1 360px;min-width:0}
+.spaces-visual{flex:1.08 1 460px;min-width:0}
+
+.about-layout{align-items:center}
+.about-copy{flex:.9 1 320px;min-width:0}
+.about-content{flex:1.1 1 460px;min-width:0}
+
+.contact-card{align-items:end}
+.contact-copy{flex:1 1 460px;min-width:0}
+.contact-card > .contact-cta{flex:0 1 220px}
+
+.footer-top{align-items:center}
+.footer-top > :first-child{flex:1 1 440px;min-width:0}
+.footer-top > :last-child{flex:.7 1 280px;min-width:0}
+
+/* The catalogue chooses its own column count from available width. */
+.product-grid{
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));
+  column-gap:clamp(14px,2.2vw,30px);
+  row-gap:clamp(30px,4vw,58px);
+}
+
+/* ─────────────────────────────────────────
+   FLUID PRODUCT VIEWER
+   1:1 media is preserved without locking the
+   modal or calculating a size per device.
+───────────────────────────────────────── */
 
 .header{z-index:1200}
 
@@ -38,45 +82,43 @@ h1,h2,h3,h4,h5,h6{margin:0;font-family:var(--font-display);font-weight:400;color
   bottom:0;
   left:0;
   z-index:1100;
-  padding:clamp(18px,3vw,36px);
+  padding:clamp(12px,3vw,36px);
+  display:grid;
   place-items:center;
   background:rgba(20,25,66,.48);
 }
 
 .modal-card{
   position:relative;
-  width:min(1160px,calc(100vw - 48px));
-  height:min(720px,calc(100dvh - var(--header-h) - 48px));
-  max-width:100%;
-  max-height:calc(100dvh - var(--header-h) - 36px);
-  display:grid;
-  grid-template-columns:minmax(420px,1fr) minmax(360px,.82fr);
-  overflow:hidden;
+  width:min(1180px,100%);
+  max-height:100%;
+  display:flex;
+  flex-wrap:wrap;
+  align-items:stretch;
+  overflow:auto;
   background:var(--surface);
   box-shadow:0 24px 70px rgba(20,25,66,.20);
 }
 
-/* The left panel is a frame around one square product stage. */
 .modal-media{
   position:relative;
+  flex:1.08 1 460px;
   min-width:0;
   min-height:0;
-  display:grid;
-  place-items:center;
-  padding:clamp(18px,2vw,28px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:clamp(14px,2vw,28px);
   overflow:hidden;
   background:var(--surface-2);
   border-right:1px solid var(--line);
 }
 
-/* This is the actual 1:1 media canvas. */
 .modal-stage{
   position:relative;
   isolation:isolate;
-  width:min(100%,calc(100dvh - var(--header-h) - 112px));
+  width:min(100%,68dvh);
   aspect-ratio:1 / 1;
-  max-height:100%;
-  padding:clamp(14px,2vw,24px);
   display:grid;
   place-items:center;
   overflow:hidden;
@@ -85,21 +127,48 @@ h1,h2,h3,h4,h5,h6{margin:0;font-family:var(--font-display);font-weight:400;color
   border:1px solid var(--line);
 }
 
-/* A square source stays square and is never cropped or artificially zoomed. */
 .modal-stage img,
 .modal-stage video{
   display:block;
   width:100%;
   height:100%;
-  max-width:none;
-  max-height:none;
-  margin:0;
   object-fit:contain;
   object-position:center;
   transform-origin:center center;
 }
 
-/* Controls sit on the frame, outside the product's safe visual area. */
+.modal-copy{
+  flex:.92 1 360px;
+  min-width:0;
+  min-height:0;
+  padding:clamp(24px,3.5vw,48px);
+  display:flex;
+  flex-direction:column;
+  align-self:stretch;
+  background:var(--surface);
+}
+
+.modal-copy h3#modal-title{
+  font-family:var(--font-ui);
+  font-size:var(--type-h4);
+  font-weight:600;
+  line-height:1.38;
+  letter-spacing:.01em;
+}
+
+.modal-copy #modal-desc{
+  margin:clamp(14px,2vw,22px) 0 clamp(20px,3vw,30px);
+  max-width:58ch;
+}
+
+.modal-close{
+  position:absolute;
+  top:14px;
+  right:14px;
+  z-index:20;
+}
+
+/* Controls remain anchored to the media component, not the viewport. */
 .modal-nav{
   position:absolute;
   top:50%;
@@ -111,7 +180,6 @@ h1,h2,h3,h4,h5,h6{margin:0;font-family:var(--font-display);font-weight:400;color
   background:rgba(255,253,248,.96);
   color:var(--heading);
   transform:translateY(-50%);
-  box-shadow:0 4px 14px rgba(47,41,43,.08);
 }
 
 .prev{left:14px}
@@ -124,7 +192,6 @@ h1,h2,h3,h4,h5,h6{margin:0;font-family:var(--font-display);font-weight:400;color
   bottom:14px;
   transform:translateX(-50%);
   display:flex;
-  align-items:center;
   gap:6px;
   max-width:calc(100% - 104px);
   padding:6px;
@@ -135,7 +202,7 @@ h1,h2,h3,h4,h5,h6{margin:0;font-family:var(--font-display);font-weight:400;color
 
 .modal-thumb{
   width:40px;
-  height:40px;
+  aspect-ratio:1;
   flex:0 0 auto;
   padding:3px;
   border:1px solid transparent;
@@ -146,119 +213,50 @@ h1,h2,h3,h4,h5,h6{margin:0;font-family:var(--font-display);font-weight:400;color
 .modal-thumb[aria-current="true"]{border-color:var(--red)}
 
 .modal-thumb img{
-  display:block;
   width:100%;
   height:100%;
   object-fit:contain;
 }
 
-/* Copy is an independent reading column, not stretched to compete with media. */
-.modal-copy{
-  min-width:0;
-  min-height:0;
-  max-height:100%;
-  padding:clamp(30px,3.5vw,48px);
-  display:flex;
-  flex-direction:column;
-  overflow:auto;
-  background:var(--surface);
-}
-
-.modal-copy h3#modal-title{
-  font-family:var(--font-ui);
-  font-size:var(--type-h4);
-  font-weight:600;
-  line-height:1.38;
-  letter-spacing:.01em;
-}
-
-.modal-close{
-  top:14px;
-  right:14px;
-  z-index:20;
-}
-
-/* Tablet: preserve the square stage before collapsing the information layout. */
-@media (max-width:1099px){
-  .modal-card{
-    grid-template-columns:minmax(0,1fr) minmax(320px,.78fr);
-    width:min(100%,980px);
-  }
-
-  .modal-stage{
-    width:min(100%,calc(100dvh - var(--header-h) - 96px));
-  }
-}
-
-/* Mobile: header stays visible, then a compact square catalogue stage. */
-@media (max-width:760px){
-  .header{z-index:1200}
-
-  .modal{
-    top:var(--header-h);
-    z-index:1100;
-    padding:0;
-    place-items:stretch;
-  }
+/* When flex wrapping happens, the media naturally becomes the first row. */
+@media(max-width:760px){
+  .modal{padding:0;place-items:stretch}
 
   .modal-card{
-    position:relative;
     width:100%;
-    height:100%;
-    max-width:none;
     max-height:none;
-    grid-template-columns:1fr;
-    grid-template-rows:auto minmax(0,1fr);
-    overflow:hidden;
-  }
-
-  .modal-media{
-    height:auto;
-    padding:12px;
-    border-right:0;
-    border-bottom:1px solid var(--line);
-  }
-
-  /* The mobile media area is square because the product media is square. */
-  .modal-stage{
-    width:min(100%,420px);
-    aspect-ratio:1 / 1;
-    max-height:min(42dvh,420px);
-    padding:12px;
-    touch-action:pan-y;
-  }
-
-  .modal-stage img,
-  .modal-stage video{
-    width:100%;
-    height:100%;
-    object-fit:contain;
-  }
-
-  .modal-nav,
-  .modal-thumbs{display:none}
-
-  .modal-copy{
-    min-height:0;
-    padding:18px 20px max(20px,env(safe-area-inset-bottom));
+    min-height:100%;
+    align-content:start;
     overflow:auto;
   }
 
-  .modal-copy #modal-desc{
-    margin:14px 0 20px;
-    line-height:1.58;
+  .modal-media{
+    flex-basis:100%;
+    border-right:0;
+    border-bottom:1px solid var(--line);
+    padding:clamp(10px,3vw,18px);
   }
 
+  .modal-stage{
+    width:min(100%,clamp(260px,86vw,460px));
+  }
+
+  .modal-copy{
+    flex-basis:100%;
+    padding:20px var(--gutter) max(28px,env(safe-area-inset-bottom));
+  }
+
+  .modal-nav,.modal-thumbs{display:none}
+
   .modal-close{
-    top:10px;
+    position:fixed;
+    top:calc(var(--header-h) + 10px);
     right:10px;
     width:38px;
     height:38px;
   }
 }
 
-@media (max-width:390px){
-  .modal-media{padding:8px}
-  .modal-stage{width:min(100%,360px);padding:10px}
+@media(max-width:390px){
+  .modal-stage{width:min(100%,86vw)}
 }
-
