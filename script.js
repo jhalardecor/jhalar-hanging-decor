@@ -8,16 +8,14 @@ const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&
 /* Canonical application root. Dynamic /products/... routes must never change where data or media are fetched from. */
 function appRoot(){
  /*
-  script.js lives at the application root. Do not use ./ here: new URL('./',
-  script.js) resolves one directory too high when the deployment is a
-  GitHub Pages project site.
+  The homepage canonical URL is the deployment contract. It is stable across
+  homepage, modal state and restored /products/... routes.
  */
- const runtime=[...document.scripts].map(x=>x.src).find(src=>/\/script\.js(?:\?|$)/.test(src));
- if(runtime){
-   const u=new URL(runtime);
-   return u.origin+u.pathname.replace(/\/script\.js$/,'/');
- }
- return location.origin+location.pathname.replace(/\/products\/.*$/,'').replace(/[^/]*$/,'');
+ const canonical=document.querySelector('link[rel="canonical"]')?.href;
+ if(canonical)return new URL('./',canonical).href;
+ const runtime=document.querySelector('script[data-jhalar-runtime]')?.src;
+ if(runtime)return new URL('./',runtime).href;
+ return location.origin+'/';
 }
 function appUrl(path){
  const clean=String(path).replace(/^\.\//,'').replace(/^\/+/, '');
