@@ -952,7 +952,7 @@ a:focus-visible,
   }
   .modal-media{width:560px !important}
   .modal-stage{width:min(560px,100%) !important;height:min(540px,100%) !important}
-  .modal-stage img,.modal-stage video{transform:none !important}
+  .modal-stage img,.modal-stage video{transform:none}
   .modal-copy{width:360px !important}
 }
 
@@ -1146,4 +1146,27 @@ a:focus-visible,
   #modal-video{
     mix-blend-mode:normal;
   }
+}
+
+
+/* Product viewer interaction contract.
+   The JS owns transform while zooming/panning; CSS must never lock it with !important. */
+.modal-stage #modal-photo{
+  cursor:zoom-in;
+  will-change:transform;
+  user-select:none;
+  -webkit-user-drag:none;
+}
+
+.modal-stage.is-zoomed #modal-photo{
+  cursor:grab;
+}
+
+.modal-stage.is-panning #modal-photo{
+  cursor:grabbing;
+}
+
+/* Keep the image transform pipeline available to the viewer engine. */
+.modal-stage #modal-photo{
+  transform-origin:center center;
 }
