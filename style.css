@@ -2249,8 +2249,8 @@ body.project-inquiry-open{overflow:hidden}
    ========================================================= */
 :root{
   --display-weight:400;
-  --display-leading:.98;
-  --display-tracking:-.055em;
+  --display-leading:1.04;
+  --display-tracking:-.025em;
 }
 .hero h1,
 .collection-intro h2,
