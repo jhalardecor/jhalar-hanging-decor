@@ -1389,3 +1389,14 @@ body.modal-open{
     font-size:1rem;
   }
 }
+
+
+/* Footer logo — final optical scale, independent from its animation envelope. */
+.site-footer .footer-logo{
+  width:clamp(118px,8vw,142px);
+}
+@media(max-width:760px){
+  .site-footer .footer-logo{
+    width:118px;
+  }
+}
