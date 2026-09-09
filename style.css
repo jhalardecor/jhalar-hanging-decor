@@ -1787,3 +1787,27 @@ body.project-inquiry-open{overflow:hidden}
   background:var(--red-deep)!important;
   color:var(--cream)!important;
 }
+
+
+/* Locked CTA rule: all primary calls-to-action use the JHALAR red family. */
+:root{
+  --action-primary:var(--red);
+  --action-primary-hover:var(--red-deep);
+  --action-primary-ink:var(--cream);
+}
+.hero-copy a,
+.button-light,
+.contact-cta,
+.modal-wa-btn,
+.project-inquiry-submit{
+  background:var(--red)!important;
+  color:var(--cream)!important;
+}
+.hero-copy a:hover,
+.button-light:hover,
+.contact-cta:hover,
+.modal-wa-btn:hover,
+.project-inquiry-submit:hover{
+  background:var(--red-deep)!important;
+  color:var(--cream)!important;
+}
