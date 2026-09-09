@@ -118,6 +118,10 @@ function initPremiumInteractions(){
   }
 }
 
+function slugify(value){
+ return String(value||'product').toLowerCase().trim()
+  .replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'')||'product';
+}
 function productSlug(p){return slugify(p.title)+'-'+p.id}
 function syncProductUrl(p,replace=false){
  const url=new URL(window.location.href);
