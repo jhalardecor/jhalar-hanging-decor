@@ -28,7 +28,7 @@
       <h2>Made for the space.<br>Made for the requirement.</h2>
       <p class="spaces-lead">From a single statement piece to larger installations, we can work with your colour direction, quantity and project requirements.</p>
       <ul class="spaces-capabilities"><li>Custom colours</li><li>Bulk quantities</li><li>Bespoke requirements</li></ul>
-      <a class="spaces-link" href="#contact">Discuss your project <span aria-hidden="true">→</span></a>
+      <button class="spaces-link discuss-project-trigger" type="button" aria-haspopup="dialog" aria-controls="project-inquiry-modal">Discuss your project <span aria-hidden="true">→</span></button>
     </div>
     <figure class="spaces-visual"><img src="assets/images/custom-orders.jpg" alt="JHALAR hanging decor used in a custom space" loading="lazy"></figure>
   </div>
@@ -44,6 +44,28 @@
 </section>
 </main>
 <footer class="site-footer"><div class="shell footer-top"><img class="footer-logo" src="assets/logo-jhalar-02-white.svg" alt="JHALAR"><div class="footer-links"><a href="#collection">Collection</a><a href="#custom-orders">Custom projects</a><a href="mailto:lokeshdugar040@gmail.com">Email</a><a href="https://wa.me/918100656258" target="_blank" rel="noopener noreferrer">WhatsApp</a></div></div><div class="shell footer-bottom"><p>© <span id="year"></span> JHALAR Hanging Decor · Howrah, West Bengal</p></div></footer>
+<div class="project-inquiry" id="project-inquiry-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="project-inquiry-title">
+  <div class="project-inquiry-backdrop" data-project-close></div>
+  <div class="project-inquiry-card">
+    <button class="project-inquiry-close" type="button" aria-label="Close inquiry form" data-project-close>×</button>
+    <div class="project-inquiry-head">
+      <p class="eyebrow">CUSTOM PROJECT</p>
+      <h2 id="project-inquiry-title">Tell us about your space.</h2>
+      <p>Share a few details. We’ll prepare your message and continue the conversation on WhatsApp.</p>
+    </div>
+    <form id="project-inquiry-form">
+      <label>Your name<input name="name" type="text" autocomplete="name" required></label>
+      <label>Phone number<input name="phone" type="tel" autocomplete="tel"></label>
+      <label>Project / space<input name="project" type="text" placeholder="Home, event, hotel, shop…" required></label>
+      <div class="project-inquiry-grid">
+        <label>Quantity<input name="quantity" type="text" placeholder="Approx. quantity"></label>
+        <label>Location<input name="location" type="text" placeholder="City"></label>
+      </div>
+      <label>Tell us what you need<textarea name="details" rows="4" placeholder="Colours, size, timeline or any special requirements"></textarea></label>
+      <button class="project-inquiry-submit" type="submit">Continue on WhatsApp <span aria-hidden="true">↗</span></button>
+    </form>
+  </div>
+</div>
 <div class="media-lightbox" id="media-lightbox" aria-hidden="true">
     <button class="media-lightbox-close" type="button" aria-label="Close full screen image"><span></span><span></span></button>
     <div class="media-lightbox-hint" aria-hidden="true">Swipe down to close</div>
