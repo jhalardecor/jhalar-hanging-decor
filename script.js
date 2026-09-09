@@ -582,15 +582,26 @@ initProducts();initRuntime();
  stage.addEventListener('click',e=>{
    if(e.detail===1&&!drag&&finePointer())toggleFullMedia();
  });
- let lastTap=0;
+ // Mobile: a deliberate single tap opens the true full-screen viewer.
+ // Ignore gestures that were part of pinch or pan.
+ let touchStart=null,touchMoved=false;
+ stage.addEventListener('touchstart',e=>{
+   if(e.touches.length===1){
+     touchStart={x:e.touches[0].clientX,y:e.touches[0].clientY,time:Date.now()};
+     touchMoved=false;
+   }
+ },{passive:true});
+ stage.addEventListener('touchmove',e=>{
+   if(!touchStart||!e.touches[0])return;
+   const dx=e.touches[0].clientX-touchStart.x,dy=e.touches[0].clientY-touchStart.y;
+   if(Math.hypot(dx,dy)>12)touchMoved=true;
+ },{passive:true});
  stage.addEventListener('touchend',e=>{
-   if(e.touches.length||pinch||drag)return;
-   const now=Date.now();
-   if(now-lastTap<350){
-     /* Double tap restores the original card composition and 1× scale. */
-     closeFullMedia();reset();
-     lastTap=0;
-   } else lastTap=now;
+   if(!touchStart)return;
+   const duration=Date.now()-touchStart.time;
+   const shouldOpen=!touchMoved&&!pinch&&!drag&&duration<450;
+   touchStart=null;
+   if(shouldOpen)toggleFullMedia();
  },{passive:true});
  document.addEventListener('keydown',e=>{
    if(e.key==='Escape'&&lightbox&&lightbox.classList.contains('open'))closeFullMedia();
