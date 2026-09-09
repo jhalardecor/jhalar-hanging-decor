@@ -4,7 +4,31 @@
 :root{--canvas:#FFFAF1;--surface:#FFFDF8;--surface-2:#F6EFE4;--ink:#141942;--heading:#622331;--muted:#705b5f;--red:#C82039;--red-deep:#A71931;--cream:#FFFAF1;--line:rgba(98,35,49,.16);--font-display:JhalarDisplay,Georgia,serif;--font-ui:Arial,Helvetica,sans-serif;--gutter:clamp(20px,4vw,56px);--shell:min(1280px,calc(100% - (2*var(--gutter))));--space-1:4px;--space-2:8px;--space-3:12px;--space-4:16px;--space-5:24px;--space-6:32px;--space-7:48px;--space-8:64px;--space-9:96px;--content-gap:clamp(28px,4vw,72px);--section:clamp(64px,9vw,144px);--header-h:clamp(64px,5vw,82px);--control-h:52px;--type-xs:clamp(.68rem,.66rem + .08vw,.74rem);--type-sm:clamp(.82rem,.78rem + .12vw,.92rem);--type-body:clamp(.96rem,.92rem + .18vw,1.06rem);--type-body-lg:clamp(1.08rem,1.02rem + .28vw,1.22rem);--type-h4:clamp(1.25rem,1.14rem + .42vw,1.5rem);--type-h3:clamp(1.5rem,1.28rem + .8vw,2rem);--type-h2:clamp(2.1rem,1.72rem + 1.7vw,3.35rem);--type-h1:clamp(3rem,2.2rem + 4vw,6.2rem)}
 *,*::before,*::after{box-sizing:border-box}html{scroll-behavior:smooth;background:var(--canvas);scroll-padding-top:var(--header-h)}body{margin:0;min-width:320px;background:var(--canvas);color:var(--ink);font-family:var(--font-ui);font-size:var(--type-body);line-height:1.6;overflow-x:hidden}body.modal-open{position:fixed;width:100%;overflow:hidden}a{color:inherit;text-decoration:none}button{font:inherit;cursor:pointer}img,video{display:block;max-width:100%}.shell{width:var(--shell);margin-inline:auto}.section{padding-block:var(--section)}
 h1,h2,h3,h4,h5,h6{margin:0;font-family:var(--font-display);font-weight:400;color:var(--heading);letter-spacing:0;font-kerning:normal;word-spacing:normal}h1{font-size:var(--type-h1);line-height:1.04}h2{font-size:var(--type-h2);line-height:1.08}h3{font-size:var(--type-h3);line-height:1.18}h4{font-size:var(--type-h4);line-height:1.28}p{margin:0;color:var(--ink);font-size:var(--type-body);line-height:1.62;letter-spacing:0}.label,.eyebrow,.kicker{margin:0 0 var(--space-3);color:var(--red);font-family:var(--font-ui);font-size:var(--type-xs);font-weight:700;letter-spacing:.12em;line-height:1.35;text-transform:uppercase}
-.header{position:sticky;top:0;z-index:100;height:var(--header-h);background:rgba(255,250,241,.96);border-bottom:1px solid var(--line);backdrop-filter:blur(14px)}.header-row{height:100%;display:flex;align-items:center;justify-content:space-between}.brand{display:flex;align-items:center}.brand img{width:clamp(132px,10vw,158px);height:auto}.nav{display:flex;align-items:center;gap:clamp(22px,3vw,44px);margin-left:auto;font-size:var(--type-sm)}.nav a{position:relative}.nav a::after{content:"";position:absolute;left:0;right:0;bottom:-7px;height:1px;background:var(--red);transform:scaleX(0);transform-origin:right;transition:transform .25s ease}.nav a:hover::after,.nav a.nav-current::after{transform:scaleX(1);transform-origin:left}.nav a:hover,.nav-current{color:var(--red-deep)}.nav-enquire{font-weight:500;color:var(--ink)!important}.menu{
+.header{
+  position:sticky;
+  top:0;
+  z-index:1200;
+  height:var(--header-h);
+  background:rgba(255,250,241,.82);
+  border-bottom:1px solid transparent;
+  backdrop-filter:blur(18px) saturate(1.1);
+  -webkit-backdrop-filter:blur(18px) saturate(1.1);
+  transition:
+    transform var(--duration-component) var(--ease-standard),
+    background var(--duration-control) var(--ease-standard),
+    border-color var(--duration-control) var(--ease-standard),
+    box-shadow var(--duration-control) var(--ease-standard);
+  will-change:transform;
+}
+.header.is-scrolled{
+  background:rgba(255,250,241,.94);
+  border-bottom-color:var(--line);
+  box-shadow:0 1px 0 rgba(20,25,66,.03);
+}
+.header.is-hidden{
+  transform:translateY(-100%);
+  pointer-events:none;
+}.header-row{height:100%;display:flex;align-items:center;justify-content:space-between}.brand{display:flex;align-items:center}.brand img{width:clamp(132px,10vw,158px);height:auto}.nav{display:flex;align-items:center;gap:clamp(22px,3vw,44px);margin-left:auto;font-size:var(--type-sm)}.nav a{position:relative}.nav a::after{content:"";position:absolute;left:0;right:0;bottom:-7px;height:1px;background:var(--red);transform:scaleX(0);transform-origin:right;transition:transform .25s ease}.nav a:hover::after,.nav a.nav-current::after{transform:scaleX(1);transform-origin:left}.nav a:hover,.nav-current{color:var(--red-deep)}.nav-enquire{font-weight:500;color:var(--ink)!important}.menu{
   display:none;
   width:44px;
   height:44px;
