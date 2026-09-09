@@ -1704,3 +1704,6 @@ body.project-inquiry-open{overflow:hidden}
   font-size:var(--type-sm);
   font-weight:600;
 }
+
+/* Product cards: the card itself is the interaction — no forced secondary CTA. */
+.product-open{display:none!important}
