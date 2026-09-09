@@ -1114,3 +1114,36 @@ a:focus-visible,
     overflow:visible;
   }
 }
+
+
+/* =========================================================
+   PRODUCT VIEWER — REMOVE THE FALSE MEDIA PANEL
+   The product image must read as an object on the same sheet,
+   not as a second white card beside the information.
+   ========================================================= */
+@media (min-width:761px){
+  .modal-card{
+    background:var(--surface) !important;
+  }
+
+  .modal-media,
+  .modal-stage{
+    background:transparent !important;
+    border:0 !important;
+    box-shadow:none !important;
+    border-radius:0 !important;
+  }
+
+  /* Catalog JPGs carry a white canvas. Multiply lets that canvas merge
+     into the presentation sheet instead of creating a visible rectangle. */
+  #modal-photo{
+    mix-blend-mode:multiply;
+    background:transparent !important;
+    isolation:auto;
+  }
+
+  /* Keep video media neutral; only raster catalog photography is blended. */
+  #modal-video{
+    mix-blend-mode:normal;
+  }
+}
