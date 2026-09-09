@@ -476,7 +476,8 @@ initProducts();initRuntime();
  const stage=document.getElementById('modal-stage'),img=document.getElementById('modal-photo'),modal=document.getElementById('product-modal');
  if(!stage||!img||!modal)return;
  let z=1,x=0,y=0,drag=null,raf=0;
- const MAX=2.8;
+ const finePointer=()=>matchMedia('(hover:hover) and (pointer:fine)').matches;
+ const MAX=finePointer()?2.4:1.8;
  function frame(){
    const r=stage.getBoundingClientRect(),cs=getComputedStyle(stage),px=(parseFloat(cs.paddingLeft)||0)*2,py=(parseFloat(cs.paddingTop)||0)*2;
    return {r,w:r.width-px,h:r.height-py};
@@ -495,7 +496,6 @@ initProducts();initRuntime();
  }
  // Mouse / fine-pointer devices only: wheel or trackpad scroll zooms the product image.
  // Touch screens must keep normal page scrolling; zoom there is pinch-only.
- const finePointer=()=>matchMedia('(hover:hover) and (pointer:fine)').matches;
  stage.addEventListener('wheel',e=>{if(!finePointer()||!modal.classList.contains('open')||stage.classList.contains('is-video'))return;e.preventDefault();zoom(z*Math.exp(-e.deltaY*.001),e.clientX,e.clientY)},{passive:false});
 
  // Mobile: two-finger pinch zooms the product image itself, not the page.
@@ -545,7 +545,7 @@ initProducts();initRuntime();
  stage.addEventListener('pointerup',stop);
  stage.addEventListener('pointercancel',stop);
  stage.addEventListener('dblclick',e=>zoom(z>1.01?1:2,e.clientX,e.clientY));
- img.addEventListener('load',reset);
+ img.addEventListener('load',()=>{img.style.transformOrigin='center center';reset()});
  // Every product/media swap starts from the true 1× contained view.
  stage.addEventListener('product-media-change',()=>requestAnimationFrame(reset));
  new MutationObserver(()=>{if(!modal.classList.contains('open'))reset()}).observe(modal,{attributes:true,attributeFilter:['class']});
