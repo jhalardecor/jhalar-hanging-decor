@@ -109,8 +109,9 @@ h1,h2,h3,h4,h5,h6{margin:0;font-family:var(--font-display);font-weight:400;color
 /* One intentional square canvas. No nested padding/card layers. */
 .modal-media{
   min-width:0;
-  display:grid;
-  place-items:center;
+  display:flex;
+  align-items:center;
+  justify-content:center;
   padding:0;
   margin:0;
   background:transparent;
@@ -118,7 +119,7 @@ h1,h2,h3,h4,h5,h6{margin:0;font-family:var(--font-display);font-weight:400;color
 }
 
 .modal-stage{
-  width:min(100%,560px);
+  width:min(88%,520px);
   aspect-ratio:1 / 1;
   height:auto;
   margin:0;
