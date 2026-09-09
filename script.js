@@ -90,9 +90,9 @@ window.addEventListener('popstate',()=>{
 });
 
 function initProductDeepLink(){
- const wanted=location.pathname.match(/products\/([^/]+)-(\\d+)\/?$/);
+ const wanted=new URLSearchParams(location.search).get('product');
  if(!wanted)return;
- const id=Number(wanted[2]);
+ const id=Number(String(wanted).match(/-(\d+)$/)?.[1]);
  if(id&&state.products?.some(p=>Number(p.id)===id))openProduct(id,false);
 }
 
@@ -136,19 +136,24 @@ function slugify(value){
  return String(value||'product').toLowerCase().trim()
   .replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'')||'product';
 }
-function productSlug(p){return slugify(p.title)}
+function productSlug(p){return slugify(p.title)+'-'+p.id}
 function productUrl(p){
- const base=new URL(window.location.href);
- base.search='';
- base.hash='';
- return base.pathname.replace(/\/?$/,'/')+'products/'+productSlug(p)+'-'+p.id+'/';
+ /* Static GitHub Pages cannot reliably serve arbitrary /products/... paths.
+    Query URLs remain shareable, bookmarkable and refresh-safe. */
+ const url=new URL(location.href);
+ url.pathname=url.pathname.replace(/products\/[^/]+\/?$/,'');
+ url.search='';
+ url.hash='';
+ url.searchParams.set('product',productSlug(p));
+ return url.pathname+'?'+url.searchParams.toString();
 }
 function syncProductUrl(p,replace=false){
- const path=productUrl(p);
- history[replace?'replaceState':'pushState']({product:p.id},'',path);
+ history[replace?'replaceState':'pushState']({product:p.id},'',productUrl(p));
 }
 function clearProductUrl(){
- history.replaceState({},'',location.pathname.replace(/products\/[^/]+\/?$/,''));
+ const url=new URL(location.href);
+ url.searchParams.delete('product');
+ history.replaceState({},'',url.pathname+(url.search||'')+url.hash);
 }
 function visibleProducts(){return state.filter==='all'?state.products:state.products.filter(p=>p.category===state.filter)}
 function mediaType(src,type){if(type)return type;return /\\.(mp4|webm|ogg|mov)(?:[?#]|$)/i.test(String(src))?'video':'image'}
@@ -243,8 +248,14 @@ function renderProducts(){
     down=null;
   },true);
   document.addEventListener('click',e=>{
+    const card=cardFrom(e);
+    if(!card)return;
+    /* Never allow the anchor to navigate away from the static application.
+       Modified clicks retain native new-tab/context behaviour. */
+    if(e.metaKey||e.ctrlKey||e.shiftKey||e.altKey||e.button===1)return;
+    e.preventDefault();
     if(Date.now()-lastOpen<450)return;
-    activate(cardFrom(e),e);
+    activate(card,e);
   },true);
 })();
 
