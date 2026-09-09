@@ -2288,7 +2288,7 @@ body.project-inquiry-open{overflow:hidden}
   letter-spacing:var(--heading-track);
   line-height:var(--heading-leading);
   text-wrap:balance;
-  font-size:clamp(3.4rem,7.2vw,7.6rem);
+  font-size:clamp(2.8rem,7.2vw,7.6rem);
 }
 .collection-intro h2{
   font-family:var(--font-display);
@@ -2296,7 +2296,7 @@ body.project-inquiry-open{overflow:hidden}
   letter-spacing:var(--heading-track);
   line-height:var(--heading-leading);
   text-wrap:balance;
-  font-size:clamp(2.5rem,4vw,4.7rem);
+  font-size:clamp(2.3rem,4vw,4.7rem);
 }
 .custom-projects h2{
   font-family:var(--font-display);
@@ -2304,7 +2304,7 @@ body.project-inquiry-open{overflow:hidden}
   letter-spacing:var(--heading-track);
   line-height:var(--heading-leading);
   text-wrap:balance;
-  font-size:clamp(3rem,5.7vw,6.1rem);
+  font-size:clamp(2.7rem,5.7vw,6.1rem);
 }
 .about-copy h2{
   font-family:var(--font-display);
@@ -2312,7 +2312,7 @@ body.project-inquiry-open{overflow:hidden}
   letter-spacing:var(--heading-track);
   line-height:var(--heading-leading);
   text-wrap:balance;
-  font-size:clamp(2.5rem,4vw,4.7rem);
+  font-size:clamp(2.3rem,4vw,4.7rem);
 }
 .contact-copy h2{
   font-family:var(--font-display);
@@ -2320,7 +2320,7 @@ body.project-inquiry-open{overflow:hidden}
   letter-spacing:var(--heading-track);
   line-height:var(--heading-leading);
   text-wrap:balance;
-  font-size:clamp(2.5rem,4vw,4.7rem);
+  font-size:clamp(2.3rem,4vw,4.7rem);
 }
 .updates h2{
   font-family:var(--font-display);
@@ -2328,13 +2328,5 @@ body.project-inquiry-open{overflow:hidden}
   letter-spacing:var(--heading-track);
   line-height:var(--heading-leading);
   text-wrap:balance;
-  font-size:clamp(2.35rem,3.4vw,4rem);
-}
-@media(max-width:760px){
-  .hero h1{font-size:clamp(2.8rem,12vw,4.2rem)}
-  .collection-intro h2{font-size:clamp(2.3rem,9vw,3.5rem)}
-  .custom-projects h2{font-size:clamp(2.7rem,11vw,4.2rem)}
-  .about-copy h2{font-size:clamp(2.3rem,9vw,3.5rem)}
-  .contact-copy h2{font-size:clamp(2.3rem,9vw,3.5rem)}
-  .updates h2{font-size:clamp(2.3rem,9vw,3.5rem)}
+  font-size:clamp(2.3rem,3.4vw,4rem);
 }
