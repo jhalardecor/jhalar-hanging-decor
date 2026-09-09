@@ -955,3 +955,80 @@ a:focus-visible,
   .modal-stage img,.modal-stage video{transform:none !important}
   .modal-copy{width:360px !important}
 }
+
+
+/* =========================================================
+   COLLECTION CARD SYSTEM — QUIET, PREMIUM, NO TILE EFFECT
+   ========================================================= */
+.product-grid{
+  align-items:start;
+}
+
+/* The card is content, not a floating UI tile. */
+.product-card{
+  position:relative;
+  margin:0;
+  padding:0;
+  background:transparent;
+  box-shadow:none !important;
+  border:0 !important;
+  transform:none !important;
+}
+
+.product-image{
+  position:relative;
+  margin:0;
+  border:0;
+  border-radius:0;
+  background:transparent;
+  overflow:hidden;
+  transform:none !important;
+  isolation:isolate;
+}
+
+.product-image img{
+  display:block;
+  transform:none !important;
+  transition:transform 700ms var(--ease-standard);
+}
+
+/* Interaction is in the object, not the whole card jumping like a tile. */
+@media(hover:hover){
+  .product-card:hover{
+    transform:none !important;
+    box-shadow:none !important;
+  }
+
+  .product-card:hover .product-image{
+    transform:none !important;
+  }
+
+  .product-card:hover .product-image img{
+    transform:scale(1.018) !important;
+  }
+
+  .product-card:hover .product-open{
+    transform:translateX(3px);
+  }
+}
+
+.product-info{
+  padding-top:var(--space-4);
+}
+
+.product-open{
+  transition:color var(--duration-fast) var(--ease-standard),
+             transform var(--duration-control) var(--ease-standard);
+}
+
+/* Every collection item owns its spacing; sections never rely on card margins. */
+.collection .product-grid{
+  margin:0;
+}
+
+@media(max-width:760px){
+  .product-info{padding-top:var(--space-3)}
+  .product-card:active .product-image img{
+    transform:scale(.99) !important;
+  }
+}
