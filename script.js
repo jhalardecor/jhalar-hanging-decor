@@ -572,11 +572,65 @@ initProducts();initRuntime();
      lightbox.setAttribute('aria-hidden','true');
    }
  };
+ let lbScale=1,lbX=0,lbY=0,lbPointers=new Map(),lbStartDist=0,lbStartScale=1,lbDrag=null;
+ const renderLightbox=()=>{
+   if(!lightboxImage)return;
+   lightboxImage.style.transform=`translate3d(${lbX}px,${lbY}px,0) scale(${lbScale})`;
+ };
+ const resetLightbox=()=>{lbScale=1;lbX=0;lbY=0;renderLightbox();};
  const closeFullMedia=()=>{
    if(!lightbox)return;
    lightbox.classList.remove('open');
    lightbox.setAttribute('aria-hidden','true');
+   resetLightbox();
  };
+
+ /* Full-screen media zoom + pan */
+ lightbox&&lightbox.addEventListener('wheel',e=>{
+   if(!lightbox.classList.contains('open')||e.ctrlKey||e.metaKey)return;
+   e.preventDefault();
+   lbScale=Math.max(1,Math.min(4,lbScale*Math.exp(-e.deltaY*.0015)));
+   if(lbScale===1){lbX=0;lbY=0;}
+   renderLightbox();
+ },{passive:false});
+
+ lightboxImage&&lightboxImage.addEventListener('pointerdown',e=>{
+   if(!lightbox.classList.contains('open'))return;
+   lightboxImage.setPointerCapture(e.pointerId);
+   lbPointers.set(e.pointerId,{x:e.clientX,y:e.clientY});
+   if(lbPointers.size===1)lbDrag={x:e.clientX,y:e.clientY,baseX:lbX,baseY:lbY};
+   if(lbPointers.size===2){
+     const p=[...lbPointers.values()];
+     lbStartDist=Math.hypot(p[0].x-p[1].x,p[0].y-p[1].y);
+     lbStartScale=lbScale;
+     lbDrag=null;
+   }
+ });
+ lightboxImage&&lightboxImage.addEventListener('pointermove',e=>{
+   if(!lbPointers.has(e.pointerId))return;
+   lbPointers.set(e.pointerId,{x:e.clientX,y:e.clientY});
+   if(lbPointers.size===2){
+     const p=[...lbPointers.values()],d=Math.hypot(p[0].x-p[1].x,p[0].y-p[1].y);
+     lbScale=Math.max(1,Math.min(4,lbStartScale*(d/lbStartDist)));
+     if(lbScale===1){lbX=0;lbY=0;}
+     renderLightbox();
+   }else if(lbDrag&&lbScale>1){
+     lbX=lbDrag.baseX+(e.clientX-lbDrag.x);
+     lbY=lbDrag.baseY+(e.clientY-lbDrag.y);
+     renderLightbox();
+   }
+ });
+ const endLightboxPointer=e=>{
+   lbPointers.delete(e.pointerId);
+   if(lbPointers.size===0)lbDrag=null;
+   else if(lbPointers.size===1){
+     const p=[...lbPointers.values()][0];
+     lbDrag={x:p.x,y:p.y,baseX:lbX,baseY:lbY};
+   }
+ };
+ lightboxImage&&lightboxImage.addEventListener('pointerup',endLightboxPointer);
+ lightboxImage&&lightboxImage.addEventListener('pointercancel',endLightboxPointer);
+ lightboxImage&&lightboxImage.addEventListener('dblclick',resetLightbox);
  lightboxClose&&lightboxClose.addEventListener('click',closeFullMedia);
  lightbox&&lightbox.addEventListener('click',e=>{if(e.target===lightbox)closeFullMedia()});
  stage.addEventListener('click',e=>{
