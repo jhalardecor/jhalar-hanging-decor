@@ -155,9 +155,16 @@ function mediaType(src,type){if(type)return type;return /\\.(mp4|webm|ogg|mov)(?
 function normaliseMedia(item){
  const raw=typeof item==='string'?item:(item&&typeof item==='object'?(item.src||item.url||item.image||item.video||item.source):'');
  if(!raw)return null;
- /* Product URLs can now be /products/.../; resolve relative catalogue media against site root. */
  let src=String(raw).trim();
- if(src&&!/^(https?:|data:|blob:|\/)/i.test(src))src=new URL(src,new URL(document.baseURI).origin+'/').href;
+ /*
+  Resolve catalogue media from the application root, not the current URL.
+  This keeps assets working on GitHub Pages project paths and /products/... URLs.
+ */
+ if(src&&!/^(https?:|data:|blob:|\/)/i.test(src)){
+   const runtimeScript=[...document.scripts].map(x=>x.src).find(x=>/\/script\.js(?:\?|$)/.test(x));
+   const appRoot=runtimeScript?new URL('./',runtimeScript):new URL('./',document.baseURI);
+   src=new URL(src,appRoot).href;
+ }
  return {src,type:mediaType(src,typeof item==='object'?(item.type||item.mediaType):undefined)};
 }
 // Descriptive alt text is optional owner-editable content; fall back to the product name.
