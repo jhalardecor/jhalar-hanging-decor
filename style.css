@@ -1227,3 +1227,49 @@ html,body{
 body.modal-open{
   overscroll-behavior:none;
 }
+
+
+/* Focused product media mode */
+.modal.media-focus .modal-card{
+  grid-template-columns:1fr !important;
+}
+.modal.media-focus .modal-copy,
+.modal.media-focus .modal-thumbs,
+.modal.media-focus .modal-nav{
+  opacity:0;
+  pointer-events:none;
+}
+.modal.media-focus .modal-media{
+  width:100% !important;
+  max-width:none !important;
+  max-height:none !important;
+}
+.modal.media-focus #modal-stage{
+  width:min(900px,calc(100vw - 96px)) !important;
+  height:min(900px,calc(100dvh - var(--header-h) - 72px)) !important;
+  margin:auto;
+}
+.modal.media-focus #modal-stage::after{
+  content:'Tap again to return';
+  position:absolute;
+  left:50%;
+  bottom:18px;
+  transform:translateX(-50%);
+  padding:8px 12px;
+  border-radius:999px;
+  background:rgba(20,25,66,.72);
+  color:#fffaf1;
+  font-size:.72rem;
+  letter-spacing:.04em;
+  pointer-events:none;
+  opacity:.9;
+}
+@media(max-width:760px){
+  .modal.media-focus .modal-card{
+    padding:12px !important;
+  }
+  .modal.media-focus #modal-stage{
+    width:100% !important;
+    height:calc(100dvh - 96px) !important;
+  }
+}
