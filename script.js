@@ -126,7 +126,7 @@ function renderProducts(){
      (alt?'<img class="alt-img" src="'+esc(alt)+'" alt="" loading="lazy">':'')+
      '</div><div class="product-info"><span class="product-category">'+esc(p.category)+'</span><h3 class="product-title">'+esc(name.name)+'</h3>'+
      (name.variant?'<span class="product-variant">'+esc(name.variant)+'</span>':'')+
-     '<span class="product-open">View design <span aria-hidden="true">→</span></span></div></article>';
+     '</div></article>';
  }).join('');
  if(!grid.dataset.productActivation){
    const activate=e=>{
