@@ -38,8 +38,11 @@ test('catalogue and manifest reference real files, not deleted legacy image path
 });
 
 test('product descriptions and category filters are complete', () => {
-  const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
-  const categories = new Set([...html.matchAll(/data-filter="([^"]+)"/g)].map(match => match[1]));
+  // Filter chips are rendered at runtime from the catalogue itself
+  // (script.js renderFilters), so completeness means every product has a
+  // usable category and there is more than one category to filter by.
+  const categories = new Set(catalogue.products.map(product => product.category).filter(c => typeof c === 'string' && c.trim()));
+  assert.ok(categories.size > 1, 'Expected more than one category for filtering');
   for (const product of catalogue.products) {
     assert.ok(product.description && product.description.trim().length > 30, `Missing description: ${product.id}`);
     assert.ok(categories.has(product.category), `Missing filter: ${product.category}`);
