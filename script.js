@@ -68,6 +68,20 @@ function renderFilters(){
 }
 
 // Premium interaction layer
+/* Logo/home should always resolve to the latest published application state. */
+document.querySelectorAll('a[href="./"],a[href="/"],a.logo,a.site-logo').forEach(link=>{
+  link.addEventListener('click',event=>{
+    const isModified=event.metaKey||event.ctrlKey||event.shiftKey||event.altKey||event.button===1;
+    if(isModified)return;
+    event.preventDefault();
+    const home=new URL(location.href);
+    home.searchParams.delete('product');
+    home.hash='';
+    home.searchParams.set('v',String(window.JHALAR_BUILD||Date.now()));
+    location.replace(home.pathname+home.search);
+  });
+});
+
 window.addEventListener('popstate',()=>{
  const wanted=new URLSearchParams(location.search).get('product');
  if(!wanted){closeModal(false);return}
@@ -161,6 +175,10 @@ function renderProducts(){
    const activate=e=>{
      const card=e.target.closest('.product-card[data-id]');
      if(!card||!grid.contains(card))return;
+     const link=e.target.closest('a.product-link');
+     /* Preserve native browser behavior for Ctrl/Cmd-click, middle click and context menus. */
+     if(link&&(e.metaKey||e.ctrlKey||e.shiftKey||e.altKey))return;
+     e.preventDefault();
      openProduct(Number(card.dataset.id));
    };
    grid.addEventListener('click',activate);
