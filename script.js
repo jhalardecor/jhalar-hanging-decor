@@ -334,71 +334,10 @@ function closeModal(updateUrl=true){
 })();
 
 /* ---------- runtime defaults: equal to the shipped HTML/settings ---------- */
-const DEFAULTS={
- heroImage:'assets/images/hero-jhalar.webp',
- heroHeadline:'Hanging decor for celebrations and events.',
- heroIntro:'Explore handmade designs for weddings, functions, festive spaces and larger orders.',
- heroCta:'View the collection',
- collectionLabel:'BROWSE DESIGNS',collectionTitle:'Browse our collection',collectionIntro:'Explore our hanging designs and find options for your event, celebration or store.',
- customLabel:'CUSTOM WORK',customTitle:'Looking for something specific?',customIntro:'Share your colour preference, size, quantity or reference image. We will be happy to discuss your requirement.',
- customImage:'assets/images/custom-orders.jpg',
- aboutLabel:'JHALAR',aboutTitle:'Made by hand in Howrah',aboutIntro:'We make hanging decor for event decorators, planners, retailers, wholesalers and families.',
- aboutImage:'assets/images/about-collage.jpg',
- contactLabel:'GET IN TOUCH',contactTitle:"Let's discuss your requirement",contactIntro:'Tell us about your event or order. If available, share the quantity, location and date as well.',
- footerTagline:'Handmade hanging decor from Howrah, India',
- siteTitle:'JHALAR | Hanging Decor',
- siteDescription:'Handmade hanging decor for events, celebrations, decorators, retailers and wholesale buyers.',
- ogImage:'assets/images/og-cover.jpg',
- nav:[['Collection','#collection'],['Custom work','#custom'],['Our story','#story']]
-};
-const setTxt=(sel,val,def)=>{if(!val||val===def)return;const el=typeof sel==='string'?$(sel):sel;if(el)el.textContent=val};
-const setImg=(sel,val,def)=>{if(!val||val===def)return;const el=$(sel);if(el)el.src=val};
-const absUrl=p=>{try{return new URL(p,window.location.href).href}catch(e){return p}};
-function applyNav(items){
- if(!Array.isArray(items))return;
- const same=items.length===DEFAULTS.nav.length&&items.every((it,i)=>it&&it.label===DEFAULTS.nav[i][0]&&it.href===DEFAULTS.nav[i][1]);
- if(same)return;
- const links=items.filter(it=>it&&it.label).map(it=>'<a href="'+esc(it.href||'#')+'">'+esc(it.label)+'</a>').join('');
- const desktop=$('.header .nav');if(desktop)desktop.innerHTML=links;
- const mobile=$('#mobile-nav');
- if(mobile){const extra=items.some(it=>it&&it.label==='Contact')?'':'<a href="#contact">Contact</a>';mobile.innerHTML=links+extra}
-}
-function applySettings(s){
- if(!s||typeof s!=='object')return;
- setImg('.hero-banner-media img',s.heroImage,DEFAULTS.heroImage);
- setTxt('h1',s.heroHeadline,DEFAULTS.heroHeadline);
- setTxt('p.hero-lead',s.heroIntro,DEFAULTS.heroIntro);
- const cta=$('.hero-banner-cta');
- if(cta){
-  if(s.sectionCopy&&s.sectionCopy.heroPrimary&&s.sectionCopy.heroPrimary.href)cta.href=s.sectionCopy.heroPrimary.href;
-  if(s.sectionCopy&&s.sectionCopy.heroPrimary&&s.sectionCopy.heroPrimary.label&&s.sectionCopy.heroPrimary.label!==DEFAULTS.heroCta)cta.innerHTML=esc(s.sectionCopy.heroPrimary.label)+' <span>↓</span>';
- }
- const sc=s.sectionCopy||{};
- setTxt('.collection .eyebrow',sc.collection&&sc.collection.label,DEFAULTS.collectionLabel);
- setTxt('.collection h2',sc.collection&&sc.collection.title,DEFAULTS.collectionTitle);
- setTxt('.collection .section-head>p',sc.collection&&sc.collection.intro,DEFAULTS.collectionIntro);
- setTxt('.custom .eyebrow',sc.customOrders&&sc.customOrders.label,DEFAULTS.customLabel);
- setTxt('.custom h2',sc.customOrders&&sc.customOrders.title,DEFAULTS.customTitle);
- const ci=$('.custom-copy p:not(.eyebrow)');setTxt(ci,sc.customOrders&&sc.customOrders.intro,DEFAULTS.customIntro);
- setImg('.custom-image img',sc.customOrders&&sc.customOrders.image,DEFAULTS.customImage);
- setTxt('.story .eyebrow',sc.about&&sc.about.label,DEFAULTS.aboutLabel);
- setTxt('.story h2',sc.about&&sc.about.title,DEFAULTS.aboutTitle);
- const ai=$('.story-copy p:not(.eyebrow)');setTxt(ai,sc.about&&sc.about.intro,DEFAULTS.aboutIntro);
- setImg('.story-image img',sc.about&&sc.about.image,DEFAULTS.aboutImage);
- setTxt('.contact .eyebrow',sc.contact&&sc.contact.label,DEFAULTS.contactLabel);
- setTxt('.contact h2',sc.contact&&sc.contact.title,DEFAULTS.contactTitle);
- const co=$('.contact p:not(.eyebrow)');setTxt(co,sc.contact&&sc.contact.intro,DEFAULTS.contactIntro);
- setTxt('.footer-row span:nth-child(2)',sc.footerTagline,DEFAULTS.footerTagline);
- applyNav(s.navItems);
- if(s.whatsapp&&s.whatsapp!==DEFAULTS.whatsapp){state.whatsapp=s.whatsapp;const a=$('.contact-cta');if(a)a.href='https://wa.me/'+s.whatsapp}
- if(s.siteTitle&&s.siteTitle!==DEFAULTS.siteTitle)document.title=s.siteTitle;
- const md=$('meta[name="description"]');if(md&&s.siteDescription&&s.siteDescription!==DEFAULTS.siteDescription)md.setAttribute('content',s.siteDescription);
- if(s.ogImage&&s.ogImage!==DEFAULTS.ogImage){const og=absUrl(s.ogImage);['meta[property="og:image"]','meta[name="twitter:image"]'].forEach(sel=>{const el=$(sel);if(el)el.setAttribute('content',og)})}
-}
+/* Public-site copy is owned by content/copy.json.
+   Legacy runtime copy injection removed to prevent stale/duplicate section copy. */
+async function applySettings(){ return; }
 
-/* ---------- theme application (editor Theme tab -> CSS variables) ---------- */
-const COLOR_MAP={'--brand-primary':'--wine','--brand-primary-dark':'--wine-deep','--brand-primary-light':'--blush','--brand-accent':'--gold','--brand-cream':'--cream','--brand-background':'--paper','--brand-alt-background':'--cream-deep','--brand-text':'--wine-ink','--brand-muted':'--muted','--brand-heading':'--wine-ink','--brand-border':'--line','--brand-header-background':'--header-bg','--brand-footer-background':'--footer-bg'};
-const px=v=>typeof v==='string'&&/\d/.test(v)?v:null;
 function setTheme(t){
  state.theme=t||null;
  if(!t||typeof t!=='object')return;
