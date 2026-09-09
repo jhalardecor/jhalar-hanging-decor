@@ -29,7 +29,7 @@ p{margin:0;color:var(--ink);font-size:var(--type-body);line-height:1.62;letter-s
 .header{position:sticky;top:0;z-index:100;height:var(--header-h);background:rgba(255,250,241,.96);border-bottom:1px solid var(--line);backdrop-filter:blur(14px)}
 .header-row{height:100%;display:flex;align-items:center;justify-content:space-between}.brand{display:flex;align-items:center}.brand img{width:clamp(132px,10vw,158px);height:auto}
 .nav{display:flex;align-items:center;gap:clamp(22px,3vw,44px);margin-left:auto;font-size:var(--type-sm)}.nav a{position:relative}.nav a::after{content:"";position:absolute;left:0;right:0;bottom:-7px;height:1px;background:var(--red);transform:scaleX(0);transform-origin:right;transition:transform .25s ease}.nav a:hover::after,.nav a.nav-current::after{transform:scaleX(1);transform-origin:left}.nav a:hover,.nav-current{color:var(--red-deep)}
-.nav-enquire{font-weight:700;color:var(--red)!important}.menu{display:none;width:44px;height:44px;padding:0;border:0;background:transparent}.menu span{display:block;width:24px;height:1.5px;background:currentColor;margin:6px auto}
+.nav-enquire{font-weight:700;color:var(--red)!important}.menu{display:none;width:44px;height:44px;padding:0;border:0;background:transparent}.menu span{display:block;width:24px;height:1.5px;background:currentColor;margin:4px auto}
 .mobile-nav,.nav-backdrop{display:none}
 
 .hero{position:relative;min-height:calc(100svh - var(--header-h));overflow:hidden;background:var(--surface)}
@@ -69,16 +69,3 @@ body.modal-open .header{z-index:100}
  .modal{top:var(--header-h);inset-inline:0;bottom:0;padding:0}
  .modal-card{height:calc(100dvh - var(--header-h));max-height:calc(100dvh - var(--header-h))}
 }
-
-
-/* HAMBURGER — compact geometry + purposeful micro-motion */
-.menu{position:relative;isolation:isolate;cursor:pointer;-webkit-tap-highlight-color:transparent}
-.menu span{width:22px;height:1.5px;margin:4px auto;transform-origin:center;transition:transform 220ms var(--ease),opacity 160ms ease,width 220ms var(--ease);will-change:transform}
-.menu:hover span:first-child{transform:translateX(2px)}
-.menu:hover span:last-child{transform:translateX(-2px)}
-.menu.open span:first-child{transform:translateY(5.5px) rotate(45deg)}
-.menu.open span:nth-child(2){opacity:0;transform:scaleX(.35)}
-.menu.open span:last-child{transform:translateY(-5.5px) rotate(-45deg)}
-.menu:active{transform:scale(.94)}
-@media(hover:none){.menu:hover span:first-child,.menu:hover span:last-child{transform:none}}
-@media(prefers-reduced-motion:reduce){.menu,.menu span{transition:none!important}}
