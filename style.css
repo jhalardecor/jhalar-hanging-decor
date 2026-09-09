@@ -1533,3 +1533,18 @@ body.modal-open{
     height:42px !important;
   }
 }
+
+
+/* Lightbox close reliability and background isolation */
+body.lightbox-open{
+  overflow:hidden;
+  overscroll-behavior:none;
+}
+.media-lightbox{
+  -webkit-tap-highlight-color:transparent;
+}
+.media-lightbox-close{
+  z-index:5;
+  touch-action:manipulation;
+  -webkit-tap-highlight-color:transparent;
+}
