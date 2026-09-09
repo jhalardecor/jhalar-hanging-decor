@@ -1067,3 +1067,50 @@ a:focus-visible,
   padding-block:12px;
   overflow:visible;
 }
+
+
+/* =========================================================
+   PRODUCT VIEWER — FINAL RESPONSIVE COMPOSITION
+   No fixed visual size. The sheet follows available viewport space.
+   ========================================================= */
+@media (min-width:761px){
+  .modal{
+    --viewer-vspace:clamp(24px,4vh,52px);
+    --viewer-pad:clamp(22px,2vw,30px);
+    --viewer-gap:clamp(24px,3vw,40px);
+    padding:var(--viewer-vspace) clamp(24px,4vw,64px);
+    align-items:center;
+  }
+
+  .modal-card{
+    width:min(1100px,calc(100vw - 48px));
+    height:auto !important;
+    min-height:0 !important;
+    max-height:calc(100dvh - var(--header-h) - (var(--viewer-vspace) * 2));
+    padding:var(--viewer-pad) !important;
+    grid-template-columns:minmax(0,1.15fr) minmax(330px,.85fr) !important;
+    gap:var(--viewer-gap) !important;
+    align-items:center !important;
+  }
+
+  .modal-media{
+    width:auto !important;
+    min-width:0;
+    aspect-ratio:1;
+    max-height:calc(100dvh - var(--header-h) - (var(--viewer-vspace) * 2) - (var(--viewer-pad) * 2));
+  }
+
+  .modal-stage{
+    width:100% !important;
+    height:100% !important;
+    max-width:none !important;
+    max-height:none !important;
+  }
+
+  .modal-copy{
+    width:auto !important;
+    max-width:430px;
+    justify-self:start;
+    overflow:visible;
+  }
+}
