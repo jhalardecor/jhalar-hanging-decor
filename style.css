@@ -1446,3 +1446,31 @@ body.modal-open{
 
   .modal.open ~ .header{transform:none;}
 }
+
+
+/* Full-screen media exit — thumb-reachable floating control.
+   Keep it in the lower interaction zone instead of forcing a reach to the top. */
+.media-lightbox-close{
+  top:auto !important;
+  right:max(18px,env(safe-area-inset-right)) !important;
+  bottom:max(22px,env(safe-area-inset-bottom)) !important;
+  width:52px !important;
+  height:52px !important;
+  font-size:28px !important;
+  background:rgba(20,25,66,.78) !important;
+  box-shadow:0 10px 30px rgba(0,0,0,.22);
+}
+
+@media(min-width:761px){
+  .media-lightbox-close{
+    right:clamp(24px,3vw,48px) !important;
+    bottom:clamp(24px,3vw,48px) !important;
+  }
+}
+
+@media(max-width:760px){
+  .media-lightbox-close{
+    right:max(16px,env(safe-area-inset-right)) !important;
+    bottom:max(18px,env(safe-area-inset-bottom)) !important;
+  }
+}
