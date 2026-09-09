@@ -1205,3 +1205,14 @@ a:focus-visible,
     width:128px;
   }
 }
+
+
+/* Touch interaction isolation: the viewer owns pinch/pan while the modal is open. */
+#modal-stage{
+  touch-action:none;
+  overscroll-behavior:contain;
+}
+
+#modal-stage #modal-photo{
+  touch-action:none;
+}
