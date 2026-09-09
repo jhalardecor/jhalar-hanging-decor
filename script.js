@@ -157,15 +157,15 @@ function mediaType(src,type){if(type)return type;return /\\.(mp4|webm|ogg|mov)(?
 function normaliseMedia(item){
  const raw=typeof item==='string'?item:(item&&typeof item==='object'?(item.src||item.url||item.image||item.video||item.source):'');
  if(!raw)return null;
- let src=String(raw).trim();
+ let src=String(raw).trim().replace(/^\.\//,'');
  /*
-  Resolve catalogue media from the application root, not the current URL.
-  This keeps assets working on GitHub Pages project paths and /products/... URLs.
+  Product catalogue paths are repository-relative. Resolve them from the
+  application root (the part before /products/), never from the current route.
  */
- if(src&&!/^(https?:|data:|blob:|\/)/i.test(src)){
-   const runtimeScript=[...document.scripts].map(x=>x.src).find(x=>/\/script\.js(?:\?|$)/.test(x));
-   const appRoot=runtimeScript?new URL('./',runtimeScript):new URL('./',document.baseURI);
-   src=new URL(src,appRoot).href;
+ if(src&&!/^(https?:|data:|blob:)/i.test(src)){
+   const routeBase=location.pathname.split('/products/')[0].replace(/\/$/,'');
+   const appRoot=location.origin+(routeBase?routeBase+'/':'/');
+   src=new URL(src.replace(/^\//,''),appRoot).href;
  }
  return {src,type:mediaType(src,typeof item==='object'?(item.type||item.mediaType):undefined)};
 }
