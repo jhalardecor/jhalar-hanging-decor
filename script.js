@@ -90,9 +90,9 @@ window.addEventListener('popstate',()=>{
 });
 
 function initProductDeepLink(){
- const wanted=new URLSearchParams(location.search).get('product');
- if(!wanted)return;
- const id=Number(String(wanted).match(/-(\d+)$/)?.[1]);
+ const match=location.pathname.match(/\/products\/([^/]+)-(\d+)\/?$/);
+ if(!match)return;
+ const id=Number(match[2]);
  if(id&&state.products?.some(p=>Number(p.id)===id))openProduct(id,false);
 }
 
@@ -137,23 +137,20 @@ function slugify(value){
   .replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'')||'product';
 }
 function productSlug(p){return slugify(p.title)+'-'+p.id}
+function appBasePath(){
+ const marker='/products/';
+ const path=location.pathname;
+ const i=path.indexOf(marker);
+ return i>=0?path.slice(0,i):path;
+}
 function productUrl(p){
- /* Static GitHub Pages cannot reliably serve arbitrary /products/... paths.
-    Query URLs remain shareable, bookmarkable and refresh-safe. */
- const url=new URL(location.href);
- url.pathname=url.pathname.replace(/products\/[^/]+\/?$/,'');
- url.search='';
- url.hash='';
- url.searchParams.set('product',productSlug(p));
- return url.pathname+'?'+url.searchParams.toString();
+ return appBasePath().replace(/\/?$/,'/')+'products/'+productSlug(p)+'/';
 }
 function syncProductUrl(p,replace=false){
  history[replace?'replaceState':'pushState']({product:p.id},'',productUrl(p));
 }
 function clearProductUrl(){
- const url=new URL(location.href);
- url.searchParams.delete('product');
- history.replaceState({},'',url.pathname+(url.search||'')+url.hash);
+ history.replaceState({},'',appBasePath()||'/');
 }
 function visibleProducts(){return state.filter==='all'?state.products:state.products.filter(p=>p.category===state.filter)}
 function mediaType(src,type){if(type)return type;return /\\.(mp4|webm|ogg|mov)(?:[?#]|$)/i.test(String(src))?'video':'image'}
@@ -314,6 +311,15 @@ function closeModal(updateUrl=true){
  if(lastFocus?.focus)requestAnimationFrame(()=>lastFocus.focus());
  lastFocus=null;
 }
+
+
+/* Recover a clean product route after static-host fallback redirects to the app shell. */
+(function recoverProductRoute(){
+ const pending=sessionStorage.getItem('jhalar_product_route');
+ if(!pending)return;
+ sessionStorage.removeItem('jhalar_product_route');
+ history.replaceState({},'',pending);
+})();
 
 /* ---------- runtime defaults: equal to the shipped HTML/settings ---------- */
 const DEFAULTS={
