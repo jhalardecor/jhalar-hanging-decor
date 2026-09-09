@@ -2365,3 +2365,40 @@ body.project-inquiry-open{overflow:hidden}
     width:calc(100% - (2 * var(--content-pad)));
   }
 }
+
+
+/* =========================================================
+   VIEWPORT SAFETY — HARD GUARANTEE
+   Nothing may escape the visible screen edge.
+   ========================================================= */
+*,*::before,*::after{box-sizing:border-box}
+html,body{width:100%;max-width:100%;overflow-x:hidden}
+:root{
+  --safe-left:max(env(safe-area-inset-left),clamp(16px,4vw,72px));
+  --safe-right:max(env(safe-area-inset-right),clamp(16px,4vw,72px));
+}
+.shell,
+.hero-copy,
+.custom-projects-shell,
+.about-layout{
+  width:auto;
+  max-width:var(--content-max);
+  margin-inline:auto;
+  margin-left:var(--safe-left);
+  margin-right:var(--safe-right);
+}
+.custom-projects-shell,
+.about-layout{
+  max-width:var(--content-wide);
+}
+/* Prevent grids/flex children and media from forcing horizontal overflow. */
+.shell > *,
+.hero-copy > *,
+.custom-projects-shell > *,
+.about-layout > *,
+.contact-card > *,
+.updates-inner > *{
+  min-width:0;
+  max-width:100%;
+}
+img,video,canvas,svg{max-width:100%;height:auto}
