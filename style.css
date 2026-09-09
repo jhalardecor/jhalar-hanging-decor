@@ -37,3 +37,26 @@ h1,h2,h3,h4,.h1,.h2,.h3,.h4,.display-title,.section-title{margin:0;font-family:v
 .about-points li{padding:10px 18px 10px 0;margin-right:18px;border-bottom:1px solid var(--line);font-size:var(--type-body-sm);line-height:1.45;letter-spacing:var(--tracking-card)}
 @media(max-width:900px){.about-layout{grid-template-columns:1fr;gap:32px;align-items:start}.about-layout>.about-copy{max-width:620px}.about-copy h2{max-width:20ch}.about-content{max-width:760px}.about-visual img{aspect-ratio:1.5/1}}
 @media(max-width:600px){.about{padding-block:52px}.about-layout{gap:28px}.about-content{gap:18px}.about-visual img{aspect-ratio:1.18/1}.about-details{gap:14px}.about-points{display:grid;grid-template-columns:1fr 1fr}.about-points li{margin:0;padding:9px 10px 9px 0}.about-points li:last-child{grid-column:1/-1}}
+
+/* Navigation enquiry — text action, not a primary CTA */
+.nav-enquire{
+  display:inline-flex;
+  align-items:center;
+  min-height:auto;
+  padding:0 !important;
+  background:transparent !important;
+  color:var(--ink) !important;
+  border:0 !important;
+  border-radius:0 !important;
+  box-shadow:none !important;
+  font:inherit;
+  font-weight:500;
+  letter-spacing:var(--tracking-ui);
+  text-decoration:none;
+}
+.nav-enquire:hover,
+.nav-enquire:focus-visible{
+  color:var(--red) !important;
+  background:transparent !important;
+}
+.nav-enquire:focus-visible{outline:2px solid var(--red);outline-offset:5px}
