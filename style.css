@@ -24,20 +24,28 @@ h1,h2,h3,h4,h5,h6{margin:0;font-family:var(--font-display);font-weight:400;color
 .nav-enquire:focus-visible{outline:2px solid var(--red);outline-offset:5px}
 
 
-/* PRODUCT VIEWER — balanced, contained and header-safe */
+/* PRODUCT VIEWER — single geometry override */
+.header{z-index:1100}
+
 .modal{
-  inset:auto 0 0;
+  position:fixed;
   top:var(--header-h);
-  padding:clamp(18px,3vw,40px);
+  right:0;
+  bottom:0;
+  left:0;
+  z-index:1000;
+  padding:clamp(18px,3vw,36px);
   place-items:center;
 }
+
 .modal-card{
-  width:min(1120px,calc(100vw - 48px));
-  height:min(720px,calc(100dvh - var(--header-h) - 48px));
+  width:min(1080px,calc(100vw - 48px));
+  height:min(700px,calc(100dvh - var(--header-h) - 48px));
   max-width:100%;
-  max-height:calc(100dvh - var(--header-h) - 32px);
-  grid-template-columns:minmax(0,1.12fr) minmax(340px,.88fr);
+  max-height:calc(100dvh - var(--header-h) - 36px);
+  grid-template-columns:minmax(0,1.08fr) minmax(340px,.92fr);
 }
+
 .modal-media{
   position:relative;
   min-width:0;
@@ -47,96 +55,96 @@ h1,h2,h3,h4,h5,h6{margin:0;font-family:var(--font-display);font-weight:400;color
   display:grid;
   place-items:center;
 }
+
 .modal-stage{
   width:100%;
   height:100%;
   min-width:0;
   min-height:0;
-  padding:clamp(24px,3vw,42px);
+  padding:clamp(36px,5vw,72px);
   overflow:hidden;
-  isolation:isolate;
   display:grid;
   place-items:center;
   touch-action:none;
 }
+
 .modal-stage img,
 .modal-stage video{
   display:block;
   width:auto;
   height:auto;
-  max-width:100%;
-  max-height:100%;
+  max-width:90%;
+  max-height:90%;
   margin:auto;
   object-fit:contain;
   object-position:center;
   transform-origin:center center;
 }
-.modal-stage img{transition:transform .18s ease-out}
-.modal-stage.is-zoomed img{transition:none}
 
-@media (min-width:761px){
-  .modal-card{
-    width:min(1120px,calc(100vw - 48px));
-    height:min(720px,calc(100dvh - var(--header-h) - 48px));
-    grid-template-columns:minmax(0,1.12fr) minmax(340px,.88fr);
-  }
-  .modal-copy{
-    min-height:0;
-    max-height:100%;
-    padding:clamp(28px,3.2vw,44px);
-  }
-  .modal-close{top:16px;right:16px}
+.modal-copy{
+  min-width:0;
+  min-height:0;
+  max-height:100%;
+  padding:clamp(30px,3.5vw,46px);
+  overflow:auto;
 }
 
+.modal-close{z-index:30}
+
 @media (max-width:760px){
+  .header{z-index:1100}
+
   .modal{
-    inset:auto 0 0;
     top:var(--header-h);
+    z-index:1000;
     padding:0;
     place-items:stretch;
     background:rgba(20,25,66,.52);
   }
+
   .modal-card{
     position:relative;
     inset:auto;
     width:100%;
-    height:calc(100dvh - var(--header-h));
+    height:100%;
     max-width:none;
     max-height:none;
     display:grid;
     grid-template-columns:1fr;
-    grid-template-rows:minmax(220px,36dvh) minmax(0,1fr);
+    grid-template-rows:minmax(190px,30dvh) minmax(0,1fr);
     overflow:hidden;
   }
+
   .modal-media{
     width:100%;
     height:100%;
-    max-height:none;
     border-right:0;
     border-bottom:1px solid var(--line);
   }
+
   .modal-stage{
-    height:100%;
-    padding:26px 18px 18px;
+    padding:18px 20px;
     touch-action:pan-y;
   }
+
   .modal-stage img,
   .modal-stage video{
     width:auto!important;
     height:auto!important;
-    max-width:100%!important;
-    max-height:100%!important;
+    max-width:82%!important;
+    max-height:82%!important;
     object-fit:contain!important;
   }
+
   .modal-copy{
     min-height:0;
-    padding:20px 20px max(20px,env(safe-area-inset-bottom));
+    padding:18px 20px max(20px,env(safe-area-inset-bottom));
     overflow:auto;
   }
-  .modal-copy #modal-desc{
-    margin:16px 0 22px;
-    line-height:1.58;
-  }
+
+  .modal-copy .label{margin-bottom:8px}
+  .modal-copy #modal-desc{margin:14px 0 20px;line-height:1.58}
+
   .modal-close{
     top:10px;
     right:10px;
@@ -145,8 +153,8 @@ h1,h2,h3,h4,h5,h6{margin:0;font-family:var(--font-display);font-weight:400;color
   }
 }
 
-@media (max-width:480px){
-  .modal-card{grid-template-rows:minmax(210px,34dvh) minmax(0,1fr)}
-  .modal-stage{padding:24px 14px 14px}
+@media (max-width:390px){
+  .modal-card{grid-template-rows:minmax(175px,28dvh) minmax(0,1fr)}
+  .modal-stage{padding:14px 16px}
 }
 
