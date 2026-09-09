@@ -878,7 +878,22 @@ initProducts();initRuntime();
     });
     bindLocationAutocomplete();
   };
-  roleInputs.forEach(input=>input.addEventListener('change',()=>renderQuestions(input.value)));
+  /* Use both change and click delegation: reliable across mobile label/radio handling. */
+  const chooseRole=role=>{
+    if(!role)return;
+    roleInputs.forEach(input=>{input.checked=input.value===role});
+    renderQuestions(role);
+    requestAnimationFrame(()=>dynamicQuestions.scrollIntoView({block:'nearest',behavior:'smooth'}));
+  };
+  roleInputs.forEach(input=>{
+    input.addEventListener('change',()=>chooseRole(input.value));
+    input.addEventListener('click',()=>chooseRole(input.value));
+  });
+  form.querySelector('.inquiry-role-options')?.addEventListener('click',event=>{
+    const label=event.target.closest('label');
+    const input=label&&label.querySelector('input[name="role"]');
+    if(input){event.preventDefault();chooseRole(input.value)}
+  });
 
   let locationTimer=null,locationAbort=null;
   const bindLocationAutocomplete=()=>{
