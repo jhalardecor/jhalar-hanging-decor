@@ -1832,3 +1832,83 @@ body.project-inquiry-open{overflow:hidden}
  #custom-orders .spaces-visual{order:-1}
  #custom-orders .spaces-copy h2{font-size:clamp(2.1rem,10vw,3rem)}
 }
+
+
+/* ACTION CONTROLS — locked contrast and interaction hierarchy */
+:root{
+  --cta-bg:var(--red);
+  --cta-bg-hover:var(--red-deep);
+  --cta-fg:#FFFFFF;
+  --cta-focus:rgba(200,32,57,.32);
+}
+
+/* One primary button language. */
+.hero-copy a,
+.contact-cta,
+.modal-wa-btn,
+.project-inquiry-submit,
+#custom-orders .spaces-link{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:var(--control-h);
+  padding:0 24px;
+  background:var(--cta-bg)!important;
+  color:var(--cta-fg)!important;
+  border:1px solid transparent;
+  border-radius:6px;
+  font-family:var(--font-ui);
+  font-size:var(--type-sm);
+  font-weight:700;
+  line-height:1;
+  letter-spacing:.01em;
+  text-decoration:none;
+  text-shadow:none;
+  box-shadow:none!important;
+  transition:background-color .18s ease,transform .18s ease;
+}
+
+/* Never use a colour change that reduces readability. */
+.hero-copy a:hover,
+.contact-cta:hover,
+.modal-wa-btn:hover,
+.project-inquiry-submit:hover,
+#custom-orders .spaces-link:hover{
+  background:var(--cta-bg-hover)!important;
+  color:#FFFFFF!important;
+}
+
+.hero-copy a:active,
+.contact-cta:active,
+.modal-wa-btn:active,
+.project-inquiry-submit:active,
+#custom-orders .spaces-link:active{transform:translateY(1px)}
+
+.hero-copy a:focus-visible,
+.contact-cta:focus-visible,
+.modal-wa-btn:focus-visible,
+.project-inquiry-submit:focus-visible,
+#custom-orders .spaces-link:focus-visible{
+  outline:3px solid var(--cta-focus);
+  outline-offset:3px;
+}
+
+/* Secondary actions are links, not weak copies of primary buttons. */
+.spaces-link:not(#custom-orders .spaces-link),
+.nav-enquire,
+.spaces-link:not(.discuss-project-trigger){
+  background:transparent!important;
+  color:var(--ink)!important;
+}
+
+/* Inquiry choices are selections, not CTAs. */
+.inquiry-role-options span{
+  color:var(--ink)!important;
+  background:var(--surface-2)!important;
+  border-color:var(--line)!important;
+}
+.inquiry-role-options input:checked+span{
+  background:var(--ink)!important;
+  border-color:var(--ink)!important;
+  color:var(--cream)!important;
+}
