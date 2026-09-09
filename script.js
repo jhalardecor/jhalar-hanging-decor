@@ -631,6 +631,21 @@ initProducts();initRuntime();
  lightboxImage&&lightboxImage.addEventListener('pointerup',endLightboxPointer);
  lightboxImage&&lightboxImage.addEventListener('pointercancel',endLightboxPointer);
  lightboxImage&&lightboxImage.addEventListener('dblclick',resetLightbox);
+
+ /* Mobile direct-manipulation dismissal: swipe the viewer down from its resting state. */
+ let lbDismissStart=null;
+ lightbox&&lightbox.addEventListener('pointerdown',e=>{
+   if(!lightbox.classList.contains('open')||lbScale>1.01)return;
+   lbDismissStart={x:e.clientX,y:e.clientY};
+ });
+ lightbox&&lightbox.addEventListener('pointerup',e=>{
+   if(!lbDismissStart||lbScale>1.01)return;
+   const dy=e.clientY-lbDismissStart.y,dx=e.clientX-lbDismissStart.x;
+   if(dy>90&&Math.abs(dx)<Math.abs(dy)*.65)closeFullMedia();
+   lbDismissStart=null;
+ });
+ lightbox&&lightbox.addEventListener('pointercancel',()=>{lbDismissStart=null});
+
  lightboxClose&&lightboxClose.addEventListener('click',closeFullMedia);
  lightbox&&lightbox.addEventListener('click',e=>{if(e.target===lightbox)closeFullMedia()});
  stage.addEventListener('click',e=>{
