@@ -2322,3 +2322,41 @@ body.project-inquiry-open{overflow:hidden}
     linear-gradient(155deg,#9b1829 0%,#c62934 48%,#861025 100%)}
   .footer-logo{width:96px!important}
 }
+
+/* =========================================================
+   TYPOGRAPHY CONSOLIDATION — SINGLE SOURCE OF TRUTH
+   Legacy heading declarations remain for layout constraints only.
+   This final layer owns display metrics everywhere.
+   ========================================================= */
+:root{
+  --heading-track:-.025em;
+  --heading-leading:1.04;
+}
+.hero h1,
+.collection-intro h2,
+.custom-projects h2,
+.about-copy h2,
+.contact-copy h2,
+.updates h2{
+  font-family:var(--font-display)!important;
+  font-weight:400!important;
+  line-height:var(--heading-leading)!important;
+  letter-spacing:var(--heading-track)!important;
+  text-wrap:balance;
+}
+/* Scale hierarchy is explicit and defined once. */
+.hero h1{font-size:clamp(3.4rem,7.2vw,7.6rem)!important;}
+.collection-intro h2,
+.about-copy h2,
+.contact-copy h2{font-size:clamp(2.5rem,4vw,4.7rem)!important;}
+.custom-projects h2{font-size:clamp(3rem,5.7vw,6.1rem)!important;}
+.updates h2{font-size:clamp(2.35rem,3.4vw,4rem)!important;}
+
+@media(max-width:760px){
+  .hero h1{font-size:clamp(2.8rem,12vw,4.2rem)!important;}
+  .collection-intro h2,
+  .about-copy h2,
+  .contact-copy h2,
+  .updates h2{font-size:clamp(2.3rem,9vw,3.5rem)!important;}
+  .custom-projects h2{font-size:clamp(2.7rem,11vw,4.2rem)!important;}
+}
