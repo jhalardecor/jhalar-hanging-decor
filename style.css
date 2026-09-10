@@ -2982,3 +2982,90 @@ body.product-view-open .modal{
     grid-template-columns:minmax(0,1fr) !important;
   }
 }
+
+
+/* =========================================================
+   VALUE SECTION — PURPOSE BEFORE FEATURES
+   A short brand thought + real occasions, not a feature checklist.
+   ========================================================= */
+.value-strip{
+  background:var(--surface);
+  border-block:1px solid var(--line);
+}
+
+.value-strip::before{display:none}
+
+.value-strip-inner{
+  display:grid;
+  grid-template-columns:minmax(0,1.05fr) minmax(360px,.95fr);
+  gap:clamp(40px,8vw,140px);
+  align-items:end;
+  padding-block:clamp(64px,9vw,128px);
+}
+
+.value-intro .eyebrow{
+  margin:0 0 18px;
+  color:var(--red);
+  font-size:.68rem;
+  font-weight:700;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+}
+
+.value-intro h2{
+  max-width:18ch;
+  margin:0;
+  color:var(--heading);
+  font-size:clamp(2rem,4vw,4.5rem);
+  line-height:.98;
+  letter-spacing:-.045em;
+}
+
+.value-intro>p:last-child{
+  max-width:48ch;
+  margin:24px 0 0;
+  color:var(--muted);
+  font-size:clamp(.95rem,1.1vw,1.08rem);
+  line-height:1.65;
+}
+
+.value-uses{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  border-top:1px solid var(--line);
+  border-left:1px solid var(--line);
+}
+
+.value-uses span{
+  min-height:92px;
+  display:flex;
+  align-items:center;
+  padding:18px clamp(18px,2vw,28px);
+  border-right:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  color:var(--heading);
+  font-size:clamp(.88rem,1vw,1rem);
+  font-weight:500;
+  letter-spacing:-.015em;
+}
+
+@media(max-width:760px){
+  .value-strip-inner{
+    grid-template-columns:1fr;
+    gap:42px;
+    padding-block:64px;
+  }
+
+  .value-intro h2{
+    max-width:14ch;
+    font-size:clamp(2.2rem,11vw,3.5rem);
+  }
+
+  .value-uses{
+    grid-template-columns:1fr;
+  }
+
+  .value-uses span{
+    min-height:68px;
+  }
+}
