@@ -2780,3 +2780,29 @@ img,video,canvas,svg{max-width:100%;height:auto}
     object-fit:contain;
   }
 }
+
+
+/* Product description — supporting copy, not a generic muted paragraph. */
+.modal-copy #modal-desc{
+  color:color-mix(in srgb,var(--heading) 68%,var(--surface)) !important;
+  font-size:clamp(.92rem,.9vw,1rem);
+  font-weight:400;
+  line-height:1.68 !important;
+  letter-spacing:.002em;
+  max-width:36ch !important;
+  text-wrap:pretty;
+}
+
+@media(min-width:761px){
+  .modal-copy #modal-desc{
+    margin:2px 0 26px !important;
+  }
+}
+
+@media(max-width:760px){
+  .modal-copy #modal-desc{
+    color:var(--muted) !important;
+    max-width:100% !important;
+    line-height:1.6 !important;
+  }
+}
