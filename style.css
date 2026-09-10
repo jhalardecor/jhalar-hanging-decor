@@ -2967,3 +2967,18 @@ body.product-view-open .modal{
     max-width:34ch;
   }
 }
+
+
+/* VALUE STRIP RESET — remove decorative numbering and let the content lead. */
+.value-number{display:none !important;}
+
+.value-strip-grid>.value-item{
+  grid-template-columns:minmax(0,1fr) !important;
+  gap:0 !important;
+}
+
+@media(max-width:760px){
+  .value-strip-grid>.value-item{
+    grid-template-columns:minmax(0,1fr) !important;
+  }
+}
