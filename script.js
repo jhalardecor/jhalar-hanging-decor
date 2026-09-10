@@ -308,7 +308,7 @@ function openProduct(id,updateUrl=true){
  const wa=$('#modal-wa-btn');wa.href='https://wa.me/'+state.whatsapp+'?text='+encodeURIComponent('Hello JHALAR, I am interested in '+p.title+'.');
  showModalMedia(0);
  const copy=$('.modal-copy');if(copy)copy.scrollTop=0;
- const modal=$('#product-modal');document.querySelector('.header')?.classList.remove('is-hidden');lastFocus=document.activeElement;modal.classList.add('open');modal.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';$('#modal-close').focus();
+ const modal=$('#product-modal');document.body.classList.add('product-view-open');document.querySelector('.header')?.classList.remove('is-hidden');lastFocus=document.activeElement;modal.classList.add('open');modal.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';$('#modal-close').focus();
 }
 function closeModal(updateUrl=true){
  const m=$('#product-modal');
