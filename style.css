@@ -2806,3 +2806,27 @@ img,video,canvas,svg{max-width:100%;height:auto}
     line-height:1.6 !important;
   }
 }
+
+
+/* =========================================================
+   PRODUCT VIEWER + HEADER — ONE EXPLICIT LAYER CONTRACT
+   The header remains physically present above the modal. Never rely on
+   scroll direction or sibling selectors while a product is open.
+   ========================================================= */
+body.product-view-open .header{
+  transform:translateY(0) !important;
+  opacity:1 !important;
+  visibility:visible !important;
+  pointer-events:auto !important;
+  z-index:1200 !important;
+}
+
+body.product-view-open .modal{
+  z-index:1100 !important;
+}
+
+@media(min-width:761px){
+  body.product-view-open .modal{
+    top:var(--header-h) !important;
+  }
+}
