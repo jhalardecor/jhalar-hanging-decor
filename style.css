@@ -2765,3 +2765,18 @@ img,video,canvas,svg{max-width:100%;height:auto}
   .hero-premium__content>p:not(.hero-premium__eyebrow){margin-top:16px}
   .hero-premium__content>a{margin-top:24px}
 }
+
+/* Desktop lightbox — presentation scale, not edge-to-edge enlargement. */
+@media(min-width:761px){
+  .media-lightbox{
+    padding:clamp(40px,7vh,88px) clamp(64px,10vw,160px);
+  }
+
+  .media-lightbox img{
+    width:auto;
+    height:auto;
+    max-width:min(78vw,1120px);
+    max-height:78vh;
+    object-fit:contain;
+  }
+}
