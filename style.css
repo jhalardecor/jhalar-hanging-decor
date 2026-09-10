@@ -2830,3 +2830,38 @@ body.product-view-open .modal{
     top:var(--header-h) !important;
   }
 }
+
+
+/* FINAL PRODUCT VIEWER TOP LAYER
+   Sticky positioning is intentionally replaced by fixed positioning while
+   the document is scroll-locked. This guarantees the header cannot disappear
+   when opening a product from any scroll position or deep-linked route. */
+body.product-view-open{
+  --active-header-h:clamp(60px,5.2vw,76px);
+}
+
+body.product-view-open .header{
+  position:fixed !important;
+  top:0 !important;
+  right:0 !important;
+  left:0 !important;
+  height:var(--active-header-h) !important;
+  transform:translateY(0) !important;
+  opacity:1 !important;
+  visibility:visible !important;
+  display:block !important;
+  background:rgba(255,250,241,.96) !important;
+  z-index:3000 !important;
+}
+
+body.product-view-open .modal{
+  top:var(--active-header-h) !important;
+  z-index:2000 !important;
+}
+
+/* Mobile uses the same guaranteed layer model. */
+@media(max-width:760px){
+  body.product-view-open{
+    --active-header-h:var(--header-h);
+  }
+}
