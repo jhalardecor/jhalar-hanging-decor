@@ -3222,3 +3222,32 @@ body.product-view-open .modal{
   .hero-premium__orb,
   .hero-premium__media img{animation:none}
 }
+
+
+/* Interaction polish: remove browser tap flash and accidental blue focus paint.
+   Keyboard users still receive a deliberate JHALAR focus ring. */
+html,
+body,
+a,
+button,
+[role="button"],
+.product-card,
+.hero,
+.hero-premium{
+  -webkit-tap-highlight-color:transparent;
+}
+
+a:focus,
+button:focus,
+[role="button"]:focus,
+.product-card:focus{
+  outline:none;
+}
+
+a:focus-visible,
+button:focus-visible,
+[role="button"]:focus-visible,
+.product-card:focus-visible{
+  outline:2px solid var(--red) !important;
+  outline-offset:4px;
+}
