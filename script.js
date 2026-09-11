@@ -991,3 +991,26 @@ initProducts();initRuntime();
     close();
   });
 })();
+
+/* Hero spatial response — desktop pointer depth, intentionally restrained. */
+(()=>{
+  const hero=document.querySelector('.hero-premium');
+  if(!hero || !window.matchMedia('(hover:hover) and (pointer:fine)').matches) return;
+  const media=hero.querySelector('.hero-premium__media');
+  const content=hero.querySelector('.hero-premium__content');
+  let frame;
+  hero.addEventListener('pointermove',(e)=>{
+    const r=hero.getBoundingClientRect();
+    const x=(e.clientX-r.left)/r.width-.5;
+    const y=(e.clientY-r.top)/r.height-.5;
+    cancelAnimationFrame(frame);
+    frame=requestAnimationFrame(()=>{
+      media.style.transform='translate3d('+(-x*10)+'px,'+(-y*8)+'px,0) rotateY('+(-x*1.2)+'deg)';
+      content.style.transform='translate3d('+(x*5)+'px,'+(y*4)+'px,40px)';
+    });
+  });
+  hero.addEventListener('pointerleave',()=>{
+    media.style.transform='';
+    content.style.transform='translateZ(40px)';
+  });
+})();
