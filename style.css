@@ -3251,3 +3251,36 @@ button:focus-visible,
   outline:2px solid var(--red) !important;
   outline-offset:4px;
 }
+
+
+/* Tactile tap feedback — clear response without browser-blue highlights. */
+a,
+button,
+[role="button"],
+.product-card,
+.filter-btn,
+.modal-thumb,
+.modal-nav,
+.menu{
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
+}
+
+@media(hover:none){
+  a:active,
+  button:active,
+  [role="button"]:active,
+  .product-card:active,
+  .filter-btn:active,
+  .modal-thumb:active,
+  .modal-nav:active,
+  .menu:active{
+    transform:scale(.975);
+    opacity:.82;
+    transition:transform 80ms ease,opacity 80ms ease;
+  }
+
+  .product-card:active{
+    box-shadow:0 8px 20px rgba(20,25,66,.10);
+  }
+}
