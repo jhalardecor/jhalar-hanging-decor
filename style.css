@@ -3121,3 +3121,104 @@ body.product-view-open .modal{
     max-width:56px;
   }
 }
+
+
+/* HERO — SUBTLE SPATIAL DEPTH */
+.hero.hero-premium{
+  perspective:1200px;
+  isolation:isolate;
+}
+
+.hero-premium__depth{
+  position:absolute;
+  inset:0;
+  overflow:hidden;
+  pointer-events:none;
+  z-index:0;
+}
+
+.hero-premium__glow{
+  position:absolute;
+  width:52vw;
+  aspect-ratio:1;
+  left:52%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(255,196,139,.24),rgba(184,31,48,.08) 38%,transparent 70%);
+  filter:blur(18px);
+  animation:heroDepthGlow 9s ease-in-out infinite alternate;
+}
+
+.hero-premium__orb{
+  position:absolute;
+  width:clamp(90px,12vw,180px);
+  aspect-ratio:1;
+  border-radius:50%;
+  border:1px solid rgba(255,250,241,.24);
+  background:radial-gradient(circle at 32% 28%,rgba(255,255,255,.20),rgba(255,255,255,.025) 58%,transparent 72%);
+  box-shadow:inset -12px -16px 30px rgba(20,25,66,.08),0 24px 70px rgba(20,25,66,.08);
+  filter:blur(.1px);
+}
+
+.hero-premium__orb--one{
+  right:9%;
+  top:18%;
+  animation:heroFloatOne 10s ease-in-out infinite;
+}
+
+.hero-premium__orb--two{
+  width:clamp(60px,7vw,110px);
+  right:29%;
+  bottom:12%;
+  animation:heroFloatTwo 13s ease-in-out infinite;
+}
+
+.hero-premium__media{
+  z-index:1;
+  transform-style:preserve-3d;
+  will-change:transform;
+}
+
+.hero-premium__media img{
+  will-change:transform;
+  transform:scale(1.035);
+  animation:heroImageBreath 14s ease-in-out infinite alternate;
+}
+
+.hero-premium__content{
+  z-index:2;
+  transform:translateZ(40px);
+  will-change:transform;
+}
+
+@keyframes heroDepthGlow{
+  from{transform:translate(-52%,-48%) scale(.92)}
+  to{transform:translate(-48%,-52%) scale(1.08)}
+}
+
+@keyframes heroFloatOne{
+  0%,100%{transform:translate3d(0,0,0) rotate(-5deg)}
+  50%{transform:translate3d(-18px,24px,45px) rotate(4deg)}
+}
+
+@keyframes heroFloatTwo{
+  0%,100%{transform:translate3d(0,0,0) rotate(8deg)}
+  50%{transform:translate3d(22px,-16px,35px) rotate(-5deg)}
+}
+
+@keyframes heroImageBreath{
+  from{transform:scale(1.035) translate3d(0,0,0)}
+  to{transform:scale(1.075) translate3d(-.8%,-.5%,0)}
+}
+
+@media(max-width:760px){
+  .hero-premium__orb{display:none}
+  .hero-premium__glow{width:95vw}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .hero-premium__glow,
+  .hero-premium__orb,
+  .hero-premium__media img{animation:none}
+}
